@@ -1,0 +1,67 @@
+{
+  "count": 6,
+  "InstallBase": [
+    {
+      "Service_Request": "170928-000014",
+      "Assigned": "Baber Mr. Vernon",
+      "Task_Number": "548",
+      "Installed_Base_ID": "16",
+      "Product_Line": "Heating & Air Conditioning",
+      "Serial_Number": "2345",
+      "Start_Date": "'2017-09-28 12:00:00'",
+      "End_Date": ""
+    },
+    {
+      "Service_Request": "170928-000014",
+      "Assigned": "Baber Mr. Vernon",
+      "Task_Number": "549",
+      "Installed_Base_ID": "119",
+      "Product_Line": "",
+      "Serial_Number": "",
+      "Start_Date": "'2017-09-28 12:00:00'",
+      "End_Date": "'2017-09-29 12:00:00'"
+    },
+    {
+      "Service_Request": "170928-000014",
+      "Assigned": "Baber Mr. Vernon",
+      "Task_Number": "403",
+      "Installed_Base_ID": "17",
+      "Product_Line": "Home Repair & Maintenance",
+      "Serial_Number": "2346",
+      "Start_Date": "'2017-09-28 12:00:00'",
+      "End_Date": "'2017-09-28 07:35:27'",
+      "tagNo":"2637565",
+      "orginalNo":"8780"
+    },
+    {
+      "Service_Request": "170928-000015",
+      "Assigned": "Baber Mr. Vernon",
+      "Task_Number": "551",
+      "Installed_Base_ID": "17",
+      "Product_Line": "Home Repair & Maintenance",
+      "Serial_Number": "2346",
+      "Start_Date": "'2017-09-29 12:00:00'",
+      "End_Date": ""
+    },
+    {
+      "Service_Request": "170928-000015",
+      "Assigned": "Baber Mr. Vernon",
+      "Task_Number": "551",
+      "Installed_Base_ID": "40",
+      "Product_Line": "",
+      "Serial_Number": "",
+      "Start_Date": "'2017-09-29 12:00:00'",
+      "End_Date": ""
+    },
+    {
+      "Service_Request": "170928-000015",
+      "Assigned": "Baber Mr. Vernon",
+      "Task_Number": "551",
+      "Installed_Base_ID": "39",
+      "Product_Line": "",
+      "Serial_Number": "2",
+      "Start_Date": "'2017-09-29 12:00:00'",
+      "End_Date": ""
+    }
+  ]
+}

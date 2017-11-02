@@ -1,0 +1,162 @@
+﻿<!-- <div style="
+display: flex; 
+-webkit-justify-content: center;
+-ms-flex-pack: center;
+justify-content: center;
+-webkit-align-items: center;
+-ms-flex-align: center;
+align-items: center;
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+z-index: 80;
+overflow: hidden;background-color: #ffffff;
+opacity: 0.8;
+text-align: center;
+z-index: 1051 !important;" ng-show="$root.completedTask">
+
+</div> -->
+<div style="padding:0" class="container">
+    <div class="debreifContainerouter">
+        <md-card style="border-radius:10px 10px 10px 10px" class="margintop10"
+                 ng-repeat="item in timeArray track by $index">
+            <div class="debreifContainerinner">
+                <form class="form-horizontal" action="/action_page.php" ng-disabled="$root.completedTask">
+
+                    <div ng-if="userType=='C'" style="padding-left:20px;padding-right:20px;"
+                         class="form-group col-sm-12">
+                         <label style="display:block" class="col-sm-12 label-my"
+                               translate="Clarity Task Name">Clarity Task Name</label>
+                        <div class="col-md-6">
+                            <select class="form-control select-debrief select-debrief-time-first-select"
+                                    ng-model="item.Field_Job_Name"
+                                    ng-options="x as x.JobName for x in item.timeDefault.fieldJobName.values track by x.ID" ng-change="setFieldName(item)">
+                                <option value="" disabled selected>Select Field Job Name</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div ng-if="userType=='C'" class="form-group col-sm-20 margintop30">
+                        <label class=" col-sm-12 label-my" translate="{{item.timeDefault.chargeType.title}}"></label>
+                        <div class="col-sm-12">
+                            <select class="form-control select-debrief" ng-model="item.Charge_Type"
+                                    ng-options="x as x.Value | translate for x in item.timeDefault.chargeType.values track by x.ID" ng-change="setChargeType(item)">
+                                <option value="" disabled selected>Select Charge Type</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-sm-20 margintop30">
+                        <label class="col-sm-12 label-my" translate="{{item.timeDefault.workType.title}}"></label>
+                        <div class="col-sm-12">
+                            <select class="form-control select-debrief " ng-model="item.Work_Type"
+                                    ng-options="x as x.Value | translate for x in item.timeDefault.workType.values track by x.ID"
+                                    ng-change="setWorkType(item.Work_Type, item)">
+                                <option value="" disabled selected>Select Work Type</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div ng-if="userType=='C'" class="form-group col-sm-20 margintop30">
+                        <label class=" col-sm-12 label-my" translate="{{item.timeDefault.chargeMethod.title}}"></label>
+                        <div class="col-sm-12">
+                            <select class="form-control select-debrief" ng-model="item.Charge_Method"
+                                    ng-options="x as x.Value | translate for x in item.timeDefault.chargeMethod.values track by x.ID" ng-change="setChargeMethod(item)">
+                                <option value="" disabled selected>Select Charge Method</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-sm-20 margintop30">
+                        <label class=" col-sm-12 label-my" translate="{{item.timeDefault.item.title}}"></label>
+                        <div class="col-sm-12">
+                            <select class="form-control select-debrief" ng-model="item.Item"
+                                    ng-options="x as x.Value | translate for x in item.timeDefault.item.values track by x.ID" ng-change="setItem(item)">
+                                <option value="" disabled selected>Select Item</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-sm-20 margintop30">
+                        <label class=" col-sm-12 label-my" translate="{{item.timeDefault.description.title}}"></label>
+                        <div class="col-sm-12">
+                            <input type="text" name="description" class="form-control" ng-model="item.Description">
+                        </div>
+                    </div>
+
+                    <div ng-if="userType=='C'" class="form-group col-sm-20 margintop30">
+                        <label class=" col-sm-12 label-my" translate="{{item.timeDefault.timeCode.title}}"></label>
+                        <div class="col-sm-12">
+                            <select class="form-control select-debrief" ng-model="item.Time_Code"
+                                    ng-options="x as x.Overtimeshiftcode | translate for x in item.timeDefault.timeCode.values track by x.OverTime_Shift_Code_ID" ng-change="setTimeCode(item)">
+                                <option value="" disabled selected>Select Time Code</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div ng-if="userType=='C'" class="form-group col-sm-20 margintop30">
+                        <label class=" col-sm-12 label-my" translate="{{item.timeDefault.shiftCode.title}}"></label>
+                        <div class="col-sm-12">
+                            <select class="form-control select-debrief" ng-change="setShiftCode(item)"
+                                    ng-options="x as x.ShiftCodeName | translate for x in item.timeDefault.shiftCode.values track by x.Shift_Code_ID"
+                                    ng-model="item.Shift_Code">
+                                <option value="" disabled selected>Select Shift Code</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-sm-20 margintop30">
+                        <label class=" col-sm-12 label-my" translate="{{item.timeDefault.Date.title}}"
+                               style="text-align: left;">-</label>
+                        <div class="col-sm-12">
+                            <p class="input-group">
+                                <input type="text" class="form-control" uib-datepicker-popup="{{format}}"
+                                       ng-model="item.Date" is-open="item.calendarOpened"
+                                       datepicker-options="dateOptions" ng-required="true" close-text="Close"
+                                       alt-input-formats="altInputFormats" ng-change="setDuration($index)"/>
+
+                                <span class="input-group-btn">
+					            <button type="button" class="btn btn-default" style="border-color:#ccc !important"
+                                        ng-click="openCalendar(item,'Time')"><i
+                                        class="glyphicon glyphicon-calendar"></i></button>
+					          </span>
+                            </p>
+
+                        </div>
+                    </div>
+
+                    <div class="form-group col-sm-20 margintop30">
+                        <label class=" col-sm-12 label-my" translate="{{item.timeDefault.duration.title}}"></label>
+                        <div class="col-sm-12">
+                            <input type="text" class="form-control" ng-model="item.Duration" ng-change="setDurationHours(item)"
+                                   />
+
+                        </div>
+                    </div>
+
+                    <div style="padding-left:20px;padding-right:20px;margin-bottom:0 !important	"
+                         class="form-group col-md-12">
+
+                        <label class="label-my col-md-12 " for="comment"
+                               translate="{{item.timeDefault.comments.title}}"></label>
+                        <div class="col-sm-12">
+                            <textarea class="form-control text-area" rows="5" id="comment"
+                                      ng-model="item.Comments"></textarea>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+
+            <section style="border-radius:0 0 10px 10px" layout="row" layout-sm="column" layout-align="center center"
+                     layout-wrap class="time-btns">
+                <md-button class="time-font time-add" ng-click="addObject('Time')" ng-disabled="$root.completedTask">ADD</md-button>
+                <md-button class="time-font time-delete" ng-click="deleteObject($index,item,'Time')" ng-disabled="$root.completedTask">DELETE</md-button>
+                <md-button class="time-font time-copy" ng-click="copyObject(item,'Time')" ng-disabled="$root.completedTask">COPY</md-button>
+            </section>
+        </md-card>
+    </div>
+</div>
+

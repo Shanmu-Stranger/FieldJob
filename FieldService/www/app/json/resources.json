@@ -1,0 +1,20 @@
+{
+  "resources":[
+    {
+      "extension":"pdf",
+      "url":"http://che.org.il/wp-content/uploads/2016/12/pdf-sample.pdf",
+      "title":"PDF"
+
+    },
+    {
+      "extension":"pdf",
+      "url":"http://che.org.il/wp-content/uploads/2016/12/pdf-sample.pdf",
+      "title":"DOC"
+    },
+    {
+      "extension":"pdf",
+      "url":"http://che.org.il/wp-content/uploads/2016/12/pdf-sample.pdf",
+      "title":"EXCEL"
+    }
+  ]
+}

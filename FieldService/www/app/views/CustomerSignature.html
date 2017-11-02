@@ -1,0 +1,143 @@
+<style>
+    div.resources {
+        margin: 30px;
+        float: left;
+        width: 100px;
+    }
+
+    div.resources:hover {}
+
+    div.resources img {
+        width: 75px;
+        height: 100px;
+    }
+
+    div.desc {
+        padding: 15px;
+        text-align: center;
+    }
+
+    #tasksdone {
+        margin: auto;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
+</style>
+
+
+<div class="container" ng-show="customersubmit || $root.completedTask">
+    <div class="debreifContainerouter" style="margin-left:7px !important">
+        <md-card style="border-radius:10px 10px 10px 10px">
+            <div class="debreifContainerinner">
+
+                <img id="tasksdone" src="Group 11@2x.png" style="width:50px !important;height:50px !important"></img>
+
+                <div style="text-align:center;margin-top:30px;text-transform:none">
+                    <h2>Field Job #{{summary.taskObject.Task_Number}} completed successfully </h2>
+
+                    <h6 style="margin-top:20px">Tap or click below icon to view Field Service Summary report</h6>
+                </div>
+
+                <!-- <div class="layout-row">
+           <div class="resources flex-33"  >
+              <img src="images/pdf.png" alt="" width="50" height="75">
+              <div class="desc">Doc1</div>
+          </div>
+
+          <div class="resources flex-33" >
+            <md-button class="md-raised time-add" id="cmd">EXPORT</md-button>
+          </div>
+
+          <div class="resources flex-33" >
+              <img src="images/pdf.png" alt="" width="50" height="75">
+              <div class="desc">Doc3</div>
+          </div> -->
+
+
+                <div class="row margintop30" style="margin-top:40px;">
+                    <div class="col-sm-4 " id="cmd" style="text-align:center">
+                        <img src="Shape 8 copy 2@2x.png" style="width:40px;" id="tasksdone">
+                        <md-button style="margin-top:10px;border-radius:0;background-color:#fff;text-decoration:underline;border:none;color:#00aa7e" class=""  pdf-save-button="idOne" pdf-name="someone.pdf">Export</md-button>
+                    </div>
+
+                    <div class="col-sm-4" style="    text-align: center;">
+                        <img src="Shape 7 copy 2@2x.png" style="width:50px" id="tasksdone">
+                        <div class="col-sm-12">
+                            <md-button id="cmd1" style="margin-top:10px;border-radius:0;background-color:#fff;text-decoration:underline;border:none;color:#00aa7e" class="" pdf-save-button="idOne" pdf-name="someone.pdf">Print</md-button>
+                        </div>
+
+                    </div>
+                    <div class="col-sm-4" style="    text-align: center;">
+                        <img src="Shape 7 copy 2@2x.png" style="width:50px" id="tasksdone">
+                        <div class="col-sm-12">
+                            <md-button id="cmd1" style="margin-top:10px;border-radius:0;background-color:#fff;text-decoration:underline;border:none;color:#00aa7e" class="" pdf-save-button="idOne" pdf-name="someone.pdf" ng-click="sendMail()" translate="Email"></md-button>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="row margintop25" style="text-align:center;">
+                    <button id="addBtn" type="submit" ui-sref="{{routeAfterDone}}">Done</button>
+                </div>
+
+            </div>
+        </md-card>
+    </div>
+
+</div>
+
+
+
+
+<form name="signatureForm">
+    <div class="container custumContainer ">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="col-md-4 col-lg-4">
+            <div class="mylabel font-size">ENTER CUSTOMER PRINT NAME</div>
+            <input class="inputFieldsMaterial" id="customerName" ng-model="customerName" name="customerName" ng-disabled="isSubmitted" />
+        </div>
+
+        <div class="col-md-4 col-lg-4">
+            <div class="mylabel font-size">JOB RESPONSIBILITY</div>
+            <input class="inputFieldsMaterial" id="jobResp" ng-model="jobResp" name="jobResp" ng-disabled="isSubmitted" />
+        </div>
+
+        <div class="col-md-4 col-lg-4">
+            <div class="mylabel font-size">ADDITIONAL RECIPIENTS</div>
+            <input type="text" class="inputFieldsMaterial" id="customerMail" name="customerMail" ng-disabled="isSubmitted" ng-model="customerEMail" ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/" required/>
+           <!--  <span style="color:Red" ng-show="signatureForm.customerMail.$error.required"> Required! </span> -->
+            <span style="color:Red" ng-show="signatureForm.customerMail.$dirty&&signatureForm.customerMail.$error.pattern">Please Enter Valid Email</span>
+        </div>
+      </div>
+    </div>
+  </div>
+    <div class="container custumContainer margintop30">
+        <div class="mylabel font-size" translate="Customer Signature"></div>
+        <div style="height: 220px;">
+            <signature-pad accept="accept" clear="clear" height="220" width="568" dataurl="dataurl" disabled="isSubmitted || $root.completedTask"></signature-pad>
+        </div>
+        <hr>
+        <div class="layout-row">
+<!--             <div class="flex-30" ng-click="clear()" style="width:100px" ng-disabled="isSubmitted">Clear</div> -->
+            <div class="flex-33">
+          <button  class="flex-60 serbtn"   ng-click="clear()" ng-disabled="isSubmitted || $root.completedTask">Clear</button>
+
+        </div>
+            <!-- <div class="flex-15">
+          <button  id="addBtn" ng-click="signature = accept()" style="width:100px">Save Sign</button>
+        </div> -->
+            <div class="flex-60" style="float:right;">
+                I confirm that I have read, understand and agreed to all terms.
+            </div>
+            <div class="flex-50">
+                <button id="addBtn" ng-click="customerSubmit()" style="float:right;width:100px" ng-disabled="isSubmitted || $root.completedTask">Submit</button>
+            </div>
+        </div>
+    </div>
+</form>
+<!--          <div class="result" ng-show="signature">
+            <img ng-src="{{ signature.dataUrl }}">
+        </div> -->

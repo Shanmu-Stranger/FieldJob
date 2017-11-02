@@ -1,0 +1,243 @@
+﻿<style>
+    div.resources {
+        margin: 30px;
+        float: left;
+        width: 100px;
+    }
+
+    div.resources:hover {
+
+    }
+
+    div.resources img {
+        width: 75px;
+        height: 100px;
+
+    }
+
+    .imgPad {
+        border: 1px solid #ccc;
+        padding: 10px;
+    }
+
+    div.desc {
+        padding: 15px;
+        text-align: center;
+    }
+
+    .toolsField {
+        height: 400px;
+    }
+
+    /*.customContainer{
+      margin-top : 20px;
+      background: #fff;
+      box-shadow: 0px 0px 5px #ccc;
+      padding-top:20px;
+      padding-left: 75px;
+      padding-right: 50px;
+      padding-bottom: 20px;
+      border-radius: 10px;
+    }*/
+
+</style>
+<md-toolbar class="category-title" layout="row">
+    <div class="md-toolbar-tools toolbar">
+
+        <md-button class="subheader-btns " aria-label="Learn More" ui-sref="taskOverFlow">
+            FIELD JOB DETAILS
+        </md-button>
+        <md-button class="subheader-btns " aria-label="Learn More" ui-sref="todo">
+            ONSITE REQUIREMENT
+        </md-button>
+        <!--     <md-button class="subheader-btns " aria-label="Learn More" flex="15" ui-sref="Material">
+          CUSTOMER INTERACTION
+        </md-button> -->
+
+        <span flex></span>
+        <md-button class="md-primary startwork-btn"  ng-click="$root.showTaskOrDebrief(4)" ng-disabled="isFutureDate">DEBRIEF
+        </md-button>
+
+    </div>
+</md-toolbar>
+<h4 class="header-labeles">NOTES</h4>
+<div class="container " style="padding:0">
+    <div class=" TodoContainer" ng-if="noteArray == undefined || noteArray.length==0">
+        NO DATA
+    </div>
+</div>
+<div class="container" style="padding:0" ng-repeat="note in noteArray">
+
+    <div class="TodoContainer">
+        <div class="ng-scope layout-column">
+            <div class="labels">{{note.Created_By}}</div>
+            <div class="mysmallValue">{{note.Start_Date.split(" ")[0] | date:'dd/MM/yyyy'}}</div>
+            <div class="margintop30"><span style="color:#2d383f;font-weight:600;font-size:12px;font-family:Arial">NOTE TYPE-</span><span>{{note.Notes_type}}</span>
+            </div>
+        </div>
+        <div class="myvalue margintop10"><span style="color:#2d383f;font-weight:600;font-size:12px;font-family:Arial">NOTE DESCRIPTION-</span><span>{{note.Notes}}</span>
+        </div>
+    </div>
+</div>
+</div>
+
+<h4 class="header-labeles">REFERENCES</h4>
+<div class="container" style="padding:0">
+    <div class="TodoContainer">
+
+        <div class="ng-scope layout-row">
+            <div flex=100 layout layout-align="center center" style="  border-collapse: separate;border-spacing: 30px;">
+
+                <div class="col-sm-12">
+                    <div ng-repeat="res in Attachments " class="col-sm-4">
+                        <div style="text-align:center">
+                            <a ng-href="data:{{res.Content_type}};base64,{{res.base64Code}}" target="_blank" download>
+                                <div>
+                                    <img class="imgPad" src="Shape 8 copy 2@2x.png" alt=""
+                                         ng-if="res.User_File_Name.indexOf('.pdf')>-1">
+                                    <img class="imgPad" src="images/doc.png" alt=""
+                                         ng-if="res.User_File_Name.indexOf('.docx')>-1 || res.User_File_Name.indexOf('.doc')>-1">
+                                    <img class="imgPad" src="images/excel.png" alt=""
+                                         ng-if="res.User_File_Name.indexOf('.xls')>-1 || res.User_File_Name.indexOf('.xlsx')>-1">
+                                    <img style="width:100px;height:100px"
+                                         data-ng-src="data:{{res.Content_type}};base64,{{res.base64Code}}" alt=""
+                                         ng-if="res.Content_type.indexOf('image')>-1 ">
+
+                                    <div style="padding:15px 0">{{res.User_File_Name}}</div>
+
+                                    <div class="label-my" style="margin-bottom:0 !important">Created by</div>
+
+                                    <div>{{$root.uName}}</div>
+
+                                    <div class="label-my margintop10" style="margin-bottom:0 !important;">Date</div>
+
+                                    <div>{{res.Date_Created.substr(1,19).split(" ")[0] |date:'dd/MM/yyyy' }}</div>
+
+                                </div>
+                            </a>
+
+                        </div>
+                    </div>
+
+                    <div ng-repeat="item in attachmentArray " class="col-sm-4">
+                        <div style="text-align:center">
+                            <a ng-click="openResource(item)" target="_blank" download>
+
+                                <div>
+                                    <img class="imgPad" src="Shape 8 copy 2@2x.png" alt=""
+                                         ng-if="item.File_Name.indexOf('.pdf')>-1">
+                                    <img class="imgPad" src="images/doc.png" alt=""
+                                         ng-if="item.File_Name.indexOf('.docx')>-1 || item.File_Name.indexOf('.doc')>-1">
+                                    <img class="imgPad" src="images/excel.png" alt=""
+                                         ng-if="item.File_Name.indexOf('.xls')>-1 || item.File_Name.indexOf('.xlsx')>-1">
+
+                                    <img style="width:100px;height:100px"
+                                         ng-src="{{item.File_Path + item.File_Name}}">
+
+                                    <div style="padding:15px 0">{{item.File_Name}}</div>
+
+                                    <div class="label-my" style="margin-bottom:0 !important">Created by</div>
+
+                                    <div>Jack</div>
+
+                                    <div class="label-my margintop10" style="margin-bottom:0 !important;">Date</div>
+
+                                    <div>{{res.Date_Created.substr(1,19).split(" ")[0] |date:'dd/MM/yyyy' }}</div>
+
+                                </div>
+                            </a>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+          
+        </div>
+
+    </div>
+</div>
+
+
+<h4 class="header-labeles">TOOLS AND EQUIPMENTS</h4>
+<div class="container  toolsField" style="padding:0">
+    <div class="TodoContainer">
+
+        <div class="ng-scope layout-column">
+            <div class="layout-row" ng-repeat="t in defaultTasks track by $index">
+                <div flex=100 layout layout-align="center center">
+                    <div class="list-item">
+
+                        {{t}}
+                        <!-- <span><img src="images/cancel.png" style="width:12px;float:right;padding-top:3px;outline:none;" ng-click="delete()"></img></span> -->
+                    </div>
+
+                    <!--  <md-button ng-click="delete()" class="md-raised md-primary" style="background-color:red;width:10px;height:10px">
+                      x resources style border: 1px solid #ccc;resources hover border: 1px solid #777;
+                    </md-button>-->
+
+                    <!--<span style="background-color:red;height:33px" ng-click="delete()">X</span>-->
+                    <br><br>
+
+                </div>
+            </div>
+
+            <div class="ng-scope layout-column">
+                <div class="layout-row" ng-repeat="t in tasks track by $index">
+                    <div flex=100 layout layout-align="center center">
+                        <div class="list-item">
+
+                            {{t}}
+                            <span><img src="images/cancel.png"
+                                       style="width:12px;float:right;padding-top:3px;outline:none;"
+                                       ng-click="delete()"></img></span>
+                        </div>
+
+                        <!--  <md-button ng-click="delete()" class="md-raised md-primary" style="background-color:red;width:10px;height:10px">
+                          x resources style border: 1px solid #ccc;resources hover border: 1px solid #777;
+                        </md-button>-->
+
+                        <!--<span style="background-color:red;height:33px" ng-click="delete()">X</span>-->
+                        <br><br>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container" style="margin-bottom:20px;padding:0 !important">
+        <div class="TodoContainer patternImg">
+
+            <div class="box-add">
+                <div class="inner-content">
+                    <form name="TodoForm">
+                        <!-- <label id="equip-header">ADD EQUIPMENTS/TOOLS</label><br>
+
+                        <input id="fieldTool" ng-model="title"  name="title" type="text" ng-required="true" placeholder="enter the tools/equipment" ></input>
+
+                        <!-- <span style="color:red" ng-show="TodoForm.title.$dirty && TodoForm.title.$invalid && TodoForm.title.$error.required">
+                          task is required
+                        </span> -->
+                        <!-- <button id="addBtn" type="sumbit" ng-click="add()"  ng-disabled="TodoForm.$invalid " >Add</button> -->
+
+
+                        <div class="input-group">
+                            <label class="label-my" id="equip-header">ADD EQUIPMENTS/TOOLS</label>
+                        </div>
+
+                        <div class="input-group">
+
+                            <input style="border: none;border-radius: 0;" class="form-control" id="fieldTool"
+                                   ng-model="title" name="title" type="text" required/>
+                            <span class="input-group-addon" id="btnGroupAddon" ng-click="add()"
+                                  ng-disabled="TodoForm.$invalid "
+                                  style="background-color: #00aa7e;border: none; border-radius: 0 !important;color: #fff;font-weight: bold;">ADD</span>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

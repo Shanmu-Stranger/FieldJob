@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+</head>
+<body>
+
+<div class="container" ng-app="app" ng-controller="DemoController">
+    <h2>Basic Table</h2>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>date</th>
+            <th>Time</th>
+            <th>Task</th>
+            <th>Assigned To</th>
+            <th>Status</th>
+        </tr>
+        </thead>
+        <tr ng-repeat="list in lists">
+            <td>{{list.date}}</td>
+            <td>{{list.Time}}</td>
+            <td>{{list.Task}}</td>
+            <td>{{list.AssignedTo}}</td>
+            <td>{{list.Status}}</td>
+        </tr>
+    </table>
+</div>
+<script type="text/javascript">
+    var myapp = angular.module('app', []);
+    myapp.controller('DemoController', function ($scope) {
+        $scope.lists = [
+            {date: "1", Time: "ewdfc", Task: "asdfasdf", AssignedTo: "asdfsa", Status: "afsdasdf"},
+            {date: "2", Time: "ewdfc", Task: "asdfasdf", AssignedTo: "asdfsa", Status: "afsdasdf"},
+            {date: "3", Time: "ewdfc", Task: "asdfasdf", AssignedTo: "asdfsa", Status: "afsdasdf"},
+            {date: "4", Time: "ewdfc", Task: "asdfasdf", AssignedTo: "asdfsa", Status: "afsdasdf"},
+            {date: "5", Time: "ewdfc", Task: "asdfasdf", AssignedTo: "asdfsa", Status: "afsdasdf"},
+            {date: "6", Time: "ewdfc", Task: "asdfasdf", AssignedTo: "asdfsa", Status: "afsdasdf"},
+            {date: "7", Time: "ewdfc", Task: "asdfasdf", AssignedTo: "asdfsa", Status: "afsdasdf"}
+
+        ]
+    });
+
+</script>
+
+</body>
+</html>

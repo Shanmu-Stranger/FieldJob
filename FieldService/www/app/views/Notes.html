@@ -1,0 +1,74 @@
+<div class="container">
+    <div class="debreifContainerouter">
+        <md-card ng-repeat="item in notesArray track by $index">
+            <div class="debreifContainerinner">
+                <form class="form-horizontal" action="/action_page.php">
+
+
+                    <div class="row" style="padding-left:15px;padding-right:15px;">
+
+                        <div class="col-sm-4">
+                            <label class="control-label label-my"
+                                   translate="{{item.noteDefault.noteType.title}}"></label>
+
+                            <select class="form-control select-debrief" ng-model="item.Note_Type"
+                                    ng-options="x as x.value | translate for x  in item.noteDefault.noteType.values track by x.id" ng-change="setNoteType(item)">
+                                <option value="" disabled selected>Select Note Type</option>
+                            </select>
+
+                        </div>
+
+                        <div class="col-sm-4">
+                            <label class="control-label  label-my"
+                                   translate="{{item.noteDefault.noteDate.title}}" style="text-align: left;"></label>
+
+                            <p class="input-group">
+                                <input type="text" class="form-control" uib-datepicker-popup="{{format}}"
+                                       ng-model="item.Date" is-open="item.calendarOpened"
+                                       datepicker-options="dateOptions" ng-required="true" close-text="Close"
+                                       alt-input-formats="altInputFormats" ng-change="setDuration($index)"/>
+
+                                <span class="input-group-btn">
+					            <button type="button" style="border-color:#ccc !important" class="btn btn-default"
+                                        ng-click="openCalendar(item,'Notes')"><i
+                                        class="glyphicon glyphicon-calendar"></i></button>
+					          </span>
+                            </p>
+
+                        </div>
+
+
+                        <div class="col-sm-4">
+
+                            <label class="control-label label-my"
+                                   translate="{{item.noteDefault.noteCreator.title}}"></label>
+
+                            <input type="text" class="form-control" id="sel1" ng-model="item.Created_By"/>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="col-sm-12">
+
+                        <label class="control-label label-my" for="justification"
+                               translate="{{item.noteDefault.notes.title}}"></label>
+
+
+                        <textarea class="form-control textarea" rows="5" id="justification"
+                                  ng-model="item.Notes"></textarea>
+
+                    </div>
+
+                </form>
+            </div>
+            <section layout="row" layout-sm="column" layout-align="center center" layout-wrap class="time-btns">
+                <md-button class="time-font time-add" ng-click="addObject('Notes')">ADD</md-button>
+                <md-button class="time-font time-delete" ng-click="deleteObject($index,item,'Notes')">DELETE</md-button>
+                <md-button class="time-font time-copy" ng-click="copyObject(item,'Notes')">COPY</md-button>
+            </section>
+
+        </md-card>
+    </div>
+</div>

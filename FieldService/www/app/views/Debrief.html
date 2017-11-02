@@ -1,0 +1,14 @@
+  <!-- <md-toolbar class="md-hue-2"> -->
+   
+          <md-tabs md-selected="selectedIndex" md-border-bottom md-autoselect md-swipe-content class="tab-height">
+              <md-tab ng-repeat="stage in stages" md-on-select=tabChange(stage) >
+                  <md-tab-label>
+                    <span translate="{{stage.title}}"></span>
+                </md-tab-label>
+                <md-tab-body class="" style="padding: 25px; text-align: center;">
+                  <div ng-include="stage.templateUrl"></div>
+                </md-tab-body>
+              </md-tab>
+          </md-tabs>
+      
+  <!--  </md-toolbar> -->

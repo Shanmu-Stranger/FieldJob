@@ -1,0 +1,126 @@
+﻿
+  
+<style>
+    /*.attachlabel
+    {
+        margin-bottom: 20px;
+        margin-left: -15px;
+    }*/
+    .attachplaceholder
+    {
+        width: 110px;
+        height: 110px;
+        background: #f0f0f0;
+        align-items: center;
+        margin-left: 15px;
+        padding: 25px;
+    }
+    .attachplaceholder img
+    {
+        height: 60px;
+        /* align-content: center; */
+
+    }
+    .attachmentDiv
+    {
+        width: 14%;
+        margin: 0px 5px;
+        height: 110PX
+    }
+    .attachmentDiv img
+    {
+        width: 100%;
+        height: 100%;
+    }
+</style>
+
+<div class="container  visible-sm" style="margin-top:30px !important">
+    <!-- <label class="import-file">
+        <input type="file" multiple onchange="angular.element(this).scope().fileNameChanged(this)">
+        <div>Import file...</div>
+    </label> -->
+    <form  name="form">
+        <div >
+        <div class="attachlabel">
+            <label >ADD PICTURE</label>
+        </div>
+        </div>
+        <div class="row">
+        <div class="button col-sm-2" ngf-select="uploadImage($file)" ngf-multiple="true" ng-model="file" name="image" ngf-pattern="'image/*'"  ngf-size="{width: 20, height: 20, quality: 0.9}"
+          ngf-accept="'image/*'" ngf-max-size="20MB" ngf-min-height="100"
+          ngf-resize="{width: 100, height: 100}"><md-button>UPLOAD</md-button></div>
+
+            <div ng-repeat="file1 in image" class="col-sm-2">
+            <div class="button col-sm-2 attachplaceholder" ngf-select="uploadImage($file)" ngf-multiple="true" ng-model="file" name="image" ngf-pattern="'image/*'"  ngf-size="{width: 20, height: 20, quality: 0.9}"
+            ngf-accept="'image/*'" ngf-max-size="20MB" ngf-min-height="100"
+            ngf-resize="{width: 100, height: 100}"><img src="images/Layer 17.png" alt=""> </div>
+
+            <div ng-repeat="file1 in image" class="col-sm-2 attachmentDiv" >
+
+                <img ngf-thumbnail="file1 || '/thumb.jpg'">
+             </div>
+          </div>
+
+
+            </div>
+
+        </div>
+
+      </form>
+        <!-- <div>(Max 2MB)</div> -->
+    </div>
+
+</form>
+</div>
+
+<form name="attachmentfrm">
+        <!-- <div>
+                <label >ADD ATTACHMENTS</label>
+            </div>
+            <div class="row">
+            <div class="button col-sm-2" ngf-select="uploadFiles($file)" ngf-multiple="true" ng-model="file" name="file"   ngf-size="{width: 20, height: 20, quality: 0.9}"
+               ngf-max-size="20MB" ngf-min-height="100"
+              ngf-resize="{width: 100, height: 100}"><md-button>UPLOAD</md-button></div>
+
+                <div ng-repeat="file1 in files" class="col-sm-2">
+                    <img ngf-thumbnail="file1 || '/thumb.jpg'" ng-if="file1.type.indexOf('image') > -1" class="img-responsive" >
+                    <img src="images/pdf.png" ng-if="file1.name.indexOf('.pdf') > -1" class="img-responsive">
+                    <img src="images/doc.png" ng-if="file1.name.indexOf('.doc') > -1 || file1.name.indexOf('.docx') > -1" class="img-responsive">
+                    <img src="images/excel.png" ng-if="file1.name.indexOf('.xlsx') > -1 || file1.name.indexOf('.xls') > -1" class="img-responsive">
+                    <!-- <div>{{file1.name}}</div> -->
+                    <!-- <input class="form-control" ng-model="" value="{{file1.name}}"></input>
+                 </div>
+              </div> -->
+
+<div class="container" style="padding:0 !important">
+  <div class="debreifContainerouter">
+    <form name="attachmentfrm">
+      <div class="debreifContainerinner" style="border-radius:10px 10px 10px 10px !important">
+        <div  class="attachlabel">
+            <label class="label-my" style="margin-bottom:25px;" translate="Add Attachments"></label>
+        </div>
+        <div class="row">
+            <div class="button col-sm-2 attachplaceholder" ngf-select="uploadFiles($file)" ngf-multiple="true" ng-model="file" name="file"   ngf-size="{width: 20, height: 20, quality: 0.9}"
+            ngf-max-size="2MB" ngf-min-height="100"
+            ngf-resize="{width: 100, height: 100}">
+
+
+             <img  src="images/Layer 18.png" alt="">
+
+
+          </div>
+
+            <div ng-repeat="file1 in files" class="col-sm-2 attachmentDiv">
+                <img ngf-thumbnail="file1.file || '/thumb.jpg'" ng-if="file1.file.type.indexOf('image') > -1" class="img-responsive" >
+                <img src="images/pdf.png" ng-if="file1.file.name.indexOf('.pdf') > -1" class="img-responsive">
+                <img src="images/doc.png" ng-if="file1.file.name.indexOf('.doc') > -1 || file1.file.name.indexOf('.docx') > -1" class="img-responsive">
+                <img src="images/excel.png" ng-if="file1.file.name.indexOf('.xlsx') > -1 || file1.file.name.indexOf('.xls') > -1" class="img-responsive">
+                <!-- <div>{{file1.name}}</div> -->
+                <input class="form-control " style="margin-top:10px" ng-model="file1.filename" value="{{file1.filename}}"></input>
+            </div>
+        </div>
+        <div style="margin-left:25px;margin-top:10px;" class="small-labels">(Max 2MB)</div>
+    </div>
+</form>
+</div>
+</div>

@@ -1,0 +1,96 @@
+<div class="showTaskList">
+    <md-toolbar>
+        <div class="md-toolbar-tools toolbar">
+            <md-button aria-label="Go Back" ng-click="calendarView()">
+                My Calendar
+            </md-button>
+
+            <md-button aria-label="Go Back" ng-class="{'selectedTabColor' : $root.tabClicked}" ng-init = "$root.tabClicked = true" style="margin-left: 20px;">
+                My Field Job
+            </md-button>
+
+            <!-- <md-truncate style="position: absolute; left: 90px; right: 170px; top: 13px; bottom: 13px;" ng-bind="setMonthName"></md-truncate> -->
+
+            <span flex>
+                  <!-- <div>
+                    <i class="fa fa-chevron-left" aria-hidden="true"></i>
+                    <span ng-bind="setMonthName"></span>
+            <i class="fa fa-chevron-right" aria-hidden="true"></i>
+        </div> -->
+        </span>
+            <md-button class="md-primary debrief-btn" ng-show="showDebriefBtn"  ng-click="showTaskOrDebrief(4)" translate="Debrief" ng-disabled="notFutureDate">DEBRIEF</md-button>
+            <md-button class="md-primary startwork-btn" ng-show="showStartWork" ui-sref="taskOverFlow" ng-click="showTaskOrDebrief(3)">FIELD JOB DETAILS</md-button>
+        </div>
+    </md-toolbar>
+
+    <div layout="row ">
+        <div class="search-row" ng-click="searchTask()">
+            <span class="fa fa-search" aria-hidden="true">SEARCH</span>
+            <div class="search-icon"></div>
+        </div>
+    </div>
+
+    <div style="padding:0" class="container margintop10">
+        <div class="mytaskContainerouter">
+            <md-card style="margin:0" class="patternImg" ng-if="showSearchTaskDiv">
+                <div style="width: 50%; margin: 0 auto;">
+                    <form name="MaterialForm">
+                        <!-- <label class="label-my" style="display:block" id="equip-header">ENTER DATA TO SEARCH</label>
+                        <input style="display:table-caption" id="fieldTool" ng-change="changeSearch(taskInput)" ng-model="taskInput" name="item" type="text" ng-required="true" />
+                        <button id="addBtn" type="sumbit" ng-click="addItem()" ng-disabled="MaterialForm.$invalid ">Search</button> -->
+
+                        <div class="input-group" >
+                            <label class="fieldJob-label">Enter Data To Search</label>
+                        </div>
+                        <div class="input-group" style="width:60%;">
+                            <input style="border: none;border-radius: 0;"  class="form-control"  id="fieldTool" ng-change="changeSearch(taskInput)" ng-model="taskInput" name="item" type="text" ng-required="true"/>
+                            <!--                          <span class="input-group-addon" id="addBtn" ng-click="addItem()" ng-disabled="MaterialForm.$invalid " style="background-color: #00aa7e;border: none; border-radius: 0 !important;color: #fff;font-weight: bold;">SEARCH</span> -->
+                        </div>
+
+                    </form>
+                </div>
+            </md-card>
+        </div>
+    </div>
+
+
+    <div style="padding:0;" class="container ">
+        <div style="margin-top:40px;" class="custumContainer fieldjob-scroll">
+            <md-table-container>
+                <table md-table>
+                    <thead md-head>
+                    <tr md-row>
+                        <th md-column ><span>Field Job#</span></th>
+                        <!-- <th md-column><span>Field Job Details</span></th> -->
+                        <th md-column><span>Customer</span></th>
+                        <th md-column><span>Location</span></th>
+                        <th md-column><span translate="Start Date"></span></th>
+                        <th md-column>
+                            <md-select ng-model="selectedTaskStatus" ng-change="changeTaskStatus(selectedTaskStatus)" placeholder="Status">
+                                <md-option ng-value="status"  ng-repeat="status in getStatus" translate="{{status}}"></md-option>
+                            </md-select>
+                        </th>
+
+                    </tr>
+                    </thead>
+                    <tbody md-body>
+
+                    <tr md-row ng-repeat="task in myTaskDetails | filter: taskInput : selectedTaskStatus| filter: selectedTaskStatus " ng-if="task.Task_Status=='Assigned' || task.Task_Status=='Accepted' || task.Task_Status=='Field Job Completed' || task.Task_Status=='Completed'"
+                        ng-click="onclickOfTask(task)" ng-class="{'rowSelected' : selectedTask == task}">
+                        <td md-cell>{{task.Task_Number}}</td>
+                        <!-- <td md-cell>{{task.Job_Description}}</td> -->
+                        <td md-cell>{{task.Customer_Name}}</td>
+                        <td md-cell>{{task.Street_Address}},{{task.City}},{{task.State}}</td>
+                        <td md-cell> {{task.Start_Date.split(" ")[0] | timezonefilter}} </td>
+                        <!-- <td md-cell>{{task.Start_Date.split(" ")[0] | date:'dd/MM/yyyy hh:mm:ss' }}</td> -->
+                        <td md-cell>
+                            <md-button class="md-raised" ng-class="{red : task.Task_Status == 'Accepted',green : task.Task_Status == 'Field Job Completed',blue : task.Task_Status == 'Assigned',green : task.Task_Status == 'Completed' }">{{task.Task_Status == 'Field Job Completed' ? 'Completed' : task.Task_Status}}</md-button>
+                        </td>
+                    </tr>
+
+                    </tbody>
+                </table>
+            </md-table-container>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,91 @@
+﻿<div style="padding:0" class="container">
+    <div class="debreifContainerouter">
+        <md-card style="border-radius:10px 10px 10px 10px" ng-repeat="item in expenseArray track by $index">
+            <div class="debreifContainerinner">
+                <form class="form-horizontal" action="/action_page.php">
+
+                    <div class="layout-row">
+
+                        <div class="form-group flex-25 expensePaddi">
+                            <label class=" col-sm-12 label-my" translate="{{item.expenseDefault.date.title}}"></label>
+
+                            <div class="col-sm-12">
+                                <div class='input-group date' id='datePickerDate' ng-model="item.date.value">
+                                    <input type="text" class="form-control" uib-datepicker-popup="{{format}}"
+                                           ng-model="item.Date" is-open="item.calendarOpened"
+                                           datepicker-options="dateOptions" ng-required="true" close-text="Close"
+                                           alt-input-formats="altInputFormats" ng-change="setDuration($index)"/>
+                                    <span class="input-group-btn">
+				 <button type="button" class="btn btn-default" style="border-color:#ccc !important"
+                         ng-click="openCalendar(item,'Expenses')"><i class="glyphicon glyphicon-calendar"></i></button>
+				 </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group flex-25 expensePaddi">
+
+                            <label class=" col-sm-12 label-my" for="expense-type"
+                                   translate="{{item.expenseDefault.expenseType.title}}"></label>
+                            <div class="col-sm-12">
+                                <select class="form-control select-debrief"
+                                        id="expense-type"
+                                        ng-model="item.Expense_Type"
+                                        ng-options="x as x.value | translate for x  in item.expenseDefault.expenseType.values track by x.id" ng-change="setExpenseItem(item)">
+                                    <option value="" disabled selected>Select Expense Type</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group flex-25 expensePaddi">
+                            <label class="col-sm-12 label-my" translate="{{item.expenseDefault.amount.title}}"></label>
+                            <div class="col-sm-12">
+                                <input type="text" class="form-control" ng-model="item.Amount"/>
+
+                            </div>
+                        </div>
+
+
+                        <div class="form-group flex-20 expensePaddi">
+                            <label class=" col-sm-12 label-my"
+                                   translate="{{item.expenseDefault.currency.title}}"></label>
+                            <div class="col-sm-12">
+                                <select class="form-control select-debrief" ng-model="item.Currency"
+                                        ng-options="x as x.Value for x in item.expenseDefault.currency.values track by x.ID" ng-change="setCurrency(item)">
+                                    <option value="" disabled selected>Select Currency</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group flex-25 expensePaddi">
+                            <label class=" col-sm-12 label-my"
+                                   translate="{{item.expenseDefault.chargeMethod.title}}"></label>
+                            <div class="col-sm-12">
+                                <select class="form-control select-debrief" ng-model="item.Charge_Method"
+                                        ng-options="x as x.Value for x in item.expenseDefault.chargeMethod.values  track by x.ID" ng-change="setChargeMethodForExpense(item)">
+                                    <option value="" disabled selected>Select Charge Method</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-12 margintop30	">
+                        <label class="  label-my" for="justification" translate="{{item.expenseDefault.justification.title}}"></label>
+                        <textarea class="form-control text-area" rows="5" id="justification"
+                                  ng-model="item.Justification"></textarea>
+                    </div>
+
+                </form>
+
+            </div>
+            <section style="border-radius:0 0 10px 10px" layout="row" layout-sm="column" layout-align="center center"
+                     layout-wrap class="time-btns">
+                <md-button class="time-font  time-add" ng-click="addObject('Expenses')">ADD</md-button>
+                <md-button class="time-font  time-delete" ng-click="deleteObject($index,item,'Expenses')">DELETE
+                </md-button>
+                <md-button class="time-font  time-copy" ng-click="copyObject(item,'Expenses')">COPY</md-button>
+            </section>
+
+        </md-card>
+    </div>
+</div>

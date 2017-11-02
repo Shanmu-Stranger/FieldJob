@@ -1,0 +1,234 @@
+<md-toolbar class="category-title" layout="row">
+    <div class="md-toolbar-tools toolbar">
+
+        <md-button class="subheader-btns btn-chng" aria-label="Learn More"  ui-sref="taskOverFlow">
+            FIELD JOB DETAILS
+        </md-button>
+        <md-button class="subheader-btns btn-chng" aria-label="Learn More"  ui-sref="todo" translate="Onsite Requirement">
+        </md-button>
+        <span flex></span>
+        <md-button class="back-btn md-raised" ng-click="goToBack()">BACK</md-button>
+        <md-button class="accept-btn md-raised" ui-sref="todo" ng-click="accept()" ng-show="$root.showAccept">ACCEPT</md-button>
+        <md-button class="accept-btn md-raised"  ng-click="$root.showTaskOrDebrief(4)" ng-show="!$root.showAccept" translate="Debrief" ng-disabled="isFutureDate"></md-button>
+
+        <!-- <div flex="60">
+    <md-button class="md-raised md-primary start-journey" >START JOURNEY</md-button>
+    </div> -->
+    </div>
+</md-toolbar>
+<div style="padding:0 !important" class="container">
+    <div class="custumContainer">
+        <div layout="row">
+
+            <div flex="30">
+                <div class="mylabel" translate="Service Request"></div>
+                <div class="myvalue">{{taskDetails.Service_Request}}</div>
+            </div>
+
+            <div flex="30">
+                <div class="mylabel">FIELD JOB NUMBER</div>
+                <div class="myvalue">{{taskDetails.Task_Number}}</div>
+            </div>
+
+            <div flex="60">
+
+                <!-- <div class="mylabel">JOB DESCRIPTION</div>
+                <div class="myvalue">{{taskDetails.Job_Description}}
+                </div> -->
+
+                <table class="table margintop25">
+                    <thead>
+                        <tr>
+                            <th style="border : 1px solid #c0c0c0;" class="taskTable" translate="Start Date"></th>
+                            <th style="border : 1px solid #c0c0c0;" class="taskTable" translate="End Date"></th>
+                            <th style="border : 1px solid #c0c0c0;" class="taskTable" translate="Duration"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="border : 1px solid #c0c0c0;background-color:#f0f0f0">{{taskDetails.Start_Date.split(" ")[0] | date:'dd/MM/yyyy'}}</td>
+                            <td style="border : 1px solid #c0c0c0;background-color:#f0f0f0">{{taskDetails.End_Date.split(" ")[0] | date:'dd/MM/yyyy'}}</td>
+                            <td style="border : 1px solid #c0c0c0;background-color:#f0f0f0">{{taskDetails.Duration}}</td>
+                        </tr>
+                    </tbody>
+
+                </table>
+
+
+
+
+            </div>
+        </div>
+
+        <div class="margintop30" layout="row">
+            <div flex="30">
+                <div class="mylabel" translate="Product Line"></div>
+                <div class="myvalue">{{taskDetails.Product_Line|| "NO VALUE"}}</div>
+
+            </div>
+
+            <div flex="30">
+                <div class="mylabel" translate="System ID / Serial #"></div>
+                <div class="myvalue">
+                    <!-- <span>DN 1200</span>
+                    <span>DN 908098</span><br>
+                    <span>DN 1090909009</span> -->
+                    {{taskDetails.Serial_Number|| "NO VALUE"}}
+                </div>
+
+            </div>
+
+            <div flex="60">
+                <div layout="row">
+                    <div flex="50">
+                        <div class="mylabel">TAG #</div>
+                        <div class="myvalue">{{taskDetails.tagNo|| "NO VALUE"}}</div>
+                    </div>
+                    <div flex="50">
+                        <div class="mylabel">ORGINAL PO #</div>
+                        <div class="myvalue">{{taskDetails.orginalNo|| "NO VALUE"}}</div>
+                    </div>
+                </div>
+
+
+
+
+            </div>
+        </div>
+
+        <div class="margintop30">
+            <hr>
+        </div>
+
+        <div class="row margintop30">
+            <div class="col-md-12 col-sm-12">
+                <span class="headerLabel" translate="Customer Site"></span>
+            </div>
+        </div>
+
+        <div class="row margintop40">
+            <div class="col-md-12 col-sm-12">
+                <div class="mylabel" translate="Customer Name"></div>
+                <div class="myvalue">{{taskDetails.Customer_Name}}</div>
+            </div>
+        </div>
+
+        <!-- <div class="ng-scope layout-row margintop10 ">
+  <div class="flex-33">
+  <div class="mylabel">STREET ADDRESS</div>
+  <div class="myvalue">3311 Richmond Avenue</div>
+  </div>
+
+  <div class="flex-20">
+     <div class="mylabel">CITY</div>
+    <div class="myvalue">Houston</div>
+</div>
+
+  <div class="flex-20">
+    <div class="mylabel">STATE</div>
+    <div class="myvalue">Texas</div>
+   </div>
+
+  <div class="flex-20">
+   <div class="mylabel">ZIPCODE</div>
+    <div class="myvalue">1210008</div>
+</div>
+
+  <div class="flex-10">
+   <md-button class="md-raised md-primary" ng-click="toggle()" value="Click here">Map</md-button>
+  </div>
+
+</div> -->
+        <!-- <div class="ng-scope layout-row position" ng-show="myVar" id="map" style="height:300px;background:#121212" >sedfgdfgvsed
+  </div> -->
+        <!--
+  <div style="display:block;" class="ng-scope layout-row margintop10 ">
+    <md-content class="md-padding">
+       <table class="table">
+<thead>
+  <tr>
+    <th>Contact</th>
+    <th>Phone Number</th>
+    <th>Email</th>
+  </tr>
+</thead>
+<tr ng-repeat="contact in contacts">
+<td>{{contact.name}}</td>
+<td>{{contact.No}}</td>
+<td>{{contact.email}}</td>
+
+</tr>
+</table>
+    </md-content>
+
+
+   </div>
+</div> -->
+        <div class="position">
+            <table>
+                <thead>
+                    <tr id="tableheader">
+                        <th style="border-right:1px solid #ebebeb;height:70px" translate="Contact Name"></th>
+                        <th style="border-right:1px solid #ebebeb;height:70px" translate="Phone Number"></th>
+                        <th style="height:70px" translate="Email"></th>
+                    </tr>
+                </thead>
+
+                <tbody class="taskcls">
+                    <tr id="tabledata" ng-repeat="contact in taskDetails.Contacts">
+                        <td>{{contact.Contact_Name}}</td>
+                        <td>WORK:{{contact.Office_Phone || "NA"}}<br/>
+                            MOBILE :{{contact.Mobile_Phone || "NA"}}</td>
+                        <td>{{contact.Email}}</td>
+                    </tr>
+
+            </table>
+        </div>
+
+        <div class="ng-scope layout-row margintop60 ">
+            <div class="flex-33">
+                <div class="mylabel" translate="Street Address"></div>
+                <div class="myvalue">{{taskDetails.Street_Address}}</div>
+            </div>
+
+            <div class="flex-20">
+                <div class="mylabel" translate="City"></div>
+                <div class="myvalue">{{taskDetails.City}}</div>
+            </div>
+
+            <div class="flex-20">
+                <div class="mylabel" translate="State"></div>
+                <div class="myvalue">{{taskDetails.State}}</div>
+            </div>
+
+            <div class="flex-20">
+                <div class="mylabel" translate="Zip Code"></div>
+                <div class="myvalue" id="zipcode">{{taskDetails.Zip_Code}}</div>
+            </div>
+
+            <!-- <div class="flex-10">
+                <md-button id="mapToggle" class="map-image md-primary" value="Click here"></md-button>
+            </div> -->
+            <div id="mapToggle" class="map-image md-primary" ng-click = "mapClicked()" ng-class = "{'mapBgImage' : mapIsClicked}"></div>
+
+        </div>
+
+        <div class="row">
+
+            <div class="col-sm-12 col-md-12">
+               
+                 <div class="ng-scope layout-row position" id="map" style="height:300px;display: none;" ng-hide="chinaUser">
+                </div> 
+
+                <div id="allmap" style="height:300px;display: none;" ng-show="chinaUser"></div>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<!--
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAjsFMJ41fB77qvY_kbf0Jk1_5uSpHzQqk&callback=initMap"
+    async defer></script> -->

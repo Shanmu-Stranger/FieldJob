@@ -1,0 +1,24 @@
+﻿<md-dialog class="dialog-border">
+    <form ng-cloak>
+        <md-dialog-content>
+            <div class="md-dialog-content material-dialog">
+
+                <div ng-repeat="item in warrantyList">
+                    <div class="row">
+                        <div class="col-sm-1" style="padding:0 !important">
+                            <div style="padding-right:10px;" ng-class="{'tickImage':item == selectedWarranty}"></div>
+                        </div>
+                        <div class="col-sm-11" style="padding:0 !important;">
+                            <label ng-click="selectedWarrantyType(item)"
+                                   ng-class="{'tickImageLabel':item == selectedWarranty}">{{item.value}}</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </md-dialog-content>
+        <md-dialog-actions layout="row" class="dialog-ok">
+            <label ng-click="$root.addMaterialItem()">CONTINUE</label>
+        </md-dialog-actions>
+
+    </form>
+</md-dialog>

@@ -1,0 +1,233 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+
+    <!-- <meta http-equiv="Content-Security-Policy"
+      content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *"> -->
+
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport"
+          content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+
+    <link rel="stylesheet" type="text/css" href="css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="css/styless.css"/>
+   <!--  <link rel="stylesheet" type="text/css" href="css/index.css"/> -->
+    <!-- <link rel="stylesheet" type="text/css" href="lib/ionic/css/ionic.css"> -->
+
+    <link rel="stylesheet" type="text/css" href="./lib/bootstrap/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="./lib/angular-material/angular-material.min.css"/>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-datetimepicker.css"/>
+
+    <title>Emerson</title>
+
+    <link rel="manifest" href="manifest.json">
+
+    <script type="text/javascript" src="lib/ionic/js/ionic.bundle.js"></script>
+
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="db/dbInitialize.js"></script>
+
+    <script type="text/javascript" src="./lib/jquery.min.js"></script>
+    <script type="text/javascript" src="./lib/jquery-ui.min.js"></script>
+
+    <script type="text/javascript" src="./lib/bootstrap/bootstrap.min.js"></script>
+
+    <!-- Spinner libraries -->
+     <script type="text/javascript" src="./lib/spinner/spin.min.js"></script>
+     <script type="text/javascript" src="./lib/spinner/angular-loading-spinner.js"></script>
+     <script type="text/javascript" src="./lib/spinner/angular-spinner.min.js"></script>
+    <!-- Angular Translate libraries -->
+    <script src="./lib/angular/angular.min.js"></script>
+    <script src="./lib/angular-translate/messageformat.js"></script>
+    <script src="./lib/angular-translate/translate.js"></script>
+    <script src="./lib/angular-translate/angular-translate-interpolation-messageformat.js"></script>
+    <script src="./lib/angular-translate/angular-translate-storage-cookie.js"></script>
+    <script src="./lib/angular-translate/angular-translate-storage-local.js"></script>
+    <script src="./lib/angular-translate/angular-translate-loader-url.js"></script>
+    <script src="./lib/angular-translate/angular-translate-loader-static-files.js"></script>
+    <script src="./lib/angular-translate/angular-translate-handler-log.js"></script>
+
+    <!-- Angular Material requires Angular.js Libraries -->
+    <script src="./lib/angular-animate/angular-animate.min.js"></script>
+    <script src="./lib/angular-aria/angular-aria.min.js"></script>
+    <script src="./lib/angular-messages/angular-messages.min.js"></script>
+    <script src="./lib/angular-ui-router/angular-ui-router.min.js"></script>
+
+    <!-- Angular Material Library -->
+    <script src="./lib/angular-material/angular-material.min.js"></script>
+    <script src="./lib/md-data-table.js"></script>
+    <script src="./lib/ui-bootstrap-tpls-2.5.0.js"></script>
+
+    <!-- Calendar libraries -->
+    <script src="./lib/moment.min.js"></script>
+    <script src="./lib/bootstrap-datetimepicker.js"></script>
+    <script src="./lib/fullcalendar.js"></script>
+    <!-- <script src="./lib/gcal.js"></script> -->
+    <script src="./lib/calendar.min.js"></script>
+    <!-- <script src="lib/daterangepicker.js"></script> -->
+    <!-- <script src="lib/angular-daterangepicker.js"></script> -->
+
+    <script type="text/javascript" src="lib/jspdf.js"></script>
+    <script type="text/javascript" src="lib/pdfmake.min.js"></script>
+    <script type="text/javascript" src="lib/html2canvas.min.js"></script>
+
+    <script src="lib/ng-file-upload/ng-file-upload-shim.min.js"></script>
+
+    <script src="lib/ng-file-upload/ng-file-upload.min.js"></script>
+    <script src="lib/signature_pad.min.js"></script>
+
+    <script type="text/javascript" src="app/app.js"></script>
+    <script type="text/javascript" src="controllers/index.js"></script>
+    <script type="text/javascript" src="controllers/myTask.js"></script>
+    <script type="text/javascript" src="controllers/taskOverFlow.js"></script>
+    <script type="text/javascript" src="controllers/todo.js"></script>
+    <script type="text/javascript" src="controllers/debrief.js"></script>
+    <script type="text/javascript" src="controllers/login.js"></script>
+
+    <script type="text/javascript" src="services/localService.js"></script>
+    <script type="text/javascript" src="services/cloudService.js"></script>
+    <script type="text/javascript" src="services/valueService.js"></script>
+    <script type="text/javascript" src="services/constantService.js"></script>
+    <script type="text/javascript" src="services/syncService.js"></script>
+    <script type="text/javascript" src="services/ofscService.js"></script>
+    <script type="text/javascript"
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAjsFMJ41fB77qvY_kbf0Jk1_5uSpHzQqk"></script>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=WsveNP7CGGiSt2GoUNH2STPyC2XQ7nma"></script>
+    <style>
+        .selected {
+            opacity: 1;
+        }
+
+        .unselected {
+            opacity: 0.1;
+        }
+    </style>
+
+    <script type="text/javascript">
+        var showingNavBar;
+
+        function onPageComplete() {
+            showingNavBar = false;
+        }
+
+        function onToggleNavBar() {
+
+            if (showingNavBar) {
+
+                showingNavBar = false;
+
+            } else {
+
+                showingNavBar = true;
+            }
+        }
+
+        document.addEventListener("showpagecomplete", onPageComplete, false);
+    </script>
+
+</head>
+
+<body ng-app="emerson" ng-controller="indexController" ng-cloak>
+
+<span class="md-dialog-container" style="background-color:#ffffff;opacity:0.8;text-align:center;z-index:1051 !important;" us-spinner="{radius:10, width:5, length: 12}"><img src="./images/02hat_loader_final2.gif" /></span>
+
+<div class="wrapper">
+    <!-- Sidebar Holder -->
+    <nav id="sidebar" ng-show="$root.Islogin">
+        <div class="sidebar-header">
+            <div class="logoIcon"></div>
+        </div>
+
+        <ul class="list-unstyled components">
+
+            <li class="categryAicon" ng-click="menuClick(item)" ng-repeat="item in sideNavItems"
+                ng-class="{'selectedCategory':item.id == $root.selectedItem}"
+                ng-if="(item.name=='Debrief' && $root.showDebrief) || item.name=='MyCalendar' || item.name=='MyTask' ||(item.name=='TaskOverview' && $root.showTaskDetail)">
+                <!--  <img ng-src="{{item == selectedItem ? item.imageSelected : item.image}}"><br> -->
+                <div ng-class="{ '{{item.name}}selected' : item.id == $root.selectedItem, '{{item.name}}' : item.id !== $root.selectedItem }"></div>
+                <br>
+                <span class="sidenav-text" ng-class="{'sidenav-text-Sel':item.id == $root.selectedItem}">{{item.displayName}}</span>
+            </li>
+
+        </ul>
+
+
+    </nav>
+
+    <!-- Page Content Holder -->
+    <div id="content">
+
+        <nav class="navbar navbar-default navbar-fixed-top navLeft" ng-show="$root.Islogin">
+            <div class="container-fluid">
+
+                <div class="navbar-header">
+
+                    <div class="hamburger" id="sidebarCollapse"></div>
+                </div>
+
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <label class="title">{{$root.selectedCategory}}</label>
+                    <ul class="nav navbar-nav navbar-right">
+
+                        <li class="popover__wrapper">
+                          <div class="user-avatar"></div>
+                            <div class="push popover__content">
+                                <div>
+                                    <p class="popover__message uname">{{$root.uName | uppercase}}</p>
+                                    <p class="popover__message designation">Service Engineer</p>
+                                    <p class="popover__message sign-out" ng-click="signout()">Sign Out</p>
+                                </div>
+                                <hr class="popover-hr">
+                                <div class="language-contents">
+                                    <label>Select Your Language</label>
+                                    <img src="images/Layer 10.png" ng-click="changeLanguage('en')" ng-disabled="usFlag"
+                                         ng-class="!usFlag ? 'selected':'unselected'"/>
+                                    <img src="images/Layer 11.png" ng-click="changeLanguage('fr')"
+                                         ng-disabled="franceFlag" ng-class="!franceFlag ? 'selected':'unselected'"/>
+                                    <img src="images/Layer 12.png" ng-click="changeLanguage('ch')"
+                                         ng-disabled="chinaFlag" ng-class="!chinaFlag ? 'selected':'unselected'"/>
+                                </div>
+                            </div>
+                        </li>
+
+                        <li class="sync" ng-click="syncFunctionality()"></li>
+                        <li class="save" ng-click="saveValues()"></li>
+                    </ul>
+
+                      <div class="badgee" ng-show="onlineStatus"></div>
+                </div>
+            </div>
+        </nav>
+        <div ui-view="" class="viewDiv" ></div>
+
+    </div>
+
+</div>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $('#sidebarCollapse').on('click', function () {
+            $('#sidebar').toggleClass('active');
+        });
+    });
+
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-17352735-3']);
+    _gaq.push(['_trackPageview']);
+    (function () {
+        var ga = document.createElement('script');
+        ga.type = 'text/javascript';
+        ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(ga, s);
+    })();
+</script>
+
+</body>
+
+</html>

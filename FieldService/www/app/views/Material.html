@@ -1,0 +1,176 @@
+<style>
+    .inputFieldsMaterial {
+        border: none;
+        width: 90%;
+        height: 30px;
+        margin-top: 7px;
+        background-color: #f5f5f5 !important;
+        outline: none;
+        padding-left: 5px;
+    }
+
+    .font-size {
+        font-size: 12px !important;
+    }
+
+    .inputFieldsMaterial:focus {
+        border: 1px solid #00AA7E;
+        padding-left: 4px;
+    }
+
+    .content-material {
+        padding: 17px 0px 0px 20px;
+        width: 70%;
+        background-color: #fff;
+        box-shadow: 0px 1px 4px #ccc;
+    }
+
+    .padding10 {
+        padding: 10px;
+    }
+
+    .margin-top {
+        margin-top: 7px;
+    }
+
+    .plusminusBtn {
+        background: none;
+        border: none;
+        outline: none;
+    }
+
+    .margin-top15 {
+        margin-top: 15px;
+    }
+
+    .height-flex {
+        height: 1% !important;
+    }
+</style>
+
+<div style="padding:0" class="container">
+    <div style="" class="mytaskContainerouter margintop30">
+
+        <md-card style="margin:0" class="patternImg">
+            <form name="MaterialForm">
+
+                <div class="input-group" style="width:50%;margin:0 auto;">
+                    <label class="label-my" >Enter Item Description</label>
+                </div>
+                <div class="input-group" style="width:50%;margin:0 auto;">
+
+                    <input style="border: none;border-radius: 0;" type="text" class="form-control" id="fieldTool"
+                           ng-model="descriptionValue" name="descriptionValue" type="text"
+                           ng-change="setMaterialSearchText(descriptionValue)" required/>
+                    <span class="input-group-addon" id="btnGroupAddon" ng-click="showDropDown($event, descriptionValue)"
+                          ng-disabled="MaterialForm.$invalid "
+                          style="background-color: #00aa7e;border: none; border-radius: 0 !important;color: #fff;font-weight: bold;">SEARCH</span>
+                </div>
+
+            </form>
+
+        </md-card>
+    </div>
+</div>
+
+<div class="container" style="padding:0">
+    <div class="debreifContainerouter">
+        <md-card style="border-radius:10px 10px 10px 10px;margin:0 !important" class="margin-top15"
+                 ng-repeat="item in materialArray track by $index">
+            <div class="debreifContainerinner">
+
+                <form class="form-horizontal" name="userForm">
+
+                    <div class="col-sm-12 col-md-12">
+                        <div class="col-sm-4 col-md-4">
+                            <div class="form-group">
+                                <label class="control-label col-sm-12 marginbottom5" translate="{{item.materialDefault.chargeType.title}}"></label>
+                                <div class="col-sm-12">
+
+                                    <input class="inputFieldsMaterial"
+                                           ng-model="item.Charge_Type" disabled></input>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4 col-md-4">
+                            <div class="col-sm-12 col-md-12">
+                                <div class="form-group">
+                                    <label class="control-label  marginbottom5" translate="{{item.materialDefault.description.title}}"></label>
+                                    <div>{{item.Description}}</div>
+                                </div>
+                            </div>
+                        </div>
+
+                         <div class="col-sm-4 col-md-4">
+                            <div class="col-sm-6 col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label  marginbottom5">ITEM NAME</label>
+                                    <input type ="text" ng-model="item.itemName"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-12 col-md-12">
+                        <div class="col-sm-4 col-md-4">
+                            <div class="form-group">
+                                <label class="control-label col-sm-12 marginbottom5" translate="{{item.materialDefault.productQuantity.title}}"></label>
+                                <div class="col-sm-12">
+                                    <button class="plusminusBtn calculateBut" ng-click="deleteSerialItem($index)"
+                                            ng-disabled="item.Product_Quantity<=1">-
+                                    </button>
+                                    <label class="control-label  calculateInput"
+                                           ng-model="itemContent.productQuantity.value">{{item.Product_Quantity}}</label>
+                                    <button class="plusminusBtn calculateBut" ng-click="addSerialItem($index) ">+
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-8 col-md-8">
+                            <div ng-repeat="serial in item.Serial_Type track by $index" style="clear:both">
+                                <div ng-show="item.Charge_Type == 'Warranty'">
+
+                                    <div class="col-sm-6 col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label" translate="{{item.materialDefault.serialIn.title}}"></label>
+                                            <input class="inputFieldsMaterial" id="SerialIn"
+                                                   ng-model="serial.in" name="ChargeType"></input>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-6 col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label" translate="{{item.materialDefault.serialOut.title}}"></label>
+                                            <input class="inputFieldsMaterial" id="SerialOut"
+                                                   ng-model="serial.out" name="SerialNumber"></input>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-8">
+                                    <div ng-show="item.Charge_Type == 'Billable' || item.Charge_Type == 'Goodwill' || item.Charge_Type == 'Concession' ">
+                                        <div class="form-group ">
+                                            <label class="control-label">{{item.materialDefault.serialNo.title}}</label>
+                                            <input style="width:240px;" class="inputFieldsMaterial" id="SerialNo"
+                                                   ng-model="serial.number" name="SerialNo"></input>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <section style="border-radius:0 0 10px 10px" layout="row" layout-sm="column" layout-align="center center"
+                     layout-wrap class="time-btns">
+                <md-button class="time-font time-delete" ng-click="deleteObject($index, item,'Material')">Delete
+                </md-button>
+            </section>
+
+        </md-card>
+
+    </div>
+</div>

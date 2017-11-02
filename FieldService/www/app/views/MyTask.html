@@ -1,0 +1,193 @@
+<!-- <link rel="stylesheet" href="././css/calendarDemo.css" /> -->
+<link href='././css/fullcalendar.min.css' rel='stylesheet' />
+<link href='././css/fullcalendar.print.min.css' rel='stylesheet' media='print' />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<style>
+    /*body {
+    margin: 40px 10px;
+    padding: 0;
+    font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
+    font-size: 14px;
+  }*/
+
+    #calendar {
+        max-width: 100%;
+        /*margin: 0 auto;*/
+    }
+
+    /*.fc-state-default {
+        border: 1px solid;
+        background-color: transparent;
+        background-image: -moz-linear-gradient(top, transparent, transparent);
+        background-image: -webkit-gradient(linear, 0 0, 0 100%, from(transparent), to(transparent));
+        background-image: -webkit-linear-gradient(top, transparent, transparent);
+        background-image: -o-linear-gradient(top, transparent, transparent);
+        background-image: linear-gradient(to bottom, transparent, transparent);
+        background-repeat: repeat-x;
+        border-color: #e6e6e6 #e6e6e6 #bfbfbf;
+        border-color: transparent;
+        color: #ffffff;
+        text-transform: uppercase;
+        text-shadow: none;
+        box-shadow: none;
+        outline: none;
+    }*/
+
+    /*.fc-state-active,
+    .fc-state-down {
+        background-color: transparent;
+        background-image: none;
+
+    }*/
+
+    /*.fc-state-active,
+    .fc-state-disabled,
+    .fc-state-down,
+    .fc-state-hover {
+        color: #ffffff;
+        background-color: transparent;
+    }*/
+
+    .fc-today-button {
+        display: none;
+    }
+
+    .fc-center h2 {
+        color: #ffffff;
+    }
+
+    .fc-description {
+        border-radius: 25px;
+        border: 2px solid #73AD21;
+        padding: 20px;
+        background-color: beige;
+    }
+
+    .fc-prev-button {
+        top: 24px;
+        right: 110px !important;
+    }
+
+
+    .fc-next-button {
+        bottom: 28px;
+        left: 110px;
+    }
+
+    .fc button {
+        font-size: 14px;
+    }
+
+    #calendar>div.fc-toolbar.fc-header-toolbar>div.fc-center>div {
+        position: relative;
+        left: 50px;
+    }
+
+    .fc-myTask-button {
+        margin-left: 20px !important;
+    }
+
+    #calendar>div.fc-toolbar.fc-header-toolbar>div.fc-right>div>h2 {
+        color: #ffffff;
+        font-size: 16px;
+    }
+
+    .fc-view-container {
+        /* width: 60%;*/
+        padding: 20px 50px 50px 50px;
+    }
+    .assignedEvent {
+        background-color: #FFF !important;
+        /* color:#FFF !important;  */
+        border: 2px solid #004b8d !important;
+    }
+
+    .acceptedEvent {
+        background-color: #FFF !important;
+        /* color:#FFF !important; */
+        border: 2px solid #d31245 !important;
+    }
+
+    .completedEvent {
+        background-color: #FFF !important;
+        /* color:#FFF !important; */
+        border: 2px solid #5cb85c !important;
+    }
+    /* .fc-title {
+    color: #FFF !important;
+  } */
+
+    .btn-default {
+        border-color: #fff;
+    }
+
+    .fc-head-container{
+        height: 50px;
+        background-color: #eaeaea;
+        background-image: url('images/crosspattern1.png');
+        /*background-repeat: no-repeat;*/
+        /*background-size: 100% 100%;*/
+    }
+    .fc-day-header{
+        border-right: solid 2px #f0f0f0 !important;
+        height: 50px;
+        font-family: Arial;
+        font-size: 15px;
+        color: #000000;
+        display: table-cell;
+        vertical-align: middle !important;
+    }
+    .fc-time{
+        font-family: Arial;
+        font-size: 15px;
+        color: #000000;
+        display: table-cell;
+        vertical-align: middle !important;
+    }
+
+</style>
+
+<!-- <md-tabs md-dynamic-height md-border-bottom> -->
+<!-- <md-button class="md-primary debrief-btn" ng-show="showDebrief">DEBRIEF</md-button>
+   <md-button class="md-primary startwork-btn" ng-show="showStartWork" ng-click="startWork()">START WORK</md-button>
+  <!-- <md-tab label="Calendar"> -->
+
+<div layout="row">
+    <div id='calendar'>
+        <div id="fullCalModal" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span> <span class="sr-only">close</span></button>
+                        <h4 id="modalTitle" class="modal-title"></h4>
+                    </div>
+                    <div id="modalBody" class="modal-body"></div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Reject</button>
+                        <button class="btn btn-primary" ng-click="onAcceptCall()">Accept</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- <div flex="40" class="showMonth">
+            <div uib-datepicker ng-model="selectedDate" class="well well-sm no-outline" datepicker-options="options" ng-click=" goToDate()"></div>
+        </div> -->
+    </div>
+</div>
+
+<!-- </md-tab>
+      <md-tab label="My Task"> -->
+
+<!--  </md-tab>
+
+    </md-tabs> -->
+<!--  <span flex></span> -->
+
+
+
+<!-- <div id="eventContent" title="Event Details">
+    Start: <span id="startTime"></span><br>
+    End: <span id="endTime"></span><br><br>
+    <p id="eventInfo"></p>
+    <p><strong><a id="eventLink" href="" target="_blank">Read More</a></strong></p>
+</div> -->

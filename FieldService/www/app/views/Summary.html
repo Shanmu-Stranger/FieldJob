@@ -1,0 +1,333 @@
+<style>
+    .padding10 {
+        padding: 10px;
+        margin-left: 50px;
+        margin-top: 30px;
+        margin-right: 50px;
+    }
+
+    .padding15 {
+        padding-left: 15px;
+        padding-bottom: 10px;
+        padding-top: 10px;
+    }
+
+    .paddiin-bottom-10 {
+        padding-bottom: 10px
+    }
+
+    table.work, th.work, td.work {
+        border: 1px solid #c0c0c0;
+
+    }
+
+    table, tr {
+        border: 1px solid #ebebeb !important;
+
+    }
+
+    td, th {
+        padding: 10px;
+    }
+
+    @media (min-width: 1200px) {
+        .container.custumContainer {
+            width: 1090px !important;
+        }
+
+    }
+</style>
+
+<div id="export1">
+    <div class="padding10 debLabelHeader">CUSTOMER CALL DETAILS</div>
+    <div class="container" style="padding:0">
+        <div class="debreifContainerouter margintop30" style="margin-top:30px !important">
+            <md-card style="border-radius:10px 10px 10px 10px">
+                <div class="debreifContainerinner">
+                    <div class="row padding15" style="margin:0 !important">
+                        <label translate="Customer Name">:</label>
+                        <div>{{summary.taskObject.Customer_Name}}</div>
+                    </div>
+                    <div class="row margintop30 ">
+                        <hr/>
+                    </div>
+                    <div class="row margintop30 " style="padding: 0px;margin:0 !important">
+                        <div class="col-sm-4 paddiin-bottom-10">
+                            <label translate="Service Request">:</label>
+                            <div>{{summary.taskObject.Service_Request}}</div>
+                        </div>
+
+                        <div class="col-sm-4 paddiin-bottom-10">
+                            <label>FIELD JOB NUMBER:</label>
+                            <div>{{summary.taskObject.Task_Number}}</div>
+                        </div>
+                        <div class="col-sm-4 paddiin-bottom-10">
+                            <div class="row">
+                                <label translate="Job Description"></label>
+                                <div>{{summary.taskObject.Job_Description}}</div>
+                            </div>
+                            <div class="row margintop25">
+                                <md-table-container>
+                                    <table md-table class="work">
+                                        <thead md-head>
+                                        <tr md-row>
+                                            <th md-column style="border : 1px solid #c0c0c0;"><span translate="Start Date"></span>
+                                            </th>
+                                            <th md-column style="border : 1px solid #c0c0c0;"><span translate="End Date">END DATE</span></th>
+                                            <th md-column style="border : 1px solid #c0c0c0;"><span translate="Duration"></span></th>
+                                        </tr>
+                                        </thead>
+                                        <tbody md-body>
+                                        <tr md-row ng-repeat="time in  summary.taskObject.times"
+                                            style="background-color:#f0f0f0">
+                                            <td md-cell style="border : 1px solid #c0c0c0;background-color:#f0f0f0">
+                                                {{time.Start_Date.split(" ")[0] | date : 'dd/MM/yyyy'}}
+                                            </td>
+                                            <td md-cell style="border : 1px solid #c0c0c0;background-color:#f0f0f0">
+                                                {{time.End_Date.split(" ")[0] | date : 'dd/MM/yyyy'}}
+                                            </td>
+                                            <td md-cell style="border : 1px solid #c0c0c0;background-color:#f0f0f0">6
+                                                hours
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </md-table-container>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row margintop30 ">
+                        <hr/>
+                    </div>
+
+                    <div class="row margintop30 " style="margin:0 !important">
+                        <div class="col-sm-3 paddiin-bottom-10">
+                            <label translate="Product Line">:</label>
+                            <div>{{summary.taskObject.Product_Line}}</div>
+                        </div>
+                        <div class="col-sm-3 paddiin-bottom-10">
+                            <label translate="System ID / Serial #">:</label>
+                            <div>{{summary.taskObject.Serial_Number}}</div>
+                        </div>
+                        <div class="col-sm-3 paddiin-bottom-10">
+                            <label>TAG #:</label>
+                            <div>{{summary.taskObject.TagNumber|| "NO VALUE"}}</div>
+                        </div>
+                        <div class="col-sm-3 paddiin-bottom-10">
+                            <label>ORIGINAL PO #:</label>
+                            <div>{{summary.taskObject.Original_PO_Number|| "NO VALUE"}}</div>
+                        </div>
+                    </div>
+                </div>
+            </md-card>
+        </div>
+    </div>
+
+    <div class="padding10 debLabelHeader" translate="Notes"></div>
+
+    <div class="container" style="padding:0">
+        <div class="debreifContainerouter margintop30">
+            <md-card style="border-radius:10px 10px 10px 10px">
+                <div class="debreifContainerinner">
+                    <md-table-container>
+                        <table md-table>
+                            <thead md-head>
+                            <tr md-row>
+                                <th md-column class="col-sm-4" style="text-align:left"><span translate="Note Type">NOTE TYPE</span></th>
+                                <th md-column class="col-sm-6" style="text-align:left"><span>NOTE DESCRIPTION</span>
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody md-body>
+                            <tr md-row ng-repeat="note in summary.notesArray">
+                                <td md-cell class="col-sm-4" style="text-align:left">{{note.Note_Type}}</td>
+                                <td md-cell class="col-sm-6" style="text-align:left">{{note.Notes}}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </md-table-container>
+                </div>
+            </md-card>
+        </div>
+    </div>
+</div>
+
+
+<div class="padding10 debLabelHeader" translate="Attachments"></div>
+<div class="container" style="padding:0">
+    <div class="debreifContainerouter margintop30">
+        <md-card style="border-radius:10px 10px 10px 10px">
+            <div class="debreifContainerinner">
+                <div ng-repeat="file1 in files" class="col-sm-2 attachmentDiv">
+                    <img ngf-thumbnail="file1.file || '/thumb.jpg'" ng-if="file1.file.type.indexOf('image') > -1"
+                         class="img-responsive">
+                         <img src="images/pdf.png" ng-if="file1.file.name.indexOf('.pdf') > -1" class="img-responsive">
+                         <img src="images/doc.png" ng-if="file1.file.name.indexOf('.doc') > -1 || file1.file.name.indexOf('.docx') > -1" class="img-responsive">
+                         <img src="images/excel.png" ng-if="file1.file.name.indexOf('.xlsx') > -1 || file1.file.name.indexOf('.xls') > -1" class="img-responsive">
+                    <!-- <div>{{file1.name}}</div> -->
+                    <div style="margin-bottom:20px">{{file1.filename}}
+                    </div>
+                </div>
+            </div>
+        </md-card>
+    </div>
+</div>
+
+
+<div class="padding10 debLabelHeader" translate="Time"></div>
+<div class="container" style="padding:0">
+    <div class="debreifContainerouter margintop30">
+        <md-card style="border-radius:10px 10px 10px 10px">
+            <div class="debreifContainerinner">
+                <md-table-container>
+                    <table md-table>
+                        <thead md-head>
+                        <tr md-row>
+                            <th md-column><span translate="Date"></span></th>
+                            <th md-column><span translate="Charge Type"></span></th>
+                            <th md-column><span translate="Charge Method"></span></th>
+                            <th md-column><span translate="Work Type"></span></th>
+                            <th md-column ng-repeat="time in timeArray[0].timeDefault.timeCode.values"><span>{{time.Overtimeshiftcode}}</span></th>
+                            <!-- <th md-column><span>OT1</span></th>
+                            <th md-column><span>OT2</span></th>
+                            <th md-column><span>OT3</span></th>
+                            <th md-column><span>OS1</span></th>
+                            <th md-column><span>OS2</span></th> -->
+                            <th md-column><span translate="Duration"></span></th>
+                            <th md-column><span translate="Item"></span></th>
+                            <th md-column><span translate="Description"></span></th>
+                        </tr>
+                        </thead>
+                        <tbody md-body>
+                        <tr md-row ng-repeat="time in  summary.timeArray">
+                            <td md-cell>{{time.Date }}</td>
+                            <td md-cell>{{time.Charge_Type}}</td>
+                            <td md-cell>{{time.Charge_Method}}</td>
+                            <td md-cell>{{time.Work_Type}}</td>
+                            <!-- <td md-cell>{{time.standard}}</td> -->
+                            <td md-cell ng-repeat="timec in timeArray[0].timeDefault.timeCode.values">{{time.timecode[$index][timec.Overtimeshiftcode]}} </td>
+                            <!-- <td md-cell>{{time.ot2}}</td>
+                            <td md-cell>{{time.ot3}}</td>
+                            <td md-cell>{{time.os1}}</td>
+                            <td md-cell>{{time.os2}}</td> -->
+                            <td md-cell>{{time.Duration}}</td>
+                            <td md-cell>{{time.Item}}</td>
+                            <td md-cell>{{time.Description}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </md-table-container>
+            </div>
+        </md-card>
+    </div>
+</div>
+
+
+<div class="padding10 debLabelHeader" translate="Expenses"></div>
+<div class="container" style="padding:0">
+    <div class="debreifContainerouter margintop30">
+        <md-card style="border-radius:10px 10px 10px 10px">
+            <div class="debreifContainerinner">
+                <md-table-container>
+                    <table md-table>
+                        <thead md-head>
+                        <tr md-row>
+                            <th md-column><span translate="Date"></span></th>
+                            <th md-column><span translate="Expense Type"></span></th>
+                            <!-- <th md-column><span>AMOUNT</span></th> -->
+                            <!--  <th md-column><span>CURRENCY</span></th> -->
+                            <th md-column><span translate="Charge Method"></span></th>
+                            <!--  <th md-column><span>BILLABLE</span></th> -->
+                            <th md-column><span translate="Justification"></span></th>
+                        </tr>
+                        </thead>
+                        <tbody md-body>
+                        <tr md-row ng-repeat="expense in summary.expenseArray">
+                            <td md-cell>{{expense.Date}}</td>
+                            <td md-cell>{{expense.Expense_Type}}</td>
+                            <!-- <td md-cell>{{expense.amount}}</td> -->
+                            <!--  <td md-cell>{{expense.currency}}</td> -->
+                            <td md-cell>{{expense.Charge_Method}}</td>
+                            <!-- <td md-cell>{{expense.isbillable}}</td> -->
+                            <td md-cell>{{expense.Justification}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </md-table-container>
+            </div>
+        </md-card>
+    </div>
+</div>
+
+<div class="padding10 debLabelHeader" translate="Material"></div>
+<div class="container" style="padding:0">
+    <div class="debreifContainerouter margintop30">
+        <md-card style="border-radius:10px 10px 10px 10px">
+            <div class="debreifContainerinner">
+                <md-table-container>
+                    <table md-table>
+                        <thead md-head>
+                        <tr md-row>
+                            <th md-column><span translate="Charge Type"></span></th>
+                            <th md-column><span>QUANTITY</span></th>
+                            <th md-column><span translate="Serial #"></span></th>
+                            <th md-column><span translate="Serial In"></span></th>
+                            <th md-column><span translate="Serial Out"></span></th>
+                            <th md-column><span translate="Item Name"></span></th>
+                            <th md-column><span translate="Item Description"></span></th>
+                        </tr>
+                        </thead>
+                        <tbody md-body>
+                        <tr md-row ng-repeat="material in summary.materialArray">
+                            <td md-cell>{{material.Charge_Type}}</td>
+                            <td md-cell>{{material.Product_Quantity}}</td>
+                            <td md-cell ><span ng-repeat="serailno in material.serialNumber">{{serailno}}</br></span></td>
+                            <td md-cell ><span ng-repeat="serailin in material.serialIn">{{serailin}}</br></span></td>
+                            <td md-cell ><span ng-repeat="serailout in material.serialOut">{{serailout}}</br></span></td>
+                            <td md-cell>{{material.ItemName}}</td>
+                            <td md-cell>{{material.Description}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </md-table-container>
+            </div>
+        </md-card>
+    </div>
+</div>
+
+<div class="padding10 debLabelHeader">SIGNATURE</div>
+<div class="container" style="padding:0">
+    <div class="debreifContainerouter margintop30">
+        <md-card style="border-radius:10px 10px 10px 10px">
+            <div class="debreifContainerinner">
+                <div class="row">
+                    <div class="col-sm-5">
+                        <!-- <label>EMERSON PROCESS MANAGEMENT</label> -->
+
+                        <div><label>Engineer Name : {{engineerName}}</label></div>
+                       <!--  <span></span> -->
+                        <!-- <div class="result" ng-show="$rootScope.signature"> -->
+                        <img ng-src="{{summary.engineer.signature}}" style="width:50%">
+                        <!-- </div> -->
+                    </div>
+                    <div class="col-sm-5">
+                        <label>{{summary.taskObject.Customer_Name}}</label>
+                        <div><label translate="Customer Name"></label></div>
+                        <span></span>
+                    </div>
+                </div>
+            </div>
+        </md-card>
+    </div>
+</div>
+
+<div class="row" style="text-align:center;">
+
+    <div class="col-sm-12 margintop10 marginbottom5">
+        <md-button style="border-radius:0;margin-bottom:20px;" class="time-font time-add" ng-click="reviewSummary()">
+            REVIEWED
+        </md-button>
+    </div>
+
+</div>

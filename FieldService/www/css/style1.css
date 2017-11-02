@@ -1,0 +1,615 @@
+body{
+    height: 100vh;
+    /*overflow: hidden;*/
+   overflow-x: hidden;
+    font-family: Helvetica;
+}
+
+#JourneyBtn {
+    border-radius : 0px !important;
+
+}
+
+
+
+.appHeader {
+    height: 10% !important;
+    /*background-color: #000000 !important;*/
+    background-image: url("../images/bg_gradient.png");
+    padding: 10px !important;
+    background-size: 100%;
+}
+.appMainDiv{
+    height: 90% !important;
+}
+
+.column10{
+    /*width: 190px;*/
+    width: 8%;
+    margin: 0px;
+    padding : 0px;
+    /*height: 100vh;*/
+    background-color: #000000 !important;
+}
+.sideNav{
+    /*width: 190px;*/
+    width: 100%;
+    margin: 0px;
+    padding : 0px;
+    /*height: 100vh;*/
+    background-color: #ffffff !important;
+}
+.sideNavWidth{
+        width: 12.33% !important;
+}
+
+.column90{
+    /*width: 1730px;*/
+    /*width: 92%;*/
+    width: 100%;
+    margin: 0px;
+    padding : 0px;
+    height: 100vh;
+    /*background : red !important;*/
+}
+
+.row, .col {
+    margin: 0px !important;
+    padding: 0px ;
+}
+
+
+
+/* Side Nav Bar styles*/
+
+.sideNavBar li {
+    float: none;
+    margin: 0;
+    cursor: pointer;
+    padding: 10px;
+   border-bottom: solid 1px #e6e6e6;
+}
+
+
+#sideNavBar > li:not(:last-child):not(:nth-child(1)) {
+    padding: 10px;
+}
+.categryAicon {
+    /*margin-top: 40px !important;*/
+      font-family: MyriadPro;
+      font-size: 11px;
+      font-weight: bold;
+      letter-spacing: 0.2px;
+      text-align: center;
+      color: #000000;
+      text-shadow: 0px 1.5px 1.5px rgba(0, 0, 0, 0.35);
+      /*height: 9%;*/
+
+}
+.categryAicon img{
+    margin-bottom: 10px;
+    height: auto;
+    width: 15%
+}
+
+.sideNavBar {
+    border-bottom: none;
+}
+
+
+.fc-myCalendar-button:active {
+  color : #19a97f !important;
+}
+
+.fc-myTask-button:active {
+  color : #19a97f !important;
+}
+
+.fc-myCalendar-button:focused {
+  color : #19a97f !important;
+}
+
+.fc-left{
+  width: 65%;
+}
+
+.fc-center {
+  width: 22%;
+}
+
+.fc-right{
+  width: 60%;
+}
+
+.fc-center>fc-button-group {
+  float:right;
+}
+
+
+.noMargin {
+    margin : 0px;
+    margin-left: 30px;
+}
+.logoIcon{
+    height: 70%;
+    margin-top: 0px !important;
+    background-position: center !important;
+    background-image: url(../logo.png);
+    background-repeat: no-repeat;
+    background-size: 70%;
+    width: 10%;
+    list-style: none;
+}
+.field-service{
+    text-align: center;
+}
+.category-title{
+    background-color: #2d383f !important;
+}
+.subheader-btns{
+
+    background-color: transparent !important;
+    font-size : 12px;
+}
+.my-calendar{
+        text-align: left;
+    background-color: transparent;
+}
+.month-name{
+        text-align: center;
+}
+.start-journey{
+    float: right;
+    background-color: #00aa7e !important;
+    border-radius : 0px !important;
+    font-size : 12px;
+    width : 150px;
+    font-weight:700;
+}
+.selectedCategory{
+        font-family: MyriadPro;
+      font-size: 11px;
+      font-weight: bold;
+      letter-spacing: 0.2px;
+      text-align: center;
+      color: #ffffff;
+      text-shadow: 0px 1.5px 1.5px rgba(0, 0, 0, 0.35);
+    /*  height: 9%;*/
+      background-color: #00aa7e;
+      outline: none;
+}
+/*Calendar Styles*/
+.fc-toolbar.fc-header-toolbar {
+    margin-bottom: 1em;
+    font-size: 20px;
+    letter-spacing: .005em;
+    box-sizing: border-box;
+    font-weight: 400;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: row;
+    flex-direction: row;
+    width: 100%;
+    height: 64px;
+    max-height: 64px;
+    padding: 0 16px;
+    margin: 0;
+    background-color: #2d383f;
+}
+
+
+/* Todo.html */
+
+#addBtn {
+  background-color :#00AA7E ;
+  color : #fff;
+  height : 35px;
+  border : none !important;
+  text-align: center;
+  margin-right:3px;
+  position : relative;
+  left : 1px;
+  width : 15%;
+  outline:none;
+  bottom : 1px;
+  border-radius:50px;
+}
+
+.inner-content {
+  width : 45%;
+  margin : 0 auto;
+  padding-top : 20px;
+}
+
+
+
+#fieldTool {
+background-color: #F0F0F0 ;
+border : none !important;
+height : 35px;
+width : 350px;
+outline:none;
+padding-left : 10px;
+border-radius:50px;
+}
+
+#fieldTool:focus {
+  border :1px solid #00AA7E !important;
+  padding-left: 9px;
+}
+
+.search-box {
+  margin : 0 auto;
+}
+
+.search-row{
+    margin-top:25px;
+}
+
+.box-add {
+  background: none !important;
+  height : 100px;
+  margin-top : 20px;
+
+}
+
+#equip-header {
+  font-size : 10px;
+  color : #333;
+  font-family: Helvetica;
+  padding-left:2px;
+}
+
+.list-item {
+background: #f9f9f9;
+min-height : 40px;
+margin-top:8px;
+padding : 10px;
+width:60%;
+border : 1px solid #ededed;
+}
+
+.thisPage {
+  overflow: hidden;
+}
+
+/* header buttons */
+
+.navBtn {
+font-size: 12px !important;
+color : #666 ;
+}
+
+.subheader-btns:focus {
+    color : #00AA7E !important;
+    background-image: url("active.png");
+    background-repeat: no-repeat;
+    background-position: cover;
+}
+
+/* //TaskOvrflow */
+
+.layout-row .flex-33 {
+  -webkit-flex: 1 1 33%;
+      -ms-flex: 1 1 33%;
+          flex: 1 1 33%;
+  box-sizing: border-box;
+}
+.layout-row .flex-33 {
+  max-width: calc(100% / 3);
+  max-height: 100%;
+}
+
+.custumContainer {
+    margin-top : 40px;
+    background: #fff;
+    box-shadow: 0px 0px 3px #ccc;
+    padding-top:40px;
+    padding-left: 75px;
+    padding-right: 50px;
+    padding-bottom: 20px;
+
+}
+
+.mylabel {
+font-size: 14px;
+font-weight : 600;
+color :#333 !important;
+}
+
+.myvalue {
+    font-size : 14px;
+    font-weight : 500;
+    color : #333 !important;
+}
+
+.mysmallValue{
+    font-size : 12px;
+    font-weight : 500;
+
+}
+
+body {
+    font-family : Helvetica !important;
+}
+
+.paddingleft40{
+    padding-left :10px;
+    padding-right: 10px;
+}
+
+.headerLabel {
+    color : #666 ;
+    font-size : 25px !important;
+}
+
+.margintop10 {
+    margin-top : 15px;
+}
+
+.headerLabel {
+color : #666;
+font-size : 20px !important;
+}
+
+tr th{
+    height : 28px;
+    /*width : 500px;*/
+    border : 1px solid #ebebeb;
+    border-left : none ;
+    border-right : none;
+    text-align: center;
+    font-size  :12px;
+}
+
+
+.md-padding {
+  padding : 0px !important;
+}
+
+tr td{
+    height : 30px;
+  /*  width : 500px;*/
+    text-align: center;
+    /*background-color: #f9f9f9;*/
+    font-size  :14px;
+    color : #666 !important;
+}
+
+.position {
+    margin-top: 15px;
+}
+#tabledata td {
+  width: 500px;
+}
+#tableheader td {
+  width: 500px;
+}
+.container-bgColor{
+  background-color: #ffffff !important;
+  margin-top: 30px;
+}
+.red{
+  background-color: #d31245 !important;
+  color:#fff !important;
+}
+.green{
+  background-color: #5cb85c !important;
+  color:#fff !important;
+}
+.blue{
+  background-color: #004b8d !important;
+  color:#fff !important;
+}
+.orange{
+  background-color: orange !important;
+  color:#fff !important;
+}
+.search-row{
+  width: 95%;
+  outline: none;
+  margin-top:25px !important;
+}
+.search-row i {
+  float: right;
+  text-transform: capitalize;
+  font-size: 16px;
+}
+md-tab-data{
+      opacity: 1;
+    display: table;
+    right: 0;
+    left: initial;
+    z-index: 20;
+}
+.debrief-btn , .startwork-btn{
+  background-color: #00aa7e !important;
+  color: #fff !important;
+}
+
+table {
+    width :100% !important;
+}
+
+.fc-center h2{
+    padding-top:3px !important;
+    font-size:20px !important;
+}
+
+.fc-center p {
+    display : none !important;
+}
+
+/*fc-center {
+    position : relative;
+    left:40px;
+}
+
+.fc-prev-button {
+position: relative;
+left: 300px;
+}
+
+.fc-next-button{
+    position: relative;
+left: 450px;
+}
+
+.fc-right {
+    position: relative;
+left: 650px;
+font-size:16px !important;
+}*/
+
+.fc-title {
+    color : #333 !important;
+}
+
+.fc-event, .fc-event:hover {
+    color : #333 !important;
+    background-color : #dee6ea !important;
+}
+
+.fc-event {
+    font-size : 13px !important;
+    border : 0 !important;
+}
+
+.fc-event, .fc-event-dot {
+    background-color : #dee6ea !important;
+}
+
+.modal-content {
+    width : 50% !important;
+    top:50% !important;
+    left:20% !important;
+}
+
+
+
+.no-outline{
+      outline: none;
+
+         }
+
+
+.showMonth {
+  float:left;
+}
+
+
+
+.fc-toolbar.fc-header-toolbar{
+  clear:both;
+
+}
+
+
+
+.fc-view-container{
+  float:left;
+
+}
+
+
+.well {
+    background: none !important;
+    border : none !important;
+    outline : none !important;
+    box-shadow : none !important;
+}
+
+.well-sm {
+    padding : 0px 70px 70px 70px !important;
+}
+
+td em{
+    display : none !important;
+}
+
+.btn{
+    border-radius : 0px !important;
+}
+
+.btn-default {
+    border-color : rgb(250,250,250) ;
+    background-color: rgb(250,250,250) ;
+}
+
+.btn-info.active, .btn-info:active, .open>.dropdown-toggle.btn-info {
+    color : #333;
+}
+
+.btn-info.active {
+
+}
+
+.btn-info {
+    color : #333;
+}
+
+.btn-info.active.focus, .btn-info.active:focus, .btn-info.active:hover, .btn-info:active.focus, .btn-info:active:focus, .btn-info:active:hover, .open>.dropdown-toggle.btn-info.focus, .open>.dropdown-toggle.btn-info:focus, .open>.dropdown-toggle.btn-info:hover {
+    background-color: #19a97f;
+    border : none !important;
+    outline : none !important;
+}
+
+.btn-info.active, .btn-info:active, .open>.dropdown-toggle.btn-info {
+        background-color: #19a97f;
+    border-color:  #19a97f !important;
+    color : #fff !important;
+}
+
+.showTaskList md-toolbar{
+  background-color: #2d383f;
+}
+
+
+.modal-my {
+  height : 70px;
+  width  : 100px;
+  padding: 5px 10px 10px 10px;
+  background: #fff;
+  border :1px solid #ccc;
+  position: absolute;
+  right: 75px;
+  border-top-right-radius: 6px !important;
+  border-radius : 3px;
+  left: auto;
+  z-index: 99999999;
+  background-color: #f9f9fb;
+  margin-top: -8px;
+}
+
+.modal-my span {
+  display: block;
+}
+
+#signout {
+  padding-top: 12px;
+  padding-left: 2px;
+  background: none ;
+  color : red;
+  font-weight: bolder;
+  font-size :12px;
+  border : none;
+}
+
+#calendar > div.fc-toolbar.fc-header-toolbar > div.fc-center > div {
+  left : 0px !important;
+}
+
+
+
+.kotni-image {
+background: url("../images/alex.png");
+height : 42;
+width  : 42;
+}
+
