@@ -32,7 +32,7 @@
     <AppXManifest Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\build\windows\debug\x64\win10\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2017-11-02T05:39:04.537</Modified>
+      <Modified>2017-11-02T05:50:09.865</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
@@ -421,47 +421,47 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\app\app.js">
       <PackagePath>www\app\app.js</PackagePath>
-      <Modified>2017-11-02T05:38:46.224</Modified>
+      <Modified>2017-11-02T05:50:02.431</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\controllers\debrief.js">
       <PackagePath>www\controllers\debrief.js</PackagePath>
-      <Modified>2017-11-02T05:38:46.261</Modified>
+      <Modified>2017-11-02T05:50:02.474</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\controllers\index.js">
       <PackagePath>www\controllers\index.js</PackagePath>
-      <Modified>2017-11-02T05:38:46.261</Modified>
+      <Modified>2017-11-02T05:50:02.476</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\controllers\login.js">
       <PackagePath>www\controllers\login.js</PackagePath>
-      <Modified>2017-11-02T05:38:46.261</Modified>
+      <Modified>2017-11-02T05:50:02.477</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\controllers\myTask.js">
       <PackagePath>www\controllers\myTask.js</PackagePath>
-      <Modified>2017-11-02T05:38:46.261</Modified>
+      <Modified>2017-11-02T05:50:02.478</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\controllers\taskOverFlow.js">
       <PackagePath>www\controllers\taskOverFlow.js</PackagePath>
-      <Modified>2017-11-02T05:38:46.261</Modified>
+      <Modified>2017-11-02T05:50:02.480</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\controllers\todo.js">
       <PackagePath>www\controllers\todo.js</PackagePath>
-      <Modified>2017-11-02T05:38:46.261</Modified>
+      <Modified>2017-11-02T05:50:02.481</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\cordova-js-src\confighelper.js">
       <PackagePath>www\cordova-js-src\confighelper.js</PackagePath>
-      <Modified>2017-11-02T05:38:46.261</Modified>
+      <Modified>2017-11-02T05:50:02.482</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\cordova-js-src\exec.js">
       <PackagePath>www\cordova-js-src\exec.js</PackagePath>
-      <Modified>2017-11-02T05:38:46.261</Modified>
+      <Modified>2017-11-02T05:50:02.483</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\cordova-js-src\platform.js">
       <PackagePath>www\cordova-js-src\platform.js</PackagePath>
-      <Modified>2017-11-02T05:38:46.261</Modified>
+      <Modified>2017-11-02T05:50:02.484</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\cordova-js-src\splashscreen.js">
       <PackagePath>www\cordova-js-src\splashscreen.js</PackagePath>
-      <Modified>2017-11-02T05:38:46.261</Modified>
+      <Modified>2017-11-02T05:50:02.484</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\cordova.js">
       <PackagePath>www\cordova.js</PackagePath>
@@ -469,403 +469,403 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\cordova_plugins.js">
       <PackagePath>www\cordova_plugins.js</PackagePath>
-      <Modified>2017-11-02T05:38:46.277</Modified>
+      <Modified>2017-11-02T05:50:02.484</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\db\dbInitialize.js">
       <PackagePath>www\db\dbInitialize.js</PackagePath>
-      <Modified>2017-11-02T05:38:46.277</Modified>
+      <Modified>2017-11-02T05:50:02.484</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\angular-animate\angular-animate.min.js">
       <PackagePath>www\lib\angular-animate\angular-animate.min.js</PackagePath>
-      <Modified>2017-11-02T05:38:46.293</Modified>
+      <Modified>2017-11-02T05:50:02.500</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\angular-aria\angular-aria.min.js">
       <PackagePath>www\lib\angular-aria\angular-aria.min.js</PackagePath>
-      <Modified>2017-11-02T05:38:46.293</Modified>
+      <Modified>2017-11-02T05:50:02.515</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\angular-base64-upload.js">
       <PackagePath>www\lib\angular-base64-upload.js</PackagePath>
-      <Modified>2017-11-02T05:38:46.309</Modified>
+      <Modified>2017-11-02T05:50:02.515</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\angular-material\angular-material.min.js">
       <PackagePath>www\lib\angular-material\angular-material.min.js</PackagePath>
-      <Modified>2017-11-02T05:38:46.309</Modified>
+      <Modified>2017-11-02T05:50:02.515</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\angular-messages\angular-messages.min.js">
       <PackagePath>www\lib\angular-messages\angular-messages.min.js</PackagePath>
-      <Modified>2017-11-02T05:38:46.309</Modified>
+      <Modified>2017-11-02T05:50:02.515</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\angular-translate\angular-translate-handler-log.js">
       <PackagePath>www\lib\angular-translate\angular-translate-handler-log.js</PackagePath>
-      <Modified>2017-11-02T05:38:46.309</Modified>
+      <Modified>2017-11-02T05:50:02.515</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\angular-translate\angular-translate-interpolation-messageformat.js">
       <PackagePath>www\lib\angular-translate\angular-translate-interpolation-messageformat.js</PackagePath>
-      <Modified>2017-11-02T05:38:46.309</Modified>
+      <Modified>2017-11-02T05:50:02.515</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\angular-translate\angular-translate-loader-static-files.js">
       <PackagePath>www\lib\angular-translate\angular-translate-loader-static-files.js</PackagePath>
-      <Modified>2017-11-02T05:38:46.309</Modified>
+      <Modified>2017-11-02T05:50:02.515</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\angular-translate\angular-translate-loader-url.js">
       <PackagePath>www\lib\angular-translate\angular-translate-loader-url.js</PackagePath>
-      <Modified>2017-11-02T05:38:46.309</Modified>
+      <Modified>2017-11-02T05:50:02.515</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\angular-translate\angular-translate-storage-cookie.js">
       <PackagePath>www\lib\angular-translate\angular-translate-storage-cookie.js</PackagePath>
-      <Modified>2017-11-02T05:38:46.309</Modified>
+      <Modified>2017-11-02T05:50:02.531</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\angular-translate\angular-translate-storage-local.js">
       <PackagePath>www\lib\angular-translate\angular-translate-storage-local.js</PackagePath>
-      <Modified>2017-11-02T05:38:46.324</Modified>
+      <Modified>2017-11-02T05:50:02.531</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\angular-translate\messageformat.js">
       <PackagePath>www\lib\angular-translate\messageformat.js</PackagePath>
-      <Modified>2017-11-02T05:38:46.324</Modified>
+      <Modified>2017-11-02T05:50:02.531</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\angular-translate\translate.js">
       <PackagePath>www\lib\angular-translate\translate.js</PackagePath>
-      <Modified>2017-11-02T05:38:46.324</Modified>
+      <Modified>2017-11-02T05:50:02.531</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\angular-ui-router\angular-ui-router.min.js">
       <PackagePath>www\lib\angular-ui-router\angular-ui-router.min.js</PackagePath>
-      <Modified>2017-11-02T05:38:46.324</Modified>
+      <Modified>2017-11-02T05:50:02.531</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\angular\angular.min.js">
       <PackagePath>www\lib\angular\angular.min.js</PackagePath>
-      <Modified>2017-11-02T05:38:46.293</Modified>
+      <Modified>2017-11-02T05:50:02.500</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\bootstrap-datetimepicker.js">
       <PackagePath>www\lib\bootstrap-datetimepicker.js</PackagePath>
-      <Modified>2017-11-02T05:38:46.324</Modified>
+      <Modified>2017-11-02T05:50:02.531</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\bootstrap\bootstrap.min.js">
       <PackagePath>www\lib\bootstrap\bootstrap.min.js</PackagePath>
-      <Modified>2017-11-02T05:38:46.324</Modified>
+      <Modified>2017-11-02T05:50:02.531</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\calendar.min.js">
       <PackagePath>www\lib\calendar.min.js</PackagePath>
-      <Modified>2017-11-02T05:38:46.324</Modified>
+      <Modified>2017-11-02T05:50:02.531</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\FileSaver.js">
       <PackagePath>www\lib\FileSaver.js</PackagePath>
-      <Modified>2017-11-02T05:38:46.324</Modified>
+      <Modified>2017-11-02T05:50:02.531</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\fullcalendar.js">
       <PackagePath>www\lib\fullcalendar.js</PackagePath>
-      <Modified>2017-11-02T05:38:46.340</Modified>
+      <Modified>2017-11-02T05:50:02.547</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\gcal.js">
       <PackagePath>www\lib\gcal.js</PackagePath>
-      <Modified>2017-11-02T05:38:46.340</Modified>
+      <Modified>2017-11-02T05:50:02.547</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\html2canvas.min.js">
       <PackagePath>www\lib\html2canvas.min.js</PackagePath>
-      <Modified>2017-11-02T05:38:46.340</Modified>
+      <Modified>2017-11-02T05:50:02.547</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ionic\js\angular-ui\angular-ui-router.js">
       <PackagePath>www\lib\ionic\js\angular-ui\angular-ui-router.js</PackagePath>
-      <Modified>2017-11-02T05:38:46.381</Modified>
+      <Modified>2017-11-02T05:50:02.584</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ionic\js\angular-ui\angular-ui-router.min.js">
       <PackagePath>www\lib\ionic\js\angular-ui\angular-ui-router.min.js</PackagePath>
-      <Modified>2017-11-02T05:38:46.383</Modified>
+      <Modified>2017-11-02T05:50:02.584</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ionic\js\angular\angular-animate.js">
       <PackagePath>www\lib\ionic\js\angular\angular-animate.js</PackagePath>
-      <Modified>2017-11-02T05:38:46.340</Modified>
+      <Modified>2017-11-02T05:50:02.562</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ionic\js\angular\angular-animate.min.js">
       <PackagePath>www\lib\ionic\js\angular\angular-animate.min.js</PackagePath>
-      <Modified>2017-11-02T05:38:46.340</Modified>
+      <Modified>2017-11-02T05:50:02.562</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ionic\js\angular\angular-resource.js">
       <PackagePath>www\lib\ionic\js\angular\angular-resource.js</PackagePath>
-      <Modified>2017-11-02T05:38:46.358</Modified>
+      <Modified>2017-11-02T05:50:02.562</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ionic\js\angular\angular-resource.min.js">
       <PackagePath>www\lib\ionic\js\angular\angular-resource.min.js</PackagePath>
-      <Modified>2017-11-02T05:38:46.359</Modified>
+      <Modified>2017-11-02T05:50:02.562</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ionic\js\angular\angular-sanitize.js">
       <PackagePath>www\lib\ionic\js\angular\angular-sanitize.js</PackagePath>
-      <Modified>2017-11-02T05:38:46.361</Modified>
+      <Modified>2017-11-02T05:50:02.562</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ionic\js\angular\angular-sanitize.min.js">
       <PackagePath>www\lib\ionic\js\angular\angular-sanitize.min.js</PackagePath>
-      <Modified>2017-11-02T05:38:46.362</Modified>
+      <Modified>2017-11-02T05:50:02.562</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ionic\js\angular\angular.js">
       <PackagePath>www\lib\ionic\js\angular\angular.js</PackagePath>
-      <Modified>2017-11-02T05:38:46.376</Modified>
+      <Modified>2017-11-02T05:50:02.584</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ionic\js\angular\angular.min.js">
       <PackagePath>www\lib\ionic\js\angular\angular.min.js</PackagePath>
-      <Modified>2017-11-02T05:38:46.379</Modified>
+      <Modified>2017-11-02T05:50:02.584</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ionic\js\ionic-angular.js">
       <PackagePath>www\lib\ionic\js\ionic-angular.js</PackagePath>
-      <Modified>2017-11-02T05:38:46.389</Modified>
+      <Modified>2017-11-02T05:50:02.584</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ionic\js\ionic-angular.min.js">
       <PackagePath>www\lib\ionic\js\ionic-angular.min.js</PackagePath>
-      <Modified>2017-11-02T05:38:46.391</Modified>
+      <Modified>2017-11-02T05:50:02.600</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ionic\js\ionic.bundle.js">
       <PackagePath>www\lib\ionic\js\ionic.bundle.js</PackagePath>
-      <Modified>2017-11-02T05:38:46.419</Modified>
+      <Modified>2017-11-02T05:50:02.631</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ionic\js\ionic.bundle.min.js">
       <PackagePath>www\lib\ionic\js\ionic.bundle.min.js</PackagePath>
-      <Modified>2017-11-02T05:38:46.426</Modified>
+      <Modified>2017-11-02T05:50:02.631</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ionic\js\ionic.js">
       <PackagePath>www\lib\ionic\js\ionic.js</PackagePath>
-      <Modified>2017-11-02T05:38:46.432</Modified>
+      <Modified>2017-11-02T05:50:02.647</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ionic\js\ionic.min.js">
       <PackagePath>www\lib\ionic\js\ionic.min.js</PackagePath>
-      <Modified>2017-11-02T05:38:46.438</Modified>
+      <Modified>2017-11-02T05:50:02.647</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\jquery-ui.min.js">
       <PackagePath>www\lib\jquery-ui.min.js</PackagePath>
-      <Modified>2017-11-02T05:38:46.442</Modified>
+      <Modified>2017-11-02T05:50:02.647</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\jquery.min.js">
       <PackagePath>www\lib\jquery.min.js</PackagePath>
-      <Modified>2017-11-02T05:38:46.445</Modified>
+      <Modified>2017-11-02T05:50:02.647</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\jspdf.js">
       <PackagePath>www\lib\jspdf.js</PackagePath>
-      <Modified>2017-11-02T05:38:46.457</Modified>
+      <Modified>2017-11-02T05:50:02.663</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\md-data-table.js">
       <PackagePath>www\lib\md-data-table.js</PackagePath>
-      <Modified>2017-11-02T05:38:46.463</Modified>
+      <Modified>2017-11-02T05:50:02.679</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\moment.min.js">
       <PackagePath>www\lib\moment.min.js</PackagePath>
-      <Modified>2017-11-02T05:38:46.464</Modified>
+      <Modified>2017-11-02T05:50:02.681</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ng-file-upload-shim\FileAPI.js">
       <PackagePath>www\lib\ng-file-upload-shim\FileAPI.js</PackagePath>
-      <Modified>2017-11-02T05:38:46.484</Modified>
+      <Modified>2017-11-02T05:50:02.700</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ng-file-upload-shim\FileAPI.min.js">
       <PackagePath>www\lib\ng-file-upload-shim\FileAPI.min.js</PackagePath>
-      <Modified>2017-11-02T05:38:46.486</Modified>
+      <Modified>2017-11-02T05:50:02.700</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ng-file-upload-shim\ng-file-upload-all.js">
       <PackagePath>www\lib\ng-file-upload-shim\ng-file-upload-all.js</PackagePath>
-      <Modified>2017-11-02T05:38:46.488</Modified>
+      <Modified>2017-11-02T05:50:02.700</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ng-file-upload-shim\ng-file-upload-all.min.js">
       <PackagePath>www\lib\ng-file-upload-shim\ng-file-upload-all.min.js</PackagePath>
-      <Modified>2017-11-02T05:38:46.489</Modified>
+      <Modified>2017-11-02T05:50:02.700</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ng-file-upload-shim\ng-file-upload-shim.js">
       <PackagePath>www\lib\ng-file-upload-shim\ng-file-upload-shim.js</PackagePath>
-      <Modified>2017-11-02T05:38:46.491</Modified>
+      <Modified>2017-11-02T05:50:02.700</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ng-file-upload-shim\ng-file-upload-shim.min.js">
       <PackagePath>www\lib\ng-file-upload-shim\ng-file-upload-shim.min.js</PackagePath>
-      <Modified>2017-11-02T05:38:46.492</Modified>
+      <Modified>2017-11-02T05:50:02.700</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ng-file-upload-shim\ng-file-upload.js">
       <PackagePath>www\lib\ng-file-upload-shim\ng-file-upload.js</PackagePath>
-      <Modified>2017-11-02T05:38:46.494</Modified>
+      <Modified>2017-11-02T05:50:02.715</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ng-file-upload-shim\ng-file-upload.min.js">
       <PackagePath>www\lib\ng-file-upload-shim\ng-file-upload.min.js</PackagePath>
-      <Modified>2017-11-02T05:38:46.495</Modified>
+      <Modified>2017-11-02T05:50:02.715</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ng-file-upload\FileAPI.js">
       <PackagePath>www\lib\ng-file-upload\FileAPI.js</PackagePath>
-      <Modified>2017-11-02T05:38:46.468</Modified>
+      <Modified>2017-11-02T05:50:02.684</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ng-file-upload\FileAPI.min.js">
       <PackagePath>www\lib\ng-file-upload\FileAPI.min.js</PackagePath>
-      <Modified>2017-11-02T05:38:46.470</Modified>
+      <Modified>2017-11-02T05:50:02.684</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ng-file-upload\ng-file-upload-all.js">
       <PackagePath>www\lib\ng-file-upload\ng-file-upload-all.js</PackagePath>
-      <Modified>2017-11-02T05:38:46.472</Modified>
+      <Modified>2017-11-02T05:50:02.684</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ng-file-upload\ng-file-upload-all.min.js">
       <PackagePath>www\lib\ng-file-upload\ng-file-upload-all.min.js</PackagePath>
-      <Modified>2017-11-02T05:38:46.474</Modified>
+      <Modified>2017-11-02T05:50:02.684</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ng-file-upload\ng-file-upload-shim.js">
       <PackagePath>www\lib\ng-file-upload\ng-file-upload-shim.js</PackagePath>
-      <Modified>2017-11-02T05:38:46.475</Modified>
+      <Modified>2017-11-02T05:50:02.684</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ng-file-upload\ng-file-upload-shim.min.js">
       <PackagePath>www\lib\ng-file-upload\ng-file-upload-shim.min.js</PackagePath>
-      <Modified>2017-11-02T05:38:46.476</Modified>
+      <Modified>2017-11-02T05:50:02.684</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ng-file-upload\ng-file-upload.js">
       <PackagePath>www\lib\ng-file-upload\ng-file-upload.js</PackagePath>
-      <Modified>2017-11-02T05:38:46.478</Modified>
+      <Modified>2017-11-02T05:50:02.684</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ng-file-upload\ng-file-upload.min.js">
       <PackagePath>www\lib\ng-file-upload\ng-file-upload.min.js</PackagePath>
-      <Modified>2017-11-02T05:38:46.480</Modified>
+      <Modified>2017-11-02T05:50:02.684</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ng-file-upload\package.js">
       <PackagePath>www\lib\ng-file-upload\package.js</PackagePath>
-      <Modified>2017-11-02T05:38:46.481</Modified>
+      <Modified>2017-11-02T05:50:02.684</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\pdfmake.min.js">
       <PackagePath>www\lib\pdfmake.min.js</PackagePath>
-      <Modified>2017-11-02T05:38:46.508</Modified>
+      <Modified>2017-11-02T05:50:02.731</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\saveHtmlToPdf.js">
       <PackagePath>www\lib\saveHtmlToPdf.js</PackagePath>
-      <Modified>2017-11-02T05:38:46.510</Modified>
+      <Modified>2017-11-02T05:50:02.731</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\signature_pad.min.js">
       <PackagePath>www\lib\signature_pad.min.js</PackagePath>
-      <Modified>2017-11-02T05:38:46.511</Modified>
+      <Modified>2017-11-02T05:50:02.731</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\spinner\angular-loading-spinner.js">
       <PackagePath>www\lib\spinner\angular-loading-spinner.js</PackagePath>
-      <Modified>2017-11-02T05:38:46.513</Modified>
+      <Modified>2017-11-02T05:50:02.731</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\spinner\angular-spinner.min.js">
       <PackagePath>www\lib\spinner\angular-spinner.min.js</PackagePath>
-      <Modified>2017-11-02T05:38:46.514</Modified>
+      <Modified>2017-11-02T05:50:02.731</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\spinner\spin.min.js">
       <PackagePath>www\lib\spinner\spin.min.js</PackagePath>
-      <Modified>2017-11-02T05:38:46.515</Modified>
+      <Modified>2017-11-02T05:50:02.731</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ui-bootstrap-tpls-2.5.0.js">
       <PackagePath>www\lib\ui-bootstrap-tpls-2.5.0.js</PackagePath>
-      <Modified>2017-11-02T05:38:46.519</Modified>
+      <Modified>2017-11-02T05:50:02.731</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\plugins\cordova-plugin-email-composer\src\windows\EmailComposerProxy.js">
       <PackagePath>www\plugins\cordova-plugin-email-composer\src\windows\EmailComposerProxy.js</PackagePath>
-      <Modified>2017-11-02T05:38:46.520</Modified>
+      <Modified>2017-11-02T05:50:02.731</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\plugins\cordova-plugin-email-composer\src\windows\EmailComposerProxyImpl.js">
       <PackagePath>www\plugins\cordova-plugin-email-composer\src\windows\EmailComposerProxyImpl.js</PackagePath>
-      <Modified>2017-11-02T05:38:46.522</Modified>
+      <Modified>2017-11-02T05:50:02.747</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\plugins\cordova-plugin-email-composer\www\email_composer.js">
       <PackagePath>www\plugins\cordova-plugin-email-composer\www\email_composer.js</PackagePath>
-      <Modified>2017-11-02T05:38:46.523</Modified>
+      <Modified>2017-11-02T05:50:02.747</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\plugins\cordova-plugin-file-opener2\src\windows\fileOpener2Proxy.js">
       <PackagePath>www\plugins\cordova-plugin-file-opener2\src\windows\fileOpener2Proxy.js</PackagePath>
-      <Modified>2017-11-02T05:38:46.550</Modified>
+      <Modified>2017-11-02T05:50:02.784</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\plugins\cordova-plugin-file-opener2\www\plugins.FileOpener2.js">
       <PackagePath>www\plugins\cordova-plugin-file-opener2\www\plugins.FileOpener2.js</PackagePath>
-      <Modified>2017-11-02T05:38:46.551</Modified>
+      <Modified>2017-11-02T05:50:02.784</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\plugins\cordova-plugin-file\src\windows\FileProxy.js">
       <PackagePath>www\plugins\cordova-plugin-file\src\windows\FileProxy.js</PackagePath>
-      <Modified>2017-11-02T05:38:46.524</Modified>
+      <Modified>2017-11-02T05:50:02.747</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\plugins\cordova-plugin-file\www\browser\isChrome.js">
       <PackagePath>www\plugins\cordova-plugin-file\www\browser\isChrome.js</PackagePath>
-      <Modified>2017-11-02T05:38:46.525</Modified>
+      <Modified>2017-11-02T05:50:02.747</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\plugins\cordova-plugin-file\www\DirectoryEntry.js">
       <PackagePath>www\plugins\cordova-plugin-file\www\DirectoryEntry.js</PackagePath>
-      <Modified>2017-11-02T05:38:46.527</Modified>
+      <Modified>2017-11-02T05:50:02.747</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\plugins\cordova-plugin-file\www\DirectoryReader.js">
       <PackagePath>www\plugins\cordova-plugin-file\www\DirectoryReader.js</PackagePath>
-      <Modified>2017-11-02T05:38:46.528</Modified>
+      <Modified>2017-11-02T05:50:02.747</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\plugins\cordova-plugin-file\www\Entry.js">
       <PackagePath>www\plugins\cordova-plugin-file\www\Entry.js</PackagePath>
-      <Modified>2017-11-02T05:38:46.529</Modified>
+      <Modified>2017-11-02T05:50:02.747</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\plugins\cordova-plugin-file\www\File.js">
       <PackagePath>www\plugins\cordova-plugin-file\www\File.js</PackagePath>
-      <Modified>2017-11-02T05:38:46.530</Modified>
+      <Modified>2017-11-02T05:50:02.747</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\plugins\cordova-plugin-file\www\FileEntry.js">
       <PackagePath>www\plugins\cordova-plugin-file\www\FileEntry.js</PackagePath>
-      <Modified>2017-11-02T05:38:46.532</Modified>
+      <Modified>2017-11-02T05:50:02.747</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\plugins\cordova-plugin-file\www\FileError.js">
       <PackagePath>www\plugins\cordova-plugin-file\www\FileError.js</PackagePath>
-      <Modified>2017-11-02T05:38:46.533</Modified>
+      <Modified>2017-11-02T05:50:02.747</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\plugins\cordova-plugin-file\www\FileReader.js">
       <PackagePath>www\plugins\cordova-plugin-file\www\FileReader.js</PackagePath>
-      <Modified>2017-11-02T05:38:46.534</Modified>
+      <Modified>2017-11-02T05:50:02.762</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\plugins\cordova-plugin-file\www\FileSystem.js">
       <PackagePath>www\plugins\cordova-plugin-file\www\FileSystem.js</PackagePath>
-      <Modified>2017-11-02T05:38:46.535</Modified>
+      <Modified>2017-11-02T05:50:02.762</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\plugins\cordova-plugin-file\www\fileSystemPaths.js">
       <PackagePath>www\plugins\cordova-plugin-file\www\fileSystemPaths.js</PackagePath>
-      <Modified>2017-11-02T05:38:46.537</Modified>
+      <Modified>2017-11-02T05:50:02.762</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\plugins\cordova-plugin-file\www\fileSystems.js">
       <PackagePath>www\plugins\cordova-plugin-file\www\fileSystems.js</PackagePath>
-      <Modified>2017-11-02T05:38:46.538</Modified>
+      <Modified>2017-11-02T05:50:02.762</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\plugins\cordova-plugin-file\www\FileUploadOptions.js">
       <PackagePath>www\plugins\cordova-plugin-file\www\FileUploadOptions.js</PackagePath>
-      <Modified>2017-11-02T05:38:46.539</Modified>
+      <Modified>2017-11-02T05:50:02.762</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\plugins\cordova-plugin-file\www\FileUploadResult.js">
       <PackagePath>www\plugins\cordova-plugin-file\www\FileUploadResult.js</PackagePath>
-      <Modified>2017-11-02T05:38:46.540</Modified>
+      <Modified>2017-11-02T05:50:02.762</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\plugins\cordova-plugin-file\www\FileWriter.js">
       <PackagePath>www\plugins\cordova-plugin-file\www\FileWriter.js</PackagePath>
-      <Modified>2017-11-02T05:38:46.542</Modified>
+      <Modified>2017-11-02T05:50:02.762</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\plugins\cordova-plugin-file\www\Flags.js">
       <PackagePath>www\plugins\cordova-plugin-file\www\Flags.js</PackagePath>
-      <Modified>2017-11-02T05:38:46.543</Modified>
+      <Modified>2017-11-02T05:50:02.762</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\plugins\cordova-plugin-file\www\LocalFileSystem.js">
       <PackagePath>www\plugins\cordova-plugin-file\www\LocalFileSystem.js</PackagePath>
-      <Modified>2017-11-02T05:38:46.544</Modified>
+      <Modified>2017-11-02T05:50:02.779</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\plugins\cordova-plugin-file\www\Metadata.js">
       <PackagePath>www\plugins\cordova-plugin-file\www\Metadata.js</PackagePath>
-      <Modified>2017-11-02T05:38:46.545</Modified>
+      <Modified>2017-11-02T05:50:02.780</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\plugins\cordova-plugin-file\www\ProgressEvent.js">
       <PackagePath>www\plugins\cordova-plugin-file\www\ProgressEvent.js</PackagePath>
-      <Modified>2017-11-02T05:38:46.546</Modified>
+      <Modified>2017-11-02T05:50:02.781</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\plugins\cordova-plugin-file\www\requestFileSystem.js">
       <PackagePath>www\plugins\cordova-plugin-file\www\requestFileSystem.js</PackagePath>
-      <Modified>2017-11-02T05:38:46.548</Modified>
+      <Modified>2017-11-02T05:50:02.783</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\plugins\cordova-plugin-file\www\resolveLocalFileSystemURI.js">
       <PackagePath>www\plugins\cordova-plugin-file\www\resolveLocalFileSystemURI.js</PackagePath>
-      <Modified>2017-11-02T05:38:46.549</Modified>
+      <Modified>2017-11-02T05:50:02.784</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\plugins\cordova-plugin-inappbrowser\src\windows\InAppBrowserProxy.js">
       <PackagePath>www\plugins\cordova-plugin-inappbrowser\src\windows\InAppBrowserProxy.js</PackagePath>
-      <Modified>2017-11-02T05:38:46.553</Modified>
+      <Modified>2017-11-02T05:50:02.784</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\plugins\cordova-plugin-inappbrowser\www\inappbrowser.js">
       <PackagePath>www\plugins\cordova-plugin-inappbrowser\www\inappbrowser.js</PackagePath>
-      <Modified>2017-11-02T05:38:46.554</Modified>
+      <Modified>2017-11-02T05:50:02.784</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\plugins\cordova-sqlite-storage\src\windows\sqlite-proxy.js">
       <PackagePath>www\plugins\cordova-sqlite-storage\src\windows\sqlite-proxy.js</PackagePath>
-      <Modified>2017-11-02T05:38:46.555</Modified>
+      <Modified>2017-11-02T05:50:02.784</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\plugins\cordova-sqlite-storage\src\windows\SQLite3-Win-RT\SQLite3JS\js\SQLite3.js">
       <PackagePath>www\plugins\cordova-sqlite-storage\src\windows\SQLite3-Win-RT\SQLite3JS\js\SQLite3.js</PackagePath>
-      <Modified>2017-11-02T05:38:46.557</Modified>
+      <Modified>2017-11-02T05:50:02.784</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\plugins\cordova-sqlite-storage\www\SQLitePlugin.js">
       <PackagePath>www\plugins\cordova-sqlite-storage\www\SQLitePlugin.js</PackagePath>
-      <Modified>2017-11-02T05:38:46.558</Modified>
+      <Modified>2017-11-02T05:50:02.784</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\scripts\platformOverrides.js">
       <PackagePath>www\scripts\platformOverrides.js</PackagePath>
@@ -877,31 +877,31 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\services\cloudService.js">
       <PackagePath>www\services\cloudService.js</PackagePath>
-      <Modified>2017-11-02T05:38:46.560</Modified>
+      <Modified>2017-11-02T05:50:02.784</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\services\constantService.js">
       <PackagePath>www\services\constantService.js</PackagePath>
-      <Modified>2017-11-02T05:38:46.562</Modified>
+      <Modified>2017-11-02T05:50:02.800</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\services\localService.js">
       <PackagePath>www\services\localService.js</PackagePath>
-      <Modified>2017-11-02T05:38:46.563</Modified>
+      <Modified>2017-11-02T05:50:02.800</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\services\ofscService.js">
       <PackagePath>www\services\ofscService.js</PackagePath>
-      <Modified>2017-11-02T05:38:46.565</Modified>
+      <Modified>2017-11-02T05:50:02.800</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\services\syncService.js">
       <PackagePath>www\services\syncService.js</PackagePath>
-      <Modified>2017-11-02T05:38:46.566</Modified>
+      <Modified>2017-11-02T05:50:02.800</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\services\valueService.js">
       <PackagePath>www\services\valueService.js</PackagePath>
-      <Modified>2017-11-02T05:38:46.567</Modified>
+      <Modified>2017-11-02T05:50:02.800</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\src\calendar.js">
       <PackagePath>www\src\calendar.js</PackagePath>
-      <Modified>2017-11-02T05:38:46.569</Modified>
+      <Modified>2017-11-02T05:50:02.800</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\WinJS\js\base.js">
       <PackagePath>www\WinJS\js\base.js</PackagePath>
@@ -909,155 +909,155 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\app\data\locale-en.json">
       <PackagePath>www\app\data\locale-en.json</PackagePath>
-      <Modified>2017-11-02T05:38:46.224</Modified>
+      <Modified>2017-11-02T05:50:02.432</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\app\data\locale-fr.json">
       <PackagePath>www\app\data\locale-fr.json</PackagePath>
-      <Modified>2017-11-02T05:38:46.224</Modified>
+      <Modified>2017-11-02T05:50:02.434</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\app\data\locale-jp.json">
       <PackagePath>www\app\data\locale-jp.json</PackagePath>
-      <Modified>2017-11-02T05:38:46.224</Modified>
+      <Modified>2017-11-02T05:50:02.435</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\app\json\attachment.json">
       <PackagePath>www\app\json\attachment.json</PackagePath>
-      <Modified>2017-11-02T05:38:46.224</Modified>
+      <Modified>2017-11-02T05:50:02.436</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\app\json\contacts.json">
       <PackagePath>www\app\json\contacts.json</PackagePath>
-      <Modified>2017-11-02T05:38:46.224</Modified>
+      <Modified>2017-11-02T05:50:02.438</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\app\json\installBase.json">
       <PackagePath>www\app\json\installBase.json</PackagePath>
-      <Modified>2017-11-02T05:38:46.224</Modified>
+      <Modified>2017-11-02T05:50:02.439</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\app\json\notes.json">
       <PackagePath>www\app\json\notes.json</PackagePath>
-      <Modified>2017-11-02T05:38:46.224</Modified>
+      <Modified>2017-11-02T05:50:02.440</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\app\json\resources.json">
       <PackagePath>www\app\json\resources.json</PackagePath>
-      <Modified>2017-11-02T05:38:46.240</Modified>
+      <Modified>2017-11-02T05:50:02.441</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\app\json\taskDetails.json">
       <PackagePath>www\app\json\taskDetails.json</PackagePath>
-      <Modified>2017-11-02T05:38:46.240</Modified>
+      <Modified>2017-11-02T05:50:02.442</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ionic\version.json">
       <PackagePath>www\lib\ionic\version.json</PackagePath>
-      <Modified>2017-11-02T05:38:46.439</Modified>
+      <Modified>2017-11-02T05:50:02.647</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ng-file-upload-shim\bower.json">
       <PackagePath>www\lib\ng-file-upload-shim\bower.json</PackagePath>
-      <Modified>2017-11-02T05:38:46.482</Modified>
+      <Modified>2017-11-02T05:50:02.700</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ng-file-upload\bower.json">
       <PackagePath>www\lib\ng-file-upload\bower.json</PackagePath>
-      <Modified>2017-11-02T05:38:46.466</Modified>
+      <Modified>2017-11-02T05:50:02.683</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\app\views\Attachments.html">
       <PackagePath>www\app\views\Attachments.html</PackagePath>
-      <Modified>2017-11-02T05:38:46.240</Modified>
+      <Modified>2017-11-02T05:50:02.444</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\app\views\base.html">
       <PackagePath>www\app\views\base.html</PackagePath>
-      <Modified>2017-11-02T05:38:46.240</Modified>
+      <Modified>2017-11-02T05:50:02.445</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\app\views\CustomerSignature.html">
       <PackagePath>www\app\views\CustomerSignature.html</PackagePath>
-      <Modified>2017-11-02T05:38:46.240</Modified>
+      <Modified>2017-11-02T05:50:02.446</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\app\views\dashBoard.html">
       <PackagePath>www\app\views\dashBoard.html</PackagePath>
-      <Modified>2017-11-02T05:38:46.240</Modified>
+      <Modified>2017-11-02T05:50:02.447</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\app\views\Debrief.html">
       <PackagePath>www\app\views\Debrief.html</PackagePath>
-      <Modified>2017-11-02T05:38:46.240</Modified>
+      <Modified>2017-11-02T05:50:02.448</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\app\views\Dialog.html">
       <PackagePath>www\app\views\Dialog.html</PackagePath>
-      <Modified>2017-11-02T05:38:46.240</Modified>
+      <Modified>2017-11-02T05:50:02.449</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\app\views\EngineerSignature.html">
       <PackagePath>www\app\views\EngineerSignature.html</PackagePath>
-      <Modified>2017-11-02T05:38:46.240</Modified>
+      <Modified>2017-11-02T05:50:02.451</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\app\views\Expenses.html">
       <PackagePath>www\app\views\Expenses.html</PackagePath>
-      <Modified>2017-11-02T05:38:46.240</Modified>
+      <Modified>2017-11-02T05:50:02.452</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\app\views\list.html">
       <PackagePath>www\app\views\list.html</PackagePath>
-      <Modified>2017-11-02T05:38:46.240</Modified>
+      <Modified>2017-11-02T05:50:02.453</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\app\views\Login.html">
       <PackagePath>www\app\views\Login.html</PackagePath>
-      <Modified>2017-11-02T05:38:46.240</Modified>
+      <Modified>2017-11-02T05:50:02.454</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\app\views\Material.html">
       <PackagePath>www\app\views\Material.html</PackagePath>
-      <Modified>2017-11-02T05:38:46.240</Modified>
+      <Modified>2017-11-02T05:50:02.455</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\app\views\myFieldJob.html">
       <PackagePath>www\app\views\myFieldJob.html</PackagePath>
-      <Modified>2017-11-02T05:38:46.255</Modified>
+      <Modified>2017-11-02T05:50:02.456</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\app\views\MyTask.html">
       <PackagePath>www\app\views\MyTask.html</PackagePath>
-      <Modified>2017-11-02T05:38:46.256</Modified>
+      <Modified>2017-11-02T05:50:02.458</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\app\views\Notes.html">
       <PackagePath>www\app\views\Notes.html</PackagePath>
-      <Modified>2017-11-02T05:38:46.258</Modified>
+      <Modified>2017-11-02T05:50:02.459</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\app\views\Summary.html">
       <PackagePath>www\app\views\Summary.html</PackagePath>
-      <Modified>2017-11-02T05:38:46.259</Modified>
+      <Modified>2017-11-02T05:50:02.460</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\app\views\TaskOverflow.html">
       <PackagePath>www\app\views\TaskOverflow.html</PackagePath>
-      <Modified>2017-11-02T05:38:46.260</Modified>
+      <Modified>2017-11-02T05:50:02.461</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\app\views\Time.html">
       <PackagePath>www\app\views\Time.html</PackagePath>
-      <Modified>2017-11-02T05:38:46.261</Modified>
+      <Modified>2017-11-02T05:50:02.462</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\app\views\TimeNC.HTML">
       <PackagePath>www\app\views\TimeNC.HTML</PackagePath>
-      <Modified>2017-11-02T05:38:46.261</Modified>
+      <Modified>2017-11-02T05:50:02.463</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\app\views\Todo.html">
       <PackagePath>www\app\views\Todo.html</PackagePath>
-      <Modified>2017-11-02T05:38:46.261</Modified>
+      <Modified>2017-11-02T05:50:02.465</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\index.html">
       <PackagePath>www\index.html</PackagePath>
-      <Modified>2017-11-02T05:38:46.277</Modified>
+      <Modified>2017-11-02T05:50:02.484</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\sidebarcollapse.html">
       <PackagePath>www\sidebarcollapse.html</PackagePath>
-      <Modified>2017-11-02T05:38:46.568</Modified>
+      <Modified>2017-11-02T05:50:02.800</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\css\bootstrap-datetimepicker.css">
       <PackagePath>www\css\bootstrap-datetimepicker.css</PackagePath>
-      <Modified>2017-11-02T05:38:46.277</Modified>
+      <Modified>2017-11-02T05:50:02.484</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\css\calendarDemo.css">
       <PackagePath>www\css\calendarDemo.css</PackagePath>
-      <Modified>2017-11-02T05:38:46.277</Modified>
+      <Modified>2017-11-02T05:50:02.484</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\css\fullcalendar.css">
       <PackagePath>www\css\fullcalendar.css</PackagePath>
-      <Modified>2017-11-02T05:38:46.277</Modified>
+      <Modified>2017-11-02T05:50:02.484</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\css\fullcalendar.min.css">
       <PackagePath>www\css\fullcalendar.min.css</PackagePath>
-      <Modified>2017-11-02T05:38:46.277</Modified>
+      <Modified>2017-11-02T05:50:02.484</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\css\fullcalendar.print.min.css">
       <PackagePath>www\css\fullcalendar.print.min.css</PackagePath>
-      <Modified>2017-11-02T05:38:46.277</Modified>
+      <Modified>2017-11-02T05:50:02.484</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\css\inappbrowser.css">
       <PackagePath>www\css\inappbrowser.css</PackagePath>
@@ -1069,31 +1069,31 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\css\style.css">
       <PackagePath>www\css\style.css</PackagePath>
-      <Modified>2017-11-02T05:38:46.277</Modified>
+      <Modified>2017-11-02T05:50:02.484</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\css\style1.css">
       <PackagePath>www\css\style1.css</PackagePath>
-      <Modified>2017-11-02T05:38:46.277</Modified>
+      <Modified>2017-11-02T05:50:02.484</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\css\styless.css">
       <PackagePath>www\css\styless.css</PackagePath>
-      <Modified>2017-11-02T05:38:46.277</Modified>
+      <Modified>2017-11-02T05:50:02.484</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\angular-material\angular-material.min.css">
       <PackagePath>www\lib\angular-material\angular-material.min.css</PackagePath>
-      <Modified>2017-11-02T05:38:46.309</Modified>
+      <Modified>2017-11-02T05:50:02.515</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\bootstrap\bootstrap.min.css">
       <PackagePath>www\lib\bootstrap\bootstrap.min.css</PackagePath>
-      <Modified>2017-11-02T05:38:46.324</Modified>
+      <Modified>2017-11-02T05:50:02.531</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ionic\css\ionic.css">
       <PackagePath>www\lib\ionic\css\ionic.css</PackagePath>
-      <Modified>2017-11-02T05:38:46.340</Modified>
+      <Modified>2017-11-02T05:50:02.547</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\lib\ionic\css\ionic.min.css">
       <PackagePath>www\lib\ionic\css\ionic.min.css</PackagePath>
-      <Modified>2017-11-02T05:38:46.340</Modified>
+      <Modified>2017-11-02T05:50:02.562</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\db\emerson.sqlite">
       <PackagePath>www\db\emerson.sqlite</PackagePath>
@@ -1445,7 +1445,7 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\config.xml">
       <PackagePath>config.xml</PackagePath>
-      <Modified>2017-11-02T05:38:45.639</Modified>
+      <Modified>2017-11-02T05:50:01.862</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Program Files %28x86%29\Microsoft SDKs\Windows Kits\10\ExtensionSDKs\Microsoft.UniversalCRT.Debug\10.0.15063.0\\redist\Debug\X64\ucrtbased.dll">
       <PackagePath>ucrtbased.dll</PackagePath>
@@ -1454,7 +1454,7 @@
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\build\windows\debug\x64\win10\resources.pri">
       <PackagePath>resources.pri</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2017-11-02T05:39:03.104</Modified>
+      <Modified>2017-11-02T05:50:07.932</Modified>
     </AppxPackagedFile>
   </ItemGroup>
   <ItemGroup>
