@@ -1,7 +1,46 @@
 ﻿app.controller('indexController', function ($scope, $state, $timeout, $mdSidenav, $mdDialog, $translate, $rootScope, usSpinnerService, valueService, localService, cloudService) {
 
-    //the onlinemethod is not working so makking the badgee's ng-show headerName
-    // $scope.onlineStatus = true;
+    if ($rootScope.Islogin) {
+
+        if (navigator.onLine) {
+
+            onLine();
+
+        } else if (navigator.offLine) {
+
+            offLine();
+        }
+    }
+
+    function onLine() {
+
+        console.log("Online");
+
+        $scope.onlineStatus = true;
+
+        valueService.setNetworkStatus(true);
+    }
+
+    function offLine() {
+
+        console.log("Offline");
+
+        $scope.onlineStatus = false;
+
+        valueService.setNetworkStatus(false);
+    }
+
+    if (valueService.getNetworkStatus()) {
+
+        localService.getPendingTaskList(function (response) {
+
+            angular.forEach(response, function (item) {
+
+                valueService.submitDebrief(item.Task_Number);
+
+            });
+        });
+    }
 
     $scope.spinnerLoading = true;
 
@@ -242,16 +281,6 @@
     //
     //  window.addEventListener("offline", offLine, false);
 
-
-    //Nikhil code
-    if ($rootScope.Islogin) {
-        if (navigator.onLine) {
-            onLine();
-        } else if (navigator.offLine) {
-            offLine();
-        }
-    }
-
     $scope.syncFunctionality = function () {
         console.log("Inside the syncFunctionality");
 
@@ -284,25 +313,9 @@
         });
     }
 
-    function onLine() {
 
-        console.log("Online");
+    //Nikhil code
 
-        $scope.onlineStatus = true;
-
-        valueService.setNetworkStatus(true);
-
-        $scope.syncFunctionality();
-    }
-
-    function offLine() {
-
-        console.log("Offline");
-
-        $scope.onlineStatus = false;
-
-        valueService.setNetworkStatus(false);
-    }
 });
 
 //$scope.changeLanguage();

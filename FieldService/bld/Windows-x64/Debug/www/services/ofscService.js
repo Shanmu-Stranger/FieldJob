@@ -4,26 +4,26 @@
 
     app.factory('ofscService', ofscService);
 
-    ofscService.$inject = ['$http', '$rootScope', '$window', '$location',  'constantService'];
+    ofscService.$inject = ['$http', '$rootScope', '$window', '$location', 'constantService'];
 
-    function ofscService($http, $rootScope, $window, $location,  constantService) {
+    function ofscService($http, $rootScope, $window, $location, constantService) {
 
         var url = conf.apiUrl;
 
         var service = {};
+
         service.activate_resource = activate_resource;
         service.start_activity = start_activity;
         service.complete_activity = complete_activity;
 
         return service;
 
-
-        function activate_resource(data,callback) {
+        function activate_resource(data, callback) {
 
             return $http({
 
                 method: 'POST',
-                url: url + 'OFSCActions/activate_resource?resourceId='+data.resourceId+'& date='+data.date,
+                url: url + 'OFSCActions/activate_resource?resourceId=' + data.resourceId + '& date=' + data.date,
                 headers: {
                     "Content-Type": constantService.getContentType(),
                     "Authorization": constantService.getAuthor(),
@@ -44,7 +44,7 @@
             });
         }
 
-        function start_activity(data,callback) {
+        function start_activity(data, callback) {
 
             return $http({
 
@@ -55,7 +55,7 @@
                     "Authorization": constantService.getAuthor(),
                     "oracle-mobile-backend-id": constantService.getOfscBackId()
                 },
-                data:data
+                data: data
 
             }).success(function (response) {
 
@@ -71,7 +71,7 @@
             });
         }
 
-        function complete_activity(data,callback) {
+        function complete_activity(data, callback) {
 
             return $http({
 
@@ -82,7 +82,7 @@
                     "Authorization": constantService.getAuthor(),
                     "oracle-mobile-backend-id": constantService.getOfscBackId()
                 },
-                data:data
+                data: data
 
             }).success(function (response) {
 
@@ -97,11 +97,5 @@
                 callback(error);
             });
         }
-
-
-
     }
-
-
-
 })();

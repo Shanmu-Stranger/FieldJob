@@ -40,6 +40,7 @@
         service.insertInstallBaseList = insertInstallBaseList;
         service.insertContactList = insertContactList;
         service.insertNoteList = insertNoteList;
+        service.insertAttachmentList = insertAttachmentList;
         service.insertProjectList = insertProjectList;
 
         service.insertOverTimeList = insertOverTimeList;
@@ -53,33 +54,45 @@
         service.insertItemList = insertItemList;
         service.insertCurrencyList = insertCurrencyList;
 
-        service.deleteInstallBase = deleteInstallBase;
-        service.deleteNote = deleteNote;
-        service.deleteContact = deleteContact;
-
-        service.deleteShiftCode = deleteShiftCode;
-        service.deleteOverTime = deleteOverTime;
-        service.deleteFieldJobName = deleteFieldJobName;
+        service.insertExpenseTypeList = insertExpenseTypeList;
+        service.insertNoteTypeList = insertNoteTypeList;
 
         service.insertTimeList = insertTimeList;
         service.insertExpenseList = insertExpenseList;
         service.insertMaterialList = insertMaterialList;
         service.insertNotesList = insertNotesList;
-        service.insertAttachmentList = insertAttachmentList;
         service.insertEngineerList = insertEngineerList;
+
+        service.deleteInstallBase = deleteInstallBase;
+        service.deleteContact = deleteContact;
+        service.deleteNote = deleteNote;
+        service.deleteAttachment = deleteAttachment;
+
+        service.deleteOverTime = deleteOverTime;
+        service.deleteShiftCode = deleteShiftCode;
+
+        service.deleteChargeType = deleteChargeType;
+        service.deleteChargeMethod = deleteChargeMethod;
+        service.deleteFieldJobName = deleteFieldJobName;
+
+        service.deleteWorkType = deleteWorkType;
+        service.deleteItem = deleteItem;
+        service.deleteCurrency = deleteCurrency;
+
+        service.deleteExpenseType = deleteExpenseType;
+        service.deleteNoteType = deleteNoteType;
 
         service.deleteTime = deleteTime;
         service.deleteExpense = deleteExpense;
         service.deleteMaterial = deleteMaterial;
         service.deleteNotes = deleteNotes;
-        service.deleteAttachment = deleteAttachment;
         service.deleteEngineer = deleteEngineer;
 
         service.getTaskList = getTaskList;
-
         service.getInstallBaseList = getInstallBaseList;
         service.getContactList = getContactList;
         service.getNoteList = getNoteList;
+        service.getAttachmentList = getAttachmentList;
         service.getProjectList = getProjectList;
 
         service.getOverTimeList = getOverTimeList;
@@ -93,14 +106,17 @@
         service.getItemList = getItemList;
         service.getCurrencyList = getCurrencyList;
 
+        service.getExpenseTypeList = getExpenseTypeList;
+        service.getNoteTypeList = getNoteTypeList;
+
         service.getTimeList = getTimeList;
         service.getExpenseList = getExpenseList;
         service.getMaterialList = getMaterialList;
         service.getNotesList = getNotesList;
-        service.getAttachmentList = getAttachmentList;
         service.getEngineer = getEngineer;
 
         service.updateTaskSubmitStatus = updateTaskSubmitStatus;
+
         service.getPendingTaskList = getPendingTaskList;
 
         return service;
@@ -175,34 +191,6 @@
             });
         };
 
-        function updateTaskSubmitStatus(responseList) {
-
-            db.transaction(function (transaction) {
-
-                var insertValues = [];
-
-                var sqlUpdate = "UPDATE Task SET Submit_Status = ?  WHERE Task_Number = ?";
-
-                insertValues.push(responseList.Submit_Status);
-                insertValues.push(responseList.Task_Number);
-
-                // console.log("TASK UPDATE VALUES =====> " + insertValues);
-
-                transaction.executeSql(sqlUpdate, insertValues, function (tx, res) {
-
-                    console.log("TASK ROW AFFECTED: " + res.rowsAffected);
-
-                }, function (tx, error) {
-
-                    console.log("TASK UPDATE ERROR: " + error.message);
-                });
-
-            }, function (error) {
-
-                console.log("TASK UPDATE TRANSACTION ERROR: " + error.message);
-            });
-        };
-
         function insertTask(responseList) {
 
             db.transaction(function (transaction) {
@@ -252,6 +240,34 @@
             }, function (error) {
 
                 console.log("TASK INSERT TRANSACTION ERROR: " + error.message);
+            });
+        };
+
+        function updateTaskSubmitStatus(responseList) {
+
+            db.transaction(function (transaction) {
+
+                var insertValues = [];
+
+                var sqlUpdate = "UPDATE Task SET Submit_Status = ?  WHERE Task_Number = ?";
+
+                insertValues.push(responseList.Submit_Status);
+                insertValues.push(responseList.Task_Number);
+
+                // console.log("TASK UPDATE VALUES =====> " + insertValues);
+
+                transaction.executeSql(sqlUpdate, insertValues, function (tx, res) {
+
+                    console.log("TASK ROW AFFECTED: " + res.rowsAffected);
+
+                }, function (tx, error) {
+
+                    console.log("TASK UPDATE ERROR: " + error.message);
+                });
+
+            }, function (error) {
+
+                console.log("TASK UPDATE TRANSACTION ERROR: " + error.message);
             });
         };
 
@@ -351,90 +367,6 @@
             }, function (error) {
 
                 console.log("INSTALLBASE INSERT TRANSACTION ERROR: " + error.message);
-            });
-        };
-
-        function deleteInstallBase() {
-
-            db.transaction(function (transaction) {
-
-                var sqlDelete = "DELETE FROM InstallBase";
-
-                transaction.executeSql(sqlDelete);
-
-            }, function (error) {
-
-                console.log("INSTALLBASE DELETE TRANSACTION ERROR: " + error.message);
-            });
-        };
-
-        function deleteNote() {
-
-            db.transaction(function (transaction) {
-
-                var sqlDelete = "DELETE FROM Note";
-
-                transaction.executeSql(sqlDelete);
-
-            }, function (error) {
-
-                console.log("NOTE DELETE TRANSACTION ERROR: " + error.message);
-            });
-        };
-
-        function deleteContact() {
-
-            db.transaction(function (transaction) {
-
-                var sqlDelete = "DELETE FROM Contact";
-
-                transaction.executeSql(sqlDelete);
-
-            }, function (error) {
-
-                console.log("CONTACT DELETE TRANSACTION ERROR: " + error.message);
-            });
-        };
-
-        function deleteShiftCode() {
-
-            db.transaction(function (transaction) {
-
-                var sqlDelete = "DELETE FROM ShiftCode";
-
-                transaction.executeSql(sqlDelete);
-
-            }, function (error) {
-
-                console.log("SHIFTCODE DELETE TRANSACTION ERROR: " + error.message);
-            });
-        };
-
-        function deleteOverTime() {
-
-            db.transaction(function (transaction) {
-
-                var sqlDelete = "DELETE FROM OverTime";
-
-                transaction.executeSql(sqlDelete);
-
-            }, function (error) {
-
-                console.log("OVERTIME DELETE TRANSACTION ERROR: " + error.message);
-            });
-        };
-
-        function deleteFieldJobName() {
-
-            db.transaction(function (transaction) {
-
-                var sqlDelete = "DELETE FROM FieldJobName";
-
-                transaction.executeSql(sqlDelete);
-
-            }, function (error) {
-
-                console.log("FIELDJOBNAME DELETE TRANSACTION ERROR: " + error.message);
             });
         };
 
@@ -639,6 +571,93 @@
             }, function (error) {
 
                 console.log("NOTE INSERT TRANSACTION ERROR: " + error.message);
+            });
+        };
+
+        function insertAttachmentList(response) {
+
+            var responseList = response;
+
+            for (var i = 0; i < responseList.length; i++) {
+
+                (function (i) {
+
+                    if (i < responseList.length - 1) {
+
+                        updateAttachment(responseList[i]);
+
+                        insertAttachment(responseList[i]);
+
+                    } else {
+
+                        updateAttachment(responseList[i]);
+
+                        insertAttachment(responseList[i]);
+                    }
+
+                    console.log("ATTACHMENT OBJECT =====> " + JSON.stringify(responseList[i]));
+
+                })(i);
+            }
+        };
+
+        function updateAttachment(responseList) {
+
+            db.transaction(function (transaction) {
+
+                var insertValues = [];
+
+                var sqlUpdate = "UPDATE Attachment SET File_Name = ?, File_Type = ?, File_Path = ?, Type = ? WHERE Attachment_Id = ? AND Task_Number = ?";
+
+                insertValues.push(responseList.File_Name);
+                insertValues.push(responseList.File_Type);
+                insertValues.push(responseList.File_Path);
+                insertValues.push(responseList.Type);
+                insertValues.push(responseList.Attachment_Id);
+                insertValues.push(responseList.Task_Number);
+
+                transaction.executeSql(sqlUpdate, insertValues, function (tx, res) {
+
+                    console.log("ATTACHMENT ROW AFFECTED: " + res.rowsAffected);
+
+                }, function (tx, error) {
+
+                    console.log("ATTACHMENT UPDATE ERROR: " + error.message);
+                });
+
+            }, function (error) {
+
+                console.log("ATTACHMENT UPDATE TRANSACTION ERROR: " + error.message);
+            });
+        };
+
+        function insertAttachment(responseList) {
+
+            db.transaction(function (transaction) {
+
+                var insertValues = [];
+
+                var sqlInsert = "INSERT INTO Attachment VALUES (?, ?, ?, ?, ?, ?)";
+
+                insertValues.push(responseList.Attachment_Id);
+                insertValues.push(responseList.File_Name);
+                insertValues.push(responseList.File_Type);
+                insertValues.push(responseList.File_Path);
+                insertValues.push(responseList.Type);
+                insertValues.push(responseList.Task_Number);
+
+                transaction.executeSql(sqlInsert, insertValues, function (tx, res) {
+
+                    console.log("ATTACHMENT INSERT ID: " + res.insertId);
+
+                }, function (tx, error) {
+
+                    console.log("ATTACHMENT INSERT ERROR: " + error.message);
+                });
+
+            }, function (error) {
+
+                console.log("ATTACHMENT INSERT TRANSACTION ERROR: " + error.message);
             });
         };
 
@@ -1399,6 +1418,164 @@
             });
         };
 
+        function insertExpenseTypeList(response) {
+
+            var responseList = response;
+
+            for (var i = 0; i < responseList.length; i++) {
+
+                (function (i) {
+
+                    if (i < responseList.length - 1) {
+
+                        updateExpenseType(responseList[i]);
+
+                        insertExpenseType(responseList[i]);
+
+                    } else {
+
+                        updateExpenseType(responseList[i]);
+
+                        insertExpenseType(responseList[i]);
+                    }
+
+                    console.log("EXPENSETYPE OBJECT =====> " + JSON.stringify(responseList[i]));
+
+                })(i);
+            }
+        };
+
+        function updateExpenseType(responseList) {
+
+            db.transaction(function (transaction) {
+
+                var insertValues = [];
+
+                var sqlUpdate = "UPDATE ExpenseType SET Value = ?  WHERE ID = ?";
+
+                insertValues.push(responseList.Value);
+                insertValues.push(responseList.ID);
+
+                transaction.executeSql(sqlUpdate, insertValues, function (tx, res) {
+
+                    console.log("EXPENSETYPE ROW AFFECTED: " + res.rowsAffected);
+
+                }, function (tx, error) {
+
+                    console.log("EXPENSETYPE UPDATE ERROR: " + error.message);
+                });
+
+            }, function (error) {
+
+                console.log("EXPENSETYPE UPDATE TRANSACTION ERROR: " + error.message);
+            });
+        };
+
+        function insertExpenseType(responseList) {
+
+            db.transaction(function (transaction) {
+
+                var insertValues = [];
+
+                var sqlInsert = "INSERT INTO ExpenseType VALUES (?, ?)";
+
+                insertValues.push(responseList.ID);
+                insertValues.push(responseList.Value);
+
+                transaction.executeSql(sqlInsert, insertValues, function (tx, res) {
+
+                    console.log("EXPENSETYPE INSERT ID: " + res.insertId);
+
+                }, function (tx, error) {
+
+                    console.log("EXPENSETYPE INSERT ERROR: " + error.message);
+                });
+
+            }, function (error) {
+
+                console.log("EXPENSETYPE INSERT TRANSACTION ERROR: " + error.message);
+            });
+        };
+
+        function insertNoteTypeList(response) {
+
+            var responseList = response;
+
+            for (var i = 0; i < responseList.length; i++) {
+
+                (function (i) {
+
+                    if (i < responseList.length - 1) {
+
+                        updateNoteType(responseList[i]);
+
+                        insertNoteType(responseList[i]);
+
+                    } else {
+
+                        updateNoteType(responseList[i]);
+
+                        insertNoteType(responseList[i]);
+                    }
+
+                    console.log("NOTETYPE OBJECT =====> " + JSON.stringify(responseList[i]));
+
+                })(i);
+            }
+        };
+
+        function updateNoteType(responseList) {
+
+            db.transaction(function (transaction) {
+
+                var insertValues = [];
+
+                var sqlUpdate = "UPDATE NoteType SET Value = ?  WHERE ID = ?";
+
+                insertValues.push(responseList.Value);
+                insertValues.push(responseList.ID);
+
+                transaction.executeSql(sqlUpdate, insertValues, function (tx, res) {
+
+                    console.log("NOTETYPE ROW AFFECTED: " + res.rowsAffected);
+
+                }, function (tx, error) {
+
+                    console.log("NOTETYPE UPDATE ERROR: " + error.message);
+                });
+
+            }, function (error) {
+
+                console.log("NOTETYPE UPDATE TRANSACTION ERROR: " + error.message);
+            });
+        };
+
+        function insertNoteType(responseList) {
+
+            db.transaction(function (transaction) {
+
+                var insertValues = [];
+
+                var sqlInsert = "INSERT INTO NoteType VALUES (?, ?)";
+
+                insertValues.push(responseList.ID);
+                insertValues.push(responseList.Value);
+
+                transaction.executeSql(sqlInsert, insertValues, function (tx, res) {
+
+                    console.log("NOTETYPE INSERT ID: " + res.insertId);
+
+                }, function (tx, error) {
+
+                    console.log("NOTETYPE INSERT ERROR: " + error.message);
+                });
+
+            }, function (error) {
+
+                console.log("NOTETYPE INSERT TRANSACTION ERROR: " + error.message);
+            });
+        };
+
         function insertTimeList(response) {
 
             var responseList = response;
@@ -1516,22 +1693,6 @@
             });
         };
 
-        function deleteTime(taskId) {
-
-            db.transaction(function (transaction) {
-
-                var insertValues = [];
-
-                var sqlDelete = "DELETE FROM Time WHERE Task_Number = " + taskId;
-
-                transaction.executeSql(sqlDelete);
-
-            }, function (error) {
-
-                console.log("TIME DELETE TRANSACTION ERROR: " + error.message);
-            });
-        };
-
         function insertExpenseList(response) {
 
             var responseList = response;
@@ -1631,22 +1792,6 @@
             });
         };
 
-        function deleteExpense(taskId) {
-
-            db.transaction(function (transaction) {
-
-                var insertValues = [];
-
-                var sqlDelete = "DELETE FROM Expense WHERE Task_Number = " + taskId;
-
-                transaction.executeSql(sqlDelete);
-
-            }, function (error) {
-
-                console.log("EXPENSE DELETE TRANSACTION ERROR: " + error.message);
-            });
-        };
-
         function insertMaterialList(response) {
 
             var responseList = response;
@@ -1742,22 +1887,6 @@
             });
         };
 
-        function deleteMaterial(taskId) {
-
-            db.transaction(function (transaction) {
-
-                var insertValues = [];
-
-                var sqlDelete = "DELETE FROM Material WHERE Task_Number = " + taskId;
-
-                transaction.executeSql(sqlDelete);
-
-            }, function (error) {
-
-                console.log("MATERIAL DELETE TRANSACTION ERROR: " + error.message);
-            });
-        };
-
         function insertNotesList(response) {
 
             var responseList = response;
@@ -1849,125 +1978,6 @@
             });
         };
 
-        function deleteNotes(taskId) {
-
-            db.transaction(function (transaction) {
-
-                var insertValues = [];
-
-                var sqlDelete = "DELETE FROM Notes WHERE Task_Number = " + taskId;
-
-                transaction.executeSql(sqlDelete);
-
-            }, function (error) {
-
-                console.log("NOTES DELETE TRANSACTION ERROR: " + error.message);
-            });
-        };
-
-        function insertAttachmentList(response) {
-
-            var responseList = response;
-
-            for (var i = 0; i < responseList.length; i++) {
-
-                (function (i) {
-
-                    if (i < responseList.length - 1) {
-
-                        updateAttachment(responseList[i]);
-
-                        insertAttachment(responseList[i]);
-
-                    } else {
-
-                        updateAttachment(responseList[i]);
-
-                        insertAttachment(responseList[i]);
-                    }
-
-                    console.log("ATTACHMENT OBJECT =====> " + JSON.stringify(responseList[i]));
-
-                })(i);
-            }
-        };
-
-        function updateAttachment(responseList) {
-
-            db.transaction(function (transaction) {
-
-                var insertValues = [];
-
-                var sqlUpdate = "UPDATE Attachment SET File_Name = ?, File_Type = ?, File_Path = ?, Type = ? WHERE Attachment_Id = ? AND Task_Number = ?";
-
-                insertValues.push(responseList.File_Name);
-                insertValues.push(responseList.File_Type);
-                insertValues.push(responseList.File_Path);
-                insertValues.push(responseList.Type);
-                insertValues.push(responseList.Attachment_Id);
-                insertValues.push(responseList.Task_Number);
-
-                transaction.executeSql(sqlUpdate, insertValues, function (tx, res) {
-
-                    console.log("ATTACHMENT ROW AFFECTED: " + res.rowsAffected);
-
-                }, function (tx, error) {
-
-                    console.log("ATTACHMENT UPDATE ERROR: " + error.message);
-                });
-
-            }, function (error) {
-
-                console.log("ATTACHMENT UPDATE TRANSACTION ERROR: " + error.message);
-            });
-        };
-
-        function insertAttachment(responseList) {
-
-            db.transaction(function (transaction) {
-
-                var insertValues = [];
-
-                var sqlInsert = "INSERT INTO Attachment VALUES (?, ?, ?, ?, ?, ?)";
-
-                insertValues.push(responseList.Attachment_Id);
-                insertValues.push(responseList.File_Name);
-                insertValues.push(responseList.File_Type);
-                insertValues.push(responseList.File_Path);
-                insertValues.push(responseList.Type);
-                insertValues.push(responseList.Task_Number);
-
-                transaction.executeSql(sqlInsert, insertValues, function (tx, res) {
-
-                    console.log("ATTACHMENT INSERT ID: " + res.insertId);
-
-                }, function (tx, error) {
-
-                    console.log("ATTACHMENT INSERT ERROR: " + error.message);
-                });
-
-            }, function (error) {
-
-                console.log("ATTACHMENT INSERT TRANSACTION ERROR: " + error.message);
-            });
-        };
-
-        function deleteAttachment(taskId) {
-
-            db.transaction(function (transaction) {
-
-                var insertValues = [];
-
-                var sqlDelete = "DELETE FROM Attachment WHERE Task_Number = " + taskId;
-
-                transaction.executeSql(sqlDelete);
-
-            }, function (error) {
-
-                console.log("ATTACHMENT DELETE TRANSACTION ERROR: " + error.message);
-            });
-        };
-
         function insertEngineerList(responseList) {
 
             updateEngineer(responseList);
@@ -2042,6 +2052,268 @@
             });
         };
 
+        function deleteInstallBase() {
+
+            db.transaction(function (transaction) {
+
+                var sqlDelete = "DELETE FROM InstallBase";
+
+                transaction.executeSql(sqlDelete);
+
+            }, function (error) {
+
+                console.log("INSTALLBASE DELETE TRANSACTION ERROR: " + error.message);
+            });
+        };
+
+        function deleteNote() {
+
+            db.transaction(function (transaction) {
+
+                var sqlDelete = "DELETE FROM Note";
+
+                transaction.executeSql(sqlDelete);
+
+            }, function (error) {
+
+                console.log("NOTE DELETE TRANSACTION ERROR: " + error.message);
+            });
+        };
+
+        function deleteContact() {
+
+            db.transaction(function (transaction) {
+
+                var sqlDelete = "DELETE FROM Contact";
+
+                transaction.executeSql(sqlDelete);
+
+            }, function (error) {
+
+                console.log("CONTACT DELETE TRANSACTION ERROR: " + error.message);
+            });
+        };
+
+        function deleteAttachment(taskId) {
+
+            db.transaction(function (transaction) {
+
+                var insertValues = [];
+
+                var sqlDelete = "DELETE FROM Attachment WHERE Task_Number = " + taskId;
+
+                transaction.executeSql(sqlDelete);
+
+            }, function (error) {
+
+                console.log("ATTACHMENT DELETE TRANSACTION ERROR: " + error.message);
+            });
+        };
+
+        function deleteShiftCode() {
+
+            db.transaction(function (transaction) {
+
+                var sqlDelete = "DELETE FROM ShiftCode";
+
+                transaction.executeSql(sqlDelete);
+
+            }, function (error) {
+
+                console.log("SHIFTCODE DELETE TRANSACTION ERROR: " + error.message);
+            });
+        };
+
+        function deleteOverTime() {
+
+            db.transaction(function (transaction) {
+
+                var sqlDelete = "DELETE FROM OverTime";
+
+                transaction.executeSql(sqlDelete);
+
+            }, function (error) {
+
+                console.log("OVERTIME DELETE TRANSACTION ERROR: " + error.message);
+            });
+        };
+
+        function deleteChargeType() {
+
+            db.transaction(function (transaction) {
+
+                var sqlDelete = "DELETE FROM ChargeType";
+
+                transaction.executeSql(sqlDelete);
+
+            }, function (error) {
+
+                console.log("CHARGETYPE DELETE TRANSACTION ERROR: " + error.message);
+            });
+        };
+
+        function deleteChargeMethod() {
+
+            db.transaction(function (transaction) {
+
+                var sqlDelete = "DELETE FROM ChargeMethod";
+
+                transaction.executeSql(sqlDelete);
+
+            }, function (error) {
+
+                console.log("CHARGEMETHOD DELETE TRANSACTION ERROR: " + error.message);
+            });
+        };
+
+        function deleteFieldJobName() {
+
+            db.transaction(function (transaction) {
+
+                var sqlDelete = "DELETE FROM FieldJobName";
+
+                transaction.executeSql(sqlDelete);
+
+            }, function (error) {
+
+                console.log("FIELDJOBNAME DELETE TRANSACTION ERROR: " + error.message);
+            });
+        };
+
+        function deleteWorkType() {
+
+            db.transaction(function (transaction) {
+
+                var sqlDelete = "DELETE FROM WorkType";
+
+                transaction.executeSql(sqlDelete);
+
+            }, function (error) {
+
+                console.log("WORKTYPE DELETE TRANSACTION ERROR: " + error.message);
+            });
+        };
+
+        function deleteItem() {
+
+            db.transaction(function (transaction) {
+
+                var sqlDelete = "DELETE FROM Item";
+
+                transaction.executeSql(sqlDelete);
+
+            }, function (error) {
+
+                console.log("ITEM DELETE TRANSACTION ERROR: " + error.message);
+            });
+        };
+
+        function deleteCurrency() {
+
+            db.transaction(function (transaction) {
+
+                var sqlDelete = "DELETE FROM Currency";
+
+                transaction.executeSql(sqlDelete);
+
+            }, function (error) {
+
+                console.log("CURRENCY DELETE TRANSACTION ERROR: " + error.message);
+            });
+        };
+
+        function deleteExpenseType() {
+
+            db.transaction(function (transaction) {
+
+                var sqlDelete = "DELETE FROM ExpenseType";
+
+                transaction.executeSql(sqlDelete);
+
+            }, function (error) {
+
+                console.log("EXPENSETYPE DELETE TRANSACTION ERROR: " + error.message);
+            });
+        };
+
+        function deleteNoteType() {
+
+            db.transaction(function (transaction) {
+
+                var sqlDelete = "DELETE FROM NoteType";
+
+                transaction.executeSql(sqlDelete);
+
+            }, function (error) {
+
+                console.log("NOTETYPE DELETE TRANSACTION ERROR: " + error.message);
+            });
+        };
+
+        function deleteTime(taskId) {
+
+            db.transaction(function (transaction) {
+
+                var insertValues = [];
+
+                var sqlDelete = "DELETE FROM Time WHERE Task_Number = " + taskId;
+
+                transaction.executeSql(sqlDelete);
+
+            }, function (error) {
+
+                console.log("TIME DELETE TRANSACTION ERROR: " + error.message);
+            });
+        };
+
+        function deleteExpense(taskId) {
+
+            db.transaction(function (transaction) {
+
+                var insertValues = [];
+
+                var sqlDelete = "DELETE FROM Expense WHERE Task_Number = " + taskId;
+
+                transaction.executeSql(sqlDelete);
+
+            }, function (error) {
+
+                console.log("EXPENSE DELETE TRANSACTION ERROR: " + error.message);
+            });
+        };
+
+        function deleteMaterial(taskId) {
+
+            db.transaction(function (transaction) {
+
+                var insertValues = [];
+
+                var sqlDelete = "DELETE FROM Material WHERE Task_Number = " + taskId;
+
+                transaction.executeSql(sqlDelete);
+
+            }, function (error) {
+
+                console.log("MATERIAL DELETE TRANSACTION ERROR: " + error.message);
+            });
+        };
+
+        function deleteNotes(taskId) {
+
+            db.transaction(function (transaction) {
+
+                var insertValues = [];
+
+                var sqlDelete = "DELETE FROM Notes WHERE Task_Number = " + taskId;
+
+                transaction.executeSql(sqlDelete);
+
+            }, function (error) {
+
+                console.log("NOTES DELETE TRANSACTION ERROR: " + error.message);
+            });
+        };
+
         function deleteEngineer(taskId) {
 
             db.transaction(function (transaction) {
@@ -2066,10 +2338,25 @@
 
                 var insertValues = [];
 
-                var sqlInsert = "INSERT INTO User VALUES (?, ?)";
+                var sqlInsert = "INSERT INTO User VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
                 insertValues.push(userObject.ID);
+                insertValues.push(userObject.ClarityID);
+                insertValues.push(userObject.Currency);
+                insertValues.push(userObject.Default_View);
+                insertValues.push(userObject.Email);
+
+                insertValues.push(userObject.Language);
+                insertValues.push(userObject.Name);
+                insertValues.push(userObject.OFSCId);
+                insertValues.push(userObject.Password);
+                insertValues.push(userObject.Time_Zone);
+
+                insertValues.push(userObject.Type);
                 insertValues.push(userObject.User_Name);
+                insertValues.push(userObject.Work_Day);
+                insertValues.push(userObject.Work_Hour);
+                insertValues.push(userObject.Last_updated);
 
                 transaction.executeSql(sqlInsert, insertValues, function (tx, res) {
 
@@ -2635,6 +2922,74 @@
             }, function (error) {
 
                 console.log("GET CURRENCY TRANSACTION ERROR: " + error.message);
+
+                callback(value);
+            });
+        };
+
+        function getExpenseTypeList(callback) {
+
+            var value = [];
+
+            return db.transaction(function (transaction) {
+
+                transaction.executeSql("SELECT * FROM ExpenseType", [], function (tx, res) {
+
+                    var leng = res.rows.length;
+
+                    for (var i = 0; i < leng; i++) {
+
+                        value.push(res.rows.item(i));
+                    }
+
+                    console.log("GET EXPENSETYPE DB ==========> " + JSON.stringify(value));
+
+                    callback(value);
+
+                }, function (tx, error) {
+
+                    console.log("GET EXPENSETYPE SELECT ERROR: " + error.message);
+
+                    callback(value);
+                });
+
+            }, function (error) {
+
+                console.log("GET EXPENSETYPE TRANSACTION ERROR: " + error.message);
+
+                callback(value);
+            });
+        };
+
+        function getNoteTypeList(callback) {
+
+            var value = [];
+
+            return db.transaction(function (transaction) {
+
+                transaction.executeSql("SELECT * FROM NoteType", [], function (tx, res) {
+
+                    var leng = res.rows.length;
+
+                    for (var i = 0; i < leng; i++) {
+
+                        value.push(res.rows.item(i));
+                    }
+
+                    console.log("GET NOTETYPE DB ==========> " + JSON.stringify(value));
+
+                    callback(value);
+
+                }, function (tx, error) {
+
+                    console.log("GET NOTETYPE SELECT ERROR: " + error.message);
+
+                    callback(value);
+                });
+
+            }, function (error) {
+
+                console.log("GET NOTETYPE TRANSACTION ERROR: " + error.message);
 
                 callback(value);
             });

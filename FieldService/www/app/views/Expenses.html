@@ -31,7 +31,7 @@
                                 <select class="form-control select-debrief"
                                         id="expense-type"
                                         ng-model="item.Expense_Type"
-                                        ng-options="x as x.value | translate for x  in item.expenseDefault.expenseType.values track by x.id" ng-change="setExpenseItem(item)">
+                                        ng-options="x as x.Value | translate for x  in item.expenseDefault.expenseType.values track by x.ID" ng-change="setExpenseItem(item)">
                                     <option value="" disabled selected>Select Expense Type</option>
                                 </select>
                             </div>

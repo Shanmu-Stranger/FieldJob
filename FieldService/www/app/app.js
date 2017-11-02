@@ -7,7 +7,7 @@ var conf = {
 
 var app = angular.module('emerson', ['ngMaterial', 'ngLoadingSpinner', 'md.data.table', 'ui.router', 'ui.bootstrap', 'ui.calendar', 'pascalprecht.translate', 'ngFileUpload']);
 
-app.run(function ($rootScope, $location, $http, $state, localService, constantService) {
+app.run(function ($rootScope, $location, $http, $state, localService, valueService, constantService) {
 
     $rootScope.local = true;
 
@@ -17,28 +17,45 @@ app.run(function ($rootScope, $location, $http, $state, localService, constantSe
 
     function onDeviceReady() {
 
-        $rootScope.$on( "$locationChangeStart", function(event, next, current) {
+        localService.getUser(function (response) {
 
-            console.log("CHANGE LOCATION");
+            console.log("USER =====> " + JSON.stringify(response));
 
-            localService.getUser(function (response) {
+            if (response.length > 0) {
 
-                if (response.length > 0) {
+                constantService.setUser(response[0]);
 
-                    if (response[0].user_id != null) {
+                valueService.setUser(response[0]);
 
-                        $state.go('myTask');
+                if (constantService.getUser().ID != null) {
+
+                    if (constantService.getUser().Default_View == "My Task") {
+
+                        $rootScope.selectedItem = 2;
+
+                        $state.go('myFieldJob');
 
                     } else {
 
-                        $state.go('login');
+                        $state.go('myTask');
                     }
+
                 } else {
 
-                    $state.go('login');
+                    $location.path('/login');
                 }
-            });
+            } else {
+
+                $location.path('/login');
+            }
         });
+
+        // $rootScope.$on("$locationChangeStart", function (event, next, current) {
+        //
+        //     console.log("CHANGE LOCATION");
+        //
+        //
+        // });
     }
 });
 

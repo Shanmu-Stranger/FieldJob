@@ -13,6 +13,7 @@
         var service = {};
 
         service.login = login;
+
         service.getTechnicianProfile = getTechnicianProfile;
 
         service.getTaskList = getTaskList;
@@ -28,14 +29,13 @@
         service.getChargeType = getChargeType;
         service.getChargeMethod = getChargeMethod;
         service.getFieldJobName = getFieldJobName;
-        service.getFieldJobNameCloud=getFieldJobNameCloud;
 
         service.getWorkType = getWorkType;
-        service.getWorkTypeCloud=getWorkTypeCloud;
         service.getItem = getItem;
-        service.getItemCloud=getItemCloud;
         service.getCurrency = getCurrency;
-        service.getCurrencyCloud=getCurrencyCloud;
+
+        service.getExpenseType = getExpenseType;
+        service.getNoteType = getNoteType;
 
         service.acceptTask = acceptTask;
         service.startTask = startTask;
@@ -56,9 +56,14 @@
 
         service.getOverTimeListCloud = getOverTimeListCloud;
         service.getShiftCodeListCloud = getShiftCodeListCloud;
+
         service.getChargeTypeCloud = getChargeTypeCloud;
         service.getChargeMethodCloud = getChargeMethodCloud;
         service.getFieldJobNameCloud = getFieldJobNameCloud;
+
+        service.getWorkTypeCloud = getWorkTypeCloud;
+        service.getItemCloud = getItemCloud;
+        service.getCurrencyCloud = getCurrencyCloud;
 
         service.setCredentials = setCredentials;
         service.clearCredentials = clearCredentials;
@@ -105,7 +110,7 @@
 
                 console.log('Technician Response', JSON.stringify(response));
 
-                callback(response);
+                callback(response.technicianProfile);
 
             }).error(function (error) {
 
@@ -263,13 +268,13 @@
 
             }).success(function (response) {
 
-                console.log("getFileIds Response " + JSON.stringify(response));
+                console.log("FileID Response " + JSON.stringify(response));
 
                 callback(response);
 
             }).error(function (error) {
 
-                console.log("getFileIds Error " + JSON.stringify(error));
+                console.log("FileID Error " + JSON.stringify(error));
 
                 callback(error);
             });
@@ -395,33 +400,6 @@
             });
         }
 
-        function getFieldJobNameCloud(callback) {
-
-            $http({
-
-                method: 'GET',
-                url: url + 'TaskName/to_get_taskname?resourceId=' + constantService.getResourceId(),
-                headers: {
-                    "Content-Type": constantService.getContentType(),
-                    "Authorization": constantService.getAuthor(),
-                    "oracle-mobile-backend-id": constantService.getFieldBackId()
-                }
-
-            }).success(function (response) {
-
-                console.log("FieldJob Response " + JSON.stringify(response));
-
-                //localService.insertFieldJobNameList(response.TaskName);
-                callback(response);
-
-            }).error(function (error) {
-
-                console.log("Field Job Error " + JSON.stringify(error));
-
-                callback(error);
-            });
-        }
-
         function getWorkType() {
 
             $http({
@@ -443,34 +421,6 @@
             }).error(function (error) {
 
                 console.log("WorkType Error " + JSON.stringify(error));
-            });
-        }
-
-        function getWorkTypeCloud(callback) {
-
-            $http({
-
-                method: 'GET',
-                url: url + 'workTypeLOV/work_type?resourceId=' + constantService.getResourceId(),
-                headers: {
-                    "Content-Type": constantService.getContentType(),
-                    "Authorization": constantService.getAuthor(),
-                    "oracle-mobile-backend-id": constantService.getChargeBackId()
-                }
-
-            }).success(function (response) {
-
-                console.log("WorkType Response " + JSON.stringify(response));
-
-                callback(response);
-
-              //  localService.insertWorkTypeList(response.Charge_Method);
-
-            }).error(function (error) {
-
-                console.log("WorkType Error " + JSON.stringify(error));
-
-                callback(error);
             });
         }
 
@@ -498,34 +448,6 @@
             });
         }
 
-        function getItemCloud(callback) {
-
-            $http({
-
-                method: 'GET',
-                url: url + 'Items_LOV/item_lov?resourceId=' + constantService.getResourceId(),
-                headers: {
-                    "Content-Type": constantService.getContentType(),
-                    "Authorization": constantService.getAuthor(),
-                    "oracle-mobile-backend-id": constantService.getChargeBackId()
-                }
-
-            }).success(function (response) {
-
-                console.log("Item Response " + JSON.stringify(response));
-
-                callback(response);
-
-                //localService.insertItemList(response.Charge_Method);
-
-            }).error(function (error) {
-
-                console.log("Item Error " + JSON.stringify(error));
-
-                callback(error);
-            });
-        }
-
         function getCurrency() {
 
             $http({
@@ -550,12 +472,12 @@
             });
         }
 
-        function getCurrencyCloud(callback) {
+        function getExpenseType() {
 
             $http({
 
                 method: 'GET',
-                url: url + 'CurrenciesLOV/get_currency?resourceId=' + constantService.getResourceId(),
+                url: url + 'ExpenseTypeLOV/expense_type?resourceId=' + constantService.getResourceId(),
                 headers: {
                     "Content-Type": constantService.getContentType(),
                     "Authorization": constantService.getAuthor(),
@@ -564,17 +486,37 @@
 
             }).success(function (response) {
 
-                console.log("Currency Response " + JSON.stringify(response));
+                console.log("ExpenseType Response " + JSON.stringify(response));
 
-                callback(response);
-
-                //localService.insertCurrencyList(response.Charge_Method);
+                localService.insertExpenseTypeList(response.ExpenseType);
 
             }).error(function (error) {
 
-                console.log("Currency Error " + JSON.stringify(error));
+                console.log("ExpenseType Error " + JSON.stringify(error));
+            });
+        }
 
-                callback(error);
+        function getNoteType() {
+
+            $http({
+
+                method: 'GET',
+                url: url + 'NotesTypeLOV/notes_type?resourceId=' + constantService.getResourceId(),
+                headers: {
+                    "Content-Type": constantService.getContentType(),
+                    "Authorization": constantService.getAuthor(),
+                    "oracle-mobile-backend-id": constantService.getChargeBackId()
+                }
+
+            }).success(function (response) {
+
+                console.log("NoteType Response " + JSON.stringify(response));
+
+                localService.insertNoteTypeList(response.Notes_Type);
+
+            }).error(function (error) {
+
+                console.log("NoteType Error " + JSON.stringify(error));
             });
         }
 
@@ -649,7 +591,7 @@
 
             }).error(function (error) {
 
-                console.log("downloadAttachment Cloud Error " + JSON.stringify(error));
+                console.log("CreateAttachment Cloud Error " + JSON.stringify(error));
 
                 callback(error);
             });
@@ -676,7 +618,7 @@
 
             }).error(function (error) {
 
-                console.log("downloadAttachment Cloud Error " + JSON.stringify(error));
+                console.log("DownloadAttachment Error " + JSON.stringify(error));
 
                 callback(error);
             });
@@ -744,8 +686,7 @@
 
             var urlWarranty = "Material_API/material_update";
 
-            console.log("UpdateMaterial  Data"+ JSON.stringify(materialData));
-          //  console.log("update warranty Material data :"+JSON.stringify(materialDataWarranty));
+            console.log("UpdateMaterial  Data" + JSON.stringify(materialData));
 
             $http({
 
@@ -770,30 +711,6 @@
 
                 callback(error);
             });
-
-            // return $http({
-            //
-            //     method: 'POST',
-            //     url: url + 'Material_2/mat_update',
-            //     headers: {
-            //         "Content-Type": constantService.getContentType(),
-            //         "Authorization": constantService.getAuthor(),
-            //         "oracle-mobile-backend-id": constantService.getMaterialBackId()
-            //     },
-            //     data: materialData
-            //
-            // }).success(function (response) {
-            //
-            //     console.log("updateMaterial Response " + JSON.stringify(response));
-            //
-            //     callback(response);
-            //
-            // }).error(function (error) {
-            //
-            //     console.log("updateMaterial Error " + JSON.stringify(error));
-            //
-            //     callback(error);
-            // });
         }
 
         function updateNotes(noteData, callback) {
@@ -1076,6 +993,90 @@
                 callback(response);
 
             }).error(function (error) {
+
+                callback(error);
+            });
+        }
+
+        function getWorkTypeCloud(callback) {
+
+            $http({
+
+                method: 'GET',
+                url: url + 'workTypeLOV/work_type?resourceId=' + constantService.getResourceId(),
+                headers: {
+                    "Content-Type": constantService.getContentType(),
+                    "Authorization": constantService.getAuthor(),
+                    "oracle-mobile-backend-id": constantService.getChargeBackId()
+                }
+
+            }).success(function (response) {
+
+                console.log("WorkType Response " + JSON.stringify(response));
+
+                callback(response);
+
+                //  localService.insertWorkTypeList(response.Charge_Method);
+
+            }).error(function (error) {
+
+                console.log("WorkType Error " + JSON.stringify(error));
+
+                callback(error);
+            });
+        }
+
+        function getItemCloud(callback) {
+
+            $http({
+
+                method: 'GET',
+                url: url + 'Items_LOV/item_lov?resourceId=' + constantService.getResourceId(),
+                headers: {
+                    "Content-Type": constantService.getContentType(),
+                    "Authorization": constantService.getAuthor(),
+                    "oracle-mobile-backend-id": constantService.getChargeBackId()
+                }
+
+            }).success(function (response) {
+
+                console.log("Item Response " + JSON.stringify(response));
+
+                callback(response);
+
+                //localService.insertItemList(response.Charge_Method);
+
+            }).error(function (error) {
+
+                console.log("Item Error " + JSON.stringify(error));
+
+                callback(error);
+            });
+        }
+
+        function getCurrencyCloud(callback) {
+
+            $http({
+
+                method: 'GET',
+                url: url + 'CurrenciesLOV/get_currency?resourceId=' + constantService.getResourceId(),
+                headers: {
+                    "Content-Type": constantService.getContentType(),
+                    "Authorization": constantService.getAuthor(),
+                    "oracle-mobile-backend-id": constantService.getChargeBackId()
+                }
+
+            }).success(function (response) {
+
+                console.log("Currency Response " + JSON.stringify(response));
+
+                callback(response);
+
+                //localService.insertCurrencyList(response.Charge_Method);
+
+            }).error(function (error) {
+
+                console.log("Currency Error " + JSON.stringify(error));
 
                 callback(error);
             });

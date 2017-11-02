@@ -10,7 +10,15 @@
 
         var service = {};
 
+        var userObject = {};
+
         var resourceId = null;
+
+        var timeZone = null;
+
+        var contactsEmail = [];
+
+        var contactsCCEmail = null;
 
         var contentType = 'application/json';
 
@@ -30,53 +38,67 @@
 
         var startDate = new Date();
 
-        var emailId=null;
-        var timeZone=null;
-
         startDate.setMonth(startDate.getMonth() - 1);
 
-        var startDateISOFormat=startDate.toISOString();
+        var startDateISOFormat = startDate.toISOString();
 
         var endDate = new Date();
 
         endDate.setDate(endDate.getDate() + 7);
 
-        var endDateISOFormat=endDate.toISOString();
-
-        var contactsEmail = [];
-        var contactsCCEmail = null;
+        var endDateISOFormat = endDate.toISOString();
 
         service.setResourceId = setResourceId;
         service.getResourceId = getResourceId;
 
+        service.setUser = setUser;
+        service.getUser = getUser;
+
         service.getStartDate = getStartDate;
         service.getEndDate = getEndDate;
 
+        service.getContentType = getContentType;
         service.getAuthor = getAuthor;
+
         service.getTaskBackId = getTaskBackId;
         service.getChargeBackId = getChargeBackId;
         service.getFieldBackId = getFieldBackId;
         service.getShiftBackId = getShiftBackId;
         service.getMaterialBackId = getMaterialBackId;
-        service.setUserEmailId=setUserEmailId;
-        service.getUserEmailId=getUserEmailId;
-        service.getContentType = getContentType;
+        service.getOfscBackId = getOfscBackId;
+
+        service.setUserEmailId = setUserEmailId;
+        service.getUserEmailId = getUserEmailId;
+
         service.setCCEmailID = setCCEmailID;
         service.getCCEmailID = getCCEmailID;
-        service.getOfscBackId = getOfscBackId;
-        service.setTimeZone=setTimeZone;
-        service.getTimeZone=getTimeZone;
+
+        service.setTimeZone = setTimeZone;
+        service.getTimeZone = getTimeZone;
+
         return service;
 
         function setResourceId(id) {
-            emailId = id;
+            resourceId = id;
         };
 
         function getResourceId() {
-
-            return emailId;
+            return resourceId;
         };
-        
+
+        function setUser(user) {
+
+            userObject = user;
+
+            setTimeZone(userObject.Time_Zone);
+
+            $rootScope.uName = userObject.Name;
+        };
+
+        function getUser() {
+            return userObject;
+        };
+
         function setTimeZone(zone) {
             timeZone = zone;
         };
@@ -87,12 +109,11 @@
         };
 
         function setUserEmailId(id) {
-           // resourceId = id;
-           for (var i = 0; i < id.length; i++) {
-                contactsEmail.push(id[i].Email);
-           }
-           console.log(contactsEmail);
 
+            for (var i = 0; i < id.length; i++) {
+
+                contactsEmail.push(id[i].Email);
+            }
         };
 
         function getUserEmailId() {
@@ -101,12 +122,11 @@
         };
 
         function setCCEmailID(email) {
-           
+
             contactsCCEmail = email;
-            console.log(contactsCCEmail);
         };
 
-         function getCCEmailID() {
+        function getCCEmailID() {
 
             return contactsCCEmail;
         };
@@ -151,7 +171,7 @@
             return materialBackEndId;
         };
 
-         function getOfscBackId() {
+        function getOfscBackId() {
 
             return ofscBackEndId;
         };

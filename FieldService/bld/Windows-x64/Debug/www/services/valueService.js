@@ -7,10 +7,14 @@
     valueService.$inject = ['$http', '$rootScope', '$window', '$location', 'localService', 'cloudService'];
 
     function valueService($http, $rootScope, $window, $location, localService, cloudService) {
+
         var futureTask;
+
         var service = {};
 
-        var userType = {};
+        var resourceId = null;
+
+        var userObject = {};
 
         var warrantyType = null;
 
@@ -46,13 +50,11 @@
             duration: ''
         };
 
-        var resourceId = null;
-
-        var techProRes = {};
-
-
         service.setResourceId = setResourceId;
         service.getResourceId = getResourceId;
+
+        service.setUser = setUser;
+        service.getUser = getUser;
 
         service.setUserType = setUserType;
         service.getUserType = getUserType;
@@ -114,7 +116,6 @@
         service.saveFile = saveFile;
         service.openFile = openFile;
 
-        service.getTechProResponse = getTechProResponse;
         service.submitDebrief = submitDebrief;
 
         service.checkIfFutureDayTask = checkIfFutureDayTask;
@@ -128,31 +129,38 @@
         };
 
         function getResourceId() {
-
             return resourceId;
         };
 
-         function setIfFutureDateTask(value){
-            console.log(value);
+        function setUser(user) {
+
+            userObject = user;
+
+            setUserType();
+        };
+
+        function getUser() {
+            return userObject;
+        };
+
+        function setIfFutureDateTask(value) {
+
             futureTask = value;
-        }
+        };
 
-    function getIfFutureDateTask(){
-        return futureTask;
-    }
+        function getIfFutureDateTask() {
+            return futureTask;
+        };
 
-        function setUserType(name, type) {
+        function setUserType() {
 
-            techProRes = type;
+            userType.name = getUser().Name;
 
-            userType.name = name;
+            userType.defaultView = getUser().Default_View;
 
-            userType.defaultView = type.technicianProfile[0].Default_View;
-            userType.duration = type.technicianProfile[0].Work_Hour;
+            userType.duration = getUser().Work_Hour;
 
-            var nameCapitalize = name.toUpperCase();
-
-            if (type.technicianProfile[0].ClarityID == "1") {
+            if (getUser().ClarityID == "1") {
 
                 userType.clarityType = 'C';
 
@@ -160,24 +168,17 @@
 
                 userType.clarityType = 'NC';
             }
-        }
+        };
 
         function getUserType() {
-
             return userType;
         };
 
-        function getTechProResponse() {
-            return techProRes;
-        };
-
         function setHeader(header) {
-
             header = header;
         };
 
         function getHeader() {
-
             return header;
         };
 
@@ -185,121 +186,80 @@
 
             debrief.task = taskObject;
 
-            if ($rootScope.local) {
+            localService.getInstallBaseList(taskObject.Task_Number, function (response) {
 
-                localService.getInstallBaseList(taskObject.Task_Number, function (response) {
+                debrief.installBase = response[0];
+            });
 
-                    debrief.installBase = response[0];
-                });
+            localService.getTimeList(taskObject.Task_Number, function (response) {
 
-                localService.getTimeList(taskObject.Task_Number, function (response) {
+                debrief.time = response;
+            });
 
-                    debrief.time = response;
-                });
+            localService.getExpenseList(taskObject.Task_Number, function (response) {
 
-                localService.getExpenseList(taskObject.Task_Number, function (response) {
+                debrief.expense = response;
+            });
 
-                    debrief.expense = response;
-                });
+            localService.getMaterialList(taskObject.Task_Number, function (response) {
 
-                localService.getMaterialList(taskObject.Task_Number, function (response) {
+                debrief.material = response;
+            });
 
-                    debrief.material = response;
-                });
+            localService.getNotesList(taskObject.Task_Number, function (response) {
 
-                localService.getNotesList(taskObject.Task_Number, function (response) {
+                debrief.notes = response;
+            });
 
-                    debrief.notes = response;
-                });
+            localService.getAttachmentList(taskObject.Task_Number, "D", function (response) {
 
-                localService.getAttachmentList(taskObject.Task_Number, "D", function (response) {
+                debrief.attachment = response;
+            });
 
-                    debrief.attachment = response;
-                });
+            localService.getEngineer(taskObject.Task_Number, function (response) {
 
-                localService.getEngineer(taskObject.Task_Number, function (response) {
+                debrief.engineer = response;
+            });
 
-                    debrief.engineer = response;
-                });
+            localService.getOverTimeList(taskObject.Task_Number, function (response) {
 
-                localService.getOverTimeList(taskObject.Task_Number, function (response) {
+                debrief.overTime = response;
+            });
 
-                    debrief.overTime = response;
-                });
+            localService.getShiftCodeList(taskObject.Task_Number, function (response) {
 
-                localService.getShiftCodeList(taskObject.Task_Number, function (response) {
+                debrief.shiftCode = response;
+            });
 
-                    debrief.shiftCode = response;
-                });
+            localService.getChargeTypeList(function (response) {
 
-                localService.getChargeTypeList(function (response) {
+                debrief.chargeType = response;
+            });
 
-                    debrief.chargeType = response;
-                });
+            localService.getChargeMethodList(function (response) {
 
-                localService.getChargeMethodList(function (response) {
+                debrief.chargeMethod = response;
+            });
 
-                    debrief.chargeMethod = response;
-                });
+            localService.getFieldJobNameList(function (response) {
 
-                localService.getFieldJobNameList(function (response) {
+                debrief.fieldName = response;
+            });
 
-                    debrief.fieldName = response;
-                });
+            localService.getWorkTypeList(function (response) {
 
-                localService.getWorkTypeList(function (response) {
+                debrief.workType = response;
+            });
 
-                    debrief.workType = response;
-                });
+            localService.getItemList(function (response) {
 
-                localService.getItemList(function (response) {
+                debrief.item = response;
+            });
 
-                    debrief.item = response;
-                });
+            localService.getCurrencyList(function (response) {
 
-                localService.getCurrencyList(function (response) {
-
-                    debrief.currency = response;
-                });
-
-            }
-            else if ($rootScope.online)
-            {
-                localService.getInstallBaseList(taskObject.Task_Number, function (response) {
-
-                    debrief.installBase = response[0];
-                });
-
-                localService.getTimeList(taskObject.Task_Number, function (response) {
-                    25
-                    debrief.time = response;
-                });
-
-                localService.getExpenseList(taskObject.Task_Number, function (response) {
-
-                    debrief.expense = response;
-                });
-
-                localService.getMaterialList(taskObject.Task_Number, function (response) {
-
-                    debrief.material = response;
-                });
-
-                localService.getNotesList(taskObject.Task_Number, function (response) {
-
-                    debrief.notes = response;
-                });
-
-                localService.getAttachmentList(taskObject.Task_Number, "D", function (response) {
-
-                    debrief.attachment = response;
-                });
-
-                localService.getEngineer(taskObject.Task_Number, function (response) {
-
-                    debrief.engineer = response;
-                });
-            }
+                debrief.currency = response;
+            });
         };
 
         function getTask() {
@@ -656,10 +616,12 @@
     function submitDebrief(taskId) {
 
         var timeArray = [];
-        var expenseArray = [];
-        var materialArray = [];
-        var notesArray = [];
 
+        var expenseArray = [];
+
+        var materialArray = [];
+
+        var notesArray = [];
 
         if ($rootScope.local) {
 
@@ -869,14 +831,14 @@
         }
     }
 
-    function checkIfFutureDayTask(selTask){
-         var currDate = new Date;
-         var selDate = new Date(selTask.Start_Date.split(" ")[0]);
-         console.log(currDate);
-         console.log(selDate);
+    function checkIfFutureDayTask(selTask) {
+        var currDate = new Date;
+        var selDate = new Date(selTask.Start_Date.split(" ")[0]);
+        console.log(currDate);
+        console.log(selDate);
         if (selDate.getFullYear() > currDate.getFullYear()) {
             return true;
-        } else if (selDate.getFullYear() === currDate.getFullYear()){
+        } else if (selDate.getFullYear() === currDate.getFullYear()) {
             if (selDate.getMonth() > currDate.getMonth()) {
                 return true;
             } else if (selDate.getMonth() === currDate.getMonth()) {
@@ -890,5 +852,5 @@
 
     }
 
-   
+
 })();

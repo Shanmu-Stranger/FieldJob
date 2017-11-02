@@ -1,20 +1,6 @@
-﻿app.controller('myTaskController', function ($scope, $compile, $timeout, uiCalendarConfig, $rootScope, $state, $http, cloudService, localService, valueService,$filter) {
-
-    if (valueService.getNetworkStatus()) {
-
-        localService.getPendingTaskList(function (response) {
-
-            angular.forEach(response, function (item) {
-
-                valueService.submitDebrief(item.Task_Number);
-
-            });
-        });
-    }
+﻿app.controller('myTaskController', function ($scope, $compile, $timeout, uiCalendarConfig, $rootScope, $state, $http, cloudService, localService, valueService, $filter) {
 
     $scope.showSearchTaskDiv = false;
-
-    // valueService.setResourceId("5");
 
     $rootScope.Islogin = true;
 
@@ -24,16 +10,13 @@
 
     var eventsArray = [];
 
-    if ($rootScope.local) {
+    getTask();
 
-        getTask();
-
-    } else {
-
-        getTaskListCloud();
-    }
+    console.log("GET TASK OUT");
 
     function getTask() {
+
+        console.log("GET TASK IN");
 
         localService.getTaskList(function (response) {
 
@@ -45,103 +28,63 @@
         });
     }
 
-    function getTaskListCloud() {
-
-        var date = new Date();
-
-        date.setMonth(date.getMonth() - 1);
-
-        var endDate = new Date();
-
-        endDate.setDate(endDate.getDate() + 7);
-
-        $scope.form = {
-            resourceId: valueService.getResourceId(),
-            startDate: date.toISOString(),
-            endDate: endDate.toISOString(),
-            header: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Basic QTQ3MjE0NF9FTUVSU09OTU9CSUxFQ0xPVURfTU9CSUxFX0FOT05ZTU9VU19BUFBJRDpZLm81amxkaHVtYzF2ZQ==',
-                'oracle-mobile-backend-id': 'cc9a9b83-02ff-4be1-8b70-bccb3ac6c592'
-            }
-        };
-
-        cloudService.getTaskListCloud($scope.form, function (response) {
-
-            if (response != null) {
-
-                $scope.myTaskDetails = response.TaskDetails;
-
-                setEventArray(response.TaskDetails);
-
-                eventInit();
-            }
-        });
-    }
-
     function setEventArray(response) {
 
-        if(response != null && response.length > 0) {
+        if (response != null && response.length > 0) {
 
             response.forEach(function (item) {
 
                 var startDate = item.Start_Date.split(' ');
+
                 var startDateTime = startDate[0] + "T" + startDate[1];
 
                 var endDate = item.End_Date.split(' ');
+
                 var endDateTime = endDate[0] + "T" + endDate[1];
 
                 var customerInfo = item.Customer_Name + "\n" + item.Street_Address + "\n" + item.City + "\n" + item.State + "\n" + item.Zip_Code;
 
-              //  if (item.Task_Status == 'Accepted' || item.Task_Status == 'Assigned'||) {
+                //  if (item.Task_Status == 'Accepted' || item.Task_Status == 'Assigned'||) {
 
-                    eventsArray.push({
-                        title: customerInfo,
-                        textEscape: true,
-                        start: startDateTime,
-                        end: endDateTime,
-                        Task_Number: item.Task_Number,
-                        Task_Status: item.Task_Status,
-                        Job_Description: item.Job_Description,
-                        Start_Date: item.Start_Date,
-                        End_Date: item.End_Date,
-                        Assigned: item.Assigned,
-                        Service_Request: item.Service_Request,
-                        Expense_Method: item.Expense_Method,
-                        Labor_Method: item.Labor_Method,
-                        Travel_Method: item.Travel_Method,
-                        Material_Method: item.Material_Method,
-                        Duration: item.Duration,
-                        Customer_Name: item.Customer_Name,
-                        Street_Address: item.Street_Address,
-                        City: item.City,
-                        State: item.State,
-                        Zip_Code: item.Zip_Code,
-                        Expense_Method: item.Expense_Method,
-                        Labor_Method: item.Labor_Method,
-                        Travel_Method: item.Travel_Method,
-                        Material_Method: item.Material_Method
-                    });
-              //  }
+                eventsArray.push({
+                    title: customerInfo,
+                    textEscape: true,
+                    start: startDateTime,
+                    end: endDateTime,
+                    Task_Number: item.Task_Number,
+                    Task_Status: item.Task_Status,
+                    Job_Description: item.Job_Description,
+                    Start_Date: item.Start_Date,
+                    End_Date: item.End_Date,
+                    Assigned: item.Assigned,
+                    Service_Request: item.Service_Request,
+                    Expense_Method: item.Expense_Method,
+                    Labor_Method: item.Labor_Method,
+                    Travel_Method: item.Travel_Method,
+                    Material_Method: item.Material_Method,
+                    Duration: item.Duration,
+                    Customer_Name: item.Customer_Name,
+                    Street_Address: item.Street_Address,
+                    City: item.City,
+                    State: item.State,
+                    Zip_Code: item.Zip_Code,
+                    Expense_Method: item.Expense_Method,
+                    Labor_Method: item.Labor_Method,
+                    Travel_Method: item.Travel_Method,
+                    Material_Method: item.Material_Method
+                });
+                //  }
             });
         }
     }
 
     function eventInit() {
-        //Set time range for technician based on duration from techpro API call
+
         var minTimeVal = "07:00:00";
-        /*var minTimeFormat = minTimeVal.split(':');
-        var hour = parseInt(minTimeFormat[0]);
-        var min = parseInt(minTimeFormat[1]);
-        var sec = parseInt(minTimeFormat[2]);
-        var duration = parseInt(valueService.getUserType().duration);
-        hour +=  duration;
-        var maxTimeVal = hour.toString() + ":" + min.toString() +":" + sec.toString();*/
+
         var maxTimeVal = "24:00:00";
 
         $("fc-left").addClass("col-md-4");
-
-        /*$('.showTaskList').hide();*/
 
         $('#calendar').fullCalendar({
             customButtons: {
@@ -154,37 +97,16 @@
                 myCalendar: {
                     text: 'My Calendar',
                     click: function (item) {
-console.log(item);
-                        /*$(document).ready(function () {
-
-                            if ($('.showTaskList').is(":visible")) {
-
-                                $('.showTaskList').hide();
-                                $('.fc-view-container').show();
-                                $('#calendar > div.fc-toolbar.fc-header-toolbar > div.fc-center > div').show();
-                                $('.fc-toolbar.fc-header-toolbar').show();
-                                $('.showMonth').show();
-                            }
-                        });*/
+                        console.log(item);
                         $state.go('myTask');
                     }
                 },
                 myTask: {
                     text: 'My Field Job',
                     click: function () {
-
-                        /*if ($('.fc-view-container').is(":visible")) {
-
-                            $('.fc-view-container').hide();
-                            $('#calendar > div.fc-toolbar.fc-header-toolbar > div.fc-center > div').hide();
-                            $('.fc-toolbar.fc-header-toolbar').hide();
-                            $('.showMonth').hide();
-                            $('.showTaskList').show();
-                            $rootScope.tabClicked = true;
-                        }*/
                         $state.go('myFieldJob');
                         $rootScope.tabClicked = true;
-                        $rootScope.selectedItem=2;
+                        $rootScope.selectedItem = 2;
                     }
                 }
             },
@@ -198,16 +120,17 @@ console.log(item);
             navLinks: true,
             editable: false,
             eventLimit: true,
-              views: {
-                 month: {
-                   eventLimit: 2
-                 }
-             },
+            views: {
+                month: {
+                    eventLimit: 2
+                }
+            },
             allDaySlot: false,
             minTime: minTimeVal,
             maxTime: maxTimeVal,
             events: eventsArray,
             eventClick: function (event, jsEvent, view) {
+
                 console.log(event);
 
                 $rootScope.selectedTask = event;
@@ -217,25 +140,32 @@ console.log(item);
                 $rootScope.selectedItem = 3;
 
                 $rootScope.showTaskDetail = true;
-                if(event.Task_Status == 'Field Job Completed' || event.Task_Status == 'Completed')
-                {
-                    $rootScope.completedTask=true;
+
+                if (event.Task_Status == 'Field Job Completed' || event.Task_Status == 'Completed') {
+
+                    $rootScope.completedTask = true;
+
                     $state.go('debrief');
+
+                } else {
+
+                    $state.go('taskOverFlow');
                 }
-                else
-                $state.go('taskOverFlow');
             },
             eventRender: function (event, element) {
 
                 if (event.Task_Status == 'Completed') {
+
                     element.addClass("completedEvent");
-                } else if (event.Task_Status == 'Accepted'){
+
+                } else if (event.Task_Status == 'Accepted') {
+
                     element.addClass("acceptedEvent");
-                }
-                else {
+
+                } else {
+
                     element.addClass("assignedEvent");
-                } 
-                    
+                }
             }
         });
     }
@@ -324,7 +254,7 @@ console.log(item);
     $scope.onAcceptCall = function () {
 
         $state.go('Task Overflow');
-    }
+    };
 
     $scope.query = {
 
@@ -336,7 +266,7 @@ console.log(item);
     $scope.changeSearch = function (data) {
 
         $scope.taskInput = data;
-    }
+    };
 
     $scope.changeTaskStatus = function (taskStatus) {
 
@@ -350,14 +280,14 @@ console.log(item);
 
             $scope.selectedTaskStatus = taskStatus;
         }
-    }
+    };
 
     $scope.getStatus = ["All", "Assigned", "Accepted", "Completed"];
 
     $scope.searchTask = function () {
 
         $scope.showSearchTaskDiv = !$scope.showSearchTaskDiv;
-    }
+    };
 
     $scope.onclickOfTask = function (task) {
 
@@ -366,10 +296,13 @@ console.log(item);
         $scope.selectedTask = task;
 
         valueService.setTask(task);
-        $rootScope.completedTask=false;
-        
+
+        $rootScope.completedTask = false;
+
         $scope.notFutureDate = valueService.checkIfFutureDayTask(task);
+
         valueService.setIfFutureDateTask($scope.notFutureDate);
+
         switch (task.Task_Status) {
 
             case 'Field Job Completed':
@@ -378,7 +311,7 @@ console.log(item);
                 $scope.showDebriefBtn = true;
                 //$rootScope.showTaskDetail = true;
                 $rootScope.showAccept = false;
-                $rootScope.completedTask=true;
+                $rootScope.completedTask = true;
                 break;
 
             case 'Completed':
@@ -386,7 +319,7 @@ console.log(item);
                 $scope.showStartWork = false;
                 $scope.showDebriefBtn = true;
                 //$rootScope.showTaskDetail = true;
-                $rootScope.completedTask=true;
+                $rootScope.completedTask = true;
                 $rootScope.showAccept = false;
                 break;
 
@@ -415,18 +348,18 @@ console.log(item);
         }
     }
 
-    
 
     $scope.calendarView = function () {
-        $state.go('myTask');
-        $rootScope.selectedItem=1;
 
-    }
+        $state.go('myTask');
+
+        $rootScope.selectedItem = 1;
+    };
 
     $scope.startWork = function () {
 
         $state.go('taskOverFlow');
-    }
+    };
 
     $rootScope.showTaskOrDebrief = function (id) {
 
@@ -437,33 +370,37 @@ console.log(item);
         if (id == 3) {
 
             $rootScope.showTaskDetail = true;
+
             $rootScope.selectedCategory = 'Field Job Overview';
 
         } else {
 
             $rootScope.showDebrief = true;
+
             $rootScope.selectedCategory = 'Field Job#' + $rootScope.selectedTask.Task_Number;
+
             $state.go('debrief');
-            if ($scope.selectedTask.Task_Status =='Assigned') {
+
+            if ($scope.selectedTask.Task_Status == 'Assigned') {
+
                 var formData = {
-                "Taskstatus": [{
-                    "taskId": $rootScope.selectedTask.Task_Number,
-                    "taskStatus": "Accepted"
-                }]
-            };
+                    "Taskstatus": [{
+                        "taskId": $rootScope.selectedTask.Task_Number,
+                        "taskStatus": "Accepted"
+                    }]
+                };
 
-            var header ={
-                'Content-Type': 'application/json',
-                'Authorization': 'Basic QTQ3MjE0NF9FTUVSU09OTU9CSUxFQ0xPVURfTU9CSUxFX0FOT05ZTU9VU19BUFBJRDpZLm81amxkaHVtYzF2ZQ==',
-                'oracle-mobile-backend-id': 'a0f02e4c-cc58-4aa7-bba9-78e57a000b59'
-            };
+                var header = {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Basic QTQ3MjE0NF9FTUVSU09OTU9CSUxFQ0xPVURfTU9CSUxFX0FOT05ZTU9VU19BUFBJRDpZLm81amxkaHVtYzF2ZQ==',
+                    'oracle-mobile-backend-id': 'a0f02e4c-cc58-4aa7-bba9-78e57a000b59'
+                };
 
-            cloudService.acceptTask(formData,header,function (response) {
+                cloudService.acceptTask(formData, header, function (response) {
 
-                console.log(response);
-            });
+                    console.log(response);
+                });
             }
-
         }
     }
 });

@@ -1,4 +1,4 @@
-﻿app.controller('loginController', function ($scope, $compile, $timeout, uiCalendarConfig, $rootScope, $timeout, $state, $http, $translate, cloudService, localService, valueService, constantService, $translate,ofscService) {
+﻿app.controller('loginController', function ($location, $state, $rootScope, $scope, $http, $compile, $timeout, uiCalendarConfig, cloudService, localService, valueService, constantService, $translate, ofscService) {
 
     $rootScope.Islogin = false;
 
@@ -18,9 +18,11 @@
             header: {
                 'Content-Type': 'application/json',
                 'Authorization': 'Basic ' + authorizationValue,
-                'oracle-mobile-backend-id': 'cc9a9b83-02ff-4be1-8b70-bccb3ac6c592'
+                'oracle-mobile-backend-id': constantService.getTaskBackId
             }
         };
+
+        localService.deleteUser();
 
         cloudService.login(data, function (response) {
 
@@ -28,73 +30,55 @@
 
                 $rootScope.Islogin = true;
 
-                if ($rootScope.local) {
-
-                    var userObject = {
-                        ID: response['ID'],
-                        User_Name: ""
-                    };
-
-                    localService.deleteUser();
-
-                    localService.insertUser(userObject);
-                }
-
                 valueService.setResourceId(response['ID']);
 
                 constantService.setResourceId(response['ID']);
 
                 cloudService.getTechnicianProfile(function (response) {
 
-                    // localService.updateUser()
-                    constantService.setTimeZone(response.technicianProfile[0].Time_Zone)
-                    if (response.technicianProfile["0"].Language == "English (US)") {
+                    var userObject = {
+                        ID: response[0].ID,
+                        ClarityID: response[0].ClarityID,
+                        Currency: response[0].Currency,
+                        Default_View: response[0].Default_View,
+                        Email: response[0].Email,
+                        Language: response[0].Language,
+                        Name: response[0].Name,
+                        OFSCId: response[0].OFSCId,
+                        Password: response[0].Password,
+                        Time_Zone: response[0].Time_Zone,
+                        Type: response[0].Type,
+                        User_Name: response[0].User_Name,
+                        Work_Day: response[0].Work_Day,
+                        Work_Hour: response[0].Work_Hour,
+                        Last_updated: new Date()
+                    };
 
-                        $translate.use('en').then(function () {
+                    localService.insertUser(userObject);
 
-                            console.log('English Used ');
+                    localService.getUser(function (response) {
+
+                        console.log("USER =====> " + JSON.stringify(response));
+
+                        constantService.setUser(response[0]);
+
+                        valueService.setUser(response[0]);
+
+                        var data = {
+                            "resourceId": constantService.getUser().OFSCId,
+                            "date": moment(new Date()).format('YYYY-MM-DD')
+                        }
+
+                        ofscService.activate_resource(data, function (response) {
+                            console.log(response);
                         });
 
-                    } else {
-
-                        $translate.use('jp').then(function () {
-
-                            console.log('Chinese Used');
-                        });
-                    }
-                    var data = {
-                        "resourceId" : response.technicianProfile["0"].OFSCId,
-                        "date" : moment(new Date()).format('YYYY-MM-DD')
-
-                    }
-                    ofscService.activate_resource(data,function(response){
-                        console.log(response);
-                    })
-                    /*constantService.setUserEmailId(response.technicianProfile["0"].Email);
-                    console.log(constantService.getUserEmailId());*/
-                    //Navigate To a View based on preference
-                    if (response.technicianProfile["0"].Default_View == "My Task") {
-
-                        $state.go('myFieldJob');
-                        $rootScope.selectedItem=2;
-                    }
-                    $rootScope.uName=response.technicianProfile["0"].Name;
-                    valueService.setUserType(response.technicianProfile["0"].Name, response);
-
+                        offlineGetCall();
+                    });
                 });
-
-                if ($rootScope.local) {
-
-                    offlineGetCall();
-
-                } else {
-
-                    $state.go('myTask');
-                }
 
             } else {
 
-                // alert('Please verify the UserName or Password.')
                 $scope.loginError = true;
             }
         });
@@ -104,11 +88,22 @@
             cloudService.getTaskList(function (response) {
 
                 localService.deleteInstallBase();
-                localService.deleteNote();
                 localService.deleteContact();
-                localService.deleteShiftCode();
+                localService.deleteNote();
+
                 localService.deleteOverTime();
+                localService.deleteShiftCode();
+
+                localService.deleteChargeType();
+                localService.deleteChargeMethod();
                 localService.deleteFieldJobName();
+
+                localService.deleteWorkType();
+                localService.deleteItem();
+                localService.deleteCurrency();
+
+                localService.deleteExpenseType();
+                localService.deleteNoteType();
 
                 cloudService.getInstallBaseList();
                 cloudService.getContactList();
@@ -125,35 +120,21 @@
                 cloudService.getItem();
                 cloudService.getCurrency();
 
-                // getAttachments();
+                cloudService.getExpenseType();
+                cloudService.getNoteType();
 
-                // localService.getOverTimeList("966", function (response) {
-                //
-                //     debrief.overTime = response;
-                // });
-                //
-                // localService.getShiftCodeList(taskObject.Task_Number, function (response) {
-                //
-                //     debrief.shiftCode = response;
-                // });
-                //
-                // localService.getChargeMethodList(function (response) {
-                //
-                //     debrief.chargeMethod = response;
-                // });
-                //
-                // localService.getChargeTypeList(function (response) {
-                //
-                //     debrief.chargeType = response;
-                // });
-                //
-                // localService.getFieldJobNameList(function (response) {
-                //
-                //     debrief.fieldName = response;
-                // });
+                getAttachments();
 
-                $state.go('myTask');
+                if (constantService.getUser().Default_View == "My Task") {
 
+                    $rootScope.selectedItem = 2;
+
+                    $state.go('myFieldJob');
+
+                } else {
+
+                    $state.go('myTask');
+                }
             });
         }
 
