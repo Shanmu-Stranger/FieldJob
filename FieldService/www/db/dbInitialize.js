@@ -100,10 +100,10 @@
             console.log('DB SUCCESS: CURRENCY');
 
             tx.executeSql(sqlExpenseType);
-            console.log('DB SUCCESS: CURRENCY');
+            console.log('DB SUCCESS: EXPENSETYPE');
 
             tx.executeSql(sqlNoteType);
-            console.log('DB SUCCESS: CURRENCY');
+            console.log('DB SUCCESS: NOTETYPE');
 
             tx.executeSql(sqlTime);
             console.log('DB SUCCESS: TIME');

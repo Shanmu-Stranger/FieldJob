@@ -173,7 +173,7 @@
 
             userType.duration = getUser().Work_Hour;
 
-            if (getUser().ClarityID == "1" ||  getUser().ClarityID!="") {
+            if (getUser().ClarityID == "1" || getUser().ClarityID != "") {
 
                 userType.clarityType = 'C';
 
@@ -707,7 +707,8 @@
         var materialArray = [];
 
         var notesArray = [];
-        var attachmentArray=[];
+
+        var attachmentArray = [];
 
         localService.getTimeList(taskId, function (response) {
 
@@ -820,25 +821,24 @@
 
             noteDataJSON.push(noteData);
         }
+
         var attachmentJSONData = [];
 
         for (var i = 0; i < attachmentArray.length; i++) {
+
             var base64;
+
             var attachmentObject = {
                 "Data": base64,
                 "FileName": attachmentArray[i].File_Name,
-                "Description":attachmentArray[i].File_Name,
+                "Description": attachmentArray[i].File_Name,
                 "Name": attachmentArray[i].File_Name,
-                "taskId":attachmentArray[i].Task_Number,
+                "taskId": attachmentArray[i].Task_Number,
                 "contentType": attachmentArray[i].File_Type
             };
 
             attachmentJSONData.push(attachmentObject);
         }
-
-        var attachmentUploadJSON = {
-            "attachment": attachmentJSONData
-        };
 
         var timeUploadJSON = {
             "Time": timeJSONData
@@ -893,6 +893,20 @@
             cloudService.updateMaterial(materialUploadJSON, function (response) {
 
                 console.log("Uploaded material " + JSON.stringify(response));
+            });
+        }
+
+        var attachmentUploadJSON = {
+            "attachment": attachmentJSONData
+        };
+
+        console.log(attachmentUploadJSON);
+
+        if (attachmentArray) {
+
+            cloudService.createAttachment(attachmentUploadJSON, function (response) {
+
+                console.log("Attachment Uploaded Successfully "+ + JSON.stringify(response));
             });
         }
 

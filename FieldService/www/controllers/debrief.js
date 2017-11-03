@@ -1362,69 +1362,6 @@ app.controller("debriefController", function ($scope, $state, $rootScope, $windo
             localService.updateTaskSubmitStatus(taskObject);
         }
 
-        var date = new Date();
-
-        date.setMonth(date.getMonth() - 1);
-
-        var attachment = [];
-
-        if ($scope.image.length > 0) {
-
-            angular.forEach($scope.image, function (key, value) {
-
-                var attachmentObject = {
-                    "Data": "",
-                    "FileName": key.file.name,
-                    "Description": key.file.name,
-                    "Name": ""
-                }
-                attachment.push(attachmentObject);
-            });
-        }
-
-        if ($scope.files.length > 0) {
-
-            angular.forEach($scope.files, function (key, value) {
-
-                var attachmentObject = {
-                    "Data": "",
-                    "FileName": key.file.name,
-                    "Description": key.filename,
-                    "Name": ""
-                }
-
-                attachment.push(attachmentObject);
-            });
-        }
-
-        // var attachmentJSONData = [];
-        //
-        // for (var i = 0; i < $scope.files.length; i++) {
-        //
-        //     var attachmentObject = {
-        //         "Data": $scope.files[i].base64,
-        //         "FileName": $scope.files[i].filename,
-        //         "Description": $scope.files[i].filename,
-        //         "Name": $scope.files[i].filename,
-        //         "taskId": $rootScope.selectedTask.Task_Number,
-        //         "contentType": $scope.files[i].contentType
-        //     };
-        //
-        //     attachmentJSONData.push(attachmentObject);
-        // }
-        //
-        // var attachmentUploadJSON = {
-        //     "attachment": attachmentJSONData
-        // };
-
-        if ($scope.files) {
-
-            cloudService.createAttachment(attachmentUploadJSON, function (response) {
-
-                console.log("Attachment Uploaded Successfully");
-            });
-        }
-
         generatePDF();
     }
 
