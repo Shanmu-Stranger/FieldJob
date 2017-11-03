@@ -9,6 +9,24 @@ var app = angular.module('emerson', ['ngMaterial', 'ngLoadingSpinner', 'md.data.
 
 app.run(function ($rootScope, $location, $http, $state, localService, valueService, constantService) {
 
+    window.addEventListener('offline', offLine);
+
+    window.addEventListener('online', onLine);
+
+    function onLine() {
+
+        console.log("Online");
+
+        valueService.setNetworkStatus(true);
+    }
+
+    function offLine() {
+
+        console.log("Offline");
+
+        valueService.setNetworkStatus(false);
+    }
+
     $rootScope.local = true;
 
     $rootScope.online = false;

@@ -13,91 +13,16 @@
         $scope.myVar = !$scope.myVar;
     };
 
-    if ($rootScope.local) {
+    $scope.noteArray = valueService.getTaskNotes();
 
-        localService.getNoteList(valueService.getTask().Task_Number, function (response) {
+    console.log("NOTE ARRAY " + $scope.noteArray);
 
-            $scope.noteArray = response;
-
-        });
-
-        localService.getAttachmentList(valueService.getTask().Task_Number, "O", function (response) {
-
-            $scope.attachmentArray = response;
-
-        });
-
-    } else {
-
-        getDebriefStagesInfo();
-
-        getAttachments();
-    }
+    $scope.attachmentArray = valueService.getTaskAttachment();
 
     $scope.openResource = function (item) {
 
         valueService.openFile(item.File_Path + item.File_Name, item.File_Type);
     };
-
-    $scope.taskId = valueService.getTask().Task_Number;
-
-    function getDebriefStagesInfo() {
-
-        var notesArray = [];
-
-        cloudService.getNoteListCloud(function (response) {
-
-            angular.forEach(response.Notes, function (key, value) {
-
-                var noteObj = {};
-
-                if (key.Task_Number == $scope.taskId) {
-
-                    noteObj.Created_By = key.Created_By;
-                    noteObj.Start_Date = key.Start_Date;
-                    noteObj.Notes = key.Notes;
-                    noteObj.Notes_type = key.Notes_type;
-
-                    notesArray.push(noteObj);
-                }
-            });
-
-            $scope.noteArray = notesArray;
-        });
-    }
-
-    function getAttachments() {
-
-        cloudService.getFileIds(function (response) {
-
-            if (response.Attachments_Info != undefined && response.Attachments_Info.length > 0) {
-
-                angular.forEach(response.Attachments_Info, function (key, value) {
-
-                    if (key.Task_Id == $scope.taskId) {
-
-                        $scope.Attachments = key.Attachments;
-
-                        angular.forEach($scope.Attachments, function (key, value) {
-
-                            download(key, function (response) {
-
-                                key.base64Code = response;
-                            });
-                        });
-                    }
-                });
-            }
-        });
-    }
-
-    function download(resource, callback) {
-
-        cloudService.downloadAttachment($scope.taskId, resource.Attachments_Id, function (response) {
-
-            callback(response.data);
-        });
-    }
 
     $scope.contacts = [
         {name: "Santiago Munez", No: "+(832)534678", email: "Santiago.munex@rolce.com"},

@@ -77,60 +77,44 @@ app.controller("debriefController", function ($scope, $state, $rootScope, $windo
 
         angular.forEach($scope.attachmentArray, function (attachment) {
 
-            var attachobj = {}
+            var attachmentObject = {};
 
-            attachobj.contentType = attachment.File_Type;
+            attachmentObject.contentType = attachment.File_Type;
 
             window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fs) {
 
                 fs.root.getFile(attachment.File_Name, {create: true, exclusive: false}, function (fileEntry) {
 
-                    readFile(fileEntry);
+                    fileEntry.file(function (file) {
 
-                }, function (response) {
+                        var reader = new FileReader();
 
-                    console.log(response);
+                        reader.onloadend = function () {
+
+                            console.log("Successful file read: " + this.result);
+
+                            attachmentObject.base64 = this.result.split(",")[1];
+
+                            attachmentObject.contentType = attachment.File_Type;
+
+                            attachmentObject.filename = attachment.File_Name.split(".")[0];
+
+                            attachmentObject.filetype = attachment.File_Name.split(".")[1];
+
+                            if (attachment.AttachmentType == "D") {
+
+                                $scope.files.push(attachmentObject);
+
+                            } else if (attachment.AttachmentType == "M") {
+
+                                $scope.image.push(attachmentObject)
+                            }
+                        };
+
+                        reader.readAsDataURL(file);
+                    });
                 });
-
-            }, function (response) {
-
-                console.log(response);
             });
-
-            function readFile(fileEntry) {
-
-                fileEntry.file(function (file) {
-
-                    var reader = new FileReader();
-
-                    reader.onloadend = function () {
-
-                        console.log("Successful file read: " + this.result);
-
-                        attachobj.base64 = this.result.split(",")[1];
-
-                        attachobj.contentType = attachment.File_Type;
-
-                        attachobj.filename = attachment.File_Name.split(".")[0];
-
-                        attachobj.filetype = attachment.File_Name.split(".")[1];
-
-                        if (attachment.AttachmentType == "D") {
-
-                            $scope.files.push(attachobj);
-
-                        } else if (attachment.AttachmentType == "M") {
-
-                            $scope.image.push(attachobj)
-                        }
-                    };
-
-                    reader.readAsDataURL(file);
-
-                }, function (response) {
-                    console.log(response);
-                });
-            }
         });
 
         $scope.engineerObject = valueService.getEngineer();
@@ -897,12 +881,12 @@ app.controller("debriefController", function ($scope, $state, $rootScope, $windo
                     valueService.saveBase64File(filePath, attachment.filename + "." + attachment.filetype, base64Code, attachment.contentType);
 
                     var attachmentObject = {
-                        Attachment_Id: $rootScope.selectedTask.Task_Number + i,
+                        Attachment_Id: $scope.taskId + i,
                         File_Path: filePath,
                         File_Name: attachment.filename + "." + attachment.filetype,
                         File_Type: attachment.contentType,
                         Type: "D",
-                        Task_Number: $rootScope.selectedTask.Task_Number,
+                        Task_Number: $scope.taskId,
                         AttachmentType: "D"
                     };
 
@@ -920,12 +904,12 @@ app.controller("debriefController", function ($scope, $state, $rootScope, $windo
                     valueService.saveBase64File(filePath, attachment.filename, base64Code, attachment.data.split(",")[0].split(";")[0].split(":")[1]);
 
                     var attachmentObject = {
-                        Attachment_Id: $rootScope.selectedTask.Task_Number + i,
+                        Attachment_Id: $scope.taskId + i,
                         File_Path: filePath,
                         File_Name: attachment.filename,
                         File_Type: attachment.contentType,
                         Type: "D",
-                        Task_Number: $rootScope.selectedTask.Task_Number,
+                        Task_Number: $scope.taskId,
                         AttachmentType: "M"
                     };
 

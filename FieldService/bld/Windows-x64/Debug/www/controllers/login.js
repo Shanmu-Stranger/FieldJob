@@ -1,5 +1,23 @@
 ﻿app.controller('loginController', function ($location, $state, $rootScope, $scope, $http, $compile, $timeout, uiCalendarConfig, cloudService, localService, valueService, constantService, $translate, ofscService) {
 
+    window.addEventListener('offline', offLine);
+
+    window.addEventListener('online', onLine);
+
+    function onLine() {
+
+        console.log("Online");
+
+        valueService.setNetworkStatus(true);
+    }
+
+    function offLine() {
+
+        console.log("Offline");
+
+        valueService.setNetworkStatus(false);
+    }
+
     $rootScope.Islogin = false;
 
     $scope.userName = "";

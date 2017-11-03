@@ -47,7 +47,7 @@
 
         var sqlExpense = "CREATE TABLE IF NOT EXISTS Expense ('Expense_Id' INTEGER PRIMARY KEY  NOT NULL, 'expenseDefault' TEXT, 'Date' TEXT, 'Expense_Type' TEXT, 'Expense_Type_Id' TEXT, 'Amount' TEXT, 'Currency' TEXT, 'Currency_Id' TEXT, 'Charge_Method' TEXT, 'Charge_Method_Id' TEXT, 'Justification' TEXT, 'Task_Number' TEXT)";
 
-        var sqlMaterial = "CREATE TABLE IF NOT EXISTS Material ('Material_Id' INTEGER PRIMARY KEY  NOT NULL, 'materialDefault' TEXT, 'Charge_Type' TEXT, 'Charge_Type_Id' TEXT, 'Description' TEXT, 'Product_Quantity' TEXT, 'Serial_Number' TEXT, 'Serial_In' TEXT, 'Serial_Out' TEXT, 'Task_Number' TEXT)";
+        var sqlMaterial = "CREATE TABLE IF NOT EXISTS Material ('Material_Id' INTEGER PRIMARY KEY  NOT NULL, 'materialDefault' TEXT, 'Charge_Type' TEXT, 'Charge_Type_Id' TEXT, 'Description' TEXT, 'ItemName' TEXT, 'Product_Quantity' TEXT, 'Serial_Number' TEXT, 'Serial_In' TEXT, 'Serial_Out' TEXT, 'Task_Number' TEXT)";
 
         var sqlNotes = "CREATE TABLE IF NOT EXISTS Notes ('Notes_Id' INTEGER PRIMARY KEY  NOT NULL, 'noteDefault' TEXT, 'Note_Type' TEXT, 'Note_Type_Id' TEXT, 'Date' TEXT, 'Created_By' TEXT, 'Notes' TEXT, 'Task_Number' TEXT)";
 
@@ -100,10 +100,10 @@
             console.log('DB SUCCESS: CURRENCY');
 
             tx.executeSql(sqlExpenseType);
-            console.log('DB SUCCESS: CURRENCY');
+            console.log('DB SUCCESS: EXPENSETYPE');
 
             tx.executeSql(sqlNoteType);
-            console.log('DB SUCCESS: CURRENCY');
+            console.log('DB SUCCESS: NOTETYPE');
 
             tx.executeSql(sqlTime);
             console.log('DB SUCCESS: TIME');

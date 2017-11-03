@@ -37,7 +37,7 @@
         service.getExpenseType = getExpenseType;
         service.getNoteType = getNoteType;
 
-        service.acceptTask = acceptTask;
+        service.updateAcceptTask = updateAcceptTask;
         service.startTask = startTask;
 
         service.uploadTime = uploadTime;
@@ -520,7 +520,7 @@
             });
         }
 
-        function acceptTask(formData, callback) {
+        function updateAcceptTask(formData, callback) {
 
             console.log("Accept Task Data", JSON.stringify(formData));
 

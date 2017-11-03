@@ -199,6 +199,11 @@
 
             debrief.task = taskObject;
 
+            cloudService.getTaskList( function (response) {
+
+                debrief.task = response;
+            });
+
             localService.getInstallBaseList(taskObject.Task_Number, function (response) {
 
                 debrief.installBase = response;
@@ -674,243 +679,8 @@
                 });
             });
         };
-    }
 
-    function acceptTask(taskId) {
-
-        var formData = {
-            "Taskstatus": [{
-                "taskId": taskId,
-                "taskStatus": "Accepted"
-            }]
-        };
-
-        cloudService.acceptTask(formData, function (response) {
-
-            console.log(JSON.stringify(response));
-
-            var taskObject = {
-                Task_Number: taskId,
-                Submit_Status: "A"
-            };
-
-            localService.updateTaskSubmitStatus(taskObject);
-        });
-    }
-
-    function submitDebrief(taskId) {
-
-        var timeArray = [];
-
-        var expenseArray = [];
-
-        var materialArray = [];
-
-        var notesArray = [];
-
-        var attachmentArray = [];
-
-        localService.getTimeList(taskId, function (response) {
-
-            timeArray = response;
-        });
-
-        localService.getExpenseList(taskId, function (response) {
-
-            expenseArray = response;
-        });
-
-        localService.getMaterialList(taskId, function (response) {
-
-            materialArray = response;
-        });
-
-        localService.getNotesList(taskId, function (response) {
-
-            notesArray = response;
-        });
-
-        localService.getAttachmentList(taskId, "D", function (response) {
-
-            attachmentArray = response;
-        });
-        //
-        // localService.getEngineer(taskId, function (response) {
-        //
-        //     debrief.engineer = response;
-        // });
-
-        var timeJSONData = [];
-
-        for (var i = 0; i < timeArray.length; i++) {
-
-            var date = $filter("date")(timeArray[i].Date, "yyyy-MM-ddThh:mm:ss.000");
-            date = date + "Z";
-
-            var timeData = {
-                "task_id": timeArray[i].Task_Number,
-                "shift_code": timeArray[i].Shift_Code_Id,
-                "overtime_shiftcode": timeArray[i].Time_Code_Id,
-                "charge_type": timeArray[i].Charge_Type_Id,
-                "duration": timeArray[i].Duration,
-                "comments": timeArray[i].Comments,
-                "labor_item": timeArray[i].Item_Id,
-                "labor_description": timeArray[i].Description,
-                "work_type": timeArray[i].Work_Type_Id,
-                "start_date": date,
-                "end_date": date,
-                "charge_method": timeArray[i].Charge_Method_Id,
-                "JobName": "20"
-            }
-
-            timeJSONData.push(timeData);
-        }
-
-        var expenseJSONData = [];
-
-        for (var i = 0; i < expenseArray.length; i++) {
-
-            var expenseDate = $filter("date")(expenseArray[i].Date, "yyyy-MM-dd");
-
-            var expenseData = {
-                "taskId": expenseArray[i].Task_Number,
-                "comments": expenseArray[i].Justification,
-                "currency": expenseArray[i].Currency_Id,
-                "chargeMethod": expenseArray[i].Charge_Method_Id,
-                "ammount": expenseArray[i].Amount,
-                "date": expenseDate,
-                "expenseItem": expenseArray[i].Expense_Type_Id,
-                "chargeType": "2",
-                "billable": "true"
-            }
-
-            expenseJSONData.push(expenseData);
-        }
-
-        var materialDataJSON = [];
-
-        for (var i = 0; i < materialArray.length; i++) {
-
-            angular.forEach(materialArray[i].Serial_Type, function (key) {
-
-                var materialData = {
-                    "charge_method": materialArray[i].Charge_Type_Id.toString(),
-                    "task_id": materialArray[i].Task_Number,
-                    "item_description": materialArray[i].Description,
-                    "product_quantity": 1,
-                    "comments": "gfhghg",
-                    "item": materialArray[i].itemName,
-                    "serialin": key.in,
-                    "serialout": key.out,
-                    "serial_number": key.number
-                }
-
-                materialDataJSON.push(materialData);
-            });
-        }
-
-        var noteDataJSON = [];
-
-        for (var i = 0; i < notesArray.length; i++) {
-
-            var noteData = {
-                "Notes_type": notesArray[i].Note_Type.id,
-                "notes_description": notesArray[i].Notes,
-                "task_id": notesArray[i].Task_Number
-            };
-
-            noteDataJSON.push(noteData);
-        }
-
-        var attachmentJSONData = [];
-
-        for (var i = 0; i < attachmentArray.length; i++) {
-
-            var base64;
-
-            var attachmentObject = {
-                "Data": base64,
-                "FileName": attachmentArray[i].File_Name,
-                "Description": attachmentArray[i].File_Name,
-                "Name": attachmentArray[i].File_Name,
-                "taskId": attachmentArray[i].Task_Number,
-                "contentType": attachmentArray[i].File_Type
-            };
-
-            attachmentJSONData.push(attachmentObject);
-        }
-
-        var timeUploadJSON = {
-            "Time": timeJSONData
-        }
-
-        console.log(timeUploadJSON);
-
-        if (timeArray) {
-
-            cloudService.uploadTime(timeUploadJSON, function (response) {
-
-                console.log("Uploaded Time Data " + JSON.stringify(response));
-            });
-        }
-
-        var expenseUploadJSON = {
-            "expense": expenseJSONData
-        }
-
-        console.log(expenseUploadJSON);
-
-        if (expenseArray) {
-
-            cloudService.updateExpenses(expenseUploadJSON, function (response) {
-
-                console.log("Uploaded Expense Data " + JSON.stringify(response));
-            });
-        }
-
-        var notesUploadJSON = {
-            "Notes": noteDataJSON
-        }
-
-        console.log(notesUploadJSON);
-
-        if (notesArray) {
-
-            cloudService.updateNotes(notesUploadJSON, function (response) {
-
-                console.log("Uploaded notes " + JSON.stringify(response));
-            });
-        }
-
-        var materialUploadJSON = {
-            "Material": materialDataJSON
-        }
-
-        console.log(materialUploadJSON);
-
-        if (materialArray) {
-
-            cloudService.updateMaterial(materialUploadJSON, function (response) {
-
-                console.log("Uploaded material " + JSON.stringify(response));
-            });
-        }
-
-        var attachmentUploadJSON = {
-            "attachment": attachmentJSONData
-        };
-
-        console.log(attachmentUploadJSON);
-
-        if (attachmentArray) {
-
-            cloudService.createAttachment(attachmentUploadJSON, function (response) {
-
-                console.log("Attachment Uploaded Successfully "+ + JSON.stringify(response));
-            });
-        }
-
-        setTimeout(function () {
+        function acceptTask(taskId) {
 
             var formData = {
                 "Taskstatus": [{
@@ -919,63 +689,322 @@
                 }]
             };
 
-            cloudService.acceptTask(formData, function (response) {
-
-                console.log(JSON.stringify(response));
-            });
-
-            var formData = {
-                "Taskstatus": [{
-                    "taskId": taskId,
-                    "taskStatus": "Completed"
-                }]
-            };
-
-            cloudService.acceptTask(formData, function (response) {
+            cloudService.updateAcceptTask(formData, function (response) {
 
                 console.log(JSON.stringify(response));
 
                 var taskObject = {
+                    Task_Status: "Accepted",
                     Task_Number: taskId,
-                    Submit_Status: "I"
+                    Submit_Status: "A"
                 };
 
                 localService.updateTaskSubmitStatus(taskObject);
             });
+        }
 
-        }, 3000);
-    }
+        function submitDebrief(taskId) {
 
-    function checkIfFutureDayTask(selTask) {
+            var timeArray = [];
 
-        var currDate = new Date;
+            var expenseArray = [];
 
-        var selDate = new Date(selTask.Start_Date.split(" ")[0]);
+            var materialArray = [];
 
-        console.log(currDate);
+            var notesArray = [];
 
-        console.log(selDate);
+            var attachmentArray = [];
 
-        if (selDate.getFullYear() > currDate.getFullYear()) {
+            localService.getTimeList(taskId, function (response) {
 
-            return true;
+                timeArray = response;
+            });
 
-        } else if (selDate.getFullYear() === currDate.getFullYear()) {
+            localService.getExpenseList(taskId, function (response) {
 
-            if (selDate.getMonth() > currDate.getMonth()) {
+                expenseArray = response;
+            });
+
+            localService.getMaterialList(taskId, function (response) {
+
+                materialArray = response;
+            });
+
+            localService.getNotesList(taskId, function (response) {
+
+                notesArray = response;
+            });
+
+            localService.getAttachmentList(taskId, "D", function (response) {
+
+                attachmentArray = response;
+            });
+            //
+            // localService.getEngineer(taskId, function (response) {
+            //
+            //     debrief.engineer = response;
+            // });
+
+            var timeJSONData = [];
+
+            for (var i = 0; i < timeArray.length; i++) {
+
+                var date = $filter("date")(timeArray[i].Date, "yyyy-MM-ddThh:mm:ss.000");
+                date = date + "Z";
+
+                var timeData = {
+                    "task_id": timeArray[i].Task_Number,
+                    "shift_code": timeArray[i].Shift_Code_Id,
+                    "overtime_shiftcode": timeArray[i].Time_Code_Id,
+                    "charge_type": timeArray[i].Charge_Type_Id,
+                    "duration": timeArray[i].Duration,
+                    "comments": timeArray[i].Comments,
+                    "labor_item": timeArray[i].Item_Id,
+                    "labor_description": timeArray[i].Description,
+                    "work_type": timeArray[i].Work_Type_Id,
+                    "start_date": date,
+                    "end_date": date,
+                    "charge_method": timeArray[i].Charge_Method_Id,
+                    "JobName": "20"
+                }
+
+                timeJSONData.push(timeData);
+            }
+
+            var expenseJSONData = [];
+
+            for (var i = 0; i < expenseArray.length; i++) {
+
+                var expenseDate = $filter("date")(expenseArray[i].Date, "yyyy-MM-dd");
+
+                var expenseData = {
+                    "taskId": expenseArray[i].Task_Number,
+                    "comments": expenseArray[i].Justification,
+                    "currency": expenseArray[i].Currency_Id,
+                    "chargeMethod": expenseArray[i].Charge_Method_Id,
+                    "ammount": expenseArray[i].Amount,
+                    "date": expenseDate,
+                    "expenseItem": expenseArray[i].Expense_Type_Id,
+                    "chargeType": "2",
+                    "billable": "true"
+                }
+
+                expenseJSONData.push(expenseData);
+            }
+
+            var materialDataJSON = [];
+
+            for (var i = 0; i < materialArray.length; i++) {
+
+                angular.forEach(materialArray[i].Serial_Type, function (key) {
+
+                    var materialData = {
+                        "charge_method": materialArray[i].Charge_Type_Id.toString(),
+                        "task_id": materialArray[i].Task_Number,
+                        "item_description": materialArray[i].Description,
+                        "product_quantity": 1,
+                        "comments": "gfhghg",
+                        "item": materialArray[i].itemName,
+                        "serialin": key.in,
+                        "serialout": key.out,
+                        "serial_number": key.number
+                    }
+
+                    materialDataJSON.push(materialData);
+                });
+            }
+
+            var noteDataJSON = [];
+
+            for (var i = 0; i < notesArray.length; i++) {
+
+                var noteData = {
+                    "Notes_type": notesArray[i].Note_Type.id,
+                    "notes_description": notesArray[i].Notes,
+                    "task_id": notesArray[i].Task_Number
+                };
+
+                noteDataJSON.push(noteData);
+            }
+
+            var attachmentJSONData = [];
+
+            angular.forEach($scope.attachmentArray, function (attachment) {
+
+                var attachmentObject = {};
+
+                attachmentObject.taskId = attachment.Task_Number;
+                attachmentObject.contentType = attachment.File_Type;
+                attachmentObject.FileName = attachment.File_Name.split(".")[0];
+                attachmentObject.Description = attachment.File_Name.split(".")[0];
+                attachmentObject.Name = attachment.File_Name.split(".")[0];
+
+                window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fs) {
+
+                    fs.root.getFile(attachment.File_Name, {create: true, exclusive: false}, function (fileEntry) {
+
+                        fileEntry.file(function (file) {
+
+                            var reader = new FileReader();
+
+                            reader.onloadend = function () {
+
+                                attachmentObject.Data = this.result.split(",")[1];
+
+                                attachmentJSONData.push(attachmentObject);
+                            };
+
+                            reader.readAsDataURL(file);
+                        });
+                    });
+                });
+            });
+
+            var timeUploadJSON = {
+                "Time": timeJSONData
+            }
+
+            console.log(timeUploadJSON);
+
+            if (timeArray) {
+
+                cloudService.uploadTime(timeUploadJSON, function (response) {
+
+                    console.log("Uploaded Time Data " + JSON.stringify(response));
+                });
+            }
+
+            var expenseUploadJSON = {
+                "expense": expenseJSONData
+            }
+
+            console.log(expenseUploadJSON);
+
+            if (expenseArray) {
+
+                cloudService.updateExpenses(expenseUploadJSON, function (response) {
+
+                    console.log("Uploaded Expense Data " + JSON.stringify(response));
+                });
+            }
+
+            var notesUploadJSON = {
+                "Notes": noteDataJSON
+            }
+
+            console.log(notesUploadJSON);
+
+            if (notesArray) {
+
+                cloudService.updateNotes(notesUploadJSON, function (response) {
+
+                    console.log("Uploaded notes " + JSON.stringify(response));
+                });
+            }
+
+            var materialUploadJSON = {
+                "Material": materialDataJSON
+            }
+
+            console.log(materialUploadJSON);
+
+            if (materialArray) {
+
+                cloudService.updateMaterial(materialUploadJSON, function (response) {
+
+                    console.log("Uploaded material " + JSON.stringify(response));
+                });
+            }
+
+            var attachmentUploadJSON = {
+                "attachment": attachmentJSONData
+            };
+
+            console.log(attachmentUploadJSON);
+
+            if (attachmentArray) {
+
+                cloudService.createAttachment(attachmentUploadJSON, function (response) {
+
+                    console.log("Attachment Uploaded Successfully " + +JSON.stringify(response));
+                });
+            }
+
+            setTimeout(function () {
+
+                var formData = {
+                    "Taskstatus": [{
+                        "taskId": taskId,
+                        "taskStatus": "Accepted"
+                    }]
+                };
+
+                cloudService.updateAcceptTask(formData, function (response) {
+
+                    console.log(JSON.stringify(response));
+
+                    var taskObject = {
+                        Task_Status: "Accepted",
+                        Task_Number: taskId,
+                        Submit_Status: "A"
+                    };
+
+                    localService.updateTaskSubmitStatus(taskObject);
+                });
+
+                var formData = {
+                    "Taskstatus": [{
+                        "taskId": taskId,
+                        "taskStatus": "Completed"
+                    }]
+                };
+
+                cloudService.updateAcceptTask(formData, function (response) {
+
+                    console.log(JSON.stringify(response));
+
+                    var taskObject = {
+                        Task_Status: "Completed",
+                        Task_Number: taskId,
+                        Submit_Status: "I"
+                    };
+
+                    localService.updateTaskSubmitStatus(taskObject);
+                });
+
+            }, 3000);
+        }
+
+        function checkIfFutureDayTask(selTask) {
+
+            var currDate = new Date;
+
+            var selDate = new Date(selTask.Start_Date.split(" ")[0]);
+
+            console.log(currDate);
+
+            console.log(selDate);
+
+            if (selDate.getFullYear() > currDate.getFullYear()) {
 
                 return true;
 
-            } else if (selDate.getMonth() === currDate.getMonth()) {
+            } else if (selDate.getFullYear() === currDate.getFullYear()) {
 
-                if (selDate.getDate() > currDate.getDate()) {
+                if (selDate.getMonth() > currDate.getMonth()) {
 
                     return true;
+
+                } else if (selDate.getMonth() === currDate.getMonth()) {
+
+                    if (selDate.getDate() > currDate.getDate()) {
+
+                        return true;
+                    }
                 }
             }
+
+            return false;
         }
-
-        return false;
     }
-
 })();

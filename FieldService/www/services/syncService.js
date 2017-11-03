@@ -4,13 +4,14 @@
 
     app.factory('syncService', syncService);
 
-    syncService.$inject = ['$http', '$rootScope', '$window', '$location',  'constantService'];
+    syncService.$inject = ['$http', '$rootScope', '$window', '$location', 'constantService'];
 
-    function syncService($http, $rootScope, $window, $location,  constantService) {
+    function syncService($http, $rootScope, $window, $location, constantService) {
 
         var url = conf.apiUrl;
 
         var service = {};
+
         service.getOffline_Contacts = getOffline_Contacts;
         service.getOffline_Notes = getOffline_Notes;
         service.getOffline_Field = getOffline_Field;
@@ -22,7 +23,7 @@
         return service;
 
 
-        function getOffline_Contacts(data,callback) {
+        function getOffline_Contacts(data, callback) {
 
             return $http({
 
@@ -33,7 +34,7 @@
                     "Authorization": constantService.getAuthor(),
                     "oracle-mobile-backend-id": constantService.getChargeBackId()
                 },
-                data:data
+                data: data
 
             }).success(function (response) {
 
@@ -49,7 +50,7 @@
             });
         }
 
-        function getOffline_Notes(data,callback) {
+        function getOffline_Notes(data, callback) {
 
             return $http({
 
@@ -60,7 +61,7 @@
                     "Authorization": constantService.getAuthor(),
                     "oracle-mobile-backend-id": constantService.getChargeBackId()
                 },
-                data:data
+                data: data
 
             }).success(function (response) {
 
@@ -76,7 +77,7 @@
             });
         }
 
-        function getOffline_Field(data,callback) {
+        function getOffline_Field(data, callback) {
 
             return $http({
 
@@ -87,7 +88,7 @@
                     "Authorization": constantService.getAuthor(),
                     "oracle-mobile-backend-id": constantService.getChargeBackId()
                 },
-                data:data
+                data: data
 
             }).success(function (response) {
 
@@ -103,7 +104,7 @@
             });
         }
 
-        function getOffline_Overtimeshiftcode(data,callback) {
+        function getOffline_Overtimeshiftcode(data, callback) {
 
             return $http({
 
@@ -114,7 +115,7 @@
                     "Authorization": constantService.getAuthor(),
                     "oracle-mobile-backend-id": constantService.getChargeBackId()
                 },
-                data:data
+                data: data
 
             }).success(function (response) {
 
@@ -130,7 +131,7 @@
             });
         }
 
-        function getOffline_Project(data,callback) {
+        function getOffline_Project(data, callback) {
 
             return $http({
 
@@ -141,7 +142,7 @@
                     "Authorization": constantService.getAuthor(),
                     "oracle-mobile-backend-id": constantService.getChargeBackId()
                 },
-                data:data
+                data: data
 
             }).success(function (response) {
 
@@ -156,7 +157,8 @@
                 callback(error);
             });
         }
-        function getOffline_ShiftCode(data,callback) {
+
+        function getOffline_ShiftCode(data, callback) {
 
             return $http({
 
@@ -167,7 +169,7 @@
                     "Authorization": constantService.getAuthor(),
                     "oracle-mobile-backend-id": constantService.getChargeBackId()
                 },
-                data:data
+                data: data
 
             }).success(function (response) {
 
@@ -182,7 +184,8 @@
                 callback(error);
             });
         }
-        function getOffline_TaskName(data,callback) {
+
+        function getOffline_TaskName(data, callback) {
 
             return $http({
 
@@ -193,7 +196,7 @@
                     "Authorization": constantService.getAuthor(),
                     "oracle-mobile-backend-id": constantService.getChargeBackId()
                 },
-                data:data
+                data: data
 
             }).success(function (response) {
 
@@ -208,9 +211,5 @@
                 callback(error);
             });
         }
-
     }
-
-
-
 })();
