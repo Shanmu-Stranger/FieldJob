@@ -1,65 +1,65 @@
 <div style="padding:0" class="container">
-<div class="debreifContainerouter">
-<md-card style="border-radius:10px 10px 10px 10px" class="margintop10" ng-repeat = "item in timeArray track by $index">
-<div class="debreifContainerinner">
-	  <form class="form-horizontal" action="/action_page.php">
+    <div class="debreifContainerouter">
+        <md-card style="border-radius:10px 10px 10px 10px" class="margintop10" ng-repeat = "item in timeArray track by $index">
+            <div class="debreifContainerinner">
+                <form class="form-horizontal" action="/action_page.php">
 
-			
 
-			 <!-- <div class="form-group col-sm-25 margintop30">
-		      <label class="col-sm-12 label-my">FIELD JOB NAME</label>
-		      <div class="col-sm-12">
-		         <select class="form-control select-debrief" id="sel1">
-						 <option>Clarity Code User 001</option>
-						 <option>Clarity Code User 002</option>
-						 <option>Clarity Code User 003</option>
-						 <option>Clarity Code User 004</option>
-				</select>
-		      </div>
-		    </div> -->
 
-		  
+                    <!-- <div class="form-group col-sm-25 margintop30">
+                     <label class="col-sm-12 label-my">FIELD JOB NAME</label>
+                     <div class="col-sm-12">
+                        <select class="form-control select-debrief" id="sel1">
+                                <option>Clarity Code User 001</option>
+                                <option>Clarity Code User 002</option>
+                                <option>Clarity Code User 003</option>
+                                <option>Clarity Code User 004</option>
+                       </select>
+                     </div>
+                   </div> -->
 
-		    <div class="form-group col-sm-20 margintop30">
-		      <label class="col-sm-12 label-my" for="email" translate="{{item.timeDefault.workType.title}}"></label>
-		      <div class="col-sm-12">
-		         <select class="form-control select-debrief " id="sel1" ng-model="item.Work_Type"
-                                    ng-options="x as x.value | translate for x in item.timeDefault.workType.values track by x.id"
-                                    ng-change="setWorkType(item.Work_Type, item)" translate="{{x.value}}">
+
+
+                    <div class="form-group col-sm-20 margintop30">
+                        <label class="col-sm-12 label-my" translate="{{item.timeDefault.workType.title}}"></label>
+                        <div class="col-sm-12">
+                            <select class="form-control select-debrief " ng-model="item.Work_Type"
+                                    ng-options="x as x.Value | translate for x in item.timeDefault.workType.values track by x.ID"
+                                    ng-change="setWorkType(item.Work_Type, item)">
                                 <option value="" disabled selected>Select Work Type</option>
-				  </select>
-		      </div>
-		    </div>
+                            </select>
+                        </div>
+                    </div>
 
-		     <div class="form-group col-sm-20 margintop30">
+                    <div class="form-group col-sm-20 margintop30">
                         <label class=" col-sm-12 label-my" translate="{{item.timeDefault.item.title}}"></label>
                         <div class="col-sm-12">
                             <select class="form-control select-debrief" ng-model="item.Item"
-                                    ng-options="x as x.value | translate for x in item.timeDefault.item.values track by x.id">
+                                    ng-options="x as x.Value | translate for x in item.timeDefault.item.values track by x.ID" ng-change="setItem(item)">
                                 <option value="" disabled selected>Select Item</option>
                             </select>
                         </div>
-             </div>
+                    </div>
 
 
-		   
 
-		  <div class="form-group col-sm-20 margintop30">
+
+                    <div class="form-group col-sm-20 margintop30">
                         <label class=" col-sm-12 label-my" translate="{{item.timeDefault.description.title}}"></label>
                         <div class="col-sm-12">
                             <input type="text" name="description" class="form-control" ng-model="item.Description">
                         </div>
-           </div>
+                    </div>
 
-		    <!--  <div class="form-group col-sm-25 margintop30">
-		      <label class=" col-sm-12 label-my" for="email" translate="{{item.shiftCode.title}}"></label>
-		      <div class="col-sm-12">
-		         <select class="form-control select-debrief " id="sel1" ng-options="x.ShiftCodeName for x in item.shiftCode.value" ng-model="item.shiftCode.selectedshiftcode">
-				  </select>
-		      </div>
-		    </div> -->
+                    <!--  <div class="form-group col-sm-25 margintop30">
+                      <label class=" col-sm-12 label-my" for="email" translate="{{item.shiftCode.title}}"></label>
+                      <div class="col-sm-12">
+                         <select class="form-control select-debrief " id="sel1" ng-options="x.ShiftCodeName for x in item.shiftCode.value" ng-model="item.shiftCode.selectedshiftcode">
+                          </select>
+                      </div>
+                    </div> -->
 
-		      <div class="form-group col-sm-20 margintop30">
+                    <div class="form-group col-sm-20 margintop30">
                         <label class=" col-sm-12 label-my" translate="{{item.timeDefault.Date.title}}"
                                style="text-align: left;">-</label>
                         <div class="col-sm-12">
@@ -77,33 +77,33 @@
                             </p>
 
                         </div>
-                </div>
+                    </div>
 
-		    <!--  <div class="form-group col-sm-25">
-		      <label class="control-label col-sm-12" for="email" translate="{{item.endDate.title}}"></label>
-		      <div class="col-sm-12">
+                    <!--  <div class="form-group col-sm-25">
+                      <label class="control-label col-sm-12" for="email" translate="{{item.endDate.title}}"></label>
+                      <div class="col-sm-12">
 
-		         <div class="form-group">
-		                <div class='input-group date' id='datetimepickerEndDate'>
-		                    <input type='text' class="form-control" ng-model="item.endDate.value" id="endDate"/>
-		                    <span class="input-group-addon">
-		                        <span class="glyphicon glyphicon-calendar"></span>
-		                    </span>
-		                </div>
-            		</div>
-		      </div>
-		    </div> -->
+                         <div class="form-group">
+                                <div class='input-group date' id='datetimepickerEndDate'>
+                                    <input type='text' class="form-control" ng-model="item.endDate.value" id="endDate"/>
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                </div>
+                            </div>
+                      </div>
+                    </div> -->
 
-		      <div class="form-group col-sm-20 margintop30">
+                    <div class="form-group col-sm-20 margintop30">
                         <label class=" col-sm-12 label-my" translate="{{item.timeDefault.duration.title}}"></label>
                         <div class="col-sm-12">
-                            <input type="text" class="form-control" ng-model="item.Duration"
-                                   />
+                            <input type="text" class="form-control" ng-model="item.Duration" ng-change="setDurationHours(item)"
+                            />
 
                         </div>
-                </div>
+                    </div>
 
-		     <div style="padding-left:20px;padding-right:20px;margin-bottom:0 !important	"
+                    <div style="padding-left:20px;padding-right:20px;margin-bottom:0 !important	"
                          class="form-group col-md-12">
 
                         <label class="label-my col-md-12 " for="comment"
@@ -113,15 +113,15 @@
                                       ng-model="item.Comments"></textarea>
                         </div>
                     </div>
-			</div>
-  		</form>
+            </div>
+            </form>
 
 
-  		<section style="border-radius:0 0 10px 10px" layout="row" layout-sm="column" layout-align="center center" layout-wrap class="time-btns">
-  			<md-button class="time-font time-add" ng-click = "addArray('Time')">ADD</md-button>
-  			<md-button class="time-font time-delete" ng-click="deleteArray($index,item,'Time')">DELETE</md-button>
-  			<md-button class="time-font time-copy" ng-click="copyArray(item,'Time')">COPY</md-button>
-  		</section>
-</md-card>
-</div>
+            <section style="border-radius:0 0 10px 10px" layout="row" layout-sm="column" layout-align="center center" layout-wrap class="time-btns">
+                <md-button class="time-font time-add" ng-click="addObject('Time')" ng-disabled="$root.completedTask">ADD</md-button>
+                <md-button class="time-font time-delete" ng-click="deleteObject($index,item,'Time')" ng-disabled="$root.completedTask">DELETE</md-button>
+                <md-button class="time-font time-copy" ng-click="copyObject(item,'Time')" ng-disabled="$root.completedTask">COPY</md-button>
+            </section>
+        </md-card>
+    </div>
 </div>

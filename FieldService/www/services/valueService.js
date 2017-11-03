@@ -173,7 +173,7 @@
 
             userType.duration = getUser().Work_Hour;
 
-            if (getUser().ClarityID == "1") {
+            if (getUser().ClarityID == "1" ||  getUser().ClarityID!="") {
 
                 userType.clarityType = 'C';
 
@@ -707,6 +707,7 @@
         var materialArray = [];
 
         var notesArray = [];
+        var attachmentArray=[];
 
         localService.getTimeList(taskId, function (response) {
 
@@ -728,10 +729,10 @@
             notesArray = response;
         });
 
-        // localService.getAttachmentList(taskId, "D", function (response) {
-        //
-        //     debrief.attachment = response;
-        // });
+        localService.getAttachmentList(taskId, "D", function (response) {
+
+            attachmentArray = response;
+        });
         //
         // localService.getEngineer(taskId, function (response) {
         //
@@ -795,7 +796,7 @@
                     "charge_method": materialArray[i].Charge_Type_Id.toString(),
                     "task_id": materialArray[i].Task_Number,
                     "item_description": materialArray[i].Description,
-                    "product_quantity": materialArray[i].Product_Quantity.toString(),
+                    "product_quantity": 1,
                     "comments": "gfhghg",
                     "item": materialArray[i].itemName,
                     "serialin": key.in,
@@ -819,6 +820,25 @@
 
             noteDataJSON.push(noteData);
         }
+        var attachmentJSONData = [];
+
+        for (var i = 0; i < attachmentArray.length; i++) {
+            var base64;
+            var attachmentObject = {
+                "Data": base64,
+                "FileName": attachmentArray[i].File_Name,
+                "Description":attachmentArray[i].File_Name,
+                "Name": attachmentArray[i].File_Name,
+                "taskId":attachmentArray[i].Task_Number,
+                "contentType": attachmentArray[i].File_Type
+            };
+
+            attachmentJSONData.push(attachmentObject);
+        }
+
+        var attachmentUploadJSON = {
+            "attachment": attachmentJSONData
+        };
 
         var timeUploadJSON = {
             "Time": timeJSONData

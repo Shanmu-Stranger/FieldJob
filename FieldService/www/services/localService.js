@@ -608,12 +608,13 @@
 
                 var insertValues = [];
 
-                var sqlUpdate = "UPDATE Attachment SET File_Name = ?, File_Type = ?, File_Path = ?, Type = ? WHERE Attachment_Id = ? AND Task_Number = ?";
+                var sqlUpdate = "UPDATE Attachment SET File_Name = ?, File_Type = ?, File_Path = ?, Type = ?, AttachmentType = ? WHERE Attachment_Id = ? AND Task_Number = ?";
 
                 insertValues.push(responseList.File_Name);
                 insertValues.push(responseList.File_Type);
                 insertValues.push(responseList.File_Path);
                 insertValues.push(responseList.Type);
+                insertValues.push(responseList.AttachmentType);
                 insertValues.push(responseList.Attachment_Id);
                 insertValues.push(responseList.Task_Number);
 
@@ -638,13 +639,14 @@
 
                 var insertValues = [];
 
-                var sqlInsert = "INSERT INTO Attachment VALUES (?, ?, ?, ?, ?, ?)";
+                var sqlInsert = "INSERT INTO Attachment VALUES (?, ?, ?, ?, ?, ?, ?)";
 
                 insertValues.push(responseList.Attachment_Id);
                 insertValues.push(responseList.File_Name);
                 insertValues.push(responseList.File_Type);
                 insertValues.push(responseList.File_Path);
                 insertValues.push(responseList.Type);
+                insertValues.push(responseList.AttachmentType);
                 insertValues.push(responseList.Task_Number);
 
                 transaction.executeSql(sqlInsert, insertValues, function (tx, res) {
@@ -1826,12 +1828,13 @@
 
                 var insertValues = [];
 
-                var sqlUpdate = "UPDATE Material SET materialDefault = ?, Charge_Type = ?, Charge_Type_Id = ?, Description = ?, Product_Quantity = ?, Serial_Number = ?, Serial_In = ?, Serial_Out = ? WHERE Material_Id = ? AND Task_Number = ?";
+                var sqlUpdate = "UPDATE Material SET materialDefault = ?, Charge_Type = ?, Charge_Type_Id = ?, Description = ?, ItemName = ?, Product_Quantity = ?, Serial_Number = ?, Serial_In = ?, Serial_Out = ? WHERE Material_Id = ? AND Task_Number = ?";
 
                 insertValues.push(responseList.materialDefault);
                 insertValues.push(responseList.Charge_Type);
                 insertValues.push(responseList.Charge_Type_Id);
                 insertValues.push(responseList.Description);
+                insertValues.push(responseList.ItemName);
                 insertValues.push(responseList.Product_Quantity);
                 insertValues.push(responseList.Serial_Number);
                 insertValues.push(responseList.Serial_In);
@@ -1860,13 +1863,14 @@
 
                 var insertValues = [];
 
-                var sqlInsert = "INSERT INTO Material VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                var sqlInsert = "INSERT INTO Material VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
                 insertValues.push(responseList.Material_Id);
                 insertValues.push(responseList.materialDefault);
                 insertValues.push(responseList.Charge_Type);
                 insertValues.push(responseList.Charge_Type_Id);
                 insertValues.push(responseList.Description);
+                insertValues.push(responseList.ItemName);
                 insertValues.push(responseList.Product_Quantity);
                 insertValues.push(responseList.Serial_Number);
                 insertValues.push(responseList.Serial_In);

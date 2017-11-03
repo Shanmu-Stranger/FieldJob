@@ -26,7 +26,10 @@
 
         var debrief = {
             task: {},
-            installBase: {},
+            installBase: [],
+            contacts: [],
+            taskNotes: [],
+            taskAttachment: [],
             time: [],
             expense: [],
             material: [],
@@ -40,7 +43,9 @@
             fieldName: [],
             workType: [],
             item: [],
-            currency: []
+            currency: [],
+            expenseType: [],
+            noteType: []
         };
 
         var userType = {
@@ -67,6 +72,10 @@
 
         service.setInstallBase = setInstallBase;
         service.getInstallBase = getInstallBase;
+
+        service.getContact = getContact;
+        service.getTaskNotes = getTaskNotes;
+        service.getTaskAttachment = getTaskAttachment;
 
         service.setTaskId = setTaskId;
         service.getTaskId = getTaskId;
@@ -103,6 +112,9 @@
         service.getItem = getItem;
         service.getCurrency = getCurrency;
 
+        service.getExpenseType = getExpenseType;
+        service.getNoteType = getNoteType;
+
         service.getDebrief = getDebrief;
         service.saveValues = saveValues;
 
@@ -117,6 +129,7 @@
         service.openFile = openFile;
 
         service.submitDebrief = submitDebrief;
+        service.acceptTask = acceptTask;
 
         service.checkIfFutureDayTask = checkIfFutureDayTask;
         service.setIfFutureDateTask = setIfFutureDateTask;
@@ -160,7 +173,7 @@
 
             userType.duration = getUser().Work_Hour;
 
-            if (getUser().ClarityID == "1") {
+            if (getUser().ClarityID == "1" ||  getUser().ClarityID!="") {
 
                 userType.clarityType = 'C';
 
@@ -188,7 +201,22 @@
 
             localService.getInstallBaseList(taskObject.Task_Number, function (response) {
 
-                debrief.installBase = response[0];
+                debrief.installBase = response;
+            });
+
+            localService.getContactList(taskObject.Task_Number, function (response) {
+
+                debrief.contacts = response;
+            });
+
+            localService.getNoteList(taskObject.Task_Number, function (response) {
+
+                debrief.taskNotes = response;
+            });
+
+            localService.getAttachmentList(taskObject.Task_Number, "O", function (response) {
+
+                debrief.taskAttachment = response;
             });
 
             localService.getTimeList(taskObject.Task_Number, function (response) {
@@ -260,6 +288,16 @@
 
                 debrief.currency = response;
             });
+
+            localService.getExpenseTypeList(function (response) {
+
+                debrief.expenseType = response;
+            });
+
+            localService.getNoteTypeList(function (response) {
+
+                debrief.noteType = response;
+            });
         };
 
         function getTask() {
@@ -275,6 +313,21 @@
         function getInstallBase() {
 
             return debrief.installBase;
+        };
+
+        function getContact() {
+
+            return debrief.contacts;
+        };
+
+        function getTaskNotes() {
+
+            return debrief.taskNotes;
+        };
+
+        function getTaskAttachment() {
+
+            return debrief.taskAttachment;
         };
 
         function setTaskId(task) {
@@ -395,6 +448,16 @@
         function getCurrency() {
 
             return debrief.currency;
+        };
+
+        function getExpenseType() {
+
+            return debrief.expenseType;
+        };
+
+        function getNoteType() {
+
+            return debrief.noteType;
         };
 
         function getDebrief() {
@@ -613,6 +676,28 @@
         };
     }
 
+    function acceptTask(taskId) {
+
+        var formData = {
+            "Taskstatus": [{
+                "taskId": taskId,
+                "taskStatus": "Accepted"
+            }]
+        };
+
+        cloudService.acceptTask(formData, function (response) {
+
+            console.log(JSON.stringify(response));
+
+            var taskObject = {
+                Task_Number: taskId,
+                Submit_Status: "A"
+            };
+
+            localService.updateTaskSubmitStatus(taskObject);
+        });
+    }
+
     function submitDebrief(taskId) {
 
         var timeArray = [];
@@ -622,39 +707,37 @@
         var materialArray = [];
 
         var notesArray = [];
+        var attachmentArray=[];
 
-        if ($rootScope.local) {
+        localService.getTimeList(taskId, function (response) {
 
-            localService.getTimeList(taskId, function (response) {
+            timeArray = response;
+        });
 
-                timeArray = response;
-            });
+        localService.getExpenseList(taskId, function (response) {
 
-            localService.getExpenseList(taskId, function (response) {
+            expenseArray = response;
+        });
 
-                expenseArray = response;
-            });
+        localService.getMaterialList(taskId, function (response) {
 
-            localService.getMaterialList(taskId, function (response) {
+            materialArray = response;
+        });
 
-                materialArray = response;
-            });
+        localService.getNotesList(taskId, function (response) {
 
-            localService.getNotesList(taskId, function (response) {
+            notesArray = response;
+        });
 
-                notesArray = response;
-            });
+        localService.getAttachmentList(taskId, "D", function (response) {
 
-            // localService.getAttachmentList(taskId, "D", function (response) {
-            //
-            //     debrief.attachment = response;
-            // });
-            //
-            // localService.getEngineer(taskId, function (response) {
-            //
-            //     debrief.engineer = response;
-            // });
-        }
+            attachmentArray = response;
+        });
+        //
+        // localService.getEngineer(taskId, function (response) {
+        //
+        //     debrief.engineer = response;
+        // });
 
         var timeJSONData = [];
 
@@ -703,154 +786,182 @@
             expenseJSONData.push(expenseData);
         }
 
-        var materialDataJSONWarranty = [];
-
         var materialDataJSON = [];
 
         for (var i = 0; i < materialArray.length; i++) {
 
-            if (materialArray[i].Charge_Type_Id == 138) {
+            angular.forEach(materialArray[i].Serial_Type, function (key) {
 
-                angular.forEach(materialArray[i].Serial_Type, function (key) {
+                var materialData = {
+                    "charge_method": materialArray[i].Charge_Type_Id.toString(),
+                    "task_id": materialArray[i].Task_Number,
+                    "item_description": materialArray[i].Description,
+                    "product_quantity": materialArray[i].Product_Quantity.toString(),
+                    "comments": "gfhghg",
+                    "item": materialArray[i].itemName,
+                    "serialin": key.in,
+                    "serialout": key.out,
+                    "serial_number": key.number
+                }
 
-                    var materialData = {
-                        "charge_method": materialArray[i].Charge_Type_Id.toString(),
-                        "task_id": materialArray[i].Task_Number,
-                        "item_description": materialArray[i].Description,
-                        "product_quantity": materialArray[i].Product_Quantity,
-                        "comments": "gfhghg",
-                        "item": "11",
-                        "serialin": key.in,
-                        "serialout": key.out,
-                        "service_activity": "serveact",
-                        "charge_type": "2"
-                    }
+                materialDataJSON.push(materialData);
+            });
+        }
 
-                    materialDataJSONWarranty.push(materialData);
-                });
+        var noteDataJSON = [];
 
-            } else {
+        for (var i = 0; i < notesArray.length; i++) {
 
-                angular.forEach(materialArray[i].Serial_Type, function (key) {
-
-                    var materialData = {
-                        "charge_method": materialArray[i].Charge_Type_Id.toString(),
-                        "task_id": materialArray[i].Task_Number,
-                        "item_description": materialArray[i].Description,
-                        "product_quantity": materialArray[i].Product_Quantity,
-                        "comments": "gfhghg",
-                        "item": "11",
-                        "serial_number": key.number,
-                        "service_activity": "serveact",
-                        "charge_type": "2"
-                    }
-
-                    materialDataJSON.push(materialData);
-                });
-            }
-
-            var noteDataJSON = [];
-
-            for (var i = 0; i < notesArray.length; i++) {
-
-                var noteData = {
-                    "Notes_type": notesArray[i].Note_Type.id,
-                    "notes_description": notesArray[i].Notes,
-                    "task_id": notesArray[i].Task_Number
-                };
-
-                noteDataJSON.push(noteData);
-            }
-
-            var timeUploadJSON = {
-                "Time": timeJSONData
-            }
-
-            console.log(timeUploadJSON);
-
-            if (timeArray) {
-
-                cloudService.uploadTime(timeUploadJSON, function (respose) {
-
-                    console.log("Uploaded Time Data");
-                });
-            }
-
-            var expenseUploadJSON = {
-                "expense": expenseJSONData
-            }
-
-            console.log(expenseUploadJSON);
-
-            if (expenseArray) {
-
-                cloudService.updateExpenses(expenseUploadJSON, function (respose) {
-
-                    console.log("Uploaded Expense Data");
-                });
-            }
-
-            var notesUploadJSON = {
-                "Notes": noteDataJSON
-            }
-
-            console.log(notesUploadJSON);
-
-            if (notesArray) {
-
-                cloudService.updateNotes(notesUploadJSON, function (respose) {
-
-                    console.log("Uploaded notes");
-                });
-            }
-
-            var materialUploadJSON = {
-                "Material": materialDataJSON
-            }
-
-            var materialUploadJSONWarranty = {
-                "Material": materialDataJSONWarranty
-            }
-
-            console.log(materialUploadJSON);
-
-            if (materialArray) {
-
-                cloudService.updateMaterial(materialUploadJSON, materialUploadJSONWarranty, function (respose) {
-
-                    console.log("Uploaded materail");
-                });
-            }
-
-            var taskObject = {
-                Task_Number: valueService.getTask().Task_Number,
-                Submit_Status: "I"
+            var noteData = {
+                "Notes_type": notesArray[i].Note_Type.id,
+                "notes_description": notesArray[i].Notes,
+                "task_id": notesArray[i].Task_Number
             };
 
-            localService.updateTaskSubmitStatus(taskObject);
+            noteDataJSON.push(noteData);
         }
+        var attachmentJSONData = [];
+
+        for (var i = 0; i < attachmentArray.length; i++) {
+            var base64;
+            var attachmentObject = {
+                "Data": base64,
+                "FileName": attachmentArray[i].File_Name,
+                "Description":attachmentArray[i].File_Name,
+                "Name": attachmentArray[i].File_Name,
+                "taskId":attachmentArray[i].Task_Number,
+                "contentType": attachmentArray[i].File_Type
+            };
+
+            attachmentJSONData.push(attachmentObject);
+        }
+
+        var attachmentUploadJSON = {
+            "attachment": attachmentJSONData
+        };
+
+        var timeUploadJSON = {
+            "Time": timeJSONData
+        }
+
+        console.log(timeUploadJSON);
+
+        if (timeArray) {
+
+            cloudService.uploadTime(timeUploadJSON, function (response) {
+
+                console.log("Uploaded Time Data " + JSON.stringify(response));
+            });
+        }
+
+        var expenseUploadJSON = {
+            "expense": expenseJSONData
+        }
+
+        console.log(expenseUploadJSON);
+
+        if (expenseArray) {
+
+            cloudService.updateExpenses(expenseUploadJSON, function (response) {
+
+                console.log("Uploaded Expense Data " + JSON.stringify(response));
+            });
+        }
+
+        var notesUploadJSON = {
+            "Notes": noteDataJSON
+        }
+
+        console.log(notesUploadJSON);
+
+        if (notesArray) {
+
+            cloudService.updateNotes(notesUploadJSON, function (response) {
+
+                console.log("Uploaded notes " + JSON.stringify(response));
+            });
+        }
+
+        var materialUploadJSON = {
+            "Material": materialDataJSON
+        }
+
+        console.log(materialUploadJSON);
+
+        if (materialArray) {
+
+            cloudService.updateMaterial(materialUploadJSON, function (response) {
+
+                console.log("Uploaded material " + JSON.stringify(response));
+            });
+        }
+
+        setTimeout(function () {
+
+            var formData = {
+                "Taskstatus": [{
+                    "taskId": taskId,
+                    "taskStatus": "Accepted"
+                }]
+            };
+
+            cloudService.acceptTask(formData, function (response) {
+
+                console.log(JSON.stringify(response));
+            });
+
+            var formData = {
+                "Taskstatus": [{
+                    "taskId": taskId,
+                    "taskStatus": "Completed"
+                }]
+            };
+
+            cloudService.acceptTask(formData, function (response) {
+
+                console.log(JSON.stringify(response));
+
+                var taskObject = {
+                    Task_Number: taskId,
+                    Submit_Status: "I"
+                };
+
+                localService.updateTaskSubmitStatus(taskObject);
+            });
+
+        }, 3000);
     }
 
     function checkIfFutureDayTask(selTask) {
+
         var currDate = new Date;
+
         var selDate = new Date(selTask.Start_Date.split(" ")[0]);
+
         console.log(currDate);
+
         console.log(selDate);
+
         if (selDate.getFullYear() > currDate.getFullYear()) {
+
             return true;
+
         } else if (selDate.getFullYear() === currDate.getFullYear()) {
+
             if (selDate.getMonth() > currDate.getMonth()) {
+
                 return true;
+
             } else if (selDate.getMonth() === currDate.getMonth()) {
+
                 if (selDate.getDate() > currDate.getDate()) {
+
                     return true;
                 }
             }
         }
 
         return false;
-
     }
-
 
 })();

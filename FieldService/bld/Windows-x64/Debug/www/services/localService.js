@@ -118,6 +118,7 @@
         service.updateTaskSubmitStatus = updateTaskSubmitStatus;
 
         service.getPendingTaskList = getPendingTaskList;
+        service.getAcceptTaskList = getAcceptTaskList;
 
         return service;
 
@@ -607,12 +608,13 @@
 
                 var insertValues = [];
 
-                var sqlUpdate = "UPDATE Attachment SET File_Name = ?, File_Type = ?, File_Path = ?, Type = ? WHERE Attachment_Id = ? AND Task_Number = ?";
+                var sqlUpdate = "UPDATE Attachment SET File_Name = ?, File_Type = ?, File_Path = ?, Type = ?, AttachmentType = ? WHERE Attachment_Id = ? AND Task_Number = ?";
 
                 insertValues.push(responseList.File_Name);
                 insertValues.push(responseList.File_Type);
                 insertValues.push(responseList.File_Path);
                 insertValues.push(responseList.Type);
+                insertValues.push(responseList.AttachmentType);
                 insertValues.push(responseList.Attachment_Id);
                 insertValues.push(responseList.Task_Number);
 
@@ -637,13 +639,14 @@
 
                 var insertValues = [];
 
-                var sqlInsert = "INSERT INTO Attachment VALUES (?, ?, ?, ?, ?, ?)";
+                var sqlInsert = "INSERT INTO Attachment VALUES (?, ?, ?, ?, ?, ?, ?)";
 
                 insertValues.push(responseList.Attachment_Id);
                 insertValues.push(responseList.File_Name);
                 insertValues.push(responseList.File_Type);
                 insertValues.push(responseList.File_Path);
                 insertValues.push(responseList.Type);
+                insertValues.push(responseList.AttachmentType);
                 insertValues.push(responseList.Task_Number);
 
                 transaction.executeSql(sqlInsert, insertValues, function (tx, res) {
@@ -2514,6 +2517,40 @@
             }, function (error) {
 
                 console.log("GET TASK PENDING TRANSACTION ERROR: " + error.message);
+
+                callback(value);
+            });
+        };
+
+        function getAcceptTaskList(callback) {
+
+            var value = [];
+
+            return db.transaction(function (transaction) {
+
+                transaction.executeSql("SELECT * FROM Task WHERE Submit_Status = ?", ["A"], function (tx, res) {
+
+                    var leng = res.rows.length;
+
+                    for (var i = 0; i < leng; i++) {
+
+                        value.push(res.rows.item(i));
+                    }
+
+                    console.log("GET TASK ACCEPT DB ==========> " + JSON.stringify(value));
+
+                    callback(value);
+
+                }, function (tx, error) {
+
+                    console.log("GET TASK ACCEPT SELECT ERROR: " + error.message);
+
+                    callback(value);
+                });
+
+            }, function (error) {
+
+                console.log("GET TASK ACCEPT TRANSACTION ERROR: " + error.message);
 
                 callback(value);
             });

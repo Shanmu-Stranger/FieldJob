@@ -13,6 +13,32 @@
         $scope.myVar = !$scope.myVar;
     };
 
+    if ($rootScope.local) {
+
+        localService.getNoteList(valueService.getTask().Task_Number, function (response) {
+
+            $scope.noteArray = response;
+
+        });
+
+        localService.getAttachmentList(valueService.getTask().Task_Number, "O", function (response) {
+
+            $scope.attachmentArray = response;
+
+        });
+
+    } else {
+
+        getDebriefStagesInfo();
+
+        getAttachments();
+    }
+
+    $scope.openResource = function (item) {
+
+        valueService.openFile(item.File_Path + item.File_Name, item.File_Type);
+    };
+
     $scope.taskId = valueService.getTask().Task_Number;
 
     function getDebriefStagesInfo() {
@@ -39,32 +65,6 @@
             $scope.noteArray = notesArray;
         });
     }
-
-    if ($rootScope.local) {
-
-        localService.getNoteList(valueService.getTask().Task_Number, function (response) {
-
-            $scope.noteArray = response;
-
-        });
-
-        localService.getAttachmentList(valueService.getTask().Task_Number, "O", function (response) {
-
-            $scope.attachmentArray = response;
-
-        });
-
-    } else {
-
-        getDebriefStagesInfo();
-
-        getAttachments();
-    }
-
-    $scope.openResource = function (item) {
-
-        valueService.openFile(item.File_Path + item.File_Name, item.File_Type);
-    };
 
     function getAttachments() {
 

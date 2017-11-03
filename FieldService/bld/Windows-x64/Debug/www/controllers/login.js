@@ -167,6 +167,7 @@
                                 File_Name: attachmentValue.User_File_Name,
                                 File_Type: attachmentValue.Content_type,
                                 Type: "O",
+                                AttachmentType: "O",
                                 Task_Number: taskArray.Task_Id
                             };
 
