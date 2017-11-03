@@ -32,6 +32,18 @@ app.controller('indexController', function ($scope, $state, $timeout, $mdSidenav
 
     if (valueService.getNetworkStatus()) {
 
+        localService.getAcceptTaskList(function (response) {
+
+            angular.forEach(response, function (item) {
+
+                valueService.acceptTask(item.Task_Number);
+
+            });
+        });
+    }
+
+    if (valueService.getNetworkStatus()) {
+
         localService.getPendingTaskList(function (response) {
 
             angular.forEach(response, function (item) {

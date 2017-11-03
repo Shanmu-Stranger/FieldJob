@@ -339,15 +339,10 @@ app.controller('myTaskController', function ($scope, $compile, $timeout, uiCalen
                 //$rootScope.showTaskDetail = true;
                 break;
 
-            /*case 'Rejected':
-            $scope.showStartWork = false;
-            $scope.showDebrief = false;
-            break;*/
             default:
                 break;
         }
     }
-
 
     $scope.calendarView = function () {
 
@@ -383,23 +378,19 @@ app.controller('myTaskController', function ($scope, $compile, $timeout, uiCalen
 
             if ($scope.selectedTask.Task_Status == 'Assigned') {
 
-                var formData = {
-                    "Taskstatus": [{
-                        "taskId": $rootScope.selectedTask.Task_Number,
-                        "taskStatus": "Accepted"
-                    }]
-                };
+                if (valueService.getNetworkStatus()) {
 
-                var header = {
-                    'Content-Type': 'application/json',
-                    'Authorization': 'Basic QTQ3MjE0NF9FTUVSU09OTU9CSUxFQ0xPVURfTU9CSUxFX0FOT05ZTU9VU19BUFBJRDpZLm81amxkaHVtYzF2ZQ==',
-                    'oracle-mobile-backend-id': 'a0f02e4c-cc58-4aa7-bba9-78e57a000b59'
-                };
+                    valueService.acceptTask(valueService.getTask().Task_Number);
 
-                cloudService.acceptTask(formData, header, function (response) {
+                } else {
 
-                    console.log(response);
-                });
+                    var taskObject = {
+                        Task_Number: valueService.getTask().Task_Number,
+                        Submit_Status: "A"
+                    };
+
+                    localService.updateTaskSubmitStatus(taskObject);
+                }
             }
         }
     }

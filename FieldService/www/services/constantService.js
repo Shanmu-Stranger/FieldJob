@@ -36,6 +36,8 @@
 
         var ofscBackEndId = "557f06cf-1dda-42f1-a8a8-afc52f823904";
 
+        var acceptBackEndId = "a0f02e4c-cc58-4aa7-bba9-78e57a000b59";
+
         var startDate = new Date();
 
         startDate.setMonth(startDate.getMonth() - 1);
@@ -66,6 +68,7 @@
         service.getShiftBackId = getShiftBackId;
         service.getMaterialBackId = getMaterialBackId;
         service.getOfscBackId = getOfscBackId;
+        service.getAcceptBackId = getAcceptBackId;
 
         service.setUserEmailId = setUserEmailId;
         service.getUserEmailId = getUserEmailId;
@@ -174,6 +177,11 @@
         function getOfscBackId() {
 
             return ofscBackEndId;
+        };
+
+        function getAcceptBackId() {
+
+            return acceptBackEndId;
         };
 
         function getContentType() {

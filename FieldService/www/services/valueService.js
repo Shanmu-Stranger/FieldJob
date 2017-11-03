@@ -26,7 +26,10 @@
 
         var debrief = {
             task: {},
-            installBase: {},
+            installBase: [],
+            contacts: [],
+            taskNotes: [],
+            taskAttachment: [],
             time: [],
             expense: [],
             material: [],
@@ -69,6 +72,10 @@
 
         service.setInstallBase = setInstallBase;
         service.getInstallBase = getInstallBase;
+
+        service.getContact = getContact;
+        service.getTaskNotes = getTaskNotes;
+        service.getTaskAttachment = getTaskAttachment;
 
         service.setTaskId = setTaskId;
         service.getTaskId = getTaskId;
@@ -122,6 +129,7 @@
         service.openFile = openFile;
 
         service.submitDebrief = submitDebrief;
+        service.acceptTask = acceptTask;
 
         service.checkIfFutureDayTask = checkIfFutureDayTask;
         service.setIfFutureDateTask = setIfFutureDateTask;
@@ -193,7 +201,22 @@
 
             localService.getInstallBaseList(taskObject.Task_Number, function (response) {
 
-                debrief.installBase = response[0];
+                debrief.installBase = response;
+            });
+
+            localService.getContactList(taskObject.Task_Number, function (response) {
+
+                debrief.contacts = response;
+            });
+
+            localService.getNoteList(taskObject.Task_Number, function (response) {
+
+                debrief.taskNotes = response;
+            });
+
+            localService.getAttachmentList(taskObject.Task_Number, "O", function (response) {
+
+                debrief.taskAttachment = response;
             });
 
             localService.getTimeList(taskObject.Task_Number, function (response) {
@@ -290,6 +313,21 @@
         function getInstallBase() {
 
             return debrief.installBase;
+        };
+
+        function getContact() {
+
+            return debrief.contacts;
+        };
+
+        function getTaskNotes() {
+
+            return debrief.taskNotes;
+        };
+
+        function getTaskAttachment() {
+
+            return debrief.taskAttachment;
         };
 
         function setTaskId(task) {
@@ -638,6 +676,28 @@
         };
     }
 
+    function acceptTask(taskId) {
+
+        var formData = {
+            "Taskstatus": [{
+                "taskId": taskId,
+                "taskStatus": "Accepted"
+            }]
+        };
+
+        cloudService.acceptTask(formData, function (response) {
+
+            console.log(JSON.stringify(response));
+
+            var taskObject = {
+                Task_Number: taskId,
+                Submit_Status: "A"
+            };
+
+            localService.updateTaskSubmitStatus(taskObject);
+        });
+    }
+
     function submitDebrief(taskId) {
 
         var timeArray = [];
@@ -648,38 +708,35 @@
 
         var notesArray = [];
 
-        if ($rootScope.local) {
+        localService.getTimeList(taskId, function (response) {
 
-            localService.getTimeList(taskId, function (response) {
+            timeArray = response;
+        });
 
-                timeArray = response;
-            });
+        localService.getExpenseList(taskId, function (response) {
 
-            localService.getExpenseList(taskId, function (response) {
+            expenseArray = response;
+        });
 
-                expenseArray = response;
-            });
+        localService.getMaterialList(taskId, function (response) {
 
-            localService.getMaterialList(taskId, function (response) {
+            materialArray = response;
+        });
 
-                materialArray = response;
-            });
+        localService.getNotesList(taskId, function (response) {
 
-            localService.getNotesList(taskId, function (response) {
+            notesArray = response;
+        });
 
-                notesArray = response;
-            });
-
-            // localService.getAttachmentList(taskId, "D", function (response) {
-            //
-            //     debrief.attachment = response;
-            // });
-            //
-            // localService.getEngineer(taskId, function (response) {
-            //
-            //     debrief.engineer = response;
-            // });
-        }
+        // localService.getAttachmentList(taskId, "D", function (response) {
+        //
+        //     debrief.attachment = response;
+        // });
+        //
+        // localService.getEngineer(taskId, function (response) {
+        //
+        //     debrief.engineer = response;
+        // });
 
         var timeJSONData = [];
 
@@ -771,9 +828,9 @@
 
         if (timeArray) {
 
-            cloudService.uploadTime(timeUploadJSON, function (respose) {
+            cloudService.uploadTime(timeUploadJSON, function (response) {
 
-                console.log("Uploaded Time Data");
+                console.log("Uploaded Time Data " + JSON.stringify(response));
             });
         }
 
@@ -785,9 +842,9 @@
 
         if (expenseArray) {
 
-            cloudService.updateExpenses(expenseUploadJSON, function (respose) {
+            cloudService.updateExpenses(expenseUploadJSON, function (response) {
 
-                console.log("Uploaded Expense Data");
+                console.log("Uploaded Expense Data " + JSON.stringify(response));
             });
         }
 
@@ -799,9 +856,9 @@
 
         if (notesArray) {
 
-            cloudService.updateNotes(notesUploadJSON, function (respose) {
+            cloudService.updateNotes(notesUploadJSON, function (response) {
 
-                console.log("Uploaded notes");
+                console.log("Uploaded notes " + JSON.stringify(response));
             });
         }
 
@@ -813,40 +870,78 @@
 
         if (materialArray) {
 
-            cloudService.updateMaterial(materialUploadJSON, function (respose) {
+            cloudService.updateMaterial(materialUploadJSON, function (response) {
 
-                console.log("Uploaded materail");
+                console.log("Uploaded material " + JSON.stringify(response));
             });
         }
 
-        var taskObject = {
-            Task_Number: valueService.getTask().Task_Number,
-            Submit_Status: "I"
-        };
+        setTimeout(function () {
 
-        localService.updateTaskSubmitStatus(taskObject);
+            var formData = {
+                "Taskstatus": [{
+                    "taskId": taskId,
+                    "taskStatus": "Accepted"
+                }]
+            };
+
+            cloudService.acceptTask(formData, function (response) {
+
+                console.log(JSON.stringify(response));
+            });
+
+            var formData = {
+                "Taskstatus": [{
+                    "taskId": taskId,
+                    "taskStatus": "Completed"
+                }]
+            };
+
+            cloudService.acceptTask(formData, function (response) {
+
+                console.log(JSON.stringify(response));
+
+                var taskObject = {
+                    Task_Number: taskId,
+                    Submit_Status: "I"
+                };
+
+                localService.updateTaskSubmitStatus(taskObject);
+            });
+
+        }, 3000);
     }
 
     function checkIfFutureDayTask(selTask) {
+
         var currDate = new Date;
+
         var selDate = new Date(selTask.Start_Date.split(" ")[0]);
+
         console.log(currDate);
+
         console.log(selDate);
+
         if (selDate.getFullYear() > currDate.getFullYear()) {
+
             return true;
+
         } else if (selDate.getFullYear() === currDate.getFullYear()) {
+
             if (selDate.getMonth() > currDate.getMonth()) {
+
                 return true;
+
             } else if (selDate.getMonth() === currDate.getMonth()) {
+
                 if (selDate.getDate() > currDate.getDate()) {
+
                     return true;
                 }
             }
         }
 
         return false;
-
     }
-
 
 })();

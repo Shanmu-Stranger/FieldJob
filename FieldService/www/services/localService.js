@@ -118,6 +118,7 @@
         service.updateTaskSubmitStatus = updateTaskSubmitStatus;
 
         service.getPendingTaskList = getPendingTaskList;
+        service.getAcceptTaskList = getAcceptTaskList;
 
         return service;
 
@@ -2514,6 +2515,40 @@
             }, function (error) {
 
                 console.log("GET TASK PENDING TRANSACTION ERROR: " + error.message);
+
+                callback(value);
+            });
+        };
+
+        function getAcceptTaskList(callback) {
+
+            var value = [];
+
+            return db.transaction(function (transaction) {
+
+                transaction.executeSql("SELECT * FROM Task WHERE Submit_Status = ?", ["A"], function (tx, res) {
+
+                    var leng = res.rows.length;
+
+                    for (var i = 0; i < leng; i++) {
+
+                        value.push(res.rows.item(i));
+                    }
+
+                    console.log("GET TASK ACCEPT DB ==========> " + JSON.stringify(value));
+
+                    callback(value);
+
+                }, function (tx, error) {
+
+                    console.log("GET TASK ACCEPT SELECT ERROR: " + error.message);
+
+                    callback(value);
+                });
+
+            }, function (error) {
+
+                console.log("GET TASK ACCEPT TRANSACTION ERROR: " + error.message);
 
                 callback(value);
             });

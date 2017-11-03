@@ -1002,11 +1002,21 @@ app.controller("debriefController", function ($scope, $state, $rootScope, $windo
                 $scope.summary.taskObject.Task_Number = $scope.taskObject.Task_Number;
                 $scope.summary.taskObject.Job_Description = $scope.taskObject.Job_Description;
 
-                if ($scope.installBaseObject != undefined) {
-                    $scope.summary.taskObject.Product_Line = $scope.installBaseObject.Product_Line;
-                    $scope.summary.taskObject.Serial_Number = $scope.installBaseObject.Serial_Number;
-                    $scope.summary.taskObject.TagNumber = $scope.installBaseObject.TagNumber;
-                    $scope.summary.taskObject.Original_PO_Number = $scope.installBaseObject.Original_PO_Number;
+                if ($scope.installBaseObject != undefined && $scope.installBaseObject.length > 0) {
+
+                    $scope.summary.taskObject.InstallBase = [];
+
+                    angular.forEach($scope.installBaseObject, function (key) {
+
+                        var install = {};
+
+                        install.Product_Line = key.Product_Line;
+                        install.Serial_Number = key.Serial_Number;
+                        install.TagNumber = key.TagNumber;
+                        install.Original_PO_Number = key.Original_PO_Number;
+
+                        $scope.summary.taskObject.InstallBase.push(install);
+                    });
                 }
 
                 $scope.summary.taskObject.times = [];
@@ -1105,21 +1115,30 @@ app.controller("debriefController", function ($scope, $state, $rootScope, $windo
     $scope.calculateDuration = function (obj, key) {
 
         obj.hours += key.DurationHours;
-        obj.mins += key.DurationMinutes
-        var reminder = obj.mins % 60
-        obj.hours += Math.floor(obj.mins / 60)
-        return (obj.hours + ":" + reminder)
+
+        obj.mins += key.DurationMinutes;
+
+        var reminder = obj.mins % 60;
+
+        obj.hours += Math.floor(obj.mins / 60);
+
+        return (obj.hours + ":" + reminder);
     }
 
     $scope.populateTimeCodeArray = function (timeArray, key) {
 
         angular.forEach(timeArray, function (timecode, value) {
+
             if (timecode.mins == undefined)
                 timecode.mins = 0;
+
             if (timecode.hours == undefined)
                 timecode.hours = 0;
+
             angular.forEach(timecode, function (shifkey, value) {
+
                 if (value == key.Time_Code.Overtimeshiftcode) {
+
                     timecode[value] = $scope.calculateDuration(timecode, key);
                 }
             });
@@ -1128,20 +1147,21 @@ app.controller("debriefController", function ($scope, $state, $rootScope, $windo
 
     $scope.getTimenewObj = function (worktype, date, chargetype, chargemethod, item, desc, commets, duration) {
 
-        var timeObj = {
-            "Date": date,
-            "Charge_Type": chargetype,
-            "Charge_Method": chargemethod,
-            "Work_Type": worktype,
-            "Item": item,
-            "Description": desc,
-            "Comments": commets,
-            "Duration": duration,
-            "mins": 0,
-            "hours": 0
-        };
+        var timeObj =
+            {
+                "Date": date,
+                "Charge_Type": chargetype,
+                "Charge_Method": chargemethod,
+                "Work_Type": worktype,
+                "Item": item,
+                "Description": desc,
+                "Comments": commets,
+                "Duration": duration,
+                "mins": 0,
+                "hours": 0
+            }
 
-        return timeObj
+        return timeObj;
     }
 
     $(function () {
@@ -1291,28 +1311,6 @@ app.controller("debriefController", function ($scope, $state, $rootScope, $windo
                 console.log("Attachment Uploaded Successfully");
             });
         }
-
-        setTimeout(function () {
-
-            var formData = {
-                "Taskstatus": [{
-                    "taskId": $rootScope.selectedTask.Task_Number,
-                    "taskStatus": "Completed"
-                }]
-            };
-
-            var header = {
-                'Content-Type': 'application/json',
-                'Authorization': 'Basic QTQ3MjE0NF9FTUVSU09OTU9CSUxFQ0xPVURfTU9CSUxFX0FOT05ZTU9VU19BUFBJRDpZLm81amxkaHVtYzF2ZQ==',
-                'oracle-mobile-backend-id': 'a0f02e4c-cc58-4aa7-bba9-78e57a000b59'
-            };
-
-            cloudService.acceptTask(formData, header, function (response) {
-
-                console.log(response);
-            });
-
-        }, 3000);
 
         generatePDF();
     }

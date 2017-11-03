@@ -520,7 +520,7 @@
             });
         }
 
-        function acceptTask(formData, header, callback) {
+        function acceptTask(formData, callback) {
 
             console.log("Accept Task Data", JSON.stringify(formData));
 
@@ -528,7 +528,11 @@
 
                 method: 'POST',
                 url: url + 'Status_Api/to_change_status',
-                headers: header,
+                headers: {
+                    "Content-Type": constantService.getContentType(),
+                    "Authorization": constantService.getAuthor(),
+                    "oracle-mobile-backend-id": constantService.getAcceptBackId()
+                },
                 data: formData
 
             }).success(function (response) {
