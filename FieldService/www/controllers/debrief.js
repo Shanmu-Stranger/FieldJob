@@ -1162,17 +1162,21 @@ app.controller("debriefController", function ($scope, $state, $rootScope, $windo
                     $scope.populateTimeCodeArray(grandTotalTimeArray, key);
                     if (subTotalArray.length > 0) {
 
+                        var keepGoing = true;
                         angular.forEach(subTotalArray, function (subtotalObj, value) {
-                            if (subtotalObj.Work_Type == key.Work_Type.Value) {
-                                newWorkType = false;
-                                $scope.populateTimeCodeArray(subTotalTimeArray, key);
-                                subtotalObject.Duration = $scope.calculateDuration(subtotalObject, key);
-
+                            if(keepGoing)
+                            {
+                                if (subtotalObj.Work_Type == key.Work_Type.Value ) {
+                                    newWorkType = false;
+                                    $scope.populateTimeCodeArray(subTotalTimeArray,key);
+                                    subtotalObj.Duration= $scope.calculateDuration(subtotalObj,key);
+                                    keepGoing=false;
+                                }
+                                else {
+                                    newWorkType = true;
+                                }
                             }
-                            else {
-                                newWorkType = true;
-                            }
-
+                            
                         })
                         if (newWorkType) {
                             subtotalObject = $scope.getTimenewObj(key.Work_Type.Value, "SUB TOTAL", "", "", "", "", "", 0)
