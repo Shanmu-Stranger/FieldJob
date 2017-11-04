@@ -9,6 +9,24 @@ var app = angular.module('emerson', ['ngMaterial', 'ngLoadingSpinner', 'md.data.
 
 app.run(function ($rootScope, $location, $http, $state, localService, valueService, constantService) {
 
+    window.addEventListener('offline', offLine);
+
+    window.addEventListener('online', onLine);
+
+    function onLine() {
+
+        console.log("Online");
+
+        valueService.setNetworkStatus(true);
+    }
+
+    function offLine() {
+
+        console.log("Offline");
+
+        valueService.setNetworkStatus(false);
+    }
+
     $rootScope.local = true;
 
     $rootScope.online = false;
@@ -33,7 +51,7 @@ app.run(function ($rootScope, $location, $http, $state, localService, valueServi
 
                         $rootScope.selectedItem = 2;
 
-                        $state.go('myFieldJob');
+                          $state.go('myTask');
 
                     } else {
 
@@ -129,8 +147,10 @@ app.filter('timezonefilter', function (constantService) {
     return function (date) {
 
         console.log("*******************" + constantService.getTimeZone());
+        if(date==="" || date===undefined)
+        return date;
 
-        return moment(date).utcOffset(constantService.getTimeZone()).format("DD/MM/YYYY");
+        return moment.utc(date).utcOffset(constantService.getTimeZone()).format("DD/MM/YYYY");
         // var convertedDate = new Date(date);
         // return $filter('date')(convertedDate, 'dd MMM yyyy');
     }

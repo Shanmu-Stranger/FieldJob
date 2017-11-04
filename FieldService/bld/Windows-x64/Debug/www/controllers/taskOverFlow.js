@@ -144,7 +144,7 @@
 
     constantService.setUserEmailId(contactArray);
 
-    angular.forEach(valueService.getInstallBase, function (key, value) {
+    angular.forEach(valueService.getInstallBase(), function (key, value) {
 
         $scope.taskDetails.Product_Line = key.Product_Line;
         $scope.taskDetails.Serial_Number = key.Serial_Number;

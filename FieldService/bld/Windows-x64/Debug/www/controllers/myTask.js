@@ -1,4 +1,4 @@
-﻿app.controller('myTaskController', function ($scope, $compile, $timeout, uiCalendarConfig, $rootScope, $state, $http, cloudService, localService, valueService, $filter) {
+﻿app.controller('myTaskController', function ($scope, $compile, $timeout, uiCalendarConfig, $rootScope, $state, $http, cloudService, localService, valueService, $filter,constantService) {
 
     $scope.showSearchTaskDiv = false;
 
@@ -34,18 +34,17 @@
 
             response.forEach(function (item) {
 
-                var startDate = item.Start_Date.split(' ');
+              // var startDate = item.Start_Date.split(' ');
+               var startDateTime= moment.utc(item.Start_Date).utcOffset(constantService.getTimeZone()).format("YYYY-MM-DDTHH:MM:SS")
+               //var startDateTime = startDate[0] + "T" + startDate[1];
 
-                var startDateTime = startDate[0] + "T" + startDate[1];
+               //var endDate = item.End_Date.split(' ');
+               var endDateTime= moment.utc(item.End_Date).utcOffset(constantService.getTimeZone()).format("YYYY-MM-DDTHH:MM:SS")
+               //var endDateTime = endDate[0] + "T" + endDate[1];
 
-                var endDate = item.End_Date.split(' ');
+               var customerInfo = item.Customer_Name + "\n" + item.Street_Address + "\n" + item.City + "\n" + item.State + "\n" + item.Zip_Code;
 
-                var endDateTime = endDate[0] + "T" + endDate[1];
-
-                var customerInfo = item.Customer_Name + "\n" + item.Street_Address + "\n" + item.City + "\n" + item.State + "\n" + item.Zip_Code;
-
-                //  if (item.Task_Status == 'Accepted' || item.Task_Status == 'Assigned'||) {
-
+               //  if (item.Task_Status == 'Accepted' || item.Task_Status == 'Assigned'||) {
                 eventsArray.push({
                     title: customerInfo,
                     textEscape: true,
