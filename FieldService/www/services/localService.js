@@ -124,7 +124,7 @@
 
         function insertTaskList(response) {
 
-            var responseList = response.TaskDetails;
+            var responseList = response;
 
             for (var i = 0; i < responseList.length; i++) {
 

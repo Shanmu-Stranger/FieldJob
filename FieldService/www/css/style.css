@@ -1710,9 +1710,9 @@ input[type="checkbox"] {
 .navLeft{
   left: 130px !important;
 }
-.viewDiv{
-     /* margin-top: 66px;*/
-    padding-top: 66px;
+.viewDiv {
+    /* margin-top: 66px;*/
+    /* padding-top: 66px;*/
     height: 100%;
     overflow-y: scroll;
     overflow-x: hidden;

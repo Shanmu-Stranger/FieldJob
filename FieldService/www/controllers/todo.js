@@ -66,4 +66,3 @@ app.controller('todoController', function ($scope, $http, $state, $rootScope, cl
         $scope.mapIsClicked = !$scope.mapIsClicked;
     }
 });
-
