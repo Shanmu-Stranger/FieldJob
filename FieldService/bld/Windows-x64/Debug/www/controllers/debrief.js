@@ -1,4 +1,4 @@
-﻿app.controller("debriefController", function ($scope, $state, $rootScope, $window, $timeout, $filter,$http, cloudService, $mdDialog, valueService, localService, Upload, constantService) {
+﻿app.controller("debriefController", function ($scope, $state, $rootScope, $window, $timeout, $filter, $http, cloudService, $mdDialog, valueService, localService, Upload, constantService) {
 
     $scope.currentTab = "time";
 
@@ -70,68 +70,53 @@
         $scope.materialArray = valueService.getMaterial();
         $scope.notesArray = valueService.getNote();
         $scope.attachmentArray = valueService.getAttachment();
-        $scope.image=[];
-        $scope.files=[];
-        angular.forEach($scope.attachmentArray,function (attachment) {
-            var attachobj={}
-            //attachobj.data="data:"+attachmFent.File_Type+","+""
-            attachobj.contentType=attachment.File_Type;
-            //get base64;
-            // $http.get(attachment.File_Path+attachment.File_Name)
-            //     .success(function (data) {
-            //         // var file = new Blob([data], {type: attachment.File_Type});
-            //         // var fileURL = URL.createObjectURL(file);
-            //         // window.open(fileURL);
-            //         attachobj.base64=data;
-            //     });
+
+        $scope.image = [];
+
+        $scope.files = [];
+
+        angular.forEach($scope.attachmentArray, function (attachment) {
+
+            var attachmentObject = {};
+
+            attachmentObject.contentType = attachment.File_Type;
+
             window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fs) {
-                fs.root.getFile(attachment.File_Name, { create: true, exclusive: false }, function (fileEntry) {
-                readFile(fileEntry)
-            }, function()
-                {
+
+                fs.root.getFile(attachment.File_Name, {create: true, exclusive: false}, function (fileEntry) {
+
+                    fileEntry.file(function (file) {
+
+                        var reader = new FileReader();
+
+                        reader.onloadend = function () {
+
+                            console.log("Successful file read: " + this.result);
+
+                            attachmentObject.base64 = this.result.split(",")[1];
+
+                            attachmentObject.contentType = attachment.File_Type;
+
+                            attachmentObject.filename = attachment.File_Name.split(".")[0];
+
+                            attachmentObject.filetype = attachment.File_Name.split(".")[1];
+
+                            if (attachment.AttachmentType == "D") {
+
+                                $scope.files.push(attachmentObject);
+
+                            } else if (attachment.AttachmentType == "M") {
+
+                                $scope.image.push(attachmentObject)
+                            }
+                        };
+
+                        reader.readAsDataURL(file);
+                    });
                 });
+            });
+        });
 
-            }, function(){});
-
-            function readFile(fileEntry) 
-            {
-
-                 fileEntry.file(function (file) {
-                 var reader = new FileReader();
-
-                reader.onloadend = function() {
-                console.log("Successful file read: " + this.result);
-                     attachobj.base64=this.result.split(",")[1];;
-                        attachobj.contentType=attachment.File_Type
-                        attachobj.filename=attachment.File_Name.split(".")[0];
-                        attachobj.filetype=attachment.File_Name.split(".")[1];
-                    if(attachment.AttachmentType=="D")
-                    {
-                        $scope.files.push(attachobj)
-                    }
-                    else if(attachment.AttachmentType=="M")
-                    {
-                        $scope.image.push(attachobj)
-                    }
-                };
-
-                reader.readAsDataURL(file);
-
-                }, function(){});
-            }
-          
-
-            // $cordovaFile.readAsDataURL(cordova.file.dataDirectory, attachment.File_Name)
-            //     .then(function (success) {
-            //         console.log("&&&&&&&&&&&&&&&"+success);
-            //         attachobj.base64=success;
-            //     }, function (error) {
-            //         console.log("&&&&&&&&&&&&&&&"+error);
-            //     });
-
-          
-            
-        })
         $scope.engineerObject = valueService.getEngineer();
 
         $scope.overTimeArray = valueService.getOverTime();
@@ -881,31 +866,37 @@
 
         } else if ($scope.currentTab == "attachments") {
 
-            if ($scope.files.length > 0 || $scope.image>0) {
-                $scope.attachmentArraydb=[];
-                i=0;
-                angular.forEach($scope.files,function (attachment) {
+            if ($scope.files.length > 0 || $scope.image.length > 0) {
+
+                $scope.attachmentArraydb = [];
+
+                i = 0;
+
+                angular.forEach($scope.files, function (attachment) {
 
                     var filePath = cordova.file.dataDirectory;
 
                     var base64Code = attachment.base64;
 
-                    valueService.saveBase64File(filePath, attachment.filename+"."+attachment.filetype, base64Code, attachment.contentType);
+                    valueService.saveBase64File(filePath, attachment.filename + "." + attachment.filetype, base64Code, attachment.contentType);
 
                     var attachmentObject = {
-                        Attachment_Id: $rootScope.selectedTask.Task_Number+i,
+                        Attachment_Id: $scope.taskId + i,
                         File_Path: filePath,
-                        File_Name: attachment.filename+"."+attachment.filetype,
+                        File_Name: attachment.filename + "." + attachment.filetype,
                         File_Type: attachment.contentType,
                         Type: "D",
-                        Task_Number: $rootScope.selectedTask.Task_Number,
-                        AttachmentType:"D"
+                        Task_Number: $scope.taskId,
+                        AttachmentType: "D"
                     };
-                    $scope.attachmentArraydb.push(attachmentObject)
-                    i++;
-                })
 
-                angular.forEach($scope.image,function (attachment) {
+                    $scope.attachmentArraydb.push(attachmentObject);
+
+                    i++;
+                });
+
+                angular.forEach($scope.image, function (attachment) {
+
                     var filePath = cordova.file.dataDirectory;
 
                     var base64Code = attachment.base64;
@@ -913,18 +904,19 @@
                     valueService.saveBase64File(filePath, attachment.filename, base64Code, attachment.data.split(",")[0].split(";")[0].split(":")[1]);
 
                     var attachmentObject = {
-                        Attachment_Id: $rootScope.selectedTask.Task_Number+i,
+                        Attachment_Id: $scope.taskId + i,
                         File_Path: filePath,
                         File_Name: attachment.filename,
                         File_Type: attachment.contentType,
                         Type: "D",
-                        Task_Number: $rootScope.selectedTask.Task_Number,
-                        AttachmentType:"M"
+                        Task_Number: $scope.taskId,
+                        AttachmentType: "M"
                     };
-                    $scope.attachmentArraydb.push(attachmentObject)
-                    i++;
-                })
 
+                    $scope.attachmentArraydb.push(attachmentObject);
+
+                    i++;
+                });
 
                 valueService.setAttachment($scope.attachmentArraydb);
             }
@@ -1354,69 +1346,6 @@
             localService.updateTaskSubmitStatus(taskObject);
         }
 
-        var date = new Date();
-
-        date.setMonth(date.getMonth() - 1);
-
-        var attachment = [];
-
-        if ($scope.image.length > 0) {
-
-            angular.forEach($scope.image, function (key, value) {
-
-                var attachmentObject = {
-                    "Data": "",
-                    "FileName": key.file.name,
-                    "Description": key.file.name,
-                    "Name": ""
-                }
-                attachment.push(attachmentObject);
-            });
-        }
-
-        if ($scope.files.length > 0) {
-
-            angular.forEach($scope.files, function (key, value) {
-
-                var attachmentObject = {
-                    "Data": "",
-                    "FileName": key.file.name,
-                    "Description": key.filename,
-                    "Name": ""
-                }
-
-                attachment.push(attachmentObject);
-            });
-        }
-
-        // var attachmentJSONData = [];
-        //
-        // for (var i = 0; i < $scope.files.length; i++) {
-        //
-        //     var attachmentObject = {
-        //         "Data": $scope.files[i].base64,
-        //         "FileName": $scope.files[i].filename,
-        //         "Description": $scope.files[i].filename,
-        //         "Name": $scope.files[i].filename,
-        //         "taskId": $rootScope.selectedTask.Task_Number,
-        //         "contentType": $scope.files[i].contentType
-        //     };
-        //
-        //     attachmentJSONData.push(attachmentObject);
-        // }
-        //
-        // var attachmentUploadJSON = {
-        //     "attachment": attachmentJSONData
-        // };
-
-        if ($scope.files) {
-
-            cloudService.createAttachment(attachmentUploadJSON, function (response) {
-
-                console.log("Attachment Uploaded Successfully");
-            });
-        }
-
         generatePDF();
     }
 
@@ -1611,8 +1540,8 @@
                 console.log(urls);
 
                 fileobj.data = urls;
-                fileobj.contentType=  fileobj.data.split(",")[0].split(";")[0].split(":")[1];
-                fileobj.base64=fileobj.data.split(",")[1];
+                fileobj.contentType = fileobj.data.split(",")[0].split(";")[0].split(":")[1];
+                fileobj.base64 = fileobj.data.split(",")[1];
                 $scope.image.push(fileobj);
 
                 console.log($scope.files);
@@ -1651,8 +1580,8 @@
                 console.log(urls);
 
                 fileobj.data = urls;
-                fileobj.contentType=  fileobj.data.split(",")[0].split(";")[0].split(":")[1];
-                fileobj.base64=fileobj.data.split(",")[1];
+                fileobj.contentType = fileobj.data.split(",")[0].split(";")[0].split(":")[1];
+                fileobj.base64 = fileobj.data.split(",")[1];
                 $scope.files.push(fileobj);
 
                 console.log($scope.files);

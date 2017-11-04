@@ -374,8 +374,6 @@ app.controller('myTaskController', function ($scope, $compile, $timeout, uiCalen
 
             $rootScope.selectedCategory = 'Field Job#' + $rootScope.selectedTask.Task_Number;
 
-            $state.go('debrief');
-
             if ($scope.selectedTask.Task_Status == 'Assigned') {
 
                 if (valueService.getNetworkStatus()) {
@@ -385,6 +383,7 @@ app.controller('myTaskController', function ($scope, $compile, $timeout, uiCalen
                 } else {
 
                     var taskObject = {
+                        Task_Status: "Accepted",
                         Task_Number: valueService.getTask().Task_Number,
                         Submit_Status: "A"
                     };
@@ -392,6 +391,8 @@ app.controller('myTaskController', function ($scope, $compile, $timeout, uiCalen
                     localService.updateTaskSubmitStatus(taskObject);
                 }
             }
+
+            $state.go('debrief');
         }
     }
 });

@@ -89,35 +89,35 @@
             <div flex=100 layout layout-align="center center" style="  border-collapse: separate;border-spacing: 30px;">
 
                 <div class="col-sm-12">
-                    <div ng-repeat="res in Attachments " class="col-sm-4">
-                        <div style="text-align:center">
-                            <a ng-href="data:{{res.Content_type}};base64,{{res.base64Code}}" target="_blank" download>
-                                <div>
-                                    <img class="imgPad" src="Shape 8 copy 2@2x.png" alt=""
-                                         ng-if="res.User_File_Name.indexOf('.pdf')>-1">
-                                    <img class="imgPad" src="images/doc.png" alt=""
-                                         ng-if="res.User_File_Name.indexOf('.docx')>-1 || res.User_File_Name.indexOf('.doc')>-1">
-                                    <img class="imgPad" src="images/excel.png" alt=""
-                                         ng-if="res.User_File_Name.indexOf('.xls')>-1 || res.User_File_Name.indexOf('.xlsx')>-1">
-                                    <img style="width:100px;height:100px"
-                                         data-ng-src="data:{{res.Content_type}};base64,{{res.base64Code}}" alt=""
-                                         ng-if="res.Content_type.indexOf('image')>-1 ">
+                    <!--<div ng-repeat="res in Attachments " class="col-sm-4">-->
+                        <!--<div style="text-align:center">-->
+                            <!--<a ng-href="data:{{res.Content_type}};base64,{{res.base64Code}}" target="_blank" download>-->
+                                <!--<div>-->
+                                    <!--<img class="imgPad" src="Shape 8 copy 2@2x.png" alt=""-->
+                                         <!--ng-if="res.User_File_Name.indexOf('.pdf')>-1">-->
+                                    <!--<img class="imgPad" src="images/doc.png" alt=""-->
+                                         <!--ng-if="res.User_File_Name.indexOf('.docx')>-1 || res.User_File_Name.indexOf('.doc')>-1">-->
+                                    <!--<img class="imgPad" src="images/excel.png" alt=""-->
+                                         <!--ng-if="res.User_File_Name.indexOf('.xls')>-1 || res.User_File_Name.indexOf('.xlsx')>-1">-->
+                                    <!--<img style="width:100px;height:100px"-->
+                                         <!--data-ng-src="data:{{res.Content_type}};base64,{{res.base64Code}}" alt=""-->
+                                         <!--ng-if="res.Content_type.indexOf('image')>-1 ">-->
 
-                                    <div style="padding:15px 0">{{res.User_File_Name}}</div>
+                                    <!--<div style="padding:15px 0">{{res.User_File_Name}}</div>-->
 
-                                    <div class="label-my" style="margin-bottom:0 !important">Created by</div>
+                                    <!--<div class="label-my" style="margin-bottom:0 !important">Created by</div>-->
 
-                                    <div>{{$root.uName}}</div>
+                                    <!--<div>{{$root.uName}}</div>-->
 
-                                    <div class="label-my margintop10" style="margin-bottom:0 !important;">Date</div>
+                                    <!--<div class="label-my margintop10" style="margin-bottom:0 !important;">Date</div>-->
 
-                                    <div>{{res.Date_Created.substr(1,19).split(" ")[0] |date:'dd/MM/yyyy' }}</div>
+                                    <!--<div>{{res.Date_Created.substr(1,19).split(" ")[0] |date:'dd/MM/yyyy' }}</div>-->
 
-                                </div>
-                            </a>
+                                <!--</div>-->
+                            <!--</a>-->
 
-                        </div>
-                    </div>
+                        <!--</div>-->
+                    <!--</div>-->
 
                     <div ng-repeat="item in attachmentArray " class="col-sm-4">
                         <div style="text-align:center">

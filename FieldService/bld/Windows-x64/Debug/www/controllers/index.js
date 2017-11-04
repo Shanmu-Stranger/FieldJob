@@ -1,16 +1,18 @@
 ﻿app.controller('indexController', function ($scope, $state, $timeout, $mdSidenav, $mdDialog, $translate, $rootScope, usSpinnerService, valueService, localService, cloudService) {
 
-    if ($rootScope.Islogin) {
 
-        if (navigator.onLine) {
+    // if (window.navigator.onLine) {
+    //
+    //     onLine();
+    //
+    // } else if (window.navigator.offLine) {
+    //
+    //     offLine();
+    // }
 
-            onLine();
+    window.addEventListener('offline', offLine);
 
-        } else if (navigator.offLine) {
-
-            offLine();
-        }
-    }
+    window.addEventListener('online', onLine);
 
     function onLine() {
 

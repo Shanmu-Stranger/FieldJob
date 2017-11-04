@@ -250,8 +250,9 @@
 
                 var insertValues = [];
 
-                var sqlUpdate = "UPDATE Task SET Submit_Status = ?  WHERE Task_Number = ?";
+                var sqlUpdate = "UPDATE Task SET Task_Status = ?, Submit_Status = ?  WHERE Task_Number = ?";
 
+                insertValues.push(responseList.Task_Status);
                 insertValues.push(responseList.Submit_Status);
                 insertValues.push(responseList.Task_Number);
 
