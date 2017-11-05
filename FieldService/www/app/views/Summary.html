@@ -5,36 +5,36 @@
         margin-top: 30px;
         margin-right: 50px;
     }
-    
+
     .padding15 {
         padding-left: 15px;
         padding-bottom: 10px;
         padding-top: 10px;
     }
-    
+
     .paddiin-bottom-10 {
         padding-bottom: 10px
     }
-    
+
     table.work, th.work, td.work {
         border: 1px solid #c0c0c0;
-        
+
     }
-    
+
     table, tr {
         border: 1px solid #ebebeb !important;
-        
+
     }
-    
+
     td, th {
         padding: 10px;
     }
-    
+
     @media (min-width: 1200px) {
         .container.custumContainer {
             width: 1090px !important;
         }
-        
+
     }
     .instalbase tr, .instalbase th,.instalbase td
     {
@@ -66,7 +66,7 @@
                             <label translate="Service Request">:</label>
                             <div>{{summary.taskObject.Service_Request}}</div>
                         </div>
-                        
+
                         <div class="col-sm-4 paddiin-bottom-10">
                             <label>FIELD JOB NUMBER:</label>
                             <div>{{summary.taskObject.Task_Number}}</div>
@@ -105,11 +105,11 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="row margintop30 ">
                     <hr/>
                 </div>
-                
+
                 <div class="row margintop30 " style="margin:0 !important">
                     <table class="instalbase"  md-table >
                         <thead md-head>
@@ -123,12 +123,12 @@
                         <tbody md-body>
                             <tr md-row ng-repeat="install in summary.taskObject.InstallBase" >
                                 <td md-cell>{{install.Product_Line|| "NO VALUE"}}</td>
-                                <td md-cell> {{install.Serial_Number|| "NO VALUE"}}</td> 
+                                <td md-cell> {{install.Serial_Number|| "NO VALUE"}}</td>
                                 <td md-cell>{{install.tagNo|| "NO VALUE"}}</td>
                                 <td md-cell>{{install.orginalNo|| "NO VALUE"}}</td>
                             </tr>
                         </tbody>
-                        
+
                     </table>
                     <!-- <div class="col-sm-3 paddiin-bottom-10">
                         <label translate="Product Line">:</label>
@@ -250,8 +250,8 @@
                 </md-card>
             </div>
         </div>
-        
-        
+
+
         <div class="padding10 debLabelHeader" translate="Expenses"></div>
         <div class="container" style="padding:0">
             <div class="debreifContainerouter margintop30">
@@ -287,7 +287,7 @@
                 </md-card>
             </div>
         </div>
-        
+
         <div class="padding10 debLabelHeader" translate="Material"></div>
         <div class="container" style="padding:0">
             <div class="debreifContainerouter margintop30">
@@ -323,7 +323,7 @@
                 </md-card>
             </div>
         </div>
-        
+
         <div class="padding10 debLabelHeader">SIGNATURE</div>
         <div class="container" style="padding:0">
             <div class="debreifContainerouter margintop30">
@@ -332,7 +332,7 @@
                         <div class="row">
                             <div class="col-sm-5">
                                 <!-- <label>EMERSON PROCESS MANAGEMENT</label> -->
-                                
+
                                 <div><label>Engineer Name : {{engineerName}}</label></div>
                                 <!--  <span></span> -->
                                 <!-- <div class="result" ng-show="$rootScope.signature"> -->
@@ -340,7 +340,7 @@
                                     <!-- </div> -->
                                 </div>
                                 <div class="col-sm-5">
-                                   
+
                                     <div><label >Customer Name :{{summary.taskObject.Customer_Name}}</label></div>
                                     <span></span>
                                 </div>
@@ -349,14 +349,14 @@
                     </md-card>
                 </div>
             </div>
-            
+
             <div class="row" style="text-align:center;">
-                
+
                 <div class="col-sm-12 margintop10 marginbottom5">
                     <md-button style="border-radius:0;margin-bottom:20px;" class="time-font time-add" ng-click="reviewSummary()">
                         REVIEWED
                     </md-button>
                 </div>
-                
+
             </div>
             

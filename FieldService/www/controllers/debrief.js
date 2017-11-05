@@ -61,7 +61,7 @@ app.controller("debriefController", function ($scope, $state, $rootScope, $windo
 
         $scope.taskObject = valueService.getTask();
 
-        $scope.taskId = $scope.taskObject.Task_Number;
+        $scope.taskId = valueService.getTaskId();
 
         $scope.installBaseObject = valueService.getInstallBase();
 
@@ -1160,7 +1160,7 @@ app.controller("debriefController", function ($scope, $state, $rootScope, $windo
                                     newWorkType = true;
                                 }
                             }
-                            
+
                         })
                         if (newWorkType) {
                             subtotalObject = $scope.getTimenewObj(key.Work_Type.Value, "SUB TOTAL", "", "", "", "", "", 0)

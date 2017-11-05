@@ -14,6 +14,8 @@ app.controller('indexController', function ($scope, $state, $timeout, $mdSidenav
 
     window.addEventListener('online', onLine);
 
+    $scope.onlineStatus = false;
+
     function onLine() {
 
         console.log("Online");
@@ -298,7 +300,7 @@ app.controller('indexController', function ($scope, $state, $timeout, $mdSidenav
     $scope.syncFunctionality = function () {
         console.log("Inside the syncFunctionality");
 
-
+        if(valueService.getNetworkStatus()){
         cloudService.getTaskList(function (response) {
 
             localService.deleteInstallBase();
@@ -326,6 +328,7 @@ app.controller('indexController', function ($scope, $state, $timeout, $mdSidenav
             $state.go('myTask');
         });
     }
+  }
 
 });
 

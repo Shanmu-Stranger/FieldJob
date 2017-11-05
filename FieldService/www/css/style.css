@@ -190,6 +190,7 @@ a.article, a.article:hover {
     background-image: url(../hamburgermenu.png);
     background-repeat: no-repeat;
     background-size: 100% 100%;
+        outline: none;
 }
 .categryAicon {
     text-align: center;
@@ -225,7 +226,7 @@ a.article, a.article:hover {
     background-image: url('../images/save/save.png');
     background-repeat: no-repeat;
     background-size: 100% 100%;
-    left: 30px;
+    /*left: 30px;*/
 }
 .sync{
     height: 38px;
@@ -234,13 +235,13 @@ a.article, a.article:hover {
     background-image: url('../images/syncup/syncup.png');
     background-repeat: no-repeat;
     background-size: 100% 100%;
-    margin-left: 30px;
+    margin-right: 30px;
 }
 .title{
   font-family: OpenSans-Light;
   font-size: 24px;
   color: #fff;
-  width: 75%;
+ /* width: 75%;*/
   text-align: center;
       letter-spacing: 1px;
 }
@@ -370,20 +371,20 @@ a.article, a.article:hover {
 }
 */
 
-.fc-myCalendar-button:active {
+/*.fc-myCalendar-button:active {
   color : #19a97f !important;
-}
+}*/
 
 .fc-myTask-button:active {
   color : #19a97f !important;
 }
 
-.fc-myCalendar-button:focused {
+/*.fc-myCalendar-button:focused {
   color : #19a97f !important;
-}
+}*/
 
 .fc-left{
-  width: 65%;
+  width: 55%;
 }
 
 .fc-center {
@@ -411,9 +412,11 @@ a.article, a.article:hover {
     background-color: #2d383f !important;
 }
 .subheader-btns{
-
     background-color: transparent !important;
-    font-size : 12px;
+    margin: 0 !important;
+    font-family: OpenSans-Bold !important;
+    font-size: 14px !important;
+    color: #888888 !important;
 }
 .my-calendar{
         text-align: left;
@@ -494,18 +497,21 @@ a.article, a.article:hover {
 }
 
 #fieldTool {
-background-color: #F0F0F0 ;
-
-height : 35px;
-
-outline:none;
-padding-left : 10px;
+    background-color: #dee6ea;
+    height: 50px;
+    outline: none;
+    /* padding-left: 10px; */
     display: inline-block;
+    padding: 0px 22px 0px 22px;
+    width: 450px;
 }
 
 #fieldTool:focus {
-  border :1px solid #00AA7E !important;
-  padding-left: 9px;
+    border: 1px solid #00AA7E !important;
+    padding: 0px 22px 0px 22px;
+    font-size: 12px;
+    font-family: Arial;
+    color: #2d383f;
 }
 
 .search-box {
@@ -704,6 +710,8 @@ md-tab-data{
 .debrief-btn , .startwork-btn{
   background-color: #00aa7e !important;
   color: #fff !important;
+  font-family: OpenSans-Bold !important;
+  font-size: 14px !important;
 }
 
 table {
@@ -779,8 +787,10 @@ font-size:16px !important;
 
 
 .fc-toolbar.fc-header-toolbar{
-  clear:both;
-  padding: 15px 50px;
+     clear: both;
+    padding: 15px 50px;
+    position: fixed;
+    z-index: 1029;
 }
 
 
@@ -1032,6 +1042,7 @@ a {
     display: inline-block;
     width: 40px;
     height: 40px;
+    margin-right: 30px;
     /*background-color: #ffffff;
     border-radius: 40px;*/
 }
@@ -1220,7 +1231,8 @@ a.md-default-theme:not(.md-button), a:not(.md-button) {
   background-repeat: repeat;
   padding:15px 40px 15px 40px;
   box-shadow: 0 0 20px rgba(0,0,0,0.3) !important;
-  border-radius: 10px;
+  height: 147px;
+  border-radius: 0px !important;
 }
 
 
@@ -1256,6 +1268,8 @@ a.md-default-theme:not(.md-button), a:not(.md-button) {
 .accept-btn{
    background-color: #00aa7e !important;
   color: #ffffff !important;
+  font-family: OpenSans-Bold !important;
+    font-size: 14px !important;
 }
 .toolbar{
       /*padding: 0 40px !important;*/
@@ -1265,9 +1279,9 @@ a.md-default-theme:not(.md-button), a:not(.md-button) {
   font-size: 14px !important;
 
 }
-.md-button{
+/*.md-button{
   font-size: 12px !important;
-}
+}*/
 
 tr {
   outline:none !important;
@@ -1351,6 +1365,7 @@ color:#004b8d;
 }
 .categryAicon div{
     margin: 0 auto;
+    margin-bottom: 8px;
 }
 .MyCalendarselected{
   background-image: url(../images/calendar/Rectangle8copy.png);
@@ -1474,7 +1489,9 @@ font-size: 80%;
   text-align:center;
 }
 .fc-myCalendar-button{
-  color: #00aa7e !important;
+    color: #00aa7e !important;
+    font-family: OpenSans-Bold !important;
+    font-size: 14px !important;
 }
 .selectedTabColor{
   font-weight: bold !important;
@@ -1624,15 +1641,15 @@ padding : 1px !important;
     outline: none;
 }
 a.md-default-theme:not(.md-button), a:not(.md-button) {
-    color: #000000 !important;
+    color: #283d3b !important
 }
 .fieldJob-label{
-  font-size: 12px;
-  font-family: Arial;
-  color: #2d383f;
-  font-weight: bold;
-  margin-bottom: 10px;
-  text-transform: uppercase;
+      font-size: 12px;
+    font-family: Arial;
+    color: #2d383f;
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-transform: uppercase;
 }
 .search-icon{
     width: 31px;
@@ -1642,7 +1659,12 @@ a.md-default-theme:not(.md-button), a:not(.md-button) {
     background-size: 100% 100%;
     outline: none;
     display: inline-block;
-    float: right;
+    /*float: right;*/
+}
+.search-text{
+    font-size: 15px;
+    font-weight: bold;
+    font-family: Arial;
 }
 .rowSelected{
   background-color: #f0f0f0;
@@ -1707,13 +1729,90 @@ input[type="checkbox"] {
   background-color: #f0f0f0 !important;
   color: #283d3b !important;
 }
-.navLeft{
+.nav-noLeft{
   left: 130px !important;
 }
-.viewDiv {
-    /* margin-top: 66px;*/
-    /* padding-top: 66px;*/
+.viewDiv{
+     /* margin-top: 66px;*/
+    padding-top: 66px;
     height: 100%;
-    overflow-y: scroll;
+   /* overflow-y: scroll;*/
     overflow-x: hidden;
+    background-color: #f0f0f0;
+}
+.nav-left{
+  left: 0px !important;
+}
+.uiViewContent{
+  margin-top: 106px;
+}
+.sub-navbar{
+        margin-top: 66px;
+        background-color: #2d383f !important;
+        color: #ffffff;
+        z-index: 100 !important;
+}
+md-tab-content{
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+}
+.btn-default{
+  text-transform: uppercase;
+}
+
+.search-div{
+  display: inline-block;
+}
+.md-column span{
+  color: #283d3f !important;
+  font-family: Arial;
+  font-weight: bold;
+  font-size: 14px;
+}
+#select_value_label_0 > span:nth-child(1){
+  color: #283d3f !important;
+  font-family: Arial;
+  font-weight: bold;
+  font-size: 14px;
+}
+.btn-position{
+  position: relative;
+    bottom: 8px;
+}
+.task-number{
+  font-family: Arial;
+  font-weight: bold;
+  font-size: 14px;
+      color: #00aa7e !important;
+    text-decoration: underline;
+}
+.task-details{
+  font-family: Arial;
+  font-size: 14px;
+  color: #283d3f !important;
+}
+.status-options{
+    font-family: OpenSans-Bold;
+    color: #000000 !important;
+    font-size: 14px;
+}
+.card-parentContainer{
+  margin-left: 50px;
+  margin-right: 40px;
+}
+.card-childContainer{
+    padding: 30px 22px 0px 22px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 0px 3px #ccc;
+}
+.martop-106{
+  margin-top: 106px;
+}
+.martop-40{
+  margin-top: 40px;
+}
+.fieldjob-search{
+    width: 60%;
+    margin: 0 auto;
 }

@@ -95,37 +95,37 @@ app.config(function ($stateProvider, $urlRouterProvider) {
     })
     $stateProvider.state("myTask", {
         url: "/myTask",
-        parent: 'dashBoard',
+      //  parent: 'dashBoard',
         controller: "myTaskController",
         templateUrl: "app/views/MyTask.html"
     })
     $stateProvider.state("myFieldJob", {
         url: "/myFieldJob",
-        parent: 'dashBoard',
+      //  parent: 'dashBoard',
         controller: "myTaskController",
         templateUrl: "app/views/myFieldJob.html"
     })
     $stateProvider.state("debrief", {
         url: "/debrief",
-        parent: 'dashBoard',
+      //  parent: 'dashBoard',
         controller: "debriefController",
         templateUrl: "app/views/Debrief.html"
     })
     $stateProvider.state("taskOverFlow", {
         url: "/taskOverFlow",
-        parent: 'dashBoard',
+      //  parent: 'dashBoard',
         controller: "taskOverFlowController",
         templateUrl: "app/views/TaskOverflow.html"
     })
     $stateProvider.state("todo", {
         url: "/todo",
-        parent: 'dashBoard',
+      //  parent: 'dashBoard',
         controller: "todoController",
         templateUrl: "app/views/Todo.html"
     })
     $stateProvider.state("material", {
         url: "/material",
-        parent: 'dashBoard',
+      //  parent: 'dashBoard',
         controller: "taskOverFlowController",
         templateUrl: "app/views/Material.html"
     })
