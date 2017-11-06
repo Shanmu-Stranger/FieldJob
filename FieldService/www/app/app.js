@@ -12,7 +12,7 @@ app.run(function ($rootScope, $location, $http, $state, localService, valueServi
     window.addEventListener('offline', offLine);
 
     window.addEventListener('online', onLine);
-
+$rootScope.apicall=true;
     //valueService.setNetworkStatus(true);
 
     function onLine() {

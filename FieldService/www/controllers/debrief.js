@@ -596,7 +596,7 @@ app.controller("debriefController", function ($scope, $state, $rootScope, $windo
 
         $scope.materialArray[index].Product_Quantity--;
 
-        $scope.materialArray[index]["Serial_Type"].splice(index, 1);
+        $scope.materialArray[index]["Serial_Type"].splice($scope.materialArray[index]["Serial_Type"].length-1, 1);
     };
 
     $scope.setMaterialSearchText = function (text) {
