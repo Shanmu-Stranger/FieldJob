@@ -204,7 +204,13 @@ app.controller('indexController', function ($scope, $state, $timeout, $mdSidenav
 
                 $rootScope.showTaskDetail = false;
 
-                $state.go("myFieldJob");
+                localService.getTaskList(function (response) {
+
+                    $rootScope.myTaskDetailsForLoggedInUser = response;
+                    $state.go("myFieldJob");
+
+                });
+
 
                 /* setTimeout(function () {
 
@@ -256,6 +262,10 @@ app.controller('indexController', function ($scope, $state, $timeout, $mdSidenav
             $rootScope.closed = true;
             $scope.collapsedClass = "collapsed"
         }
+    }
+
+    $scope.menuIconClicked = function(){
+        $scope.hideNavLeft = !$scope.hideNavLeft;
     }
 
     $scope.signout = function () {
