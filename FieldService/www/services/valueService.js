@@ -6,7 +6,7 @@
 
     valueService.$inject = ['$http', '$rootScope', '$window', '$location', 'localService', 'cloudService'];
 
-    function valueService($http,$rootScope, $window, $location, localService, cloudService) {
+    function valueService($http, $rootScope, $window, $location, localService, cloudService) {
 
         var futureTask;
 
@@ -26,6 +26,7 @@
 
         var debrief = {
             task: {},
+            taskList: [],
             installBase: [],
             contacts: [],
             taskNotes: [],
@@ -69,6 +70,9 @@
 
         service.setTask = setTask;
         service.getTask = getTask;
+
+        service.setTaskList = setTaskList;
+        service.getTaskList = getTaskList;
 
         service.setInstallBase = setInstallBase;
         service.getInstallBase = getInstallBase;
@@ -199,11 +203,6 @@
 
             debrief.task = taskObject;
 
-            // localService.getTaskList( function (response) {
-            //
-            //     debrief.task = response;
-            // });
-
             localService.getInstallBaseList(taskObject.Task_Number, function (response) {
 
                 debrief.installBase = response;
@@ -307,6 +306,18 @@
 
         function getTask() {
 
+            return debrief.task;
+        };
+
+        function setTaskList() {
+
+            localService.getTaskList(function (response) {
+
+                debrief.taskList = response;
+            });
+        };
+
+        function getTaskList() {
             return debrief.task;
         };
 
@@ -582,7 +593,7 @@
 
                     }, function () {
 
-                        alert("UNABLE TO SAVE " + folderpath);
+                        console.log("UNABLE TO SAVE " + folderpath);
                     });
                 });
             });
@@ -610,7 +621,7 @@
 
                     }, function () {
 
-                        alert("UNABLE TO SAVE " + folderpath);
+                        console.log("UNABLE TO SAVE " + folderpath);
                     });
                 });
             });
@@ -706,22 +717,21 @@
         function submitDebrief(taskId) {
 
             var timeArray = [];
-
             var expenseArray = [];
-
             var materialArray = [];
-
             var notesArray = [];
-
             var attachmentArray = [];
+
             var timeJSONData = [];
             var expenseJSONData = [];
             var materialDataJSON = [];
             var noteDataJSON = [];
             var attachmentJSONData = [];
+
             localService.getTimeList(taskId, function (response) {
 
                 timeArray = response;
+
                 for (var i = 0; i < timeArray.length; i++) {
 
                     var date = $filter("date")(timeArray[i].Date, "yyyy-MM-ddThh:mm:ss.000");
@@ -750,6 +760,7 @@
             localService.getExpenseList(taskId, function (response) {
 
                 expenseArray = response;
+
                 for (var i = 0; i < expenseArray.length; i++) {
 
                     var expenseDate = $filter("date")(expenseArray[i].Date, "yyyy-MM-dd");
@@ -773,6 +784,7 @@
             localService.getMaterialList(taskId, function (response) {
 
                 materialArray = response;
+
                 for (var i = 0; i < materialArray.length; i++) {
 
                     angular.forEach(materialArray[i].Serial_Type, function (key) {
@@ -782,7 +794,7 @@
                             "task_id": materialArray[i].Task_Number,
                             "item_description": materialArray[i].Description,
                             "product_quantity": 1,
-                            "comments":"",
+                            "comments": "",
                             "item": materialArray[i].itemName,
                             "serialin": key.in,
                             "serialout": key.out,
@@ -797,6 +809,7 @@
             localService.getNotesList(taskId, function (response) {
 
                 notesArray = response;
+
                 for (var i = 0; i < notesArray.length; i++) {
 
                     var noteData = {
@@ -812,6 +825,7 @@
             localService.getAttachmentList(taskId, "D", function (response) {
 
                 attachmentArray = response;
+
                 angular.forEach(attachmentArray, function (attachment) {
 
                     var attachmentObject = {};
@@ -843,146 +857,129 @@
                     });
                 });
             });
-            //
+
             // localService.getEngineer(taskId, function (response) {
             //
             //     debrief.engineer = response;
             // });
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            setTimeout(function () {
-            var timeUploadJSON = {
-                "Time": timeJSONData
-            }
-
-            console.log(timeUploadJSON);
-
-            if (timeArray) {
-
-                cloudService.uploadTime(timeUploadJSON, function (response) {
-
-                    console.log("Uploaded Time Data " + JSON.stringify(response));
-                });
-            }
-
-            var expenseUploadJSON = {
-                "expense": expenseJSONData
-            }
-
-            console.log(expenseUploadJSON);
-
-            if (expenseArray) {
-
-                cloudService.updateExpenses(expenseUploadJSON, function (response) {
-
-                    console.log("Uploaded Expense Data " + JSON.stringify(response));
-                });
-            }
-
-            var notesUploadJSON = {
-                "Notes": noteDataJSON
-            }
-
-            console.log(notesUploadJSON);
-
-            if (notesArray) {
-
-                cloudService.updateNotes(notesUploadJSON, function (response) {
-
-                    console.log("Uploaded notes " + JSON.stringify(response));
-                });
-            }
-
-            var materialUploadJSON = {
-                "Material": materialDataJSON
-            }
-
-            console.log(materialUploadJSON);
-
-            if (materialArray) {
-
-                cloudService.updateMaterial(materialUploadJSON, function (response) {
-
-                    console.log("Uploaded material " + JSON.stringify(response));
-                });
-            }
-
-            var attachmentUploadJSON = {
-                "attachment": attachmentJSONData
-            };
-
-            console.log(attachmentUploadJSON);
-
-            if (attachmentArray) {
-
-                cloudService.createAttachment(attachmentUploadJSON, function (response) {
-
-                    console.log("Attachment Uploaded Successfully " + +JSON.stringify(response));
-                });
-            }
-
             setTimeout(function () {
 
-                var formData = {
-                    "Taskstatus": [{
-                        "taskId": taskId,
-                        "taskStatus": "Accepted"
-                    }]
+                var timeUploadJSON = {
+                    "Time": timeJSONData
+                }
+
+                console.log(timeUploadJSON);
+
+                if (timeArray) {
+
+                    cloudService.uploadTime(timeUploadJSON, function (response) {
+
+                        console.log("Uploaded Time Data " + JSON.stringify(response));
+                    });
+                }
+
+                var expenseUploadJSON = {
+                    "expense": expenseJSONData
+                }
+
+                console.log(expenseUploadJSON);
+
+                if (expenseArray) {
+
+                    cloudService.updateExpenses(expenseUploadJSON, function (response) {
+
+                        console.log("Uploaded Expense Data " + JSON.stringify(response));
+                    });
+                }
+
+                var notesUploadJSON = {
+                    "Notes": noteDataJSON
+                }
+
+                console.log(notesUploadJSON);
+
+                if (notesArray) {
+
+                    cloudService.updateNotes(notesUploadJSON, function (response) {
+
+                        console.log("Uploaded notes " + JSON.stringify(response));
+                    });
+                }
+
+                var materialUploadJSON = {
+                    "Material": materialDataJSON
+                }
+
+                console.log(materialUploadJSON);
+
+                if (materialArray) {
+
+                    cloudService.updateMaterial(materialUploadJSON, function (response) {
+
+                        console.log("Uploaded material " + JSON.stringify(response));
+                    });
+                }
+
+                var attachmentUploadJSON = {
+                    "attachment": attachmentJSONData
                 };
 
-                cloudService.updateAcceptTask(formData, function (response) {
+                console.log(attachmentUploadJSON);
 
-                    console.log(JSON.stringify(response));
+                if (attachmentArray) {
 
-                    var taskObject = {
-                        Task_Status: "Accepted",
-                        Task_Number: taskId,
-                        Submit_Status: "A"
+                    cloudService.createAttachment(attachmentUploadJSON, function (response) {
+
+                        console.log("Attachment Uploaded Successfully " + +JSON.stringify(response));
+                    });
+                }
+
+                setTimeout(function () {
+
+                    var formData = {
+                        "Taskstatus": [{
+                            "taskId": taskId,
+                            "taskStatus": "Accepted"
+                        }]
                     };
 
-                    localService.updateTaskSubmitStatus(taskObject);
-                });
+                    cloudService.updateAcceptTask(formData, function (response) {
 
-                var formData = {
-                    "Taskstatus": [{
-                        "taskId": taskId,
-                        "taskStatus": "Completed"
-                    }]
-                };
+                        console.log(JSON.stringify(response));
 
-                cloudService.updateAcceptTask(formData, function (response) {
+                        var taskObject = {
+                            Task_Status: "Accepted",
+                            Task_Number: taskId,
+                            Submit_Status: "A"
+                        };
 
-                    console.log(JSON.stringify(response));
+                        localService.updateTaskSubmitStatus(taskObject);
+                    });
 
-                    var taskObject = {
-                        Task_Status: "Completed",
-                        Task_Number: taskId,
-                        Submit_Status: "I"
+                    var formData = {
+                        "Taskstatus": [{
+                            "taskId": taskId,
+                            "taskStatus": "Completed"
+                        }]
                     };
 
-                    localService.updateTaskSubmitStatus(taskObject);
-                });
+                    cloudService.updateAcceptTask(formData, function (response) {
 
-            }, 3000);
-          },8000);
+                        console.log(JSON.stringify(response));
+
+                        var taskObject = {
+                            Task_Status: "Completed",
+                            Task_Number: taskId,
+                            Submit_Status: "I"
+                        };
+
+                        localService.updateTaskSubmitStatus(taskObject);
+                    });
+
+                }, 3000);
+            }, 8000);
         }
 
         function checkIfFutureDayTask(selTask) {

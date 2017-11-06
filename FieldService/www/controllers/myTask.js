@@ -113,9 +113,16 @@ app.controller('myTaskController', function ($scope, $compile, $timeout, uiCalen
                 myTask: {
                     text: 'My Field Job',
                     click: function () {
-                        $state.go('myFieldJob');
-                        $rootScope.tabClicked = true;
-                        $rootScope.selectedItem = 2;
+
+                        localService.getTaskList(function (response) {
+
+                            $rootScope.myTaskDetailsForLoggedInUser = response;
+                            $state.go("myFieldJob");
+                            $rootScope.tabClicked = true;
+                            $rootScope.selectedItem = 2;
+                        });
+
+
                     }
                 }
             },

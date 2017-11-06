@@ -8,6 +8,7 @@ app.controller('todoController', function ($scope, $http, $state, $rootScope, cl
 
     $scope.ProductQuantity = 1;
 
+    $scope.isFutureDate = valueService.getIfFutureDateTask();
     $scope.toggle = function () {
 
         $scope.myVar = !$scope.myVar;
