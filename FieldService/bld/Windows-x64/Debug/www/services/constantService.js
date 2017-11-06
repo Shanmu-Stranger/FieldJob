@@ -40,13 +40,13 @@
 
         var startDate = new Date();
 
-        startDate.setMonth(startDate.getMonth() - 1);
+        startDate.setDate(startDate.getDate() - 15);
 
         var startDateISOFormat = startDate.toISOString();
 
         var endDate = new Date();
 
-        endDate.setDate(endDate.getDate() + 7);
+        endDate.setDate(endDate.getDate() + 15);
 
         var endDateISOFormat = endDate.toISOString();
 

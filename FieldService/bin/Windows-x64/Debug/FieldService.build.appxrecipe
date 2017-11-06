@@ -641,6 +641,15 @@
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\plugins\cordova-plugin-inappbrowser\www\inappbrowser.js">
       <PackagePath>www\plugins\cordova-plugin-inappbrowser\www\inappbrowser.js</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\plugins\cordova-plugin-network-information\src\windows\NetworkInfoProxy.js">
+      <PackagePath>www\plugins\cordova-plugin-network-information\src\windows\NetworkInfoProxy.js</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\plugins\cordova-plugin-network-information\www\Connection.js">
+      <PackagePath>www\plugins\cordova-plugin-network-information\www\Connection.js</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\plugins\cordova-plugin-network-information\www\network.js">
+      <PackagePath>www\plugins\cordova-plugin-network-information\www\network.js</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\plugins\cordova-sqlite-storage\src\windows\sqlite-proxy.js">
       <PackagePath>www\plugins\cordova-sqlite-storage\src\windows\sqlite-proxy.js</PackagePath>
     </AppxPackagedFile>
@@ -718,9 +727,6 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\app\views\Attachments.html">
       <PackagePath>www\app\views\Attachments.html</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\app\views\base.html">
-      <PackagePath>www\app\views\base.html</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\app\views\CustomerSignature.html">
       <PackagePath>www\app\views\CustomerSignature.html</PackagePath>

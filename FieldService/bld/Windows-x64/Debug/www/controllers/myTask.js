@@ -17,15 +17,25 @@
     function getTask() {
 
         console.log("GET TASK IN");
+        if($rootScope.myTaskDetailsForLoggedInUser){
 
-        localService.getTaskList(function (response) {
-
-            $scope.myTaskDetails = response;
-
-            setEventArray(response);
-
+            $scope.myTaskDetails = $rootScope.myTaskDetailsForLoggedInUser;
+            setEventArray($rootScope.myTaskDetailsForLoggedInUser);
             eventInit();
-        });
+        }
+        else{
+            localService.getTaskList(function (response) {
+                if (response){
+                    $scope.myTaskDetails = response;
+
+                    setEventArray(response);
+
+                    eventInit();
+                }
+
+            });
+        }
+
     }
 
     function setEventArray(response) {

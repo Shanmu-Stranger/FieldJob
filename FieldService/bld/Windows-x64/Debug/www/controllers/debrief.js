@@ -61,7 +61,7 @@
 
         $scope.taskObject = valueService.getTask();
 
-        $scope.taskId = $scope.taskObject.Task_Number;
+        $scope.taskId = valueService.getTaskId();
 
         $scope.installBaseObject = valueService.getInstallBase();
 
@@ -474,7 +474,9 @@
             case "Time":
 
                 var durationFromResponse = moment(valueService.getUserType().duration, 'HH').format('HH:mm');
-
+                console.log('To check duration');
+                console.log(valueService.getUser());
+                console.log(durationFromResponse);
                 $scope.timeArray.push({
                     timeDefault: $scope.timeDefault,
                     Time_Id: $scope.taskId + ($scope.timeArray.length + 1),
@@ -1146,15 +1148,19 @@
                     $scope.populateTimeCodeArray(grandTotalTimeArray, key);
                     if (subTotalArray.length > 0) {
 
+                        var keepGoing = true;
                         angular.forEach(subTotalArray, function (subtotalObj, value) {
-                            if (subtotalObj.Work_Type == key.Work_Type.Value) {
-                                newWorkType = false;
-                                $scope.populateTimeCodeArray(subTotalTimeArray, key);
-                                subtotalObject.Duration = $scope.calculateDuration(subtotalObject, key);
-
-                            }
-                            else {
-                                newWorkType = true;
+                            if(keepGoing)
+                            {
+                                if (subtotalObj.Work_Type == key.Work_Type.Value ) {
+                                    newWorkType = false;
+                                    $scope.populateTimeCodeArray(subTotalTimeArray,key);
+                                    subtotalObj.Duration= $scope.calculateDuration(subtotalObj,key);
+                                    keepGoing=false;
+                                }
+                                else {
+                                    newWorkType = true;
+                                }
                             }
 
                         })

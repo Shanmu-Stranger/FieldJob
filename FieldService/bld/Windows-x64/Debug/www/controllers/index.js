@@ -14,6 +14,8 @@
 
     window.addEventListener('online', onLine);
 
+    $scope.onlineStatus = false;
+
     function onLine() {
 
         console.log("Online");
@@ -202,7 +204,13 @@
 
                 $rootScope.showTaskDetail = false;
 
-                $state.go("myFieldJob");
+                localService.getTaskList(function (response) {
+
+                    $rootScope.myTaskDetailsForLoggedInUser = response;
+                    $state.go("myFieldJob");
+
+                });
+
 
                 /* setTimeout(function () {
 
@@ -256,6 +264,10 @@
         }
     }
 
+    $scope.menuIconClicked = function(){
+        $scope.hideNavLeft = !$scope.hideNavLeft;
+    }
+
     $scope.signout = function () {
 
         // localService.deleteUser();
@@ -298,7 +310,7 @@
     $scope.syncFunctionality = function () {
         console.log("Inside the syncFunctionality");
 
-
+        if(valueService.getNetworkStatus()){
         cloudService.getTaskList(function (response) {
 
             localService.deleteInstallBase();
@@ -326,6 +338,7 @@
             $state.go('myTask');
         });
     }
+  }
 
 });
 

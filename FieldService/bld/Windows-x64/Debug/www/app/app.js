@@ -9,6 +9,8 @@ var app = angular.module('emerson', ['ngMaterial', 'ngLoadingSpinner', 'md.data.
 
 app.run(function ($rootScope, $location, $http, $state, localService, valueService, constantService) {
 
+    
+
     window.addEventListener('offline', offLine);
 
     window.addEventListener('online', onLine);
@@ -35,6 +37,25 @@ app.run(function ($rootScope, $location, $http, $state, localService, valueServi
 
     function onDeviceReady() {
 
+        function checkConnection() {
+
+            var networkState = navigator.connection.type;
+
+            var states = {};
+            states[Connection.UNKNOWN] = 'Unknown connection';
+            states[Connection.ETHERNET] = 'Ethernet connection';
+            states[Connection.WIFI] = 'WiFi connection';
+            states[Connection.CELL_2G] = 'Cell 2G connection';
+            states[Connection.CELL_3G] = 'Cell 3G connection';
+            states[Connection.CELL_4G] = 'Cell 4G connection';
+            states[Connection.CELL] = 'Cell generic connection';
+            states[Connection.NONE] = 'No network connection';
+
+            console.log('Connection type: ' + states[networkState]);
+        }
+
+        checkConnection();
+
         localService.getUser(function (response) {
 
             console.log("USER =====> " + JSON.stringify(response));
@@ -51,7 +72,12 @@ app.run(function ($rootScope, $location, $http, $state, localService, valueServi
 
                         $rootScope.selectedItem = 2;
 
-                          $state.go('myTask');
+                        localService.getTaskList(function (response) {
+
+                            $rootScope.myTaskDetailsForLoggedInUser = response;
+
+                            $state.go('myFieldJob');
+                        });
 
                     } else {
 
@@ -95,37 +121,37 @@ app.config(function ($stateProvider, $urlRouterProvider) {
     })
     $stateProvider.state("myTask", {
         url: "/myTask",
-        parent: 'dashBoard',
+        //  parent: 'dashBoard',
         controller: "myTaskController",
         templateUrl: "app/views/MyTask.html"
     })
     $stateProvider.state("myFieldJob", {
         url: "/myFieldJob",
-        parent: 'dashBoard',
+        //  parent: 'dashBoard',
         controller: "myTaskController",
         templateUrl: "app/views/myFieldJob.html"
     })
     $stateProvider.state("debrief", {
         url: "/debrief",
-        parent: 'dashBoard',
+        //  parent: 'dashBoard',
         controller: "debriefController",
         templateUrl: "app/views/Debrief.html"
     })
     $stateProvider.state("taskOverFlow", {
         url: "/taskOverFlow",
-        parent: 'dashBoard',
+        //  parent: 'dashBoard',
         controller: "taskOverFlowController",
         templateUrl: "app/views/TaskOverflow.html"
     })
     $stateProvider.state("todo", {
         url: "/todo",
-        parent: 'dashBoard',
+        //  parent: 'dashBoard',
         controller: "todoController",
         templateUrl: "app/views/Todo.html"
     })
     $stateProvider.state("material", {
         url: "/material",
-        parent: 'dashBoard',
+        //  parent: 'dashBoard',
         controller: "taskOverFlowController",
         templateUrl: "app/views/Material.html"
     })
@@ -147,8 +173,8 @@ app.filter('timezonefilter', function (constantService) {
     return function (date) {
 
         console.log("*******************" + constantService.getTimeZone());
-        if(date==="" || date===undefined)
-        return date;
+        if (date === "" || date === undefined)
+            return date;
 
         return moment.utc(date).utcOffset(constantService.getTimeZone()).format("DD/MM/YYYY");
         // var convertedDate = new Date(date);

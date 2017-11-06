@@ -166,7 +166,7 @@
         };
 
         function setUserType() {
-
+            console.log(getUser());
             userType.name = getUser().Name;
 
             userType.defaultView = getUser().Default_View;
@@ -199,10 +199,10 @@
 
             debrief.task = taskObject;
 
-            cloudService.getTaskList( function (response) {
-
-                debrief.task = response;
-            });
+            // localService.getTaskList( function (response) {
+            //
+            //     debrief.task = response;
+            // });
 
             localService.getInstallBaseList(taskObject.Task_Number, function (response) {
 
