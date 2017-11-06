@@ -97,8 +97,8 @@ app.controller("debriefController", function ($scope, $state, $rootScope, $windo
 
                             attachmentObject.contentType = attachment.File_Type;
 
-                            attachmentObject.filename = attachment.File_Name.split(".")[0];
-
+                            attachmentObject.fileDisc = attachment.File_Name.split(".")[0];
+                            attachmentObject.filename=attachment.File_Name;
                             attachmentObject.filetype = attachment.File_Name.split(".")[1];
 
                             if (attachment.AttachmentType == "D") {
@@ -883,12 +883,12 @@ app.controller("debriefController", function ($scope, $state, $rootScope, $windo
 
                     var base64Code = attachment.base64;
 
-                    valueService.saveBase64File(filePath, attachment.filename + "." + attachment.filetype, base64Code, attachment.contentType);
+                    valueService.saveBase64File(filePath, attachment.filename, base64Code, attachment.contentType);
 
                     var attachmentObject = {
                         Attachment_Id: $scope.taskId + i,
                         File_Path: filePath,
-                        File_Name: attachment.filename + "." + attachment.filetype,
+                        File_Name: attachment.filename,
                         File_Type: attachment.contentType,
                         Type: "D",
                         Task_Number: $scope.taskId,
@@ -1525,37 +1525,37 @@ valueService.setNetworkStatus(true);
           date.setMonth(date.getMonth() - 1);
 
           //Post notes data
-          var attachment = [];
+        //   var attachment = [];
 
-          if ($scope.image.length > 0) {
+        //   if ($scope.image.length > 0) {
 
-              angular.forEach($scope.image, function (key, value) {
+        //       angular.forEach($scope.image, function (key, value) {
 
-                  var attachmentObject = {
-                      "Data": "",
-                      "FileName": key.file.name,
-                      "Description": key.file.name,
-                      "Name": ""
-                  }
+        //           var attachmentObject = {
+        //               "Data": "",
+        //               "FileName": key.file.name,
+        //               "Description": key.file.name,
+        //               "Name": ""
+        //           }
 
-                  attachment.push(attachmentObject);
-              });
-          }
+        //           attachment.push(attachmentObject);
+        //       });
+        //   }
 
-          if ($scope.files.length > 0) {
+        //   if ($scope.files.length > 0) {
 
-              angular.forEach($scope.files, function (key, value) {
+        //       angular.forEach($scope.files, function (key, value) {
 
-                  var attachmentObject = {
-                      "Data": "",
-                      "FileName": key.file.name,
-                      "Description": key.filename,
-                      "Name": ""
-                  }
+        //           var attachmentObject = {
+        //               "Data": "",
+        //               "FileName": key.fileename,
+        //               "Description": key.fileDisc,
+        //               "Name": ""
+        //           }
 
-                  attachment.push(attachmentObject);
-              });
-          }
+        //           attachment.push(attachmentObject);
+        //       });
+        //   }
 
           var attachmentJSONData = [];
 
@@ -1564,7 +1564,7 @@ valueService.setNetworkStatus(true);
               var attachmentObject = {
                   "Data": $scope.files[i].data.split(",")[1],
                   "FileName": $scope.files[i].filename,
-                  "Description": $scope.files[i].filename,
+                  "Description": $scope.files[i].fileDisc,
                   "Name": $scope.files[i].filename,
                   "taskId": $rootScope.selectedTask.Task_Number,
                   "contentType": $scope.files[i].data.split(",")[0].split(";")[0].split(":")[1]
@@ -1841,7 +1841,7 @@ valueService.setNetworkStatus(true);
 
             var type = file.name.split(".")[1];
 
-            var fileobj = {"filename": name, "file": file, "filetype": type, "data": ""};
+            var fileobj = {"filename": file.name,"fileDisc":name, "file": file, "filetype": type, "data": ""};
 
             var fileObject = null;
 
@@ -1881,7 +1881,7 @@ valueService.setNetworkStatus(true);
 
             var type = file.name.split(".")[1];
 
-            var fileobj = {"filename": name, "file": file, "filetype": type, "data": ""};
+            var fileobj = {"filename": file.name,"fileDisc":name, "file": file, "filetype": type, "data": ""};
 
             var fileObject = null;
 
@@ -2095,10 +2095,10 @@ valueService.setNetworkStatus(true);
                 doc1.addImage(excelimg, 'JPEG', xAttachField1, yAttachField + 15, 50, 40)
             doc1.setFontSize(16)
             doc1.setFontType('normal')
-            if (file.filename.length >= 20)
-                doc1.text(xAttachField1, yAttachField + 65, file.filename.substr(0, 18) + '..')
+            if (file.fileDisc.length >= 20)
+                doc1.text(xAttachField1, yAttachField + 65, file.fileDisc.substr(0, 18) + '..')
             else {
-                doc1.text(xAttachField1, yAttachField + 65, file.filename)
+                doc1.text(xAttachField1, yAttachField + 65, file.fileDisc)
             }
             xAttachField1 += 60;
         })
