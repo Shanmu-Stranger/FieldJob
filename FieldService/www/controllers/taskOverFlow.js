@@ -173,6 +173,8 @@ app.controller('taskOverFlowController', function ($scope, $http, $state, $rootS
 
     $scope.goToBack = function () {
         $state.go('myTask');
+        $rootScope.selectedItem = 1;
+        $rootScope.showTaskDetail = false;
     };
 
     $scope.add = function () {
