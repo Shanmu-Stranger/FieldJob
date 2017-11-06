@@ -6,7 +6,7 @@
 
     valueService.$inject = ['$http', '$rootScope', '$window', '$location', 'localService', 'cloudService'];
 
-    function valueService($http, $rootScope, $window, $location, localService, cloudService) {
+    function valueService($http,$rootScope, $window, $location, localService, cloudService) {
 
         var futureTask;
 
@@ -714,30 +714,134 @@
             var notesArray = [];
 
             var attachmentArray = [];
-
+            var timeJSONData = [];
+            var expenseJSONData = [];
+            var materialDataJSON = [];
+            var noteDataJSON = [];
+            var attachmentJSONData = [];
             localService.getTimeList(taskId, function (response) {
 
                 timeArray = response;
+                for (var i = 0; i < timeArray.length; i++) {
+
+                    var date = $filter("date")(timeArray[i].Date, "yyyy-MM-ddThh:mm:ss.000");
+                    date = date + "Z";
+
+                    var timeData = {
+                        "task_id": timeArray[i].Task_Number,
+                        "shift_code": timeArray[i].Shift_Code_Id,
+                        "overtime_shiftcode": timeArray[i].Time_Code_Id,
+                        "charge_type": timeArray[i].Charge_Type_Id,
+                        "duration": timeArray[i].Duration,
+                        "comments": timeArray[i].Comments,
+                        "labor_item": timeArray[i].Item_Id,
+                        "labor_description": timeArray[i].Description,
+                        "work_type": timeArray[i].Work_Type_Id,
+                        "start_date": date,
+                        "end_date": date,
+                        "charge_method": timeArray[i].Charge_Method_Id,
+                        "JobName": "20"
+                    }
+
+                    timeJSONData.push(timeData);
+                }
             });
 
             localService.getExpenseList(taskId, function (response) {
 
                 expenseArray = response;
+                for (var i = 0; i < expenseArray.length; i++) {
+
+                    var expenseDate = $filter("date")(expenseArray[i].Date, "yyyy-MM-dd");
+
+                    var expenseData = {
+                        "taskId": expenseArray[i].Task_Number,
+                        "comments": expenseArray[i].Justification,
+                        "currency": expenseArray[i].Currency_Id,
+                        "chargeMethod": expenseArray[i].Charge_Method_Id,
+                        "ammount": expenseArray[i].Amount,
+                        "date": expenseDate,
+                        "expenseItem": expenseArray[i].Expense_Type_Id,
+                        "chargeType": "2",
+                        "billable": "true"
+                    }
+
+                    expenseJSONData.push(expenseData);
+                }
             });
 
             localService.getMaterialList(taskId, function (response) {
 
                 materialArray = response;
+                for (var i = 0; i < materialArray.length; i++) {
+
+                    angular.forEach(materialArray[i].Serial_Type, function (key) {
+
+                        var materialData = {
+                            "charge_method": materialArray[i].Charge_Type_Id.toString(),
+                            "task_id": materialArray[i].Task_Number,
+                            "item_description": materialArray[i].Description,
+                            "product_quantity": 1,
+                            "comments":"",
+                            "item": materialArray[i].itemName,
+                            "serialin": key.in,
+                            "serialout": key.out,
+                            "serial_number": key.number
+                        }
+
+                        materialDataJSON.push(materialData);
+                    });
+                }
             });
 
             localService.getNotesList(taskId, function (response) {
 
                 notesArray = response;
+                for (var i = 0; i < notesArray.length; i++) {
+
+                    var noteData = {
+                        "Notes_type": notesArray[i].Note_Type.id,
+                        "notes_description": notesArray[i].Notes,
+                        "task_id": notesArray[i].Task_Number
+                    };
+
+                    noteDataJSON.push(noteData);
+                }
             });
 
             localService.getAttachmentList(taskId, "D", function (response) {
 
                 attachmentArray = response;
+                angular.forEach(attachmentArray, function (attachment) {
+
+                    var attachmentObject = {};
+
+                    attachmentObject.taskId = attachment.Task_Number;
+                    attachmentObject.contentType = attachment.File_Type;
+                    attachmentObject.FileName = attachment.File_Name.split(".")[0];
+                    attachmentObject.Description = attachment.File_Name.split(".")[0];
+                    attachmentObject.Name = attachment.File_Name.split(".")[0];
+
+                    window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fs) {
+
+                        fs.root.getFile(attachment.File_Name, {create: true, exclusive: false}, function (fileEntry) {
+
+                            fileEntry.file(function (file) {
+
+                                var reader = new FileReader();
+
+                                reader.onloadend = function () {
+
+                                    attachmentObject.Data = this.result.split(",")[1];
+
+                                    attachmentJSONData.push(attachmentObject);
+                                };
+
+                                reader.readAsDataURL(file);
+                            });
+                        });
+                    });
+                });
             });
             //
             // localService.getEngineer(taskId, function (response) {
@@ -745,121 +849,26 @@
             //     debrief.engineer = response;
             // });
 
-            var timeJSONData = [];
 
-            for (var i = 0; i < timeArray.length; i++) {
 
-                var date = $filter("date")(timeArray[i].Date, "yyyy-MM-ddThh:mm:ss.000");
-                date = date + "Z";
 
-                var timeData = {
-                    "task_id": timeArray[i].Task_Number,
-                    "shift_code": timeArray[i].Shift_Code_Id,
-                    "overtime_shiftcode": timeArray[i].Time_Code_Id,
-                    "charge_type": timeArray[i].Charge_Type_Id,
-                    "duration": timeArray[i].Duration,
-                    "comments": timeArray[i].Comments,
-                    "labor_item": timeArray[i].Item_Id,
-                    "labor_description": timeArray[i].Description,
-                    "work_type": timeArray[i].Work_Type_Id,
-                    "start_date": date,
-                    "end_date": date,
-                    "charge_method": timeArray[i].Charge_Method_Id,
-                    "JobName": "20"
-                }
 
-                timeJSONData.push(timeData);
-            }
 
-            var expenseJSONData = [];
 
-            for (var i = 0; i < expenseArray.length; i++) {
 
-                var expenseDate = $filter("date")(expenseArray[i].Date, "yyyy-MM-dd");
 
-                var expenseData = {
-                    "taskId": expenseArray[i].Task_Number,
-                    "comments": expenseArray[i].Justification,
-                    "currency": expenseArray[i].Currency_Id,
-                    "chargeMethod": expenseArray[i].Charge_Method_Id,
-                    "ammount": expenseArray[i].Amount,
-                    "date": expenseDate,
-                    "expenseItem": expenseArray[i].Expense_Type_Id,
-                    "chargeType": "2",
-                    "billable": "true"
-                }
 
-                expenseJSONData.push(expenseData);
-            }
 
-            var materialDataJSON = [];
 
-            for (var i = 0; i < materialArray.length; i++) {
 
-                angular.forEach(materialArray[i].Serial_Type, function (key) {
 
-                    var materialData = {
-                        "charge_method": materialArray[i].Charge_Type_Id.toString(),
-                        "task_id": materialArray[i].Task_Number,
-                        "item_description": materialArray[i].Description,
-                        "product_quantity": 1,
-                        "comments": "gfhghg",
-                        "item": materialArray[i].itemName,
-                        "serialin": key.in,
-                        "serialout": key.out,
-                        "serial_number": key.number
-                    }
 
-                    materialDataJSON.push(materialData);
-                });
-            }
 
-            var noteDataJSON = [];
 
-            for (var i = 0; i < notesArray.length; i++) {
 
-                var noteData = {
-                    "Notes_type": notesArray[i].Note_Type.id,
-                    "notes_description": notesArray[i].Notes,
-                    "task_id": notesArray[i].Task_Number
-                };
 
-                noteDataJSON.push(noteData);
-            }
 
-            var attachmentJSONData = [];
-
-            angular.forEach($scope.attachmentArray, function (attachment) {
-
-                var attachmentObject = {};
-
-                attachmentObject.taskId = attachment.Task_Number;
-                attachmentObject.contentType = attachment.File_Type;
-                attachmentObject.FileName = attachment.File_Name.split(".")[0];
-                attachmentObject.Description = attachment.File_Name.split(".")[0];
-                attachmentObject.Name = attachment.File_Name.split(".")[0];
-
-                window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fs) {
-
-                    fs.root.getFile(attachment.File_Name, {create: true, exclusive: false}, function (fileEntry) {
-
-                        fileEntry.file(function (file) {
-
-                            var reader = new FileReader();
-
-                            reader.onloadend = function () {
-
-                                attachmentObject.Data = this.result.split(",")[1];
-
-                                attachmentJSONData.push(attachmentObject);
-                            };
-
-                            reader.readAsDataURL(file);
-                        });
-                    });
-                });
-            });
-
+            setTimeout(function () {
             var timeUploadJSON = {
                 "Time": timeJSONData
             }
@@ -973,6 +982,7 @@
                 });
 
             }, 3000);
+          },8000);
         }
 
         function checkIfFutureDayTask(selTask) {
