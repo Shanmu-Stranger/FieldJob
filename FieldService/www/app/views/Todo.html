@@ -41,10 +41,10 @@
     }*/
 
 </style>
-       
+
 
         <nav class="navbar navbar-default navbar-fixed-top nav-noLeft sub-navbar"  ng-class="{'nav-left' : hideNavLeft}">
-            
+
                 <div class="navbar-header">
 
                     <md-button class="subheader-btns" aria-label="Learn More"  ui-sref="taskOverFlow">
@@ -55,17 +55,17 @@
                 </div>
 
                 <div class="collapse navbar-collapse"  style="text-align: center;">
-                    
+
                     <div class="nav navbar-nav navbar-right">
-                         
+
                          <!-- <a class="startwork-btn md-button md-ink-ripple" ng-click="$root.showTaskOrDebrief(4)" ng-disabled="isFutureDate"><span translate="Debrief"></span></a> -->
 
-                         <button type="button" class="btn btn-default startwork-btn" ng-click="$root.showTaskOrDebrief(4)" ng-disabled="isFutureDate" translate="Debrief"></button>
+                         <button type="button" class="btn btn-default startwork-btn" ng-click="$root.showTaskOrDebrief(4)" ng-disabled="isFutureDateInTodo" translate="Debrief"></button>
                     </div>
 
-                      
+
                 </div>
-           
+
 </nav>
 <!-- <md-toolbar class="category-title" layout="row">
     <div class="md-toolbar-tools toolbar">
@@ -76,7 +76,7 @@
         <md-button class="subheader-btns " aria-label="Learn More" ui-sref="todo">
             ONSITE REQUIREMENT
         </md-button>
-       
+
         <span flex></span>
         <md-button class="md-primary startwork-btn"  ng-click="$root.showTaskOrDebrief(4)" ng-disabled="isFutureDate">DEBRIEF
         </md-button>
@@ -180,11 +180,11 @@
                 </div>
 
             </div>
-          
+
         </div>
 
     </div>
-  
+
 </div>
 
 
