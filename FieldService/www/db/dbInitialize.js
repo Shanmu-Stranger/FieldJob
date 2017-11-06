@@ -58,70 +58,70 @@
         db.transaction(function (tx) {
 
             tx.executeSql(sqlUser);
-            console.log('DB SUCCESS: USER');
+            // console.log('DB SUCCESS: USER');
 
             tx.executeSql(sqlTask);
-            console.log('DB SUCCESS: TASK');
+            //console.log('DB SUCCESS: TASK');
 
             tx.executeSql(sqlInstallBase);
-            console.log('DB SUCCESS: INSTALLBASE');
+            //console.log('DB SUCCESS: INSTALLBASE');
 
             tx.executeSql(sqlContact);
-            console.log('DB SUCCESS: CONTACT');
+            //console.log('DB SUCCESS: CONTACT');
 
             tx.executeSql(sqlNote);
-            console.log('DB SUCCESS: NOTE');
+            //console.log('DB SUCCESS: NOTE');
 
             tx.executeSql(sqlProject);
-            console.log('DB SUCCESS: PROJECT');
+            //console.log('DB SUCCESS: PROJECT');
 
             tx.executeSql(sqlOverTime);
-            console.log('DB SUCCESS: OVERTIME');
+            //console.log('DB SUCCESS: OVERTIME');
 
             tx.executeSql(sqlShiftCode);
-            console.log('DB SUCCESS: SHIFTCODE');
+            //console.log('DB SUCCESS: SHIFTCODE');
 
             tx.executeSql(sqlChargeType);
-            console.log('DB SUCCESS: CHARGETYPE');
+            //console.log('DB SUCCESS: CHARGETYPE');
 
             tx.executeSql(sqlChargeMethod);
-            console.log('DB SUCCESS: CHARGEMETHOD');
+            //console.log('DB SUCCESS: CHARGEMETHOD');
 
             tx.executeSql(sqlFieldJobName);
-            console.log('DB SUCCESS: FIELDJOBNAME');
+            //console.log('DB SUCCESS: FIELDJOBNAME');
 
             tx.executeSql(sqlWorkType);
-            console.log('DB SUCCESS: WORKTYPE');
+            //console.log('DB SUCCESS: WORKTYPE');
 
             tx.executeSql(sqlItem);
-            console.log('DB SUCCESS: ITEM');
+            //console.log('DB SUCCESS: ITEM');
 
             tx.executeSql(sqlCurrency);
-            console.log('DB SUCCESS: CURRENCY');
+            //console.log('DB SUCCESS: CURRENCY');
 
             tx.executeSql(sqlExpenseType);
-            console.log('DB SUCCESS: EXPENSETYPE');
+            //console.log('DB SUCCESS: EXPENSETYPE');
 
             tx.executeSql(sqlNoteType);
-            console.log('DB SUCCESS: NOTETYPE');
+            //console.log('DB SUCCESS: NOTETYPE');
 
             tx.executeSql(sqlTime);
-            console.log('DB SUCCESS: TIME');
+            //console.log('DB SUCCESS: TIME');
 
             tx.executeSql(sqlExpense);
-            console.log('DB SUCCESS: EXPENSE');
+            //console.log('DB SUCCESS: EXPENSE');
 
             tx.executeSql(sqlMaterial);
-            console.log('DB SUCCESS: MATERIAL');
+            //console.log('DB SUCCESS: MATERIAL');
 
             tx.executeSql(sqlNotes);
-            console.log('DB SUCCESS: NOTES');
+            //console.log('DB SUCCESS: NOTES');
 
             tx.executeSql(sqlAttachment);
-            console.log('DB SUCCESS: ATTACHMENT');
+            //console.log('DB SUCCESS: ATTACHMENT');
 
             tx.executeSql(sqlEngineer);
-            console.log('DB SUCCESS: ENGINEER');
+            //console.log('DB SUCCESS: ENGINEER');
 
         }, function (error) {
 

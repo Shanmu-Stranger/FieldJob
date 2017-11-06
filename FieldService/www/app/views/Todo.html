@@ -41,10 +41,10 @@
     }*/
 
 </style>
-       
+
 
         <nav class="navbar navbar-default navbar-fixed-top nav-noLeft sub-navbar"  ng-class="{'nav-left' : hideNavLeft}">
-            
+
                 <div class="navbar-header">
 
                     <md-button class="subheader-btns" aria-label="Learn More"  ui-sref="taskOverFlow">
@@ -55,17 +55,17 @@
                 </div>
 
                 <div class="collapse navbar-collapse"  style="text-align: center;">
-                    
+
                     <div class="nav navbar-nav navbar-right">
-                         
+
                          <!-- <a class="startwork-btn md-button md-ink-ripple" ng-click="$root.showTaskOrDebrief(4)" ng-disabled="isFutureDate"><span translate="Debrief"></span></a> -->
 
-                         <button type="button" class="btn btn-default startwork-btn" ng-click="$root.showTaskOrDebrief(4)" ng-disabled="isFutureDate" translate="Debrief"></button>
+                         <button type="button" class="btn btn-default startwork-btn" ng-click="$root.showTaskOrDebrief(4)" ng-disabled="isFutureDateInTodo" translate="Debrief"></button>
                     </div>
 
-                      
+
                 </div>
-           
+
 </nav>
 <!-- <md-toolbar class="category-title" layout="row">
     <div class="md-toolbar-tools toolbar">
@@ -76,7 +76,7 @@
         <md-button class="subheader-btns " aria-label="Learn More" ui-sref="todo">
             ONSITE REQUIREMENT
         </md-button>
-       
+
         <span flex></span>
         <md-button class="md-primary startwork-btn"  ng-click="$root.showTaskOrDebrief(4)" ng-disabled="isFutureDate">DEBRIEF
         </md-button>
@@ -156,7 +156,8 @@
                                          ng-if="item.File_Name.indexOf('.xls')>-1 || item.File_Name.indexOf('.xlsx')>-1"/>
 
                                     <img style="width:100px;height:100px"
-                                         ng-src="{{item.File_Path + item.File_Name}}"/>
+                                         data-ng-src="data:{{item.contentType}};base64,{{item.base64}}" alt=""
+                                         ng-if="item.contentType.indexOf('image')>-1"/>
 
                                     <div style="padding:15px 0">{{item.File_Name}}</div>
 
@@ -166,24 +167,24 @@
 
                                     <div class="label-my margintop10" style="margin-bottom:0 !important;">Date</div>
 
-                                    <div>{{res.Date_Created.substr(1,19)| timezonefilter }}</div>
+                                    <div>{{item.Date_Created.substr(1,19)| timezonefilter }}</div>
 
                                 </div>
                             </a>
 
                         </div>
                     </div>
-                    <div  ng-if="Attachments == undefined || Attachments.length==0">
+                    <div  ng-if="attachmentArray == undefined || attachmentArray.length==0">
                             NO DATA
                         </div>
                 </div>
 
             </div>
-          
+
         </div>
 
     </div>
-  
+
 </div>
 
 

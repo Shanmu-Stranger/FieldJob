@@ -151,30 +151,36 @@ app.controller('loginController', function ($location, $state, $rootScope, $scop
 
                     angular.forEach(taskArray.Attachments, function (attachmentValue, value) {
 
-                        $scope.attachmentArray = [];
-
                         download(attachmentValue, taskArray.Task_Id, function (response) {
+                            $rootScope.apicall=false;
+                            $scope.attachmentArray = [];
 
                             var filePath = cordova.file.dataDirectory;
 
-                            var base64Code = response;
+                            if (response != undefined && response != null) {
 
-                            valueService.saveBase64File(filePath, attachmentValue.User_File_Name, base64Code, attachmentValue.Content_type);
+                                var base64Code = response;
 
-                            var attachmentObject = {
-                                Attachment_Id: attachmentValue.Attachments_Id,
-                                File_Path: filePath,
-                                File_Name: attachmentValue.User_File_Name,
-                                File_Type: attachmentValue.Content_type,
-                                Type: "O",
-                                AttachmentType: "O",
-                                Task_Number: taskArray.Task_Id
-                            };
+                               valueService.saveBase64File(filePath, attachmentValue.User_File_Name, base64Code, attachmentValue.Content_type);
 
-                            $scope.attachmentArray.push(attachmentObject);
+                                var attachmentObject = {
+                                    Attachment_Id: attachmentValue.Attachments_Id,
+                                    File_Path: filePath,
+                                    File_Name: attachmentValue.User_File_Name,
+                                    File_Type: attachmentValue.Content_type,
+                                    Type: "O",
+                                    AttachmentType: "O",
+                                    Task_Number: taskArray.Task_Id
+                                };
+
+                                $scope.attachmentArray.push(attachmentObject);
+
+                                localService.insertAttachmentList($scope.attachmentArray);
+
+                            }
                         });
 
-                        localService.insertAttachmentList($scope.attachmentArray);
+
                     });
                 });
             }
@@ -182,10 +188,12 @@ app.controller('loginController', function ($location, $state, $rootScope, $scop
     }
 
     function download(resource, taskId, callback) {
-
+        $rootScope.apicall=false;
         cloudService.downloadAttachment(taskId, resource.Attachments_Id, function (response) {
 
-            callback(response.data);
+            if (response != undefined)
+                callback(response.data);
+
         });
     }
 });
