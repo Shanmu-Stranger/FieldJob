@@ -289,7 +289,9 @@ app.controller("debriefController", function ($scope, $state, $rootScope, $windo
                     item.Date = new Date(item.Date);
 
                 item.timeDefault = $scope.timeDefault;
+                item.DurationHours = moment.duration(item.Duration).hours();
 
+                item.DurationMinutes = moment.duration(item.Duration).minutes();
                 angular.forEach(item.timeDefault.chargeType.values, function (type) {
                     if (type.ID == item.Charge_Type_Id) {
                         item.Charge_Type = type;
@@ -1448,7 +1450,7 @@ valueService.setNetworkStatus(true);
               var date = $filter("date")(notesArray[i].Date, "yyyy-MM-ddThh:mm:ss.000");
               date = date + "Z";
               var noteData = {
-                  "Notes_type": notesArray[i].Note_Type.id,
+                  "Notes_type": notesArray[i].Note_Type.ID,
                   "notes_description": notesArray[i].Notes,
                   "task_id": notesArray[i].Task_Number,
                   "mobilecreatedDate":moment.utc(notesArray[i].Date).format("YYYY-MM-DDTHH:mm:ss.000Z")
@@ -1584,7 +1586,7 @@ valueService.setNetworkStatus(true);
           }
 
           setTimeout(function () {
-              
+
               var formData = {
                   "Taskstatus": [{
                       "taskId": $scope.taskId,

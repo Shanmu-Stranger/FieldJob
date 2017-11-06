@@ -52,7 +52,12 @@ app.run(function ($rootScope, $location, $http, $state, localService, valueServi
 
                         $rootScope.selectedItem = 2;
 
-                          $state.go('myTask');
+                          //$state.go('myTask');
+                          localService.getTaskList(function (response) {
+
+                                $rootScope.myTaskDetailsForLoggedInUser = response;
+                                 $state.go('myFieldJob');
+                        });
 
                     } else {
 
