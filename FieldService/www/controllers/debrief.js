@@ -61,7 +61,7 @@ app.controller("debriefController", function ($scope, $state, $rootScope, $windo
 
         $scope.taskObject = valueService.getTask();
 
-        $scope.taskId = valueService.getTaskId();
+        $scope.taskId = $scope.taskObject.Task_Number;
 
         $scope.installBaseObject = valueService.getInstallBase();
 
@@ -473,11 +473,14 @@ app.controller("debriefController", function ($scope, $state, $rootScope, $windo
 
             case "Time":
 
+                var arrayLength = $scope.taskId + ($scope.timeArray.length + 1)
                 var durationFromResponse = moment(valueService.getUserType().duration, 'HH').format('HH:mm');
+
+                console.log($scope.timeArray.length + 1)
 
                 $scope.timeArray.push({
                     timeDefault: $scope.timeDefault,
-                    Time_Id: $scope.taskId + ($scope.timeArray.length + 1),
+                    Time_Id: arrayLength,
                     Field_Job_Name: "",
                     Field_Job_Name_Id: "",
                     Charge_Type: "",
@@ -638,7 +641,7 @@ app.controller("debriefController", function ($scope, $state, $rootScope, $windo
             case "Time":
 
                 itemToBeCopied.comments = "";
-
+                itemToBeCopied.Time_Id=$scope.taskId + ($scope.timeArray.length + 1)
                 $scope.timeArray.push(itemToBeCopied);
 
                 break;
@@ -646,13 +649,13 @@ app.controller("debriefController", function ($scope, $state, $rootScope, $windo
             case "Expenses":
 
                 itemToBeCopied.justification = "";
-
+                itemToBeCopied.Expense_Id=$scope.taskId + ($scope.expenseArray.length + 1)
                 $scope.expenseArray.push(itemToBeCopied);
 
                 break;
 
             case "Notes":
-
+               itemToBeCopied.Notes_Id=$scope.taskId + ($scope.notesArray.length + 1)
                 $scope.notesArray.push(itemToBeCopied);
 
                 break;
@@ -1327,7 +1330,7 @@ app.controller("debriefController", function ($scope, $state, $rootScope, $windo
     $scope.customerSubmit = function () {
 
         console.log(customerMail.value);
-
+valueService.setNetworkStatus(true);
         $scope.customersubmit = true;
 
         $scope.isSubmitted = true;
@@ -1338,8 +1341,309 @@ app.controller("debriefController", function ($scope, $state, $rootScope, $windo
 
         if (valueService.getNetworkStatus()) {
 
-            valueService.submitDebrief(valueService.getTask().Task_Number);
+          //  valueService.submitDebrief(valueService.getTask().Task_Number);
+            var timeJSONData = [];
 
+          var timeArray = $scope.timeArray;
+          var expenseArray = $scope.expenseArray;
+          var materialArray = $scope.materialArray;
+          var notesArray = $scope.notesArray;
+
+          for (var i = 0; i < timeArray.length; i++) {
+
+              var date = $filter("date")(timeArray[i].Date, "yyyy-MM-ddThh:mm:ss.000");
+              date = date + "Z";
+              console.log(date);
+              var timeData = {
+                  "task_id": timeArray[i].Task_Number,
+                  "shift_code": timeArray[i].Shift_Code_Id,
+                  "overtime_shiftcode": timeArray[i].Time_Code_Id,
+                  "charge_type": timeArray[i].Charge_Type_Id,
+                  "duration": timeArray[i].Duration,
+                  "comments": timeArray[i].Comments,
+                  "labor_item": timeArray[i].Item_Id,
+                  "labor_description": timeArray[i].Description,
+                  "work_type": timeArray[i].Work_Type_Id,
+                  "start_date": moment.utc(timeArray[i].Date).format("YYYY-MM-DDTHH:mm:ss.000Z"),
+                  "end_date": moment.utc(timeArray[i].Date).format("YYYY-MM-DDTHH:mm:ss.000Z"),
+                  "charge_method": timeArray[i].Charge_Method_Id,
+                  "JobName": "20"
+              }
+
+              timeJSONData.push(timeData);
+          }
+
+          var expenseJSONData = [];
+
+          for (var i = 0; i < expenseArray.length; i++) {
+
+              var expenseDate = $filter("date")(expenseArray[i].Date, "yyyy-MM-dd");
+
+              var expenseData = {
+                  "taskId": expenseArray[i].Task_Number,
+                  "comments": expenseArray[i].Justification,
+                  "currency": expenseArray[i].Currency_Id.toString(),
+                  "chargeMethod": expenseArray[i].Charge_Method_Id.toString(),
+                  "ammount": expenseArray[i].Amount,
+                  "date": moment.utc(expenseArray[i].Date).format("YYYY-MM-DD"),
+                  "expenseItem": expenseArray[i].Expense_Type_Id.toString()
+                  // "chargeType": "2",
+                  // "billable": "true"
+              }
+
+              expenseJSONData.push(expenseData);
+          }
+
+          var materialDataJSONWarranty = [];
+
+          var materialDataJSON = [];
+
+          for (var i = 0; i < materialArray.length; i++) {
+
+              //  if (materialArray[i].Charge_Type_Id == 138) {
+
+              angular.forEach(materialArray[i].Serial_Type, function (key) {
+
+                  var materialData = {
+                      "charge_method": materialArray[i].Charge_Type_Id.toString(),
+                      "task_id": materialArray[i].Task_Number,
+                      "item_description": materialArray[i].Description,
+                      "product_quantity":"1",
+                      "comments": "gfhghg",
+                      "item": materialArray[i].itemName,
+                      "serialin": key.in,
+                      "serialout": key.out,
+                      "serial_number":key.number
+                      // "service_activity": "serveact",
+                      // "charge_type": "2"
+                  }
+
+                  materialDataJSON.push(materialData);
+              });
+          }
+
+          //   } else {
+          //
+          //       angular.forEach(materialArray[i].Serial_Type, function (key) {
+          //
+          //           var materialData = {
+          //               "charge_method": materialArray[i].Charge_Type_Id.toString(),
+          //               "task_id": materialArray[i].Task_Number,
+          //               "item_description": materialArray[i].Description,
+          //               "product_quantity": materialArray[i].Product_Quantity+"",
+          //               "comments": "gfhghg",
+          //               "item": "11",
+          //               "serial_number": key.number,
+          //               "service_activity": "serveact",
+          //               "charge_type": "2"
+          //           }
+          //
+          //           materialDataJSON.push(materialData);
+          //       });
+          //   }
+          // }
+
+          var noteDataJSON = [];
+          for (var i = 0; i < notesArray.length; i++) {
+              var date = $filter("date")(notesArray[i].Date, "yyyy-MM-ddThh:mm:ss.000");
+              date = date + "Z";
+              var noteData = {
+                  "Notes_type": notesArray[i].Note_Type.id,
+                  "notes_description": notesArray[i].Notes,
+                  "task_id": notesArray[i].Task_Number,
+                  "mobilecreatedDate":moment.utc(notesArray[i].Date).format("YYYY-MM-DDTHH:mm:ss.000Z")
+              };
+
+              noteDataJSON.push(noteData);
+          }
+
+          var timeUploadJSON = {
+              "Time": timeJSONData
+          }
+
+          console.log(timeUploadJSON);
+
+          if (timeArray) {
+
+              cloudService.uploadTime(timeUploadJSON, function (respose) {
+
+                  console.log("Uploaded Time Data");
+              });
+          }
+
+          var expenseUploadJSON = {
+              "expense": expenseJSONData
+          }
+
+          console.log(expenseUploadJSON);
+
+          if (expenseArray) {
+
+              cloudService.updateExpenses(expenseUploadJSON, function (respose) {
+
+                  console.log("Uploaded Expense Data");
+              });
+          }
+
+          var notesUploadJSON = {
+              "Notes": noteDataJSON
+          }
+
+          console.log(notesUploadJSON);
+
+          if (notesArray) {
+
+              cloudService.updateNotes(notesUploadJSON, function (respose) {
+
+                  console.log("Uploaded notes");
+              });
+          }
+
+          var materialUploadJSON = {
+              "Material": materialDataJSON
+          }
+
+          // var materialUploadJSONWarranty = {
+          //     "Material": materialDataJSONWarranty
+          // }
+
+          console.log(materialUploadJSON);
+
+          if (materialArray) {
+
+              cloudService.updateMaterial(materialUploadJSON, function (respose) {
+
+                  console.log("Uploaded materail");
+              });
+          }
+
+
+          var date = new Date();
+
+          date.setMonth(date.getMonth() - 1);
+
+          //Post notes data
+          var attachment = [];
+
+          if ($scope.image.length > 0) {
+
+              angular.forEach($scope.image, function (key, value) {
+
+                  var attachmentObject = {
+                      "Data": "",
+                      "FileName": key.file.name,
+                      "Description": key.file.name,
+                      "Name": ""
+                  }
+
+                  attachment.push(attachmentObject);
+              });
+          }
+
+          if ($scope.files.length > 0) {
+
+              angular.forEach($scope.files, function (key, value) {
+
+                  var attachmentObject = {
+                      "Data": "",
+                      "FileName": key.file.name,
+                      "Description": key.filename,
+                      "Name": ""
+                  }
+
+                  attachment.push(attachmentObject);
+              });
+          }
+
+          var attachmentJSONData = [];
+
+          for (var i = 0; i < $scope.files.length; i++) {
+
+              var attachmentObject = {
+                  "Data": $scope.files[i].data.split(",")[1],
+                  "FileName": $scope.files[i].filename,
+                  "Description": $scope.files[i].filename,
+                  "Name": $scope.files[i].filename,
+                  "taskId": $rootScope.selectedTask.Task_Number,
+                  "contentType": $scope.files[i].data.split(",")[0].split(";")[0].split(":")[1]
+              };
+
+              attachmentJSONData.push(attachmentObject);
+          }
+
+          var attachmentUploadJSON = {
+              "attachment": attachmentJSONData
+          };
+
+          if ($scope.files) {
+
+              cloudService.createAttachment(attachmentUploadJSON, function (response) {
+
+                  console.log("Attachment Uploaded Successfully");
+              });
+          }
+
+          setTimeout(function () {
+              
+              var formData = {
+                  "Taskstatus": [{
+                      "taskId": $scope.taskId,
+                      "taskStatus": "Completed",
+                      "completeDate":moment.utc(new Date()).format("YYYY-MM-DDTHH:mm:ss.000Z")
+                  }]
+              };
+
+              var header = {
+                  'Content-Type': 'application/json',
+                  'Authorization': 'Basic QTQ3MjE0NF9FTUVSU09OTU9CSUxFQ0xPVURfTU9CSUxFX0FOT05ZTU9VU19BUFBJRDpZLm81amxkaHVtYzF2ZQ==',
+                  'oracle-mobile-backend-id': 'a0f02e4c-cc58-4aa7-bba9-78e57a000b59'
+              };
+
+              setTimeout(function () {
+
+                  var formData = {
+                      "Taskstatus": [{
+                          "taskId": $scope.taskId,
+                          "taskStatus": "Accepted"
+                      }]
+                  };
+
+                  cloudService.updateAcceptTask(formData, function (response) {
+
+                      console.log(JSON.stringify(response));
+
+                      var taskObject = {
+                          Task_Status: "Accepted",
+                          Task_Number: $scope.taskId,
+                          Submit_Status: "A"
+                      };
+
+                      localService.updateTaskSubmitStatus(taskObject);
+                  });
+
+                  var formData = {
+                      "Taskstatus": [{
+                          "taskId": $scope.taskId,
+                          "taskStatus": "Completed"
+                      }]
+                  };
+
+                  cloudService.updateAcceptTask(formData, function (response) {
+
+                      console.log(JSON.stringify(response));
+
+                      var taskObject = {
+                          Task_Status: "Completed",
+                          Task_Number: $scope.taskId,
+                          Submit_Status: "I"
+                      };
+
+                      localService.updateTaskSubmitStatus(taskObject);
+                  });
+
+              }, 3000);
+
+          }, 3000);
         } else {
 
             var taskObject = {
@@ -1698,7 +2002,7 @@ app.controller("debriefController", function ($scope, $state, $rootScope, $windo
         doc1.setFontSize(22)
         doc1.setFontType('normal')
         if ($scope.summary.taskObject.Task_Number)
-            doc1.text(200, 120, $scope.summary.taskObject.Task_Number)
+            doc1.text(200, 120, $scope.summary.taskObject.Task_Number.toString())
         doc1.setFontSize(22)
         doc1.setFontType('bold')
         doc1.text(350, 110, 'Job Description')
