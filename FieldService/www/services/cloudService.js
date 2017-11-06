@@ -671,7 +671,7 @@
 
             }).error(function (error) {
 
-                console.log("CreateAttachment Cloud Error " + JSON.stringify(error));
+                //console.log("CreateAttachment Cloud Error " + JSON.stringify(error));
 
                 callback(error);
             });
