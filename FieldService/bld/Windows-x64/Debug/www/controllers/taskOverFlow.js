@@ -144,16 +144,21 @@
 
     constantService.setUserEmailId(contactArray);
 
+    $scope.taskDetails.InstallBase=[];
+
     angular.forEach(valueService.getInstallBase(), function (key, value) {
 
-        $scope.taskDetails.Product_Line = key.Product_Line;
-        $scope.taskDetails.Serial_Number = key.Serial_Number;
-        $scope.taskDetails.tagNo = key.TagNumber;
-        $scope.taskDetails.orginalNo = key.Original_PO_Number;
+        if(key.Task_Number==$scope.taskId){
+          var install={};
+          install.Product_Line = key.Product_Line;
+          install.Serial_Number = key.Serial_Number;
+          install.tagNo = key.TagNumber;
+          install.orginalNo = key.Original_PO_Number;
+          $scope.taskDetails.InstallBase.push(install);
+          $rootScope.selectedTask = $scope.taskDetails;
+          valueService.setTask($scope.taskDetails);
+        }
 
-        $rootScope.selectedTask = $scope.taskDetails;
-
-        valueService.setTask($scope.taskDetails);
 
     });
 
@@ -168,6 +173,8 @@
 
     $scope.goToBack = function () {
         $state.go('myTask');
+        $rootScope.selectedItem = 1;
+        $rootScope.showTaskDetail = false;
     };
 
     $scope.add = function () {

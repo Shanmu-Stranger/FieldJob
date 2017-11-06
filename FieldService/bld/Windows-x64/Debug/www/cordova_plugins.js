@@ -236,6 +236,29 @@ module.exports = [
         "file": "plugins/cordova-plugin-email-composer/src/windows/EmailComposerProxyImpl.js",
         "pluginId": "cordova-plugin-email-composer",
         "runs": true
+    },
+    {
+        "id": "cordova-plugin-network-information.network",
+        "file": "plugins/cordova-plugin-network-information/www/network.js",
+        "pluginId": "cordova-plugin-network-information",
+        "clobbers": [
+            "navigator.connection",
+            "navigator.network.connection"
+        ]
+    },
+    {
+        "id": "cordova-plugin-network-information.Connection",
+        "file": "plugins/cordova-plugin-network-information/www/Connection.js",
+        "pluginId": "cordova-plugin-network-information",
+        "clobbers": [
+            "Connection"
+        ]
+    },
+    {
+        "id": "cordova-plugin-network-information.NetworkInfoProxy",
+        "file": "plugins/cordova-plugin-network-information/src/windows/NetworkInfoProxy.js",
+        "pluginId": "cordova-plugin-network-information",
+        "runs": true
     }
 ];
 module.exports.metadata = 
@@ -247,7 +270,8 @@ module.exports.metadata =
     "cordova-plugin-file-opener2": "2.0.19",
     "cordova-plugin-compat": "1.2.0",
     "cordova-plugin-file": "4.3.3",
-    "cordova-plugin-email-composer": "0.8.11"
+    "cordova-plugin-email-composer": "0.8.11",
+    "cordova-plugin-network-information": "1.3.3"
 };
 // BOTTOM OF METADATA
 });

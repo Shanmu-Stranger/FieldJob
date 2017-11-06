@@ -66,4 +66,3 @@
         $scope.mapIsClicked = !$scope.mapIsClicked;
     }
 });
-

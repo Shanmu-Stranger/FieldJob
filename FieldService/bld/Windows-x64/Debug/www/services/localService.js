@@ -16,19 +16,10 @@
 
         function onDeviceReady() {
 
-            if ($rootScope.local) {
-
-                db = sqlitePlugin.openDatabase({
-                    name: "emerson.sqlite",
-                    location: "default"
-                });
-            }
-            else if ($rootScope.online) {
-                db = sqlitePlugin.openDatabase({
-                    name: "emerson.sqlite",
-                    location: "default"
-                });
-            }
+            db = sqlitePlugin.openDatabase({
+                name: "emerson.sqlite",
+                location: "default"
+            });
         }
 
         service.getUser = getUser;
@@ -124,7 +115,7 @@
 
         function insertTaskList(response) {
 
-            var responseList = response.TaskDetails;
+            var responseList = response;
 
             for (var i = 0; i < responseList.length; i++) {
 

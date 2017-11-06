@@ -122,6 +122,25 @@
 
         function getTaskList(callback) {
 
+          //var ofscResponse = [];
+          var responseOfTaskDetails=[];
+
+          //var startDate = moment(constantService.getStartDate()).format("YYYY-MM-DD");
+          //var endDate = moment(constantService.getEndDate()).format("YYYY-MM-DD");
+          //var type="CUSTOMER";
+          //return $http({
+
+          //    method: 'GET',
+          //    url: url + 'OFSCActions/tasktype?resourceId='+constantService.getResourceId()+'&fromDate='+startDate+'&toDate='+endDate+'&type='+type,
+          //    headers: {
+          //        "Content-Type": constantService.getContentType(),
+          //        "Authorization": constantService.getAuthor(),
+          //        "oracle-mobile-backend-id": constantService.getOfscBackId()
+          //    }
+          //}).success(function (response) {
+
+          //    ofscResponse = response.finalResult;
+          //  console.log(ofscResponse);
             $http({
 
                 method: 'GET',
@@ -138,9 +157,29 @@
 
                 console.log("Task Response " + JSON.stringify(response));
 
-                localService.insertTaskList(response);
+                response.TaskDetails.forEach(function (item) {
 
-                callback(response);
+                      //   ofscResponse.forEach(function(itemForOFSC){
+                      //
+                      //     if(itemForOFSC.ActivityID==item.Activity_Id){
+                      //
+                      //         console.log("true" + item.Activity_Id)
+                      //
+                      //        item.Start_Date= itemForOFSC.Start_Date;
+                      //
+                      //        item.End_Date= itemForOFSC.End_Date;
+                      //
+                      //     }
+                      // });
+
+                      responseOfTaskDetails.push(item);
+                  });
+
+                console.log("**************************************************");
+                console.log(responseOfTaskDetails);
+                localService.insertTaskList(responseOfTaskDetails);
+
+                callback(responseOfTaskDetails);
 
             }).error(function (error) {
 
@@ -148,7 +187,44 @@
 
                 callback(error);
             });
+
+          //}).error(function (error) {
+
+          //    console.log('Login Error', JSON.stringify(error));
+
+          //    callback(error);
+          //});
+
         }
+
+        function getOFSCDate(callback){
+            console.log('getOFSCDate ::', JSON.stringify(formData));
+            var startDate = moment(constantService.getStartDate()).format("YYYY-MM-DD");
+            var endDate = moment(constantService.getEndDate()).format("YYYY-MM-DD");
+            var type="CUSTOMER";
+            return $http({
+
+                method: 'GET',
+                url: url + 'OFSCActions/tasktype?resourceId='+constantService.getResourceId()+'&fromDate='+startDate+'&toDate='+endDate+'&type='+type,
+                headers: {
+                    "Content-Type": constantService.getContentType(),
+                    "Authorization": constantService.getAuthor(),
+                    "oracle-mobile-backend-id": constantService.getOfscBackId()
+                }
+            }).success(function (response) {
+
+                console.log('OFSC Date Call Response', JSON.stringify(response));
+
+                callback(response);
+
+            }).error(function (error) {
+
+                console.log('Login Error', JSON.stringify(error));
+
+                callback(error);
+            });
+
+          }
 
         function getInstallBaseList() {
 
