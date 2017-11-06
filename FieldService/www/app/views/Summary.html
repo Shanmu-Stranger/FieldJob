@@ -213,10 +213,10 @@
                         <thead md-head>
                             <tr md-row>
                                 <th md-column><span translate="Date"></span></th>
-                                <th md-column ng-if="parent.userType=='C'"><span translate="Charge Type"></span></th>
-                                <th md-column ng-if="parent.userType=='C'"><span translate="Charge Method"></span></th>
+                                <th md-column ng-if="userType=='C'"><span translate="Charge Type"></span></th>
+                                <th md-column ng-if="userType=='C'"><span translate="Charge Method"></span></th>
                                 <th md-column><span translate="Work Type"></span></th>
-                                <th md-column ng-if="parent.userType=='C'" ng-repeat="time in timeArray[0].timeDefault.timeCode.values"><span>{{time.Overtimeshiftcode}}</span></th>
+                                <th md-column ng-if="userType=='C'" ng-repeat="time in timeArray[0].timeDefault.timeCode.values"><span>{{time.Overtimeshiftcode}}</span></th>
                                 <!-- <th md-column><span>OT1</span></th>
                                     <th md-column><span>OT2</span></th>
                                     <th md-column><span>OT3</span></th>
@@ -230,11 +230,11 @@
                             <tbody md-body>
                                 <tr md-row ng-repeat="time in  summary.timeArray">
                                     <td md-cell>{{time.Date }}</td>
-                                    <td md-cell ng-if="parent.userType=='C'">{{time.Charge_Type}}</td>
-                                    <td md-cell ng-if="parent.userType=='C'">{{time.Charge_Method}}</td>
+                                    <td md-cell ng-if="userType=='C'">{{time.Charge_Type}}</td>
+                                    <td md-cell ng-if="userType=='C'">{{time.Charge_Method}}</td>
                                     <td md-cell>{{time.Work_Type}}</td>
                                     <!-- <td md-cell>{{time.standard}}</td> -->
-                                    <td md-cell ng-if="parent.userType=='C'" ng-repeat="timec in timeArray[0].timeDefault.timeCode.values">{{time.timecode[$index][timec.Overtimeshiftcode]}} </td>
+                                    <td md-cell ng-if="userType=='C'" ng-repeat="timec in timeArray[0].timeDefault.timeCode.values">{{time.timecode[$index][timec.Overtimeshiftcode]}} </td>
                                     <!-- <td md-cell>{{time.ot2}}</td>
                                         <td md-cell>{{time.ot3}}</td>
                                         <td md-cell>{{time.os1}}</td>
@@ -359,4 +359,3 @@
                 </div>
 
             </div>
-            

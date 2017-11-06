@@ -122,25 +122,25 @@
 
         function getTaskList(callback) {
 
-          var ofscResponse = [];
+          //var ofscResponse = [];
           var responseOfTaskDetails=[];
 
-          var startDate = moment(constantService.getStartDate()).format("YYYY-MM-DD");
-          var endDate = moment(constantService.getEndDate()).format("YYYY-MM-DD");
-          var type="CUSTOMER";
-          return $http({
+          //var startDate = moment(constantService.getStartDate()).format("YYYY-MM-DD");
+          //var endDate = moment(constantService.getEndDate()).format("YYYY-MM-DD");
+          //var type="CUSTOMER";
+          //return $http({
 
-              method: 'GET',
-              url: url + 'OFSCActions/tasktype?resourceId='+constantService.getResourceId()+'&fromDate='+startDate+'&toDate='+endDate+'&type='+type,
-              headers: {
-                  "Content-Type": constantService.getContentType(),
-                  "Authorization": constantService.getAuthor(),
-                  "oracle-mobile-backend-id": constantService.getOfscBackId()
-              }
-          }).success(function (response) {
+          //    method: 'GET',
+          //    url: url + 'OFSCActions/tasktype?resourceId='+constantService.getResourceId()+'&fromDate='+startDate+'&toDate='+endDate+'&type='+type,
+          //    headers: {
+          //        "Content-Type": constantService.getContentType(),
+          //        "Authorization": constantService.getAuthor(),
+          //        "oracle-mobile-backend-id": constantService.getOfscBackId()
+          //    }
+          //}).success(function (response) {
 
-              ofscResponse = response.finalResult;
-            console.log(ofscResponse);
+          //    ofscResponse = response.finalResult;
+          //  console.log(ofscResponse);
             $http({
 
                 method: 'GET',
@@ -159,18 +159,18 @@
 
                 response.TaskDetails.forEach(function (item) {
 
-                        ofscResponse.forEach(function(itemForOFSC){
-
-                          if(itemForOFSC.ActivityID==item.Activity_Id){
-
-                              console.log("true" + item.Activity_Id)
-                             
-                             item.Start_Date= itemForOFSC.Start_Date;
-
-                             item.End_Date= itemForOFSC.End_Date;
-
-                          }
-                      });
+                      //   ofscResponse.forEach(function(itemForOFSC){
+                      //
+                      //     if(itemForOFSC.ActivityID==item.Activity_Id){
+                      //
+                      //         console.log("true" + item.Activity_Id)
+                      //
+                      //        item.Start_Date= itemForOFSC.Start_Date;
+                      //
+                      //        item.End_Date= itemForOFSC.End_Date;
+                      //
+                      //     }
+                      // });
 
                       responseOfTaskDetails.push(item);
                   });
@@ -188,12 +188,12 @@
                 callback(error);
             });
 
-          }).error(function (error) {
+          //}).error(function (error) {
 
-              console.log('Login Error', JSON.stringify(error));
+          //    console.log('Login Error', JSON.stringify(error));
 
-              callback(error);
-          });
+          //    callback(error);
+          //});
 
         }
 
