@@ -152,7 +152,7 @@
                         //console.log("TASK SELECT TRANSACTION ERROR: " + error.message);
                     });
 
-                    //console.log("TASK OBJECT =====> " + JSON.stringify(responseList[i]));
+                    console.log("TASK OBJECT =====> " + JSON.stringify(responseList[i]));
 
                 })(i);
             }
@@ -164,7 +164,7 @@
 
                 var insertValues = [];
 
-                var sqlUpdate = "UPDATE Task SET Job_Description = ?, Duration = ?, Task_Status = ?, Customer_Name =?, Street_Address = ?, City = ?, State = ?, Zip_Code = ?, Expense_Method = ?, Labor_Method = ?, Travel_Method = ?, Material_Method = ?, Service_Request = ?, Assigned = ?, Start_Date = ?, End_Date = ?  WHERE Task_Number = ?";
+                var sqlUpdate = "UPDATE Task SET Job_Description = ?, Duration = ?, Task_Status = ?, Customer_Name =?, Street_Address = ?, City = ?, State = ?, Country = ?, Zip_Code = ?, Expense_Method = ?, Labor_Method = ?, Travel_Method = ?, Material_Method = ?, Service_Request = ?, Assigned = ?, Start_Date = ?, End_Date = ?  WHERE Task_Number = ?";
 
                 insertValues.push(responseList.Job_Description);
                 insertValues.push(responseList.Duration);
@@ -173,6 +173,7 @@
                 insertValues.push(responseList.Street_Address);
                 insertValues.push(responseList.City);
                 insertValues.push(responseList.State);
+                insertValues.push(responseList.Country);
                 insertValues.push(responseList.Zip_Code);
                 insertValues.push(responseList.Expense_Method);
                 insertValues.push(responseList.Labor_Method);
@@ -207,7 +208,7 @@
 
                 var insertValues = [];
 
-                var sqlInsert = "INSERT INTO Task VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                var sqlInsert = "INSERT INTO Task VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
                 insertValues.push(responseList.Task_Number);
                 insertValues.push(responseList.Job_Description);
@@ -217,6 +218,7 @@
                 insertValues.push(responseList.Street_Address);
                 insertValues.push(responseList.City);
                 insertValues.push(responseList.State);
+                insertValues.push(responseList.Country);
                 insertValues.push(responseList.Zip_Code);
                 insertValues.push(responseList.Expense_Method);
                 insertValues.push(responseList.Labor_Method);
