@@ -122,7 +122,7 @@
 
         function getTaskList(callback) {
 
-            //var ofscResponse = [];
+            var ofscResponse = [];
             var responseOfTaskDetails = [];
 
             var startDate = moment(constantService.getStartDate()).format("YYYY-MM-DD");
