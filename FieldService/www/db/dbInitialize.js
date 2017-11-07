@@ -21,7 +21,7 @@
 
         var sqlNote = "CREATE TABLE IF NOT EXISTS Note ('ID' INTEGER, 'Notes' TEXT, 'Notes_type' TEXT, 'Created_By' TEXT, 'Task_Number' TEXT, 'Service_Request' TEXT, 'Assigned' TEXT, 'Start_Date' TEXT, 'End_Date' TEXT)";
 
-        var sqlProject = "CREATE TABLE IF NOT EXISTS Project ('ID' INTEGER PRIMARY KEY  NOT NULL, 'Clarity_Contact' TEXT, 'P_ProjectManager' TEXT, 'P_Company' TEXT, 'P_ProjectNumber' TEXT, 'Requested' TEXT)";
+        var sqlProject = "CREATE TABLE IF NOT EXISTS Project ('ID' INTEGER, 'Clarity_Contact' TEXT, 'P_ProjectManager' TEXT, 'P_Company' TEXT, 'P_ProjectNumber' TEXT, 'Requested' TEXT)";
 
         var sqlOverTime = "CREATE TABLE IF NOT EXISTS OverTime ('OverTime_Shift_Code_ID' TEXT, 'Overtimeshiftcode' TEXT, 'Task' TEXT, 'Technician_ID' TEXT, 'Field_Job_ID' TEXT, 'Project' TEXT, 'Start_Date' TEXT, 'Date_Completed' TEXT)";
 

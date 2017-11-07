@@ -87,23 +87,23 @@ app.controller('loginController', function ($location, $state, $rootScope, $scop
 
             cloudService.getTaskList(function (response) {
 
-                localService.deleteInstallBase();
-                localService.deleteContact();
-                localService.deleteNote();
-
-                localService.deleteOverTime();
-                localService.deleteShiftCode();
-
-                localService.deleteChargeType();
-                localService.deleteChargeMethod();
-                localService.deleteFieldJobName();
-
-                localService.deleteWorkType();
-                localService.deleteItem();
-                localService.deleteCurrency();
-
-                localService.deleteExpenseType();
-                localService.deleteNoteType();
+                // localService.deleteInstallBase();
+                // localService.deleteContact();
+                // localService.deleteNote();
+                //
+                // localService.deleteOverTime();
+                // localService.deleteShiftCode();
+                //
+                // localService.deleteChargeType();
+                // localService.deleteChargeMethod();
+                // localService.deleteFieldJobName();
+                //
+                // localService.deleteWorkType();
+                // localService.deleteItem();
+                // localService.deleteCurrency();
+                //
+                // localService.deleteExpenseType();
+                // localService.deleteNoteType();
 
                 cloudService.getInstallBaseList();
                 cloudService.getContactList();
@@ -152,7 +152,9 @@ app.controller('loginController', function ($location, $state, $rootScope, $scop
                     angular.forEach(taskArray.Attachments, function (attachmentValue, value) {
 
                         download(attachmentValue, taskArray.Task_Id, function (response) {
-                            $rootScope.apicall=false;
+
+                            $rootScope.apicall = false;
+
                             $scope.attachmentArray = [];
 
                             var filePath = cordova.file.dataDirectory;
@@ -161,7 +163,7 @@ app.controller('loginController', function ($location, $state, $rootScope, $scop
 
                                 var base64Code = response;
 
-                               valueService.saveBase64File(filePath, attachmentValue.User_File_Name, base64Code, attachmentValue.Content_type);
+                                valueService.saveBase64File(filePath, attachmentValue.User_File_Name, base64Code, attachmentValue.Content_type);
 
                                 var attachmentObject = {
                                     Attachment_Id: attachmentValue.Attachments_Id,
@@ -179,8 +181,6 @@ app.controller('loginController', function ($location, $state, $rootScope, $scop
 
                             }
                         });
-
-
                     });
                 });
             }
@@ -188,7 +188,9 @@ app.controller('loginController', function ($location, $state, $rootScope, $scop
     }
 
     function download(resource, taskId, callback) {
-        $rootScope.apicall=false;
+
+        $rootScope.apicall = false;
+
         cloudService.downloadAttachment(taskId, resource.Attachments_Id, function (response) {
 
             if (response != undefined)
