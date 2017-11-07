@@ -1,4 +1,4 @@
-app.controller('myTaskController', function ($scope, $compile, $timeout, uiCalendarConfig, $rootScope, $state, $http, cloudService, localService, valueService, $filter,constantService) {
+app.controller('myTaskController', function ($scope, $compile, $timeout, uiCalendarConfig, $rootScope, $state, $http, cloudService, localService, valueService, $filter, constantService) {
 
     $scope.showSearchTaskDiv = false;
 
@@ -12,30 +12,34 @@ app.controller('myTaskController', function ($scope, $compile, $timeout, uiCalen
 
     getTask();
 
-    console.log("GET TASK OUT");
-
     function getTask() {
 
-        console.log("GET TASK IN");
-        if($rootScope.myTaskDetailsForLoggedInUser){
+        console.log("GET TASK IN " + $rootScope.myTaskDetailsForLoggedInUser);
+
+        if ($rootScope.myTaskDetailsForLoggedInUser) {
 
             $scope.myTaskDetails = $rootScope.myTaskDetailsForLoggedInUser;
+
             setEventArray($rootScope.myTaskDetailsForLoggedInUser);
+
             eventInit();
-        }
-        else{
+
+        } else {
+
             localService.getTaskList(function (response) {
-                if (response){
+
+                if (response) {
+
                     $scope.myTaskDetails = response;
+
+                    console.log("GET TASK IN DB" + $rootScope.myTaskDetails);
 
                     setEventArray(response);
 
                     eventInit();
                 }
-
             });
         }
-
     }
 
     function setEventArray(response) {
@@ -44,17 +48,17 @@ app.controller('myTaskController', function ($scope, $compile, $timeout, uiCalen
 
             response.forEach(function (item) {
 
-              // var startDate = item.Start_Date.split(' ');
-               var startDateTime= moment.utc(item.Start_Date).utcOffset(constantService.getTimeZone()).format("YYYY-MM-DDTHH:MM:SS")
-               //var startDateTime = startDate[0] + "T" + startDate[1];
+                // var startDate = item.Start_Date.split(' ');
+                var startDateTime = moment.utc(item.Start_Date).utcOffset(constantService.getTimeZone()).format("YYYY-MM-DDTHH:MM:SS")
+                //var startDateTime = startDate[0] + "T" + startDate[1];
 
-               //var endDate = item.End_Date.split(' ');
-               var endDateTime= moment.utc(item.End_Date).utcOffset(constantService.getTimeZone()).format("YYYY-MM-DDTHH:MM:SS")
-               //var endDateTime = endDate[0] + "T" + endDate[1];
+                //var endDate = item.End_Date.split(' ');
+                var endDateTime = moment.utc(item.End_Date).utcOffset(constantService.getTimeZone()).format("YYYY-MM-DDTHH:MM:SS")
+                //var endDateTime = endDate[0] + "T" + endDate[1];
 
-               var customerInfo = item.Customer_Name + "\n" + item.Street_Address + "\n" + item.City + "\n" + item.State + "\n" + item.Zip_Code;
+                var customerInfo = item.Customer_Name + "\n" + item.Street_Address + "\n" + item.City + "\n" + item.State + "\n" + item.Zip_Code;
 
-               //  if (item.Task_Status == 'Accepted' || item.Task_Status == 'Assigned'||) {
+                //  if (item.Task_Status == 'Accepted' || item.Task_Status == 'Assigned'||) {
                 eventsArray.push({
                     title: customerInfo,
                     textEscape: true,
@@ -389,8 +393,6 @@ app.controller('myTaskController', function ($scope, $compile, $timeout, uiCalen
             $rootScope.showDebrief = true;
 
             $rootScope.selectedCategory = 'Field Job#' + $rootScope.selectedTask.Task_Number;
-
-
 
             $state.go('debrief');
         }

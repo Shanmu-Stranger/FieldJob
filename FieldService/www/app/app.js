@@ -83,14 +83,18 @@ app.run(function ($rootScope, $location, $http, $state, localService, valueServi
 
                     if (valueService.getNetworkStatus()) {
 
-                        valueService.syncData();
+                        // valueService.syncData();
                     }
+
+                    console.log("TASK =====> " + constantService.getUser().Default_View);
 
                     if (constantService.getUser().Default_View == "My Task") {
 
                         $rootScope.selectedItem = 2;
 
                         localService.getTaskList(function (response) {
+
+                            console.log("TASK =====> " + JSON.stringify(response));
 
                             $rootScope.myTaskDetailsForLoggedInUser = response;
 
@@ -99,7 +103,14 @@ app.run(function ($rootScope, $location, $http, $state, localService, valueServi
 
                     } else {
 
-                        $state.go('myTask');
+                        localService.getTaskList(function (response) {
+
+                            console.log("TASK =====> " + JSON.stringify(response));
+
+                            $rootScope.myTaskDetailsForLoggedInUser = response;
+
+                            $state.go('myTask');
+                        });
                     }
 
                 } else {
