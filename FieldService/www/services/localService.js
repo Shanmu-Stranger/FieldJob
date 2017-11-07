@@ -3197,13 +3197,13 @@
             });
         };
 
-        function getFieldJobNameList(callback) {
+        function getFieldJobNameList(taskNumber,callback) {
 
             var value = [];
 
             return db.transaction(function (transaction) {
 
-                transaction.executeSql("SELECT * FROM FieldJobName", [], function (tx, res) {
+                transaction.executeSql("SELECT * FROM FieldJobName WHERE TaskNumber = ?", [taskNumber], function (tx, res) {
 
                     var rowLength = res.rows.length;
 

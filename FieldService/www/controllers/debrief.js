@@ -1167,6 +1167,14 @@ app.controller("debriefController", function ($scope, $state, $rootScope, $windo
                 var subTotalArray = [];
                 angular.forEach($scope.timeArray, function (key, value) {
                     grandtimeObject.Duration = $scope.calculateDuration(grandtimeObject, key)
+                    if (grandtimeObject.Duration.split(":")[0].length == 1) {
+                        var hours = "0" + grandtimeObject.Duration.split(":")[0]
+                        grandtimeObject.Duration = hours + ":" + grandtimeObject.Duration.split(":")[1]
+                    }
+                    if (grandtimeObject.Duration.split(":")[1].length == 1) {
+                        var mins = "0" + grandtimeObject.Duration.split(":")[1]
+                        grandtimeObject.Duration = grandtimeObject.Duration.split(":")[0] + ":" + mins
+                    }
                     $scope.populateTimeCodeArray(grandTotalTimeArray, key);
                     if (subTotalArray.length > 0) {
 
@@ -1177,6 +1185,15 @@ app.controller("debriefController", function ($scope, $state, $rootScope, $windo
                                     newWorkType = false;
                                     $scope.populateTimeCodeArray(subTotalTimeArray, key);
                                     subtotalObj.Duration = $scope.calculateDuration(subtotalObj, key);
+                                    if (subtotalObj.Duration.split(":")[0].length == 1) {
+                                        var hours = "0" + subtotalObj.Duration.split(":")[0]
+                                        subtotalObj.Duration = hours + ":" + subtotalObj.Duration.split(":")[1]
+                                    }
+                                    if (subtotalObj.Duration.split(":")[1].length == 1) {
+                                        var mins = "0" + subtotalObj.Duration.split(":")[1]
+                                        subtotalObj.Duration = subtotalObj.Duration.split(":")[0] + ":" + mins
+                                    }
+                                    
                                     keepGoing = false;
                                 }
                                 else {
@@ -1196,6 +1213,14 @@ app.controller("debriefController", function ($scope, $state, $rootScope, $windo
                             $scope.populateTimeCodeArray(subTotalTimeArray, key);
                             subtotalObject.timecode = subTotalTimeArray;
                             subtotalObject.Duration = $scope.calculateDuration(subtotalObject, key)
+                            if (subtotalObject.Duration.split(":")[0].length == 1) {
+                                var hours = "0" + subtotalObject.Duration.split(":")[0]
+                                subtotalObject.Duration = hours + ":" + subtotalObject.Duration.split(":")[1]
+                            }
+                            if (subtotalObject.Duration.split(":")[1].length == 1) {
+                                var mins = "0" + subtotalObject.Duration.split(":")[1]
+                                subtotalObject.Duration = subtotalObject.Duration.split(":")[0] + ":" + mins
+                            }
                             subTotalArray.push(subtotalObject);
                         }
                     }
@@ -1204,6 +1229,14 @@ app.controller("debriefController", function ($scope, $state, $rootScope, $windo
                         $scope.populateTimeCodeArray(subTotalTimeArray, key);
                         subtotalObject.timecode = subTotalTimeArray;
                         subtotalObject.Duration = $scope.calculateDuration(subtotalObject, key)
+                        if (subtotalObject.Duration.split(":")[0].length == 1) {
+                            var hours = "0" + subtotalObject.Duration.split(":")[0]
+                            subtotalObject.Duration = hours + ":" + subtotalObject.Duration.split(":")[1]
+                        }
+                        if (subtotalObject.Duration.split(":")[1].length == 1) {
+                            var mins = "0" + subtotalObject.Duration.split(":")[1]
+                            subtotalObject.Duration = subtotalObject.Duration.split(":")[0] + ":" + mins
+                        }
                         subTotalArray.push(subtotalObject);
                     }
 
@@ -1245,8 +1278,10 @@ app.controller("debriefController", function ($scope, $state, $rootScope, $windo
         var reminder = obj.mins % 60;
 
         obj.hours += Math.floor(obj.mins / 60);
-
-        return (obj.hours + ":" + reminder);
+        var duration = obj.hours + ":" + reminder;
+        
+        return obj.hours + ":" + reminder;
+        
     }
 
     $scope.populateTimeCodeArray = function (timeArray, key) {
@@ -1541,12 +1576,12 @@ app.controller("debriefController", function ($scope, $state, $rootScope, $windo
             for (var i = 0; i < $scope.files.length; i++) {
 
                 var attachmentObject = {
-                    "Data": $scope.files[i].data.split(",")[1],
+                    "Data": $scope.files[i].base64,
                     "FileName": $scope.files[i].filename,
                     "Description": $scope.files[i].fileDisc,
                     "Name": $scope.files[i].filename,
                     "taskId": $rootScope.selectedTask.Task_Number,
-                    "contentType": $scope.files[i].data.split(",")[0].split(";")[0].split(":")[1]
+                    "contentType": $scope.files[i].contentType
                 };
   
                 attachmentJSONData.push(attachmentObject);

@@ -275,7 +275,7 @@
                 debrief.chargeMethod = response;
             });
 
-            localService.getFieldJobNameList(function (response) {
+            localService.getFieldJobNameList(taskObject.Task_Number,function (response) {
 
                 debrief.fieldName = response;
             });
