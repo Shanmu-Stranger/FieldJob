@@ -1834,10 +1834,11 @@ app.controller("debriefController", function ($scope, $state, $rootScope, $windo
     };
 
     $scope.setDurationHours = function (item) {
+        if (item.Duration != undefined && item.Duration != "") {
+            item.DurationHours = parseInt(item.Duration.split(":")[0]);
 
-        item.DurationHours = moment.duration(item.Duration).hours();
-
-        item.DurationMinutes = moment.duration(item.Duration).minutes();
+            item.DurationMinutes = parseInt( item.Duration.split(":")[1]);
+        }
     };
 
     $scope.file = "";

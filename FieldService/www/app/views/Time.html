@@ -130,7 +130,7 @@ z-index: 1051 !important;" ng-show="$root.completedTask">
                     <div class="form-group col-sm-20 margintop30">
                         <label class=" col-sm-12 label-my" translate="{{item.timeDefault.duration.title}}"></label>
                         <div class="col-sm-12">
-                            <input type="text" class="form-control" ng-model="item.Duration" ng-change="setDurationHours(item)"
+                            <input type="text" class="form-control" date-format ng-model="item.Duration" ng-change="setDurationHours(item)"
                                    />
 
                         </div>

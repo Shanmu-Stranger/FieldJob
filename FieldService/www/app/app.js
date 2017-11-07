@@ -202,18 +202,44 @@ app.filter('timezonefilter', function (constantService) {
 });
 app.directive('dateFormat', function ($filter) {
     return {
-        require: 'ngModel',
-        link: function(scope, element, attrs, ngModelController) {
-            ngModelController.$parsers.push(function(data) {
-                //View -> Model
-                return data;
-            });
-            ngModelController.$formatters.push(function(data) {
-                //Model -> View
-                return $filter('date')(data, "HH:MM");
+        require: '?ngModel',
+        link: function (scope, elem, attrs, ctrl) {
+            if (!ctrl) return;
+
+
+            //ctrl.$formatters.unshift(function (a) {
+            //    return "06:00";
+            //});
+
+
+            ctrl.$parsers.unshift(function (viewValue) {
+                //var plainNumber = viewValue.replace(/[^\d|\-+|\.+]/g, '');
+                //elem.val($filter(attrs.format)(plainNumber));
+                //return plainNumber;
+                if (viewValue != undefined && viewValue != "") {
+                    if (viewValue.split(":")[0] != undefined &&viewValue.split(":")[0].length == 1) {
+                        var hours = "0" + viewValue.split(":")[0]
+                        viewValue = hours + ":" + viewValue.split(":")[1]
+                    }
+                    if (viewValue.split(":")[1] != undefined && viewValue.split(":")[1].length == 1) {
+                        var mins = "0" + viewValue.split(":")[1]
+                        viewValue = viewValue.split(":")[0] + ":" + mins
+                    }
+                    if (viewValue.split(":")[1] != undefined && viewValue.split(":")[1]!="undefined" && viewValue.split(":")[1].length > 2)
+                    {
+                        var mins = viewValue.split(":")[1].substring(0, 2);
+                        viewValue = viewValue.split(":")[0] + ":" + mins
+                    }
+                    if (viewValue.split(":")[1] == undefined || viewValue.split(":")[1] == "undefined")
+                    {
+                        viewValue = viewValue.split(":")[0] + ":00";
+                    }
+                }
+                elem.val(viewValue);
+                return viewValue;
             });
         }
-    }
+    };
 });
 app.directive('signaturePad', ['$interval', '$timeout', '$window', '$rootScope', function ($interval, $timeout, $window, $rootScope) {
 
