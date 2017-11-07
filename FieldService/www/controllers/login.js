@@ -105,6 +105,31 @@ app.controller('loginController', function ($location, $state, $rootScope, $scop
                 // localService.deleteExpenseType();
                 // localService.deleteNoteType();
 
+                if (constantService.getUser().Default_View == "My Task") {
+
+                    $rootScope.selectedItem = 2;
+
+                    localService.getTaskList(function (response) {
+
+                        console.log("TASK =====> " + JSON.stringify(response));
+
+                        $rootScope.myTaskDetailsForLoggedInUser = response;
+
+                        $state.go('myFieldJob');
+                    });
+
+                } else {
+
+                    localService.getTaskList(function (response) {
+
+                        console.log("TASK =====> " + JSON.stringify(response));
+
+                        $rootScope.myTaskDetailsForLoggedInUser = response;
+
+                        $state.go('myTask');
+                    });
+                }
+
                 cloudService.getInstallBaseList();
                 cloudService.getContactList();
                 cloudService.getNoteList();
@@ -123,18 +148,9 @@ app.controller('loginController', function ($location, $state, $rootScope, $scop
                 cloudService.getExpenseType();
                 cloudService.getNoteType();
 
-                getAttachments();
+                // getAttachments();
 
-                if (constantService.getUser().Default_View == "My Task") {
 
-                    $rootScope.selectedItem = 2;
-
-                    $state.go('myFieldJob');
-
-                } else {
-
-                    $state.go('myTask');
-                }
             });
         }
 

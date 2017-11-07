@@ -83,7 +83,7 @@ app.run(function ($rootScope, $location, $http, $state, localService, valueServi
 
                     if (valueService.getNetworkStatus()) {
 
-                        // valueService.syncData();
+                        valueService.syncData();
                     }
 
                     console.log("TASK =====> " + constantService.getUser().Default_View);
