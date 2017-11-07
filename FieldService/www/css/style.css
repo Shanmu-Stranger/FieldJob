@@ -1,4 +1,5 @@
 
+@import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
 
 @font-face {
     font-family: OpenSans-Bold;
@@ -696,18 +697,21 @@ tr td {
 }
 
 .red {
-    background-color: #d31245 !important;
-    color: #fff !important;
+    /* background-color: #d31245 !important;*/
+    color: #d31245 !important;
+    text-transform: uppercase;
 }
 
 .green {
-    background-color: #5cb85c !important;
-    color: #fff !important;
+    /*background-color: #5cb85c !important;*/
+    color: #00aa7e !important;
+    text-transform: uppercase;
 }
 
 .blue {
-    background-color: #004b8d !important;
-    color: #fff !important;
+    /*background-color: #004b8d !important;*/
+    color: #004b8d !important;
+    text-transform: uppercase;
 }
 
 .orange {
@@ -1721,7 +1725,7 @@ a.md-default-theme:not(.md-button), a:not(.md-button) {
 .search-icon {
     width: 31px;
     height: 31px;
-    background-image: url(../images/Shape3.png);
+    background-image: url(../images/search_1x.png);
     background-repeat: no-repeat;
     background-size: 100% 100%;
     outline: none;
@@ -1849,12 +1853,32 @@ md-tab-content {
     display: inline-block;
 }
 
-.md-column span {
-    color: #283d3f !important;
-    font-family: Arial;
-    font-weight: bold;
-    font-size: 14px;
+.fieldjob-headRow {
+    text-transform: uppercase;
 }
+
+    .fieldjob-headRow th {
+        border-bottom: none !important;
+        display: table-cell;
+        vertical-align: middle !important;
+    }
+
+    .fieldjob-headRow span {
+        color: #283d3f !important;
+        font-family: Arial;
+        font-weight: bold;
+        font-size: 14px;
+    }
+
+.fieldjob-body {
+    border-bottom: solid 1px #f0f0f0;
+    height: 60px;
+}
+
+    .fieldjob-body td {
+        display: table-cell;
+        vertical-align: middle !important;
+    }
 
 #select_value_label_0 > span:nth-child(1) {
     color: #283d3f !important;
@@ -1874,12 +1898,15 @@ md-tab-content {
     font-size: 14px;
     color: #00aa7e !important;
     text-decoration: underline;
+    text-align: left;
 }
 
 .task-details {
     font-family: Arial;
     font-size: 14px;
     color: #283d3f !important;
+    text-align: left !important;
+    padding-left: 10px !important;
 }
 
 .status-options {
@@ -1891,6 +1918,7 @@ md-tab-content {
 .card-parentContainer {
     margin-left: 50px;
     margin-right: 40px;
+    margin-bottom: 40px;
 }
 
 .card-childContainer {
@@ -1986,3 +2014,28 @@ md-tab-content {
         font-size: 14px;
         color: #283d3f !important;
     }
+
+.fieldjob-status {
+    font-family: OpenSans-Bold;
+    font-size: 12px;
+}
+
+.text-left {
+    text-align: left;
+}
+
+md-select {
+    margin: 0 !important;
+}
+
+.table > tbody > tr > td, .table > tbody > tr > th, .table > tfoot > tr > td, .table > tfoot > tr > th, .table > thead > tr > td, .table > thead > tr > th {
+    border-top: none !important;
+}
+
+md-select.md-default-theme:not([disabled]):focus ._md-select-value, md-select:not([disabled]):focus ._md-select-value {
+    border-bottom-color: #fff !important;
+}
+
+md-select.md-default-theme ._md-select-value, md-select ._md-select-value {
+    border-bottom-color: #fff !important;
+}
