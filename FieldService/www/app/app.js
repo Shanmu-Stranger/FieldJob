@@ -9,11 +9,15 @@ var app = angular.module('emerson', ['ngMaterial', 'ngLoadingSpinner', 'md.data.
 
 app.run(function ($rootScope, $location, $http, $state, localService, valueService, constantService) {
 
+    $rootScope.local = true;
+
+    $rootScope.online = false;
+
     window.addEventListener('offline', offLine);
 
     window.addEventListener('online', onLine);
-$rootScope.apicall=true;
-    //valueService.setNetworkStatus(true);
+
+    $rootScope.apicall = true;
 
     function onLine() {
 
@@ -28,10 +32,6 @@ $rootScope.apicall=true;
 
         valueService.setNetworkStatus(false);
     }
-
-    $rootScope.local = true;
-
-    $rootScope.online = false;
 
     document.addEventListener("deviceready", onDeviceReady, false);
 
@@ -76,6 +76,15 @@ $rootScope.apicall=true;
                 valueService.setUser(response[0]);
 
                 if (constantService.getUser().ID != null) {
+
+                    valueService.setResourceId(constantService.getUser().ID);
+
+                    constantService.setResourceId(constantService.getUser().ID);
+
+                    if (valueService.getNetworkStatus()) {
+
+                        valueService.syncData();
+                    }
 
                     if (constantService.getUser().Default_View == "My Task") {
 

@@ -139,6 +139,8 @@
         service.setIfFutureDateTask = setIfFutureDateTask;
         service.getIfFutureDateTask = getIfFutureDateTask;
 
+        service.syncData = syncData;
+
         return service;
 
         function setResourceId(id) {
@@ -712,7 +714,7 @@
 
                 localService.updateTaskSubmitStatus(taskObject);
             });
-        }
+        };
 
         function submitDebrief(taskId) {
 
@@ -980,7 +982,7 @@
 
                 }, 3000);
             }, 8000);
-        }
+        };
 
         function checkIfFutureDayTask(selTask) {
 
@@ -1012,6 +1014,32 @@
             }
 
             return false;
-        }
+        };
+
+        function syncData() {
+
+            cloudService.getTaskList(function (response) {
+
+            });
+
+            cloudService.getInstallBaseList();
+            cloudService.getContactList();
+            cloudService.getNoteList();
+
+            cloudService.getOverTimeList();
+            cloudService.getShiftCodeList();
+
+            cloudService.getChargeType();
+            cloudService.getChargeMethod();
+            cloudService.getFieldJobName();
+
+            cloudService.getWorkType();
+            cloudService.getItem();
+            cloudService.getCurrency();
+
+            cloudService.getExpenseType();
+            cloudService.getNoteType();
+
+        };
     }
 })();

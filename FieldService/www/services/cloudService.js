@@ -122,25 +122,25 @@
 
         function getTaskList(callback) {
 
-          //var ofscResponse = [];
-          var responseOfTaskDetails=[];
+            //var ofscResponse = [];
+            var responseOfTaskDetails = [];
 
-          //var startDate = moment(constantService.getStartDate()).format("YYYY-MM-DD");
-          //var endDate = moment(constantService.getEndDate()).format("YYYY-MM-DD");
-          //var type="CUSTOMER";
-          //return $http({
+            //var startDate = moment(constantService.getStartDate()).format("YYYY-MM-DD");
+            //var endDate = moment(constantService.getEndDate()).format("YYYY-MM-DD");
+            //var type="CUSTOMER";
+            //return $http({
 
-          //    method: 'GET',
-          //    url: url + 'OFSCActions/tasktype?resourceId='+constantService.getResourceId()+'&fromDate='+startDate+'&toDate='+endDate+'&type='+type,
-          //    headers: {
-          //        "Content-Type": constantService.getContentType(),
-          //        "Authorization": constantService.getAuthor(),
-          //        "oracle-mobile-backend-id": constantService.getOfscBackId()
-          //    }
-          //}).success(function (response) {
+            //    method: 'GET',
+            //    url: url + 'OFSCActions/tasktype?resourceId='+constantService.getResourceId()+'&fromDate='+startDate+'&toDate='+endDate+'&type='+type,
+            //    headers: {
+            //        "Content-Type": constantService.getContentType(),
+            //        "Authorization": constantService.getAuthor(),
+            //        "oracle-mobile-backend-id": constantService.getOfscBackId()
+            //    }
+            //}).success(function (response) {
 
-          //    ofscResponse = response.finalResult;
-          //  console.log(ofscResponse);
+            //    ofscResponse = response.finalResult;
+            //  console.log(ofscResponse);
             $http({
 
                 method: 'GET',
@@ -159,21 +159,21 @@
 
                 response.TaskDetails.forEach(function (item) {
 
-                      //   ofscResponse.forEach(function(itemForOFSC){
-                      //
-                      //     if(itemForOFSC.ActivityID==item.Activity_Id){
-                      //
-                      //         console.log("true" + item.Activity_Id)
-                      //
-                      //        item.Start_Date= itemForOFSC.Start_Date;
-                      //
-                      //        item.End_Date= itemForOFSC.End_Date;
-                      //
-                      //     }
-                      // });
+                    //   ofscResponse.forEach(function(itemForOFSC){
+                    //
+                    //     if(itemForOFSC.ActivityID==item.Activity_Id){
+                    //
+                    //         console.log("true" + item.Activity_Id)
+                    //
+                    //        item.Start_Date= itemForOFSC.Start_Date;
+                    //
+                    //        item.End_Date= itemForOFSC.End_Date;
+                    //
+                    //     }
+                    // });
 
-                      responseOfTaskDetails.push(item);
-                  });
+                    responseOfTaskDetails.push(item);
+                });
 
                 console.log("**************************************************");
                 console.log(responseOfTaskDetails);
@@ -188,24 +188,24 @@
                 callback(error);
             });
 
-          //}).error(function (error) {
+            //}).error(function (error) {
 
-          //    console.log('Login Error', JSON.stringify(error));
+            //    console.log('Login Error', JSON.stringify(error));
 
-          //    callback(error);
-          //});
+            //    callback(error);
+            //});
 
         }
 
-        function getOFSCDate(callback){
+        function getOFSCDate(callback) {
             console.log('getOFSCDate ::', JSON.stringify(formData));
             var startDate = moment(constantService.getStartDate()).format("YYYY-MM-DD");
             var endDate = moment(constantService.getEndDate()).format("YYYY-MM-DD");
-            var type="CUSTOMER";
+            var type = "CUSTOMER";
             return $http({
 
                 method: 'GET',
-                url: url + 'OFSCActions/tasktype?resourceId='+constantService.getResourceId()+'&fromDate='+startDate+'&toDate='+endDate+'&type='+type,
+                url: url + 'OFSCActions/tasktype?resourceId=' + constantService.getResourceId() + '&fromDate=' + startDate + '&toDate=' + endDate + '&type=' + type,
                 headers: {
                     "Content-Type": constantService.getContentType(),
                     "Authorization": constantService.getAuthor(),
@@ -224,7 +224,7 @@
                 callback(error);
             });
 
-          }
+        }
 
         function getInstallBaseList() {
 
