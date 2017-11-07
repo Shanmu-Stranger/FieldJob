@@ -1541,12 +1541,12 @@ app.controller("debriefController", function ($scope, $state, $rootScope, $windo
             for (var i = 0; i < $scope.files.length; i++) {
 
                 var attachmentObject = {
-                    "Data": $scope.files[i].data.split(",")[1],
+                    "Data": $scope.files[i].base64,
                     "FileName": $scope.files[i].filename,
                     "Description": $scope.files[i].fileDisc,
                     "Name": $scope.files[i].filename,
                     "taskId": $rootScope.selectedTask.Task_Number,
-                    "contentType": $scope.files[i].data.split(",")[0].split(";")[0].split(":")[1]
+                    "contentType": $scope.files[i].contentType
                 };
   
                 attachmentJSONData.push(attachmentObject);

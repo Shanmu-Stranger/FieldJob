@@ -264,7 +264,7 @@
         }
     }
 
-    $scope.menuIconClicked = function(){
+    $scope.menuIconClicked = function () {
         $scope.hideNavLeft = !$scope.hideNavLeft;
     }
 
@@ -310,35 +310,35 @@
     $scope.syncFunctionality = function () {
         console.log("Inside the syncFunctionality");
 
-        if(valueService.getNetworkStatus()){
-        cloudService.getTaskList(function (response) {
+        if (valueService.getNetworkStatus()) {
+            cloudService.getTaskList(function (response) {
 
-            localService.deleteInstallBase();
-            localService.deleteNote();
-            localService.deleteContact();
-            localService.deleteShiftCode();
-            localService.deleteOverTime();
-            localService.deleteFieldJobName();
+                localService.deleteInstallBase();
+                localService.deleteNote();
+                localService.deleteContact();
+                localService.deleteShiftCode();
+                localService.deleteOverTime();
+                localService.deleteFieldJobName();
 
-            cloudService.getInstallBaseList();
-            cloudService.getContactList();
-            cloudService.getNoteList();
+                cloudService.getInstallBaseList();
+                cloudService.getContactList();
+                cloudService.getNoteList();
 
-            cloudService.getOverTimeList();
-            cloudService.getShiftCodeList();
+                cloudService.getOverTimeList();
+                cloudService.getShiftCodeList();
 
-            cloudService.getChargeType();
-            cloudService.getChargeMethod();
-            cloudService.getFieldJobName();
+                cloudService.getChargeType();
+                cloudService.getChargeMethod();
+                cloudService.getFieldJobName();
 
-            cloudService.getWorkType();
-            cloudService.getItem();
-            cloudService.getCurrency();
+                cloudService.getWorkType();
+                cloudService.getItem();
+                cloudService.getCurrency();
 
-            $state.go('myTask');
-        });
+                $state.go('myTask');
+            });
+        }
     }
-  }
 
 });
 
