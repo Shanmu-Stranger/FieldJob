@@ -191,7 +191,21 @@ app.filter('timezonefilter', function (constantService) {
         // return $filter('date')(convertedDate, 'dd MMM yyyy');
     }
 });
-
+app.directive('dateFormat', function ($filter) {
+    return {
+        require: 'ngModel',
+        link: function(scope, element, attrs, ngModelController) {
+            ngModelController.$parsers.push(function(data) {
+                //View -> Model
+                return data;
+            });
+            ngModelController.$formatters.push(function(data) {
+                //Model -> View
+                return $filter('date')(data, "HH:MM");
+            });
+        }
+    }
+});
 app.directive('signaturePad', ['$interval', '$timeout', '$window', '$rootScope', function ($interval, $timeout, $window, $rootScope) {
 
     'use strict';
