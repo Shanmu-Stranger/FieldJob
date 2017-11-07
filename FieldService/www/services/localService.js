@@ -3203,7 +3203,7 @@
 
             return db.transaction(function (transaction) {
 
-                transaction.executeSql("SELECT * FROM FieldJobName WHERE TaskNumber = ?", [taskNumber], function (tx, res) {
+                transaction.executeSql("SELECT * FROM FieldJobName WHERE TaskCode = ?", [taskNumber], function (tx, res) {
 
                     var rowLength = res.rows.length;
 
@@ -3212,13 +3212,13 @@
                         value.push(res.rows.item(i));
                     }
 
-                    //console.log("GET FIELDJOBNAME DB ==========> " + JSON.stringify(value));
+                    console.log("GET FIELDJOBNAME DB ==========> " + JSON.stringify(value));
 
                     callback(value);
 
                 }, function (tx, error) {
 
-                    //console.log("GET FIELDJOBNAME SELECT ERROR: " + error.message);
+                    console.log("GET FIELDJOBNAME SELECT ERROR: " + error.message);
 
                     callback(value);
                 });
