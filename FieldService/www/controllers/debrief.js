@@ -1163,7 +1163,7 @@ app.controller("debriefController", function ($scope, $state, $rootScope, $windo
                     subTotalTimeArray.push(codeobj1);
                 })
                 var grandtimeObject = $scope.getTimenewObj("", "GRAND TOTAL", "", "", "", "", "", 0)
-                var subtotalObject = $scope.getTimenewObj("", "SUBTOTAL", "", "", "", "", "", 0)
+                var subtotalObject = $scope.getTimenewObj("", "SUB TOTAL", "", "", "", "", "", 0)
                 var subTotalArray = [];
                 angular.forEach($scope.timeArray, function (key, value) {
                     grandtimeObject.Duration = $scope.calculateDuration(grandtimeObject, key)
@@ -1429,7 +1429,7 @@ app.controller("debriefController", function ($scope, $state, $rootScope, $windo
                         "task_id": materialArray[i].Task_Number,
                         "item_description": materialArray[i].Description,
                         "product_quantity": "1",
-                        "comments": "gfhghg",
+                        "comments": "",
                         "item": materialArray[i].itemName,
                         "serialin": key.in,
                         "serialout": key.out,

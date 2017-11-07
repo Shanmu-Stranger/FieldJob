@@ -13,6 +13,12 @@ app.controller('taskOverFlowController', function ($scope, $http, $state, $rootS
     $scope.toggle = function () {
         $scope.myVar = !$scope.myVar;
     };
+    if ($scope.selectedTask.Task_Status == 'Assigned') {
+        $rootScope.accepted=false;
+    }
+    else {
+        $rootScope.accepted=true;
+    }
 
     $scope.taskId = $rootScope.selectedTask.Task_Number;
 
@@ -177,6 +183,10 @@ app.controller('taskOverFlowController', function ($scope, $http, $state, $rootS
         $rootScope.showTaskDetail = false;
     };
 
+    $scope.goToOnsiteReq = function () {
+        $state.go('todo');
+    }
+
     $scope.add = function () {
 
         $scope.tasks.push($scope.title);
@@ -206,7 +216,25 @@ app.controller('taskOverFlowController', function ($scope, $http, $state, $rootS
     };
 
     $scope.accept = function () {
+        if ($scope.selectedTask.Task_Status == 'Assigned') {
 
+            if (valueService.getNetworkStatus()) {
+
+                valueService.acceptTask(valueService.getTask().Task_Number);
+                $scope.selectedTask.Task_Status = "Accepted";
+                $rootScope.showAccept = false;
+
+            } else {
+
+                var taskObject = {
+                    Task_Status: "Accepted",
+                    Task_Number: valueService.getTask().Task_Number,
+                    Submit_Status: "A"
+                };
+
+                localService.updateTaskSubmitStatus(taskObject);
+            }
+        }
     };
 
     $scope.mapClicked = function () {
