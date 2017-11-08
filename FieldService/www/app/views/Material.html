@@ -86,18 +86,25 @@
                             <div class="form-group">
                                 <label class="control-label col-sm-12 marginbottom5" translate="{{item.materialDefault.chargeType.title}}"></label>
                                 <div class="col-sm-12">
-
+                                    
                                     <input class="inputFieldsMaterial"
-                                           ng-model="item.Charge_Type" disabled></input>
+                                    ng-model="item.Charge_Type" disabled></input>
+                                </div>
+                                <div class="col-sm-12">
+                                    <select class="form-control select-debrief" ng-model="item.Charge_Type"
+                                            ng-options="x as x.value | translate for x in warrantyList track by x.id" ng-change="selectedWarrantyType(item)">
+                                        <option value="" disabled selected>Select Charge Method</option>
+                                    </select>
                                 </div>
                             </div>
                         </div>
-
+                        
                         <div class="col-sm-4 col-md-4">
                             <div class="col-sm-12 col-md-12">
                                 <div class="form-group">
                                     <label class="control-label  marginbottom5" translate="{{item.materialDefault.description.title}}"></label>
-                                    <div>{{item.Description}}</div>
+                                    <input type="text" name="description" class="form-control" ng-model="item.Description"/>
+                                       <!-- <div>{{item.Description}}</div> -->
                                 </div>
                             </div>
                         </div>
