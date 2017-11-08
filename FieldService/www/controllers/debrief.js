@@ -1024,17 +1024,17 @@ app.controller("debriefController", function ($scope, $state, $rootScope, $windo
 
                 $scope.addObject(stage.title);
 
-                // if ($scope.expenseDefault.chargeMethod.values != undefined && $scope.expenseDefault.chargeMethod.values.length > 0) {
-                //
-                //     angular.forEach($scope.expenseDefault.chargeMethod.values, function (key, value) {
-                //
-                //         if (key.Value == $scope.taskObject.Expense_Method) {
-                //
-                //             $scope.expenseArray[0].Charge_Method = key;
-                //             $scope.expenseArray[0].Charge_Method_Id = key.ID;
-                //         }
-                //     });
-                // }
+                if ($scope.materialDefault.chargeType.values != undefined && $scope.materialDefault.chargeType.values.length > 0) {
+                
+                    angular.forEach($scope.materialDefault.chargeType.values, function (key, value) {
+
+                        if (key.Value == $scope.taskObject.Material_Method) {
+                
+                             $scope.materialArray[0].Charge_Type = key;
+                             $scope.materialArray[0].Charge_Type_Id = key.ID;
+                         }
+                     });
+                 }
             }
 
             $scope.currentTab = "material";
