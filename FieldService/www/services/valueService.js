@@ -573,7 +573,7 @@
             return blob;
         };
 
-        function saveBase64File(folderpath, filename, content, contentType, callback) {
+        function saveBase64File(folderpath, filename, content, contentType, defer) {
 
             var DataBlob = b64toBlob(content, contentType);
 
@@ -592,8 +592,8 @@
                         console.log("WRITING CONTENT TO FILE");
 
                         fileWriter.write(DataBlob);
-                        if (callback != null)
-                            callback();
+                        if (defer != null)
+                            defer.resolve();
 
                     }, function () {
 
@@ -631,12 +631,16 @@
             });
         };
 
-        function openFile(filePath, fileType) {
+        function openFile(filePath, fileType,callback) {
 
             cordova.plugins.fileOpener2.open(filePath, fileType, {
 
                     error: function (e) {
                         console.log('Error status: ' + e.status + ' - Error message: ' + e.message);
+                        if (callback != null && callback != undefined)
+                        {
+                            callback();
+                        }
                     },
                     success: function () {
                         console.log('file opened successfully');

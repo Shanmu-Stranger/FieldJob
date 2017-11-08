@@ -1376,13 +1376,24 @@ app.controller("debriefController", function ($scope, $state, $rootScope, $windo
 
             $("#cmd").click(function () {
 
-               
-                var promise = generatePDF();
-                promise.then(function () {
-                    var filePath = cordova.file.dataDirectory;
-                    valueService.openFile(filePath + "Report_" + $scope.summary.taskObject.Task_Number + ".pdf", "application/pdf");
-                })
+                var filePath = cordova.file.dataDirectory;
 
+                valueService.openFile(filePath + "Report_" + $scope.summary.taskObject.Task_Number + ".pdf", "application/pdf", function () {
+
+                    $rootScope.apicall = true;
+
+                    var promise = generatePDF();
+
+                    promise.then(function () {
+
+                        $rootScope.apicall = false;
+
+                        var filePath = cordova.file.dataDirectory;
+
+                        valueService.openFile(filePath + "Report_" + $scope.summary.taskObject.Task_Number + ".pdf", "application/pdf");
+
+                    })
+                });
             });
 
         }, 1000);
@@ -1392,13 +1403,22 @@ app.controller("debriefController", function ($scope, $state, $rootScope, $windo
             $("#cmd1").click(function () {
 
                 //doc1.save("Report_" + $scope.summary.taskObject.Task_Number + ".pdf");
+                var filePath = cordova.file.dataDirectory;
+                valueService.openFile(filePath + "Report_" + $scope.summary.taskObject.Task_Number + ".pdf", "application/pdf", function () {
 
-                var promise = generatePDF();
-                promise.then(function () {
-                    var filePath = cordova.file.dataDirectory;
-                    valueService.openFile(filePath + "Report_" + $scope.summary.taskObject.Task_Number + ".pdf", "application/pdf");
-                })
-               
+                    $rootScope.apicall = true;
+
+                    var promise = generatePDF();
+
+                    promise.then(function () {
+
+                        $rootScope.apicall = true;
+
+                        var filePath = cordova.file.dataDirectory;
+
+                        valueService.openFile(filePath + "Report_" + $scope.summary.taskObject.Task_Number + ".pdf", "application/pdf");
+                    })
+                });
 
                 //                 var doc = jsPDF("p", "mm", [700, 750]);
 
@@ -1642,12 +1662,13 @@ app.controller("debriefController", function ($scope, $state, $rootScope, $windo
                     "taskId": $rootScope.selectedTask.Task_Number,
                     "contentType": "application/pdf"
                 }
-            attachmentJSONData.push(reportObj);
+         //   attachmentJSONData.push(reportObj);
             var attachmentUploadJSON = {
                 "attachment": attachmentJSONData
             };
 
-            if ($scope.files != undefined && $scope.files.length > 0) {
+             if ($scope.files != undefined && $scope.files.length > 0)
+            {
 
                 cloudService.createAttachment(attachmentUploadJSON, function (response) {
 
@@ -2445,7 +2466,7 @@ app.controller("debriefController", function ($scope, $state, $rootScope, $windo
 
                 $scope.value = doc1.output("datauri");
 
-                valueService.saveBase64File(filePath, "Report_" + $scope.summary.taskObject.Task_Number + ".pdf", $scope.value, "application/pdf", defer.resolve());
+                valueService.saveBase64File(filePath, "Report_" + $scope.summary.taskObject.Task_Number + ".pdf", $scope.value, "application/pdf", defer);
 
                 //  valueService.openFile(filePath + "Report_" + $scope.summary.taskObject.Task_Number + ".pdf", "application/pdf");
 
@@ -2462,7 +2483,7 @@ app.controller("debriefController", function ($scope, $state, $rootScope, $windo
                 // valueService.openFile(filePath + "Report_" + $scope.summary.taskObject.Task_Number + ".pdf", "application/pdf");
 
             }
-        }, 1)
+        }, 1000)
 
         return defer.promise
           
@@ -2472,13 +2493,13 @@ app.controller("debriefController", function ($scope, $state, $rootScope, $windo
     }
     $scope.sendMail = function () {
         if ($scope.reportBase64 != "" && $scope.reportBase64 != undefined) {
-            var base64parts = $scope.value.split(',');
+            var base64parts = $scope.reportBase64.split(',');
 
             base64parts[0] = "base64:" + "Report_" + $scope.summary.taskObject.Task_Number + ".pdf" + "//";
 
             var file = "app://local/" + "Report_" + $scope.summary.taskObject.Task_Number + ".pdf";
 
-            var compatibleAttachment = base64parts + $scope.value;
+            var compatibleAttachment = base64parts + $scope.reportBase64;
 
             cordova.plugins.email.open({
                 to: constantService.getUserEmailId(),
