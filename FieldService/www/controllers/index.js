@@ -268,7 +268,7 @@ app.controller('indexController', function ($scope, $state, $timeout, $mdSidenav
                 });
             });
 
-            valueService.syncData();
+            // valueService.syncData();
 
             localService.getPendingTaskList(function (response) {
 

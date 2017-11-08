@@ -178,7 +178,7 @@
 
                                 item.Submit_Status = "I";
 
-                            } else {
+                            }  else {
 
                                 item.Submit_Status = "A";
                             }
