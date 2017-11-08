@@ -119,6 +119,12 @@
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\images\doc.png">
       <PackagePath>www\images\doc.png</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\images\email1x.png">
+      <PackagePath>www\images\email1x.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\images\email2x.png">
+      <PackagePath>www\images\email2x.png</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\images\emerson.png">
       <PackagePath>www\images\emerson.png</PackagePath>
     </AppxPackagedFile>
@@ -139,6 +145,12 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\images\excel.png">
       <PackagePath>www\images\excel.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\images\Excel_1x.png">
+      <PackagePath>www\images\Excel_1x.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\images\Excel_2x.png">
+      <PackagePath>www\images\Excel_2x.png</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\images\Group 5.png">
       <PackagePath>www\images\Group 5.png</PackagePath>
@@ -206,6 +218,12 @@
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\images\mytask\taskoverview.png">
       <PackagePath>www\images\mytask\taskoverview.png</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\images\Notepad_1x.png">
+      <PackagePath>www\images\Notepad_1x.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\images\Notepad_2x.png">
+      <PackagePath>www\images\Notepad_2x.png</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\images\padlock.png">
       <PackagePath>www\images\padlock.png</PackagePath>
     </AppxPackagedFile>
@@ -214,6 +232,24 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\images\pdf.png">
       <PackagePath>www\images\pdf.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\images\pdf1x.png">
+      <PackagePath>www\images\pdf1x.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\images\pdf2x.png">
+      <PackagePath>www\images\pdf2x.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\images\PowerPoint_1x.png">
+      <PackagePath>www\images\PowerPoint_1x.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\images\PowerPoint_2x.png">
+      <PackagePath>www\images\PowerPoint_2x.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\images\print1x.png">
+      <PackagePath>www\images\print1x.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\images\print2x.png">
+      <PackagePath>www\images\print2x.png</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\images\save\save.png">
       <PackagePath>www\images\save\save.png</PackagePath>
@@ -292,6 +328,12 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\images\user_avator\VectorSmartObject%402x.png">
       <PackagePath>www\images\user_avator\VectorSmartObject%402x.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\images\Word_1x.png">
+      <PackagePath>www\images\Word_1x.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\images\Word_2x.png">
+      <PackagePath>www\images\Word_2x.png</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\akhya\Documents\GitHub\FieldJob\FieldService\platforms\windows\www\patterns.png">
       <PackagePath>www\patterns.png</PackagePath>

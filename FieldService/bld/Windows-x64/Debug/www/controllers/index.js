@@ -268,7 +268,7 @@
                 });
             });
 
-            valueService.syncData();
+            // valueService.syncData();
 
             localService.getPendingTaskList(function (response) {
 
