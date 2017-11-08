@@ -144,7 +144,7 @@
   "DoubleTime":"DoubleTime",
   "My calendar":"My calendar",
   "My Field Job":"My Field Job",
-  "Field Job #":	"Field Job #",
+  "Field Job":	"Field Job",
   "Customer":	"Customer",
   "Location":	"Location",
   "Field Job Details":	"Field Job Details",
@@ -164,7 +164,7 @@
   "Clear":"Clear",
   "Next":"Next",
   "Engineer Name":	"Engineer Name",
-  "Tag":	"Tag",
+  "TAG":	"Tag",
   "Original PO":	"Original PO",
   "ENTER CUSTOMER PRINT NAME":	"ENTER CUSTOMER PRINT NAME",
   "JOB RESPONSIBILITY":	"JOB RESPONSIBILITY",
@@ -180,5 +180,9 @@
   "Signature":"Signature",
   "Customer Call Details":"Customer Call Details",
   "Note Description":"Note Description",
-  "State/Province":"State/Province"
+  "State/Province":"State/Province",
+  "Field Service":"Field Service",
+  "Accept":"Accept",
+  "Tools and Equipments": "Tools and Equipments",
+  "Add Equipments/Tools":"Add Equipments/Tools",
 }

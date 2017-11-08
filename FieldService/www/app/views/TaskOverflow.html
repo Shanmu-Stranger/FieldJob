@@ -34,7 +34,7 @@
 
         <div class="nav navbar-nav navbar-right">
             <button type="button" class="btn btn-default back-btn" ng-click="goToBack()" translate="Back"></button>
-            <button type="button" class="btn btn-default accept-btn" ui-sref="todo" ng-click="accept()" ng-show="$root.showAccept" style="margin-left: 20px;">ACCEPT</button>
+            <button type="button" class="btn btn-default accept-btn" ui-sref="todo" ng-click="accept()" ng-show="$root.showAccept" style="margin-left: 20px;" translate="Accept"></button>
             <button type="button" class="btn btn-default accept-btn"  ng-click="$root.showTaskOrDebrief(4)" ng-show="!$root.showAccept" translate="Debrief" ng-disabled="isFutureDate" style="margin-left: 20px;"></button>
             <!-- <a class="accept-btn md-button md-ink-ripple" ng-click="$root.showTaskOrDebrief(4)" ng-show="!$root.showAccept"  ng-disabled="isFutureDate"><span translate="Debrief"></span></a> -->
         </div>

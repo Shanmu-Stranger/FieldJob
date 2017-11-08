@@ -159,7 +159,7 @@
                                 <div class="col-md-8">
                                     <div ng-show="item.Charge_Type.Value == 'Billable' || item.Charge_Type.Value == 'Goodwill' || item.Charge_Type.Value == 'Concession' ">
                                         <div class="form-group ">
-                                            <label class="control-label">{{item.materialDefault.serialNo.title}}</label>
+                                            <label class="control-label" translate="{{item.materialDefault.serialNo.title}}"></label>
                                             <input style="width:240px;" class="inputFieldsMaterial" id="SerialNo"
                                                    ng-model="serial.number" name="SerialNo"></input>
                                         </div>

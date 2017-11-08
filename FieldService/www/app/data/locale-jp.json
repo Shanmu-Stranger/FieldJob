@@ -19,7 +19,8 @@
   "Phone Number": "电话号码",
   "Email": "邮箱",
   "Onsite Requirement": "现场要求",
-  "Equipment/Tools": "装备/工具",
+  "Tools and Equipments": "装备/工具",
+  "Add Equipments/Tools":"添加装备/工具",
   "Tools Description": "工具描述",
   "Notes ": "备注",
   "Notes Type": "备注类型",
@@ -182,7 +183,7 @@
   "Clear":"清除",
   "Next":"下一步",
   "Engineer Name":	"工程师名字",
-  "Tag":	"标签",
+  "TAG":	"标签",
   "Original PO":	"原始订单号",
   "ENTER CUSTOMER PRINT NAME":	"客户全名",
   "JOB RESPONSIBILITY":	"工作范围",
@@ -198,5 +199,7 @@
   "Signature":"签字",
   "Customer Call Details":"客户具体服务需求",
   "Note Description":"备注服务描述",
-  "State/Province":"省"
+  "State/Province":"省",
+  "Field Service":"现场服务",
+  "Accept":"接受"
 }
