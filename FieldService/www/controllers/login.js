@@ -67,10 +67,10 @@ app.controller('loginController', function ($location, $state, $rootScope, $scop
                         var data = {
                             "resourceId": constantService.getUser().OFSCId,
                             "date": moment(new Date()).format('YYYY-MM-DD')
-                        }
+                        };
 
                         ofscService.activate_resource(data, function (response) {
-                            console.log(response);
+                            console.log("ACTIVATE RESOURCE " + JSON.stringify(response));
                         });
 
                         offlineGetCall();
@@ -109,25 +109,13 @@ app.controller('loginController', function ($location, $state, $rootScope, $scop
 
                     $rootScope.selectedItem = 2;
 
-                    localService.getTaskList(function (response) {
-
-                        console.log("TASK =====> " + JSON.stringify(response));
-
-                        $rootScope.myTaskDetailsForLoggedInUser = response;
-
-                        $state.go('myFieldJob');
-                    });
+                    $state.go('myFieldJob');
 
                 } else {
 
-                    localService.getTaskList(function (response) {
+                    $rootScope.selectedItem = 1;
 
-                        console.log("TASK =====> " + JSON.stringify(response));
-
-                        $rootScope.myTaskDetailsForLoggedInUser = response;
-
-                        $state.go('myTask');
-                    });
+                    $state.go('myTask');
                 }
 
                 cloudService.getInstallBaseList();
@@ -148,9 +136,7 @@ app.controller('loginController', function ($location, $state, $rootScope, $scop
                 cloudService.getExpenseType();
                 cloudService.getNoteType();
 
-                // getAttachments();
-
-
+                getAttachments();
             });
         }
 

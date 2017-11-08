@@ -18,6 +18,8 @@
 
         var contactsEmail = [];
 
+        var taskList = [];
+
         var contactsCCEmail = null;
 
         var contentType = 'application/json';
@@ -58,6 +60,9 @@
 
         service.getStartDate = getStartDate;
         service.getEndDate = getEndDate;
+
+        service.setTaskList = setTaskList;
+        service.getTaskList = getTaskList;
 
         service.getContentType = getContentType;
         service.getAuthor = getAuthor;
@@ -142,6 +147,16 @@
         function getEndDate() {
 
             return endDateISOFormat;
+        };
+
+        function setTaskList(response) {
+
+            taskList = response;
+        };
+
+        function getTaskList() {
+
+            return taskList;
         };
 
         function getAuthor() {

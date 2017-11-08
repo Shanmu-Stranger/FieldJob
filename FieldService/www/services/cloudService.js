@@ -123,11 +123,15 @@
         function getTaskList(callback) {
 
             var ofscResponse = [];
+
             var responseOfTaskDetails = [];
 
             var startDate = moment(constantService.getStartDate()).format("YYYY-MM-DD");
+
             var endDate = moment(constantService.getEndDate()).format("YYYY-MM-DD");
+
             var type = "CUSTOMER";
+
             return $http({
 
                 method: 'GET',
@@ -140,7 +144,9 @@
             }).success(function (response) {
 
                 ofscResponse = response.finalResult;
-                console.log(ofscResponse);
+
+                console.log("OFSC Response " + JSON.stringify(ofscResponse));
+
                 $http({
 
                     method: 'GET',
@@ -163,27 +169,31 @@
 
                             if (itemForOFSC.ActivityID == item.Activity_Id) {
 
-                                console.log("true" + item.Activity_Id)
-
                                 item.Start_Date = itemForOFSC.Start_Date;
 
                                 item.End_Date = itemForOFSC.End_Date;
+                            }
 
+                            if (item.Task_Status == "Completed") {
+
+                                item.Submit_Status = "I";
+
+                            } else {
+
+                                item.Submit_Status = "A";
                             }
                         });
 
                         responseOfTaskDetails.push(item);
                     });
 
-                    console.log("**************************************************");
-                    console.log(responseOfTaskDetails);
+                    console.log("Task Response Final" + JSON.stringify(responseOfTaskDetails));
+
+                    constantService.setTaskList(responseOfTaskDetails);
+
                     localService.insertTaskList(responseOfTaskDetails);
 
-                    setTimeout(function () {
-
-                        callback(responseOfTaskDetails);
-                        
-                    },2000);
+                    callback(responseOfTaskDetails);
 
                 }).error(function (error) {
 
@@ -194,40 +204,10 @@
 
             }).error(function (error) {
 
-                console.log('Login Error', JSON.stringify(error));
+                console.log('OFSC Error', JSON.stringify(error));
 
                 callback(error);
             });
-
-        }
-
-        function getOFSCDate(callback) {
-            console.log('getOFSCDate ::', JSON.stringify(formData));
-            var startDate = moment(constantService.getStartDate()).format("YYYY-MM-DD");
-            var endDate = moment(constantService.getEndDate()).format("YYYY-MM-DD");
-            var type = "CUSTOMER";
-            return $http({
-
-                method: 'GET',
-                url: url + 'OFSCActions/tasktype?resourceId=' + constantService.getResourceId() + '&fromDate=' + startDate + '&toDate=' + endDate + '&type=' + type,
-                headers: {
-                    "Content-Type": constantService.getContentType(),
-                    "Authorization": constantService.getAuthor(),
-                    "oracle-mobile-backend-id": constantService.getOfscBackId()
-                }
-            }).success(function (response) {
-
-                console.log('OFSC Date Call Response', JSON.stringify(response));
-
-                callback(response);
-
-            }).error(function (error) {
-
-                console.log('Login Error', JSON.stringify(error));
-
-                callback(error);
-            });
-
         }
 
         function getInstallBaseList() {
@@ -669,13 +649,13 @@
 
             }).success(function (response) {
 
-                // console.log("downloadAttachment Cloud Response " + JSON.stringify(response));
+                console.log("CreateAttachment Response " + JSON.stringify(response));
 
                 callback(response);
 
             }).error(function (error) {
 
-                //console.log("CreateAttachment Cloud Error " + JSON.stringify(error));
+                console.log("CreateAttachment Error " + JSON.stringify(error));
 
                 callback(error);
             });
@@ -696,13 +676,13 @@
 
             }).success(function (response) {
 
-                // console.log("downloadAttachment Cloud Response " + JSON.stringify(response));
+                // console.log("DownloadAttachment Response " + JSON.stringify(response));
 
                 callback(response);
 
             }).error(function (error) {
 
-                // console.log("DownloadAttachment Error " + JSON.stringify(error));
+                console.log("DownloadAttachment Error " + JSON.stringify(error));
 
                 callback(error);
             });
