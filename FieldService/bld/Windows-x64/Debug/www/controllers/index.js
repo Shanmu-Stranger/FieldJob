@@ -9,7 +9,7 @@
     //
     //     offLine();
     // }
-
+    $rootScope.hide1 = "hide";
     window.addEventListener('offline', offLine);
 
     window.addEventListener('online', onLine);
