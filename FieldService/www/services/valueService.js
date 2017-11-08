@@ -573,7 +573,7 @@
             return blob;
         };
 
-        function saveBase64File(folderpath, filename, content, contentType) {
+        function saveBase64File(folderpath, filename, content, contentType, callback) {
 
             var DataBlob = b64toBlob(content, contentType);
 
@@ -592,6 +592,8 @@
                         console.log("WRITING CONTENT TO FILE");
 
                         fileWriter.write(DataBlob);
+                        if (callback != null)
+                            callback();
 
                     }, function () {
 

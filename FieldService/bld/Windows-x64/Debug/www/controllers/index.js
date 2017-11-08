@@ -311,6 +311,29 @@
         console.log("Inside the syncFunctionality");
 
         if (valueService.getNetworkStatus()) {
+
+            valueService.syncData();
+
+            localService.getAcceptTaskList(function (response) {
+
+                angular.forEach(response, function (item) {
+
+                    valueService.acceptTask(item.Task_Number);
+
+                });
+            });
+
+            localService.getPendingTaskList(function (response) {
+
+                angular.forEach(response, function (item) {
+
+                    valueService.submitDebrief(item.Task_Number);
+
+                });
+            });
+        }
+
+        if (valueService.getNetworkStatus()) {
             cloudService.getTaskList(function (response) {
 
                 localService.deleteInstallBase();
