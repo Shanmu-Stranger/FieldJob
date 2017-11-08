@@ -243,7 +243,7 @@ app.directive('dateFormat', function ($filter) {
         }
     };
 });
-app.directive('signaturePad', ['$interval', '$timeout', '$window', '$rootScope', function ($interval, $timeout, $window, $rootScope) {
+app.directive('signaturePad', ['$interval', '$timeout', '$window', '$rootScope','constantService', function ($interval, $timeout, $window, $rootScope,constantService) {
 
     'use strict';
 
@@ -283,6 +283,17 @@ app.directive('signaturePad', ['$interval', '$timeout', '$window', '$rootScope',
                 $scope.notifyDrawing({
                     drawing: false
                 });
+                var stagesSign = constantService.getStagesArray();
+                switch(stagesSign.title) {
+                    case 'Engineer Signature':
+                        $rootScope.engineerSignTime = new Date().toLocaleString();
+                        break;
+                    case 'Customer Signature':
+                         $rootScope.customerSignTime = new Date().toLocaleString();
+                        break;
+                    default:
+                        break;
+                }
             };
 
             $scope.updateModel = function () {
@@ -296,6 +307,17 @@ app.directive('signaturePad', ['$interval', '$timeout', '$window', '$rootScope',
             $scope.clear = function () {
                 $scope.signaturePad.clear();
                 $scope.dataurl = EMPTY_IMAGE;
+                 var stagesTime = constantService.getStagesArray();
+                switch(stagesTime.title) {
+                    case 'Engineer Signature':
+                        $rootScope.engineerSignTime ='';
+                        break;
+                    case 'Customer Signature':
+                         $rootScope.customerSignTime = '';
+                        break;
+                    default:
+                        break;
+                }
             };
 
             $scope.$watch("dataurl", function (dataUrl) {

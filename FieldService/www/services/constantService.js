@@ -39,7 +39,7 @@
         var ofscBackEndId = "557f06cf-1dda-42f1-a8a8-afc52f823904";
 
         var acceptBackEndId = "a0f02e4c-cc58-4aa7-bba9-78e57a000b59";
-
+         var stagesArray = {};
         var startDate = new Date();
 
         startDate.setDate(startDate.getDate() - 15);
@@ -83,6 +83,8 @@
 
         service.setTimeZone = setTimeZone;
         service.getTimeZone = getTimeZone;
+        service.setStagesArray = setStagesArray;
+        service.getStagesArray = getStagesArray;
 
         return service;
 
@@ -202,6 +204,12 @@
         function getContentType() {
 
             return contentType;
+        };
+         function setStagesArray(stages){
+            stagesArray = stages;
+        }
+        function getStagesArray(){
+            return stagesArray;
         };
     }
 })();

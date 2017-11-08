@@ -831,7 +831,7 @@ app.controller("debriefController", function ($scope, $state, $rootScope, $windo
     }
 
     $scope.tabChange = function (stage) {
-
+        constantService.setStagesArray(stage);
         console.log("STAGE =====> " + JSON.stringify(stage));
 
         if ($scope.currentTab == "time") {
