@@ -2897,7 +2897,7 @@
 
             return db.transaction(function (transaction) {
 
-                transaction.executeSql("SELECT * FROM Task WHERE Task_Status = Accepted AND Submit_Status = ?", ["A"], function (tx, res) {
+                transaction.executeSql("SELECT * FROM Task WHERE Task_Status = ? AND Submit_Status = ?", ["Accepted", "A"], function (tx, res) {
 
                     var rowLength = res.rows.length;
 
@@ -3202,7 +3202,7 @@
             var value = [];
 
             return db.transaction(function (transaction) {
-                // transaction.executeSql("SELECT * FROM FieldJobName WHERE TaskCode = ?", [taskNumber], function (tx, res) {
+
                 transaction.executeSql("SELECT * FROM FieldJobName WHERE Task = ?", [taskNumber], function (tx, res) {
 
                     var rowLength = res.rows.length;

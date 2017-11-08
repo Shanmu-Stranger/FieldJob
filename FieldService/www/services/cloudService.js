@@ -41,9 +41,9 @@
         service.startTask = startTask;
 
         service.uploadTime = uploadTime;
-        service.updateExpenses = updateExpenses;
-        service.updateMaterial = updateMaterial;
-        service.updateNotes = updateNotes;
+        service.uploadExpense = uploadExpense;
+        service.uploadMaterial = uploadMaterial;
+        service.uploadNote = uploadNote;
 
         service.createAttachment = createAttachment;
         service.downloadAttachment = downloadAttachment;
@@ -649,13 +649,13 @@
 
             }).success(function (response) {
 
-                console.log("CreateAttachment Response " + JSON.stringify(response));
+                console.log("Create Attachment Response " + JSON.stringify(response));
 
                 callback(response);
 
             }).error(function (error) {
 
-                console.log("CreateAttachment Error " + JSON.stringify(error));
+                console.log("Create Attachment Error " + JSON.stringify(error));
 
                 callback(error);
             });
@@ -690,7 +690,7 @@
 
         function uploadTime(timedata, callback) {
 
-            console.log("UploadTime Data " + JSON.stringify(timedata));
+            console.log("Time Data " + JSON.stringify(timedata));
 
             return $http({
 
@@ -705,21 +705,21 @@
 
             }).success(function (response) {
 
-                console.log("UploadTime Response " + JSON.stringify(response));
+                console.log("Upload Time Response " + JSON.stringify(response));
 
                 callback(response);
 
             }).error(function (error) {
 
-                console.log("UploadTime Error " + JSON.stringify(error));
+                console.log("Upload Time Error " + JSON.stringify(error));
 
                 callback(error);
             });
         }
 
-        function updateExpenses(expenseData, callback) {
+        function uploadExpense(expenseData, callback) {
 
-            console.log("UpdateExpenses Data " + JSON.stringify(expenseData));
+            console.log("Expense Data " + JSON.stringify(expenseData));
 
             return $http({
 
@@ -734,23 +734,23 @@
 
             }).success(function (response) {
 
-                console.log("UpdateExpenses Response " + JSON.stringify(response));
+                console.log("Upload Expense Response " + JSON.stringify(response));
 
                 callback(response);
 
             }).error(function (error) {
 
-                console.log("UpdateExpenses Error " + JSON.stringify(error));
+                console.log("Upload Expense Error " + JSON.stringify(error));
 
                 callback(error);
             });
         }
 
-        function updateMaterial(materialData, callback) {
+        function uploadMaterial(materialData, callback) {
 
             var urlWarranty = "Material_API/material_update";
 
-            console.log("UpdateMaterial  Data" + JSON.stringify(materialData));
+            console.log("Material Data" + JSON.stringify(materialData));
 
             $http({
 
@@ -765,21 +765,21 @@
 
             }).success(function (response) {
 
-                console.log("updateMaterial Response " + JSON.stringify(response));
+                console.log("Upload Material Response " + JSON.stringify(response));
 
                 callback(response);
 
             }).error(function (error) {
 
-                console.log("updateMaterial Error " + JSON.stringify(error));
+                console.log("Upload Material Error " + JSON.stringify(error));
 
                 callback(error);
             });
         }
 
-        function updateNotes(noteData, callback) {
+        function uploadNote(noteData, callback) {
 
-            console.log("UpdateNotes Data", JSON.stringify(noteData));
+            console.log("Note Data", JSON.stringify(noteData));
 
             return $http({
 
@@ -794,13 +794,13 @@
 
             }).success(function (response) {
 
-                console.log("UpdateNotes Response " + JSON.stringify(response));
+                console.log("Upload Note Response " + JSON.stringify(response));
 
                 callback(response);
 
             }).error(function (error) {
 
-                console.log("UpdateNotes Error " + JSON.stringify(error));
+                console.log("Upload Note Error " + JSON.stringify(error));
 
                 callback(error);
             });

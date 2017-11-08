@@ -241,6 +241,11 @@ app.controller('taskOverFlowController', function ($scope, $http, $state, $rootS
                 };
 
                 localService.updateTaskSubmitStatus(taskObject);
+
+                localService.getTaskList(function (response) {
+
+                    constantService.setTaskList(response);
+                });
             }
         }
     };

@@ -257,6 +257,8 @@ app.controller('indexController', function ($scope, $state, $timeout, $mdSidenav
 
     $scope.syncFunctionality = function () {
 
+        console.log("NETWORK "+valueService.getNetworkStatus());
+
         if (valueService.getNetworkStatus()) {
 
             localService.getAcceptTaskList(function (response) {
@@ -265,46 +267,42 @@ app.controller('indexController', function ($scope, $state, $timeout, $mdSidenav
 
                     valueService.acceptTask(item.Task_Number);
 
+                    cloudService.getTaskList(function (response) {
+
+                    });
                 });
             });
-
-            // valueService.syncData();
 
             localService.getPendingTaskList(function (response) {
 
                 angular.forEach(response, function (item) {
 
                     valueService.submitDebrief(item.Task_Number);
-
                 });
             });
 
-            cloudService.getTaskList(function (response) {
-
-                localService.deleteInstallBase();
-                localService.deleteNote();
-                localService.deleteContact();
-                localService.deleteShiftCode();
-                localService.deleteOverTime();
-                localService.deleteFieldJobName();
-
-                cloudService.getInstallBaseList();
-                cloudService.getContactList();
-                cloudService.getNoteList();
-
-                cloudService.getOverTimeList();
-                cloudService.getShiftCodeList();
-
-                cloudService.getChargeType();
-                cloudService.getChargeMethod();
-                cloudService.getFieldJobName();
-
-                cloudService.getWorkType();
-                cloudService.getItem();
-                cloudService.getCurrency();
-
-                $state.go('myTask');
-            });
+            // cloudService.getTaskList(function (response) {
+            //
+            //     cloudService.getInstallBaseList();
+            //     cloudService.getContactList();
+            //     cloudService.getNoteList();
+            //
+            //     cloudService.getOverTimeList();
+            //     cloudService.getShiftCodeList();
+            //
+            //     cloudService.getChargeType();
+            //     cloudService.getChargeMethod();
+            //     cloudService.getFieldJobName();
+            //
+            //     cloudService.getWorkType();
+            //     cloudService.getItem();
+            //     cloudService.getCurrency();
+            //
+            //     cloudService.getExpenseType();
+            //     cloudService.getNoteType();
+            //
+            //     getAttachments();
+            // });
         }
     }
 
