@@ -275,7 +275,7 @@
                 debrief.chargeMethod = response;
             });
 
-            localService.getFieldJobNameList(taskObject.Task_Number,function (response) {
+            localService.getFieldJobNameList(taskObject.Task_Number, function (response) {
 
                 debrief.fieldName = response;
             });
@@ -631,14 +631,13 @@
             });
         };
 
-        function openFile(filePath, fileType,callback) {
+        function openFile(filePath, fileType, callback) {
 
             cordova.plugins.fileOpener2.open(filePath, fileType, {
 
                     error: function (e) {
                         console.log('Error status: ' + e.status + ' - Error message: ' + e.message);
-                        if (callback != null && callback != undefined)
-                        {
+                        if (callback != null && callback != undefined) {
                             callback();
                         }
                     },
@@ -777,8 +776,8 @@
                             "labor_item": timeArray[i].Item_Id,
                             "labor_description": timeArray[i].Description,
                             "work_type": timeArray[i].Work_Type_Id,
-                            "start_date": date,
-                            "end_date": date,
+                            "start_date": moment.utc(timeArray[i].Date).format("YYYY-MM-DDTHH:mm:ss.000Z"),
+                            "end_date": moment.utc(timeArray[i].Date).format("YYYY-MM-DDTHH:mm:ss.000Z"),
                             "charge_method": timeArray[i].Charge_Method_Id,
                             "JobName": timeArray[i].Field_Job_Name_Id
                         }
@@ -799,13 +798,13 @@
                                 var expenseData = {
                                     "taskId": expenseArray[i].Task_Number,
                                     "comments": expenseArray[i].Justification,
-                                    "currency": expenseArray[i].Currency_Id,
-                                    "chargeMethod": expenseArray[i].Charge_Method_Id,
+                                    "currency": expenseArray[i].Currency_Id.toString(),
+                                    "chargeMethod": expenseArray[i].Charge_Method_Id.toString(),
                                     "ammount": expenseArray[i].Amount,
-                                    "date": expenseDate,
-                                    "expenseItem": expenseArray[i].Expense_Type_Id,
-                                    "chargeType": "2",
-                                    "billable": "true"
+                                    "date": moment.utc(expenseArray[i].Date).format("YYYY-MM-DD"),
+                                    "expenseItem": expenseArray[i].Expense_Type_Id.toString()
+                                    // "chargeType": "2",
+                                    // "billable": "true"
                                 }
 
                                 expenseJSONData.push(expenseData);
@@ -825,12 +824,14 @@
                                                 "charge_method": materialArray[i].Charge_Type_Id.toString(),
                                                 "task_id": materialArray[i].Task_Number,
                                                 "item_description": materialArray[i].Description,
-                                                "product_quantity": 1,
+                                                "product_quantity": "1",
                                                 "comments": "",
-                                                "item": materialArray[i].itemName,
+                                                "item": materialArray[i].ItemName,
                                                 "serialin": key.in,
                                                 "serialout": key.out,
                                                 "serial_number": key.number
+                                                // "service_activity": "serveact",
+                                                // "charge_type": "2"
                                             }
 
                                             materialDataJSON.push(materialData);
@@ -846,9 +847,10 @@
                                             for (var i = 0; i < notesArray.length; i++) {
 
                                                 var noteData = {
-                                                    "Notes_type": notesArray[i].Note_Type.id,
+                                                    "Notes_type": notesArray[i].Note_Type.ID,
                                                     "notes_description": notesArray[i].Notes,
-                                                    "task_id": notesArray[i].Task_Number
+                                                    "task_id": notesArray[i].Task_Number,
+                                                    "mobilecreatedDate": moment.utc(notesArray[i].Date).format("YYYY-MM-DDTHH:mm:ss.000Z")
                                                 };
 
                                                 noteDataJSON.push(noteData);
@@ -904,7 +906,7 @@
 
                                                         cloudService.uploadTime(timeUploadJSON, function (response) {
 
-                                                            console.log("Uploaded Time Data " + JSON.stringify(response));
+                                                            console.log("Uploaded Time " + JSON.stringify(response));
                                                         });
                                                     }
 
@@ -918,7 +920,7 @@
 
                                                         cloudService.updateExpenses(expenseUploadJSON, function (response) {
 
-                                                            console.log("Uploaded Expense Data " + JSON.stringify(response));
+                                                            console.log("Uploaded Expense " + JSON.stringify(response));
                                                         });
                                                     }
 
@@ -932,7 +934,7 @@
 
                                                         cloudService.updateNotes(notesUploadJSON, function (response) {
 
-                                                            console.log("Uploaded notes " + JSON.stringify(response));
+                                                            console.log("Uploaded Notes " + JSON.stringify(response));
                                                         });
                                                     }
 
@@ -946,10 +948,18 @@
 
                                                         cloudService.updateMaterial(materialUploadJSON, function (response) {
 
-                                                            console.log("Uploaded material " + JSON.stringify(response));
+                                                            console.log("Uploaded Material " + JSON.stringify(response));
                                                         });
                                                     }
-
+                                                    var reportObj = {
+                                                        "Data": $scope.reportBase64,
+                                                        "FileName": "Report_" + $scope.summary.taskObject.Task_Number + ".pdf",
+                                                        "Description": "Report_" + $scope.summary.taskObject.Task_Number + ".pdf",
+                                                        "Name": "Report_" + $scope.summary.taskObject.Task_Number + ".pdf",
+                                                        "taskId": $rootScope.selectedTask.Task_Number,
+                                                        "contentType": "application/pdf"
+                                                    }
+                                                    attachmentJSONData.push(reportObj);
                                                     var attachmentUploadJSON = {
                                                         "attachment": attachmentJSONData
                                                     };
@@ -968,8 +978,17 @@
 
                                                         var formData = {
                                                             "Taskstatus": [{
-                                                                "taskId": taskId,
-                                                                "taskStatus": "Completed"
+                                                                "taskId": $scope.taskId,
+                                                                "taskStatus": "Completed",
+                                                                "completeDate": moment.utc(new Date()).format("YYYY-MM-DDTHH:mm:ss.000Z"),
+                                                                "followUp": $scope.followUp.toString(),
+                                                                "salesQuote": $scope.spareQuote.toString(),
+                                                                "salesVisit": $scope.salesVisit.toString(),
+                                                                "salesLead": $scope.salesLead.toString(),
+                                                                "followuptext": $scope.engineerObject.Follow_Up,
+                                                                "sparequotetext": $scope.engineerObject.Spare_Quote,
+                                                                "salesText": $scope.engineerObject.Sales_Visit,
+                                                                "salesleadText": $scope.engineerObject.Sales_Head
                                                             }]
                                                         };
 
