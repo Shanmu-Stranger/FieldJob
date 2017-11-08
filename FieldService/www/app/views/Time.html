@@ -152,9 +152,9 @@ z-index: 1051 !important;" ng-show="$root.completedTask">
 
             <section style="border-radius:0 0 10px 10px" layout="row" layout-sm="column" layout-align="center center"
                      layout-wrap class="time-btns">
-                <md-button class="time-font time-add" ng-click="addObject('Time')" ng-disabled="$root.completedTask">ADD</md-button>
-                <md-button class="time-font time-delete" ng-click="deleteObject($index,item,'Time')" ng-disabled="$root.completedTask">DELETE</md-button>
-                <md-button class="time-font time-copy" ng-click="copyObject(item,'Time')" ng-disabled="$root.completedTask">COPY</md-button>
+                <md-button class="time-font time-add" ng-click="addObject('Time')" ng-disabled="$root.completedTask" translate="Add"></md-button>
+                <md-button class="time-font time-delete" ng-click="deleteObject($index,item,'Time')" ng-disabled="$root.completedTask" translate="delete"></md-button>
+                <md-button class="time-font time-copy" ng-click="copyObject(item,'Time')" ng-disabled="$root.completedTask" translate="copy"></md-button>
             </section>
         </md-card>
     </div>
