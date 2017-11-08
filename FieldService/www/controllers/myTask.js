@@ -117,10 +117,11 @@ app.controller('myTaskController', function ($scope, $compile, $timeout, uiCalen
                 myTask: {
                     text: 'My Field Job',
                     click: function () {
-
+                        $rootScope.apicall = true;
                         localService.getTaskList(function (response) {
 
                             $rootScope.myTaskDetailsForLoggedInUser = response;
+                            $rootScope.apicall = false;
                             $state.go("myFieldJob");
                             $rootScope.tabClicked = true;
                             $rootScope.selectedItem = 2;
