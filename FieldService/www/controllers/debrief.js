@@ -475,7 +475,7 @@ app.controller("debriefController", function ($scope, $state, $rootScope, $windo
             Type: "D",
             Task_Number: $scope.taskId
         };
-
+        if ($scope.engineerObject == undefined)
         $scope.engineerObject = {
             Engineer_Id: $scope.taskId,
             Follow_Up: "",
@@ -1647,7 +1647,7 @@ app.controller("debriefController", function ($scope, $state, $rootScope, $windo
                 "attachment": attachmentJSONData
             };
 
-            if ($scope.files) {
+            if ($scope.files != undefined && $scope.files.length > 0) {
 
                 cloudService.createAttachment(attachmentUploadJSON, function (response) {
 
@@ -1661,7 +1661,15 @@ app.controller("debriefController", function ($scope, $state, $rootScope, $windo
                     "Taskstatus": [{
                         "taskId": $scope.taskId,
                         "taskStatus": "Completed",
-                        "completeDate": moment.utc(new Date()).format("YYYY-MM-DDTHH:mm:ss.000Z")
+                        "completeDate": moment.utc(new Date()).format("YYYY-MM-DDTHH:mm:ss.000Z"),
+                        "followUp": $scope.followUp.toString(),
+                        "salesQuote": $scope.spareQuote.toString(),
+                        "salesVisit": $scope.salesVisit.toString(),
+                        "salesLead": $scope.salesLead.toString(),
+                        "followuptext": $scope.engineerObject.Follow_Up,
+                        "sparequotetext": $scope.engineerObject.Spare_Quote,
+                        "salesText": $scope.engineerObject.Sales_Visit,
+                        "salesleadText": $scope.engineerObject.Sales_Head
                     }]
                 };
 
@@ -1671,34 +1679,34 @@ app.controller("debriefController", function ($scope, $state, $rootScope, $windo
                     'oracle-mobile-backend-id': 'a0f02e4c-cc58-4aa7-bba9-78e57a000b59'
                 };
 
-                setTimeout(function () {
+                //setTimeout(function () {
 
-                    var formData = {
-                        "Taskstatus": [{
-                            "taskId": $scope.taskId,
-                            "taskStatus": "Accepted"
-                        }]
-                    };
+                //    var formData = {
+                //        "Taskstatus": [{
+                //            "taskId": $scope.taskId,
+                //            "taskStatus": "Accepted"
+                //        }]
+                //    };
 
-                    cloudService.updateAcceptTask(formData, function (response) {
+                //    cloudService.updateAcceptTask(formData, function (response) {
 
-                        console.log(JSON.stringify(response));
+                //        console.log(JSON.stringify(response));
 
-                        var taskObject = {
-                            Task_Status: "Accepted",
-                            Task_Number: $scope.taskId,
-                            Submit_Status: "A"
-                        };
+                //        var taskObject = {
+                //            Task_Status: "Accepted",
+                //            Task_Number: $scope.taskId,
+                //            Submit_Status: "A"
+                //        };
 
-                        localService.updateTaskSubmitStatus(taskObject);
-                    });
+                //        localService.updateTaskSubmitStatus(taskObject);
+                //    });
 
-                    var formData = {
-                        "Taskstatus": [{
-                            "taskId": $scope.taskId,
-                            "taskStatus": "Completed"
-                        }]
-                    };
+                //    var formData = {
+                //        "Taskstatus": [{
+                //            "taskId": $scope.taskId,
+                //            "taskStatus": "Completed"
+                //        }]
+                //    };
 
                     cloudService.updateAcceptTask(formData, function (response) {
 
@@ -1713,7 +1721,7 @@ app.controller("debriefController", function ($scope, $state, $rootScope, $windo
                         localService.updateTaskSubmitStatus(taskObject);
                     });
 
-                }, 3000);
+                //}, 3000);
 
             }, 3000);
         } else {
@@ -2425,7 +2433,7 @@ app.controller("debriefController", function ($scope, $state, $rootScope, $windo
             doc1.text(50, ySignField + 20, 'ENGINEER NAME')
             doc1.text(250, ySignField + 20, 'CUSTOMER NAME')
             doc1.text(50, ySignField + 35, 'Alex')
-            if ($scope.summary.engineer.signature)
+            if ($scope.summary.engineer != undefined && $scope.summary.engineer.signature)
                 doc1.addImage($scope.summary.engineer.signature, 'JPEG', 50, ySignField + 45, 75, 40)
             doc1.text(250, ySignField + 35, $scope.summary.taskObject.Customer_Name)
             //                 doc1.save("Report_" + $scope.summary.taskObject.Task_Number + ".pdf");

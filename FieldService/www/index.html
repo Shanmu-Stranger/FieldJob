@@ -151,7 +151,7 @@
                 <!--  <img ng-src="{{item == selectedItem ? item.imageSelected : item.image}}"><br> -->
                 <div ng-class="{ '{{item.name}}selected' : item.id == $root.selectedItem, '{{item.name}}' : item.id !== $root.selectedItem }"></div>
                 <!-- <br> -->
-                <span class="sidenav-text" ng-class="{'sidenav-text-Sel':item.id == $root.selectedItem}">{{item.displayName}}</span>
+                <span class="sidenav-text" ng-class="{'sidenav-text-Sel':item.id == $root.selectedItem}" translate="{{item.displayName}}">{{item.displayName}}</span>
             </li>
 
         </ul>
