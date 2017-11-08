@@ -118,6 +118,8 @@ app.controller('loginController', function ($location, $state, $rootScope, $scop
                     $state.go('myTask');
                 }
 
+                $rootScope.apicall = false;
+
                 cloudService.getInstallBaseList();
                 cloudService.getContactList();
                 cloudService.getNoteList();

@@ -216,12 +216,15 @@ app.controller('taskOverFlowController', function ($scope, $http, $state, $rootS
     };
 
     $scope.accept = function () {
+
         if ($scope.selectedTask.Task_Status == 'Assigned') {
 
             if (valueService.getNetworkStatus()) {
 
                 valueService.acceptTask(valueService.getTask().Task_Number);
+
                 $scope.selectedTask.Task_Status = "Accepted";
+
                 $rootScope.showAccept = false;
 
             } else {

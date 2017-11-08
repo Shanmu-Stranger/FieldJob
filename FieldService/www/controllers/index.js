@@ -1,37 +1,14 @@
-app.controller('indexController', function ($scope, $state, $timeout, $mdSidenav, $mdDialog, $translate, $rootScope, usSpinnerService, valueService, localService, cloudService) {
-
-
-    // if (window.navigator.onLine) {
-    //
-    //     onLine();
-    //
-    // } else if (window.navigator.offLine) {
-    //
-    //     offLine();
-    // }
-
-    window.addEventListener('offline', offLine);
-
-    window.addEventListener('online', onLine);
+app.controller('indexController', function ($scope, $state, $timeout, $mdSidenav, $mdDialog, $translate, $rootScope, usSpinnerService, cloudService, localService, valueService, constantService, ofscService) {
 
     $scope.onlineStatus = false;
 
-    function onLine() {
-
-        console.log("Online");
+    if (valueService.getNetworkStatus()) {
 
         $scope.onlineStatus = true;
 
-        valueService.setNetworkStatus(true);
-    }
-
-    function offLine() {
-
-        console.log("Offline");
+    } else {
 
         $scope.onlineStatus = false;
-
-        valueService.setNetworkStatus(false);
     }
 
     if (valueService.getNetworkStatus()) {
@@ -44,9 +21,6 @@ app.controller('indexController', function ($scope, $state, $timeout, $mdSidenav
 
             });
         });
-    }
-
-    if (valueService.getNetworkStatus()) {
 
         localService.getPendingTaskList(function (response) {
 
@@ -185,15 +159,6 @@ app.controller('indexController', function ($scope, $state, $timeout, $mdSidenav
 
                 $state.go(item.controller);
 
-                /*if ($('.showTaskList').is(":visible")) {
-
-                    $('.showTaskList').hide();
-                    $('.fc-view-container').show();
-                    $('#calendar > div.fc-toolbar.fc-header-toolbar > div.fc-center > div').show();
-                    $('.fc-toolbar.fc-header-toolbar').show();
-                    $('.showMonth').show();
-                }*/
-
                 $rootScope.selectedCategory = 'Field Service'
 
                 break;
@@ -204,22 +169,7 @@ app.controller('indexController', function ($scope, $state, $timeout, $mdSidenav
 
                 $rootScope.showTaskDetail = false;
 
-                localService.getTaskList(function (response) {
-
-                    $rootScope.myTaskDetailsForLoggedInUser = response;
-                    $state.go("myFieldJob");
-
-                });
-
-
-                /* setTimeout(function () {
-
-                     $('.fc-view-container').hide();
-                     $('#calendar > div.fc-toolbar.fc-header-toolbar > div.fc-center > div').hide();
-                     $('.fc-toolbar.fc-header-toolbar').hide();
-                     $('.showMonth').hide();
-                     $('.showTaskList').show();
-                 }, 100);*/
+                $state.go("myFieldJob");
 
                 $rootScope.selectedCategory = 'My Field Job';
 
@@ -255,11 +205,13 @@ app.controller('indexController', function ($scope, $state, $timeout, $mdSidenav
         if ($rootScope.closed == true) {
 
             $rootScope.closed = false;
+
             $scope.collapsedClass = ""
 
         } else {
 
             $rootScope.closed = true;
+
             $scope.collapsedClass = "collapsed"
         }
     }
@@ -303,16 +255,9 @@ app.controller('indexController', function ($scope, $state, $timeout, $mdSidenav
         valueService.saveValues();
     }
 
-    //  window.addEventListener("online", onLine, false);
-    //
-    //  window.addEventListener("offline", offLine, false);
-
     $scope.syncFunctionality = function () {
-        console.log("Inside the syncFunctionality");
 
         if (valueService.getNetworkStatus()) {
-
-            valueService.syncData();
 
             localService.getAcceptTaskList(function (response) {
 
@@ -323,6 +268,8 @@ app.controller('indexController', function ($scope, $state, $timeout, $mdSidenav
                 });
             });
 
+            valueService.syncData();
+
             localService.getPendingTaskList(function (response) {
 
                 angular.forEach(response, function (item) {
@@ -331,9 +278,7 @@ app.controller('indexController', function ($scope, $state, $timeout, $mdSidenav
 
                 });
             });
-        }
 
-        if (valueService.getNetworkStatus()) {
             cloudService.getTaskList(function (response) {
 
                 localService.deleteInstallBase();
@@ -361,6 +306,209 @@ app.controller('indexController', function ($scope, $state, $timeout, $mdSidenav
                 $state.go('myTask');
             });
         }
+    }
+
+    $rootScope.Islogin = false;
+
+    $scope.userName = "";
+
+    $scope.login = function () {
+
+        console.log($scope.userName);
+
+        $rootScope.uName = $scope.userName;
+
+        var baseData = $scope.userName.toLowerCase() + ":" + $scope.password;
+
+        var authorizationValue = window.btoa(baseData);
+
+        var data = {
+            header: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Basic ' + authorizationValue,
+                'oracle-mobile-backend-id': constantService.getTaskBackId
+            }
+        };
+
+        localService.deleteUser();
+
+        cloudService.login(data, function (response) {
+
+            if (response && response.message == null) {
+
+                $rootScope.Islogin = true;
+
+                valueService.setResourceId(response['ID']);
+
+                constantService.setResourceId(response['ID']);
+
+                cloudService.getTechnicianProfile(function (response) {
+
+                    var userObject = {
+                        ID: response[0].ID,
+                        ClarityID: response[0].ClarityID,
+                        Currency: response[0].Currency,
+                        Default_View: response[0].Default_View,
+                        Email: response[0].Email,
+                        Language: response[0].Language,
+                        Name: response[0].Name,
+                        OFSCId: response[0].OFSCId,
+                        Password: response[0].Password,
+                        Time_Zone: response[0].Time_Zone,
+                        Type: response[0].Type,
+                        User_Name: response[0].User_Name,
+                        Work_Day: response[0].Work_Day,
+                        Work_Hour: response[0].Work_Hour,
+                        Last_updated: new Date()
+                    };
+
+                    localService.insertUser(userObject);
+
+                    localService.getUser(function (response) {
+
+                        console.log("USER =====> " + JSON.stringify(response));
+
+                        constantService.setUser(response[0]);
+
+                        valueService.setUser(response[0]);
+
+                        var data = {
+                            "resourceId": constantService.getUser().OFSCId,
+                            "date": moment(new Date()).format('YYYY-MM-DD')
+                        };
+
+                        ofscService.activate_resource(data, function (response) {
+                            console.log("ACTIVATE RESOURCE " + JSON.stringify(response));
+                        });
+
+                        offlineGetCall();
+                    });
+                });
+
+            } else {
+
+                $scope.loginError = true;
+            }
+        });
+
+        function offlineGetCall() {
+
+            cloudService.getTaskList(function (response) {
+
+                // localService.deleteInstallBase();
+                // localService.deleteContact();
+                // localService.deleteNote();
+                //
+                // localService.deleteOverTime();
+                // localService.deleteShiftCode();
+                //
+                // localService.deleteChargeType();
+                // localService.deleteChargeMethod();
+                // localService.deleteFieldJobName();
+                //
+                // localService.deleteWorkType();
+                // localService.deleteItem();
+                // localService.deleteCurrency();
+                //
+                // localService.deleteExpenseType();
+                // localService.deleteNoteType();
+
+                if (constantService.getUser().Default_View == "My Task") {
+
+                    $rootScope.selectedItem = 2;
+
+                    $state.go('myFieldJob');
+
+                } else {
+
+                    $rootScope.selectedItem = 1;
+
+                    $state.go('myTask');
+                }
+
+                $rootScope.apicall = false;
+
+                cloudService.getInstallBaseList();
+                cloudService.getContactList();
+                cloudService.getNoteList();
+
+                cloudService.getOverTimeList();
+                cloudService.getShiftCodeList();
+
+                cloudService.getChargeType();
+                cloudService.getChargeMethod();
+                cloudService.getFieldJobName();
+
+                cloudService.getWorkType();
+                cloudService.getItem();
+                cloudService.getCurrency();
+
+                cloudService.getExpenseType();
+                cloudService.getNoteType();
+
+                getAttachments();
+            });
+        }
+
+        console.log("Login API END");
+    }
+
+    function getAttachments() {
+
+        cloudService.getFileIds(function (response) {
+
+            if (response.Attachments_Info != undefined && response.Attachments_Info.length > 0) {
+
+                angular.forEach(response.Attachments_Info, function (taskArray, value) {
+
+                    angular.forEach(taskArray.Attachments, function (attachmentValue, value) {
+
+                        download(attachmentValue, taskArray.Task_Id, function (response) {
+
+                            $rootScope.apicall = false;
+
+                            $scope.attachmentArray = [];
+
+                            var filePath = cordova.file.dataDirectory;
+
+                            if (response != undefined && response != null) {
+
+                                var base64Code = response;
+
+                                valueService.saveBase64File(filePath, attachmentValue.User_File_Name, base64Code, attachmentValue.Content_type);
+
+                                var attachmentObject = {
+                                    Attachment_Id: attachmentValue.Attachments_Id,
+                                    File_Path: filePath,
+                                    File_Name: attachmentValue.User_File_Name,
+                                    File_Type: attachmentValue.Content_type,
+                                    Type: "O",
+                                    AttachmentType: "O",
+                                    Task_Number: taskArray.Task_Id
+                                };
+
+                                $scope.attachmentArray.push(attachmentObject);
+
+                                localService.insertAttachmentList($scope.attachmentArray);
+
+                            }
+                        });
+                    });
+                });
+            }
+        });
+    }
+
+    function download(resource, taskId, callback) {
+
+        $rootScope.apicall = false;
+
+        cloudService.downloadAttachment(taskId, resource.Attachments_Id, function (response) {
+
+            if (response != undefined)
+                callback(response.data);
+
+        });
     }
 
 });

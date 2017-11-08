@@ -112,22 +112,22 @@ app.controller('myTaskController', function ($scope, $compile, $timeout, uiCalen
                 myCalendar: {
                     text: 'My Calendar',
                     click: function (item) {
-                        console.log(item);
                         $state.go('myTask');
                     }
                 },
                 myTask: {
                     text: 'My Field Job',
                     click: function () {
-                        $rootScope.apicall = true;
-                        localService.getTaskList(function (response) {
 
-                            $rootScope.myTaskDetailsForLoggedInUser = response;
-                            $rootScope.apicall = false;
-                            $state.go("myFieldJob");
-                            $rootScope.tabClicked = true;
-                            $rootScope.selectedItem = 2;
-                        });
+                        $rootScope.apicall = true;
+
+                        $rootScope.apicall = false;
+
+                        $state.go("myFieldJob");
+
+                        $rootScope.tabClicked = true;
+
+                        $rootScope.selectedItem = 2;
                     }
                 }
             },
@@ -152,7 +152,7 @@ app.controller('myTaskController', function ($scope, $compile, $timeout, uiCalen
             events: eventsArray,
             eventClick: function (event, jsEvent, view) {
 
-                console.log(event);
+                console.log("EVENT " + JSON.stringify(event));
 
                 $rootScope.selectedTask = event;
 
@@ -216,7 +216,6 @@ app.controller('myTaskController', function ($scope, $compile, $timeout, uiCalen
     };
 
     $scope.options = {
-
         customClass: getDayClass,
         minDate: new Date(),
         showWeeks: true
@@ -312,7 +311,7 @@ app.controller('myTaskController', function ($scope, $compile, $timeout, uiCalen
 
     $scope.onclickOfTask = function (task) {
 
-        console.log(task);
+        console.log("TASK " + task);
 
         $scope.selectedTask = task;
 
@@ -327,37 +326,49 @@ app.controller('myTaskController', function ($scope, $compile, $timeout, uiCalen
         switch (task.Task_Status) {
 
             case 'Field Job Completed':
+
                 //$rootScope.showDebrief = true;
+                //$rootScope.showTaskDetail = true;
+
                 $scope.showStartWork = false;
                 $scope.showDebriefBtn = true;
-                //$rootScope.showTaskDetail = true;
                 $rootScope.showAccept = false;
                 $rootScope.completedTask = true;
+
                 break;
 
             case 'Completed':
+
                 //$rootScope.showDebrief = true;
+                //$rootScope.showTaskDetail = true;
+
                 $scope.showStartWork = false;
                 $scope.showDebriefBtn = true;
-                //$rootScope.showTaskDetail = true;
                 $rootScope.completedTask = true;
                 $rootScope.showAccept = false;
+
                 break;
 
             case 'Assigned':
+
+                //$rootScope.showDebrief = false;
+                // $rootScope.showTaskDetail = true;
+
                 $scope.showStartWork = true;
                 $rootScope.showAccept = true;
                 $scope.showDebriefBtn = false;
-                //$rootScope.showDebrief = false;
-                // $rootScope.showTaskDetail = true;
+
                 break;
 
             case 'Accepted':
+
+                //$rootScope.showDebrief = true;
+                //$rootScope.showTaskDetail = true;
+
                 $scope.showStartWork = true;
                 $scope.showDebriefBtn = true;
                 $rootScope.showAccept = false;
-                //$rootScope.showDebrief = true;
-                //$rootScope.showTaskDetail = true;
+
                 break;
 
             default:

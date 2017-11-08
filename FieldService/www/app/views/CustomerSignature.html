@@ -39,21 +39,21 @@
                 <img id="tasksdone" src="Group 11@2x.png" style="width:50px !important;height:50px !important;" />
             </div>
             <div style="text-align:center;margin-top:30px;text-transform:none">
-                <label class="completed-msg">Field Job #{{summary.taskObject.Task_Number}} completed successfully </label>
+                <label class="completed-msg"><span translate="Field Job #"></span>{{summary.taskObject.Task_Number}} completed successfully </label>
                 <br>
-                <label style="margin-top:25px" class="summary-report-label">Tap or click below icon to view Field Service Summary report</label>
+                <label style="margin-top:25px" class="summary-report-label" translate="Tap or click below icon to view Field Service Summary report"></label>
             </div>
 
             <div class="row" style="margin-top:30px;">
                 <div class="col-sm-4 " id="cmd" style="text-align:center">
                     <img src="images/pdf1x.png" style="display: inherit;" id="tasksdone">
-                    <md-button class="summary-report-btn" pdf-save-button="idOne" pdf-name="someone.pdf">Export</md-button>
+                    <md-button class="summary-report-btn" pdf-save-button="idOne" pdf-name="someone.pdf" translate="Export"></md-button>
                 </div>
 
                 <div class="col-sm-4" style="    text-align: center;">
                     <img src="images/print1x.png" id="tasksdone">
                     <div class="col-sm-12">
-                        <md-button id="cmd1" class="summary-report-btn" pdf-save-button="idOne" pdf-name="someone.pdf">Print</md-button>
+                        <md-button id="cmd1" class="summary-report-btn" pdf-save-button="idOne" pdf-name="someone.pdf" translate="Print"></md-button>
                     </div>
 
                 </div>
@@ -67,7 +67,7 @@
         </div>
 
         <div class="row margintop30" style="text-align:center;">
-            <button class="summary-report-donebtn" type="submit" ui-sref="{{routeAfterDone}}" ng-click="onDone()">Done</button>
+            <button class="summary-report-donebtn" type="submit" ui-sref="{{routeAfterDone}}" ng-click="onDone()" translate="Done"></button>
         </div>
 
     </div>
@@ -81,17 +81,17 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="col-md-4 col-lg-4">
-                        <div class="mylabel font-size">ENTER CUSTOMER PRINT NAME</div>
+                        <div class="mylabel font-size" translate="ENTER CUSTOMER PRINT NAME"></div>
                         <input class="inputFieldsMaterial" id="customerName" ng-model="customerName" name="customerName" ng-disabled="isSubmitted" />
                     </div>
 
                     <div class="col-md-4 col-lg-4">
-                        <div class="mylabel font-size">JOB RESPONSIBILITY</div>
+                        <div class="mylabel font-size" translate="JOB RESPONSIBILITY"></div>
                         <input class="inputFieldsMaterial" id="jobResp" ng-model="jobResp" name="jobResp" ng-disabled="isSubmitted" />
                     </div>
 
                     <div class="col-md-4 col-lg-4">
-                        <div class="mylabel font-size">ADDITIONAL RECIPIENTS</div>
+                        <div class="mylabel font-size" translate="ADDITIONAL RECIPIENTS"></div>
                         <input type="text" class="inputFieldsMaterial" id="customerMail" name="customerMail" ng-disabled="isSubmitted" ng-model="customerEMail" ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/" required />
                         <!--  <span style="color:Red" ng-show="signatureForm.customerMail.$error.required"> Required! </span> -->
                         <span style="color:Red" ng-show="signatureForm.customerMail.$dirty&&signatureForm.customerMail.$error.pattern">Please Enter Valid Email</span>
@@ -108,17 +108,17 @@
             <div class="layout-row">
                 <!--             <div class="flex-30" ng-click="clear()" style="width:100px" ng-disabled="isSubmitted">Clear</div> -->
                 <div class="flex-20">
-                    <button class="serbtn" ng-click="clear()" ng-disabled="isSubmitted || $root.completedTask">Clear</button>
+                    <button class="serbtn" ng-click="clear()" ng-disabled="isSubmitted || $root.completedTask" translate="Clear"></button>
 
                 </div>
                 <!-- <div class="flex-15">
                   <button  id="addBtn" ng-click="signature = accept()" style="width:100px">Save Sign</button>
                 </div> -->
                 <div class="flex-60 smmary-report-confirm">
-                    <label>I confirm that I have read, understand and agreed to all terms.</label>
+                    <label translate="I confirm that I have read, understand and agreed to all terms"></label>
                 </div>
                 <div class="flex-20">
-                    <button class="summary-report-donebtn" ng-click="customerSubmit()" style="float:right;" ng-disabled="isSubmitted || $root.completedTask">Submit</button>
+                    <button class="summary-report-donebtn" ng-click="customerSubmit()" style="float:right;" ng-disabled="isSubmitted || $root.completedTask" translate="Submit"></button>
                 </div>
             </div>
         </div>

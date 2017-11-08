@@ -68,7 +68,7 @@
                         </div>
 
                         <div class="col-sm-4 paddiin-bottom-10">
-                            <label>FIELD JOB NUMBER:</label>
+                            <label translate="Field Job Number">:</label>
                             <div>{{summary.taskObject.Task_Number}}</div>
                         </div>
                         <div class="col-sm-4 paddiin-bottom-10">
@@ -333,7 +333,7 @@
                             <div class="col-sm-5">
                                 <!-- <label>EMERSON PROCESS MANAGEMENT</label> -->
 
-                                <div><label>Engineer Name : {{engineerName}}</label></div>
+                                <div><label translate="Engineer Name"> : {{engineerName}}</label></div>
                                 <!--  <span></span> -->
                                 <!-- <div class="result" ng-show="$rootScope.signature"> -->
                                     <img ng-src="{{summary.engineer.signature}}" style="width:50%">
@@ -353,8 +353,7 @@
             <div class="row" style="text-align:center;">
 
                 <div class="col-sm-12 margintop10 marginbottom5">
-                    <md-button style="border-radius:0;margin-bottom:20px;" class="time-font time-add" ng-click="reviewSummary()">
-                        REVIEWED
+                    <md-button style="border-radius:0;margin-bottom:20px;" class="time-font time-add" ng-click="reviewSummary()" translate="Reviewed">
                     </md-button>
                 </div>
 

@@ -24,8 +24,7 @@
 
     <div class="navbar-header">
 
-        <md-button class="subheader-btns selectedTabColor" aria-label="Learn More"  ui-sref="taskOverFlow">
-            FIELD JOB DETAILS
+        <md-button class="subheader-btns selectedTabColor" aria-label="Learn More"  ui-sref="taskOverFlow" translate="Field Job Details">
         </md-button>
         <md-button class="subheader-btns" aria-label="Learn More" ng-disabled="!$root.accepted" ng-click="goToOnsiteReq()" translate="Onsite Requirement" style="margin-left: 34px !important;">
         </md-button>
@@ -34,7 +33,7 @@
     <div class="collapse navbar-collapse"  style="text-align: center;">
 
         <div class="nav navbar-nav navbar-right">
-            <button type="button" class="btn btn-default back-btn" ng-click="goToBack()">BACK</button>
+            <button type="button" class="btn btn-default back-btn" ng-click="goToBack()" translate="Back"></button>
             <button type="button" class="btn btn-default accept-btn" ui-sref="todo" ng-click="accept()" ng-show="$root.showAccept" style="margin-left: 20px;">ACCEPT</button>
             <button type="button" class="btn btn-default accept-btn"  ng-click="$root.showTaskOrDebrief(4)" ng-show="!$root.showAccept" translate="Debrief" ng-disabled="isFutureDate" style="margin-left: 20px;"></button>
             <!-- <a class="accept-btn md-button md-ink-ripple" ng-click="$root.showTaskOrDebrief(4)" ng-show="!$root.showAccept"  ng-disabled="isFutureDate"><span translate="Debrief"></span></a> -->
@@ -55,7 +54,7 @@
                 </div>
 
                 <div flex="30">
-                    <div class="mylabel">FIELD JOB NUMBER</div>
+                    <div class="mylabel" translate="Field Job Number"></div>
                     <div class="myvalue">{{taskDetails.Task_Number}}</div>
                 </div>
 
