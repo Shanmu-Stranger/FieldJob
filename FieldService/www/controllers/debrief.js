@@ -237,7 +237,8 @@ app.controller("debriefController", function ($scope, $state, $rootScope, $windo
 
         $scope.materialDefault = {
             chargeType: {
-                title: "Charge Method"
+                title: "Charge Method",
+               values: $scope.chargeMethodArray
             },
             description: {
                 title: "Description"
@@ -384,7 +385,11 @@ app.controller("debriefController", function ($scope, $state, $rootScope, $windo
             angular.forEach($scope.materialArray, function (item) {
 
                 item.materialDefault = $scope.materialDefault;
-
+                angular.forEach(item.materialDefault.chargeType.values, function (type) {
+                    if (type.ID == item.Charge_Type_Id) {
+                        item.Charge_Type = type;
+                    }
+                });
                 var serialin, serialout, serialNo;
 
                 if (item.Serial_In != undefined) {
@@ -561,7 +566,18 @@ app.controller("debriefController", function ($scope, $state, $rootScope, $windo
                 });
 
                 break;
-
+            case "Material":
+                $scope.materialArray.push({
+                    materialDefault: $scope.materialDefault,
+                    Material_Id: $scope.taskId + ($scope.materialArray.length + 1),
+                    Charge_Type:"",
+                    Charge_Type_Id:"",
+                    Description:"",
+                    Product_Quantity: 1,
+                    Serial_Type: [{"in": "", "out": "", "number": ""}],
+                    Task_Number: $scope.taskId,
+                    ItemName:""
+                });
             default:
                 break;
         }
@@ -579,7 +595,8 @@ app.controller("debriefController", function ($scope, $state, $rootScope, $windo
             Description: $scope.description,
             Product_Quantity: 1,
             Serial_Type: [{"in": "", "out": "", "number": ""}],
-            Task_Number: $scope.taskId
+            Task_Number: $scope.taskId,
+            ItemName:""
         });
 
         $mdDialog.hide();
@@ -678,6 +695,11 @@ app.controller("debriefController", function ($scope, $state, $rootScope, $windo
             case "Notes":
                 itemToBeCopied.Notes_Id = $scope.taskId + ($scope.notesArray.length + 1)
                 $scope.notesArray.push(itemToBeCopied);
+
+                break;
+            case "Material":
+                itemToBeCopied.Material_Id = $scope.taskId + ($scope.materialArray.length + 1)
+                $scope.materialArray.push(itemToBeCopied);
 
                 break;
 
@@ -998,6 +1020,22 @@ app.controller("debriefController", function ($scope, $state, $rootScope, $windo
         }
 
         if (stage.title.toLowerCase() == "material") {
+            if ($scope.materialArray.length == 0) {
+
+                $scope.addObject(stage.title);
+
+                // if ($scope.expenseDefault.chargeMethod.values != undefined && $scope.expenseDefault.chargeMethod.values.length > 0) {
+                //
+                //     angular.forEach($scope.expenseDefault.chargeMethod.values, function (key, value) {
+                //
+                //         if (key.Value == $scope.taskObject.Expense_Method) {
+                //
+                //             $scope.expenseArray[0].Charge_Method = key;
+                //             $scope.expenseArray[0].Charge_Method_Id = key.ID;
+                //         }
+                //     });
+                // }
+            }
 
             $scope.currentTab = "material";
         }
@@ -1036,7 +1074,7 @@ app.controller("debriefController", function ($scope, $state, $rootScope, $windo
 
                     var expenseObject = {
                         "Date": $filter("date")(key.Date, "dd-MM-yyyy "),
-                        "Expense_Type": key.Expense_Type.value,
+                        "Expense_Type": key.Expense_Type.Value,
                         "Amount": key.Amount,
                         "Currency": key.Currency.Value,
                         "Charge_Method": key.Charge_Method.Value,
@@ -1089,13 +1127,13 @@ app.controller("debriefController", function ($scope, $state, $rootScope, $windo
                 angular.forEach($scope.materialArray, function (key, value) {
 
                     var materialObject = {
-                        "Charge_Type": key.Charge_Type,
+                        "Charge_Type": key.Charge_Type.Value,
                         "Product_Quantity": key.Product_Quantity,
                         "serialNumber": $scope.serialNumber(key.Serial_Type),
                         "serialIn": $scope.serialIn(key.Serial_Type),
                         "serialOut": $scope.serialOut(key.Serial_Type),
                         "Description": key.Description,
-                        "ItemName": key.itemName
+                        "ItemName": key.ItemName
                     }
 
                     $scope.summary.materialArray.push(materialObject);
@@ -1466,7 +1504,7 @@ app.controller("debriefController", function ($scope, $state, $rootScope, $windo
                         "item_description": materialArray[i].Description,
                         "product_quantity": "1",
                         "comments": "",
-                        "item": materialArray[i].itemName,
+                        "item": materialArray[i].ItemName,
                         "serialin": key.in,
                         "serialout": key.out,
                         "serial_number": key.number

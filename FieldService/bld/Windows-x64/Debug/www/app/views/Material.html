@@ -48,7 +48,7 @@
     }
 </style>
 
-<div style="padding:0" class="container">
+<!--<div style="padding:0" class="container">
     <div style="" class="mytaskContainerouter margintop30">
 
         <md-card style="margin:0" class="patternImg">
@@ -71,7 +71,7 @@
 
         </md-card>
     </div>
-</div>
+</div>-->
 
 <div class="container" style="padding:0">
     <div class="debreifContainerouter">
@@ -85,19 +85,26 @@
                         <div class="col-sm-4 col-md-4">
                             <div class="form-group">
                                 <label class="control-label col-sm-12 marginbottom5" translate="{{item.materialDefault.chargeType.title}}"></label>
-                                <div class="col-sm-12">
-
+                                <!--<div class="col-sm-12">
+                                    
                                     <input class="inputFieldsMaterial"
-                                           ng-model="item.Charge_Type" disabled></input>
+                                    ng-model="item.Charge_Type" disabled></input>
+                                </div>-->
+                                <div class="col-sm-12">
+                                    <select class="form-control select-debrief" ng-model="item.Charge_Type"
+                                            ng-options="x as x.Value | translate for x in item.materialDefault.chargeType.values track by x.ID" ng-change="setChargeType(item)">
+                                        <option value="" disabled selected>Select Charge Method</option>
+                                    </select>
                                 </div>
                             </div>
                         </div>
-
+                        
                         <div class="col-sm-4 col-md-4">
                             <div class="col-sm-12 col-md-12">
                                 <div class="form-group">
                                     <label class="control-label  marginbottom5" translate="{{item.materialDefault.description.title}}"></label>
-                                    <div>{{item.Description}}</div>
+                                    <input type="text" name="description" class="form-control" ng-model="item.Description"/>
+                                       <!-- <div>{{item.Description}}</div> -->
                                 </div>
                             </div>
                         </div>
@@ -106,7 +113,7 @@
                             <div class="col-sm-6 col-md-6">
                                 <div class="form-group">
                                     <label class="control-label  marginbottom5">ITEM NAME</label>
-                                    <input type ="text" ng-model="item.itemName"/>
+                                    <input type ="text" ng-model="item.ItemName"/>
                                 </div>
                             </div>
                         </div>
@@ -130,7 +137,7 @@
 
                         <div class="col-sm-8 col-md-8">
                             <div ng-repeat="serial in item.Serial_Type track by $index" style="clear:both">
-                                <div ng-show="item.Charge_Type == 'Warranty'">
+                                <div ng-show="item.Charge_Type.Value == 'Warranty'">
 
                                     <div class="col-sm-6 col-md-6">
                                         <div class="form-group">
@@ -150,7 +157,7 @@
                                 </div>
 
                                 <div class="col-md-8">
-                                    <div ng-show="item.Charge_Type == 'Billable' || item.Charge_Type == 'Goodwill' || item.Charge_Type == 'Concession' ">
+                                    <div ng-show="item.Charge_Type.Value == 'Billable' || item.Charge_Type.Value == 'Goodwill' || item.Charge_Type.Value == 'Concession' ">
                                         <div class="form-group ">
                                             <label class="control-label">{{item.materialDefault.serialNo.title}}</label>
                                             <input style="width:240px;" class="inputFieldsMaterial" id="SerialNo"
@@ -166,8 +173,11 @@
 
             <section style="border-radius:0 0 10px 10px" layout="row" layout-sm="column" layout-align="center center"
                      layout-wrap class="time-btns">
-                <md-button class="time-font time-delete" ng-click="deleteObject($index, item,'Material')">Delete
-                </md-button>
+                <!--<md-button class="time-font time-delete" ng-click="deleteObject($index, item,'Material')">Delete
+                </md-button>-->
+                <md-button class="time-font time-add" ng-click="addObject('Material')" ng-disabled="$root.completedTask">ADD</md-button>
+                <md-button class="time-font time-delete" ng-click="deleteObject($index,item,'Material')" ng-disabled="$root.completedTask">DELETE</md-button>
+                <md-button class="time-font time-copy" ng-click="copyObject(item,'Material')" ng-disabled="$root.completedTask">COPY</md-button>
             </section>
 
         </md-card>
