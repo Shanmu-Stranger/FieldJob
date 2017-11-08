@@ -1479,6 +1479,7 @@ app.controller("debriefController", function ($scope, $state, $rootScope, $windo
                 var date = $filter("date")(timeArray[i].Date, "yyyy-MM-ddThh:mm:ss.000");
                 date = date + "Z";
                 console.log(date);
+
                 var timeData = {
                     "task_id": timeArray[i].Task_Number,
                     "shift_code": timeArray[i].Shift_Code_Id,
@@ -1512,8 +1513,6 @@ app.controller("debriefController", function ($scope, $state, $rootScope, $windo
                     "ammount": expenseArray[i].Amount,
                     "date": moment.utc(expenseArray[i].Date).format("YYYY-MM-DD"),
                     "expenseItem": expenseArray[i].Expense_Type_Id.toString()
-                    // "chargeType": "2",
-                    // "billable": "true"
                 }
 
                 expenseJSONData.push(expenseData);
@@ -1535,8 +1534,6 @@ app.controller("debriefController", function ($scope, $state, $rootScope, $windo
                         "serialin": key.in,
                         "serialout": key.out,
                         "serial_number": key.number
-                        // "service_activity": "serveact",
-                        // "charge_type": "2"
                     }
 
                     materialDataJSON.push(materialData);
@@ -1547,9 +1544,7 @@ app.controller("debriefController", function ($scope, $state, $rootScope, $windo
 
             for (var i = 0; i < notesArray.length; i++) {
 
-                var date = $filter("date")(notesArray[i].Date, "yyyy-MM-ddThh:mm:ss.000");
-                date = date + "Z";
-                var noteData = {
+                    var noteData = {
                     "Notes_type": notesArray[i].Note_Type.ID,
                     "notes_description": notesArray[i].Notes,
                     "task_id": notesArray[i].Task_Number,
@@ -1569,7 +1564,7 @@ app.controller("debriefController", function ($scope, $state, $rootScope, $windo
 
                 cloudService.uploadTime(timeUploadJSON, function (respose) {
 
-                    console.log("Uploaded Time Data");
+                    console.log("Uploaded Time");
                 });
             }
 
@@ -1583,7 +1578,7 @@ app.controller("debriefController", function ($scope, $state, $rootScope, $windo
 
                 cloudService.updateExpenses(expenseUploadJSON, function (respose) {
 
-                    console.log("Uploaded Expense Data");
+                    console.log("Uploaded Expense");
                 });
             }
 
@@ -1597,7 +1592,7 @@ app.controller("debriefController", function ($scope, $state, $rootScope, $windo
 
                 cloudService.updateNotes(notesUploadJSON, function (respose) {
 
-                    console.log("Uploaded notes");
+                    console.log("Uploaded Notes");
                 });
             }
 
@@ -1610,6 +1605,8 @@ app.controller("debriefController", function ($scope, $state, $rootScope, $windo
             if (materialArray) {
 
                 cloudService.updateMaterial(materialUploadJSON, function (respose) {
+
+                    console.log("Uploaded Material");
                 });
             }
 
@@ -1629,30 +1626,26 @@ app.controller("debriefController", function ($scope, $state, $rootScope, $windo
                 attachmentJSONData.push(attachmentObject);
             }
 
-            var reportObj =
-                {
-                    "Data": $scope.reportBase64,
-                    "FileName": "Report_" + $scope.summary.taskObject.Task_Number + ".pdf",
-                    "Description": "Report_" + $scope.summary.taskObject.Task_Number + ".pdf",
-                    "Name": "Report_" + $scope.summary.taskObject.Task_Number + ".pdf",
-                    "taskId": $rootScope.selectedTask.Task_Number,
-                    "contentType": "application/pdf"
-                }
-
+            var reportObj = {
+                "Data": $scope.reportBase64,
+                "FileName": "Report_" + $scope.summary.taskObject.Task_Number + ".pdf",
+                "Description": "Report_" + $scope.summary.taskObject.Task_Number + ".pdf",
+                "Name": "Report_" + $scope.summary.taskObject.Task_Number + ".pdf",
+                "taskId": $rootScope.selectedTask.Task_Number,
+                "contentType": "application/pdf"
+            }
 
             attachmentJSONData.push(reportObj);
-
 
             var attachmentUploadJSON = {
                 "attachment": attachmentJSONData
             };
 
-           //  if ($scope.files != undefined && $scope.files.length > 0)
-            {
+            if ($scope.files != undefined && $scope.files.length > 0){
 
                 cloudService.createAttachment(attachmentUploadJSON, function (response) {
 
-                    console.log("Attachment Uploaded Successfully");
+                    console.log("Uploaded Attachment");
                 });
             }
 
@@ -1686,18 +1679,19 @@ app.controller("debriefController", function ($scope, $state, $rootScope, $windo
 
                     localService.updateTaskSubmitStatus(taskObject);
                 });
+
             }, 3000);
+
         } else {
 
             var taskObject = {
+                Task_Status: "Completed",
                 Task_Number: valueService.getTask().Task_Number,
                 Submit_Status: "P"
             };
 
             localService.updateTaskSubmitStatus(taskObject);
         }
-
-        // generatePDF();
     }
 
     $scope.followUp = false;
