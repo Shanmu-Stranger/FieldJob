@@ -53,7 +53,7 @@ app.run(function ($rootScope, $location, $http, $state, localService, valueServi
 
             console.log('Connection type: ' + states[networkState]);
 
-            if (networkState == Connection.NONE) {
+            if (networkState === Connection.NONE) {
 
                 valueService.setNetworkStatus(false);
 
@@ -75,7 +75,7 @@ app.run(function ($rootScope, $location, $http, $state, localService, valueServi
 
                 valueService.setUser(response[0]);
 
-                if (constantService.getUser().ID != null) {
+                if (constantService.getUser().ID !== null) {
 
                     valueService.setResourceId(constantService.getUser().ID);
 
@@ -199,7 +199,7 @@ app.filter('timezonefilter', function (constantService) {
         if (date === "" || date === undefined)
             return date;
 
-        return moment.utc(date).utcOffset(constantService.getTimeZone()).format("DD/MM/YYYY");
+        return moment(date).format("DD/MM/YYYY");
         // var convertedDate = new Date(date);
         // return $filter('date')(convertedDate, 'dd MMM yyyy');
     }
@@ -220,7 +220,7 @@ app.directive('dateFormat', function ($filter) {
                 //var plainNumber = viewValue.replace(/[^\d|\-+|\.+]/g, '');
                 //elem.val($filter(attrs.format)(plainNumber));
                 //return plainNumber;
-                if (viewValue != undefined && viewValue != "") {
+                if (viewValue !== undefined && viewValue !== "") {
                     if (viewValue.split(":")[0] != undefined && viewValue.split(":")[0].length == 1) {
                         var hours = "0" + viewValue.split(":")[0]
                         viewValue = hours + ":" + viewValue.split(":")[1]
