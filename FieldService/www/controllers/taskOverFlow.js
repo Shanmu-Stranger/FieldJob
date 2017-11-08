@@ -1,4 +1,4 @@
-app.controller('taskOverFlowController', function ($scope, $http, $state, $rootScope, cloudService, valueService, constantService) {
+app.controller('taskOverFlowController', function ($scope, $http, $state, $rootScope, cloudService, valueService, constantService, localService) {
 
     $scope.myVar = false;
 
@@ -13,11 +13,11 @@ app.controller('taskOverFlowController', function ($scope, $http, $state, $rootS
     $scope.toggle = function () {
         $scope.myVar = !$scope.myVar;
     };
+
     if ($scope.selectedTask.Task_Status == 'Assigned') {
-        $rootScope.accepted=false;
-    }
-    else {
-        $rootScope.accepted=true;
+        $rootScope.accepted = false;
+    } else {
+        $rootScope.accepted = true;
     }
 
     $scope.taskId = $rootScope.selectedTask.Task_Number;
@@ -150,22 +150,25 @@ app.controller('taskOverFlowController', function ($scope, $http, $state, $rootS
 
     constantService.setUserEmailId(contactArray);
 
-    $scope.taskDetails.InstallBase=[];
+    $scope.taskDetails.InstallBase = [];
 
     angular.forEach(valueService.getInstallBase(), function (key, value) {
 
-        if(key.Task_Number==$scope.taskId){
-          var install={};
-          install.Product_Line = key.Product_Line;
-          install.Serial_Number = key.Serial_Number;
-          install.tagNo = key.TagNumber;
-          install.orginalNo = key.Original_PO_Number;
-          $scope.taskDetails.InstallBase.push(install);
-          $rootScope.selectedTask = $scope.taskDetails;
-          valueService.setTask($scope.taskDetails);
+        if (key.Task_Number == $scope.taskId) {
+
+            var install = {};
+
+            install.Product_Line = key.Product_Line;
+            install.Serial_Number = key.Serial_Number;
+            install.tagNo = key.TagNumber;
+            install.orginalNo = key.Original_PO_Number;
+
+            $scope.taskDetails.InstallBase.push(install);
+
+            $rootScope.selectedTask = $scope.taskDetails;
+
+            valueService.setTask($scope.taskDetails);
         }
-
-
     });
 
     $scope.contacts = [
@@ -211,11 +214,13 @@ app.controller('taskOverFlowController', function ($scope, $http, $state, $rootS
     };
 
     $scope.deleteItem = function () {
-        $scope.items.splice(this.$index, 1);
 
+        $scope.items.splice(this.$index, 1);
     };
 
     $scope.accept = function () {
+
+        console.log("STATUS " + $scope.selectedTask.Task_Status);
 
         if ($scope.selectedTask.Task_Status == 'Assigned') {
 

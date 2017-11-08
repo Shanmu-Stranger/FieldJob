@@ -32,7 +32,7 @@ z-index: 1051 !important;" ng-show="$root.completedTask">
                         <div class="col-md-6">
                             <select class="form-control select-debrief select-debrief-time-first-select"
                                     ng-model="item.Field_Job_Name"
-                                    ng-options="x as x.JobName for x in item.timeDefault.fieldJobName.values track by x.ID" ng-change="setFieldName(item)">
+                                    ng-options="x as x.JobName for x in item.timeDefault.fieldJobName.values track by x.TaskCode" ng-change="setFieldName(item)">
                                 <option value="" disabled selected>Select Field Job Name</option>
                             </select>
                         </div>

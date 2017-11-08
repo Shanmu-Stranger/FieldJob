@@ -1430,7 +1430,7 @@ app.controller("debriefController", function ($scope, $state, $rootScope, $windo
     $scope.customerSubmit = function () {
 
         console.log(customerMail.value);
-        valueService.setNetworkStatus(true);
+
         $scope.customersubmit = true;
 
         $scope.isSubmitted = true;
@@ -1468,7 +1468,7 @@ app.controller("debriefController", function ($scope, $state, $rootScope, $windo
                     "start_date": moment.utc(timeArray[i].Date).format("YYYY-MM-DDTHH:mm:ss.000Z"),
                     "end_date": moment.utc(timeArray[i].Date).format("YYYY-MM-DDTHH:mm:ss.000Z"),
                     "charge_method": timeArray[i].Charge_Method_Id,
-                    "JobName": "20"
+                    "JobName": timeArray[i].Field_Job_Name_Id
                 }
 
                 timeJSONData.push(timeData);

@@ -311,7 +311,7 @@ app.controller('myTaskController', function ($scope, $compile, $timeout, uiCalen
 
     $scope.onclickOfTask = function (task) {
 
-        console.log("TASK " + task);
+        console.log("TASK " + JSON.stringify(task));
 
         $scope.selectedTask = task;
 

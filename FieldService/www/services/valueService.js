@@ -776,7 +776,7 @@
                             "start_date": date,
                             "end_date": date,
                             "charge_method": timeArray[i].Charge_Method_Id,
-                            "JobName": "20"
+                            "JobName": timeArray[i].Field_Job_Name_Id
                         }
 
                         timeJSONData.push(timeData);
