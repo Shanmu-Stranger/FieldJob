@@ -81,22 +81,15 @@ app.run(function ($rootScope, $location, $http, $state, localService, valueServi
 
                     constantService.setResourceId(constantService.getUser().ID);
 
-                    if (valueService.getNetworkStatus()) {
-
-                        valueService.syncData();
-                    }
-
-                    console.log("TASK =====> " + constantService.getUser().Default_View);
-
                     if (constantService.getUser().Default_View == "My Task") {
 
                         $rootScope.selectedItem = 2;
 
                         localService.getTaskList(function (response) {
 
-                            console.log("TASK =====> " + JSON.stringify(response));
+                            console.log("TASK MY FIELD JOB =====> " + JSON.stringify(response));
 
-                            $rootScope.myTaskDetailsForLoggedInUser = response;
+                            constantService.setTaskList(response);
 
                             $state.go('myFieldJob');
                         });
@@ -105,9 +98,9 @@ app.run(function ($rootScope, $location, $http, $state, localService, valueServi
 
                         localService.getTaskList(function (response) {
 
-                            console.log("TASK =====> " + JSON.stringify(response));
+                            console.log("TASK MY TASK =====> " + JSON.stringify(response));
 
-                            $rootScope.myTaskDetailsForLoggedInUser = response;
+                            constantService.setTaskList(response);
 
                             $state.go('myTask');
                         });
@@ -142,48 +135,48 @@ app.config(function ($stateProvider, $urlRouterProvider) {
         url: "/login",
         controller: "loginController",
         templateUrl: "app/views/Login.html"
-    })
+    });
     $stateProvider.state("dashBoard", {
         url: "/dashBoard",
         controller: "indexController",
         templateUrl: "app/views/dashBoard.html"
-    })
+    });
     $stateProvider.state("myTask", {
         url: "/myTask",
         //  parent: 'dashBoard',
         controller: "myTaskController",
         templateUrl: "app/views/MyTask.html"
-    })
+    });
     $stateProvider.state("myFieldJob", {
         url: "/myFieldJob",
         //  parent: 'dashBoard',
         controller: "myTaskController",
         templateUrl: "app/views/myFieldJob.html"
-    })
+    });
     $stateProvider.state("debrief", {
         url: "/debrief",
         //  parent: 'dashBoard',
         controller: "debriefController",
         templateUrl: "app/views/Debrief.html"
-    })
+    });
     $stateProvider.state("taskOverFlow", {
         url: "/taskOverFlow",
         //  parent: 'dashBoard',
         controller: "taskOverFlowController",
         templateUrl: "app/views/TaskOverflow.html"
-    })
+    });
     $stateProvider.state("todo", {
         url: "/todo",
         //  parent: 'dashBoard',
         controller: "todoController",
         templateUrl: "app/views/Todo.html"
-    })
+    });
     $stateProvider.state("material", {
         url: "/material",
         //  parent: 'dashBoard',
         controller: "taskOverFlowController",
         templateUrl: "app/views/Material.html"
-    })
+    });
 });
 
 app.config(function ($translateProvider) {
@@ -228,7 +221,7 @@ app.directive('dateFormat', function ($filter) {
                 //elem.val($filter(attrs.format)(plainNumber));
                 //return plainNumber;
                 if (viewValue != undefined && viewValue != "") {
-                    if (viewValue.split(":")[0] != undefined &&viewValue.split(":")[0].length == 1) {
+                    if (viewValue.split(":")[0] != undefined && viewValue.split(":")[0].length == 1) {
                         var hours = "0" + viewValue.split(":")[0]
                         viewValue = hours + ":" + viewValue.split(":")[1]
                     }
@@ -236,13 +229,11 @@ app.directive('dateFormat', function ($filter) {
                         var mins = "0" + viewValue.split(":")[1]
                         viewValue = viewValue.split(":")[0] + ":" + mins
                     }
-                    if (viewValue.split(":")[1] != undefined && viewValue.split(":")[1]!="undefined" && viewValue.split(":")[1].length > 2)
-                    {
+                    if (viewValue.split(":")[1] != undefined && viewValue.split(":")[1] != "undefined" && viewValue.split(":")[1].length > 2) {
                         var mins = viewValue.split(":")[1].substring(0, 2);
                         viewValue = viewValue.split(":")[0] + ":" + mins
                     }
-                    if (viewValue.split(":")[1] == undefined || viewValue.split(":")[1] == "undefined")
-                    {
+                    if (viewValue.split(":")[1] == undefined || viewValue.split(":")[1] == "undefined") {
                         viewValue = viewValue.split(":")[0] + ":00";
                     }
                 }

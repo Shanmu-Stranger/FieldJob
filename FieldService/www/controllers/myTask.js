@@ -14,13 +14,13 @@ app.controller('myTaskController', function ($scope, $compile, $timeout, uiCalen
 
     function getTask() {
 
-        console.log("GET TASK IN " + $rootScope.myTaskDetailsForLoggedInUser);
+        console.log("GET TASK IN " + JSON.stringify(constantService.getTaskList()));
 
-        if ($rootScope.myTaskDetailsForLoggedInUser) {
+        if (constantService.getTaskList()) {
 
-            $scope.myTaskDetails = $rootScope.myTaskDetailsForLoggedInUser;
+            $scope.myTaskDetails = constantService.getTaskList();
 
-            setEventArray($rootScope.myTaskDetailsForLoggedInUser);
+            setEventArray(constantService.getTaskList());
 
             eventInit();
 
@@ -31,6 +31,8 @@ app.controller('myTaskController', function ($scope, $compile, $timeout, uiCalen
                 if (response) {
 
                     $scope.myTaskDetails = response;
+
+                    constantService.setTaskList(response)
 
                     console.log("GET TASK IN DB" + $rootScope.myTaskDetails);
 
@@ -126,8 +128,6 @@ app.controller('myTaskController', function ($scope, $compile, $timeout, uiCalen
                             $rootScope.tabClicked = true;
                             $rootScope.selectedItem = 2;
                         });
-
-
                     }
                 }
             },
