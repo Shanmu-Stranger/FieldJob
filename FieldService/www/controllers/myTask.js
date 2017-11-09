@@ -57,44 +57,66 @@ app.controller('myTaskController', function ($scope, $compile, $timeout, uiCalen
 
             response.forEach(function (item) {
 
-               // var startDate = item.Start_Date.split(' ');
-                var startDateTime = moment(item.Start_Date).format("YYYY-MM-DDTHH:mm:ss");
-               // var startDateTime = startDate[0] + "T" + startDate[1];
+                if (item.Type == "CUSTOMER") {
 
-               // var endDate = item.End_Date.split(' ');
-                var endDateTime = moment(item.End_Date).format("YYYY-MM-DDTHH:mm:ss");
-               // var endDateTime = endDate[0] + "T" + endDate[1];
 
-                var customerInfo = item.Customer_Name + "\n" + item.Street_Address + "\n" + item.City + "\n" + item.State + "\n" + item.Zip_Code;
+                    // var startDate = item.Start_Date.split(' ');
+                    var startDateTime = moment(item.Start_Date).format("YYYY-MM-DDTHH:mm:ss");
+                    // var startDateTime = startDate[0] + "T" + startDate[1];
 
-                //  if (item.Task_Status == 'Accepted' || item.Task_Status == 'Assigned'||) {
-                eventsArray.push({
-                    title: customerInfo,
-                    textEscape: true,
-                    start: startDateTime,
-                    end: endDateTime,
-                    Task_Number: item.Task_Number,
-                    Task_Status: item.Task_Status,
-                    Job_Description: item.Job_Description,
-                    Start_Date: item.Start_Date,
-                    End_Date: item.End_Date,
-                    Assigned: item.Assigned,
-                    Service_Request: item.Service_Request,
-                    Expense_Method: item.Expense_Method,
-                    Labor_Method: item.Labor_Method,
-                    Travel_Method: item.Travel_Method,
-                    Material_Method: item.Material_Method,
-                    Duration: item.Duration,
-                    Customer_Name: item.Customer_Name,
-                    Street_Address: item.Street_Address,
-                    City: item.City,
-                    State: item.State,
-                    Zip_Code: item.Zip_Code,
-                    Expense_Method: item.Expense_Method,
-                    Labor_Method: item.Labor_Method,
-                    Travel_Method: item.Travel_Method,
-                    Material_Method: item.Material_Method
-                });
+                    // var endDate = item.End_Date.split(' ');
+                    var endDateTime = moment(item.End_Date).format("YYYY-MM-DDTHH:mm:ss");
+                    // var endDateTime = endDate[0] + "T" + endDate[1];
+
+                    var customerInfo = item.Customer_Name + "\n" + item.Street_Address + "\n" + item.City + "\n" + item.State + "\n" + item.Zip_Code;
+
+
+                    //  if (item.Task_Status == 'Accepted' || item.Task_Status == 'Assigned'||) {
+                    eventsArray.push({
+                        title: customerInfo,
+                        textEscape: true,
+                        start: startDateTime,
+                        end: endDateTime,
+                        Task_Number: item.Task_Number,
+                        Task_Status: item.Task_Status,
+                        Job_Description: item.Job_Description,
+                        Start_Date: item.Start_Date,
+                        End_Date: item.End_Date,
+                        Assigned: item.Assigned,
+                        Service_Request: item.Service_Request,
+                        Expense_Method: item.Expense_Method,
+                        Labor_Method: item.Labor_Method,
+                        Travel_Method: item.Travel_Method,
+                        Material_Method: item.Material_Method,
+                        Duration: item.Duration,
+                        Customer_Name: item.Customer_Name,
+                        Street_Address: item.Street_Address,
+                        City: item.City,
+                        State: item.State,
+                        Zip_Code: item.Zip_Code,
+                        Expense_Method: item.Expense_Method,
+                        Labor_Method: item.Labor_Method,
+                        Travel_Method: item.Travel_Method,
+                        Material_Method: item.Material_Method
+                    });
+                } else {
+                    var startDateTime = moment(item.Start_Date).format("YYYY-MM-DDTHH:mm:ss");
+                    // var startDateTime = startDate[0] + "T" + startDate[1];
+
+                    // var endDate = item.End_Date.split(' ');
+                    var endDateTime = moment(item.End_Date).format("YYYY-MM-DDTHH:mm:ss");
+                    // var endDateTime = endDate[0] + "T" + endDate[1];
+
+                    var customerInfo = item.Customer_Name;
+
+                    eventsArray.push({
+                        title: customerInfo,
+                        textEscape: true,
+                        start: startDateTime,
+                        end: endDateTime,
+                        Type: item.Type
+                    });
+                }
                 //  }
             });
         }
@@ -192,6 +214,10 @@ app.controller('myTaskController', function ($scope, $compile, $timeout, uiCalen
                     $scope.showDebriefBtn = true;
                     $rootScope.showAccept = false;
                     $state.go('taskOverFlow');
+                }
+                else if (event.Type == 'INTERNAL')
+                {
+
                 }
                 else {
 
