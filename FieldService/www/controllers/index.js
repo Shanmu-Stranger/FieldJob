@@ -277,28 +277,28 @@ app.controller('indexController', function ($scope, $state, $timeout, $mdSidenav
                 });
             });
 
-            // cloudService.getTaskList(function (response) {
-            //
-            //     cloudService.getInstallBaseList();
-            //     cloudService.getContactList();
-            //     cloudService.getNoteList();
-            //
-            //     cloudService.getOverTimeList();
-            //     cloudService.getShiftCodeList();
-            //
-            //     cloudService.getChargeType();
-            //     cloudService.getChargeMethod();
-            //     cloudService.getFieldJobName();
-            //
-            //     cloudService.getWorkType();
-            //     cloudService.getItem();
-            //     cloudService.getCurrency();
-            //
-            //     cloudService.getExpenseType();
-            //     cloudService.getNoteType();
-            //
-            //     getAttachments();
-            // });
+            cloudService.getTaskList(function (response) {
+
+                cloudService.getInstallBaseList();
+                cloudService.getContactList();
+                cloudService.getNoteList();
+
+                cloudService.getOverTimeList();
+                cloudService.getShiftCodeList();
+
+                cloudService.getChargeType();
+                cloudService.getChargeMethod();
+                cloudService.getFieldJobName();
+
+                cloudService.getWorkType();
+                cloudService.getItem();
+                cloudService.getCurrency();
+
+                cloudService.getExpenseType();
+                cloudService.getNoteType();
+
+                getAttachments();
+            });
         }
     }
 
@@ -420,7 +420,7 @@ app.controller('indexController', function ($scope, $state, $timeout, $mdSidenav
                     $state.go('myTask');
                 }
 
-                $rootScope.apicall = false;
+                // $rootScope.apicall = false;
 
                 cloudService.getInstallBaseList();
                 cloudService.getContactList();

@@ -1701,23 +1701,7 @@ app.controller("debriefController", function ($scope, $state, $rootScope, $windo
             });
         }
     }
-
-    $scope.check1 = function () {
-        $scope.engineerObject.followUp = !$scope.engineerObject.followUp;
-    }
-
-    $scope.check2 = function () {
-        $scope.engineerObject.spareQuote = !$scope.engineerObject.spareQuote;
-    }
-
-    $scope.check3 = function () {
-        $scope.engineerObject.salesVisit = !$scope.engineerObject.salesVisit;
-    }
-
-    $scope.check4 = function () {
-        $scope.engineerObject.salesLead = !$scope.engineerObject.salesLead;
-    }
-
+    
     $scope.SaveSign = function () {
 
         console.log("Inside save sign");
