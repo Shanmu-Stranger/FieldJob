@@ -1554,7 +1554,7 @@ app.controller("debriefController", function ($scope, $state, $rootScope, $windo
             for (var i = 0; i < notesArray.length; i++) {
 
                 var noteData = {
-                    "Notes_type": notesArray[i].Note_Type.ID,
+                    "Notes_type": notesArray[i].Note_Type_Id,
                     "notes_description": notesArray[i].Notes,
                     "task_id": notesArray[i].Task_Number,
                     "mobilecreatedDate": moment.utc(notesArray[i].Date).format("YYYY-MM-DDTHH:mm:ss.000Z")

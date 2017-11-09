@@ -795,17 +795,75 @@
 
                                 if (materialArray.length > 0) {
 
-                                    for (var i = 0; i < materialArray.length; i++) {
+                                 
+                                        angular.forEach(materialArray, function (item) {
+                                        var serialin, serialout, serialNo;
 
-                                        angular.forEach(materialArray[i].Serial_Type, function (key) {
+                                        if (item.Serial_In != undefined) {
+
+                                            var serialin = item.Serial_In.split(",");
+
+                                            serialin = item.Serial_In.split(",");
+                                        }
+
+                                        if (item.Serial_In != undefined) {
+
+                                            var serialout = item.Serial_Out.split(",");
+
+                                            serialout = item.Serial_Out.split(",");
+                                        }
+
+                                        if (item.Serial_In != undefined) {
+
+                                            var serialNo = item.Serial_Number.split(",");
+
+                                            serialNo = item.Serial_Number.split(",")
+                                        }
+
+                                        item.Serial_Type = [];
+
+                                        if (serialNo != undefined && serialNo.length > 0) {
+
+                                            angular.forEach(serialNo, function (serail) {
+
+                                                var serialTypeobj = {};
+
+                                                serialTypeobj.in = "";
+                                                serialTypeobj.out = "";
+                                                serialTypeobj.number = serail;
+
+                                                if (serialTypeobj.number != "")
+                                                    item.Serial_Type.push(serialTypeobj);
+                                            });
+                                        }
+
+                                        if (serialin != undefined && serialin.length > 0 && serialout != undefined && serialout.length > 0) {
+
+                                            var index = 0;
+
+                                            angular.forEach(serialin, function (serail) {
+
+                                                var serialTypeobj = {};
+
+                                                serialTypeobj.in = serail;
+                                                serialTypeobj.out = serialout[index];
+                                                serialTypeobj.number = "";
+
+                                                if (serialTypeobj.in != "")
+                                                    item.Serial_Type.push(serialTypeobj);
+
+                                                index++;
+                                            });
+                                        }
+                                        angular.forEach(item.Serial_Type, function (key) {
 
                                             var materialData = {
-                                                "charge_method": materialArray[i].Charge_Type_Id.toString(),
-                                                "task_id": materialArray[i].Task_Number,
-                                                "item_description": materialArray[i].Description,
+                                                "charge_method": item.Charge_Type_Id.toString(),
+                                                "task_id": item.Task_Number,
+                                                "item_description": item.Description,
                                                 "product_quantity": "1",
                                                 "comments": "",
-                                                "item": materialArray[i].ItemName,
+                                                "item": item.ItemName,
                                                 "serialin": key.in,
                                                 "serialout": key.out,
                                                 "serial_number": key.number
@@ -815,7 +873,7 @@
 
                                             materialJSONData.push(materialData);
                                         });
-                                    }
+                                    })
 
                                     localService.getNotesList(taskId, function (response) {
 
@@ -826,7 +884,7 @@
                                             for (var i = 0; i < notesArray.length; i++) {
 
                                                 var noteData = {
-                                                    "Notes_type": notesArray[i].Note_Type.ID,
+                                                    "Notes_type": notesArray[i].Note_Type_Id,
                                                     "notes_description": notesArray[i].Notes,
                                                     "task_id": notesArray[i].Task_Number,
                                                     "mobilecreatedDate": moment.utc(new Date(notesArray[i].Date)).format("YYYY-MM-DDTHH:mm:ss.000Z")
@@ -874,7 +932,7 @@
                                                             });
                                                         });
                                                     });
-
+                                                }
                                                     var timeUploadJSON = {
                                                         "Time": timeJSONData
                                                     };
@@ -913,10 +971,10 @@
 
                                                                     console.log("Uploaded Material " + JSON.stringify(response));
 
-                                                                    cloudService.createAttachment(attachmentUploadJSON, function (response) {
+                                                                    //cloudService.createAttachment(attachmentUploadJSON, function (response) {
 
-                                                                        console.log("Uploaded Attachment " + JSON.stringify(response));
-                                                                    });
+                                                                    //    console.log("Uploaded Attachment " + JSON.stringify(response));
+                                                                    //});
                                                                 });
                                                             });
                                                         });
@@ -960,7 +1018,7 @@
                                                         });
 
                                                     }, 3000);
-                                                }
+                                                //}
                                             });
                                         }
                                     });

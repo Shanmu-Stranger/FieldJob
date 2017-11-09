@@ -33,22 +33,22 @@ app.controller('taskOverFlowController', function ($scope, $http, $state, $rootS
         console.log(valueService.getTask());
 
         if (valueService.getTask().Country == "People's Republic of China") {
+            if (valueService.getNetworkStatus()) {
+                var map = new BMap.Map("allmap");
 
-            var map = new BMap.Map("allmap");
+                map.centerAndZoom(new BMap.Point(116.404, 39.915), 11);
 
-            map.centerAndZoom(new BMap.Point(116.404, 39.915), 11);
+                map.addControl(new BMap.MapTypeControl({
+                    mapTypes: [
+                        BMAP_NORMAL_MAP,
+                        BMAP_HYBRID_MAP
+                    ]
+                }));
 
-            map.addControl(new BMap.MapTypeControl({
-                mapTypes: [
-                    BMAP_NORMAL_MAP,
-                    BMAP_HYBRID_MAP
-                ]
-            }));
+                map.setCurrentCity("??");
 
-            map.setCurrentCity("??");
-
-            map.enableScrollWheelZoom(true);
-
+                map.enableScrollWheelZoom(true);
+            }
             $scope.chinaUser = true;
 
         } else {
@@ -68,26 +68,28 @@ app.controller('taskOverFlowController', function ($scope, $http, $state, $rootS
         $('#mapToggle').click(function () {
 
             if (firstload) {
+                if (valueService.getNetworkStatus()) {
+                    map = new google.maps.Map(document.getElementById('map'), {
+                        center: { lat: -34.397, lng: 150.644 },
+                        zoom: 8
+                    });
 
-                map = new google.maps.Map(document.getElementById('map'), {
-                    center: {lat: -34.397, lng: 150.644},
-                    zoom: 8
-                });
+                    firstload = false;
 
-                firstload = false;
-
-                codeAddress($scope.taskDetails.Zip_Code);
+                    codeAddress($scope.taskDetails.Zip_Code);
+                }
             }
 
             if (mapClose) {
 
                 if ($scope.chinaUser == false) {
+                    if (valueService.getNetworkStatus()) {
+                        document.getElementById('map').style.display = "block";
 
-                    document.getElementById('map').style.display = "block";
+                        google.maps.event.trigger(document.getElementById('map'), 'resize');
 
-                    google.maps.event.trigger(document.getElementById('map'), 'resize');
-
-                    mapClose = false;
+                        mapClose = false;
+                    }
 
                 } else {
 
