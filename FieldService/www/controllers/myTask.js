@@ -456,7 +456,7 @@ app.controller('myTaskController', function ($scope, $compile, $timeout, uiCalen
 
             $rootScope.showDebrief = true;
 
-            $rootScope.selectedCategory = 'Field Job#' + $rootScope.selectedTask.Task_Number;
+            $rootScope.selectedCategory = 'Field Job#';
 
             $state.go('debrief');
         }

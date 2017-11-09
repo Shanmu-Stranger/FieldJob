@@ -176,7 +176,7 @@
                 </div>
 
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" style="text-align: center;">
-                    <label class="title">{{$root.selectedCategory}}</label>
+                    <label class="title" translate="{{$root.selectedCategory}}"></label><span class="title" ng-if="$root.selectedTask.Task_Number">#{{$root.selectedTask.Task_Number}}</span>
                     <ul class="nav navbar-nav navbar-right">
 
                         <li class="popover__wrapper">
@@ -185,11 +185,11 @@
                                 <div>
                                     <p class="popover__message uname">{{$root.uName | uppercase}}</p>
                                     <p class="popover__message designation">Service Engineer</p>
-                                    <p class="popover__message sign-out" ng-click="signout()">Sign Out</p>
+                                    <p class="popover__message sign-out" ng-click="signout()" translate="Sign Out"></p>
                                 </div>
                                 <hr class="popover-hr">
                                 <div class="language-contents">
-                                    <label>Select Your Language</label>
+                                    <label translate="Select Your Language"></label>
                                     <img src="images/Layer 10.png" ng-click="changeLanguage('en')" ng-disabled="usFlag"
                                          ng-class="!usFlag ? 'selected':'unselected'"/>
                                     <img src="images/Layer 11.png" ng-click="changeLanguage('fr')"
