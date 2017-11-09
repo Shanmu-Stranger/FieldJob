@@ -30,11 +30,15 @@
         <div class="collapse navbar-collapse" style="text-align: center;">
 
             <!--  <div class="nav navbar-nav navbar-right"> -->
-            <div class="pull-right btn-position">
-                <div class="search-div" ng-click="searchTask()">
+            <div class="pull-right">
+                <!-- <div class="search-div" ng-click="searchTask()">
                     <div class="search-icon"></div>
-                    <span class="search-text" aria-hidden="true" translate="search"></span>
-                </div>
+                    <span class="search-text" aria-hidden="true" ></span>
+                </div> -->
+                 <button class="btn btn-default search-div" ng-click="searchTask()">
+                            <span class="search-text" translate="search"></span>
+                          <img src="./images/search_1x.png" style="height: 20px;" /> 
+                </button>
                 <!--  <a class="debrief-btn md-button md-ink-ripple" ng-show="showDebriefBtn" ng-click="showTaskOrDebrief(4)" ng-disabled=true><span translate="Debrief"></span></a> -->
                 <button type="button" class="btn btn-default debrief-btn" ng-show="showDebriefBtn" ng-disabled="notFutureDate" ng-click="showTaskOrDebrief(4)" translate="Debrief" style="margin-left: 20px;"></button>
                 <button type="button" class="btn btn-default startwork-btn" ng-show="showStartWork" ui-sref="taskOverFlow" ng-click="showTaskOrDebrief(3)" style="margin-left: 20px;" translate="Field Job Details"></button>
@@ -102,7 +106,7 @@
                             ng-click="onclickOfTask(task)" ng-class="{'rowSelected' : selectedTask == task}" class="fieldjob-body">
                             <td class="task-number">{{task.Task_Number}}</td>
                             <!-- <td md-cell>{{task.Job_Description}}</td> -->
-                            <td class="task-details" style="padding-left: ">{{task.Customer_Name}}</td>
+                            <td class="task-details">{{task.Customer_Name}}</td>
                             <td class="task-details">{{task.Street_Address}},{{task.City}},{{task.State}}</td>
                             <td class="task-details"> {{task.Start_Date| timezonefilter}} </td>
                             <!-- <td md-cell>{{task.Start_Date.split(" ")[0] | date:'dd/MM/yyyy hh:mm:ss' }}</td> -->
