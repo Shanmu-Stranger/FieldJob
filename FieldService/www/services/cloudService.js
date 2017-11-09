@@ -172,16 +172,14 @@
                                 item.Start_Date = itemForOFSC.Start_Date;
 
                                 item.End_Date = itemForOFSC.End_Date;
+
+                                item.Type = itemForOFSC.End_Date;
                             }
 
-                            if (item.Task_Status == "Completed") {
+                            item.Email = "";
 
-                                item.Submit_Status = "I";
+                            item.Date = new Date();
 
-                            }  else {
-
-                                item.Submit_Status = "A";
-                            }
                         });
 
                         responseOfTaskDetails.push(item);

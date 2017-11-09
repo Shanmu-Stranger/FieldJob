@@ -266,10 +266,6 @@ app.controller('indexController', function ($scope, $state, $timeout, $mdSidenav
                 angular.forEach(response, function (item) {
 
                     valueService.acceptTask(item.Task_Number);
-
-                    cloudService.getTaskList(function (response) {
-
-                    });
                 });
             });
 
@@ -277,7 +273,7 @@ app.controller('indexController', function ($scope, $state, $timeout, $mdSidenav
 
                 angular.forEach(response, function (item) {
 
-                    valueService.submitDebrief(item.Task_Number);
+                    valueService.submitDebrief(item, item.Task_Number);
                 });
             });
 

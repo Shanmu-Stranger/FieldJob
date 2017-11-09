@@ -164,11 +164,11 @@
 
                 var insertValues = [];
 
-                var sqlUpdate = "UPDATE Task SET Job_Description = ?, Duration = ?, Task_Status = ?, Customer_Name =?, Street_Address = ?, City = ?, State = ?, Country = ?, Zip_Code = ?, Expense_Method = ?, Labor_Method = ?, Travel_Method = ?, Material_Method = ?, Service_Request = ?, Assigned = ?, Start_Date = ?, End_Date = ?  WHERE Task_Number = ?";
+                var sqlUpdate = "UPDATE Task SET Job_Description = ?, Duration = ?, Customer_Name =?, Street_Address = ?, City = ?, State = ?, Country = ?, Zip_Code = ?, Expense_Method = ?, Labor_Method = ?, Travel_Method = ?, Material_Method = ?, Service_Request = ?, Assigned = ?, Start_Date = ?, End_Date = ?  WHERE Task_Number = ?";
 
                 insertValues.push(responseList.Job_Description);
                 insertValues.push(responseList.Duration);
-                insertValues.push(responseList.Task_Status);
+                // insertValues.push(responseList.Task_Status);
                 insertValues.push(responseList.Customer_Name);
                 insertValues.push(responseList.Street_Address);
                 insertValues.push(responseList.City);
@@ -208,7 +208,7 @@
 
                 var insertValues = [];
 
-                var sqlInsert = "INSERT INTO Task VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                var sqlInsert = "INSERT INTO Task VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
                 insertValues.push(responseList.Task_Number);
                 insertValues.push(responseList.Job_Description);
@@ -228,15 +228,10 @@
                 insertValues.push(responseList.Assigned);
                 insertValues.push(responseList.Start_Date);
                 insertValues.push(responseList.End_Date);
-
-                if (responseList.Task_Status == "Completed") {
-
-                    insertValues.push("I");
-
-                } else {
-
-                    insertValues.push("A");
-                }
+                insertValues.push("I");
+                insertValues.push(responseList.Email);
+                insertValues.push(responseList.Date);
+                insertValues.push(responseList.Type);
 
                 console.log("TASK INSERT VALUES =====> " + insertValues);
 
@@ -261,10 +256,11 @@
 
                 var insertValues = [];
 
-                var sqlUpdate = "UPDATE Task SET Task_Status = ?, Submit_Status = ?  WHERE Task_Number = ?";
+                var sqlUpdate = "UPDATE Task SET Task_Status = ?, Submit_Status = ?, Date = ?  WHERE Task_Number = ?";
 
                 insertValues.push(responseList.Task_Status);
                 insertValues.push(responseList.Submit_Status);
+                insertValues.push(responseList.Date);
                 insertValues.push(responseList.Task_Number);
 
                 console.log("TASK UPDATE VALUES =====> " + insertValues);
@@ -2398,9 +2394,13 @@
 
                 var insertValues = [];
 
-                var sqlInsert = "INSERT INTO Engineer VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+                var sqlInsert = "INSERT INTO Engineer VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
                 insertValues.push(responseList.Engineer_Id);
+                insertValues.push(responseList.followUp);
+                insertValues.push(responseList.salesQuote);
+                insertValues.push(responseList.salesVisit);
+                insertValues.push(responseList.salesLead);
                 insertValues.push(responseList.Follow_Up);
                 insertValues.push(responseList.Spare_Quote);
                 insertValues.push(responseList.Sales_Visit);

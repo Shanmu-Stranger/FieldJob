@@ -475,9 +475,15 @@ app.controller("debriefController", function ($scope, $state, $rootScope, $windo
             Type: "D",
             Task_Number: $scope.taskId
         };
-        if ($scope.engineerObject == undefined)
+
+        if ($scope.engineerObject == undefined) {
+
             $scope.engineerObject = {
                 Engineer_Id: $scope.taskId,
+                followUp: false,
+                salesQuote: false,
+                salesVisit: false,
+                salesLead: false,
                 Follow_Up: "",
                 Spare_Quote: "",
                 Sales_Visit: "",
@@ -486,6 +492,7 @@ app.controller("debriefController", function ($scope, $state, $rootScope, $windo
                 File_Name: "",
                 Task_Number: $scope.taskId
             };
+        }
     };
 
     $scope.addObject = function (stage) {
@@ -795,23 +802,25 @@ app.controller("debriefController", function ($scope, $state, $rootScope, $windo
 
         timeObject.Charge_Type_Id = timeObject.Charge_Type.ID;
     }
+
     $scope.setChargeTypeMaterial = function (timeObject) {
 
         timeObject.Charge_Type_Id = timeObject.Charge_Type.ID;
-        if (timeObject.Charge_Type.Value == 'Billable' || timeObject.Charge_Type.Value == 'Goodwill' || timeObject.Charge_Type.Value == 'Concession')
-        {
-            angular.forEach(timeObject.Serial_Type, function (serial)
-            {
-                serial.in = "";
-                serial.out=""
-            })
-        }
-        else
-        {
+
+        if (timeObject.Charge_Type.Value == 'Billable' || timeObject.Charge_Type.Value == 'Goodwill' || timeObject.Charge_Type.Value == 'Concession') {
+
             angular.forEach(timeObject.Serial_Type, function (serial) {
+
+                serial.in = "";
+                serial.out = ""
+            });
+
+        } else {
+
+            angular.forEach(timeObject.Serial_Type, function (serial) {
+
                 serial.number = "";
-                
-            })
+            });
         }
     }
 
@@ -1645,10 +1654,10 @@ app.controller("debriefController", function ($scope, $state, $rootScope, $windo
                         "email": constantService.getCCEmailID(),
                         "requestDate": moment.utc(new Date()).format("YYYY-MM-DDTHH:mm:ss.000Z"),
                         "completeDate": moment.utc(new Date()).format("YYYY-MM-DDTHH:mm:ss.000Z"),
-                        "followUp": $scope.followUp.toString(),
-                        "salesQuote": $scope.spareQuote.toString(),
-                        "salesVisit": $scope.salesVisit.toString(),
-                        "salesLead": $scope.salesLead.toString(),
+                        "followUp": $scope.engineerObject.followUp.toString(),
+                        "salesQuote": $scope.engineerObject.spareQuote.toString(),
+                        "salesVisit": $scope.engineerObject.salesVisit.toString(),
+                        "salesLead": $scope.engineerObject.salesLead.toString(),
                         "followuptext": $scope.engineerObject.Follow_Up,
                         "sparequotetext": $scope.engineerObject.Spare_Quote,
                         "salesText": $scope.engineerObject.Sales_Visit,
@@ -1692,25 +1701,20 @@ app.controller("debriefController", function ($scope, $state, $rootScope, $windo
         }
     }
 
-    $scope.followUp = false;
-    $scope.spareQuote = false;
-    $scope.salesVisit = false;
-    $scope.salesLead = false;
-
     $scope.check1 = function () {
-        $scope.followUp = !$scope.followUp;
+        $scope.engineerObject.followUp = !$scope.engineerObject.followUp;
     }
 
     $scope.check2 = function () {
-        $scope.spareQuote = !$scope.spareQuote;
+        $scope.engineerObject.spareQuote = !$scope.engineerObject.spareQuote;
     }
 
     $scope.check3 = function () {
-        $scope.salesVisit = !$scope.salesVisit;
+        $scope.engineerObject.salesVisit = !$scope.engineerObject.salesVisit;
     }
 
     $scope.check4 = function () {
-        $scope.salesLead = !$scope.salesLead;
+        $scope.engineerObject.salesLead = !$scope.engineerObject.salesLead;
     }
 
     $scope.SaveSign = function () {

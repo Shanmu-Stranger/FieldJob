@@ -725,7 +725,7 @@
             });
         };
 
-        function submitDebrief(taskId) {
+        function submitDebrief(taskObject, taskId) {
 
             var timeArray = [];
             var expenseArray = [];
@@ -795,27 +795,21 @@
 
                                 if (materialArray.length > 0) {
 
-                                 
-                                        angular.forEach(materialArray, function (item) {
-                                        var serialin, serialout, serialNo;
+                                    angular.forEach(materialArray, function (item) {
+
+                                        var serialIn, serialOut, serialNo;
 
                                         if (item.Serial_In != undefined) {
 
-                                            var serialin = item.Serial_In.split(",");
-
-                                            serialin = item.Serial_In.split(",");
+                                            serialIn = item.Serial_In.split(",");
                                         }
 
-                                        if (item.Serial_In != undefined) {
+                                        if (item.Serial_Out != undefined) {
 
-                                            var serialout = item.Serial_Out.split(",");
-
-                                            serialout = item.Serial_Out.split(",");
+                                            serialOut = item.Serial_Out.split(",");
                                         }
 
-                                        if (item.Serial_In != undefined) {
-
-                                            var serialNo = item.Serial_Number.split(",");
+                                        if (item.Serial_Number != undefined) {
 
                                             serialNo = item.Serial_Number.split(",")
                                         }
@@ -826,31 +820,31 @@
 
                                             angular.forEach(serialNo, function (serail) {
 
-                                                var serialTypeobj = {};
+                                                var serialTypeObject = {};
 
-                                                serialTypeobj.in = "";
-                                                serialTypeobj.out = "";
-                                                serialTypeobj.number = serail;
+                                                serialTypeObject.in = "";
+                                                serialTypeObject.out = "";
+                                                serialTypeObject.number = serail;
 
-                                                if (serialTypeobj.number != "")
-                                                    item.Serial_Type.push(serialTypeobj);
+                                                if (serialTypeObject.number != "")
+                                                    item.Serial_Type.push(serialTypeObject);
                                             });
                                         }
 
-                                        if (serialin != undefined && serialin.length > 0 && serialout != undefined && serialout.length > 0) {
+                                        if (serialIn != undefined && serialIn.length > 0 && serialOut != undefined && serialOut.length > 0) {
 
                                             var index = 0;
 
-                                            angular.forEach(serialin, function (serail) {
+                                            angular.forEach(serialIn, function (serial) {
 
-                                                var serialTypeobj = {};
+                                                var serialTypeObject = {};
 
-                                                serialTypeobj.in = serail;
-                                                serialTypeobj.out = serialout[index];
-                                                serialTypeobj.number = "";
+                                                serialTypeObject.in = serial;
+                                                serialTypeObject.out = serialOut[index];
+                                                serialTypeObject.number = "";
 
-                                                if (serialTypeobj.in != "")
-                                                    item.Serial_Type.push(serialTypeobj);
+                                                if (serialTypeObject.in != "")
+                                                    item.Serial_Type.push(serialTypeObject);
 
                                                 index++;
                                             });
@@ -873,7 +867,7 @@
 
                                             materialJSONData.push(materialData);
                                         });
-                                    })
+                                    });
 
                                     localService.getNotesList(taskId, function (response) {
 
@@ -932,93 +926,93 @@
                                                             });
                                                         });
                                                     });
-                                                }
-                                                    var timeUploadJSON = {
-                                                        "Time": timeJSONData
-                                                    };
 
-                                                    var expenseUploadJSON = {
-                                                        "expense": expenseJSONData
-                                                    };
+                                                    localService.getEngineer(taskId, function (response) {
 
-                                                    var notesUploadJSON = {
-                                                        "Notes": noteJSONData
-                                                    };
+                                                        if (response != undefined) {
 
-                                                    var materialUploadJSON = {
-                                                        "Material": materialJSONData
-                                                    };
-
-                                                    var attachmentUploadJSON = {
-                                                        "attachment": attachmentJSONData
-                                                    };
-
-                                                    console.log("Material "+JSON.stringify(materialUploadJSON));
-
-                                                    cloudService.uploadTime(timeUploadJSON, function (response) {
-
-                                                        console.log("Uploaded Time " + JSON.stringify(response));
-
-                                                        cloudService.uploadExpense(expenseUploadJSON, function (response) {
-
-                                                            console.log("Uploaded Expense " + JSON.stringify(response));
-
-                                                            cloudService.uploadNote(notesUploadJSON, function (response) {
-
-                                                                console.log("Uploaded Notes " + JSON.stringify(response));
-
-                                                                cloudService.uploadMaterial(materialUploadJSON, function (response) {
-
-                                                                    console.log("Uploaded Material " + JSON.stringify(response));
-
-                                                                    //cloudService.createAttachment(attachmentUploadJSON, function (response) {
-
-                                                                    //    console.log("Uploaded Attachment " + JSON.stringify(response));
-                                                                    //});
-                                                                });
-                                                            });
-                                                        });
-                                                    });
-
-                                                    setTimeout(function () {
-
-                                                        var formData = {
-                                                            "Taskstatus": [{
-                                                                "taskId": taskId,
-                                                                "taskStatus": "Completed",
-                                                               // "email": constantService.getCCEmailID(),
-                                                                "requestDate": moment.utc(new Date()).format("YYYY-MM-DDTHH:mm:ss.000Z"),
-                                                                "completeDate": moment.utc(new Date()).format("YYYY-MM-DDTHH:mm:ss.000Z")
-                                                                // "followUp": $scope.followUp.toString(),
-                                                                // "salesQuote": $scope.spareQuote.toString(),
-                                                                // "salesVisit": $scope.salesVisit.toString(),
-                                                                // "salesLead": $scope.salesLead.toString(),
-                                                                // "followuptext": $scope.engineerObject.Follow_Up,
-                                                                // "sparequotetext": $scope.engineerObject.Spare_Quote,
-                                                                // "salesText": $scope.engineerObject.Sales_Visit,
-                                                                // "salesleadText": $scope.engineerObject.Sales_Head
-                                                            }]
-                                                        };
-
-                                                        cloudService.updateAcceptTask(formData, function (response) {
-
-                                                            console.log("Task Completed " + JSON.stringify(response));
-
-                                                            var taskObject = {
-                                                                Task_Status: "Completed",
-                                                                Task_Number: taskId,
-                                                                Submit_Status: "I"
+                                                            var formData = {
+                                                                "Taskstatus": [{
+                                                                    "taskId": taskId,
+                                                                    "taskStatus": "Completed",
+                                                                    "email": taskObject.Email,
+                                                                    "requestDate": moment.utc(taskObject.Date).format("YYYY-MM-DDTHH:mm:ss.000Z"),
+                                                                    "completeDate": moment.utc(taskObject.Date).format("YYYY-MM-DDTHH:mm:ss.000Z"),
+                                                                    "followUp": response.followUp.toString(),
+                                                                    "salesQuote": response.spareQuote.toString(),
+                                                                    "salesVisit": response.salesVisit.toString(),
+                                                                    "salesLead": response.salesLead.toString(),
+                                                                    "followuptext": response.Follow_Up,
+                                                                    "sparequotetext": response.Spare_Quote,
+                                                                    "salesText": response.Sales_Visit,
+                                                                    "salesleadText": response.Sales_Head
+                                                                }]
                                                             };
 
-                                                            localService.updateTaskSubmitStatus(taskObject);
+                                                            var timeUploadJSON = {
+                                                                "Time": timeJSONData
+                                                            };
 
-                                                            cloudService.getTaskList(function (response) {
+                                                            var expenseUploadJSON = {
+                                                                "expense": expenseJSONData
+                                                            };
 
+                                                            var notesUploadJSON = {
+                                                                "Notes": noteJSONData
+                                                            };
+
+                                                            var materialUploadJSON = {
+                                                                "Material": materialJSONData
+                                                            };
+
+                                                            var attachmentUploadJSON = {
+                                                                "attachment": attachmentJSONData
+                                                            };
+
+                                                            cloudService.uploadTime(timeUploadJSON, function (response) {
+
+                                                                console.log("Uploaded Time " + JSON.stringify(response));
+
+                                                                cloudService.uploadExpense(expenseUploadJSON, function (response) {
+
+                                                                    console.log("Uploaded Expense " + JSON.stringify(response));
+
+                                                                    cloudService.uploadNote(notesUploadJSON, function (response) {
+
+                                                                        console.log("Uploaded Notes " + JSON.stringify(response));
+
+                                                                        cloudService.uploadMaterial(materialUploadJSON, function (response) {
+
+                                                                            console.log("Uploaded Material " + JSON.stringify(response));
+
+                                                                            cloudService.createAttachment(attachmentUploadJSON, function (response) {
+
+                                                                                console.log("Uploaded Attachment " + JSON.stringify(response));
+
+                                                                                cloudService.updateAcceptTask(formData, function (response) {
+
+                                                                                    console.log("Task Completed " + JSON.stringify(response));
+
+                                                                                    var taskObject = {
+                                                                                        Task_Status: "Completed",
+                                                                                        Task_Number: taskId,
+                                                                                        Submit_Status: "I"
+                                                                                    };
+
+                                                                                    localService.updateTaskSubmitStatus(taskObject);
+
+                                                                                    cloudService.getTaskList(function (response) {
+
+                                                                                    });
+                                                                                });
+                                                                            });
+                                                                        });
+                                                                    });
+                                                                });
                                                             });
-                                                        });
-
-                                                    }, 3000);
-                                                //}
+                                                        }
+                                                    });
+                                                }
                                             });
                                         }
                                     });
@@ -1028,13 +1022,6 @@
                     });
                 }
             });
-
-
-            // localService.getEngineer(taskId, function (response) {
-            //
-            //     debrief.engineer = response;
-            // });
-
         };
 
         function checkIfFutureDayTask(selTask) {
