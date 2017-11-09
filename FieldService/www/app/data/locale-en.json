@@ -7,7 +7,7 @@
   "End Date": "End Date",
   "Duration": "Duration",
   "Product Line": "Product Line",
-  "System ID / Serial #": "System ID / Serial #",
+  "System ID / Serial": "System ID / Serial",
   "Customer Site": "Customer Site",
   "Customer Name": "Customer Name",
   "Street Address": "Street Address",
@@ -184,5 +184,5 @@
   "Field Service":"Field Service",
   "Accept":"Accept",
   "Tools and Equipments": "Tools and Equipments",
-  "Add Equipments/Tools":"Add Equipments/Tools",
+  "Add Equipments/Tools":"Add Equipments/Tools"
 }

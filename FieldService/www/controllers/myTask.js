@@ -152,7 +152,7 @@ app.controller('myTaskController', function ($scope, $compile, $timeout, uiCalen
             events: eventsArray,
             eventClick: function (event, jsEvent, view) {
 
-                console.log("EVENT " + JSON.stringify(event));
+                //console.log("EVENT " + JSON.stringify(event));
 
                 $rootScope.selectedTask = event;
 
@@ -164,14 +164,33 @@ app.controller('myTaskController', function ($scope, $compile, $timeout, uiCalen
 
                 if (event.Task_Status == 'Field Job Completed' || event.Task_Status == 'Completed') {
 
+                    $scope.showStartWork = false;
+                    $scope.showDebriefBtn = true;
+                    $rootScope.showAccept = false;
                     $rootScope.completedTask = true;
 
                     $state.go('debrief');
 
-                } else {
+                }
+                else if (event.Task_Status == 'Assigned')
+                {
+                    $scope.showStartWork = true;
+                    $rootScope.showAccept = true;
+                    $scope.showDebriefBtn = false;
+                    $state.go('taskOverFlow');
+                }
+                else if (event.Task_Status == 'Accepted')
+                {
+                    $scope.showStartWork = true;
+                    $scope.showDebriefBtn = true;
+                    $rootScope.showAccept = false;
+                    $state.go('taskOverFlow');
+                }
+                else {
 
                     $state.go('taskOverFlow');
                 }
+            
             },
             eventRender: function (event, element) {
 

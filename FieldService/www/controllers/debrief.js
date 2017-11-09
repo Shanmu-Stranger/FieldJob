@@ -795,6 +795,25 @@ app.controller("debriefController", function ($scope, $state, $rootScope, $windo
 
         timeObject.Charge_Type_Id = timeObject.Charge_Type.ID;
     }
+    $scope.setChargeTypeMaterial = function (timeObject) {
+
+        timeObject.Charge_Type_Id = timeObject.Charge_Type.ID;
+        if (timeObject.Charge_Type.Value == 'Billable' || timeObject.Charge_Type.Value == 'Goodwill' || timeObject.Charge_Type.Value == 'Concession')
+        {
+            angular.forEach(timeObject.Serial_Type, function (serial)
+            {
+                serial.in = "";
+                serial.out=""
+            })
+        }
+        else
+        {
+            angular.forEach(timeObject.Serial_Type, function (serial) {
+                serial.number = "";
+                
+            })
+        }
+    }
 
     $scope.setFieldName = function (timeObject) {
         timeObject.Field_Job_Name_Id = timeObject.Field_Job_Name.TaskCode;
