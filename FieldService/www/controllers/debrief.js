@@ -1476,7 +1476,7 @@ app.controller("debriefController", function ($scope, $state, $rootScope, $windo
             })
         }, 1000);
     });
-
+   
     $scope.customersubmit = false;
 
     $scope.customerSubmit = function () {
@@ -1486,6 +1486,8 @@ app.controller("debriefController", function ($scope, $state, $rootScope, $windo
         $scope.isSubmitted = true;
 
         constantService.setCCEmailID(customerMail.value);
+        var email = { "Email": customerMail.value, "Task_Number": $scope.taskId }
+        localService.updateTaskEmail(email);
 
         valueService.saveValues();
 
@@ -1638,6 +1640,44 @@ app.controller("debriefController", function ($scope, $state, $rootScope, $windo
                                 cloudService.createAttachment(attachmentUploadJSON, function (response) {
 
                                     console.log("Uploaded Attachment " + JSON.stringify(response));
+                                    setTimeout(function () {
+
+                                        var formData = {
+                                            "Taskstatus": [{
+                                                "taskId": $scope.taskId,
+                                                "taskStatus": "Completed",
+                                                "email": constantService.getCCEmailID(),
+                                                "requestDate": moment.utc(new Date()).format("YYYY-MM-DDTHH:mm:ss.000+00:00"),
+                                                "completeDate": moment.utc(new Date()).format("YYYY-MM-DDTHH:mm:ss.000+00:00"),
+                                                "followUp": $scope.engineerObject.followUp.toString(),
+                                                "salesQuote": $scope.engineerObject.salesQuote.toString(),
+                                                "salesVisit": $scope.engineerObject.salesVisit.toString(),
+                                                "salesLead": $scope.engineerObject.salesLead.toString(),
+                                                "followuptext": $scope.engineerObject.Follow_Up,
+                                                "sparequotetext": $scope.engineerObject.Spare_Quote,
+                                                "salesText": $scope.engineerObject.Sales_Visit,
+                                                "salesleadText": $scope.engineerObject.Sales_Head
+                                            }]
+                                        };
+
+                                        cloudService.updateAcceptTask(formData, function (response) {
+
+                                            console.log("Task Completed " + JSON.stringify(response));
+
+                                            var taskObject = {
+                                                Task_Status: "Completed",
+                                                Task_Number: $scope.taskId,
+                                                Submit_Status: "I"
+                                            };
+
+                                            localService.updateTaskSubmitStatus(taskObject);
+
+                                            cloudService.getTaskList(function (response) {
+
+                                            });
+                                        });
+
+                                    }, 3000);
                                 });
                             }
                         });
@@ -1645,44 +1685,7 @@ app.controller("debriefController", function ($scope, $state, $rootScope, $windo
                 });
             });
 
-            setTimeout(function () {
-
-                var formData = {
-                    "Taskstatus": [{
-                        "taskId": $scope.taskId,
-                        "taskStatus": "Completed",
-                        "email": constantService.getCCEmailID(),
-                        "requestDate": moment.utc(new Date()).format("YYYY-MM-DDTHH:mm:ss.000Z"),
-                        "completeDate": moment.utc(new Date()).format("YYYY-MM-DDTHH:mm:ss.000Z"),
-                        "followUp": $scope.engineerObject.followUp.toString(),
-                        "salesQuote": $scope.engineerObject.spareQuote.toString(),
-                        "salesVisit": $scope.engineerObject.salesVisit.toString(),
-                        "salesLead": $scope.engineerObject.salesLead.toString(),
-                        "followuptext": $scope.engineerObject.Follow_Up,
-                        "sparequotetext": $scope.engineerObject.Spare_Quote,
-                        "salesText": $scope.engineerObject.Sales_Visit,
-                        "salesleadText": $scope.engineerObject.Sales_Head
-                    }]
-                };
-
-                cloudService.updateAcceptTask(formData, function (response) {
-
-                    console.log("Task Completed " + JSON.stringify(response));
-
-                    var taskObject = {
-                        Task_Status: "Completed",
-                        Task_Number: $scope.taskId,
-                        Submit_Status: "I"
-                    };
-
-                    localService.updateTaskSubmitStatus(taskObject);
-
-                    cloudService.getTaskList(function (response) {
-
-                    });
-                });
-
-            }, 3000);
+           
 
         } else {
 

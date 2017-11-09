@@ -173,7 +173,7 @@
 
                                 item.End_Date = itemForOFSC.End_Date;
 
-                                item.Type = itemForOFSC.End_Date;
+                                item.Type = itemForOFSC.Type;
                             }
 
                             item.Email = "";
