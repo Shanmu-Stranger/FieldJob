@@ -107,6 +107,7 @@
         service.getEngineer = getEngineer;
 
         service.updateTaskSubmitStatus = updateTaskSubmitStatus;
+        service.updateTaskEmail = updateTaskEmail;
 
         service.getPendingTaskList = getPendingTaskList;
         service.getAcceptTaskList = getAcceptTaskList;
@@ -261,6 +262,34 @@
                 insertValues.push(responseList.Task_Status);
                 insertValues.push(responseList.Submit_Status);
                 insertValues.push(responseList.Date);
+                insertValues.push(responseList.Task_Number);
+
+                console.log("TASK UPDATE VALUES =====> " + insertValues);
+
+                transaction.executeSql(sqlUpdate, insertValues, function (tx, res) {
+
+                    console.log("TASK ROW AFFECTED: " + res.rowsAffected);
+
+                }, function (tx, error) {
+
+                    console.log("TASK UPDATE ERROR: " + error.message);
+                });
+
+            }, function (error) {
+
+                console.log("TASK UPDATE TRANSACTION ERROR: " + error.message);
+            });
+        };
+
+        function updateTaskEmail(responseList) {
+
+            db.transaction(function (transaction) {
+
+                var insertValues = [];
+
+                var sqlUpdate = "UPDATE Task SET Email = ?  WHERE Task_Number = ?";
+
+                insertValues.push(responseList.Email);
                 insertValues.push(responseList.Task_Number);
 
                 console.log("TASK UPDATE VALUES =====> " + insertValues);
