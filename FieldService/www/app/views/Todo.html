@@ -58,11 +58,11 @@
         <label class="note-type-label">NO DATA</label>
     </div>
 
-    <div class="card-childContainer marginbottom30">
+    <div class="card-childContainer marginbottom30"  ng-if="attachmentArray != undefined && attachmentArray.length>0">
 
         <div class="row">
           
-                <div ng-repeat="res in Attachments " class="col-sm-4 text-center">
+                <!--<div ng-repeat="res in Attachments " class="col-sm-4 text-center">
                        
                             <a ng-href="data:{{res.Content_type}};base64,{{res.base64Code}}" target="_blank" download>
                                
@@ -93,7 +93,7 @@
                             </a>
 
                         
-                    </div>
+                    </div>-->
 
                     <div ng-repeat="item in attachmentArray " class="col-sm-4 text-center">
                         

@@ -1643,9 +1643,8 @@ app.controller("debriefController", function ($scope, $state, $rootScope, $windo
                                     setTimeout(function () {
 
                                         var formData = {
-                                            "Taskstatus": [{
-                                                "taskId": $scope.taskId,
-                                                "taskStatus": "Completed",
+                                                "taskid": $scope.taskId,
+                                                "taskstatus": "Completed",
                                                 "email": constantService.getCCEmailID(),
                                                 "requestDate": moment.utc(new Date()).format("YYYY-MM-DDTHH:mm:ss.000+00:00"),
                                                 "completeDate": moment.utc(new Date()).format("YYYY-MM-DDTHH:mm:ss.000+00:00"),
@@ -1657,7 +1656,6 @@ app.controller("debriefController", function ($scope, $state, $rootScope, $windo
                                                 "sparequotetext": $scope.engineerObject.Spare_Quote,
                                                 "salesText": $scope.engineerObject.Sales_Visit,
                                                 "salesleadText": $scope.engineerObject.Sales_Head
-                                            }]
                                         };
 
                                         cloudService.updateAcceptTask(formData, function (response) {

@@ -38,7 +38,7 @@
 
         var ofscBackEndId = "557f06cf-1dda-42f1-a8a8-afc52f823904";
 
-        var acceptBackEndId = "a0f02e4c-cc58-4aa7-bba9-78e57a000b59";
+        var acceptBackEndId = "3fec5f35-296c-49a6-92b7-cbac8e071522";
          var stagesArray = {};
         var startDate = new Date();
 

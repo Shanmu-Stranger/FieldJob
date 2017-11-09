@@ -583,9 +583,9 @@
             console.log("Accept Task Data", JSON.stringify(formData));
 
             return $http({
-
+               
                 method: 'POST',
-                url: url + 'Status_Api/to_change_status',
+                url: url + '/UpdateTaskDetails/update',
                 headers: {
                     "Content-Type": constantService.getContentType(),
                     "Authorization": constantService.getAuthor(),

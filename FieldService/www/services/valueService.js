@@ -701,10 +701,11 @@
         function acceptTask(taskId) {
 
             var formData = {
-                "Taskstatus": [{
-                    "taskId": taskId,
-                    "taskStatus": "Accepted"
-                }]
+                
+                    "taskid": taskId,
+                    "taskstatus": "Accepted",
+                    "requestDate": moment.utc(new Date()).format("YYYY-MM-DDTHH:mm:ss.000+00:00")
+                
             };
 
             cloudService.updateAcceptTask(formData, function (response) {
@@ -714,7 +715,8 @@
                 var taskObject = {
                     Task_Status: "Accepted",
                     Task_Number: taskId,
-                    Submit_Status: "A"
+                    Submit_Status: "A",
+                    Date: new Date()
                 };
 
                 localService.updateTaskSubmitStatus(taskObject);
