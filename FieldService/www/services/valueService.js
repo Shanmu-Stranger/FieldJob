@@ -741,6 +741,8 @@
             var noteJSONData = [];
             var attachmentJSONData = [];
 
+            acceptTask(taskId);
+
             localService.getTimeList(taskId, function (response) {
 
                 timeArray = response;
@@ -934,21 +936,19 @@
                                                         if (response != undefined) {
 
                                                             var formData = {
-                                                                "Taskstatus": [{
-                                                                    "taskId": taskId,
-                                                                    "taskStatus": "Completed",
-                                                                    "email": taskObject.Email,
-                                                                    "requestDate": moment.utc(taskObject.Date).format("YYYY-MM-DDTHH:mm:ss.000Z"),
-                                                                    "completeDate": moment.utc(taskObject.Date).format("YYYY-MM-DDTHH:mm:ss.000Z"),
-                                                                    "followUp": response.followUp.toString(),
-                                                                    "salesQuote": response.spareQuote.toString(),
-                                                                    "salesVisit": response.salesVisit.toString(),
-                                                                    "salesLead": response.salesLead.toString(),
-                                                                    "followuptext": response.Follow_Up,
-                                                                    "sparequotetext": response.Spare_Quote,
-                                                                    "salesText": response.Sales_Visit,
-                                                                    "salesleadText": response.Sales_Head
-                                                                }]
+                                                                "taskid": taskId,
+                                                                "taskstatus": "Completed",
+                                                                "email": taskObject.Email,
+                                                                "requestDate": moment.utc(taskObject.Date).format("YYYY-MM-DDTHH:mm:ss.000Z"),
+                                                                "completeDate": moment.utc(taskObject.Date).format("YYYY-MM-DDTHH:mm:ss.000Z"),
+                                                                "followUp": response.followUp+"",
+                                                                "salesQuote": response.spareQuote+"",
+                                                                "salesVisit": response.salesVisit+"",
+                                                                "salesLead": response.salesLead+"",
+                                                                "followuptext": response.Follow_Up,
+                                                                "sparequotetext": response.Spare_Quote,
+                                                                "salesText": response.Sales_Visit,
+                                                                "salesleadText": response.Sales_Head
                                                             };
 
                                                             var timeUploadJSON = {
