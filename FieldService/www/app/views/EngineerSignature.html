@@ -8,74 +8,86 @@
 
         <!-- <md-input-container class="md-block md-input-style"> -->
 
-            <div class="row">
+        <div class="row">
 
-                <!-- <div class="col-md-3">
-                    <md-checkbox class="mylabel fontsize14 " name="followUp" ng-model="followUp" ng-change="check1()" translate="Follow-up">
+            <!-- <div class="col-md-3">
+                <md-checkbox class="mylabel fontsize14 " name="followUp" ng-model="followUp" ng-change="check1()" translate="Follow-up">
 
-                    </md-checkbox>
-                </div>
-                <div class="col-md-3">
-                    <md-checkbox class="mylabel fontsize14 " translate="Spare Quote" name="spareQuote" ng-model="spareQuote"
-                                 ng-change="check2()">
-
-                    </md-checkbox>
-                </div>
-                <div class="col-md-3">
-                    <md-checkbox class="mylabel fontsize14" translate="Sales Visit" name="salesVisit" ng-model="salesVisit"
-                                 ng-change="check3()">
-
-                    </md-checkbox>
-                </div>
-                <div class="col-md-3">
-                    <md-checkbox class="mylabel fontsize14" translate="Sales Lead" name="salesLead" ng-model="salesLead" ng-change="check4()">
-
-                    </md-checkbox>
-                </div> -->
-                <div class="col-md-3">
-                    <div class="checkbox">
-                    <label class="checkbox-inline"><input type="checkbox" value="engineerObject.followUp" name="followUp" ng-model="engineerObject.followUp" ng-change="check1()"><span translate="Follow-up" class="mylabel fontsize14"></span></label>
-                    </div>
-                </div>
-
-                <div class="col-md-3">
-                    <div class="checkbox">
-                    <label class="checkbox-inline"><input type="checkbox" value="engineerObject.salesQuote" name="spareQuote" ng-model="engineerObject.salesQuote" ng-change="check2()"><span translate="Spare Quote" class="mylabel fontsize14"></span></label>
-                    </div>
-                </div>
-
-                <div class="col-md-3">
-                    <div class="checkbox">
-                    <label class=" checkbox-inline"><input type="checkbox" value="engineerObject.salesVisit" name="salesVisit" ng-model="engineerObject.salesVisit" ng-change="check3()"><span translate="Sales Visit" class="mylabel fontsize14"></span></label>
-                    </div>
-                </div>
-
-                <div class="col-md-3">
-                    <div class="checkbox">
-                    <label class=" checkbox-inline"><input type="checkbox" value="engineerObject.salesLead" name="salesLead" ng-model="engineerObject.salesLead" ng-change="check4()"><span translate="Sales Lead" class="mylabel fontsize14"></span></label>
-                    </div>
-                </div>
-
+                </md-checkbox>
             </div>
+            <div class="col-md-3">
+                <md-checkbox class="mylabel fontsize14 " translate="Spare Quote" name="spareQuote" ng-model="spareQuote"
+                             ng-change="check2()">
+
+                </md-checkbox>
+            </div>
+            <div class="col-md-3">
+                <md-checkbox class="mylabel fontsize14" translate="Sales Visit" name="salesVisit" ng-model="salesVisit"
+                             ng-change="check3()">
+
+                </md-checkbox>
+            </div>
+            <div class="col-md-3">
+                <md-checkbox class="mylabel fontsize14" translate="Sales Lead" name="salesLead" ng-model="salesLead" ng-change="check4()">
+
+                </md-checkbox>
+            </div> -->
+            <div class="col-md-3">
+                <div class="checkbox">
+                    <label class="checkbox-inline"><input type="checkbox" ng-model="engineerObject.followUp"
+                    ><span translate="Follow-up"
+                           class="mylabel fontsize14"></span></label>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="checkbox">
+                    <label class="checkbox-inline"><input type="checkbox" ng-model="engineerObject.salesQuote"
+                    ><span translate="Spare Quote"
+                           class="mylabel fontsize14"></span></label>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="checkbox">
+                    <label class=" checkbox-inline"><input type="checkbox" ng-model="engineerObject.salesVisit"
+                    ><span translate="Sales Visit"
+                           class="mylabel fontsize14"></span></label>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="checkbox">
+                    <label class=" checkbox-inline"><input type="checkbox" ng-model="engineerObject.salesLead"
+                    ><span translate="Sales Lead"
+                           class="mylabel fontsize14"></span></label>
+                </div>
+            </div>
+
+        </div>
         <!-- </md-input-container> -->
 
 
         <div class="layout-column ">
             <div ng-show="engineerObject.followUp">
                 <div class="mylabel font-size margintop25" translate="Additional Information on Follow-Up"></div>
-                <textarea class="inputFieldsES inputFieldsMaterial1" id="followUpInfo" ng-model="engineerObject.Follow_Up"
+                <textarea class="inputFieldsES inputFieldsMaterial1" id="followUpInfo"
+                          ng-model="engineerObject.Follow_Up"
                           name="followUpInfo"></textarea></div>
             <div ng-show="engineerObject.salesQuote">
                 <div class="mylabel font-size margintop10" translate="Additional Information on Spare Quote"></div>
-                <textarea class="inputFieldsES inputFieldsMaterial1" id="spareQuoteInfo" ng-model="engineerObject.Spare_Quote"
+                <textarea class="inputFieldsES inputFieldsMaterial1" id="spareQuoteInfo"
+                          ng-model="engineerObject.Spare_Quote"
                           name="spareQuoteInfo"></textarea></div>
             <div ng-show="engineerObject.salesVisit">
                 <div class="mylabel font-size margintop10" translate="Additional Information on Sales Visit"></div>
-                <textarea class="inputFieldsES inputFieldsMaterial1" id="salesVisitInfo" ng-model="engineerObject.Sales_Visit"
+                <textarea class="inputFieldsES inputFieldsMaterial1" id="salesVisitInfo"
+                          ng-model="engineerObject.Sales_Visit"
                           name="salesVisitInfo"></textarea></div>
             <div ng-show="engineerObject.salesLead">
                 <div class="mylabel font-size margintop10" translate="Additional Information on Sales Lead"></div>
-                <textarea class="inputFieldsES inputFieldsMaterial1" id="salesLeadInfo" ng-model="engineerObject.Sales_Head"
+                <textarea class="inputFieldsES inputFieldsMaterial1" id="salesLeadInfo"
+                          ng-model="engineerObject.Sales_Head"
                           name="salesLeadInfo"></textarea></div>
         </div>
 
@@ -87,7 +99,8 @@
         <div class="debreifContainerinner margintop30">
             <div class="serviceLabel" translate="Service Engineer Signature">:*</div>
             <div class="layout-row">
-                <signature-pad accept="accept" clear="clear" height="220" width="700" dataurl="dataurl"></signature-pad><br>
+                <signature-pad accept="accept" clear="clear" height="220" width="700" dataurl="dataurl"></signature-pad>
+                <br>
                 <label ng-bind="$root.engineerSignTime"></label>
             </div>
             <div class="layout-row">
