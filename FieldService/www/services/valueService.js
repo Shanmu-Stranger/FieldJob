@@ -757,8 +757,8 @@
                             "labor_item": timeArray[i].Item_Id,
                             "labor_description": timeArray[i].Description,
                             "work_type": timeArray[i].Work_Type_Id,
-                            "start_date": moment.utc(timeArray[i].Date).format("YYYY-MM-DDTHH:mm:ss.000Z"),
-                            "end_date": moment.utc(timeArray[i].Date).format("YYYY-MM-DDTHH:mm:ss.000Z"),
+                            "start_date": moment.utc(new Date(timeArray[i].Date)).format("YYYY-MM-DDTHH:mm:ss.000Z"),
+                            "end_date": moment.utc(new Date(timeArray[i].Date)).format("YYYY-MM-DDTHH:mm:ss.000Z"),
                             "charge_method": timeArray[i].Charge_Method_Id,
                             "JobName": timeArray[i].Field_Job_Name_Id
                         }
@@ -780,7 +780,7 @@
                                     "currency": expenseArray[i].Currency_Id.toString(),
                                     "chargeMethod": expenseArray[i].Charge_Method_Id.toString(),
                                     "ammount": expenseArray[i].Amount,
-                                    "date": moment.utc(expenseArray[i].Date).format("YYYY-MM-DD"),
+                                    "date": moment.utc(new Date(expenseArray[i].Date)).format("YYYY-MM-DD"),
                                     "expenseItem": expenseArray[i].Expense_Type_Id.toString()
                                     // "chargeType": "2",
                                     // "billable": "true"
@@ -829,7 +829,7 @@
                                                     "Notes_type": notesArray[i].Note_Type.ID,
                                                     "notes_description": notesArray[i].Notes,
                                                     "task_id": notesArray[i].Task_Number,
-                                                    "mobilecreatedDate": moment.utc(notesArray[i].Date).format("YYYY-MM-DDTHH:mm:ss.000Z")
+                                                    "mobilecreatedDate": moment.utc(new Date(notesArray[i].Date)).format("YYYY-MM-DDTHH:mm:ss.000Z")
                                                 };
 
                                                 noteJSONData.push(noteData);
@@ -928,6 +928,8 @@
                                                             "Taskstatus": [{
                                                                 "taskId": taskId,
                                                                 "taskStatus": "Completed",
+                                                               // "email": constantService.getCCEmailID(),
+                                                                "requestDate": moment.utc(new Date()).format("YYYY-MM-DDTHH:mm:ss.000Z"),
                                                                 "completeDate": moment.utc(new Date()).format("YYYY-MM-DDTHH:mm:ss.000Z")
                                                                 // "followUp": $scope.followUp.toString(),
                                                                 // "salesQuote": $scope.spareQuote.toString(),

@@ -1642,6 +1642,8 @@ app.controller("debriefController", function ($scope, $state, $rootScope, $windo
                     "Taskstatus": [{
                         "taskId": $scope.taskId,
                         "taskStatus": "Completed",
+                        "email": constantService.getCCEmailID(),
+                        "requestDate": moment.utc(new Date()).format("YYYY-MM-DDTHH:mm:ss.000Z"),
                         "completeDate": moment.utc(new Date()).format("YYYY-MM-DDTHH:mm:ss.000Z"),
                         "followUp": $scope.followUp.toString(),
                         "salesQuote": $scope.spareQuote.toString(),
