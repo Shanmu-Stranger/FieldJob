@@ -701,11 +701,9 @@
         function acceptTask(taskId) {
 
             var formData = {
-                
-                    "taskid": taskId,
-                    "taskstatus": "Accepted",
-                    "requestDate": moment.utc(new Date()).format("YYYY-MM-DDTHH:mm:ss.000+00:00")
-                
+                "taskid": taskId,
+                "taskstatus": "Accepted",
+                "requestDate": moment.utc(new Date()).format("YYYY-MM-DDTHH:mm:ss.000+00:00")
             };
 
             cloudService.updateAcceptTask(formData, function (response) {
@@ -939,10 +937,10 @@
                                                                 "taskid": taskId,
                                                                 "taskstatus": "Completed",
                                                                 "email": taskObject.Email,
-                                                                "requestDate": moment.utc(taskObject.Date).format("YYYY-MM-DDTHH:mm:ss.000Z"),
-                                                                "completeDate": moment.utc(taskObject.Date).format("YYYY-MM-DDTHH:mm:ss.000Z"),
+                                                                "requestDate": moment.utc(new Date()).format("YYYY-MM-DDTHH:mm:ss.000Z"),
+                                                                "completeDate": moment.utc(new Date()).format("YYYY-MM-DDTHH:mm:ss.000Z"),
                                                                 "followUp": response.followUp+"",
-                                                                "salesQuote": response.spareQuote+"",
+                                                                "salesQuote": response.salesQuote+"",
                                                                 "salesVisit": response.salesVisit+"",
                                                                 "salesLead": response.salesLead+"",
                                                                 "followuptext": response.Follow_Up,
