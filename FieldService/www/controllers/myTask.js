@@ -10,12 +10,12 @@ app.controller('myTaskController', function ($scope, $compile, $timeout, uiCalen
 
     var eventsArray = [];
 
-    localService.getTaskList(function (response) {
-
-        constantService.setTaskList(response);
-
-        $scope.myTaskDetails = response;
-    });
+    // localService.getTaskList(function (response) {
+    //
+    //     constantService.setTaskList(response);
+    //
+    //     $scope.myTaskDetails = response;
+    // });
 
     getTask();
 

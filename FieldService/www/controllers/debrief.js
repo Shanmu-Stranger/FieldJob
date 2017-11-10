@@ -1365,7 +1365,16 @@ app.controller("debriefController", function ($scope, $state, $rootScope, $windo
                 if (value == key.Time_Code.Overtimeshiftcode) {
 
                     timecode[value] = $scope.calculateDuration(timecode, key);
+                    if (timecode[value].split(":")[0].length == 1) {
+                        var hours = "0" + timecode[value].split(":")[0]
+                        timecode[value] = hours + ":" + timecode[value].split(":")[1]
+                    }
+                    if (timecode[value].split(":")[1].length == 1) {
+                        var mins = "0" + timecode[value].split(":")[1]
+                        timecode[value] = timecode[value].split(":")[0] + ":" + mins
+                    }
                 }
+
             });
         });
     }
@@ -1701,7 +1710,7 @@ app.controller("debriefController", function ($scope, $state, $rootScope, $windo
             });
         }
     }
-    
+
     $scope.SaveSign = function () {
 
         console.log("Inside save sign");

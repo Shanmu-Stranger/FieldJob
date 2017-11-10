@@ -459,7 +459,7 @@ app.controller('indexController', function ($scope, $state, $timeout, $mdSidenav
 
                         download(attachmentValue, taskArray.Task_Id, function (response) {
 
-                            $rootScope.apicall = false;
+                            // $rootScope.apicall = false;
 
                             $scope.attachmentArray = [];
 
