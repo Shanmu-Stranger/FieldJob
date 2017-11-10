@@ -227,23 +227,13 @@ app.controller('indexController', function($scope, $state, $timeout, $mdSidenav,
         name: 'emerson.sqlite',
         location: 'default'
       });
-
-<<<<<<< HEAD
-            $state.go('login');
+      constantService.onDeviceReady();
+      $state.go('login');
         }
         else{
-        
-}
-    }
-=======
       $state.go('login');
 
-      constantService.onDeviceReady();
->>>>>>> ccceae9311da4807c950963255e5c35349118b41
-
-    } else {
-
-    }
+    } 
   }
 
   $scope.export2PDF = function() {
@@ -488,7 +478,6 @@ app.controller('indexController', function($scope, $state, $timeout, $mdSidenav,
 
                 valueService.saveBase64File(filePath, attachmentValue.User_File_Name, base64Code, attachmentValue.Content_type);
 
-<<<<<<< HEAD
                                 var attachmentObject = {
                                     Attachment_Id: attachmentValue.Attachments_Id,
                                     File_Path: filePath,
@@ -499,18 +488,6 @@ app.controller('indexController', function($scope, $state, $timeout, $mdSidenav,
                                     Created_Date: attachmentValue.Date_Created,
                                     Task_Number: taskArray.Task_Id
                                 };
-=======
-                var attachmentObject = {
-                  Attachment_Id: attachmentValue.Attachments_Id,
-                  File_Path: filePath,
-                  File_Name: attachmentValue.User_File_Name,
-                  File_Type: attachmentValue.Content_type,
-                  Type: "O",
-                  AttachmentType: "O",
-                  Task_Number: taskArray.Task_Id
-                };
->>>>>>> ccceae9311da4807c950963255e5c35349118b41
-
                 $scope.attachmentArray.push(attachmentObject);
 
                 localService.insertAttachmentList($scope.attachmentArray);
