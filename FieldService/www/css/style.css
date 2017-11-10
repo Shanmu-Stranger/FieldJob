@@ -2118,3 +2118,19 @@ md-select.md-default-theme ._md-select-value, md-select ._md-select-value{
   margin-top: 20px;
   margin-bottom: 20px;
 }
+.debrief-items{
+  padding-right: 20px;
+  margin-bottom: 20px;
+  max-width: 16% !important;
+}
+.debrief-textarea{
+  background-color: #f0f0f0 !important;
+  border:none !important;
+  height: 70px !important;
+  margin-bottom: 20px;
+}
+.noBorder-radius{
+      padding-bottom: 0px !important;
+    border-bottom-left-radius: 0px !important;
+    border-bottom-right-radius: 0px !important;
+}
