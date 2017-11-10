@@ -796,6 +796,7 @@ app.controller("debriefController", function ($scope, $state, $rootScope, $windo
         }
 
         timeObject.Work_Type_Id = timeObject.Work_Type.ID;
+        timeObject.Item = "";
     };
 
     $scope.setChargeType = function (timeObject) {
