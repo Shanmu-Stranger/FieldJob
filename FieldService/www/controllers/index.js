@@ -223,10 +223,14 @@ app.controller('indexController', function ($scope, $state, $timeout, $mdSidenav
     $scope.signout = function () {
 
         // localService.deleteUser();
+        if (valueService.getNetworkStatus()) {
+            var db = sqlitePlugin.deleteDatabase({ name: 'emerson.sqlite', location: 'default' });
 
-        // var db = sqlitePlugin.deleteDatabase({name: 'emerson.sqlite', location: 'default'});
+            $state.go('login');
+        }
+        else {
 
-        $state.go('login');
+        }
     }
 
     $scope.export2PDF = function () {

@@ -173,9 +173,9 @@ app.controller("debriefController", function ($scope, $state, $rootScope, $windo
                 valuesDeputation: [{"ID": 1, "Value": "Deputation- Standard"},
                     {"ID": 2, "Value": "Deputation- Overtime"},
                     {"ID": 3, "Value": "Deputation- DoubleTime"}],
-                valuesTravel: [{"ID": 1, "Value": "Travel- Standard"},
-                    {"ID": 2, "Value": "Travel- Overtime"},
-                    {"ID": 3, "Value": "Travel- DoubleTime"}],
+                valuesTravel: [{"ID": 4, "Value": "Travel- Standard"},
+                    {"ID": 5, "Value": "Travel- Overtime"},
+                    {"ID": 6, "Value": "Travel- DoubleTime"}],
                 valuesNormal: [{"ID": 1, "Value": "Normal- Standard"},
                     {"ID": 2, "Value": "Normal- Overtime"},
                     {"ID": 3, "Value": "Normal- DoubleTime"}],
@@ -1345,6 +1345,8 @@ app.controller("debriefController", function ($scope, $state, $rootScope, $windo
         var reminder = obj.mins % 60;
 
         obj.hours += Math.floor(obj.mins / 60);
+        if(obj.mins>60)
+        obj.mins = reminder
         var duration = obj.hours + ":" + reminder;
 
         return obj.hours + ":" + reminder;
