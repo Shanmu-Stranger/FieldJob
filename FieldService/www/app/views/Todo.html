@@ -285,12 +285,15 @@
                 <form name="TodoForm" class="addEquip">
                     <label class="note-type-label" translate="Add Equipments/Tools"></label>
                     <div>
-                    <div class="input-group">
-
+                    <div class="input-group col-sm-12">
+                        <div class="col-sm-11">
                             <input  class="form-control" style="border-radius: 0px;" id="fieldTool"
                                    ng-model="title" name="title" type="text" required  />
-                            <span class="input-group-addon addlist-btn"   ng-click="add()"
-                                  ng-disabled="TodoForm.$invalid">Add List</span>
+                                   </div>
+                                   <div class="col-sm-1">   <md-button class="input-group-addon addlist-btn" id="btnGroupAddon" ng-click="add()"
+                                    ng-disabled="TodoForm.$invalid "
+                                    >Add List</md-button>
+                                </div>
                         </div>
                     </div>
                 </form>

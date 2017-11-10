@@ -2061,7 +2061,7 @@ md-select.md-default-theme ._md-select-value, md-select ._md-select-value{
 }
 .addlist-btn{
       border-radius: 0px !important;
-    height: 40px !important;
+    height: 49px !important;
     /* color: black; */
     width: 100px !important;
     font-family: Arial !important;
@@ -2070,6 +2070,8 @@ md-select.md-default-theme ._md-select-value, md-select ._md-select-value{
     color: #ffffff !important;
     background-color: #00aa7e !important;
     text-transform: uppercase;
+    min-width: 55px !important;
+    margin-top: 0px !important;
 }
 .cancelInEquip{
   width:12px;float:right;padding-top:3px;outline:none;margin-top: 15px;margin-right: 20px;
