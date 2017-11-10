@@ -1344,7 +1344,7 @@ app.controller("debriefController", function ($scope, $state, $rootScope, $windo
         var reminder = obj.mins % 60;
 
         obj.hours += Math.floor(obj.mins / 60);
-        if (obj.mins > 60)
+        if (obj.mins >= 60)
             obj.mins = reminder
         var duration = obj.hours + ":" + reminder;
 
@@ -2009,7 +2009,7 @@ app.controller("debriefController", function ($scope, $state, $rootScope, $windo
             doc1.setFontSize(22)
             doc1.setFontType('bold')
             doc1.text(25, 70, 'Customer Call Details')
-            doc1.rect(20, 75, 650, 80)
+
             doc1.setFontSize(22)
             doc1.setFontType('bold')
             doc1.text(25, 85, 'Customer Name')
@@ -2018,20 +2018,25 @@ app.controller("debriefController", function ($scope, $state, $rootScope, $windo
             if ($scope.summary.taskObject.Customer_Name)
                 doc1.text(25, 95, $scope.summary.taskObject.Customer_Name)
             // console.log($scope.summary.taskObject.times[0].Start_Date.split(" ")[0]  | date : 'dd/MM/yyyy')
+            //
             doc1.setFontSize(22)
             doc1.setFontType('bold')
             doc1.text(200, 85, 'Start Date')
             doc1.setFontSize(22)
             doc1.setFontType('normal')
-            if ($scope.summary.taskObject.times[0].Start_Date.split(" ")[0])
-                doc1.text(200, 95, $scope.summary.taskObject.times[0].Start_Date.split(" ")[0])
+            var start = moment.utc($scope.summary.taskObject.times[0].Start_Date).utcOffset(constantService.getTimeZone()).format("DD/MM/YYYY")
+            if (start)
+                doc1.text(200, 95, start)
             doc1.setFontSize(22)
             doc1.setFontType('bold')
             doc1.text(350, 85, 'End Date')
             doc1.setFontSize(22)
             doc1.setFontType('normal')
-            if ($scope.summary.taskObject.times[0].End_Date.split(" ")[0])
-                doc1.text(350, 95, $scope.summary.taskObject.times[0].End_Date.split(" ")[0])
+            var enddate = " ";
+            if ($scope.summary.taskObject.times[0].End_Date != "" && $scope.summary.taskObject.times[0].End_Date != undefined) {
+                enddate = moment.utc($scope.summary.taskObject.times[0].End_Date).utcOffset(constantService.getTimeZone()).format("DD/MM/YYYY");
+            }
+            doc1.text(350, 95, enddate);
             doc1.setFontSize(22)
             doc1.setFontType('bold')
             doc1.text(475, 85, 'Duration')
@@ -2053,7 +2058,7 @@ app.controller("debriefController", function ($scope, $state, $rootScope, $windo
             doc1.setFontSize(22)
             doc1.setFontType('normal')
             if ($scope.summary.taskObject.Task_Number)
-                doc1.text(200, 120, $scope.summary.taskObject.Task_Number.toString())
+                doc1.text(200, 120, $scope.summary.taskObject.Task_Number)
             doc1.setFontSize(22)
             doc1.setFontType('bold')
             doc1.text(350, 110, 'Job Description')
@@ -2065,33 +2070,51 @@ app.controller("debriefController", function ($scope, $state, $rootScope, $windo
             doc1.setFontType('bold')
             doc1.text(25, 135, 'Product Line')
             doc1.setFontSize(22)
-            doc1.setFontType('normal')
-            if ($scope.summary.taskObject.Product_Line)
-                doc1.text(25, 145, $scope.summary.taskObject.Product_Line)
-            doc1.setFontSize(22)
             doc1.setFontType('bold')
             doc1.text(200, 135, 'System ID/Serial #')
-            doc1.setFontSize(22)
-            doc1.setFontType('normal')
-            if ($scope.summary.taskObject.Serial_Number)
-                doc1.text(200, 145, $scope.summary.taskObject.Serial_Number)
             doc1.setFontSize(22)
             doc1.setFontType('bold')
             doc1.text(350, 135, 'Tag #')
             doc1.setFontSize(22)
-            doc1.setFontType('normal')
-            if ($scope.summary.taskObject.TagNumber)
-                doc1.text(350, 145, $scope.summary.taskObject.TagNumber)
-            doc1.setFontSize(22)
             doc1.setFontType('bold')
             doc1.text(450, 135, 'Original PO#')
-            doc1.setFontSize(22)
-            doc1.setFontType('normal')
-            if ($scope.summary.taskObject.Original_PO_Number)
-                doc1.text(450, 145, $scope.summary.taskObject.Original_PO_Number)
+            var ibyvalue = 145;
+            angular.forEach($scope.summary.taskObject.InstallBase, function (key) {
+                doc1.setFontSize(22)
+                doc1.setFontType('normal')
+                if (key.Product_Line)
+                    doc1.text(25, ibyvalue, key.Product_Line)
+                else
+                    doc1.text(25, ibyvalue, 'NO VALUE')
 
 
-            var i = 0, xNotesField = 25, yNotesField = 170, rectNotesWidth = 650,
+                doc1.setFontSize(22)
+                doc1.setFontType('normal')
+                if (key.Serial_Number)
+                    doc1.text(200, ibyvalue, key.Serial_Number)
+                else
+                    doc1.text(200, ibyvalue, 'NO VALUE')
+
+                doc1.setFontSize(22)
+                doc1.setFontType('normal')
+                if (key.TagNumber)
+                    doc1.text(350, ibyvalue, key.TagNumber)
+                else
+                    doc1.text(350, ibyvalue, 'NO VALUE')
+
+                doc1.setFontSize(22)
+                doc1.setFontType('normal')
+                if (key.Original_PO_Number)
+                    doc1.text(450, ibyvalue, key.Original_PO_Number)
+                else
+                    doc1.text(450, ibyvalue, 'NO VALUE')
+                ibyvalue = ibyvalue + 10;
+            })
+            var customerRectHeight = ibyvalue - 70;
+            doc1.rect(20, 75, 650, customerRectHeight)
+
+
+            var i = 0, xNotesField = 25, yNotesField = ibyvalue + 20, rectNotesWidth = 650,
                 rectNotesHeight = 22 * $scope.summary.notesArray.length,
                 rectNotesX = 20, rectNotesY = 170;
             var xNotesField1 = xNotesField, xNotesField2 = xNotesField1 + 150, yNotesField1 = yNotesField + 22,
@@ -2390,7 +2413,7 @@ app.controller("debriefController", function ($scope, $state, $rootScope, $windo
             doc1.rect(20, ySignField + 10, rectSignWidth, rectSignHeight)
             doc1.text(50, ySignField + 20, 'ENGINEER NAME')
             doc1.text(250, ySignField + 20, 'CUSTOMER NAME')
-            doc1.text(50, ySignField + 35, 'Alex')
+            doc1.text(50, ySignField + 35, $scope.engineerName)
             if ($scope.summary.engineer != undefined && $scope.summary.engineer.signature)
                 doc1.addImage($scope.summary.engineer.signature, 'JPEG', 50, ySignField + 45, 75, 40)
             doc1.text(250, ySignField + 35, $scope.summary.taskObject.Customer_Name)
