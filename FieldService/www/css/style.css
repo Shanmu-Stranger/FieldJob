@@ -2120,14 +2120,15 @@ md-select.md-default-theme ._md-select-value, md-select ._md-select-value{
 }
 .debrief-items{
   padding-right: 20px;
-  margin-bottom: 20px;
+     margin-bottom: 30px;
   max-width: 16% !important;
 }
 .debrief-textarea{
   background-color: #f0f0f0 !important;
   border:none !important;
-  height: 70px !important;
-  margin-bottom: 20px;
+      height: 40px !important;
+    margin-bottom: 20px;
+    padding: 10px !important;
 }
 .noBorder-radius{
       padding-bottom: 0px !important;

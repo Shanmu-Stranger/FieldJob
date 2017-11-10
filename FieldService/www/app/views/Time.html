@@ -1,8 +1,8 @@
 
-<div class="card-parentContainer martop-40">
+<div class="card-parentContainer margintop10">
    
-        
-            <div class="card-childContainer  noBorder-radius" ng-repeat="item in timeArray track by $index">
+            <div class="margintop30" ng-repeat="item in timeArray track by $index">
+            <div class="card-childContainer  noBorder-radius" >
                 <form class="form-horizontal" action="/action_page.php" ng-disabled="$root.completedTask">
                 <div layout="row" layout-wrap>
                     <div ng-if="userType=='C'" flex="30" class="debrief-items" style="max-width: 20%;">
@@ -116,13 +116,13 @@
                     </div>
 
 
-                    <div flex="100">
+                    <div flex="30" style="max-width: 31%;">
 
-                        <label flex="100" class="label-my col-md-12 " for="comment"
+                        <label flex="100" class="label-my" for="comment"
                                translate="{{item.timeDefault.comments.title}}"></label>
                         <div flex="100">
                             <textarea class="form-control debrief-textarea" rows="5" id="comment"
-                                      ng-model="item.Comments"></textarea>
+                                      ng-model="item.comments"></textarea>
                         </div>
                     </div>
                     </div>
@@ -137,4 +137,6 @@
                 <md-button class="time-font time-delete" ng-click="deleteObject($index,item,'Time')" ng-disabled="$root.completedTask" translate="delete"></md-button>
                 <md-button class="time-font time-copy" ng-click="copyObject(item,'Time')" ng-disabled="$root.completedTask" translate="copy"></md-button>
             </section>
+
+</div>
 </div>
