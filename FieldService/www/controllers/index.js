@@ -220,9 +220,7 @@ app.controller('indexController', function($scope, $state, $timeout, $mdSidenav,
   }
 
   $scope.signout = function() {
-
-    // localService.deleteUser();
-
+    
     if (valueService.getNetworkStatus()) {
 
       var db = sqlitePlugin.deleteDatabase({
