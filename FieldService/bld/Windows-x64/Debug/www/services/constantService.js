@@ -1,215 +1,219 @@
-﻿(function () {
+﻿(function() {
 
-    'use strict';
+  'use strict';
 
-    app.service('constantService', constantService);
+  app.service('constantService', constantService);
 
-    constantService.$inject = ['$http', '$rootScope', '$window', '$location', 'localService'];
+  constantService.$inject = ['$http', '$rootScope', '$window', '$location', 'localService'];
 
-    function constantService($http, $rootScope, $window, $location, localService) {
+  function constantService($http, $rootScope, $window, $location, localService) {
 
-        var service = {};
+    var service = {};
 
-        var userObject = {};
+    var userObject = {};
 
-        var resourceId = null;
+    var resourceId = null;
 
-        var timeZone = null;
+    var timeZone = null;
 
-        var contactsEmail = [];
+    var contactsEmail = [];
 
-        var taskList = [];
+    var taskList = [];
 
-        var contactsCCEmail = null;
+    var contactsCCEmail = null;
 
-        var contentType = 'application/json';
+    var contentType = 'application/json';
 
-        var authKey = "Basic QTQ3MjE0NF9FTUVSU09OTU9CSUxFQ0xPVURfTU9CSUxFX0FOT05ZTU9VU19BUFBJRDpZLm81amxkaHVtYzF2ZQ==";
+    var authKey = "Basic QTQ3MjE0NF9FTUVSU09OTU9CSUxFQ0xPVURfTU9CSUxFX0FOT05ZTU9VU19BUFBJRDpZLm81amxkaHVtYzF2ZQ==";
 
-        var taskBackEndId = "cc9a9b83-02ff-4be1-8b70-bccb3ac6c592";
+    var taskBackEndId = "cc9a9b83-02ff-4be1-8b70-bccb3ac6c592";
 
-        var chargeBackEndId = "7172e7e3-d292-4bb3-be0b-1e475c6f66a7";
+    var chargeBackEndId = "7172e7e3-d292-4bb3-be0b-1e475c6f66a7";
 
-        var shiftBackEndId = "4b2f8c2d-f6d1-4957-8add-b0d471cdaea4";
+    var shiftBackEndId = "4b2f8c2d-f6d1-4957-8add-b0d471cdaea4";
 
-        var fieldBackEndId = "b861a04a-de53-4c76-9430-3f485c21c5f4";
+    var fieldBackEndId = "b861a04a-de53-4c76-9430-3f485c21c5f4";
 
-        var materialBackEndId = "0686fd58-8150-4264-ac09-348f79436fb9";
+    var materialBackEndId = "0686fd58-8150-4264-ac09-348f79436fb9";
 
-        var ofscBackEndId = "557f06cf-1dda-42f1-a8a8-afc52f823904";
+    var ofscBackEndId = "557f06cf-1dda-42f1-a8a8-afc52f823904";
 
-        var acceptBackEndId = "3fec5f35-296c-49a6-92b7-cbac8e071522";
-         var stagesArray = {};
-        var startDate = new Date();
+    var acceptBackEndId = "3fec5f35-296c-49a6-92b7-cbac8e071522";
 
-        startDate.setDate(startDate.getDate() - 15);
+    var stagesArray = {};
+    
+    var startDate = new Date();
 
-        var startDateISOFormat = startDate.toISOString();
+    startDate.setDate(startDate.getDate() - 15);
 
-        var endDate = new Date();
+    var startDateISOFormat = startDate.toISOString();
 
-        endDate.setDate(endDate.getDate() + 15);
+    var endDate = new Date();
 
-        var endDateISOFormat = endDate.toISOString();
+    endDate.setDate(endDate.getDate() + 15);
 
-        service.setResourceId = setResourceId;
-        service.getResourceId = getResourceId;
+    var endDateISOFormat = endDate.toISOString();
 
-        service.setUser = setUser;
-        service.getUser = getUser;
+    service.setResourceId = setResourceId;
+    service.getResourceId = getResourceId;
 
-        service.getStartDate = getStartDate;
-        service.getEndDate = getEndDate;
+    service.setUser = setUser;
+    service.getUser = getUser;
 
-        service.setTaskList = setTaskList;
-        service.getTaskList = getTaskList;
+    service.getStartDate = getStartDate;
+    service.getEndDate = getEndDate;
 
-        service.getContentType = getContentType;
-        service.getAuthor = getAuthor;
+    service.setTaskList = setTaskList;
+    service.getTaskList = getTaskList;
 
-        service.getTaskBackId = getTaskBackId;
-        service.getChargeBackId = getChargeBackId;
-        service.getFieldBackId = getFieldBackId;
-        service.getShiftBackId = getShiftBackId;
-        service.getMaterialBackId = getMaterialBackId;
-        service.getOfscBackId = getOfscBackId;
-        service.getAcceptBackId = getAcceptBackId;
+    service.getContentType = getContentType;
+    service.getAuthor = getAuthor;
 
-        service.setUserEmailId = setUserEmailId;
-        service.getUserEmailId = getUserEmailId;
+    service.getTaskBackId = getTaskBackId;
+    service.getChargeBackId = getChargeBackId;
+    service.getFieldBackId = getFieldBackId;
+    service.getShiftBackId = getShiftBackId;
+    service.getMaterialBackId = getMaterialBackId;
+    service.getOfscBackId = getOfscBackId;
+    service.getAcceptBackId = getAcceptBackId;
 
-        service.setCCEmailID = setCCEmailID;
-        service.getCCEmailID = getCCEmailID;
+    service.setUserEmailId = setUserEmailId;
+    service.getUserEmailId = getUserEmailId;
 
-        service.setTimeZone = setTimeZone;
-        service.getTimeZone = getTimeZone;
-        service.setStagesArray = setStagesArray;
-        service.getStagesArray = getStagesArray;
+    service.setCCEmailID = setCCEmailID;
+    service.getCCEmailID = getCCEmailID;
 
-        return service;
+    service.setTimeZone = setTimeZone;
+    service.getTimeZone = getTimeZone;
+    service.setStagesArray = setStagesArray;
+    service.getStagesArray = getStagesArray;
 
-        function setResourceId(id) {
-            resourceId = id;
-        };
+    return service;
 
-        function getResourceId() {
-            return resourceId;
-        };
+    function setResourceId(id) {
+      resourceId = id;
+    };
 
-        function setUser(user) {
+    function getResourceId() {
+      return resourceId;
+    };
 
-            userObject = user;
+    function setUser(user) {
 
-            setTimeZone(userObject.Time_Zone);
+      userObject = user;
 
-            $rootScope.uName = userObject.Name;
-        };
+      setTimeZone(userObject.Time_Zone);
 
-        function getUser() {
-            return userObject;
-        };
+      $rootScope.uName = userObject.Name;
+    };
 
-        function setTimeZone(zone) {
-            timeZone = zone;
-        };
+    function getUser() {
+      return userObject;
+    };
 
-        function getTimeZone() {
+    function setTimeZone(zone) {
+      timeZone = zone;
+    };
 
-            return timeZone;
-        };
+    function getTimeZone() {
 
-        function setUserEmailId(id) {
+      return timeZone;
+    };
 
-            for (var i = 0; i < id.length; i++) {
+    function setUserEmailId(id) {
 
-                contactsEmail.push(id[i].Email);
-            }
-        };
+      for (var i = 0; i < id.length; i++) {
 
-        function getUserEmailId() {
+        contactsEmail.push(id[i].Email);
+      }
+    };
 
-            return contactsEmail;
-        };
+    function getUserEmailId() {
 
-        function setCCEmailID(email) {
+      return contactsEmail;
+    };
 
-            contactsCCEmail = email;
-        };
+    function setCCEmailID(email) {
 
-        function getCCEmailID() {
+      contactsCCEmail = email;
+    };
 
-            return contactsCCEmail;
-        };
+    function getCCEmailID() {
 
-        function getStartDate() {
+      return contactsCCEmail;
+    };
 
-            return startDateISOFormat;
-        };
+    function getStartDate() {
 
-        function getEndDate() {
+      return startDateISOFormat;
+    };
 
-            return endDateISOFormat;
-        };
+    function getEndDate() {
 
-        function setTaskList(response) {
+      return endDateISOFormat;
+    };
 
-            taskList = response;
-        };
+    function setTaskList(response) {
 
-        function getTaskList() {
+      taskList = response;
+    };
 
-            return taskList;
-        };
+    function getTaskList() {
 
-        function getAuthor() {
+      return taskList;
+    };
 
-            return authKey;
-        };
+    function getAuthor() {
 
-        function getTaskBackId() {
+      return authKey;
+    };
 
-            return taskBackEndId;
-        };
+    function getTaskBackId() {
 
-        function getChargeBackId() {
+      return taskBackEndId;
+    };
 
-            return chargeBackEndId;
-        };
+    function getChargeBackId() {
 
-        function getFieldBackId() {
+      return chargeBackEndId;
+    };
 
-            return fieldBackEndId;
-        };
+    function getFieldBackId() {
 
-        function getShiftBackId() {
+      return fieldBackEndId;
+    };
 
-            return shiftBackEndId;
-        };
+    function getShiftBackId() {
 
-        function getMaterialBackId() {
+      return shiftBackEndId;
+    };
 
-            return materialBackEndId;
-        };
+    function getMaterialBackId() {
 
-        function getOfscBackId() {
+      return materialBackEndId;
+    };
 
-            return ofscBackEndId;
-        };
+    function getOfscBackId() {
 
-        function getAcceptBackId() {
+      return ofscBackEndId;
+    };
 
-            return acceptBackEndId;
-        };
+    function getAcceptBackId() {
 
-        function getContentType() {
+      return acceptBackEndId;
+    };
 
-            return contentType;
-        };
-         function setStagesArray(stages){
-            stagesArray = stages;
-        }
-        function getStagesArray(){
-            return stagesArray;
-        };
+    function getContentType() {
+
+      return contentType;
+    };
+
+    function setStagesArray(stages) {
+      stagesArray = stages;
     }
+
+    function getStagesArray() {
+      return stagesArray;
+    };
+  }
 })();

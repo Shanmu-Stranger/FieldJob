@@ -176,6 +176,7 @@ app.controller('loginController', function ($location, $state, $rootScope, $scop
                                     File_Type: attachmentValue.Content_type,
                                     Type: "O",
                                     AttachmentType: "O",
+                                    Created_Date: attachmentValue.Date_Created,
                                     Task_Number: taskArray.Task_Id
                                 };
 

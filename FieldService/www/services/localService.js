@@ -717,13 +717,14 @@
 
                 var insertValues = [];
 
-                var sqlUpdate = "UPDATE Attachment SET File_Name = ?, File_Type = ?, File_Path = ?, Type = ?, AttachmentType = ? WHERE Attachment_Id = ? AND Task_Number = ?";
+                var sqlUpdate = "UPDATE Attachment SET File_Name = ?, File_Type = ?, File_Path = ?, Type = ?, AttachmentType = ?,Created_Date=? WHERE Attachment_Id = ? AND Task_Number = ?";
 
                 insertValues.push(responseList.File_Name);
                 insertValues.push(responseList.File_Type);
                 insertValues.push(responseList.File_Path);
                 insertValues.push(responseList.Type);
                 insertValues.push(responseList.AttachmentType);
+                insertValues.push(responseList.Created_Date);
                 insertValues.push(responseList.Attachment_Id);
                 insertValues.push(responseList.Task_Number);
 
@@ -748,7 +749,7 @@
 
                 var insertValues = [];
 
-                var sqlInsert = "INSERT INTO Attachment VALUES (?, ?, ?, ?, ?, ?, ?)";
+                var sqlInsert = "INSERT INTO Attachment VALUES (?, ?, ?, ?, ?, ?, ?,?)";
 
                 insertValues.push(responseList.Attachment_Id);
                 insertValues.push(responseList.File_Name);
@@ -756,7 +757,9 @@
                 insertValues.push(responseList.File_Path);
                 insertValues.push(responseList.Type);
                 insertValues.push(responseList.AttachmentType);
+                insertValues.push(responseList.Created_Date);
                 insertValues.push(responseList.Task_Number);
+
 
                 transaction.executeSql(sqlInsert, insertValues, function (tx, res) {
 

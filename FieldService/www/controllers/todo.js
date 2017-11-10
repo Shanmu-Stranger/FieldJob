@@ -38,7 +38,8 @@ app.controller('todoController', function ($scope, $http, $state, $rootScope, cl
                         attachment.contentType = attachment.File_Type;
 
                         attachment.filename = attachment.File_Name.split(".")[0];
-
+                        attachment.Date_Created = attachment.Created_Date;
+                        
                         attachment.filetype = attachment.File_Name.split(".")[1];
                         $scope.$apply()
                         // if (attachment.AttachmentType == "D") {
