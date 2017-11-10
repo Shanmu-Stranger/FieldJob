@@ -283,26 +283,26 @@
 
 
     <!-- Add Equipmets/Tools -->
-            <div class="marginbottom30">
+
+             <div class="marginbottom30">
             <div class="patternImg" style="height: 147px;">
                 <form name="TodoForm" class="addEquip">
                     <label class="note-type-label" translate="Add Equipments/Tools"></label>
                     <div>
-                    <div class="input-group col-sm-12">
-                        <div class="col-sm-11">
+                    <div class="input-group">
+
                             <input  class="form-control" style="border-radius: 0px;" id="fieldTool"
                                    ng-model="title" name="title" type="text" required  />
-                                   </div>
-                                   <div class="col-sm-1">   <md-button class="input-group-addon addlist-btn" id="btnGroupAddon" ng-click="add()"
-                                    ng-disabled="TodoForm.$invalid "
-                                    >Add List</md-button>
-                                </div>
+                            <span class="input-group-addon addlist-btn"   ng-click="add()"
+                                  ng-disabled="TodoForm.$invalid">Add List</span>
                         </div>
                     </div>
                 </form>
             </div>
     
             </div>
+
+            
     <!-- End of Add Equipmets/Tools -->
 
 
