@@ -94,7 +94,7 @@
                         <div class="mylabel font-size" translate="Email"></div>
                         <input type="text" class="inputFieldsMaterial" id="customerMail" name="customerMail" ng-disabled="isSubmitted" ng-model="customerEMail" ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/" required />
                         <!--  <span style="color:Red" ng-show="signatureForm.customerMail.$error.required"> Required! </span> -->
-                        <span style="color:Red" ng-show="signatureForm.customerMail.$dirty&&signatureForm.customerMail.$error.pattern">Please Enter Valid Email</span>
+                        <span style="color:Red" ng-show="signatureForm.customerMail.$dirty&&signatureForm.customerMail.$error.pattern" translate="Please Enter Valid Email"></span>
                     </div>
                 </div>
             </div>
