@@ -1,480 +1,494 @@
-app.controller('indexController', function ($scope, $state, $timeout, $mdSidenav, $mdDialog, $translate, $rootScope, usSpinnerService, cloudService, localService, valueService, constantService, ofscService) {
+app.controller('indexController', function($scope, $state, $timeout, $mdSidenav, $mdDialog, $translate, $rootScope, usSpinnerService, cloudService, localService, valueService, constantService, ofscService) {
+
+  $scope.onlineStatus = false;
+
+  if (valueService.getNetworkStatus()) {
+
+    $scope.onlineStatus = true;
+
+  } else {
 
     $scope.onlineStatus = false;
+  }
 
-    if (valueService.getNetworkStatus()) {
+  if (valueService.getNetworkStatus()) {
 
-        $scope.onlineStatus = true;
+    localService.getAcceptTaskList(function(response) {
+
+      angular.forEach(response, function(item) {
+
+        valueService.acceptTask(item.Task_Number);
+
+      });
+    });
+
+    localService.getPendingTaskList(function(response) {
+
+      angular.forEach(response, function(item) {
+
+        valueService.submitDebrief(item.Task_Number);
+
+      });
+    });
+  }
+
+  $scope.spinnerLoading = true;
+
+  $rootScope.closed = false;
+
+  $rootScope.selectedCategory = 'Field Service';
+
+  $scope.collapsedClass = "";
+
+  $scope.franceFlag = true;
+
+  $scope.chinaFlag = true;
+
+  $scope.stopSpin = function() {
+
+    console.log('Stop Spinner');
+
+    usSpinnerService.stop('spinner-1');
+  };
+
+  $scope.openLeftMenu = function() {
+
+    console.log('show');
+
+    $mdSidenav('left').toggle();
+  };
+
+  $scope.changeLanguage = function(lang) {
+
+    switch (lang) {
+
+      case "en":
+
+        $scope.usFlag = false;
+        $scope.franceFlag = true;
+        $scope.chinaFlag = true;
+        $translate.use('en').then(function() {
+          console.log('English Used');
+        });
+
+        break;
+
+      case "fr":
+
+        $scope.usFlag = true;
+        $scope.franceFlag = false;
+        $scope.chinaFlag = true;
+        $translate.use('fr').then(function() {
+          console.log('french Used');
+        });
+
+        break;
+
+      case "ch":
+
+        $scope.usFlag = true;
+        $scope.franceFlag = true;
+        $scope.chinaFlag = false;
+        $translate.use('jp').then(function() {
+          console.log('Chinese Used');
+        });
+
+        break;
+
+      default:
+        break;
+    }
+  }
+
+  $scope.sideNavItems = [{
+      id: 1,
+      displayName: "My Calendar",
+      name: "MyCalendar",
+      controller: "myTask",
+      image: "images/calendar/Rectangle8.png",
+      imageSelected: "images/calendar/Rectangle8copy.png"
+    },
+    {
+      id: 2,
+      displayName: "My Field Job",
+      name: "MyTask",
+      controller: "myTask",
+      image: "images/mytask/Shape36.png",
+      imageSelected: "images/mytask/myTaskSel.png"
+    },
+    {
+      id: 3,
+      displayName: "Field Job Overview",
+      name: "TaskOverview",
+      controller: "taskOverflow",
+      image: "images/taskoverview/taskoverview.png",
+      imageSelected: "images/taskoverview/taskOverflowSel.png"
+    },
+    {
+      id: 4,
+      displayName: "Debrief",
+      name: "Debrief",
+      controller: "debrief",
+      image: "images/debrief/brief copy.png",
+      imageSelected: "images/debrief/brief.png"
+    }
+  ];
+
+  $rootScope.selectedItem = $scope.sideNavItems[0].id;
+
+  $scope.menuClick = function(item) {
+
+    $rootScope.selectedItem = item.id;
+
+    $rootScope.tabClicked = true;
+
+    $rootScope.columnclass = "col-sm-11";
+
+    switch (item.name) {
+
+      case "MyCalendar":
+
+        $scope.myCalendar = true;
+
+        $scope.taskOverview = false;
+
+        $rootScope.showDebrief = false;
+
+        $rootScope.showTaskDetail = false;
+
+        $state.go(item.controller);
+
+        $rootScope.selectedCategory = 'Field Service'
+
+        break;
+
+      case "MyTask":
+
+        $rootScope.showDebrief = false;
+
+        $rootScope.showTaskDetail = false;
+
+        $state.go("myFieldJob");
+
+        $rootScope.selectedCategory = 'My Field Job';
+
+        break;
+
+      case "TaskOverview":
+
+        $scope.taskOverview = true;
+
+        $scope.myCalendar = false;
+
+        $state.go("taskOverFlow");
+
+        break;
+
+      case "Debrief":
+
+        $scope.taskOverview = true;
+
+        $scope.myCalendar = false;
+
+        $state.go(item.controller);
+
+        $rootScope.selectedCategory = 'Debrief'
+
+      default:
+        break;
+    }
+  }
+
+  $scope.menuToggle = function() {
+
+    if ($rootScope.closed == true) {
+
+      $rootScope.closed = false;
+
+      $scope.collapsedClass = ""
 
     } else {
 
-        $scope.onlineStatus = false;
-    }
+      $rootScope.closed = true;
 
+      $scope.collapsedClass = "collapsed"
+    }
+  }
+
+  $scope.menuIconClicked = function() {
+    $scope.hideNavLeft = !$scope.hideNavLeft;
+  }
+
+  $scope.signout = function() {
+    
     if (valueService.getNetworkStatus()) {
 
-        localService.getAcceptTaskList(function (response) {
-
-            angular.forEach(response, function (item) {
-
-                valueService.acceptTask(item.Task_Number);
-
-            });
-        });
-
-        localService.getPendingTaskList(function (response) {
-
-            angular.forEach(response, function (item) {
-
-                valueService.submitDebrief(item.Task_Number);
-
-            });
-        });
-    }
-
-    $scope.spinnerLoading = true;
-
-    $rootScope.closed = false;
-
-    $rootScope.selectedCategory = 'Field Service';
-
-    $scope.collapsedClass = "";
-
-    $scope.franceFlag = true;
-
-    $scope.chinaFlag = true;
-
-    $scope.stopSpin = function () {
-
-        console.log('Stop Spinner');
-
-        usSpinnerService.stop('spinner-1');
-    };
-
-    $scope.openLeftMenu = function () {
-
-        console.log('show');
-
-        $mdSidenav('left').toggle();
-    };
-
-    $scope.changeLanguage = function (lang) {
-
-        switch (lang) {
-
-            case "en":
-
-                $scope.usFlag = false;
-                $scope.franceFlag = true;
-                $scope.chinaFlag = true;
-                $translate.use('en').then(function () {
-                    console.log('English Used');
-                });
-
-                break;
-
-            case "fr":
-
-                $scope.usFlag = true;
-                $scope.franceFlag = false;
-                $scope.chinaFlag = true;
-                $translate.use('fr').then(function () {
-                    console.log('french Used');
-                });
-
-                break;
-
-            case "ch" :
-
-                $scope.usFlag = true;
-                $scope.franceFlag = true;
-                $scope.chinaFlag = false;
-                $translate.use('jp').then(function () {
-                    console.log('Chinese Used');
-                });
-
-                break;
-
-            default:
-                break;
-        }
-    }
-
-    $scope.sideNavItems = [
-        {
-            id: 1,
-            displayName: "My Calendar",
-            name: "MyCalendar",
-            controller: "myTask",
-            image: "images/calendar/Rectangle8.png",
-            imageSelected: "images/calendar/Rectangle8copy.png"
-        },
-        {
-            id: 2,
-            displayName: "My Field Job",
-            name: "MyTask",
-            controller: "myTask",
-            image: "images/mytask/Shape36.png",
-            imageSelected: "images/mytask/myTaskSel.png"
-        },
-        {
-            id: 3,
-            displayName: "Field Job Overview",
-            name: "TaskOverview",
-            controller: "taskOverflow",
-            image: "images/taskoverview/taskoverview.png",
-            imageSelected: "images/taskoverview/taskOverflowSel.png"
-        },
-        {
-            id: 4,
-            displayName: "Debrief",
-            name: "Debrief",
-            controller: "debrief",
-            image: "images/debrief/brief copy.png",
-            imageSelected: "images/debrief/brief.png"
-        }
-    ];
-
-    $rootScope.selectedItem = $scope.sideNavItems[0].id;
-
-    $scope.menuClick = function (item) {
-
-        $rootScope.selectedItem = item.id;
-
-        $rootScope.tabClicked = true;
-
-        $rootScope.columnclass = "col-sm-11";
-
-        switch (item.name) {
-
-            case "MyCalendar":
-
-                $scope.myCalendar = true;
-
-                $scope.taskOverview = false;
-
-                $rootScope.showDebrief = false;
-
-                $rootScope.showTaskDetail = false;
-
-                $state.go(item.controller);
-
-                $rootScope.selectedCategory = 'Field Service'
-
-                break;
-
-            case "MyTask":
-
-                $rootScope.showDebrief = false;
-
-                $rootScope.showTaskDetail = false;
-
-                $state.go("myFieldJob");
-
-                $rootScope.selectedCategory = 'My Field Job';
-
-                break;
-
-            case "TaskOverview":
-
-                $scope.taskOverview = true;
-
-                $scope.myCalendar = false;
-
-                $state.go("taskOverFlow");
-
-                break;
-
-            case "Debrief" :
-
-                $scope.taskOverview = true;
-
-                $scope.myCalendar = false;
-
-                $state.go(item.controller);
-
-                $rootScope.selectedCategory = 'Debrief'
-
-            default:
-                break;
-        }
-    }
-
-    $scope.menuToggle = function () {
-
-        if ($rootScope.closed == true) {
-
-            $rootScope.closed = false;
-
-            $scope.collapsedClass = ""
-
-        } else {
-
-            $rootScope.closed = true;
-
-            $scope.collapsedClass = "collapsed"
-        }
-    }
-
-    $scope.menuIconClicked = function () {
-        $scope.hideNavLeft = !$scope.hideNavLeft;
-    }
-
-    $scope.signout = function () {
-
-        // localService.deleteUser();
-        if (valueService.getNetworkStatus()) {
-            var db = sqlitePlugin.deleteDatabase({ name: 'emerson.sqlite', location: 'default' });
-
+      var db = sqlitePlugin.deleteDatabase({
+        name: 'emerson.sqlite',
+        location: 'default'
+      });
+
+<<<<<<< HEAD
             $state.go('login');
         }
         else{
         
 }
     }
+=======
+      $state.go('login');
 
-    $scope.export2PDF = function () {
+      constantService.onDeviceReady();
+>>>>>>> ccceae9311da4807c950963255e5c35349118b41
 
-        html2canvas(document.getElementById('exportthis'), {
+    } else {
 
-            onrendered: function (canvas) {
-
-                var data = canvas.toDataURL();
-
-                var docDefinition = {
-
-                    content: [{
-                        image: data,
-                        width: 500,
-                    }]
-                };
-
-                pdfMake.createPdf(docDefinition).download("Score_Details.pdf");
-            }
-        });
     }
+  }
 
-    $scope.saveValues = function () {
+  $scope.export2PDF = function() {
 
-        valueService.saveValues();
-    }
+    html2canvas(document.getElementById('exportthis'), {
 
-    $scope.syncFunctionality = function () {
+      onrendered: function(canvas) {
 
-        console.log("NETWORK "+valueService.getNetworkStatus());
+        var data = canvas.toDataURL();
 
-        if (valueService.getNetworkStatus()) {
+        var docDefinition = {
 
-            localService.getAcceptTaskList(function (response) {
-
-                angular.forEach(response, function (item) {
-
-                    valueService.acceptTask(item.Task_Number);
-                });
-            });
-
-            localService.getPendingTaskList(function (response) {
-
-                angular.forEach(response, function (item) {
-
-                    valueService.submitDebrief(item, item.Task_Number);
-                });
-            });
-
-            cloudService.getTaskList(function (response) {
-
-                cloudService.getInstallBaseList();
-                cloudService.getContactList();
-                cloudService.getNoteList();
-
-                cloudService.getOverTimeList();
-                cloudService.getShiftCodeList();
-
-                cloudService.getChargeType();
-                cloudService.getChargeMethod();
-                cloudService.getFieldJobName();
-
-                cloudService.getWorkType();
-                cloudService.getItem();
-                cloudService.getCurrency();
-
-                cloudService.getExpenseType();
-                cloudService.getNoteType();
-
-                getAttachments();
-            });
-        }
-    }
-
-    $rootScope.Islogin = false;
-
-    $scope.userName = "";
-
-    $scope.login = function () {
-
-        console.log($scope.userName);
-
-        $rootScope.uName = $scope.userName;
-
-        var baseData = $scope.userName.toLowerCase() + ":" + $scope.password;
-
-        var authorizationValue = window.btoa(baseData);
-
-        var data = {
-            header: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Basic ' + authorizationValue,
-                'oracle-mobile-backend-id': constantService.getTaskBackId
-            }
+          content: [{
+            image: data,
+            width: 500,
+          }]
         };
 
-        localService.deleteUser();
+        pdfMake.createPdf(docDefinition).download("Score_Details.pdf");
+      }
+    });
+  }
 
-        cloudService.login(data, function (response) {
+  $scope.saveValues = function() {
 
-            if (response && response.message == null) {
+    valueService.saveValues();
+  }
 
-                $rootScope.Islogin = true;
+  $scope.syncFunctionality = function() {
 
-                valueService.setResourceId(response['ID']);
+    console.log("NETWORK " + valueService.getNetworkStatus());
 
-                constantService.setResourceId(response['ID']);
+    if (valueService.getNetworkStatus()) {
 
-                cloudService.getTechnicianProfile(function (response) {
+      localService.getAcceptTaskList(function(response) {
 
-                    var userObject = {
-                        ID: response[0].ID,
-                        ClarityID: response[0].ClarityID,
-                        Currency: response[0].Currency,
-                        Default_View: response[0].Default_View,
-                        Email: response[0].Email,
-                        Language: response[0].Language,
-                        Name: response[0].Name,
-                        OFSCId: response[0].OFSCId,
-                        Password: response[0].Password,
-                        Time_Zone: response[0].Time_Zone,
-                        Type: response[0].Type,
-                        User_Name: response[0].User_Name,
-                        Work_Day: response[0].Work_Day,
-                        Work_Hour: response[0].Work_Hour,
-                        Last_updated: new Date()
-                    };
+        angular.forEach(response, function(item) {
 
-                    localService.insertUser(userObject);
+          valueService.acceptTask(item.Task_Number);
+        });
+      });
 
-                    localService.getUser(function (response) {
+      localService.getPendingTaskList(function(response) {
 
-                        console.log("USER =====> " + JSON.stringify(response));
+        angular.forEach(response, function(item) {
 
-                        constantService.setUser(response[0]);
+          valueService.submitDebrief(item, item.Task_Number);
+        });
+      });
 
-                        valueService.setUser(response[0]);
+      cloudService.getTaskList(function(response) {
 
-                        var data = {
-                            "resourceId": constantService.getUser().OFSCId,
-                            "date": moment(new Date()).format('YYYY-MM-DD')
-                        };
+        cloudService.getInstallBaseList();
+        cloudService.getContactList();
+        cloudService.getNoteList();
 
-                        ofscService.activate_resource(data, function (response) {
-                            console.log("ACTIVATE RESOURCE " + JSON.stringify(response));
-                        });
+        cloudService.getOverTimeList();
+        cloudService.getShiftCodeList();
 
-                        offlineGetCall();
-                    });
-                });
+        cloudService.getChargeType();
+        cloudService.getChargeMethod();
+        cloudService.getFieldJobName();
 
-            } else {
+        cloudService.getWorkType();
+        cloudService.getItem();
+        cloudService.getCurrency();
 
-                $scope.loginError = true;
-            }
+        cloudService.getExpenseType();
+        cloudService.getNoteType();
+
+        getAttachments();
+      });
+    }
+  }
+
+  $rootScope.Islogin = false;
+
+  $scope.userName = "";
+
+  $scope.login = function() {
+
+    console.log($scope.userName);
+
+    $rootScope.uName = $scope.userName;
+
+    var baseData = $scope.userName.toLowerCase() + ":" + $scope.password;
+
+    var authorizationValue = window.btoa(baseData);
+
+    var data = {
+      header: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Basic ' + authorizationValue,
+        'oracle-mobile-backend-id': constantService.getTaskBackId
+      }
+    };
+
+    localService.deleteUser();
+
+    cloudService.login(data, function(response) {
+
+      if (response && response.message == null) {
+
+        $rootScope.Islogin = true;
+
+        valueService.setResourceId(response['ID']);
+
+        constantService.setResourceId(response['ID']);
+
+        cloudService.getTechnicianProfile(function(response) {
+
+          var userObject = {
+            ID: response[0].ID,
+            ClarityID: response[0].ClarityID,
+            Currency: response[0].Currency,
+            Default_View: response[0].Default_View,
+            Email: response[0].Email,
+            Language: response[0].Language,
+            Name: response[0].Name,
+            OFSCId: response[0].OFSCId,
+            Password: response[0].Password,
+            Time_Zone: response[0].Time_Zone,
+            Type: response[0].Type,
+            User_Name: response[0].User_Name,
+            Work_Day: response[0].Work_Day,
+            Work_Hour: response[0].Work_Hour,
+            Last_updated: new Date()
+          };
+
+          localService.insertUser(userObject);
+
+          localService.getUser(function(response) {
+
+            console.log("USER =====> " + JSON.stringify(response));
+
+            constantService.setUser(response[0]);
+
+            valueService.setUser(response[0]);
+
+            var data = {
+              "resourceId": constantService.getUser().OFSCId,
+              "date": moment(new Date()).format('YYYY-MM-DD')
+            };
+
+            ofscService.activate_resource(data, function(response) {
+              console.log("ACTIVATE RESOURCE " + JSON.stringify(response));
+            });
+
+            offlineGetCall();
+          });
         });
 
-        function offlineGetCall() {
+      } else {
 
-            cloudService.getTaskList(function (response) {
+        $scope.loginError = true;
+      }
+    });
 
-                // localService.deleteInstallBase();
-                // localService.deleteContact();
-                // localService.deleteNote();
-                //
-                // localService.deleteOverTime();
-                // localService.deleteShiftCode();
-                //
-                // localService.deleteChargeType();
-                // localService.deleteChargeMethod();
-                // localService.deleteFieldJobName();
-                //
-                // localService.deleteWorkType();
-                // localService.deleteItem();
-                // localService.deleteCurrency();
-                //
-                // localService.deleteExpenseType();
-                // localService.deleteNoteType();
+    function offlineGetCall() {
 
-                if (constantService.getUser().Default_View == "My Task") {
+      cloudService.getTaskList(function(response) {
 
-                    $rootScope.selectedItem = 2;
+        // localService.deleteInstallBase();
+        // localService.deleteContact();
+        // localService.deleteNote();
+        //
+        // localService.deleteOverTime();
+        // localService.deleteShiftCode();
+        //
+        // localService.deleteChargeType();
+        // localService.deleteChargeMethod();
+        // localService.deleteFieldJobName();
+        //
+        // localService.deleteWorkType();
+        // localService.deleteItem();
+        // localService.deleteCurrency();
+        //
+        // localService.deleteExpenseType();
+        // localService.deleteNoteType();
 
-                    $state.go('myFieldJob');
+        if (constantService.getUser().Default_View == "My Task") {
 
-                } else {
+          $rootScope.selectedItem = 2;
 
-                    $rootScope.selectedItem = 1;
+          $state.go('myFieldJob');
 
-                    $state.go('myTask');
-                }
+        } else {
 
-                // $rootScope.apicall = false;
+          $rootScope.selectedItem = 1;
 
-                cloudService.getInstallBaseList();
-                cloudService.getContactList();
-                cloudService.getNoteList();
-
-                cloudService.getOverTimeList();
-                cloudService.getShiftCodeList();
-
-                cloudService.getChargeType();
-                cloudService.getChargeMethod();
-                cloudService.getFieldJobName();
-
-                cloudService.getWorkType();
-                cloudService.getItem();
-                cloudService.getCurrency();
-
-                cloudService.getExpenseType();
-                cloudService.getNoteType();
-
-                getAttachments();
-            });
+          $state.go('myTask');
         }
 
-        console.log("Login API END");
+        // $rootScope.apicall = false;
+
+        cloudService.getInstallBaseList();
+        cloudService.getContactList();
+        cloudService.getNoteList();
+
+        cloudService.getOverTimeList();
+        cloudService.getShiftCodeList();
+
+        cloudService.getChargeType();
+        cloudService.getChargeMethod();
+        cloudService.getFieldJobName();
+
+        cloudService.getWorkType();
+        cloudService.getItem();
+        cloudService.getCurrency();
+
+        cloudService.getExpenseType();
+        cloudService.getNoteType();
+
+        getAttachments();
+      });
     }
 
-    function getAttachments() {
+    console.log("Login API END");
+  }
 
-        cloudService.getFileIds(function (response) {
+  function getAttachments() {
 
-            if (response.Attachments_Info != undefined && response.Attachments_Info.length > 0) {
+    cloudService.getFileIds(function(response) {
 
-                angular.forEach(response.Attachments_Info, function (taskArray, value) {
+      if (response.Attachments_Info != undefined && response.Attachments_Info.length > 0) {
 
-                    angular.forEach(taskArray.Attachments, function (attachmentValue, value) {
+        angular.forEach(response.Attachments_Info, function(taskArray, value) {
 
-                        download(attachmentValue, taskArray.Task_Id, function (response) {
+          angular.forEach(taskArray.Attachments, function(attachmentValue, value) {
 
-                            // $rootScope.apicall = false;
+            download(attachmentValue, taskArray.Task_Id, function(response) {
 
-                            $scope.attachmentArray = [];
+              // $rootScope.apicall = false;
 
-                            var filePath = cordova.file.dataDirectory;
+              $scope.attachmentArray = [];
 
-                            if (response != undefined && response != null) {
+              var filePath = cordova.file.dataDirectory;
 
-                                var base64Code = response;
+              if (response != undefined && response != null) {
 
-                                valueService.saveBase64File(filePath, attachmentValue.User_File_Name, base64Code, attachmentValue.Content_type);
+                var base64Code = response;
 
+                valueService.saveBase64File(filePath, attachmentValue.User_File_Name, base64Code, attachmentValue.Content_type);
+
+<<<<<<< HEAD
                                 var attachmentObject = {
                                     Attachment_Id: attachmentValue.Attachments_Id,
                                     File_Path: filePath,
@@ -485,30 +499,41 @@ app.controller('indexController', function ($scope, $state, $timeout, $mdSidenav
                                     Created_Date: attachmentValue.Date_Created,
                                     Task_Number: taskArray.Task_Id
                                 };
+=======
+                var attachmentObject = {
+                  Attachment_Id: attachmentValue.Attachments_Id,
+                  File_Path: filePath,
+                  File_Name: attachmentValue.User_File_Name,
+                  File_Type: attachmentValue.Content_type,
+                  Type: "O",
+                  AttachmentType: "O",
+                  Task_Number: taskArray.Task_Id
+                };
+>>>>>>> ccceae9311da4807c950963255e5c35349118b41
 
-                                $scope.attachmentArray.push(attachmentObject);
+                $scope.attachmentArray.push(attachmentObject);
 
-                                localService.insertAttachmentList($scope.attachmentArray);
+                localService.insertAttachmentList($scope.attachmentArray);
 
-                            }
-                        });
-                    });
-                });
-            }
+              }
+            });
+          });
         });
-    }
+      }
+    });
+  }
 
-    function download(resource, taskId, callback) {
+  function download(resource, taskId, callback) {
 
-        $rootScope.apicall = false;
+    $rootScope.apicall = false;
 
-        cloudService.downloadAttachment(taskId, resource.Attachments_Id, function (response) {
+    cloudService.downloadAttachment(taskId, resource.Attachments_Id, function(response) {
 
-            if (response != undefined)
-                callback(response.data);
+      if (response != undefined)
+        callback(response.data);
 
-        });
-    }
+    });
+  }
 
 });
 
