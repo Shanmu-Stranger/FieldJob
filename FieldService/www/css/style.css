@@ -606,7 +606,7 @@ font-size: 12px;
 color :#2d383f !important;
 font-family : Arial;
 font-weight:bold;
-    text-transform: uppercase;
+text-transform: uppercase;
 
 }
 
@@ -2134,4 +2134,55 @@ md-select.md-default-theme ._md-select-value, md-select ._md-select-value{
       padding-bottom: 0px !important;
     border-bottom-left-radius: 0px !important;
     border-bottom-right-radius: 0px !important;
+}
+.attachmentDiv{
+      height: 110px;
+    width: 110px;
+    border: solid 1px #c0c0c0;
+    padding: 5px;
+}
+.attachment-input{
+  margin-top: 10px;
+    width: 110px !important;
+    border: solid 1px #00aa7e !important;
+}
+.attachment-label{
+      margin-top: 10px;
+    font-size: 12px;
+    color: #00aa7e;
+    text-transform: uppercase;
+    text-align: center;
+    width: 110px;
+}
+.attachment-spacing{
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+    margin-left: 30px;
+    margin-bottom: 30px;
+}
+.nopadding{
+  padding-left: 0px !important;
+  padding-right: 0px !important;
+}
+.attachplaceholder{
+      width: 110px;
+    height: 110px;
+    background-color: #f0f0f0;
+    text-align: center;
+    /* display: table; */
+    padding: 20px;
+}
+.max-size{
+  margin-top: 10px;
+  width: 110px;
+  text-align: center;
+  font-family: Arial;
+  font-weight: normal;
+  font-size: 12px;
+  color: #283d3f;
+
+
+}
+.width110{
+  width: 110px !important;
 }
