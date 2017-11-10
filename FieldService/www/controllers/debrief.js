@@ -9,6 +9,7 @@ app.controller("debriefController", function ($scope, $state, $rootScope, $windo
     $scope.engineerName = valueService.getUserType().name;
 
     $rootScope.headerName = "Debrief";
+    $scope.custsignature={}
 
     if (valueService.getUserType().defaultView == "My Task") {
 
@@ -1493,231 +1494,262 @@ app.controller("debriefController", function ($scope, $state, $rootScope, $windo
         $scope.customersubmit = true;
 
         $scope.isSubmitted = true;
-
+        $rootScope.apicall = true;
         constantService.setCCEmailID(customerMail.value);
-        var email = { "Email": customerMail.value, "Task_Number": $scope.taskId }
-        localService.updateTaskEmail(email);
+        var promise = generatePDF();
+        promise.then(function () {
+            window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fs) {
 
-        valueService.saveValues();
+                fs.root.getFile("Report_" + $scope.summary.taskObject.Task_Number + ".pdf", {
+                    create: true,
+                    exclusive: false
+                }, function (fileEntry) {
 
-        if (valueService.getNetworkStatus()) {
+                    fileEntry.file(function (file) {
 
-            valueService.acceptTask(valueService.getTask().Task_Number);
+                        var reader = new FileReader();
 
-            var timeJSONData = [];
-            var expenseJSONData = [];
-            var materialJSONData = [];
-            var noteJSONData = [];
-            var attachmentJSONData = [];
+                        reader.onloadend = function () {
 
-            var timeArray = $scope.timeArray;
-            var expenseArray = $scope.expenseArray;
-            var materialArray = $scope.materialArray;
-            var notesArray = $scope.notesArray;
+                            console.log("Successful file read: " + this.result);
 
-            for (var i = 0; i < timeArray.length; i++) {
+                            $scope.reportBase64 = this.result.split(",")[1];
+                            var email = { "Email": customerMail.value, "Task_Number": $scope.taskId }
+                            localService.updateTaskEmail(email);
 
-                var timeData = {
-                    "task_id": timeArray[i].Task_Number,
-                    "shift_code": timeArray[i].Shift_Code_Id,
-                    "overtime_shiftcode": timeArray[i].Time_Code_Id,
-                    "charge_type": timeArray[i].Charge_Type_Id,
-                    "duration": timeArray[i].Duration,
-                    "comments": timeArray[i].Comments,
-                    "labor_item": timeArray[i].Item_Id,
-                    "labor_description": timeArray[i].Description,
-                    "work_type": timeArray[i].Work_Type_Id,
-                    "start_date": moment.utc(timeArray[i].Date).format("YYYY-MM-DDTHH:mm:ss.000Z"),
-                    "end_date": moment.utc(timeArray[i].Date).format("YYYY-MM-DDTHH:mm:ss.000Z"),
-                    "charge_method": timeArray[i].Charge_Method_Id,
-                    "JobName": timeArray[i].Field_Job_Name_Id
-                }
+                            valueService.saveValues();
+                            if (valueService.getNetworkStatus()) {
 
-                timeJSONData.push(timeData);
-            }
+                                valueService.acceptTask(valueService.getTask().Task_Number);
 
-            for (var i = 0; i < expenseArray.length; i++) {
+                                var timeJSONData = [];
+                                var expenseJSONData = [];
+                                var materialJSONData = [];
+                                var noteJSONData = [];
+                                var attachmentJSONData = [];
 
-                var expenseData = {
-                    "taskId": expenseArray[i].Task_Number,
-                    "comments": expenseArray[i].Justification,
-                    "currency": expenseArray[i].Currency_Id.toString(),
-                    "chargeMethod": expenseArray[i].Charge_Method_Id.toString(),
-                    "ammount": expenseArray[i].Amount,
-                    "date": moment.utc(expenseArray[i].Date).format("YYYY-MM-DD"),
-                    "expenseItem": expenseArray[i].Expense_Type_Id.toString()
-                }
+                                var timeArray = $scope.timeArray;
+                                var expenseArray = $scope.expenseArray;
+                                var materialArray = $scope.materialArray;
+                                var notesArray = $scope.notesArray;
 
-                expenseJSONData.push(expenseData);
-            }
+                                for (var i = 0; i < timeArray.length; i++) {
 
-            for (var i = 0; i < materialArray.length; i++) {
+                                    var timeData = {
+                                        "task_id": timeArray[i].Task_Number,
+                                        "shift_code": timeArray[i].Shift_Code_Id,
+                                        "overtime_shiftcode": timeArray[i].Time_Code_Id,
+                                        "charge_type": timeArray[i].Charge_Type_Id,
+                                        "duration": timeArray[i].Duration,
+                                        "comments": timeArray[i].Comments,
+                                        "labor_item": timeArray[i].Item_Id,
+                                        "labor_description": timeArray[i].Description,
+                                        "work_type": timeArray[i].Work_Type_Id,
+                                        "start_date": moment.utc(timeArray[i].Date).format("YYYY-MM-DDTHH:mm:ss.000Z"),
+                                        "end_date": moment.utc(timeArray[i].Date).format("YYYY-MM-DDTHH:mm:ss.000Z"),
+                                        "charge_method": timeArray[i].Charge_Method_Id,
+                                        "JobName": timeArray[i].Field_Job_Name_Id
+                                    }
 
-                angular.forEach(materialArray[i].Serial_Type, function (key) {
+                                    timeJSONData.push(timeData);
+                                }
 
-                    var materialData = {
-                        "charge_method": materialArray[i].Charge_Type_Id.toString(),
-                        "task_id": materialArray[i].Task_Number,
-                        "item_description": materialArray[i].Description,
-                        "product_quantity": "1",
-                        "comments": "",
-                        "item": materialArray[i].ItemName,
-                        "serialin": key.in,
-                        "serialout": key.out,
-                        "serial_number": key.number
-                    }
+                                for (var i = 0; i < expenseArray.length; i++) {
 
-                    materialJSONData.push(materialData);
-                });
-            }
+                                    var expenseData = {
+                                        "taskId": expenseArray[i].Task_Number,
+                                        "comments": expenseArray[i].Justification,
+                                        "currency": expenseArray[i].Currency_Id.toString(),
+                                        "chargeMethod": expenseArray[i].Charge_Method_Id.toString(),
+                                        "ammount": expenseArray[i].Amount,
+                                        "date": moment.utc(expenseArray[i].Date).format("YYYY-MM-DD"),
+                                        "expenseItem": expenseArray[i].Expense_Type_Id.toString()
+                                    }
 
-            for (var i = 0; i < notesArray.length; i++) {
+                                    expenseJSONData.push(expenseData);
+                                }
 
-                var noteData = {
-                    "Notes_type": notesArray[i].Note_Type_Id,
-                    "notes_description": notesArray[i].Notes,
-                    "task_id": notesArray[i].Task_Number,
-                    "mobilecreatedDate": moment.utc(notesArray[i].Date).format("YYYY-MM-DDTHH:mm:ss.000Z")
-                };
+                                for (var i = 0; i < materialArray.length; i++) {
 
-                noteJSONData.push(noteData);
-            }
+                                    angular.forEach(materialArray[i].Serial_Type, function (key) {
 
-            for (var i = 0; i < $scope.files.length; i++) {
+                                        var materialData = {
+                                            "charge_method": materialArray[i].Charge_Type_Id.toString(),
+                                            "task_id": materialArray[i].Task_Number,
+                                            "item_description": materialArray[i].Description,
+                                            "product_quantity": "1",
+                                            "comments": "",
+                                            "item": materialArray[i].ItemName,
+                                            "serialin": key.in,
+                                            "serialout": key.out,
+                                            "serial_number": key.number
+                                        }
 
-                var attachmentObject = {
-                    "Data": $scope.files[i].base64,
-                    "FileName": $scope.files[i].filename,
-                    "Description": $scope.files[i].fileDisc,
-                    "Name": $scope.files[i].filename,
-                    "taskId": $rootScope.selectedTask.Task_Number,
-                    "contentType": $scope.files[i].contentType
-                };
+                                        materialJSONData.push(materialData);
+                                    });
+                                }
 
-                attachmentJSONData.push(attachmentObject);
-            }
+                                for (var i = 0; i < notesArray.length; i++) {
 
-            var reportObj = {
-                "Data": $scope.reportBase64,
-                "FileName": "Report_" + $scope.summary.taskObject.Task_Number + ".pdf",
-                "Description": "Report_" + $scope.summary.taskObject.Task_Number + ".pdf",
-                "Name": "Report_" + $scope.summary.taskObject.Task_Number + ".pdf",
-                "taskId": $rootScope.selectedTask.Task_Number,
-                "contentType": "application/pdf"
-            }
+                                    var noteData = {
+                                        "Notes_type": notesArray[i].Note_Type_Id,
+                                        "notes_description": notesArray[i].Notes,
+                                        "task_id": notesArray[i].Task_Number,
+                                        "mobilecreatedDate": moment.utc(notesArray[i].Date).format("YYYY-MM-DDTHH:mm:ss.000Z")
+                                    };
 
-            attachmentJSONData.push(reportObj);
+                                    noteJSONData.push(noteData);
+                                }
 
-            var timeUploadJSON = {
-                "Time": timeJSONData
-            };
+                                for (var i = 0; i < $scope.files.length; i++) {
 
-            var expenseUploadJSON = {
-                "expense": expenseJSONData
-            };
+                                    var attachmentObject = {
+                                        "Data": $scope.files[i].base64,
+                                        "FileName": $scope.files[i].filename,
+                                        "Description": $scope.files[i].fileDisc,
+                                        "Name": $scope.files[i].filename,
+                                        "taskId": $rootScope.selectedTask.Task_Number,
+                                        "contentType": $scope.files[i].contentType
+                                    };
 
-            var notesUploadJSON = {
-                "Notes": noteJSONData
-            };
+                                    attachmentJSONData.push(attachmentObject);
+                                }
 
-            var materialUploadJSON = {
-                "Material": materialJSONData
-            };
+                                var reportObj = {
+                                    "Data": $scope.reportBase64,
+                                    "FileName": "Report_" + $scope.summary.taskObject.Task_Number + ".pdf",
+                                    "Description": "Report_" + $scope.summary.taskObject.Task_Number + ".pdf",
+                                    "Name": "Report_" + $scope.summary.taskObject.Task_Number + ".pdf",
+                                    "taskId": $rootScope.selectedTask.Task_Number,
+                                    "contentType": "application/pdf"
+                                }
 
-            var attachmentUploadJSON = {
-                "attachment": attachmentJSONData
-            };
+                               // attachmentJSONData.push(reportObj);
 
-            cloudService.uploadTime(timeUploadJSON, function (response) {
+                                var timeUploadJSON = {
+                                    "Time": timeJSONData
+                                };
 
-                console.log("Uploaded Time " + JSON.stringify(response));
+                                var expenseUploadJSON = {
+                                    "expense": expenseJSONData
+                                };
 
-                cloudService.uploadExpense(expenseUploadJSON, function (response) {
+                                var notesUploadJSON = {
+                                    "Notes": noteJSONData
+                                };
 
-                    console.log("Uploaded Expense " + JSON.stringify(response));
+                                var materialUploadJSON = {
+                                    "Material": materialJSONData
+                                };
 
-                    cloudService.uploadNote(notesUploadJSON, function (response) {
+                                var attachmentUploadJSON = {
+                                    "attachment": attachmentJSONData
+                                };
 
-                        console.log("Uploaded Notes " + JSON.stringify(response));
+                                cloudService.uploadTime(timeUploadJSON, function (response) {
 
-                        cloudService.uploadMaterial(materialUploadJSON, function (response) {
+                                    console.log("Uploaded Time " + JSON.stringify(response));
 
-                            console.log("Uploaded Material " + JSON.stringify(response));
+                                    cloudService.uploadExpense(expenseUploadJSON, function (response) {
 
-                            if ($scope.files != undefined && $scope.files.length > 0) {
+                                        console.log("Uploaded Expense " + JSON.stringify(response));
 
-                                cloudService.createAttachment(attachmentUploadJSON, function (response) {
+                                        cloudService.uploadNote(notesUploadJSON, function (response) {
 
-                                    console.log("Uploaded Attachment " + JSON.stringify(response));
-                                    setTimeout(function () {
+                                            console.log("Uploaded Notes " + JSON.stringify(response));
 
-                                        var formData = {
-                                                "taskid": $scope.taskId,
-                                                "taskstatus": "Completed",
-                                                "email": constantService.getCCEmailID(),
-                                                "requestDate": moment.utc(new Date()).format("YYYY-MM-DDTHH:mm:ss.000+00:00"),
-                                                "completeDate": moment.utc(new Date()).format("YYYY-MM-DDTHH:mm:ss.000+00:00"),
-                                                "followUp": $scope.engineerObject.followUp.toString(),
-                                                "salesQuote": $scope.engineerObject.salesQuote.toString(),
-                                                "salesVisit": $scope.engineerObject.salesVisit.toString(),
-                                                "salesLead": $scope.engineerObject.salesLead.toString(),
-                                                "followuptext": $scope.engineerObject.Follow_Up,
-                                                "sparequotetext": $scope.engineerObject.Spare_Quote,
-                                                "salesText": $scope.engineerObject.Sales_Visit,
-                                                "salesleadText": $scope.engineerObject.Sales_Head
-                                        };
+                                            cloudService.uploadMaterial(materialUploadJSON, function (response) {
 
-                                        cloudService.updateAcceptTask(formData, function (response) {
+                                                console.log("Uploaded Material " + JSON.stringify(response));
 
-                                            console.log("Task Completed " + JSON.stringify(response));
+                                                if ($scope.files != undefined && $scope.files.length > 0) {
 
-                                            var taskObject = {
-                                                Task_Status: "Completed",
-                                                Task_Number: $scope.taskId,
-                                                Submit_Status: "I"
-                                            };
+                                                    cloudService.createAttachment(attachmentUploadJSON, function (response) {
 
-                                            localService.updateTaskSubmitStatus(taskObject);
+                                                        console.log("Uploaded Attachment " + JSON.stringify(response));
+                                                        setTimeout(function () {
 
-                                            cloudService.getTaskList(function (response) {
+                                                            var formData = {
+                                                                "taskid": $scope.taskId,
+                                                                "taskstatus": "Completed",
+                                                                "email": constantService.getCCEmailID(),
+                                                                "requestDate": moment.utc(new Date()).format("YYYY-MM-DDTHH:mm:ss.000+00:00"),
+                                                                "completeDate": moment.utc(new Date()).format("YYYY-MM-DDTHH:mm:ss.000+00:00"),
+                                                                "followUp": $scope.engineerObject.followUp.toString(),
+                                                                "salesQuote": $scope.engineerObject.salesQuote.toString(),
+                                                                "salesVisit": $scope.engineerObject.salesVisit.toString(),
+                                                                "salesLead": $scope.engineerObject.salesLead.toString(),
+                                                                "followuptext": $scope.engineerObject.Follow_Up,
+                                                                "sparequotetext": $scope.engineerObject.Spare_Quote,
+                                                                "salesText": $scope.engineerObject.Sales_Visit,
+                                                                "salesleadText": $scope.engineerObject.Sales_Head
+                                                            };
 
+                                                            cloudService.updateAcceptTask(formData, function (response) {
+
+                                                                console.log("Task Completed " + JSON.stringify(response));
+
+                                                                var taskObject = {
+                                                                    Task_Status: "Completed",
+                                                                    Task_Number: $scope.taskId,
+                                                                    Submit_Status: "I"
+                                                                };
+
+                                                                localService.updateTaskSubmitStatus(taskObject);
+
+                                                                cloudService.getTaskList(function (response) {
+
+                                                                });
+                                                            });
+
+                                                        }, 3000);
+                                                    });
+                                                }
                                             });
                                         });
+                                    });
+                                });
 
-                                    }, 3000);
+
+
+                            } else {
+
+                                var taskObject = {
+                                    Task_Status: "Completed",
+                                    Task_Number: valueService.getTask().Task_Number,
+                                    Submit_Status: "P"
+                                };
+
+                                localService.updateTaskSubmitStatus(taskObject);
+
+                                localService.getTaskList(function (response) {
+
+                                    constantService.setTaskList(response);
                                 });
                             }
-                        });
+
+                        };
+
+                        reader.readAsDataURL(file);
                     });
                 });
             });
 
-           
+        }, function (reason) {
 
-        } else {
+        })
+        
 
-            var taskObject = {
-                Task_Status: "Completed",
-                Task_Number: valueService.getTask().Task_Number,
-                Submit_Status: "P"
-            };
-
-            localService.updateTaskSubmitStatus(taskObject);
-
-            localService.getTaskList(function (response) {
-
-                constantService.setTaskList(response);
-            });
-        }
+        
     }
-
+    $scope.summary.engineer = {};
     $scope.SaveSign = function () {
 
         console.log("Inside save sign");
 
         console.log($rootScope.signature);
 
-        $scope.summary.engineer = {};
+      
 
         $scope.summary.engineer.signature = $rootScope.signature;
 
@@ -1949,37 +1981,7 @@ app.controller("debriefController", function ($scope, $state, $rootScope, $windo
 
         $scope.selectedIndex = $scope.stages.findIndex(x => x.title == "Customer Signature"
     )
-        $rootScope.apicall = true;
-        var promise = generatePDF();
-        promise.then(function () {
-            window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fs) {
-
-                fs.root.getFile("Report_" + $scope.summary.taskObject.Task_Number + ".pdf", {
-                    create: true,
-                    exclusive: false
-                }, function (fileEntry) {
-
-                    fileEntry.file(function (file) {
-
-                        var reader = new FileReader();
-
-                        reader.onloadend = function () {
-
-                            console.log("Successful file read: " + this.result);
-
-                            $scope.reportBase64 = this.result.split(",")[1];
-                            $rootScope.apicall = false;
-
-                        };
-
-                        reader.readAsDataURL(file);
-                    });
-                });
-            });
-
-        }, function (reason) {
-
-        });
+      
     }
 
     function generatePDF() {
@@ -2390,7 +2392,10 @@ app.controller("debriefController", function ($scope, $state, $rootScope, $windo
             doc1.text(50, ySignField + 35, 'Alex')
             if ($scope.summary.engineer != undefined && $scope.summary.engineer.signature)
                 doc1.addImage($scope.summary.engineer.signature, 'JPEG', 50, ySignField + 45, 75, 40)
+            
             doc1.text(250, ySignField + 35, $scope.summary.taskObject.Customer_Name)
+            if ($rootScope.signature)
+                doc1.addImage($rootScope.signature, 'JPEG', 250, ySignField + 45, 75, 40)
             //                 doc1.save("Report_" + $scope.summary.taskObject.Task_Number + ".pdf");
 
             if ($rootScope.local) {
