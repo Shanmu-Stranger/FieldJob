@@ -1,37 +1,8 @@
-<style>
-    .inputFieldsMaterial1 {
-        height: 100px;
-    }
-</style>
-<div class="container margin-top15" style="padding:0 !important">
-    <div class="debreifContainerouter">
-
-        <!-- <md-input-container class="md-block md-input-style"> -->
-
+<div class="card-parentContainer martop-40"> 
+    <div class="card-childContainer marginbottom30">
+      
         <div class="row">
 
-            <!-- <div class="col-md-3">
-                <md-checkbox class="mylabel fontsize14 " name="followUp" ng-model="followUp" ng-change="check1()" translate="Follow-up">
-
-                </md-checkbox>
-            </div>
-            <div class="col-md-3">
-                <md-checkbox class="mylabel fontsize14 " translate="Spare Quote" name="spareQuote" ng-model="spareQuote"
-                             ng-change="check2()">
-
-                </md-checkbox>
-            </div>
-            <div class="col-md-3">
-                <md-checkbox class="mylabel fontsize14" translate="Sales Visit" name="salesVisit" ng-model="salesVisit"
-                             ng-change="check3()">
-
-                </md-checkbox>
-            </div>
-            <div class="col-md-3">
-                <md-checkbox class="mylabel fontsize14" translate="Sales Lead" name="salesLead" ng-model="salesLead" ng-change="check4()">
-
-                </md-checkbox>
-            </div> -->
             <div class="col-md-3">
                 <div class="checkbox">
                     <label class="checkbox-inline"><input type="checkbox" ng-model="engineerObject.followUp"
@@ -64,60 +35,48 @@
                 </div>
             </div>
 
+
         </div>
-        <!-- </md-input-container> -->
-
-
-        <div class="layout-column ">
-            <div ng-show="engineerObject.followUp">
-                <div class="mylabel font-size margintop25" translate="Additional Information on Follow-Up"></div>
-                <textarea class="inputFieldsES inputFieldsMaterial1" id="followUpInfo"
+        <div class="margintop30" ng-show="engineerObject.followUp">
+                <label class="engSign-label" translate="Additional Information on Follow-Up"></label>
+                <textarea class="engSign-textarea" id="followUpInfo"
                           ng-model="engineerObject.Follow_Up"
                           name="followUpInfo"></textarea></div>
-            <div ng-show="engineerObject.salesQuote">
-                <div class="mylabel font-size margintop10" translate="Additional Information on Spare Quote"></div>
-                <textarea class="inputFieldsES inputFieldsMaterial1" id="spareQuoteInfo"
+            <div class="margintop30" ng-show="engineerObject.salesQuote">
+                <label class="engSign-label" translate="Additional Information on Spare Quote"></label>
+                <textarea class="engSign-textarea" id="spareQuoteInfo"
                           ng-model="engineerObject.Spare_Quote"
                           name="spareQuoteInfo"></textarea></div>
-            <div ng-show="engineerObject.salesVisit">
-                <div class="mylabel font-size margintop10" translate="Additional Information on Sales Visit"></div>
-                <textarea class="inputFieldsES inputFieldsMaterial1" id="salesVisitInfo"
+            <div class="margintop30" ng-show="engineerObject.salesVisit">
+                <label class="engSign-label" translate="Additional Information on Sales Visit"></label>
+                <textarea class="engSign-textarea" id="salesVisitInfo"
                           ng-model="engineerObject.Sales_Visit"
                           name="salesVisitInfo"></textarea></div>
-            <div ng-show="engineerObject.salesLead">
-                <div class="mylabel font-size margintop10" translate="Additional Information on Sales Lead"></div>
-                <textarea class="inputFieldsES inputFieldsMaterial1" id="salesLeadInfo"
+            <div class="margintop30" ng-show="engineerObject.salesLead">
+                <label class="engSign-label" translate="Additional Information on Sales Lead"></label>
+                <textarea class="engSign-textarea" id="salesLeadInfo"
                           ng-model="engineerObject.Sales_Head"
                           name="salesLeadInfo"></textarea></div>
-        </div>
-
+    
     </div>
-</div>
 
-<div class="container" style="padding:0 !important">
-    <div class="debreifContainerouter">
-        <div class="debreifContainerinner margintop30">
-            <div class="serviceLabel" translate="Service Engineer Signature">:*</div>
+<div class="card-childContainer marginbottom30">
+<label class="engSign-label no-marbottom" translate="Service Engineer Signature">:*</label>
             <div class="layout-row">
                 <signature-pad accept="accept" clear="clear" height="220" width="700" dataurl="dataurl"></signature-pad>
                 <br>
+                
+            </div>
+            <div class="layout-row marginbottom30">
                 <label ng-bind="$root.engineerSignTime"></label>
             </div>
-            <div class="layout-row">
-                <div class="flex-33">
-                    <button class="flex-60 serbtn" ng-click="clear()" translate="Clear"></button>
-
-                </div>
-                <!-- <div class="flex-40"><button  class="flex-33" id="addBtn" ng-click="signature = accept(); SaveSign()">Save Sign</button></div> -->
-                <div class="flex-80">
-                    <button class="flex-33" id="addBtn" ng-click="signature = accept(); SaveSign()"
-                            style="float:right;width:100px" translate="Next">
-                    </button>
-                </div>
+           
+            <div>
+                 <button class="serbtn" ng-click="clear()" translate="Clear"></button>
+                 <button  class="engSign-Next" ng-click="signature = accept(); SaveSign()" translate="Next">
+                 </button>
             </div>
-        </div>
-    </div>
+   
 </div>
-<!-- <div class="result" ng-show="signature">
-   <img ng-src="{{ signature.dataUrl }}" >
-</div> -->
+
+</div>
