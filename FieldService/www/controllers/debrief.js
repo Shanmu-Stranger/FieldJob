@@ -493,6 +493,13 @@ app.controller("debriefController", function ($scope, $state, $rootScope, $windo
                 Task_Number: $scope.taskId
             };
         }
+        else
+        {
+            $scope.engineerObject.followUp = ($scope.engineerObject.followUp == 'true');
+            $scope.engineerObject.salesQuote = ($scope.engineerObject.salesQuote == 'true');
+           $scope.engineerObject.salesVisit = ($scope.engineerObject.salesVisit == 'true');
+            $scope.engineerObject.salesLead = ($scope.engineerObject.salesLead == 'true');
+        }
     };
 
     $scope.addObject = function (stage) {
