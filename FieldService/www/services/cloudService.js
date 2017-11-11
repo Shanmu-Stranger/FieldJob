@@ -154,18 +154,27 @@
                 }
             }).success(function (response) {
 
-                console.log(JSON.stringify(response));
-                response.finalResult.forEach(function (item) {
-                    var internalOFSCJSONObject = {};
-                    internalOFSCJSONObject.Start_Date = item.Start_Date;
-                    internalOFSCJSONObject.End_Date = item.End_Date;
-                    internalOFSCJSONObject.Type = item.Type;
-                    internalOFSCJSONObject.Customer_Name = item.Activity_Type;
-                    internalOFSCJSONObject.Task_Number = item.ActivityID;
-                    internalOFSCResponse.push(internalOFSCJSONObject);
+                if (response != undefined && response.finalResult != undefined) {
 
-                });
-                console.log("internalOFSCResponse********"+JSON.stringify(internalOFSCResponse));
+                    console.log(JSON.stringify(response));
+
+                    response.finalResult.forEach(function (item) {
+
+                        var internalOFSCJSONObject = {};
+
+                        internalOFSCJSONObject.Start_Date = item.Start_Date;
+                        internalOFSCJSONObject.End_Date = item.End_Date;
+                        internalOFSCJSONObject.Type = item.Type;
+                        internalOFSCJSONObject.Customer_Name = item.Activity_Type;
+                        internalOFSCJSONObject.Task_Number = item.ActivityID;
+
+                        internalOFSCResponse.push(internalOFSCJSONObject);
+
+                    });
+                }
+
+                console.log("internalOFSCResponse " + JSON.stringify(internalOFSCResponse));
+
                 return $http({
 
                     method: 'GET',
@@ -177,9 +186,12 @@
                     }
                 }).success(function (response) {
 
-                    ofscResponse = response.finalResult;
+                    if (response != undefined && response.finalResult != undefined) {
 
-                    console.log("OFSC Response " + JSON.stringify(ofscResponse));
+                        ofscResponse = response.finalResult;
+
+                        console.log("OFSC Response " + JSON.stringify(ofscResponse));
+                    }
 
                     $http({
 
@@ -221,12 +233,6 @@
 
                             responseOfTaskDetails.push(item);
                         });
-                        // angular.forEach(internalOFSCResponse, function (intenal)
-                        // {
-                        //
-                        //     responseOfTaskDetails.push(intenal);
-                        // })
-
 
                         console.log("Task Response Final" + JSON.stringify(responseOfTaskDetails));
 

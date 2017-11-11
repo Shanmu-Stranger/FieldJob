@@ -493,11 +493,10 @@ app.controller("debriefController", function ($scope, $state, $rootScope, $windo
                 Task_Number: $scope.taskId
             };
         }
-        else
-        {
+        else {
             $scope.engineerObject.followUp = ($scope.engineerObject.followUp == 'true');
             $scope.engineerObject.salesQuote = ($scope.engineerObject.salesQuote == 'true');
-           $scope.engineerObject.salesVisit = ($scope.engineerObject.salesVisit == 'true');
+            $scope.engineerObject.salesVisit = ($scope.engineerObject.salesVisit == 'true');
             $scope.engineerObject.salesLead = ($scope.engineerObject.salesLead == 'true');
         }
     };
@@ -1226,117 +1225,187 @@ app.controller("debriefController", function ($scope, $state, $rootScope, $windo
             if ($scope.timeArray != undefined) {
 
                 var length = $scope.timeArray.length, i = 0;
-                var grandTotalTimeArray = []
-                var subTotalTimeArray = []
+
+                var grandTotalTimeArray = [];
+
+                var subTotalTimeArray = [];
+
                 angular.forEach($scope.timeArray[0].timeDefault.timeCode.values, function (timecode, value) {
-                    var codeobj = {}
-                    var codeobj1 = {}
+
+                    var codeobj = {};
+
+                    var codeobj1 = {};
+
                     codeobj[timecode.Overtimeshiftcode] = 0;
+
                     codeobj1[timecode.Overtimeshiftcode] = 0;
+
                     grandTotalTimeArray.push(codeobj);
+
                     subTotalTimeArray.push(codeobj1);
-                })
-                var grandtimeObject = $scope.getTimenewObj("", "GRAND TOTAL", "", "", "", "", "", 0)
-                var subtotalObject = $scope.getTimenewObj("", "SUB TOTAL", "", "", "", "", "", 0)
+
+                });
+
+                var grandtimeObject = $scope.getTimenewObj("", "GRAND TOTAL", "", "", "", "", "", 0);
+
+                var subtotalObject = $scope.getTimenewObj("", "SUB TOTAL", "", "", "", "", "", 0);
+
                 var subTotalArray = [];
+
                 angular.forEach($scope.timeArray, function (key, value) {
-                    grandtimeObject.Duration = $scope.calculateDuration(grandtimeObject, key)
+
+                    grandtimeObject.Duration = $scope.calculateDuration(grandtimeObject, key);
+
                     if (grandtimeObject.Duration.split(":")[0].length == 1) {
-                        var hours = "0" + grandtimeObject.Duration.split(":")[0]
+
+                        var hours = "0" + grandtimeObject.Duration.split(":")[0];
                         grandtimeObject.Duration = hours + ":" + grandtimeObject.Duration.split(":")[1]
                     }
+
                     if (grandtimeObject.Duration.split(":")[1].length == 1) {
                         var mins = "0" + grandtimeObject.Duration.split(":")[1]
                         grandtimeObject.Duration = grandtimeObject.Duration.split(":")[0] + ":" + mins
                     }
+
                     $scope.populateTimeCodeArray(grandTotalTimeArray, key);
+
                     if (subTotalArray.length > 0) {
 
                         var keepGoing = true;
+
                         angular.forEach(subTotalArray, function (subtotalObj, value) {
+
                             if (keepGoing) {
+
                                 if (subtotalObj.Work_Type == key.Work_Type.Value) {
+
                                     newWorkType = false;
+
                                     $scope.populateTimeCodeArray(subTotalTimeArray, key);
+
                                     subtotalObj.Duration = $scope.calculateDuration(subtotalObj, key);
+
                                     if (subtotalObj.Duration.split(":")[0].length == 1) {
-                                        var hours = "0" + subtotalObj.Duration.split(":")[0]
+
+                                        var hours = "0" + subtotalObj.Duration.split(":")[0];
+
                                         subtotalObj.Duration = hours + ":" + subtotalObj.Duration.split(":")[1]
                                     }
+
                                     if (subtotalObj.Duration.split(":")[1].length == 1) {
-                                        var mins = "0" + subtotalObj.Duration.split(":")[1]
+
+                                        var mins = "0" + subtotalObj.Duration.split(":")[1];
+
                                         subtotalObj.Duration = subtotalObj.Duration.split(":")[0] + ":" + mins
                                     }
 
                                     keepGoing = false;
-                                }
-                                else {
+
+                                } else {
+
                                     newWorkType = true;
                                 }
                             }
+                        });
 
-                        })
                         if (newWorkType) {
-                            subtotalObject = $scope.getTimenewObj(key.Work_Type.Value, "SUB TOTAL", "", "", "", "", "", 0)
+
+                            subtotalObject = $scope.getTimenewObj(key.Work_Type.Value, "SUB TOTAL", "", "", "", "", "", 0);
+
                             subTotalTimeArray = [];
+
                             angular.forEach($scope.timeArray[0].timeDefault.timeCode.values, function (timecode, value) {
-                                var codeobj = {}
+
+                                var codeobj = {};
+
                                 codeobj[timecode.Overtimeshiftcode] = 0;
+
                                 subTotalTimeArray.push(codeobj);
-                            })
+                            });
+
                             $scope.populateTimeCodeArray(subTotalTimeArray, key);
+
                             subtotalObject.timecode = subTotalTimeArray;
-                            subtotalObject.Duration = $scope.calculateDuration(subtotalObject, key)
+
+                            subtotalObject.Duration = $scope.calculateDuration(subtotalObject, key);
+
                             if (subtotalObject.Duration.split(":")[0].length == 1) {
-                                var hours = "0" + subtotalObject.Duration.split(":")[0]
-                                subtotalObject.Duration = hours + ":" + subtotalObject.Duration.split(":")[1]
+
+                                var hours = "0" + subtotalObject.Duration.split(":")[0];
+
+                                subtotalObject.Duration = hours + ":" + subtotalObject.Duration.split(":")[1];
                             }
+
                             if (subtotalObject.Duration.split(":")[1].length == 1) {
-                                var mins = "0" + subtotalObject.Duration.split(":")[1]
-                                subtotalObject.Duration = subtotalObject.Duration.split(":")[0] + ":" + mins
+
+                                var mins = "0" + subtotalObject.Duration.split(":")[1];
+
+                                subtotalObject.Duration = subtotalObject.Duration.split(":")[0] + ":" + mins;
                             }
+
                             subTotalArray.push(subtotalObject);
                         }
-                    }
-                    else if (subTotalArray.length == 0) {
-                        subtotalObject.Work_Type = key.Work_Type.Value
+
+                    } else if (subTotalArray.length == 0) {
+
+                        subtotalObject.Work_Type = key.Work_Type.Value;
+
                         $scope.populateTimeCodeArray(subTotalTimeArray, key);
+
                         subtotalObject.timecode = subTotalTimeArray;
-                        subtotalObject.Duration = $scope.calculateDuration(subtotalObject, key)
+
+                        subtotalObject.Duration = $scope.calculateDuration(subtotalObject, key);
+
                         if (subtotalObject.Duration.split(":")[0].length == 1) {
-                            var hours = "0" + subtotalObject.Duration.split(":")[0]
-                            subtotalObject.Duration = hours + ":" + subtotalObject.Duration.split(":")[1]
+
+                            var hours = "0" + subtotalObject.Duration.split(":")[0];
+
+                            subtotalObject.Duration = hours + ":" + subtotalObject.Duration.split(":")[1];
                         }
+
                         if (subtotalObject.Duration.split(":")[1].length == 1) {
-                            var mins = "0" + subtotalObject.Duration.split(":")[1]
-                            subtotalObject.Duration = subtotalObject.Duration.split(":")[0] + ":" + mins
+
+                            var mins = "0" + subtotalObject.Duration.split(":")[1];
+
+                            subtotalObject.Duration = subtotalObject.Duration.split(":")[0] + ":" + mins;
                         }
+
                         subTotalArray.push(subtotalObject);
                     }
 
-                    var timeObject = $scope.getTimenewObj(key.Work_Type.Value, $filter("date")(key.Date, "dd-MM-yyyy "), key.Charge_Type.Value, key.Charge_Method.Value, key.Item.Value, key.Description, "", key.Duration)
+                    var timeObject = $scope.getTimenewObj(key.Work_Type.Value, $filter("date")(key.Date, "dd-MM-yyyy "), key.Charge_Type.Value, key.Charge_Method.Value, key.Item.Value, key.Description, "", key.Duration);
+
                     timeObject.Duration = key.Duration;
+
                     var timecodearray = [];
 
                     angular.forEach($scope.timeArray[0].timeDefault.timeCode.values, function (timecode, value) {
+
                         var codeobj = {};
+
                         if (key.Time_Code.Overtimeshiftcode == timecode.Overtimeshiftcode) {
+
                             codeobj[timecode.Overtimeshiftcode] = key.Duration;
-                        }
-                        else {
+
+                        } else {
+
                             codeobj[timecode.Overtimeshiftcode] = "";
                         }
-                        timecodearray.push(codeobj)
-                    })
+
+                        timecodearray.push(codeobj);
+                    });
+
                     timeObject.timecode = timecodearray;
 
                     $scope.summary.timeArray.push(timeObject)
 
                 });
+
                 grandtimeObject.timecode = grandTotalTimeArray;
+
                 angular.forEach(subTotalArray, function (obj, value) {
                     $scope.summary.timeArray.push(obj);
-                })
+                });
 
                 $scope.summary.timeArray.push(grandtimeObject)
             }
@@ -1352,8 +1421,10 @@ app.controller("debriefController", function ($scope, $state, $rootScope, $windo
         var reminder = obj.mins % 60;
 
         obj.hours += Math.floor(obj.mins / 60);
+
         if (obj.mins >= 60)
-            obj.mins = reminder
+            obj.mins = reminder;
+
         var duration = obj.hours + ":" + reminder;
 
         return obj.hours + ":" + reminder;
@@ -1440,7 +1511,7 @@ app.controller("debriefController", function ($scope, $state, $rootScope, $windo
 
                         valueService.openFile(filePath + "Report_" + $scope.summary.taskObject.Task_Number + ".pdf", "application/pdf");
 
-                    })
+                    });
                 });
             });
 
@@ -1452,8 +1523,8 @@ app.controller("debriefController", function ($scope, $state, $rootScope, $windo
 
                 //doc1.save("Report_" + $scope.summary.taskObject.Task_Number + ".pdf");
                 var filePath = cordova.file.dataDirectory;
-                valueService.openFile(filePath + "Report_" + $scope.summary.taskObject.Task_Number + ".pdf", "application/pdf", function () {
 
+                valueService.openFile(filePath + "Report_" + $scope.summary.taskObject.Task_Number + ".pdf", "application/pdf", function () {
 
                     $rootScope.apicall = true;
 
@@ -1466,32 +1537,9 @@ app.controller("debriefController", function ($scope, $state, $rootScope, $windo
                         var filePath = cordova.file.dataDirectory;
 
                         valueService.openFile(filePath + "Report_" + $scope.summary.taskObject.Task_Number + ".pdf", "application/pdf");
-                    })
+                    });
                 });
-
-
-                //                 var doc = jsPDF("p", "mm", [700, 750]);
-
-                //                 doc.fromHTML($("#export1").html(), 15, 15, {"width": 500}, function (bla) {
-
-                //                     if ($rootScope.local) {
-
-                //                         var filePath = cordova.file.dataDirectory;
-
-                //                         console.log("FILE PATH  " + filePath)
-
-                //                         var value = doc.output("datauri");
-
-                //                         valueService.saveBase64File(filePath, "sample.pdf", value, "application/pdf");
-
-                //                         valueService.openFile(filePath + "sample.pdf", "application/pdf");
-
-                //                     } else {
-
-                //                         doc.save("Report.pdf");
-                //                     }
-                //                 });
-            })
+            });
         }, 1000);
     });
 
@@ -1523,7 +1571,7 @@ app.controller("debriefController", function ($scope, $state, $rootScope, $windo
 
                             $scope.reportBase64 = this.result.split(",")[1];
                             constantService.setCCEmailID(customerMail.value);
-                            var email = { "Email": customerMail.value, "Task_Number": $scope.taskId }
+                            var email = {"Email": customerMail.value, "Task_Number": $scope.taskId}
                             localService.updateTaskEmail(email);
 
                             valueService.saveValues();
@@ -1721,7 +1769,6 @@ app.controller("debriefController", function ($scope, $state, $rootScope, $windo
                                 });
 
 
-
                             } else {
 
                                 var taskObject = {
@@ -1749,7 +1796,7 @@ app.controller("debriefController", function ($scope, $state, $rootScope, $windo
         }, function (reason) {
 
         });
-        
+
     }
 
     $scope.SaveSign = function () {
@@ -1762,10 +1809,6 @@ app.controller("debriefController", function ($scope, $state, $rootScope, $windo
 
         $scope.summary.engineer.signature = $rootScope.signature;
 
-        //   var url= $rootScope.signature;
-        //   $timeout( function(){
-        //     $scope.$apply();
-        // }, 5000 );
 
         $scope.selectedIndex = $scope.stages.findIndex(x => x.title == "Summary"
     )
@@ -1891,7 +1934,9 @@ app.controller("debriefController", function ($scope, $state, $rootScope, $windo
     };
 
     $scope.setDurationHours = function (item) {
+
         if (item.Duration != undefined && item.Duration != "") {
+
             item.DurationHours = parseInt(item.Duration.split(":")[0]);
 
             item.DurationMinutes = parseInt(item.Duration.split(":")[1]);
@@ -1990,7 +2035,7 @@ app.controller("debriefController", function ($scope, $state, $rootScope, $windo
 
         $scope.selectedIndex = $scope.stages.findIndex(x => x.title == "Customer Signature"
     )
-        
+
     }
 
     function generatePDF() {
@@ -2239,32 +2284,36 @@ app.controller("debriefController", function ($scope, $state, $rootScope, $windo
                     doc1.text(xTimeField + 110, yTimeFieldValue, $scope.summary.timeArray[j - 1].Charge_Method)
 
                 doc1.setFontSize(22)
-                doc1.setFontType('normal')
+
+                doc1.setFontType('normal');
+
                 if ($scope.summary.timeArray[j - 1].Work_Type)
                     doc1.text(xTimeField + 175, yTimeFieldValue, $scope.summary.timeArray[j - 1].Work_Type)
                 var a = 2;
+
                 angular.forEach($scope.timeArray[0].timeDefault.timeCode.values, function (timecodeKey, value) {
 
                     angular.forEach($scope.summary.timeArray[j - 1].timecode, function (key, value) {
-                        console.log($scope.summary.timeArray[j - 1].timecode[value][timecodeKey.Overtimeshiftcode])
+
+                        console.log($scope.summary.timeArray[j - 1].timecode[value][timecodeKey.Overtimeshiftcode]);
+
                         if ($scope.summary.timeArray[j - 1].timecode[value][timecodeKey.Overtimeshiftcode] != undefined) {
+
                             //  doc1.text(xTimeField + 235, yTimeFieldName, timecodeKey.Overtimeshiftcode)
                             // xTimeField1=xTimeField1 +40;
                             // doc1.text(xTimeField1, yTimeFieldName, timecodeKey.Overtimeshiftcode)
                             // xTimeField1=xTimeField1-40*a;
                             doc1.setFontSize(22)
                             doc1.setFontType('normal')
-                            doc1.text(xTimeField1 - 40 * a, yTimeFieldValue, $scope.summary.timeArray[j - 1].timecode[value][timecodeKey.Overtimeshiftcode].toString())
+                            doc1.text(xTimeField1 - 40 * a, yTimeFieldValue, $scope.summary.timeArray[j - 1].timecode[value][timecodeKey.Overtimeshiftcode].toString());
                             a--;
-                        }
-                        else {
+
+                        } else {
+
                             //  console.log("testsajhhhhhhhhhhhhhhhd")
-
                         }
-
-                    })
-
-                })
+                    });
+                });
                 // doc1.text(xTimeField + 235, yTimeFieldName, 'Standard')
                 // doc1.text(xTimeField + 235, yTimeFieldValue, $scope.summary.timeArray[j-1].Shift_Code)
                 // doc1.text(xTimeField + 275, yTimeFieldName, 'OT1')
@@ -2335,11 +2384,12 @@ app.controller("debriefController", function ($scope, $state, $rootScope, $windo
                     doc1.text(xExpenseField + 450, yExpenseFieldValue, $scope.summary.expenseArray[k - 1].Justification)
             }
             rectExpenseHeight = yExpenseFieldValue - yExpenseFieldName + 15;
-            doc1.rect(20, yExpenseField + 10, rectExpenseWidth, rectExpenseHeight)
+            doc1.rect(20, yExpenseField + 10, rectExpenseWidth, rectExpenseHeight);
 
             var l = 0, xMaterialField = 25, yMaterialField = yExpenseField + rectExpenseHeight + 20,
                 rectMaterialWidth = 650, rectMaterialHeight = 25 * $scope.summary.materialArray.length,
                 yMaterialFieldName = yMaterialField + 20, yMaterialFieldValue;
+
             doc1.setFontSize(22)
             doc1.setFontType('bold')
             doc1.text(xMaterialField, yMaterialField + 5, 'Materials')
@@ -2365,7 +2415,8 @@ app.controller("debriefController", function ($scope, $state, $rootScope, $windo
             doc1.setFontType('bold')
             doc1.text(320, yMaterialFieldName, 'Item Name')
             doc1.text(380, yMaterialFieldName, 'Description')
-            yMaterialFieldValue = yMaterialFieldName + 10
+            yMaterialFieldValue = yMaterialFieldName + 10;
+
             while (l < $scope.summary.materialArray.length) {
                 // yMaterialFieldName =  ;
                 // yMaterialFieldValue = yMaterialFieldValue + 10 *
@@ -2412,29 +2463,36 @@ app.controller("debriefController", function ($scope, $state, $rootScope, $windo
                 // doc1.text(460, yMaterialFieldValue, $scope.summary.materialArray[l-1].Charge_Type)
                 yMaterialFieldValue = yMaterialFieldValue + 10 * $scope.summary.materialArray[l - 1].Product_Quantity;
             }
+
             rectMaterialHeight = yMaterialFieldValue - yMaterialFieldName + 10;
             doc1.rect(20, yMaterialField + 10, rectMaterialWidth, rectMaterialHeight)
 
             var xSignField = 25, ySignField = yMaterialField + rectMaterialHeight + 20, rectSignWidth = 650,
                 rectSignHeight = 80;
+
             doc1.setFontSize(22)
             doc1.setFontType('bold')
             doc1.text(xSignField, ySignField + 5, 'Signature')
             doc1.rect(20, ySignField + 10, rectSignWidth, rectSignHeight)
             doc1.text(50, ySignField + 20, 'ENGINEER NAME')
             doc1.text(250, ySignField + 20, 'CUSTOMER NAME')
-            doc1.text(50, ySignField + 35, $scope.engineerName)
+            doc1.text(50, ySignField + 35, $scope.engineerName);
+
             if ($scope.summary.engineer != undefined && $scope.summary.engineer.signature)
-                doc1.addImage($scope.summary.engineer.signature, 'JPEG', 50, ySignField + 45, 75, 40)
-            doc1.text(250, ySignField + 35, $scope.summary.taskObject.Customer_Name)
+                doc1.addImage($scope.summary.engineer.signature, 'JPEG', 50, ySignField + 45, 75, 40);
+            doc1.text(250, ySignField + 35, $scope.summary.taskObject.Customer_Name);
+
             if ($rootScope.signature)
-                doc1.addImage($rootScope.signature, 'JPEG', 250, ySignField + 45, 75, 40)
+                doc1.addImage($rootScope.signature, 'JPEG', 250, ySignField + 45, 75, 40);
             //                 doc1.save("Report_" + $scope.summary.taskObject.Task_Number + ".pdf");
 
             if ($rootScope.local) {
+
                 var filePath = cordova.file.dataDirectory;
+
                 $rootScope.reposrtpath = filePath + "Report_" + $scope.summary.taskObject.Task_Number + ".pdf";
-                console.log("FILE PATH  " + filePath)
+
+                console.log("FILE PATH  " + filePath);
 
                 $scope.value = doc1.output("datauri");
 
@@ -2442,11 +2500,13 @@ app.controller("debriefController", function ($scope, $state, $rootScope, $windo
 
                 //  valueService.openFile(filePath + "Report_" + $scope.summary.taskObject.Task_Number + ".pdf", "application/pdf");
 
-            }
-            else {
+            } else {
+
                 var filePath = cordova.file.dataDirectory;
+
                 $rootScope.reposrtpath = filePath + "Report_" + $scope.summary.taskObject.Task_Number + ".pdf";
-                console.log("FILE PATH  " + filePath)
+
+                console.log("FILE PATH  " + filePath);
 
                 $scope.value = doc1.output("datauri");
 
@@ -2463,7 +2523,9 @@ app.controller("debriefController", function ($scope, $state, $rootScope, $windo
     }
 
     $scope.sendMail = function () {
+
         if ($scope.reportBase64 != "" && $scope.reportBase64 != undefined) {
+
             var base64parts = $scope.reportBase64.split(',');
 
             base64parts[0] = "base64:" + "Report_" + $scope.summary.taskObject.Task_Number + ".pdf" + "//";
@@ -2479,11 +2541,13 @@ app.controller("debriefController", function ($scope, $state, $rootScope, $windo
                 body: '',
                 attachments: [compatibleAttachment]
             });
-        }
-        else {
+
+        } else {
 
             var promise = generatePDF();
+
             promise.then(function () {
+
                 var base64parts = $scope.value.split(',');
 
                 base64parts[0] = "base64:" + "Report_" + $scope.summary.taskObject.Task_Number + ".pdf" + "//";
@@ -2499,14 +2563,11 @@ app.controller("debriefController", function ($scope, $state, $rootScope, $windo
                     body: '',
                     attachments: [compatibleAttachment]
                 });
-
-            })
+            });
         }
-
     };
+
     $scope.deleteAttachment = function () {
         $scope.files.splice(this.$index, 1);
     };
-
-
 });
