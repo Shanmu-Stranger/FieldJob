@@ -221,12 +221,12 @@
 
                             responseOfTaskDetails.push(item);
                         });
-                        angular.forEach(internalOFSCResponse, function (intenal)
-                        {
-                           
-                            responseOfTaskDetails.push(intenal);
-                        })
-                        
+                        // angular.forEach(internalOFSCResponse, function (intenal)
+                        // {
+                        //
+                        //     responseOfTaskDetails.push(intenal);
+                        // })
+
 
                         console.log("Task Response Final" + JSON.stringify(responseOfTaskDetails));
 
@@ -627,7 +627,7 @@
             console.log("Accept Task Data", JSON.stringify(formData));
 
             return $http({
-               
+
                 method: 'POST',
                 url: url + '/UpdateTaskDetails/update',
                 headers: {

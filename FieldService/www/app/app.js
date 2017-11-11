@@ -2,7 +2,9 @@
 
 var conf = {
 
-  apiUrl: 'https://emersonmobilecloud-a472144.mobileenv.us2.oraclecloud.com:443/mobile/custom/'
+  //apiUrl: 'https://emersonmobilecloud-a472144.mobileenv.us2.oraclecloud.com:443/mobile/custom/'
+  apiUrl: 'https://emersonmobiletestenv-a472144.mobileenv.us2.oraclecloud.com/mobile/custom/'
+
 };
 
 var app = angular.module('emerson', ['ngMaterial', 'ngLoadingSpinner', 'md.data.table', 'ui.router', 'ui.bootstrap', 'ui.calendar', 'pascalprecht.translate', 'ngFileUpload']);

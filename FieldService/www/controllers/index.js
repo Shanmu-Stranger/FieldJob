@@ -337,8 +337,6 @@ app.controller('indexController', function($scope, $state, $timeout, $mdSidenav,
 
       if (response && response.message == null) {
 
-        $rootScope.Islogin = true;
-
         valueService.setResourceId(response['ID']);
 
         constantService.setResourceId(response['ID']);
@@ -416,13 +414,17 @@ app.controller('indexController', function($scope, $state, $timeout, $mdSidenav,
 
         if (constantService.getUser().Default_View == "My Task") {
 
-          $rootScope.selectedItem = 2;
+            $rootScope.selectedItem = 2;
+
+            $rootScope.Islogin = true;
 
           $state.go('myFieldJob');
 
         } else {
 
-          $rootScope.selectedItem = 1;
+            $rootScope.selectedItem = 1;
+
+            $rootScope.Islogin = true;
 
           $state.go('myTask');
         }
