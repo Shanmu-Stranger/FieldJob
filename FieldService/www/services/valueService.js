@@ -4,9 +4,9 @@
 
   app.service('valueService', valueService);
 
-  valueService.$inject = ['$http', '$rootScope', '$window', '$location', 'localService', 'cloudService'];
+  valueService.$inject = ['$http', '$rootScope', '$window', '$location', '$q', 'localService', 'cloudService'];
 
-  function valueService($http, $rootScope, $window, $location, localService, cloudService) {
+  function valueService($http, $rootScope, $window, $location, $q, localService, cloudService) {
 
     var futureTask;
 

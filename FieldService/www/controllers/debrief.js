@@ -1504,6 +1504,7 @@ app.controller("debriefController", function ($scope, $state, $rootScope, $windo
         $scope.isSubmitted = true;
         $rootScope.apicall = true;
         var promise = generatePDF();
+
         promise.then(function () {
             window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fs) {
 
@@ -1734,6 +1735,7 @@ app.controller("debriefController", function ($scope, $state, $rootScope, $windo
                                 localService.getTaskList(function (response) {
 
                                     constantService.setTaskList(response);
+                                    $rootScope.apicall = false;
                                 });
                             }
 
