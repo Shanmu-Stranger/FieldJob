@@ -39,6 +39,7 @@
         // var ofscBackEndId = "557f06cf-1dda-42f1-a8a8-afc52f823904";
         //
         // var acceptBackEndId = "3fec5f35-296c-49a6-92b7-cbac8e071522";
+        // var acceptBackEndId = "9baa9146-6abd-4375-a454-827de596f83a";
 
         var authKey = "Basic QTQ3MjE0NF9FTUVSU09OTU9CSUxFVEVTVEVOVl9NT0JJTEVfQU5PTllNT1VTX0FQUElEOm9ma3U1ZG4xUHZscS5t";
 
@@ -52,11 +53,9 @@
 
         var materialBackEndId = "eddb82d4-5f21-45e0-a029-c5947d2c9c48";
 
-        var ofscBackEndId = "eddb82d4-5f21-45e0-a029-c5947d2c9c48";
+        var ofscBackEndId = "b043c17e-7dcd-41a5-abc6-39fa2f8ab0a6";
 
         var acceptBackEndId = "eddb82d4-5f21-45e0-a029-c5947d2c9c48";
-
-        // var acceptBackEndId = "9baa9146-6abd-4375-a454-827de596f83a";
 
         var stagesArray = {};
 
@@ -236,8 +235,6 @@
         function getStagesArray() {
             return stagesArray;
         };
-
-
 
         function onDeviceReady() {
 

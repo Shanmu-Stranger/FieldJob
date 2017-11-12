@@ -1,98 +1,114 @@
-﻿<div ng-controller="indexController">
-  <span class="md-dialog-container" style="background-color:#ffffff;opacity:0.8;text-align:center;z-index:1051 !important;" us-spinner="{radius:10, width:5, length: 12}"><img src="./images/02hat_loader_final2.gif" /></span>
+﻿<div ng-controller="indexController" ng-cloak>
 
-  <div class="wrapper">
-      <!-- Sidebar Holder -->
-      <nav id="sidebar" ng-show="$root.Islogin">
-          <div class="sidebar-header">
-              <div class="logoIcon"></div>
-          </div>
+    <span class="md-dialog-container"
+          style="background-color:#ffffff;opacity:0.8;text-align:center;z-index:1051 !important;"
+          us-spinner="{radius:10, width:5, length: 12}"><img src="./images/02hat_loader_final2.gif"/></span>
 
-          <ul class="list-unstyled components">
+    <div class="wrapper">
+        <!-- Sidebar Holder -->
+        <nav id="sidebar" ng-show="$root.Islogin">
 
-              <li class="categryAicon" ng-click="menuClick(item)" ng-repeat="item in sideNavItems"
-                  ng-class="{'selectedCategory':item.id == $root.selectedItem}"
-                  ng-if="(item.name=='Debrief' && $root.showDebrief) || item.name=='MyCalendar' || item.name=='MyTask' ||(item.name=='TaskOverview' && $root.showTaskDetail)">
-                  <!--  <img ng-src="{{item == selectedItem ? item.imageSelected : item.image}}"><br> -->
-                  <div ng-class="{ '{{item.name}}selected' : item.id == $root.selectedItem, '{{item.name}}' : item.id !== $root.selectedItem }"></div>
-                  <!-- <br> -->
-                  <span class="sidenav-text" ng-class="{'sidenav-text-Sel':item.id == $root.selectedItem}">{{item.displayName}}</span>
-              </li>
+            <div class="sidebar-header">
+                <div class="logoIcon"></div>
+            </div>
 
-          </ul>
+            <ul class="list-unstyled components">
+
+                <li class="categryAicon" ng-click="menuClick(item)" ng-repeat="item in sideNavItems"
+                    ng-class="{'selectedCategory':item.id == $root.selectedItem}"
+                    ng-if="(item.name=='Debrief' && $root.showDebrief) || item.name=='MyCalendar' || item.name=='MyTask' ||(item.name=='TaskOverview' && $root.showTaskDetail)">
+                    <!--  <img ng-src="{{item == selectedItem ? item.imageSelected : item.image}}"><br> -->
+                    <div ng-class="{ '{{item.name}}selected' : item.id == $root.selectedItem, '{{item.name}}' : item.id !== $root.selectedItem }"></div>
+                    <!-- <br> -->
+                    <span class="sidenav-text" ng-class="{'sidenav-text-Sel':item.id == $root.selectedItem}">{{item.displayName}}</span>
+                </li>
+
+            </ul>
 
 
-      </nav>
+        </nav>
 
-      <!-- Page Content Holder -->
-      <div id="content">
+        <!-- Page Content Holder -->
+        <div id="content">
 
-          <nav class="navbar navbar-default navbar-fixed-top nav-noLeft" ng-show="$root.Islogin" ng-class="{'nav-left' : hideNavLeft}">
-              <div class="container-fluid">
+            <nav class="navbar navbar-default navbar-fixed-top nav-noLeft" ng-show="$root.Islogin"
+                 ng-class="{'nav-left' : hideNavLeft}">
 
-                  <div class="navbar-header">
+                <div class="container-fluid">
 
-                      <div class="hamburger" id="sidebarCollapse" ng-click="menuIconClicked()"></div>
-                  </div>
+                    <div class="hamburger" id="sidebarCollapse" ng-click="menuIconClicked()"></div>
 
-                  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" style="text-align: center;">
-                      <label class="title">{{$root.selectedCategory}}</label>
-                      <ul class="nav navbar-nav navbar-right">
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" style="text-align: center;">
 
-                          <li class="popover__wrapper">
-                            <div class="user-avatar"></div>
-                              <div class="push popover__content">
-                                  <div>
-                                      <p class="popover__message uname">{{$root.uName | uppercase}}</p>
-                                      <p class="popover__message designation">Service Engineer</p>
-                                      <p class="popover__message sign-out" ng-click="signout()">Sign Out</p>
-                                  </div>
-                                  <hr class="popover-hr">
-                                  <div class="language-contents">
-                                      <label>Select Your Language</label>
-                                      <img src="images/Layer 10.png" ng-click="changeLanguage('en')" ng-disabled="usFlag"
-                                           ng-class="!usFlag ? 'selected':'unselected'"/>
-                                      <img src="images/Layer 11.png" ng-click="changeLanguage('fr')"
-                                           ng-disabled="franceFlag" ng-class="!franceFlag ? 'selected':'unselected'"/>
-                                      <img src="images/Layer 12.png" ng-click="changeLanguage('ch')"
-                                           ng-disabled="chinaFlag" ng-class="!chinaFlag ? 'selected':'unselected'"/>
-                                  </div>
-                              </div>
-                          </li>
+                        <label class="title">{{$root.selectedCategory}}</label>
 
-                          <li class="sync" ng-click="syncFunctionality()"></li>
-                          <li class="save" ng-click="saveValues()"></li>
-                      </ul>
+                        <ul class="nav navbar-nav navbar-right">
+
+                            <li class="popover__wrapper">
+
+                                <div class="user-avatar"></div>
+
+                                <div class="push popover__content">
+
+                                    <div>
+                                        <p class="popover__message uname">{{$root.uName | uppercase}}</p>
+                                        <p class="popover__message designation">Service Engineer</p>
+                                        <p class="popover__message sign-out" ng-click="signout()">Sign Out</p>
+                                    </div>
+
+                                    <hr class="popover-hr">
+
+                                    <div class="language-contents">
+                                        <label>Select Your Language</label>
+                                        <img src="images/Layer 10.png" ng-click="changeLanguage('en')"
+                                             ng-disabled="usFlag"
+                                             ng-class="!usFlag ? 'selected':'unselected'"/>
+                                        <img src="images/Layer 11.png" ng-click="changeLanguage('fr')"
+                                             ng-disabled="franceFlag" ng-class="!franceFlag ? 'selected':'unselected'"/>
+                                        <img src="images/Layer 12.png" ng-click="changeLanguage('ch')"
+                                             ng-disabled="chinaFlag" ng-class="!chinaFlag ? 'selected':'unselected'"/>
+                                    </div>
+
+                                </div>
+                            </li>
+
+                            <li class="sync" ng-click="syncFunctionality()"></li>
+                            <li class="save" ng-click="saveValues()"></li>
+
+                        </ul>
 
                         <div class="badgee" ng-show="onlineStatus"></div>
-                  </div>
-              </div>
-          </nav>
-          <div ui-view="" class="viewDiv"></div>
 
-      </div>
+                    </div>
+                </div>
+            </nav>
 
-  </div>
+            <div ui-view="" class="viewDiv"></div>
 
-  <script type="text/javascript">
+        </div>
 
-      $(document).ready(function () {
-          $('#sidebarCollapse').on('click', function () {
-              $('#sidebar').toggleClass('active');
+    </div>
 
-          });
-      });
+    <script type="text/javascript">
 
-      var _gaq = _gaq || [];
-      _gaq.push(['_setAccount', 'UA-17352735-3']);
-      _gaq.push(['_trackPageview']);
-      (function () {
-          var ga = document.createElement('script');
-          ga.type = 'text/javascript';
-          ga.async = true;
-          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-          var s = document.getElementsByTagName('script')[0];
-          s.parentNode.insertBefore(ga, s);
-      })();
-  </script>
+        $(document).ready(function () {
+            $('#sidebarCollapse').on('click', function () {
+                $('#sidebar').toggleClass('active');
+
+            });
+        });
+
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-17352735-3']);
+        _gaq.push(['_trackPageview']);
+        (function () {
+            var ga = document.createElement('script');
+            ga.type = 'text/javascript';
+            ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
 </div>

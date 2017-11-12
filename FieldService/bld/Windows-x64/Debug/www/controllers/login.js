@@ -67,10 +67,10 @@
                         var data = {
                             "resourceId": constantService.getUser().OFSCId,
                             "date": moment(new Date()).format('YYYY-MM-DD')
-                        }
+                        };
 
                         ofscService.activate_resource(data, function (response) {
-                            console.log(response);
+                            console.log("ACTIVATE RESOURCE " + JSON.stringify(response));
                         });
 
                         offlineGetCall();
@@ -87,23 +87,38 @@
 
             cloudService.getTaskList(function (response) {
 
-                localService.deleteInstallBase();
-                localService.deleteContact();
-                localService.deleteNote();
+                // localService.deleteInstallBase();
+                // localService.deleteContact();
+                // localService.deleteNote();
+                //
+                // localService.deleteOverTime();
+                // localService.deleteShiftCode();
+                //
+                // localService.deleteChargeType();
+                // localService.deleteChargeMethod();
+                // localService.deleteFieldJobName();
+                //
+                // localService.deleteWorkType();
+                // localService.deleteItem();
+                // localService.deleteCurrency();
+                //
+                // localService.deleteExpenseType();
+                // localService.deleteNoteType();
 
-                localService.deleteOverTime();
-                localService.deleteShiftCode();
+                if (constantService.getUser().Default_View == "My Task") {
 
-                localService.deleteChargeType();
-                localService.deleteChargeMethod();
-                localService.deleteFieldJobName();
+                    $rootScope.selectedItem = 2;
 
-                localService.deleteWorkType();
-                localService.deleteItem();
-                localService.deleteCurrency();
+                    $state.go('myFieldJob');
 
-                localService.deleteExpenseType();
-                localService.deleteNoteType();
+                } else {
+
+                    $rootScope.selectedItem = 1;
+
+                    $state.go('myTask');
+                }
+
+                $rootScope.apicall = false;
 
                 cloudService.getInstallBaseList();
                 cloudService.getContactList();
@@ -124,17 +139,6 @@
                 cloudService.getNoteType();
 
                 getAttachments();
-
-                if (constantService.getUser().Default_View == "My Task") {
-
-                    $rootScope.selectedItem = 2;
-
-                    $state.go('myFieldJob');
-
-                } else {
-
-                    $state.go('myTask');
-                }
             });
         }
 
@@ -151,30 +155,37 @@
 
                     angular.forEach(taskArray.Attachments, function (attachmentValue, value) {
 
-                        $scope.attachmentArray = [];
-
                         download(attachmentValue, taskArray.Task_Id, function (response) {
+
+                            $rootScope.apicall = false;
+
+                            $scope.attachmentArray = [];
 
                             var filePath = cordova.file.dataDirectory;
 
-                            var base64Code = response;
+                            if (response != undefined && response != null) {
 
-                            valueService.saveBase64File(filePath, attachmentValue.User_File_Name, base64Code, attachmentValue.Content_type);
+                                var base64Code = response;
 
-                            var attachmentObject = {
-                                Attachment_Id: attachmentValue.Attachments_Id,
-                                File_Path: filePath,
-                                File_Name: attachmentValue.User_File_Name,
-                                File_Type: attachmentValue.Content_type,
-                                Type: "O",
-                                AttachmentType: "O",
-                                Task_Number: taskArray.Task_Id
-                            };
+                                valueService.saveBase64File(filePath, attachmentValue.User_File_Name, base64Code, attachmentValue.Content_type);
 
-                            $scope.attachmentArray.push(attachmentObject);
+                                var attachmentObject = {
+                                    Attachment_Id: attachmentValue.Attachments_Id,
+                                    File_Path: filePath,
+                                    File_Name: attachmentValue.User_File_Name,
+                                    File_Type: attachmentValue.Content_type,
+                                    Type: "O",
+                                    AttachmentType: "O",
+                                    Created_Date: attachmentValue.Date_Created,
+                                    Task_Number: taskArray.Task_Id
+                                };
+
+                                $scope.attachmentArray.push(attachmentObject);
+
+                                localService.insertAttachmentList($scope.attachmentArray);
+
+                            }
                         });
-
-                        localService.insertAttachmentList($scope.attachmentArray);
                     });
                 });
             }
@@ -183,9 +194,13 @@
 
     function download(resource, taskId, callback) {
 
+        $rootScope.apicall = false;
+
         cloudService.downloadAttachment(taskId, resource.Attachments_Id, function (response) {
 
-            callback(response.data);
+            if (response != undefined)
+                callback(response.data);
+
         });
     }
 });

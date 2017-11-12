@@ -1,55 +1,25 @@
 ﻿cordova.define('cordova/plugin_list', function(require, exports, module) {
 module.exports = [
     {
-        "id": "cordova-sqlite-storage.SQLitePlugin",
-        "file": "plugins/cordova-sqlite-storage/www/SQLitePlugin.js",
-        "pluginId": "cordova-sqlite-storage",
+        "id": "cordova-plugin-email-composer.EmailComposer",
+        "file": "plugins/cordova-plugin-email-composer/www/email_composer.js",
+        "pluginId": "cordova-plugin-email-composer",
         "clobbers": [
-            "SQLitePlugin"
+            "cordova.plugins.email",
+            "plugin.email"
         ]
     },
     {
-        "id": "cordova-sqlite-storage.SQLiteProxy",
-        "file": "plugins/cordova-sqlite-storage/src/windows/sqlite-proxy.js",
-        "pluginId": "cordova-sqlite-storage",
+        "id": "cordova-plugin-email-composer.EmailComposerProxy",
+        "file": "plugins/cordova-plugin-email-composer/src/windows/EmailComposerProxy.js",
+        "pluginId": "cordova-plugin-email-composer",
         "runs": true
     },
     {
-        "id": "cordova-sqlite-storage.SQLite3",
-        "file": "plugins/cordova-sqlite-storage/src/windows/SQLite3-Win-RT/SQLite3JS/js/SQLite3.js",
-        "pluginId": "cordova-sqlite-storage",
+        "id": "cordova-plugin-email-composer.EmailComposerProxyImpl",
+        "file": "plugins/cordova-plugin-email-composer/src/windows/EmailComposerProxyImpl.js",
+        "pluginId": "cordova-plugin-email-composer",
         "runs": true
-    },
-    {
-        "id": "cordova-plugin-inappbrowser.inappbrowser",
-        "file": "plugins/cordova-plugin-inappbrowser/www/inappbrowser.js",
-        "pluginId": "cordova-plugin-inappbrowser",
-        "clobbers": [
-            "cordova.InAppBrowser.open",
-            "window.open"
-        ]
-    },
-    {
-        "id": "cordova-plugin-inappbrowser.InAppBrowserProxy",
-        "file": "plugins/cordova-plugin-inappbrowser/src/windows/InAppBrowserProxy.js",
-        "pluginId": "cordova-plugin-inappbrowser",
-        "runs": true
-    },
-    {
-        "id": "cordova-plugin-file-opener2.FileOpener2",
-        "file": "plugins/cordova-plugin-file-opener2/www/plugins.FileOpener2.js",
-        "pluginId": "cordova-plugin-file-opener2",
-        "clobbers": [
-            "cordova.plugins.fileOpener2"
-        ]
-    },
-    {
-        "id": "cordova-plugin-file-opener2.fileOpener2Proxy",
-        "file": "plugins/cordova-plugin-file-opener2/src/windows/fileOpener2Proxy.js",
-        "pluginId": "cordova-plugin-file-opener2",
-        "merges": [
-            ""
-        ]
     },
     {
         "id": "cordova-plugin-file.DirectoryEntry",
@@ -217,24 +187,34 @@ module.exports = [
         "runs": true
     },
     {
-        "id": "cordova-plugin-email-composer.EmailComposer",
-        "file": "plugins/cordova-plugin-email-composer/www/email_composer.js",
-        "pluginId": "cordova-plugin-email-composer",
+        "id": "cordova-plugin-file-opener2.FileOpener2",
+        "file": "plugins/cordova-plugin-file-opener2/www/plugins.FileOpener2.js",
+        "pluginId": "cordova-plugin-file-opener2",
         "clobbers": [
-            "cordova.plugins.email",
-            "plugin.email"
+            "cordova.plugins.fileOpener2"
         ]
     },
     {
-        "id": "cordova-plugin-email-composer.EmailComposerProxy",
-        "file": "plugins/cordova-plugin-email-composer/src/windows/EmailComposerProxy.js",
-        "pluginId": "cordova-plugin-email-composer",
-        "runs": true
+        "id": "cordova-plugin-file-opener2.fileOpener2Proxy",
+        "file": "plugins/cordova-plugin-file-opener2/src/windows/fileOpener2Proxy.js",
+        "pluginId": "cordova-plugin-file-opener2",
+        "merges": [
+            ""
+        ]
     },
     {
-        "id": "cordova-plugin-email-composer.EmailComposerProxyImpl",
-        "file": "plugins/cordova-plugin-email-composer/src/windows/EmailComposerProxyImpl.js",
-        "pluginId": "cordova-plugin-email-composer",
+        "id": "cordova-plugin-inappbrowser.inappbrowser",
+        "file": "plugins/cordova-plugin-inappbrowser/www/inappbrowser.js",
+        "pluginId": "cordova-plugin-inappbrowser",
+        "clobbers": [
+            "cordova.InAppBrowser.open",
+            "window.open"
+        ]
+    },
+    {
+        "id": "cordova-plugin-inappbrowser.InAppBrowserProxy",
+        "file": "plugins/cordova-plugin-inappbrowser/src/windows/InAppBrowserProxy.js",
+        "pluginId": "cordova-plugin-inappbrowser",
         "runs": true
     },
     {
@@ -259,19 +239,39 @@ module.exports = [
         "file": "plugins/cordova-plugin-network-information/src/windows/NetworkInfoProxy.js",
         "pluginId": "cordova-plugin-network-information",
         "runs": true
+    },
+    {
+        "id": "cordova-sqlite-storage.SQLitePlugin",
+        "file": "plugins/cordova-sqlite-storage/www/SQLitePlugin.js",
+        "pluginId": "cordova-sqlite-storage",
+        "clobbers": [
+            "SQLitePlugin"
+        ]
+    },
+    {
+        "id": "cordova-sqlite-storage.SQLiteProxy",
+        "file": "plugins/cordova-sqlite-storage/src/windows/sqlite-proxy.js",
+        "pluginId": "cordova-sqlite-storage",
+        "runs": true
+    },
+    {
+        "id": "cordova-sqlite-storage.SQLite3",
+        "file": "plugins/cordova-sqlite-storage/src/windows/SQLite3-Win-RT/SQLite3JS/js/SQLite3.js",
+        "pluginId": "cordova-sqlite-storage",
+        "runs": true
     }
 ];
 module.exports.metadata = 
 // TOP OF METADATA
 {
-    "cordova-plugin-whitelist": "1.2.2",
-    "cordova-sqlite-storage": "2.0.4",
-    "cordova-plugin-inappbrowser": "1.7.1",
-    "cordova-plugin-file-opener2": "2.0.19",
     "cordova-plugin-compat": "1.2.0",
-    "cordova-plugin-file": "4.3.3",
     "cordova-plugin-email-composer": "0.8.11",
-    "cordova-plugin-network-information": "1.3.3"
+    "cordova-plugin-file": "4.3.3",
+    "cordova-plugin-file-opener2": "2.0.19",
+    "cordova-plugin-inappbrowser": "1.7.1",
+    "cordova-plugin-network-information": "1.3.3",
+    "cordova-plugin-whitelist": "1.2.2",
+    "cordova-sqlite-storage": "2.0.4"
 };
 // BOTTOM OF METADATA
 });

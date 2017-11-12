@@ -143,6 +143,8 @@
                 "Text": ""
             };
 
+            console.log("Internal URL " + 'OFSCActions/tasktype?resourceId=' + constantService.getResourceId() + '&fromDate=' + startDate + '&toDate=' + endDate + '&type=' + typei);
+
             return $http({
 
                 method: 'GET',
@@ -156,7 +158,7 @@
 
                 if (response != undefined && response.finalResult != undefined) {
 
-                    console.log(JSON.stringify(response));
+                    console.log("Internal Response " + JSON.stringify(response));
 
                     response.finalResult.forEach(function (item) {
 
@@ -173,7 +175,9 @@
                     });
                 }
 
-                console.log("internalOFSCResponse " + JSON.stringify(internalOFSCResponse));
+                console.log("Internal OFSCResponse " + JSON.stringify(internalOFSCResponse));
+
+                console.log("Customer URL " + 'OFSCActions/tasktype?resourceId=' + constantService.getResourceId() + '&fromDate=' + startDate + '&toDate=' + endDate + '&type=' + type);
 
                 return $http({
 
@@ -190,7 +194,7 @@
 
                         ofscResponse = response.finalResult;
 
-                        console.log("OFSC Response " + JSON.stringify(ofscResponse));
+                        console.log("Customer OFSC Response " + JSON.stringify(ofscResponse));
                     }
 
                     $http({
@@ -220,8 +224,9 @@
                                     item.End_Date = itemForOFSC.End_Date;
 
                                     item.Type = itemForOFSC.Type;
-                                }
-                                else {
+
+                                } else {
+
                                     item.Type = "CUSTOMER";
                                 }
 

@@ -13,7 +13,7 @@
 
         var sqlUser = "CREATE TABLE IF NOT EXISTS User ('ID' INTEGER PRIMARY KEY  NOT NULL, 'ClarityID' TEXT, 'Currency' TEXT, 'Default_View' TEXT, 'Email' TEXT, 'Language' TEXT, 'Name' TEXT, 'OFSCId' TEXT, 'Password' TEXT, 'Time_Zone' TEXT, 'Type' TEXT, 'User_Name' TEXT, 'Work_Day' TEXT, 'Work_Hour' TEXT, 'Last_Updated' TEXT)";
 
-        var sqlTask = "CREATE TABLE IF NOT EXISTS Task ('Task_Number' INTEGER PRIMARY KEY  NOT NULL, 'Job_Description' TEXT, 'Duration' TEXT, 'Task_Status' TEXT, 'Customer_Name' TEXT, 'Street_Address' TEXT, 'City' TEXT, 'State' TEXT, 'Zip_Code' TEXT, 'Expense_Method' TEXT, 'Labor_Method' TEXT, 'Travel_Method' TEXT, 'Material_Method' TEXT, 'Service_Request' TEXT, 'Assigned' TEXT, 'Start_Date' TEXT, 'End_Date' TEXT, 'Submit_Status' TEXT)";
+        var sqlTask = "CREATE TABLE IF NOT EXISTS Task ('Task_Number' INTEGER PRIMARY KEY  NOT NULL, 'Job_Description' TEXT, 'Duration' TEXT, 'Task_Status' TEXT, 'Customer_Name' TEXT, 'Street_Address' TEXT, 'City' TEXT, 'State' TEXT, 'Country' TEXT, 'Zip_Code' TEXT, 'Expense_Method' TEXT, 'Labor_Method' TEXT, 'Travel_Method' TEXT, 'Material_Method' TEXT, 'Service_Request' TEXT, 'Assigned' TEXT, 'Start_Date' TEXT, 'End_Date' TEXT, 'Submit_Status' TEXT, 'Email' TEXT, 'Date' TEXT, 'Type' TEXT)";
 
         var sqlInstallBase = "CREATE TABLE IF NOT EXISTS InstallBase ('Installed_Base_ID' INTEGER, 'Product_Line' TEXT, 'Serial_Number' TEXT, 'TagNumber' TEXT, 'Original_PO_Number' TEXT, 'Task_Number' TEXT, 'Service_Request' TEXT, 'Assigned' TEXT, 'Start_Date' TEXT, 'End_Date' TEXT)";
 
@@ -21,7 +21,7 @@
 
         var sqlNote = "CREATE TABLE IF NOT EXISTS Note ('ID' INTEGER, 'Notes' TEXT, 'Notes_type' TEXT, 'Created_By' TEXT, 'Task_Number' TEXT, 'Service_Request' TEXT, 'Assigned' TEXT, 'Start_Date' TEXT, 'End_Date' TEXT)";
 
-        var sqlProject = "CREATE TABLE IF NOT EXISTS Project ('ID' INTEGER PRIMARY KEY  NOT NULL, 'Clarity_Contact' TEXT, 'P_ProjectManager' TEXT, 'P_Company' TEXT, 'P_ProjectNumber' TEXT, 'Requested' TEXT)";
+        var sqlProject = "CREATE TABLE IF NOT EXISTS Project ('ID' INTEGER, 'Clarity_Contact' TEXT, 'P_ProjectManager' TEXT, 'P_Company' TEXT, 'P_ProjectNumber' TEXT, 'Requested' TEXT)";
 
         var sqlOverTime = "CREATE TABLE IF NOT EXISTS OverTime ('OverTime_Shift_Code_ID' TEXT, 'Overtimeshiftcode' TEXT, 'Task' TEXT, 'Technician_ID' TEXT, 'Field_Job_ID' TEXT, 'Project' TEXT, 'Start_Date' TEXT, 'Date_Completed' TEXT)";
 
@@ -51,77 +51,77 @@
 
         var sqlNotes = "CREATE TABLE IF NOT EXISTS Notes ('Notes_Id' INTEGER PRIMARY KEY  NOT NULL, 'noteDefault' TEXT, 'Note_Type' TEXT, 'Note_Type_Id' TEXT, 'Date' TEXT, 'Created_By' TEXT, 'Notes' TEXT, 'Task_Number' TEXT)";
 
-        var sqlAttachment = "CREATE TABLE IF NOT EXISTS Attachment ('Attachment_Id' INTEGER PRIMARY KEY  NOT NULL, 'File_Name' TEXT, 'File_Type' TEXT, 'File_Path' TEXT, 'Type' TEXT, 'AttachmentType' TEXT, 'Task_Number' TEXT)";
+        var sqlAttachment = "CREATE TABLE IF NOT EXISTS Attachment ('Attachment_Id' INTEGER PRIMARY KEY  NOT NULL, 'File_Name' TEXT, 'File_Type' TEXT, 'File_Path' TEXT, 'Type' TEXT, 'AttachmentType' TEXT, 'Created_Date' TEXT, 'Task_Number' TEXT)";
 
-        var sqlEngineer = "CREATE TABLE IF NOT EXISTS Engineer ('Engineer_Id' INTEGER PRIMARY KEY  NOT NULL, 'Follow_Up' TEXT, 'Spare_Quote' TEXT, 'Sales_Visit' TEXT, 'Sales_Head' TEXT, 'Sign_File_Path' TEXT, 'File_Name' TEXT, 'Task_Number' TEXT)";
+        var sqlEngineer = "CREATE TABLE IF NOT EXISTS Engineer ('Engineer_Id' INTEGER PRIMARY KEY  NOT NULL, 'followUp' boolean, 'salesQuote' boolean, 'salesVisit' boolean, 'salesLead' boolean, 'Follow_Up' TEXT, 'Spare_Quote' TEXT, 'Sales_Visit' TEXT, 'Sales_Head' TEXT, 'Sign_File_Path' TEXT, 'File_Name' TEXT, 'Task_Number' TEXT)";
 
         db.transaction(function (tx) {
 
             tx.executeSql(sqlUser);
-            console.log('DB SUCCESS: USER');
+            // console.log('DB SUCCESS: USER');
 
             tx.executeSql(sqlTask);
-            console.log('DB SUCCESS: TASK');
+            //console.log('DB SUCCESS: TASK');
 
             tx.executeSql(sqlInstallBase);
-            console.log('DB SUCCESS: INSTALLBASE');
+            //console.log('DB SUCCESS: INSTALLBASE');
 
             tx.executeSql(sqlContact);
-            console.log('DB SUCCESS: CONTACT');
+            //console.log('DB SUCCESS: CONTACT');
 
             tx.executeSql(sqlNote);
-            console.log('DB SUCCESS: NOTE');
+            //console.log('DB SUCCESS: NOTE');
 
             tx.executeSql(sqlProject);
-            console.log('DB SUCCESS: PROJECT');
+            //console.log('DB SUCCESS: PROJECT');
 
             tx.executeSql(sqlOverTime);
-            console.log('DB SUCCESS: OVERTIME');
+            //console.log('DB SUCCESS: OVERTIME');
 
             tx.executeSql(sqlShiftCode);
-            console.log('DB SUCCESS: SHIFTCODE');
+            //console.log('DB SUCCESS: SHIFTCODE');
 
             tx.executeSql(sqlChargeType);
-            console.log('DB SUCCESS: CHARGETYPE');
+            //console.log('DB SUCCESS: CHARGETYPE');
 
             tx.executeSql(sqlChargeMethod);
-            console.log('DB SUCCESS: CHARGEMETHOD');
+            //console.log('DB SUCCESS: CHARGEMETHOD');
 
             tx.executeSql(sqlFieldJobName);
-            console.log('DB SUCCESS: FIELDJOBNAME');
+            //console.log('DB SUCCESS: FIELDJOBNAME');
 
             tx.executeSql(sqlWorkType);
-            console.log('DB SUCCESS: WORKTYPE');
+            //console.log('DB SUCCESS: WORKTYPE');
 
             tx.executeSql(sqlItem);
-            console.log('DB SUCCESS: ITEM');
+            //console.log('DB SUCCESS: ITEM');
 
             tx.executeSql(sqlCurrency);
-            console.log('DB SUCCESS: CURRENCY');
+            //console.log('DB SUCCESS: CURRENCY');
 
             tx.executeSql(sqlExpenseType);
-            console.log('DB SUCCESS: EXPENSETYPE');
+            //console.log('DB SUCCESS: EXPENSETYPE');
 
             tx.executeSql(sqlNoteType);
-            console.log('DB SUCCESS: NOTETYPE');
+            //console.log('DB SUCCESS: NOTETYPE');
 
             tx.executeSql(sqlTime);
-            console.log('DB SUCCESS: TIME');
+            //console.log('DB SUCCESS: TIME');
 
             tx.executeSql(sqlExpense);
-            console.log('DB SUCCESS: EXPENSE');
+            //console.log('DB SUCCESS: EXPENSE');
 
             tx.executeSql(sqlMaterial);
-            console.log('DB SUCCESS: MATERIAL');
+            //console.log('DB SUCCESS: MATERIAL');
 
             tx.executeSql(sqlNotes);
-            console.log('DB SUCCESS: NOTES');
+            //console.log('DB SUCCESS: NOTES');
 
             tx.executeSql(sqlAttachment);
-            console.log('DB SUCCESS: ATTACHMENT');
+            //console.log('DB SUCCESS: ATTACHMENT');
 
             tx.executeSql(sqlEngineer);
-            console.log('DB SUCCESS: ENGINEER');
+            //console.log('DB SUCCESS: ENGINEER');
 
         }, function (error) {
 

@@ -2,15 +2,155 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ff190ac8-9b56-4d52-b6ae-923d049132fe" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FieldService/www/controllers/myTask.js" afterPath="$PROJECT_DIR$/FieldService/www/controllers/myTask.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FieldService/www/controllers/taskOverFlow.js" afterPath="$PROJECT_DIR$/FieldService/www/controllers/taskOverFlow.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FieldService/www/services/localService.js" afterPath="$PROJECT_DIR$/FieldService/www/services/localService.js" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/FieldService/plugins/cordova-sqlite-storage/src/windows/SQLite3-Win-RT/SQLite3/SQLite3.UWP/x64/debug/SQLite3.UWP.tlog/link-VCTIP.read.1.tlog" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/FieldService/plugins/cordova-sqlite-storage/src/windows/SQLite3-Win-RT/SQLite3/SQLite3.UWP/x64/debug/SQLite3.UWP.tlog/link-VCTIP.read.10.tlog" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/FieldService/plugins/cordova-sqlite-storage/src/windows/SQLite3-Win-RT/SQLite3/SQLite3.UWP/x64/debug/SQLite3.UWP.tlog/link-VCTIP.read.11.tlog" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/FieldService/plugins/cordova-sqlite-storage/src/windows/SQLite3-Win-RT/SQLite3/SQLite3.UWP/x64/debug/SQLite3.UWP.tlog/link-VCTIP.read.12.tlog" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/FieldService/plugins/cordova-sqlite-storage/src/windows/SQLite3-Win-RT/SQLite3/SQLite3.UWP/x64/debug/SQLite3.UWP.tlog/link-VCTIP.read.14.tlog" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/FieldService/plugins/cordova-sqlite-storage/src/windows/SQLite3-Win-RT/SQLite3/SQLite3.UWP/x64/debug/SQLite3.UWP.tlog/link-VCTIP.read.17.tlog" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/FieldService/plugins/cordova-sqlite-storage/src/windows/SQLite3-Win-RT/SQLite3/SQLite3.UWP/x64/debug/SQLite3.UWP.tlog/link-VCTIP.read.23.tlog" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/FieldService/plugins/cordova-sqlite-storage/src/windows/SQLite3-Win-RT/SQLite3/SQLite3.UWP/x64/debug/SQLite3.UWP.tlog/link-VCTIP.read.25.tlog" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/FieldService/plugins/cordova-sqlite-storage/src/windows/SQLite3-Win-RT/SQLite3/SQLite3.UWP/x64/debug/SQLite3.UWP.tlog/link-VCTIP.read.26.tlog" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/FieldService/plugins/cordova-sqlite-storage/src/windows/SQLite3-Win-RT/SQLite3/SQLite3.UWP/x64/debug/SQLite3.UWP.tlog/link-VCTIP.read.27.tlog" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/FieldService/plugins/cordova-sqlite-storage/src/windows/SQLite3-Win-RT/SQLite3/SQLite3.UWP/x64/debug/SQLite3.UWP.tlog/link-VCTIP.read.28.tlog" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/FieldService/plugins/cordova-sqlite-storage/src/windows/SQLite3-Win-RT/SQLite3/SQLite3.UWP/x64/debug/SQLite3.UWP.tlog/link-VCTIP.read.34.tlog" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/FieldService/plugins/cordova-sqlite-storage/src/windows/SQLite3-Win-RT/SQLite3/SQLite3.UWP/x64/debug/SQLite3.UWP.tlog/link-VCTIP.read.39.tlog" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/FieldService/plugins/cordova-sqlite-storage/src/windows/SQLite3-Win-RT/SQLite3/SQLite3.UWP/x64/debug/SQLite3.UWP.tlog/link-VCTIP.read.52.tlog" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/FieldService/plugins/cordova-sqlite-storage/src/windows/SQLite3-Win-RT/SQLite3/SQLite3.UWP/x64/debug/SQLite3.UWP.tlog/link-VCTIP.read.60.tlog" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/FieldService/plugins/cordova-sqlite-storage/src/windows/SQLite3-Win-RT/SQLite3/SQLite3.UWP/x64/debug/SQLite3.UWP.tlog/link-VCTIP.read.7.tlog" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/FieldService/plugins/cordova-sqlite-storage/src/windows/SQLite3-Win-RT/SQLite3/SQLite3.UWP/x64/debug/SQLite3.UWP.tlog/link-VCTIP.read.71.tlog" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/FieldService/plugins/cordova-sqlite-storage/src/windows/SQLite3-Win-RT/SQLite3/SQLite3.UWP/x64/debug/SQLite3.UWP.tlog/link-VCTIP.read.83.tlog" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/FieldService/plugins/cordova-sqlite-storage/src/windows/SQLite3-Win-RT/SQLite3/SQLite3.UWP/x64/debug/SQLite3.UWP.tlog/link-VCTIP.write.1.tlog" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/FieldService/plugins/cordova-sqlite-storage/src/windows/SQLite3-Win-RT/SQLite3/SQLite3.UWP/x64/debug/SQLite3.UWP.tlog/link-VCTIP.write.10.tlog" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/FieldService/plugins/cordova-sqlite-storage/src/windows/SQLite3-Win-RT/SQLite3/SQLite3.UWP/x64/debug/SQLite3.UWP.tlog/link-VCTIP.write.14.tlog" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/FieldService/plugins/cordova-sqlite-storage/src/windows/SQLite3-Win-RT/SQLite3/SQLite3.UWP/x64/debug/SQLite3.UWP.tlog/link-VCTIP.write.25.tlog" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/FieldService/plugins/cordova-sqlite-storage/src/windows/SQLite3-Win-RT/SQLite3/SQLite3.UWP/x64/debug/SQLite3.UWP.tlog/link-VCTIP.write.26.tlog" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/FieldService/plugins/cordova-sqlite-storage/src/windows/SQLite3-Win-RT/SQLite3/SQLite3.UWP/x64/debug/SQLite3.UWP.tlog/link-VCTIP.write.27.tlog" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/FieldService/plugins/cordova-sqlite-storage/src/windows/SQLite3-Win-RT/SQLite3/SQLite3.UWP/x64/debug/SQLite3.UWP.tlog/link-VCTIP.write.32.tlog" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/FieldService/plugins/cordova-sqlite-storage/src/windows/SQLite3-Win-RT/SQLite3/SQLite3.UWP/x64/debug/SQLite3.UWP.tlog/link-VCTIP.write.34.tlog" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/FieldService/plugins/cordova-sqlite-storage/src/windows/SQLite3-Win-RT/SQLite3/SQLite3.UWP/x64/debug/SQLite3.UWP.tlog/link-VCTIP.write.39.tlog" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/FieldService/plugins/cordova-sqlite-storage/src/windows/SQLite3-Win-RT/SQLite3/SQLite3.UWP/x64/debug/SQLite3.UWP.tlog/link-VCTIP.write.83.tlog" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/FieldService/plugins/cordova-sqlite-storage/src/windows/SQLite3-Win-RT/SQLite3/SQLite3.UWP/x64/debug/SQLite3.UWP.tlog/link.6124-VCTIP.read.1.tlog" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/FieldService/plugins/cordova-sqlite-storage/src/windows/SQLite3-Win-RT/SQLite3/SQLite3.UWP/x64/debug/SQLite3.UWP.tlog/link.6124-VCTIP.read.22.tlog" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/FieldService/plugins/cordova-sqlite-storage/src/windows/SQLite3-Win-RT/SQLite3/SQLite3.UWP/x64/debug/SQLite3.UWP.tlog/link.6124-VCTIP.read.48.tlog" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/FieldService/plugins/cordova-sqlite-storage/src/windows/SQLite3-Win-RT/SQLite3/SQLite3.UWP/x64/debug/SQLite3.UWP.tlog/link.6124-VCTIP.read.58.tlog" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/FieldService/plugins/cordova-sqlite-storage/src/windows/SQLite3-Win-RT/SQLite3/SQLite3.UWP/x64/debug/SQLite3.UWP.tlog/link.6124-VCTIP.read.69.tlog" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/FieldService/plugins/cordova-sqlite-storage/src/windows/SQLite3-Win-RT/SQLite3/SQLite3.UWP/x64/debug/SQLite3.UWP.tlog/link.6124-VCTIP.write.1.tlog" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/FieldService/plugins/cordova-sqlite-storage/src/windows/SQLite3-Win-RT/SQLite3/SQLite3.UWP/x64/debug/SQLite3.UWP.tlog/link.6124-VCTIP.write.22.tlog" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/FieldService/plugins/cordova-sqlite-storage/src/windows/SQLite3-Win-RT/SQLite3/SQLite3.UWP/x64/debug/SQLite3.UWP.tlog/link.6124-VCTIP.write.25.tlog" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/FieldService/plugins/cordova-sqlite-storage/src/windows/SQLite3-Win-RT/SQLite3/SQLite3.UWP/x64/debug/SQLite3.UWP.tlog/link.6124-VCTIP.write.28.tlog" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/FieldService/plugins/cordova-sqlite-storage/src/windows/SQLite3-Win-RT/SQLite3/SQLite3.UWP/x64/debug/SQLite3.UWP.tlog/link.6124-VCTIP.write.69.tlog" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.vs/FieldService/v15/.suo" afterPath="$PROJECT_DIR$/.vs/FieldService/v15/.suo" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FieldService/bin/Windows-x64/Debug/resources.pri" afterPath="$PROJECT_DIR$/FieldService/bin/Windows-x64/Debug/resources.pri" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/SQLite3.UWP.dll" afterPath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/SQLite3.UWP.dll" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/images/SplashScreen.scale-100.png" afterPath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/images/SplashScreen.scale-100.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/resources.pri" afterPath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/resources.pri" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/ucrtbased.dll" afterPath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/ucrtbased.dll" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FieldService/plugins/cordova-sqlite-storage/src/windows/SQLite3-Win-RT/SQLite3/SQLite3.UWP/x64/debug/Constants.obj" afterPath="$PROJECT_DIR$/FieldService/plugins/cordova-sqlite-storage/src/windows/SQLite3-Win-RT/SQLite3/SQLite3.UWP/x64/debug/Constants.obj" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FieldService/plugins/cordova-sqlite-storage/src/windows/SQLite3-Win-RT/SQLite3/SQLite3.UWP/x64/debug/Database.obj" afterPath="$PROJECT_DIR$/FieldService/plugins/cordova-sqlite-storage/src/windows/SQLite3-Win-RT/SQLite3/SQLite3.UWP/x64/debug/Database.obj" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FieldService/plugins/cordova-sqlite-storage/src/windows/SQLite3-Win-RT/SQLite3/SQLite3.UWP/x64/debug/SQLite3.UWP/SQLite3.UWP.dll" afterPath="$PROJECT_DIR$/FieldService/plugins/cordova-sqlite-storage/src/windows/SQLite3-Win-RT/SQLite3/SQLite3.UWP/x64/debug/SQLite3.UWP/SQLite3.UWP.dll" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FieldService/plugins/cordova-sqlite-storage/src/windows/SQLite3-Win-RT/SQLite3/SQLite3.UWP/x64/debug/SQLite3.UWP/SQLite3.UWP.exp" afterPath="$PROJECT_DIR$/FieldService/plugins/cordova-sqlite-storage/src/windows/SQLite3-Win-RT/SQLite3/SQLite3.UWP/x64/debug/SQLite3.UWP/SQLite3.UWP.exp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FieldService/plugins/cordova-sqlite-storage/src/windows/SQLite3-Win-RT/SQLite3/SQLite3.UWP/x64/debug/SQLite3.UWP/SQLite3.UWP.ilk" afterPath="$PROJECT_DIR$/FieldService/plugins/cordova-sqlite-storage/src/windows/SQLite3-Win-RT/SQLite3/SQLite3.UWP/x64/debug/SQLite3.UWP/SQLite3.UWP.ilk" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FieldService/plugins/cordova-sqlite-storage/src/windows/SQLite3-Win-RT/SQLite3/SQLite3.UWP/x64/debug/SQLite3.UWP/SQLite3.UWP.lib" afterPath="$PROJECT_DIR$/FieldService/plugins/cordova-sqlite-storage/src/windows/SQLite3-Win-RT/SQLite3/SQLite3.UWP/x64/debug/SQLite3.UWP/SQLite3.UWP.lib" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FieldService/plugins/cordova-sqlite-storage/src/windows/SQLite3-Win-RT/SQLite3/SQLite3.UWP/x64/debug/SQLite3.UWP/SQLite3.UWP.pdb" afterPath="$PROJECT_DIR$/FieldService/plugins/cordova-sqlite-storage/src/windows/SQLite3-Win-RT/SQLite3/SQLite3.UWP/x64/debug/SQLite3.UWP/SQLite3.UWP.pdb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FieldService/plugins/cordova-sqlite-storage/src/windows/SQLite3-Win-RT/SQLite3/SQLite3.UWP/x64/debug/Statement.obj" afterPath="$PROJECT_DIR$/FieldService/plugins/cordova-sqlite-storage/src/windows/SQLite3-Win-RT/SQLite3/SQLite3.UWP/x64/debug/Statement.obj" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FieldService/plugins/cordova-sqlite-storage/src/windows/SQLite3-Win-RT/SQLite3/SQLite3.UWP/x64/debug/pch.obj" afterPath="$PROJECT_DIR$/FieldService/plugins/cordova-sqlite-storage/src/windows/SQLite3-Win-RT/SQLite3/SQLite3.UWP/x64/debug/pch.obj" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FieldService/plugins/cordova-sqlite-storage/src/windows/SQLite3-Win-RT/SQLite3/SQLite3.UWP/x64/debug/pch.pch" afterPath="$PROJECT_DIR$/FieldService/plugins/cordova-sqlite-storage/src/windows/SQLite3-Win-RT/SQLite3/SQLite3.UWP/x64/debug/pch.pch" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FieldService/plugins/cordova-sqlite-storage/src/windows/SQLite3-Win-RT/SQLite3/SQLite3.UWP/x64/debug/sqlite3.obj" afterPath="$PROJECT_DIR$/FieldService/plugins/cordova-sqlite-storage/src/windows/SQLite3-Win-RT/SQLite3/SQLite3.UWP/x64/debug/sqlite3.obj" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FieldService/plugins/cordova-sqlite-storage/src/windows/SQLite3-Win-RT/SQLite3/SQLite3.UWP/x64/debug/vc141.idb" afterPath="$PROJECT_DIR$/FieldService/plugins/cordova-sqlite-storage/src/windows/SQLite3-Win-RT/SQLite3/SQLite3.UWP/x64/debug/vc141.idb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FieldService/plugins/cordova-sqlite-storage/src/windows/SQLite3-Win-RT/SQLite3/SQLite3.UWP/x64/debug/vc141.pdb" afterPath="$PROJECT_DIR$/FieldService/plugins/cordova-sqlite-storage/src/windows/SQLite3-Win-RT/SQLite3/SQLite3.UWP/x64/debug/vc141.pdb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FieldService/www/services/constantService.js" afterPath="$PROJECT_DIR$/FieldService/www/services/constantService.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FieldService/www/services/cloudService.js" afterPath="$PROJECT_DIR$/FieldService/www/services/cloudService.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FieldService/www/services/valueService.js" afterPath="$PROJECT_DIR$/FieldService/www/services/valueService.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FieldService/www/controllers/index.js" afterPath="$PROJECT_DIR$/FieldService/www/controllers/index.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FieldService/bin/Windows-x64/Debug/AppxManifest.xml" afterPath="$PROJECT_DIR$/FieldService/bin/Windows-x64/Debug/AppxManifest.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FieldService/bin/Windows-x64/Debug/FieldService.build.appxrecipe" afterPath="$PROJECT_DIR$/FieldService/bin/Windows-x64/Debug/FieldService.build.appxrecipe" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/AppxManifest.xml" afterPath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/AppxManifest.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/config.xml" afterPath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/config.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/vs.appxrecipe" afterPath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/vs.appxrecipe" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/app/app.js" afterPath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/app/app.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/app/data/locale-en.json" afterPath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/app/data/locale-en.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/app/data/locale-jp.json" afterPath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/app/data/locale-jp.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/app/views/Attachments.html" afterPath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/app/views/Attachments.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/app/views/CustomerSignature.html" afterPath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/app/views/CustomerSignature.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/app/views/EngineerSignature.html" afterPath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/app/views/EngineerSignature.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/app/views/Material.html" afterPath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/app/views/Material.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/app/views/MyTask.html" afterPath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/app/views/MyTask.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/app/views/Summary.html" afterPath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/app/views/Summary.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/app/views/TaskOverflow.html" afterPath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/app/views/TaskOverflow.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/app/views/Time.html" afterPath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/app/views/Time.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/app/views/Todo.html" afterPath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/app/views/Todo.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/app/views/dashBoard.html" afterPath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/app/views/dashBoard.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/app/views/myFieldJob.html" afterPath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/app/views/myFieldJob.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/controllers/debrief.js" afterPath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/controllers/debrief.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/controllers/index.js" afterPath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/controllers/index.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/controllers/login.js" afterPath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/controllers/login.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/controllers/myTask.js" afterPath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/controllers/myTask.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/controllers/taskOverFlow.js" afterPath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/controllers/taskOverFlow.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/controllers/todo.js" afterPath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/controllers/todo.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/cordova-js-src/confighelper.js" afterPath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/cordova-js-src/confighelper.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/cordova-js-src/exec.js" afterPath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/cordova-js-src/exec.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/cordova-js-src/platform.js" afterPath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/cordova-js-src/platform.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/cordova-js-src/splashscreen.js" afterPath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/cordova-js-src/splashscreen.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/cordova.js" afterPath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/cordova.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/cordova_plugins.js" afterPath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/cordova_plugins.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/css/splashscreen.css" afterPath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/css/splashscreen.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/db/dbInitialize.js" afterPath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/db/dbInitialize.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/index.html" afterPath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/plugins/cordova-plugin-email-composer/src/windows/EmailComposerProxy.js" afterPath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/plugins/cordova-plugin-email-composer/src/windows/EmailComposerProxy.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/plugins/cordova-plugin-email-composer/src/windows/EmailComposerProxyImpl.js" afterPath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/plugins/cordova-plugin-email-composer/src/windows/EmailComposerProxyImpl.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/plugins/cordova-plugin-email-composer/www/email_composer.js" afterPath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/plugins/cordova-plugin-email-composer/www/email_composer.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/plugins/cordova-plugin-file-opener2/src/windows/fileOpener2Proxy.js" afterPath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/plugins/cordova-plugin-file-opener2/src/windows/fileOpener2Proxy.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/plugins/cordova-plugin-file-opener2/www/plugins.FileOpener2.js" afterPath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/plugins/cordova-plugin-file-opener2/www/plugins.FileOpener2.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/plugins/cordova-plugin-file/src/windows/FileProxy.js" afterPath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/plugins/cordova-plugin-file/src/windows/FileProxy.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/plugins/cordova-plugin-file/www/DirectoryEntry.js" afterPath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/plugins/cordova-plugin-file/www/DirectoryEntry.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/plugins/cordova-plugin-file/www/DirectoryReader.js" afterPath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/plugins/cordova-plugin-file/www/DirectoryReader.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/plugins/cordova-plugin-file/www/Entry.js" afterPath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/plugins/cordova-plugin-file/www/Entry.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/plugins/cordova-plugin-file/www/File.js" afterPath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/plugins/cordova-plugin-file/www/File.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/plugins/cordova-plugin-file/www/FileEntry.js" afterPath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/plugins/cordova-plugin-file/www/FileEntry.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/plugins/cordova-plugin-file/www/FileError.js" afterPath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/plugins/cordova-plugin-file/www/FileError.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/plugins/cordova-plugin-file/www/FileReader.js" afterPath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/plugins/cordova-plugin-file/www/FileReader.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/plugins/cordova-plugin-file/www/FileSystem.js" afterPath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/plugins/cordova-plugin-file/www/FileSystem.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/plugins/cordova-plugin-file/www/FileUploadOptions.js" afterPath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/plugins/cordova-plugin-file/www/FileUploadOptions.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/plugins/cordova-plugin-file/www/FileUploadResult.js" afterPath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/plugins/cordova-plugin-file/www/FileUploadResult.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/plugins/cordova-plugin-file/www/FileWriter.js" afterPath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/plugins/cordova-plugin-file/www/FileWriter.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/plugins/cordova-plugin-file/www/Flags.js" afterPath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/plugins/cordova-plugin-file/www/Flags.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/plugins/cordova-plugin-file/www/LocalFileSystem.js" afterPath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/plugins/cordova-plugin-file/www/LocalFileSystem.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/plugins/cordova-plugin-file/www/Metadata.js" afterPath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/plugins/cordova-plugin-file/www/Metadata.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/plugins/cordova-plugin-file/www/ProgressEvent.js" afterPath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/plugins/cordova-plugin-file/www/ProgressEvent.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/plugins/cordova-plugin-file/www/browser/isChrome.js" afterPath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/plugins/cordova-plugin-file/www/browser/isChrome.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/plugins/cordova-plugin-file/www/fileSystemPaths.js" afterPath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/plugins/cordova-plugin-file/www/fileSystemPaths.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/plugins/cordova-plugin-file/www/fileSystems.js" afterPath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/plugins/cordova-plugin-file/www/fileSystems.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/plugins/cordova-plugin-file/www/requestFileSystem.js" afterPath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/plugins/cordova-plugin-file/www/requestFileSystem.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/plugins/cordova-plugin-file/www/resolveLocalFileSystemURI.js" afterPath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/plugins/cordova-plugin-file/www/resolveLocalFileSystemURI.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/plugins/cordova-plugin-inappbrowser/src/windows/InAppBrowserProxy.js" afterPath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/plugins/cordova-plugin-inappbrowser/src/windows/InAppBrowserProxy.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/plugins/cordova-plugin-inappbrowser/www/inappbrowser.js" afterPath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/plugins/cordova-plugin-inappbrowser/www/inappbrowser.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/plugins/cordova-plugin-network-information/src/windows/NetworkInfoProxy.js" afterPath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/plugins/cordova-plugin-network-information/src/windows/NetworkInfoProxy.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/plugins/cordova-plugin-network-information/www/Connection.js" afterPath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/plugins/cordova-plugin-network-information/www/Connection.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/plugins/cordova-plugin-network-information/www/network.js" afterPath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/plugins/cordova-plugin-network-information/www/network.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/plugins/cordova-sqlite-storage/src/windows/SQLite3-Win-RT/SQLite3JS/js/SQLite3.js" afterPath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/plugins/cordova-sqlite-storage/src/windows/SQLite3-Win-RT/SQLite3JS/js/SQLite3.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/plugins/cordova-sqlite-storage/src/windows/sqlite-proxy.js" afterPath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/plugins/cordova-sqlite-storage/src/windows/sqlite-proxy.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/plugins/cordova-sqlite-storage/www/SQLitePlugin.js" afterPath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/plugins/cordova-sqlite-storage/www/SQLitePlugin.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/services/cloudService.js" afterPath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/services/cloudService.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/services/constantService.js" afterPath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/services/constantService.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/services/localService.js" afterPath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/services/localService.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/services/ofscService.js" afterPath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/services/ofscService.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/services/valueService.js" afterPath="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/services/valueService.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FieldService/plugins/cordova-sqlite-storage/src/windows/SQLite3-Win-RT/SQLite3/SQLite3.UWP/x64/debug/SQLite3.UWP.tlog/CL.command.1.tlog" afterPath="$PROJECT_DIR$/FieldService/plugins/cordova-sqlite-storage/src/windows/SQLite3-Win-RT/SQLite3/SQLite3.UWP/x64/debug/SQLite3.UWP.tlog/CL.command.1.tlog" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FieldService/plugins/cordova-sqlite-storage/src/windows/SQLite3-Win-RT/SQLite3/SQLite3.UWP/x64/debug/SQLite3.UWP.tlog/CL.read.1.tlog" afterPath="$PROJECT_DIR$/FieldService/plugins/cordova-sqlite-storage/src/windows/SQLite3-Win-RT/SQLite3/SQLite3.UWP/x64/debug/SQLite3.UWP.tlog/CL.read.1.tlog" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FieldService/plugins/cordova-sqlite-storage/src/windows/SQLite3-Win-RT/SQLite3/SQLite3.UWP/x64/debug/SQLite3.UWP.tlog/CL.write.1.tlog" afterPath="$PROJECT_DIR$/FieldService/plugins/cordova-sqlite-storage/src/windows/SQLite3-Win-RT/SQLite3/SQLite3.UWP/x64/debug/SQLite3.UWP.tlog/CL.write.1.tlog" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FieldService/plugins/cordova-sqlite-storage/src/windows/SQLite3-Win-RT/SQLite3/SQLite3.UWP/x64/debug/SQLite3.UWP.tlog/SQLite3.UWP.lastbuildstate" afterPath="$PROJECT_DIR$/FieldService/plugins/cordova-sqlite-storage/src/windows/SQLite3-Win-RT/SQLite3/SQLite3.UWP/x64/debug/SQLite3.UWP.tlog/SQLite3.UWP.lastbuildstate" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FieldService/plugins/cordova-sqlite-storage/src/windows/SQLite3-Win-RT/SQLite3/SQLite3.UWP/x64/debug/SQLite3.UWP.tlog/SQLite3.UWP.read.1u.tlog" afterPath="$PROJECT_DIR$/FieldService/plugins/cordova-sqlite-storage/src/windows/SQLite3-Win-RT/SQLite3/SQLite3.UWP/x64/debug/SQLite3.UWP.tlog/SQLite3.UWP.read.1u.tlog" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FieldService/plugins/cordova-sqlite-storage/src/windows/SQLite3-Win-RT/SQLite3/SQLite3.UWP/x64/debug/SQLite3.UWP.tlog/SQLite3.UWP.write.1u.tlog" afterPath="$PROJECT_DIR$/FieldService/plugins/cordova-sqlite-storage/src/windows/SQLite3-Win-RT/SQLite3/SQLite3.UWP/x64/debug/SQLite3.UWP.tlog/SQLite3.UWP.write.1u.tlog" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FieldService/plugins/cordova-sqlite-storage/src/windows/SQLite3-Win-RT/SQLite3/SQLite3.UWP/x64/debug/SQLite3.UWP.tlog/link-VCTIP.delete.10.tlog" afterPath="$PROJECT_DIR$/FieldService/plugins/cordova-sqlite-storage/src/windows/SQLite3-Win-RT/SQLite3/SQLite3.UWP/x64/debug/SQLite3.UWP.tlog/link-VCTIP.delete.10.tlog" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FieldService/plugins/cordova-sqlite-storage/src/windows/SQLite3-Win-RT/SQLite3/SQLite3.UWP/x64/debug/SQLite3.UWP.tlog/link.command.1.tlog" afterPath="$PROJECT_DIR$/FieldService/plugins/cordova-sqlite-storage/src/windows/SQLite3-Win-RT/SQLite3/SQLite3.UWP/x64/debug/SQLite3.UWP.tlog/link.command.1.tlog" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FieldService/plugins/cordova-sqlite-storage/src/windows/SQLite3-Win-RT/SQLite3/SQLite3.UWP/x64/debug/SQLite3.UWP.tlog/link.read.1.tlog" afterPath="$PROJECT_DIR$/FieldService/plugins/cordova-sqlite-storage/src/windows/SQLite3-Win-RT/SQLite3/SQLite3.UWP/x64/debug/SQLite3.UWP.tlog/link.read.1.tlog" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FieldService/plugins/cordova-sqlite-storage/src/windows/SQLite3-Win-RT/SQLite3/SQLite3.UWP/x64/debug/SQLite3.UWP.tlog/link.write.1.tlog" afterPath="$PROJECT_DIR$/FieldService/plugins/cordova-sqlite-storage/src/windows/SQLite3-Win-RT/SQLite3/SQLite3.UWP/x64/debug/SQLite3.UWP.tlog/link.write.1.tlog" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FieldService/www/app/app.js" afterPath="$PROJECT_DIR$/FieldService/www/app/app.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FieldService/www/controllers/debrief.js" afterPath="$PROJECT_DIR$/FieldService/www/controllers/debrief.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FieldService/www/controllers/index.js" afterPath="$PROJECT_DIR$/FieldService/www/controllers/index.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FieldService/www/services/cloudService.js" afterPath="$PROJECT_DIR$/FieldService/www/services/cloudService.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FieldService/www/services/constantService.js" afterPath="$PROJECT_DIR$/FieldService/www/services/constantService.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FieldService/www/services/localService.js" afterPath="$PROJECT_DIR$/FieldService/www/services/localService.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FieldService/www/services/ofscService.js" afterPath="$PROJECT_DIR$/FieldService/www/services/ofscService.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FieldService/www/services/valueService.js" afterPath="$PROJECT_DIR$/FieldService/www/services/valueService.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -24,113 +164,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="TimeNC.HTML" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/FieldService/www/app/views/TimeNC.HTML">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="294">
-              <caret line="95" column="0" lean-forward="false" selection-start-line="95" selection-start-column="0" selection-end-line="95" selection-end-column="0" />
-              <folding>
-                <element signature="n#style#0;n#md-card#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="debrief.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/FieldService/www/controllers/debrief.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="396">
-              <caret line="484" column="41" lean-forward="false" selection-start-line="484" selection-start-column="41" selection-end-line="484" selection-end-column="41" />
-              <folding>
-                <marker date="1509961075053" expanded="true" signature="187:160876" ph="{...}" />
-                <marker date="1509961075053" expanded="true" signature="2011:2091" ph="{...}" />
-                <marker date="1509961075053" expanded="true" signature="142672:160874" ph="{...}" />
-                <marker date="1509961075053" expanded="true" signature="145015:145678" ph="{...}" />
-                <marker date="1509961075053" expanded="true" signature="146223:147099" ph="{...}" />
-                <marker date="1509961075053" expanded="true" signature="146332:146467" ph="{...}" />
-                <marker date="1509961075053" expanded="true" signature="146966:147056" ph="{...}" />
-                <marker date="1509961075053" expanded="true" signature="148181:148586" ph="{...}" />
-                <marker date="1509961075053" expanded="true" signature="148391:148576" ph="//..." />
-                <marker date="1509961075053" expanded="true" signature="148901:152634" ph="{...}" />
-                <marker date="1509961075053" expanded="true" signature="150137:151244" ph="{...}" />
-                <marker date="1509961075053" expanded="true" signature="150236:151228" ph="{...}" />
-                <marker date="1509961075053" expanded="true" signature="150467:151092" ph="{...}" />
-                <marker date="1509961075053" expanded="true" signature="150493:150781" ph="//..." />
-                <marker date="1509961075053" expanded="true" signature="151118:151209" ph="{...}" />
-                <marker date="1509961075053" expanded="true" signature="151258:151919" ph="//..." />
-                <marker date="1509961075053" expanded="true" signature="153744:154855" ph="{...}" />
-                <marker date="1509961075053" expanded="true" signature="156433:158755" ph="{...}" />
-                <marker date="1509961075053" expanded="true" signature="156447:156537" ph="//..." />
-                <marker date="1509961075053" expanded="true" signature="157845:157999" ph="//..." />
-                <marker date="1509961075053" expanded="true" signature="158483:158630" ph="//..." />
-                <marker date="1509961075053" expanded="true" signature="159751:160303" ph="{...}" />
-                <marker date="1509961075053" expanded="true" signature="160317:160868" ph="{...}" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="login.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/FieldService/www/controllers/login.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="189">
-              <caret line="36" column="42" lean-forward="false" selection-start-line="36" selection-start-column="42" selection-end-line="36" selection-end-column="42" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="app.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/FieldService/www/app/app.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="670">
-              <caret line="64" column="26" lean-forward="false" selection-start-line="64" selection-start-column="26" selection-end-line="64" selection-end-column="26" />
-              <folding>
-                <marker date="1509961132173" expanded="true" signature="6538:6612" ph="..." />
-                <marker date="1509961132173" expanded="true" signature="6629:6660" ph="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/FieldService/www/controllers/index.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="206" column="62" lean-forward="false" selection-start-line="206" selection-start-column="62" selection-end-line="206" selection-end-column="62" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/FieldService/www/index.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="473">
-              <caret line="149" column="169" lean-forward="false" selection-start-line="149" selection-start-column="149" selection-end-line="149" selection-end-column="169" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="cloudService.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/FieldService/www/services/cloudService.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="417">
-              <caret line="110" column="74" lean-forward="false" selection-start-line="110" selection-start-column="66" selection-end-line="110" selection-end-column="74" />
-              <folding>
-                <marker date="1509948005271" expanded="true" signature="3940:7904" ph="{...}" />
-                <marker date="1509948005271" expanded="true" signature="20725:20772" ph="{&quot;method&quot;: 'POST'...}" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="dashBoard.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/FieldService/www/app/views/dashBoard.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="21">
-              <caret line="1" column="4" lean-forward="false" selection-start-line="1" selection-start-column="4" selection-end-line="1" selection-end-column="4" />
+            <state relative-caret-position="344">
+              <caret line="158" column="81" lean-forward="false" selection-start-line="158" selection-start-column="81" selection-end-line="158" selection-end-column="81" />
               <folding />
             </state>
           </provider>
@@ -139,18 +177,29 @@
       <file leaf-file-name="valueService.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/FieldService/www/services/valueService.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="87">
-              <caret line="154" column="24" lean-forward="false" selection-start-line="154" selection-start-column="24" selection-end-line="154" selection-end-column="24" />
-              <folding>
-                <marker date="1509961075057" expanded="true" signature="26254:26269" ph="{...}" />
-                <marker date="1509961075057" expanded="true" signature="26254:27047" ph="{...}" />
-                <marker date="1509961075057" expanded="true" signature="26318:27041" ph="{...}" />
-                <marker date="1509961075057" expanded="true" signature="26565:26611" ph="{...}" />
-                <marker date="1509961075057" expanded="true" signature="26671:27004" ph="{...}" />
-                <marker date="1509961075057" expanded="true" signature="26736:26790" ph="{...}" />
-                <marker date="1509961075057" expanded="true" signature="26844:26990" ph="{...}" />
-                <marker date="1509961075057" expanded="true" signature="26911:26972" ph="{...}" />
-              </folding>
+            <state relative-caret-position="475">
+              <caret line="724" column="64" lean-forward="false" selection-start-line="724" selection-start-column="64" selection-end-line="724" selection-end-column="64" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="dbInitialize.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/FieldService/www/db/dbInitialize.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2244">
+              <caret line="132" column="11" lean-forward="false" selection-start-line="13" selection-start-column="8" selection-end-line="132" selection-end-column="11" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="debrief.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/FieldService/www/controllers/debrief.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-34">
+              <caret line="1224" column="48" lean-forward="false" selection-start-line="1224" selection-start-column="48" selection-end-line="1224" selection-end-column="48" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -158,9 +207,67 @@
       <file leaf-file-name="localService.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/FieldService/www/services/localService.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-3654">
-              <caret line="21" column="15" lean-forward="false" selection-start-line="21" selection-start-column="15" selection-end-line="21" selection-end-column="15" />
+            <state relative-caret-position="344">
+              <caret line="3037" column="86" lean-forward="false" selection-start-line="3037" selection-start-column="86" selection-end-line="3037" selection-end-column="86" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="app.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/FieldService/www/app/app.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="85">
+              <caret line="5" column="99" lean-forward="false" selection-start-line="5" selection-start-column="99" selection-end-line="5" selection-end-column="99" />
+              <folding>
+                <marker date="1510480813734" expanded="true" signature="8853:8927" ph="..." />
+                <marker date="1510480813734" expanded="true" signature="8944:8975" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="constantService.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/services/constantService.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="85">
+              <caret line="42" column="0" lean-forward="false" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
+              <folding>
+                <marker date="1510502111565" expanded="true" signature="267:6682" ph="{...}" />
+                <marker date="1510502111565" expanded="true" signature="3665:3805" ph="{...}" />
+                <marker date="1510502111565" expanded="true" signature="3989:4030" ph="{...}" />
+                <marker date="1510502111565" expanded="true" signature="4069:4195" ph="{...}" />
+                <marker date="1510502111565" expanded="true" signature="4120:4185" ph="{...}" />
+                <marker date="1510502111565" expanded="true" signature="4232:4278" ph="{...}" />
+                <marker date="1510502111565" expanded="true" signature="4318:4367" ph="{...}" />
+                <marker date="1510502111565" expanded="true" signature="4402:4450" ph="{...}" />
+                <marker date="1510502111565" expanded="true" signature="4485:4536" ph="{...}" />
+                <marker date="1510502111565" expanded="true" signature="4569:4618" ph="{...}" />
+                <marker date="1510502111565" expanded="true" signature="4660:4705" ph="{...}" />
+                <marker date="1510502111565" expanded="true" signature="4739:4780" ph="{...}" />
+                <marker date="1510502111565" expanded="true" signature="4812:4852" ph="{...}" />
+                <marker date="1510502111565" expanded="true" signature="4888:4934" ph="{...}" />
+                <marker date="1510502111565" expanded="true" signature="4972:5020" ph="{...}" />
+                <marker date="1510502111565" expanded="true" signature="5057:5104" ph="{...}" />
+                <marker date="1510502111565" expanded="true" signature="5141:5188" ph="{...}" />
+                <marker date="1510502111565" expanded="true" signature="5228:5278" ph="{...}" />
+                <marker date="1510502111565" expanded="true" signature="5314:5360" ph="{...}" />
+                <marker date="1510502111565" expanded="true" signature="5398:5446" ph="{...}" />
+                <marker date="1510502111565" expanded="true" signature="5483:5527" ph="{...}" />
+                <marker date="1510502111565" expanded="true" signature="5731:6675" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/FieldService/www/controllers/index.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="182">
+              <caret line="245" column="15" lean-forward="false" selection-start-line="245" selection-start-column="11" selection-end-line="245" selection-end-column="15" />
+              <folding>
+                <marker date="1510501977387" expanded="true" signature="6236:6938" ph="//..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -169,39 +276,45 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>accep</find>
-      <find>startTask</find>
-      <find>acceptTask</find>
-      <find>openResources</find>
-      <find>getI</find>
-      <find>contactsEmailID</find>
-      <find>attachment</find>
-      <find>custo</find>
-      <find>image</find>
-      <find>AttachmentType</find>
-      <find>uploadf</find>
-      <find>getA</find>
-      <find>customer</find>
-      <find>getAt</find>
-      <find>submitD</find>
-      <find>Attachment</find>
-      <find>get</find>
-      <find>upload</find>
-      <find>getAtt</find>
-      <find>mater</find>
-      <find>userty</find>
-      <find>dbI</find>
-      <find>submitDe</find>
-      <find>customerSu</find>
-      <find>debriefs</find>
-      <find>tabcha</find>
-      <find>submitd</find>
-      <find>clo</find>
-      <find>localService</find>
-      <find>submit</find>
+      <find>ItemName</find>
+      <find>moment</find>
+      <find>engineero</find>
+      <find>update</find>
+      <find>reportBase64</find>
+      <find>enginee</find>
+      <find>spareQuote</find>
+      <find>followUp</find>
+      <find>salesVisit</find>
+      <find>salesLead</find>
+      <find>engineerObject</find>
+      <find>salesQuote</find>
+      <find>$scope.engineerObject</find>
+      <find>followup</find>
+      <find>check</find>
+      <find>formdat</find>
+      <find>$q</find>
+      <find>user</find>
+      <find>device</find>
+      <find>deleteAttachment</find>
+      <find>del</find>
+      <find>DELETE FROM</find>
+      <find>DELETE * FROM</find>
+      <find>de</find>
+      <find>//console.log</find>
+      <find>DROP TABLE IF EXISTS</find>
+      <find>sign</find>
+      <find>Islogin</find>
+      <find>OFSC</find>
+      <find>MultiDay</find>
     </findStrings>
     <replaceStrings>
       <replace>constantService.getUser()</replace>
+      <replace>rowLength</replace>
+      <replace>//console.log</replace>
+      <replace>DELETE * FROM</replace>
+      <replace>DROP TABLE IF EXISTS</replace>
+      <replace>DELETE FROM</replace>
+      <replace>console.log</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -210,27 +323,35 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/FieldService/www/index.html" />
-        <option value="$PROJECT_DIR$/FieldService/www/app/views/dashBoard.html" />
         <option value="$PROJECT_DIR$/FieldService/www/services/ofscService.js" />
         <option value="$PROJECT_DIR$/FieldService/www/app/views/Notes.html" />
         <option value="$PROJECT_DIR$/FieldService/www/app/views/Expenses.html" />
-        <option value="$PROJECT_DIR$/FieldService/www/services/constantService.js" />
-        <option value="$PROJECT_DIR$/FieldService/www/controllers/taskOverFlow.js" />
         <option value="$PROJECT_DIR$/FieldService/www/app/views/TimeNC.HTML" />
-        <option value="$PROJECT_DIR$/FieldService/www/db/dbInitialize.js" />
         <option value="$PROJECT_DIR$/FieldService/www/app/views/Attachments.html" />
-        <option value="$PROJECT_DIR$/FieldService/www/controllers/debrief.js" />
         <option value="$PROJECT_DIR$/FieldService/www/app/views/Todo.html" />
         <option value="$PROJECT_DIR$/FieldService/www/controllers/todo.js" />
-        <option value="$PROJECT_DIR$/FieldService/www/services/localService.js" />
-        <option value="$PROJECT_DIR$/FieldService/www/services/cloudService.js" />
-        <option value="$PROJECT_DIR$/FieldService/www/controllers/myTask.js" />
-        <option value="$PROJECT_DIR$/FieldService/www/services/valueService.js" />
         <option value="$PROJECT_DIR$/FieldService/www/services/syncService.js" />
-        <option value="$PROJECT_DIR$/FieldService/www/controllers/index.js" />
         <option value="$PROJECT_DIR$/FieldService/www/controllers/login.js" />
+        <option value="$PROJECT_DIR$/FieldService/www/app/views/dashBoard.html" />
+        <option value="$PROJECT_DIR$/FieldService/www/app/views/Time.html" />
+        <option value="$PROJECT_DIR$/FieldService/www/app/data/locale-jp.json" />
+        <option value="$PROJECT_DIR$/FieldService/www/index.html" />
+        <option value="$PROJECT_DIR$/FieldService/www/css/style.css" />
+        <option value="$PROJECT_DIR$/FieldService/www/app/views/Material.html" />
+        <option value="$PROJECT_DIR$/FieldService/www/app/views/myFieldJob.html" />
+        <option value="$PROJECT_DIR$/FieldService/www/controllers/taskOverFlow.js" />
+        <option value="$PROJECT_DIR$/FieldService/www/db/dbInitialize.js" />
+        <option value="$PROJECT_DIR$/FieldService/www/controllers/myTask.js" />
+        <option value="$PROJECT_DIR$/FieldService/www/app/views/EngineerSignature.html" />
+        <option value="$PROJECT_DIR$/FieldService/www/app/views/CustomerSignature.html" />
+        <option value="$PROJECT_DIR$/FieldService/www/services/constantService.js" />
+        <option value="$PROJECT_DIR$/FieldService/www/controllers/index.js" />
+        <option value="$PROJECT_DIR$/FieldService/www/controllers/debrief.js" />
+        <option value="$PROJECT_DIR$/FieldService/www/services/valueService.js" />
+        <option value="$PROJECT_DIR$/FieldService/www/services/localService.js" />
         <option value="$PROJECT_DIR$/FieldService/www/app/app.js" />
+        <option value="$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/services/constantService.js" />
+        <option value="$PROJECT_DIR$/FieldService/www/services/cloudService.js" />
       </list>
     </option>
   </component>
@@ -243,7 +364,7 @@
   <component name="NodeModulesDirectoryManager">
     <handled-path value="$PROJECT_DIR$/FieldService/plugins/cordova-sqlite-storage/node_modules" />
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-8" />
     <option name="width" value="1400" />
     <option name="height" value="990" />
@@ -263,6 +384,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -294,7 +416,7 @@
               <item name="FieldService" type="462c0819:PsiDirectoryNode" />
               <item name="www" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
+              <item name="data" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="FieldJob" type="b2602c69:ProjectViewProjectNode" />
@@ -302,6 +424,13 @@
               <item name="FieldService" type="462c0819:PsiDirectoryNode" />
               <item name="www" type="462c0819:PsiDirectoryNode" />
               <item name="controllers" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="FieldJob" type="b2602c69:ProjectViewProjectNode" />
+              <item name="FieldJob" type="462c0819:PsiDirectoryNode" />
+              <item name="FieldService" type="462c0819:PsiDirectoryNode" />
+              <item name="www" type="462c0819:PsiDirectoryNode" />
+              <item name="css" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="FieldJob" type="b2602c69:ProjectViewProjectNode" />
@@ -321,7 +450,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scratches" />
       <pane id="Scope" />
     </panes>
   </component>
@@ -329,6 +457,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="HbShouldOpenHtmlAsHb" value="" />
+    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -356,19 +485,31 @@
       <workItem from="1509674626451" duration="1661000" />
       <workItem from="1509685322522" duration="5233000" />
       <workItem from="1509691460312" duration="20692000" />
+      <workItem from="1509989469744" duration="8826000" />
+      <workItem from="1510034040882" duration="22172000" />
+      <workItem from="1510118912510" duration="21788000" />
+      <workItem from="1510160801039" duration="9253000" />
+      <workItem from="1510205635297" duration="9937000" />
+      <workItem from="1510228424427" duration="4556000" />
+      <workItem from="1510241520876" duration="1038000" />
+      <workItem from="1510318634505" duration="2555000" />
+      <workItem from="1510378870560" duration="3086000" />
+      <workItem from="1510389020134" duration="226000" />
+      <workItem from="1510415515753" duration="9336000" />
+      <workItem from="1510479705820" duration="8308000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="45451000" />
+    <option name="totallyTimeSpent" value="146532000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-9" y="-9" width="1938" height="1048" extended-state="7" />
-    <editor active="true" />
+    <frame x="-6" y="-6" width="1381" height="885" extended-state="6" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2453125" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20702268" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1129386" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.0" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -376,21 +517,11 @@
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17916666" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -406,104 +537,13 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/FieldService/www/controllers/login.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="36" column="42" lean-forward="false" selection-start-line="36" selection-start-column="42" selection-end-line="36" selection-end-column="42" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/FieldService/www/services/cloudService.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="417">
-          <caret line="110" column="74" lean-forward="false" selection-start-line="110" selection-start-column="66" selection-end-line="110" selection-end-column="74" />
-          <folding>
-            <marker date="1509948005271" expanded="true" signature="3940:7904" ph="{...}" />
-            <marker date="1509948005271" expanded="true" signature="20725:20772" ph="{&quot;method&quot;: 'POST'...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/FieldService/www/app/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2535">
-          <caret line="51" column="62" lean-forward="true" selection-start-line="51" selection-start-column="62" selection-end-line="51" selection-end-column="62" />
-          <folding>
-            <marker date="1509961132173" expanded="true" signature="6538:6612" ph="..." />
-            <marker date="1509961132173" expanded="true" signature="6629:6660" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/FieldService/www/controllers/myTask.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/FieldService/www/controllers/login.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2121">
-          <caret line="101" column="37" lean-forward="false" selection-start-line="101" selection-start-column="37" selection-end-line="101" selection-end-column="37" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/FieldService/www/controllers/debrief.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="27552">
-          <caret line="1312" column="9" lean-forward="true" selection-start-line="1312" selection-start-column="9" selection-end-line="1312" selection-end-column="9" />
-          <folding>
-            <marker date="1509961075053" expanded="true" signature="187:160876" ph="{...}" />
-            <marker date="1509961075053" expanded="true" signature="2011:2091" ph="{...}" />
-            <marker date="1509961075053" expanded="true" signature="142672:160874" ph="{...}" />
-            <marker date="1509961075053" expanded="true" signature="145015:145678" ph="{...}" />
-            <marker date="1509961075053" expanded="true" signature="146223:147099" ph="{...}" />
-            <marker date="1509961075053" expanded="true" signature="146332:146467" ph="{...}" />
-            <marker date="1509961075053" expanded="true" signature="146966:147056" ph="{...}" />
-            <marker date="1509961075053" expanded="true" signature="148181:148586" ph="{...}" />
-            <marker date="1509961075053" expanded="true" signature="148391:148576" ph="//..." />
-            <marker date="1509961075053" expanded="true" signature="148901:152634" ph="{...}" />
-            <marker date="1509961075053" expanded="true" signature="150137:151244" ph="{...}" />
-            <marker date="1509961075053" expanded="true" signature="150236:151228" ph="{...}" />
-            <marker date="1509961075053" expanded="true" signature="150467:151092" ph="{...}" />
-            <marker date="1509961075053" expanded="true" signature="150493:150781" ph="//..." />
-            <marker date="1509961075053" expanded="true" signature="151118:151209" ph="{...}" />
-            <marker date="1509961075053" expanded="true" signature="151258:151919" ph="//..." />
-            <marker date="1509961075053" expanded="true" signature="153744:154855" ph="{...}" />
-            <marker date="1509961075053" expanded="true" signature="156433:158755" ph="{...}" />
-            <marker date="1509961075053" expanded="true" signature="156447:156537" ph="//..." />
-            <marker date="1509961075053" expanded="true" signature="157845:157999" ph="//..." />
-            <marker date="1509961075053" expanded="true" signature="158483:158630" ph="//..." />
-            <marker date="1509961075053" expanded="true" signature="159751:160303" ph="{...}" />
-            <marker date="1509961075053" expanded="true" signature="160317:160868" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/FieldService/www/controllers/taskOverFlow.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="20" column="17" lean-forward="true" selection-start-line="20" selection-start-column="17" selection-end-line="20" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/FieldService/www/app/views/TaskOverflow.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2457">
-          <caret line="117" column="43" lean-forward="true" selection-start-line="117" selection-start-column="43" selection-end-line="117" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/FieldService/www/controllers/index.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="882">
           <caret line="42" column="5" lean-forward="true" selection-start-line="32" selection-start-column="4" selection-end-line="42" selection-end-column="5" />
-          <folding />
+          <folding>
+            <marker date="1510501977387" expanded="true" signature="6236:6938" ph="//..." />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -519,16 +559,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="4263">
           <caret line="203" column="46" lean-forward="false" selection-start-line="203" selection-start-column="46" selection-end-line="203" selection-end-column="46" />
-          <folding>
-            <marker date="1509961075057" expanded="true" signature="26254:26269" ph="{...}" />
-            <marker date="1509961075057" expanded="true" signature="26254:27047" ph="{...}" />
-            <marker date="1509961075057" expanded="true" signature="26318:27041" ph="{...}" />
-            <marker date="1509961075057" expanded="true" signature="26565:26611" ph="{...}" />
-            <marker date="1509961075057" expanded="true" signature="26671:27004" ph="{...}" />
-            <marker date="1509961075057" expanded="true" signature="26736:26790" ph="{...}" />
-            <marker date="1509961075057" expanded="true" signature="26844:26990" ph="{...}" />
-            <marker date="1509961075057" expanded="true" signature="26911:26972" ph="{...}" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -543,10 +574,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="11403">
           <caret line="543" column="32" lean-forward="true" selection-start-line="543" selection-start-column="32" selection-end-line="543" selection-end-column="32" />
-          <folding>
-            <marker date="1509948005271" expanded="true" signature="3940:7904" ph="{...}" />
-            <marker date="1509948005271" expanded="true" signature="20725:20772" ph="{&quot;method&quot;: 'POST'...}" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -554,7 +582,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="6511">
           <caret line="383" column="33" lean-forward="false" selection-start-line="383" selection-start-column="33" selection-end-line="383" selection-end-column="33" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -562,7 +589,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2193">
           <caret line="129" column="48" lean-forward="false" selection-start-line="129" selection-start-column="19" selection-end-line="129" selection-end-column="48" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -570,31 +596,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="19771">
           <caret line="1163" column="23" lean-forward="false" selection-start-line="1163" selection-start-column="23" selection-end-line="1163" selection-end-column="23" />
-          <folding>
-            <marker date="1509961075053" expanded="true" signature="187:160876" ph="{...}" />
-            <marker date="1509961075053" expanded="true" signature="2011:2091" ph="{...}" />
-            <marker date="1509961075053" expanded="true" signature="142672:160874" ph="{...}" />
-            <marker date="1509961075053" expanded="true" signature="145015:145678" ph="{...}" />
-            <marker date="1509961075053" expanded="true" signature="146223:147099" ph="{...}" />
-            <marker date="1509961075053" expanded="true" signature="146332:146467" ph="{...}" />
-            <marker date="1509961075053" expanded="true" signature="146966:147056" ph="{...}" />
-            <marker date="1509961075053" expanded="true" signature="148181:148586" ph="{...}" />
-            <marker date="1509961075053" expanded="true" signature="148391:148576" ph="//..." />
-            <marker date="1509961075053" expanded="true" signature="148901:152634" ph="{...}" />
-            <marker date="1509961075053" expanded="true" signature="150137:151244" ph="{...}" />
-            <marker date="1509961075053" expanded="true" signature="150236:151228" ph="{...}" />
-            <marker date="1509961075053" expanded="true" signature="150467:151092" ph="{...}" />
-            <marker date="1509961075053" expanded="true" signature="150493:150781" ph="//..." />
-            <marker date="1509961075053" expanded="true" signature="151118:151209" ph="{...}" />
-            <marker date="1509961075053" expanded="true" signature="151258:151919" ph="//..." />
-            <marker date="1509961075053" expanded="true" signature="153744:154855" ph="{...}" />
-            <marker date="1509961075053" expanded="true" signature="156433:158755" ph="{...}" />
-            <marker date="1509961075053" expanded="true" signature="156447:156537" ph="//..." />
-            <marker date="1509961075053" expanded="true" signature="157845:157999" ph="//..." />
-            <marker date="1509961075053" expanded="true" signature="158483:158630" ph="//..." />
-            <marker date="1509961075053" expanded="true" signature="159751:160303" ph="{...}" />
-            <marker date="1509961075053" expanded="true" signature="160317:160868" ph="{...}" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -602,7 +604,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1802">
           <caret line="106" column="42" lean-forward="false" selection-start-line="106" selection-start-column="42" selection-end-line="106" selection-end-column="42" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -610,16 +611,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="9775">
           <caret line="575" column="17" lean-forward="false" selection-start-line="575" selection-start-column="17" selection-end-line="575" selection-end-column="17" />
-          <folding>
-            <marker date="1509961075057" expanded="true" signature="26254:26269" ph="{...}" />
-            <marker date="1509961075057" expanded="true" signature="26254:27047" ph="{...}" />
-            <marker date="1509961075057" expanded="true" signature="26318:27041" ph="{...}" />
-            <marker date="1509961075057" expanded="true" signature="26565:26611" ph="{...}" />
-            <marker date="1509961075057" expanded="true" signature="26671:27004" ph="{...}" />
-            <marker date="1509961075057" expanded="true" signature="26736:26790" ph="{...}" />
-            <marker date="1509961075057" expanded="true" signature="26844:26990" ph="{...}" />
-            <marker date="1509961075057" expanded="true" signature="26911:26972" ph="{...}" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -627,31 +619,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="799">
           <caret line="47" column="34" lean-forward="true" selection-start-line="47" selection-start-column="34" selection-end-line="47" selection-end-column="34" />
-          <folding>
-            <marker date="1509961075053" expanded="true" signature="187:160876" ph="{...}" />
-            <marker date="1509961075053" expanded="true" signature="2011:2091" ph="{...}" />
-            <marker date="1509961075053" expanded="true" signature="142672:160874" ph="{...}" />
-            <marker date="1509961075053" expanded="true" signature="145015:145678" ph="{...}" />
-            <marker date="1509961075053" expanded="true" signature="146223:147099" ph="{...}" />
-            <marker date="1509961075053" expanded="true" signature="146332:146467" ph="{...}" />
-            <marker date="1509961075053" expanded="true" signature="146966:147056" ph="{...}" />
-            <marker date="1509961075053" expanded="true" signature="148181:148586" ph="{...}" />
-            <marker date="1509961075053" expanded="true" signature="148391:148576" ph="//..." />
-            <marker date="1509961075053" expanded="true" signature="148901:152634" ph="{...}" />
-            <marker date="1509961075053" expanded="true" signature="150137:151244" ph="{...}" />
-            <marker date="1509961075053" expanded="true" signature="150236:151228" ph="{...}" />
-            <marker date="1509961075053" expanded="true" signature="150467:151092" ph="{...}" />
-            <marker date="1509961075053" expanded="true" signature="150493:150781" ph="//..." />
-            <marker date="1509961075053" expanded="true" signature="151118:151209" ph="{...}" />
-            <marker date="1509961075053" expanded="true" signature="151258:151919" ph="//..." />
-            <marker date="1509961075053" expanded="true" signature="153744:154855" ph="{...}" />
-            <marker date="1509961075053" expanded="true" signature="156433:158755" ph="{...}" />
-            <marker date="1509961075053" expanded="true" signature="156447:156537" ph="//..." />
-            <marker date="1509961075053" expanded="true" signature="157845:157999" ph="//..." />
-            <marker date="1509961075053" expanded="true" signature="158483:158630" ph="//..." />
-            <marker date="1509961075053" expanded="true" signature="159751:160303" ph="{...}" />
-            <marker date="1509961075053" expanded="true" signature="160317:160868" ph="{...}" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -659,7 +627,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3502">
           <caret line="206" column="0" lean-forward="true" selection-start-line="206" selection-start-column="0" selection-end-line="206" selection-end-column="0" />
-          <folding />
+          <folding>
+            <marker date="1510501977387" expanded="true" signature="6236:6938" ph="//..." />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -674,10 +644,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="9724">
           <caret line="572" column="17" lean-forward="false" selection-start-line="572" selection-start-column="17" selection-end-line="572" selection-end-column="17" />
-          <folding>
-            <marker date="1509948005271" expanded="true" signature="3940:7904" ph="{...}" />
-            <marker date="1509948005271" expanded="true" signature="20725:20772" ph="{&quot;method&quot;: 'POST'...}" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -706,37 +673,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="4964">
           <caret line="292" column="12" lean-forward="false" selection-start-line="292" selection-start-column="7" selection-end-line="292" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/FieldService/www/app/views/dashBoard.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="21">
-          <caret line="1" column="4" lean-forward="false" selection-start-line="1" selection-start-column="4" selection-end-line="1" selection-end-column="4" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/FieldService/www/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="473">
-          <caret line="149" column="169" lean-forward="false" selection-start-line="149" selection-start-column="149" selection-end-line="149" selection-end-column="169" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/FieldService/www/app/views/myFieldJob.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/FieldService/www/app/views/MyTask.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -761,13 +697,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/FieldService/www/services/constantService.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3111">
-          <caret line="183" column="34" lean-forward="false" selection-start-line="183" selection-start-column="34" selection-end-line="183" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/FieldService/www/app/views/TaskOverflow.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2457">
@@ -777,19 +706,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/FieldService/www/app/views/TimeNC.HTML">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="294">
+        <state relative-caret-position="1615">
           <caret line="95" column="0" lean-forward="false" selection-start-line="95" selection-start-column="0" selection-end-line="95" selection-end-column="0" />
-          <folding>
-            <element signature="n#style#0;n#md-card#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/FieldService/www/controllers/taskOverFlow.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="21" column="0" lean-forward="false" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -797,38 +715,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2751">
           <caret line="131" column="103" lean-forward="false" selection-start-line="131" selection-start-column="103" selection-end-line="131" selection-end-column="103" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/FieldService/www/controllers/debrief.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="396">
-          <caret line="484" column="41" lean-forward="false" selection-start-line="484" selection-start-column="41" selection-end-line="484" selection-end-column="41" />
-          <folding>
-            <marker date="1509961075053" expanded="true" signature="187:160876" ph="{...}" />
-            <marker date="1509961075053" expanded="true" signature="2011:2091" ph="{...}" />
-            <marker date="1509961075053" expanded="true" signature="142672:160874" ph="{...}" />
-            <marker date="1509961075053" expanded="true" signature="145015:145678" ph="{...}" />
-            <marker date="1509961075053" expanded="true" signature="146223:147099" ph="{...}" />
-            <marker date="1509961075053" expanded="true" signature="146332:146467" ph="{...}" />
-            <marker date="1509961075053" expanded="true" signature="146966:147056" ph="{...}" />
-            <marker date="1509961075053" expanded="true" signature="148181:148586" ph="{...}" />
-            <marker date="1509961075053" expanded="true" signature="148391:148576" ph="//..." />
-            <marker date="1509961075053" expanded="true" signature="148901:152634" ph="{...}" />
-            <marker date="1509961075053" expanded="true" signature="150137:151244" ph="{...}" />
-            <marker date="1509961075053" expanded="true" signature="150236:151228" ph="{...}" />
-            <marker date="1509961075053" expanded="true" signature="150467:151092" ph="{...}" />
-            <marker date="1509961075053" expanded="true" signature="150493:150781" ph="//..." />
-            <marker date="1509961075053" expanded="true" signature="151118:151209" ph="{...}" />
-            <marker date="1509961075053" expanded="true" signature="151258:151919" ph="//..." />
-            <marker date="1509961075053" expanded="true" signature="153744:154855" ph="{...}" />
-            <marker date="1509961075053" expanded="true" signature="156433:158755" ph="{...}" />
-            <marker date="1509961075053" expanded="true" signature="156447:156537" ph="//..." />
-            <marker date="1509961075053" expanded="true" signature="157845:157999" ph="//..." />
-            <marker date="1509961075053" expanded="true" signature="158483:158630" ph="//..." />
-            <marker date="1509961075053" expanded="true" signature="159751:160303" ph="{...}" />
-            <marker date="1509961075053" expanded="true" signature="160317:160868" ph="{...}" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -846,34 +732,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/FieldService/www/services/valueService.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="87">
-          <caret line="154" column="24" lean-forward="false" selection-start-line="154" selection-start-column="24" selection-end-line="154" selection-end-column="24" />
-          <folding>
-            <marker date="1509961075057" expanded="true" signature="26254:26269" ph="{...}" />
-            <marker date="1509961075057" expanded="true" signature="26254:27047" ph="{...}" />
-            <marker date="1509961075057" expanded="true" signature="26318:27041" ph="{...}" />
-            <marker date="1509961075057" expanded="true" signature="26565:26611" ph="{...}" />
-            <marker date="1509961075057" expanded="true" signature="26671:27004" ph="{...}" />
-            <marker date="1509961075057" expanded="true" signature="26736:26790" ph="{...}" />
-            <marker date="1509961075057" expanded="true" signature="26844:26990" ph="{...}" />
-            <marker date="1509961075057" expanded="true" signature="26911:26972" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/FieldService/www/services/cloudService.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="417">
-          <caret line="110" column="74" lean-forward="false" selection-start-line="110" selection-start-column="66" selection-end-line="110" selection-end-column="74" />
-          <folding>
-            <marker date="1509948005271" expanded="true" signature="3940:7904" ph="{...}" />
-            <marker date="1509948005271" expanded="true" signature="20725:20772" ph="{&quot;method&quot;: 'POST'...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/FieldService/www/services/ofscService.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1102">
@@ -888,52 +746,200 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/FieldService/www/controllers/index.js">
+    <entry file="file://$PROJECT_DIR$/FieldService/www/app/views/dashBoard.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="206" column="62" lean-forward="false" selection-start-line="206" selection-start-column="62" selection-end-line="206" selection-end-column="62" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/FieldService/www/controllers/myTask.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="641">
-          <caret line="394" column="33" lean-forward="false" selection-start-line="394" selection-start-column="33" selection-end-line="394" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/FieldService/www/db/dbInitialize.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-220">
-          <caret line="19" column="57" lean-forward="false" selection-start-line="19" selection-start-column="57" selection-end-line="19" selection-end-column="57" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/FieldService/www/services/localService.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3654">
-          <caret line="21" column="15" lean-forward="false" selection-start-line="21" selection-start-column="15" selection-end-line="21" selection-end-column="15" />
-          <folding />
+        <state relative-caret-position="0">
+          <caret line="0" column="5" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="113" selection-end-column="6" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/FieldService/www/controllers/login.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="36" column="42" lean-forward="false" selection-start-line="36" selection-start-column="42" selection-end-line="36" selection-end-column="42" />
+        <state relative-caret-position="0">
+          <caret line="0" column="210" lean-forward="false" selection-start-line="0" selection-start-column="128" selection-end-line="0" selection-end-column="210" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/FieldService/www/app/views/Time.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="34" column="128" lean-forward="false" selection-start-line="34" selection-start-column="128" selection-end-line="34" selection-end-column="128" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/FieldService/www/app/data/locale-jp.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="138">
+          <caret line="19" column="8" lean-forward="false" selection-start-line="19" selection-start-column="8" selection-end-line="19" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/FieldService/www/css/style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="301">
+          <caret line="1739" column="29" lean-forward="false" selection-start-line="1739" selection-start-column="29" selection-end-line="1739" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/FieldService/www/app/views/Material.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2346">
+          <caret line="138" column="34" lean-forward="false" selection-start-line="138" selection-start-column="34" selection-end-line="138" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$APPLICATION_HOME_DIR$/lib/webstorm.jar!/resources/html5-schema/html5/common.rnc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="250">
+          <caret line="182" column="18" lean-forward="false" selection-start-line="182" selection-start-column="18" selection-end-line="182" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/FieldService/www/app/views/MyTask.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2822">
+          <caret line="166" column="65" lean-forward="false" selection-start-line="166" selection-start-column="65" selection-end-line="166" selection-end-column="65" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/FieldService/www/app/views/myFieldJob.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="667">
+          <caret line="91" column="43" lean-forward="false" selection-start-line="91" selection-start-column="43" selection-end-line="91" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/FieldService/www/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="509">
+          <caret line="202" column="68" lean-forward="false" selection-start-line="202" selection-start-column="51" selection-end-line="202" selection-end-column="68" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/FieldService/www/controllers/taskOverFlow.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="325">
+          <caret line="240" column="68" lean-forward="false" selection-start-line="240" selection-start-column="68" selection-end-line="240" selection-end-column="68" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/FieldService/www/controllers/myTask.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="17" column="10" lean-forward="false" selection-start-line="12" selection-start-column="7" selection-end-line="17" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/FieldService/www/app/views/EngineerSignature.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="867">
+          <caret line="51" column="52" lean-forward="false" selection-start-line="51" selection-start-column="52" selection-end-line="51" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/FieldService/www/app/views/CustomerSignature.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="342">
+          <caret line="104" column="84" lean-forward="false" selection-start-line="104" selection-start-column="84" selection-end-line="104" selection-end-column="84" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/FieldService/www/db/dbInitialize.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2244">
+          <caret line="132" column="11" lean-forward="false" selection-start-line="13" selection-start-column="8" selection-end-line="132" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/FieldService/www/controllers/debrief.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-34">
+          <caret line="1224" column="48" lean-forward="false" selection-start-line="1224" selection-start-column="48" selection-end-line="1224" selection-end-column="48" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/FieldService/www/services/valueService.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="475">
+          <caret line="724" column="64" lean-forward="false" selection-start-line="724" selection-start-column="64" selection-end-line="724" selection-end-column="64" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/FieldService/www/services/localService.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="344">
+          <caret line="3037" column="86" lean-forward="false" selection-start-line="3037" selection-start-column="86" selection-end-line="3037" selection-end-column="86" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/FieldService/www/services/constantService.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="242">
+          <caret line="55" column="66" lean-forward="false" selection-start-line="55" selection-start-column="12" selection-end-line="55" selection-end-column="66" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/FieldService/www/app/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="670">
-          <caret line="64" column="26" lean-forward="false" selection-start-line="64" selection-start-column="26" selection-end-line="64" selection-end-column="26" />
+        <state relative-caret-position="85">
+          <caret line="5" column="99" lean-forward="false" selection-start-line="5" selection-start-column="99" selection-end-line="5" selection-end-column="99" />
           <folding>
-            <marker date="1509961132173" expanded="true" signature="6538:6612" ph="..." />
-            <marker date="1509961132173" expanded="true" signature="6629:6660" ph="..." />
+            <marker date="1510480813734" expanded="true" signature="8853:8927" ph="..." />
+            <marker date="1510480813734" expanded="true" signature="8944:8975" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/FieldService/bld/Windows-x64/Debug/www/services/constantService.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="42" column="0" lean-forward="false" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
+          <folding>
+            <marker date="1510502111565" expanded="true" signature="267:6682" ph="{...}" />
+            <marker date="1510502111565" expanded="true" signature="3665:3805" ph="{...}" />
+            <marker date="1510502111565" expanded="true" signature="3989:4030" ph="{...}" />
+            <marker date="1510502111565" expanded="true" signature="4069:4195" ph="{...}" />
+            <marker date="1510502111565" expanded="true" signature="4120:4185" ph="{...}" />
+            <marker date="1510502111565" expanded="true" signature="4232:4278" ph="{...}" />
+            <marker date="1510502111565" expanded="true" signature="4318:4367" ph="{...}" />
+            <marker date="1510502111565" expanded="true" signature="4402:4450" ph="{...}" />
+            <marker date="1510502111565" expanded="true" signature="4485:4536" ph="{...}" />
+            <marker date="1510502111565" expanded="true" signature="4569:4618" ph="{...}" />
+            <marker date="1510502111565" expanded="true" signature="4660:4705" ph="{...}" />
+            <marker date="1510502111565" expanded="true" signature="4739:4780" ph="{...}" />
+            <marker date="1510502111565" expanded="true" signature="4812:4852" ph="{...}" />
+            <marker date="1510502111565" expanded="true" signature="4888:4934" ph="{...}" />
+            <marker date="1510502111565" expanded="true" signature="4972:5020" ph="{...}" />
+            <marker date="1510502111565" expanded="true" signature="5057:5104" ph="{...}" />
+            <marker date="1510502111565" expanded="true" signature="5141:5188" ph="{...}" />
+            <marker date="1510502111565" expanded="true" signature="5228:5278" ph="{...}" />
+            <marker date="1510502111565" expanded="true" signature="5314:5360" ph="{...}" />
+            <marker date="1510502111565" expanded="true" signature="5398:5446" ph="{...}" />
+            <marker date="1510502111565" expanded="true" signature="5483:5527" ph="{...}" />
+            <marker date="1510502111565" expanded="true" signature="5731:6675" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/FieldService/www/services/cloudService.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="344">
+          <caret line="158" column="81" lean-forward="false" selection-start-line="158" selection-start-column="81" selection-end-line="158" selection-end-column="81" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/FieldService/www/controllers/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="182">
+          <caret line="245" column="15" lean-forward="false" selection-start-line="245" selection-start-column="11" selection-end-line="245" selection-end-column="15" />
+          <folding>
+            <marker date="1510501977387" expanded="true" signature="6236:6938" ph="//..." />
           </folding>
         </state>
       </provider>

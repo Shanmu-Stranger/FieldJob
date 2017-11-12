@@ -1,109 +1,82 @@
-﻿<style>
-    .inputFieldsMaterial1 {
-        height: 100px;
-    }
-</style>
-<div class="container margin-top15" style="padding:0 !important">
-    <div class="debreifContainerouter">
+﻿<div class="card-parentContainer martop-40"> 
+    <div class="card-childContainer marginbottom30">
+      
+        <div class="row">
 
-        <!-- <md-input-container class="md-block md-input-style"> -->
-
-            <div class="row">
-
-                <!-- <div class="col-md-3">
-                    <md-checkbox class="mylabel fontsize14 " name="followUp" ng-model="followUp" ng-change="check1()" translate="Follow-up">
-
-                    </md-checkbox>
+            <div class="col-md-3">
+                <div class="checkbox">
+                    <label class="checkbox-inline"><input type="checkbox" ng-model="engineerObject.followUp"
+                    ><span translate="Follow-up"
+                           class="mylabel fontsize14"></span></label>
                 </div>
-                <div class="col-md-3">
-                    <md-checkbox class="mylabel fontsize14 " translate="Spare Quote" name="spareQuote" ng-model="spareQuote"
-                                 ng-change="check2()">
-
-                    </md-checkbox>
-                </div>
-                <div class="col-md-3">
-                    <md-checkbox class="mylabel fontsize14" translate="Sales Visit" name="salesVisit" ng-model="salesVisit"
-                                 ng-change="check3()">
-
-                    </md-checkbox>
-                </div>
-                <div class="col-md-3">
-                    <md-checkbox class="mylabel fontsize14" translate="Sales Lead" name="salesLead" ng-model="salesLead" ng-change="check4()">
-
-                    </md-checkbox>
-                </div> -->
-                <div class="col-md-3">
-                    <div class="checkbox">
-                    <label class="checkbox-inline"><input type="checkbox" value="followUp" name="followUp" ng-model="followUp" ng-change="check1()"><span translate="Follow-up" class="mylabel fontsize14"></span></label>
-                    </div>
-                </div>
-
-                <div class="col-md-3">
-                    <div class="checkbox">
-                    <label class="checkbox-inline"><input type="checkbox" value="spareQuote" name="spareQuote" ng-model="spareQuote" ng-change="check2()"><span translate="Spare Quote" class="mylabel fontsize14"></span></label>
-                    </div>
-                </div>
-
-                <div class="col-md-3">
-                    <div class="checkbox">
-                    <label class=" checkbox-inline"><input type="checkbox" value="salesVisit" name="salesVisit" ng-model="salesVisit" ng-change="check3()"><span translate="Sales Visit" class="mylabel fontsize14"></span></label>
-                    </div>
-                </div>
-
-                <div class="col-md-3">
-                    <div class="checkbox">
-                    <label class=" checkbox-inline"><input type="checkbox" value="salesLead" name="salesLead" ng-model="salesLead" ng-change="check4()"><span translate="Sales Lead" class="mylabel fontsize14"></span></label>
-                    </div>
-                </div>
-
             </div>
-        <!-- </md-input-container> -->
+
+            <div class="col-md-3">
+                <div class="checkbox">
+                    <label class="checkbox-inline"><input type="checkbox" ng-model="engineerObject.salesQuote"
+                    ><span translate="Spare Quote"
+                           class="mylabel fontsize14"></span></label>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="checkbox">
+                    <label class=" checkbox-inline"><input type="checkbox" ng-model="engineerObject.salesVisit"
+                    ><span translate="Sales Visit"
+                           class="mylabel fontsize14"></span></label>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="checkbox">
+                    <label class=" checkbox-inline"><input type="checkbox" ng-model="engineerObject.salesLead"
+                    ><span translate="Sales Lead"
+                           class="mylabel fontsize14"></span></label>
+                </div>
+            </div>
 
 
-        <div class="layout-column ">
-            <div ng-show="followUp">
-                <div class="mylabel font-size margintop25">ADDITIONAL INFORMATION ON FOLLOW UP</div>
-                <textarea class="inputFieldsES inputFieldsMaterial1" id="followUpInfo" ng-model="engineerObject.Follow_Up"
+        </div>
+        <div class="margintop30" ng-show="engineerObject.followUp">
+                <label class="engSign-label" translate="Additional Information on Follow-Up"></label>
+                <textarea class="engSign-textarea" id="followUpInfo"
+                          ng-model="engineerObject.Follow_Up"
                           name="followUpInfo"></textarea></div>
-            <div ng-show="spareQuote">
-                <div class="mylabel font-size margintop10">ADDITIONAL INFORMATION ON SPARE QUOTE</div>
-                <textarea class="inputFieldsES inputFieldsMaterial1" id="spareQuoteInfo" ng-model="engineerObject.Spare_Quote"
+            <div class="margintop30" ng-show="engineerObject.salesQuote">
+                <label class="engSign-label" translate="Additional Information on Spare Quote"></label>
+                <textarea class="engSign-textarea" id="spareQuoteInfo"
+                          ng-model="engineerObject.Spare_Quote"
                           name="spareQuoteInfo"></textarea></div>
-            <div ng-show="salesVisit">
-                <div class="mylabel font-size margintop10">ADDITIONAL INFORMATION ON SALES VISIT</div>
-                <textarea class="inputFieldsES inputFieldsMaterial1" id="salesVisitInfo" ng-model="engineerObject.Sales_Visit"
+            <div class="margintop30" ng-show="engineerObject.salesVisit">
+                <label class="engSign-label" translate="Additional Information on Sales Visit"></label>
+                <textarea class="engSign-textarea" id="salesVisitInfo"
+                          ng-model="engineerObject.Sales_Visit"
                           name="salesVisitInfo"></textarea></div>
-            <div ng-show="salesLead">
-                <div class="mylabel font-size margintop10">ADDITIONAL INFORMATION ON SALES LEAD</div>
-                <textarea class="inputFieldsES inputFieldsMaterial1" id="salesLeadInfo" ng-model="engineerObject.Sales_Head"
+            <div class="margintop30" ng-show="engineerObject.salesLead">
+                <label class="engSign-label" translate="Additional Information on Sales Lead"></label>
+                <textarea class="engSign-textarea" id="salesLeadInfo"
+                          ng-model="engineerObject.Sales_Head"
                           name="salesLeadInfo"></textarea></div>
-        </div>
-
+    
     </div>
+
+<div class="card-childContainer marginbottom30">
+<label class="engSign-label no-marbottom" translate="Service Engineer Signature">:*</label>
+            <div class="layout-row">
+                <signature-pad accept="accept" clear="clear" height="220" width="950" dataurl="dataurl"></signature-pad>
+                <br>
+                
+            </div>
+            <div class="layout-row marginbottom30">
+                <label ng-bind="$root.engineerSignTime"></label>
+            </div>
+           
+            <div>
+                 <button class="serbtn" ng-click="clear()" translate="Clear"></button>
+                 <button  class="engSign-Next" ng-click="signature = accept(); SaveSign()" translate="Next">
+                 </button>
+            </div>
+   
 </div>
 
-<div class="container" style="padding:0 !important">
-    <div class="debreifContainerouter">
-        <div class="debreifContainerinner margintop30">
-            <div class="serviceLabel">SERVICE ENGINEER SIGNATURE:*</div>
-            <div class="layout-row">
-                <signature-pad accept="accept" clear="clear"  style="height:220;width:100%"dataurl="dataurl"></signature-pad>
-            </div>
-            <div class="layout-row">
-                <div class="flex-33">
-                    <button class="flex-60 serbtn" ng-click="clear()">Clear</button>
-
-                </div>
-                <!-- <div class="flex-40"><button  class="flex-33" id="addBtn" ng-click="signature = accept(); SaveSign()">Save Sign</button></div> -->
-                <div class="flex-80">
-                    <button class="flex-33" id="addBtn" ng-click="signature = accept(); SaveSign()"
-                            style="float:right;width:100px">Next
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
 </div>
-<!-- <div class="result" ng-show="signature">
-   <img ng-src="{{ signature.dataUrl }}" >
-</div> -->

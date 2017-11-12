@@ -14,7 +14,7 @@
 
     <link rel="stylesheet" type="text/css" href="css/style.css"/>
     <link rel="stylesheet" type="text/css" href="css/styless.css"/>
-   <!--  <link rel="stylesheet" type="text/css" href="css/index.css"/> -->
+    <!--  <link rel="stylesheet" type="text/css" href="css/index.css"/> -->
     <!-- <link rel="stylesheet" type="text/css" href="lib/ionic/css/ionic.css"> -->
 
     <link rel="stylesheet" type="text/css" href="./lib/bootstrap/bootstrap.min.css"/>
@@ -36,9 +36,9 @@
     <script type="text/javascript" src="./lib/bootstrap/bootstrap.min.js"></script>
 
     <!-- Spinner libraries -->
-     <script type="text/javascript" src="./lib/spinner/spin.min.js"></script>
-     <script type="text/javascript" src="./lib/spinner/angular-loading-spinner.js"></script>
-     <script type="text/javascript" src="./lib/spinner/angular-spinner.min.js"></script>
+    <script type="text/javascript" src="./lib/spinner/spin.min.js"></script>
+    <script type="text/javascript" src="./lib/spinner/angular-loading-spinner.js"></script>
+    <script type="text/javascript" src="./lib/spinner/angular-spinner.min.js"></script>
     <!-- Angular Translate libraries -->
     <script src="./lib/angular/angular.min.js"></script>
     <script src="./lib/angular-translate/messageformat.js"></script>
@@ -97,7 +97,8 @@
     <script type="text/javascript" src="services/ofscService.js"></script>
     <script type="text/javascript"
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAjsFMJ41fB77qvY_kbf0Jk1_5uSpHzQqk"></script>
-    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=WsveNP7CGGiSt2GoUNH2STPyC2XQ7nma"></script>
+    <script type="text/javascript"
+            src="http://api.map.baidu.com/api?v=2.0&ak=WsveNP7CGGiSt2GoUNH2STPyC2XQ7nma"></script>
     <style>
         .selected {
             opacity: 1;
@@ -134,7 +135,9 @@
 
 <body ng-app="emerson" ng-controller="indexController" ng-cloak>
 
-<span class="md-dialog-container" style="background-color:#ffffff;opacity:0.8;text-align:center;z-index:1051 !important;" us-spinner="{radius:10, width:5, length: 12}"><img src="./images/02hat_loader_final2.gif" /></span>
+<span class="md-dialog-container" ng-show="$root.apicall"
+      style="background-color:#ffffff;opacity:0.8;text-align:center;z-index:1051 !important;"
+      us-spinner="{radius:10, width:5, length: 12}"><img src="./images/02hat_loader_2.gif"/></span>
 
 <div class="wrapper">
     <!-- Sidebar Holder -->
@@ -151,7 +154,8 @@
                 <!--  <img ng-src="{{item == selectedItem ? item.imageSelected : item.image}}"><br> -->
                 <div ng-class="{ '{{item.name}}selected' : item.id == $root.selectedItem, '{{item.name}}' : item.id !== $root.selectedItem }"></div>
                 <!-- <br> -->
-                <span class="sidenav-text" ng-class="{'sidenav-text-Sel':item.id == $root.selectedItem}">{{item.displayName}}</span>
+                <span class="sidenav-text" ng-class="{'sidenav-text-Sel':item.id == $root.selectedItem}"
+                      translate="{{item.displayName}}">{{item.displayName}}</span>
             </li>
 
         </ul>
@@ -162,7 +166,8 @@
     <!-- Page Content Holder -->
     <div id="content">
 
-        <nav class="navbar navbar-default navbar-fixed-top nav-noLeft" ng-show="$root.Islogin" ng-class="{'nav-left' : hideNavLeft}">
+        <nav class="navbar navbar-default navbar-fixed-top nav-noLeft" ng-show="$root.Islogin"
+             ng-class="{'nav-left' : hideNavLeft}">
             <div class="container-fluid">
 
                 <div class="navbar-header">
@@ -171,20 +176,20 @@
                 </div>
 
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" style="text-align: center;">
-                    <label class="title">{{$root.selectedCategory}}</label>
+                    <label class="title" translate="{{$root.selectedCategory}}"></label><span class="title" ng-if="$root.selectedTask.Task_Number">#{{$root.selectedTask.Task_Number}}</span>
                     <ul class="nav navbar-nav navbar-right">
 
                         <li class="popover__wrapper">
-                          <div class="user-avatar"></div>
+                            <div class="user-avatar"></div>
                             <div class="push popover__content">
                                 <div>
                                     <p class="popover__message uname">{{$root.uName | uppercase}}</p>
                                     <p class="popover__message designation">Service Engineer</p>
-                                    <p class="popover__message sign-out" ng-click="signout()">Sign Out</p>
+                                    <p class="popover__message sign-out" ng-click="signout()" translate="Sign Out"></p>
                                 </div>
                                 <hr class="popover-hr">
                                 <div class="language-contents">
-                                    <label>Select Your Language</label>
+                                    <label translate="Select Your Language"></label>
                                     <img src="images/Layer 10.png" ng-click="changeLanguage('en')" ng-disabled="usFlag"
                                          ng-class="!usFlag ? 'selected':'unselected'"/>
                                     <img src="images/Layer 11.png" ng-click="changeLanguage('fr')"
@@ -199,11 +204,11 @@
                         <li class="save" ng-click="saveValues()"></li>
                     </ul>
 
-                      <div class="badgee" ng-show="onlineStatus"></div>
+                    <div class="badgee" ng-show="onlineStatus"></div>
                 </div>
             </div>
         </nav>
-        <div ui-view="" class="viewDiv" ></div>
+        <div ui-view="" class="viewDiv"></div>
 
     </div>
 
