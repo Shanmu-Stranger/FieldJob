@@ -2355,6 +2355,794 @@ app.controller("debriefController", function ($scope, $state, $rootScope, $windo
             doc1.addImage($scope.summary.engineer.signature, 'JPEG', 50, ySignField + 45, 75, 40)
         doc1.text(250, ySignField + 35, $scope.summary.taskObject.Customer_Name)
 //                 doc1.save("Report_" + $scope.summary.taskObject.Task_Number + ".pdf");
+        
+        var lang="china";
+        if(lang=="China"){
+          var canvas = document.getElementById('canvas');
+                if (canvas.getContext) {
+                  var ctx = canvas.getContext('2d');
+                  var pdfimg='data:image/png;base64,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'
+                  var excelimg='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAQAAAAAYLlVAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QAAKqNIzIAAAAJcEhZcwAADdcAAA3XAUIom3gAAAAHdElNRQfhCwEGLDTCqNdaAAADfklEQVRo3u2ZTUhUURTHf8+vUsuK7MNKKCenCT/HohKkoo2gtQyiqCiCqDZFCxcVfRBRrqJFUARZUAS1aBGhrSQNIiiDEMrACKkIE1TKonJeC193zvsanZk7MxvP29zzce/5v3PvPee++wySI4MAdYSpYwXBRAbISchtDqsttzUUWbKRxN4gHgD5VBMmTB1VzEgianECmEPYchsiW5fbyQEsskIcpky/U38Ay5XbktS6lQCyWWWFuJZ56XIrAYxSoHG8AzRM2daki7tganqGAWiLs9e1rPQH3UY7Mg2gKNMAmAaQWDHypzd0CK6QBqCX7y67tdG0rncb2imEickGD83w/34Zn4JpAM5F+JGHgltHvUP/lB7VDrDVNV4VSwW3DICNLHbZ5Uab9qX0m5AwCzFu0/6wlelODbXAdO+CdhvSBzbdBaHZpaUYmV7bcJtws0bIh5ij5EV8SR2A9+QJCB1KflxIL2sqx6aB6bE0W2hV7U10AjBAkF+WrJpXrgPqCHNxHkgW0AQ8ZtDlYWd0GXrhGrWt22eYmOxTvEH3FDPhhskzoV8qbhPGWzHpFW+8d8qpOAkAEdaJN+7noOLm8lUnAL9MaHAFQ03STe4rzXkWopH8y/F69nDLal/kj9Wq41DM8ZqpElwpALvZ7LITn3b+W+Qzs11xee5rPTEFcW/DWMWohBMOyX7W+1qbJESxq6Fzrw/FsDVIkPzD0+/xzfRI9xQYMULXyBOrVcCY1VpBL/me1hOZ0LkIDwNXGXBZn2bmZBG4Lcwvi/bJmBGwUxKJaJBiZRxgXNz/5PEuHYnoGN9U+xxZnFXcb46glbzeRp7ta4lgEqFWyO7pi4DXIhyjkg+Ka6cRgMc0K9kS3rqSlMZyLA8eW4RcDn1U1zZ0A3hpSz8vhKZLyLN5nRoAfwkLN9sd2iahqyeSCgCtwkUOfQ5tjy3h3tABwF6OTeCM4soodyydWq7zSXE/PVb3FduHTZBLQAt9Lrs70TQfb8j8nmEPOEkkorTRNADdVzSnRL6EWQDc8LiimZUqAAGPQ1tFrA4Zn4JpAJkGMJppAPdy+CMvjJKm7jhsTbq4a5BHhfWfqIbCJFxPnIjiJllesyhXf4+K4x5JAwBJpepvYWlmAERpvgUlTDDmnkkZgCgVUmNBqbTdo6UNQJRyqbCg1KjjeVoByP4rrT2U4O/7f0/9ov/AQQ2NAAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDE3LTExLTAxVDA2OjQ0OjUyKzAxOjAwfVk/DQAAACV0RVh0ZGF0ZTptb2RpZnkAMjAxNy0xMS0wMVQwNjo0NDo1MiswMTowMAwEh7EAAAAZdEVYdFNvZnR3YXJlAHd3dy5pbmtzY2FwZS5vcmeb7jwaAAAAAElFTkSuQmCC'
+
+
+                  //Customer Call heading
+                  ctx.fillStyle ="#000" ;
+                  ctx.font = '15px sans-serif';
+                  ctx.fillText('客户具体服务需求', 10,70);
+
+                  //Customer Call Labels and fields
+                  ctx.fillStyle ="#000" ;
+                  ctx.font = 'bold 13px sans-serif ';
+                  ctx.fillText('客户名', 20,98);
+
+                  ctx.fillStyle ="#000" ;
+                  ctx.font = '13px sans-serif ';
+                  ctx.fillText($scope.summary.taskObject.Customer_Name, 20,112);
+
+                  ctx.fillStyle ="#000" ;
+                  ctx.font = 'bold 13px sans-serif ';
+                  ctx.fillText('服务日期', 200,98);
+
+                  ctx.fillStyle ="#000" ;
+                  ctx.font = '13px sans-serif ';
+                  var start=  moment.utc($scope.summary.taskObject.times[0].Start_Date).utcOffset(constantService.getTimeZone()).format("DD/MM/YYYY")
+                  if(start)
+                  ctx.fillText(start, 200,112);
+
+                  ctx.fillStyle ="#000" ;
+                  ctx.font = 'bold 13px sans-serif ';
+                  ctx.fillText('结束日期', 350,98);
+
+                  ctx.fillStyle ="#000" ;
+                  ctx.font = '13px sans-serif ';
+                  var enddate=" ";
+            if($scope.summary.taskObject.times[0].End_Date!="" && $scope.summary.taskObject.times[0].End_Date!=undefined)
+            {
+                enddate=moment.utc( $scope.summary.taskObject.times[0].End_Date).utcOffset(constantService.getTimeZone()).format("DD/MM/YYYY");
+            }
+                  ctx.fillText(enddate, 350,112);
+
+                  ctx.fillStyle ="#000" ;
+                  ctx.font = 'bold 13px sans-serif ';
+                  ctx.fillText('服务持续时间', 500,98);
+
+                  ctx.fillStyle ="#000" ;
+                  ctx.font = '13px sans-serif ';
+                  if( $scope.summary.taskObject.times[0].Duration)
+                  ctx.fillText( $scope.summary.taskObject.times[0].Duration, 500,112);
+
+                  ctx.fillStyle ="#000" ;
+                  ctx.font = 'bold 13px sans-serif ';
+                  ctx.fillText('服务请求', 20,138);
+
+                  ctx.fillStyle ="#000" ;
+                  ctx.font = '13px sans-serif ';
+                  if($scope.summary.taskObject.Service_Request)
+                  ctx.fillText($scope.summary.taskObject.Service_Request, 20,152);
+
+                  ctx.fillStyle ="#000" ;
+                  ctx.font = 'bold 13px sans-serif ';
+                  ctx.fillText('现场服务号', 200,138);
+
+                  ctx.fillStyle ="#000" ;
+                  ctx.font = '13px sans-serif ';
+                    if( $scope.summary.taskObject.Task_Number)
+                  ctx.fillText($scope.summary.taskObject.Task_Number, 200,152);
+
+                  ctx.fillStyle ="#000" ;
+                  ctx.font = 'bold 13px sans-serif ';
+                  ctx.fillText('工作描述', 350,138);
+
+                  ctx.fillStyle ="#000" ;
+                  ctx.font = '13px sans-serif ';
+                  ctx.fillText('To run the field', 350,152);
+
+                  ctx.fillStyle ="#000" ;
+                  ctx.font = 'bold 13px sans-serif ';
+                  ctx.fillText('产品系列', 20,182);
+
+                  // ctx.fillStyle ="#000" ;
+                  // ctx.font = '13px sans-serif ';
+                  // ctx.fillText('产品系列', 20,196);
+
+                  ctx.fillStyle ="#000" ;
+                  ctx.font = 'bold 13px sans-serif ';
+                  ctx.fillText('系统序列号/产品序列号', 200,182);
+
+                  // ctx.fillStyle ="#000" ;
+                  // ctx.font = '13px sans-serif ';
+                  // ctx.fillText('x', 200,196);
+
+                  ctx.fillStyle ="#000" ;
+                  ctx.font = 'bold 13px sans-serif ';
+                  ctx.fillText('标签#', 350,182);
+                  //
+                  // ctx.fillStyle ="#000" ;
+                  // ctx.font = '13px sans-serif ';
+                  // ctx.fillText('x', 350,196);
+
+                  ctx.fillStyle ="#000" ;
+                  ctx.font = 'bold 13px sans-serif ';
+                  ctx.fillText('原始订单号#', 500,182);
+
+                  // ctx.fillStyle ="#000" ;
+                  // ctx.font = '13px sans-serif ';
+                  // ctx.fillText('x', 500,196);
+
+                  var ibyvalue=196;
+                  if($scope.summary.taskObject.InstallBase){
+                    angular.forEach($scope.summary.taskObject.InstallBase,function(key)
+                    {
+                      ctx.fillStyle ="#000" ;
+                      ctx.font = '13px sans-serif ';
+                        if(key.Product_Line)
+                        ctx.fillText( key.Product_Line,20, ibyvalue)
+                        else
+                        ctx.fillText('NO VALUE',20, ibyvalue)
+
+
+                        ctx.fillStyle ="#000" ;
+                        ctx.font = '13px sans-serif ';
+                        if(key.Serial_Number)
+                        ctx.fillText(key.Serial_Number,200, ibyvalue )
+                        else
+                        ctx.fillText('NO VALUE',200, ibyvalue )
+
+                        ctx.fillStyle ="#000" ;
+                        ctx.font = '13px sans-serif ';
+                        if(key.TagNumber)
+                        ctx.fillText( key.TagNumber,350, ibyvalue)
+                        else
+                        ctx.fillText('NO VALUE',350, ibyvalue )
+
+                        ctx.fillStyle ="#000" ;
+                        ctx.font = '13px sans-serif ';
+                        if(key.Original_PO_Number)
+                        ctx.fillText( key.Original_PO_Number,450, ibyvalue)
+                        else
+                        ctx.fillText('NO VALUE',450, ibyvalue )
+                        ibyvalue=ibyvalue+14;
+                    });
+                  }
+
+
+                  var i = 0, xNotesField = 20, yNotesField = ibyvalue+30, rectNotesWidth = 650,
+                      rectNotesHeight = 22 * $scope.summary.notesArray.length,
+                      rectNotesX = 20, rectNotesY = 170;
+                      var xNotesField1 = xNotesField, xNotesField2 = xNotesField1 + 150, yNotesField1 = yNotesField + 22,
+                      yNotesField2, yNotesField1_val, yNotesField2_val;
+
+
+                                //Notes heading
+
+                  //notes labels and value
+                      // doc1.setFontSize(22)
+                      // doc1.setFontType('bold')
+                      // doc1.text(xNotesField1, yNotesField1, 'Note Type')
+                      ctx.fillStyle ="#000" ;
+                      ctx.font = 'bold 13px sans-serif ';
+                      ctx.fillText('备注类型', 20,yNotesField1);
+                      // doc1.setFontSize(22)
+                      // doc1.setFontType('bold')
+                      // doc1.text(xNotesField2, yNotesField1, 'Note Description')
+                      ctx.fillStyle ="#000" ;
+                      ctx.font = 'bold 13px sans-serif ';
+                      ctx.fillText('Note Description', 200,yNotesField1);
+                      // doc1.setFontSize(22)
+                      // doc1.setFontType('bold')
+                      // doc1.text(xNotesField, yNotesField, 'Notes')
+                      ctx.fillStyle ="#000" ;
+                      ctx.font = '15px sans-serif ';
+                      ctx.fillText('备注', 10,yNotesField);
+                      // doc1.rect(20, yNotesField+10, rectNotesWidth, rectNotesHeight)
+                      while (i < $scope.summary.notesArray.length) {
+                          xNotesField1 = xNotesField;
+                          //yNotesField1 = yNotesField + 22;
+                          yNotesField1_val = yNotesField1 + 14 * ++i;
+                          xNotesField2 = xNotesField1 + 150;
+
+                          // doc1.setFontSize(22)
+                          // doc1.setFontType('normal')
+                          // if ($scope.summary.notesArray[i - 1].Note_Type)
+                          // doc1.text(xNotesField1, yNotesField1_val, $scope.summary.notesArray[i - 1].Note_Type)
+
+                          ctx.fillStyle ="#000" ;
+                          ctx.font = '13px sans-serif ';
+                          ctx.fillText($scope.summary.notesArray[i - 1].Note_Type, 20,yNotesField1_val);
+
+                          // doc1.setFontSize(22)
+                          // doc1.setFontType('normal')
+                          // if ($scope.summary.notesArray[i - 1].Notes)
+                          // doc1.text(xNotesField2, yNotesField1_val, $scope.summary.notesArray[i - 1].Notes)
+                          ctx.fillStyle ="#000" ;
+                          ctx.font = '13px sans-serif ';
+                          ctx.fillText($scope.summary.notesArray[i - 1].Notes, 200,yNotesField1_val);
+                      }
+                      rectNotesHeight=yNotesField1_val-yNotesField+10;
+                      // doc1.rect(20, yNotesField+5, rectNotesWidth, rectNotesHeight)
+
+                  //Attachments heading
+
+                  // ctx.fillStyle ="#000" ;
+                  // ctx.font = '15px sans-serif ';
+                  // ctx.fillText('附件', 10,336);
+
+
+                                    var xAttachField = 25, yAttachField = yNotesField1_val  + 25, rectAttachWidth = 650,
+                            rectAttachHeight = 135,xAttachField1=25;
+                            // doc1.setFontSize(22)
+                            // doc1.setFontType('bold')
+                            // doc1.text(xAttachField, yAttachField, 'Attachments')
+                            ctx.fillStyle ="#000" ;
+                            ctx.font = '15px sans-serif ';
+                            ctx.fillText('附件', 10,yAttachField);
+                            // doc1.rect(20, yAttachField + 10, rectAttachWidth, rectAttachHeight)
+                            ctx.fillStyle= "#000" ;
+                            ctx.strokeRect(10,yAttachField + 10,1010,rectAttachHeight);
+                            angular.forEach($scope.files,function(file,value){
+                                // setTimeout(function () {
+                                if(file.filetype!="pdf" && file.filetype!="xlsx" ){
+                                    // doc1.addImage( file.data, 'JPEG', xAttachField1, yAttachField+15, 50, 40)
+                                    var attachfile = new Image();
+                                    attachfile.onload = function() {
+                                      ctx.drawImage(attachfile, xAttachField1, yAttachField+15);
+                                      if(file.filename.length>=20){
+                                        ctx.fillStyle ="#000" ;
+                                        ctx.font = '15px sans-serif ';
+                                        ctx.fillText(file.filename.substr(0,18)+'..', xAttachField1,yAttachField+125);
+                                      }
+                                      // doc1.text(xAttachField1, yAttachField+65, file.filename.substr(0,18)+'..')
+                                      else {
+                                        ctx.fillStyle ="#000" ;
+                                        ctx.font = '15px sans-serif ';
+                                        ctx.fillText(file.filename, xAttachField1,yAttachField+125);
+                                      }
+                                      xAttachField1+=95;
+                                    };
+                                    attachfile.src = file.data;
+                                    attachfile.width="50";
+                                    attachfile.height="40";
+                                    // }, 1000);
+                                  }
+                                else if(file.filetype=="pdf"){
+
+                                var imgpdf = document.getElementById('pdf');
+                                        var callback = function(image) {
+                                 if(!image) image = this;
+
+                                 ctx.drawImage(image, xAttachField1, yAttachField+15);
+                                 if(file.filename.length>=20){
+                                   ctx.fillStyle ="#000" ;
+                                   ctx.font = '15px sans-serif ';
+                                   ctx.fillText(file.filename.substr(0,18)+'..', xAttachField1,yAttachField+125);
+                                 }
+                                 // doc1.text(xAttachField1, yAttachField+65, file.filename.substr(0,18)+'..')
+                                 else {
+                                   ctx.fillStyle ="#000" ;
+                                   ctx.font = '15px sans-serif ';
+                                   ctx.fillText(file.filename, xAttachField1,yAttachField+125);
+                                 }
+                                xAttachField1+=75;
+                              }
+                              if(imgpdf.complete) {
+                                 callback(imgpdf);
+                              }else {
+                                 imgpdf.onload = callback;
+                              }
+                              }
+                                // doc1.addImage( pdfimg, 'JPEG', xAttachField1, yAttachField+15, 50, 40)
+                                else if(file.filetype=="xlsx"){
+                                var attachfileexcel = new Image();
+                                attachfileexcel.onload = function() {
+                                  ctx.drawImage(attachfileexcel, xAttachField1, yAttachField+15);
+                                  if(file.filename.length>=20){
+                                    ctx.fillStyle ="#000" ;
+                                    ctx.font = '15px sans-serif ';
+                                    ctx.fillText(file.filename.substr(0,18)+'..', xAttachField1,yAttachField+125);
+                                  }
+                                  // doc1.text(xAttachField1, yAttachField+65, file.filename.substr(0,18)+'..')
+                                  else {
+                                    ctx.fillStyle ="#000" ;
+                                    ctx.font = '15px sans-serif ';
+                                    ctx.fillText(file.filename, xAttachField1,yAttachField+125);
+                                  }
+                                  xAttachField1+=75;
+                                };
+                                attachfileexcel.src = excelimg;
+                                attachfileexcel.width="50";
+                                attachfileexcel.height="40";
+                              }
+                                // doc1.addImage( excelimg, 'JPEG', xAttachField1, yAttachField+15, 50, 40)
+                                // doc1.setFontSize(16)
+                                // doc1.setFontType('normal')
+
+                                // xAttachField1+=60;
+                            })
+
+
+                  //Time heading
+
+
+
+                  //Time labels and values
+
+
+
+
+
+                  var j = 0, xTimeField = 25, yTimeField = yAttachField + rectAttachHeight + 20, rectTimeWidth = 650,
+          rectTimeHeight = 22 * $scope.summary.timeArray.length, yTimeFieldName = yTimeField + 20,
+          yTimeFieldValue = yTimeField;
+          // doc1.setFontSize(22)
+          // doc1.setFontType('bold')
+          // doc1.text(xTimeField, yTimeField, 'Time')
+          ctx.fillStyle ="#000" ;
+          ctx.font = '15px sans-serif ';
+          ctx.fillText('时间', 10,yTimeField);
+          // doc1.setFontSize(22)
+          // doc1.setFontType('bold')
+          // doc1.text(xTimeField, yTimeFieldName, 'Date')
+          ctx.fillStyle ="#000" ;
+          ctx.font = 'bold 13px sans-serif ';
+          ctx.fillText('日期', 20,yTimeFieldName);
+
+
+          if($scope.userType=='C')
+          {
+              // doc1.setFontSize(22)
+              // doc1.setFontType('bold')
+              // doc1.text(xTimeField + 55, yTimeFieldName, 'Charge Type')
+              ctx.fillStyle ="#000" ;
+              ctx.font = 'bold 13px sans-serif ';
+              ctx.fillText('结算类型',100,yTimeFieldName);
+              // doc1.setFontSize(22)
+              // doc1.setFontType('bold')
+              // doc1.text(xTimeField + 110, yTimeFieldName, 'Charge method')
+              ctx.fillStyle ="#000" ;
+              ctx.font = 'bold 13px sans-serif ';
+              ctx.fillText('结算方式', 180,yTimeFieldName);
+
+          }
+          // doc1.setFontSize(22)
+          // doc1.setFontType('bold')
+          // doc1.text(xTimeField + 175, yTimeFieldName, 'Work Type')
+          ctx.fillStyle ="#000" ;
+          ctx.font = '13px sans-serif ';
+          ctx.fillText('收费与否', 250,yTimeFieldName);
+          //  doc1.text(xTimeField + 235, yTimeFieldName, 'Standard')
+          var xTimeField1 = 290;
+          if($scope.userType=='C')
+          {
+              angular.forEach($scope.timeArray[0].timeDefault.timeCode.values, function (timecodeKey, value) {
+                  xTimeField1 = xTimeField1 + 50;
+                  // doc1.setFontSize(22)
+                  // doc1.setFontType('bold')
+                  // doc1.text(xTimeField1, yTimeFieldName, timecodeKey.Overtimeshiftcode)
+                  ctx.fillStyle ="#000" ;
+                  ctx.font = 'bold 13px sans-serif ';
+                  ctx.fillText(timecodeKey.Overtimeshiftcode, xTimeField1,yTimeFieldName);
+
+                  // doc1.text(xTimeField + 275, yTimeFieldName, 'OT1')
+                  // doc1.text(xTimeField + 315, yTimeFieldName, 'OT2')
+                  // doc1.text(xTimeField + 355, yTimeFieldName, 'OT3')
+              });
+          }
+          // doc1.text(xTimeField + 415, yTimeFieldName, 'Duration')
+          ctx.fillStyle ="#000" ;
+          ctx.font = 'bold 13px sans-serif ';
+          ctx.fillText('服务持续时间', 700,yTimeFieldName);
+          // doc1.text(xTimeField + 475, yTimeFieldName, 'Item')
+          ctx.fillStyle ="#000" ;
+          ctx.font = 'bold 13px sans-serif ';
+          ctx.fillText('服务类别', 780,yTimeFieldName);
+          // doc1.text(xTimeField + 539, yTimeFieldName, 'Description')
+          ctx.fillStyle ="#000" ;
+          ctx.font = '13px sans-serif ';
+          ctx.fillText('路途-加班', 965,yTimeFieldName);
+          // doc1.rect(20, yTimeField + 5, rectTimeWidth, rectTimeHeight)
+          ctx.fillStyle= "#000" ;
+          ctx.strokeRect(10,yTimeField + 5,1010,rectTimeHeight);
+          while (j < $scope.summary.timeArray.length) {
+
+              yTimeFieldName = yTimeField + 20 * ++j;
+              yTimeFieldValue = yTimeFieldName + 10;
+              // doc1.text(xTimeField, yTimeFieldName, 'Date')
+
+              // doc1.setFontSize(22)
+              // doc1.setFontType('normal')
+              // if ($scope.summary.timeArray[j - 1].Date)
+              // doc1.text(xTimeField, yTimeFieldValue, $scope.summary.timeArray[j - 1].Date)
+              ctx.fillStyle ="#000" ;
+              ctx.font = '13px sans-serif ';
+              if ($scope.summary.timeArray[j - 1].Date)
+              ctx.fillText($scope.summary.timeArray[j - 1].Date, 20,yTimeFieldValue);
+
+              doc1.setFontSize(22)
+              doc1.setFontType('normal')
+              if($scope.userType=='C')
+              {
+                  // if ($scope.summary.timeArray[j - 1].Charge_Type)
+                  // doc1.text(xTimeField + 55, yTimeFieldValue, $scope.summary.timeArray[j - 1].Charge_Type)
+                  ctx.fillStyle ="#000" ;
+                  ctx.font = '13px sans-serif ';
+                  if ($scope.summary.timeArray[j - 1].Charge_Type)
+                  ctx.fillText($scope.summary.timeArray[j - 1].Charge_Type, 100,yTimeFieldValue);
+
+                  // doc1.setFontSize(22)
+                  // doc1.setFontType('normal')
+                  // if ($scope.summary.timeArray[j - 1].Charge_Method)
+                  // doc1.text(xTimeField + 110, yTimeFieldValue, $scope.summary.timeArray[j - 1].Charge_Method)
+                  ctx.fillStyle ="#000" ;
+                  ctx.font = '13px sans-serif ';
+                    if ($scope.summary.timeArray[j - 1].Charge_Method)
+                  ctx.fillText($scope.summary.timeArray[j - 1].Charge_Method, 180,yTimeFieldValue);
+              }
+              // doc1.setFontSize(22)
+              // doc1.setFontType('normal')
+              // if ($scope.summary.timeArray[j - 1].Work_Type)
+              // doc1.text(xTimeField + 175, yTimeFieldValue, $scope.summary.timeArray[j - 1].Work_Type)
+              ctx.fillStyle ="#000" ;
+              ctx.font = '13px sans-serif ';
+              if ($scope.summary.timeArray[j - 1].Work_Type)
+              ctx.fillText( $scope.summary.timeArray[j - 1].Work_Type, 250,yTimeFieldValue);
+              var a = 2;
+              if($scope.userType=='C')
+              {
+                  angular.forEach($scope.timeArray[0].timeDefault.timeCode.values, function (timecodeKey, value) {
+
+                      angular.forEach($scope.summary.timeArray[j - 1].timecode, function (key, value) {
+                          console.log($scope.summary.timeArray[j - 1].timecode[value][timecodeKey.Overtimeshiftcode])
+                          if ($scope.summary.timeArray[j - 1].timecode[value][timecodeKey.Overtimeshiftcode] != undefined) {
+
+                              //  doc1.text(xTimeField + 235, yTimeFieldName, timecodeKey.Overtimeshiftcode)
+                              // xTimeField1=xTimeField1 +40;
+                              // doc1.text(xTimeField1, yTimeFieldName, timecodeKey.Overtimeshiftcode)
+                              // xTimeField1=xTimeField1-40*a;
+                              // doc1.setFontSize(22)
+                              // doc1.setFontType('normal')
+                              // doc1.text(xTimeField1 - 40 * a, yTimeFieldValue, $scope.summary.timeArray[j - 1].timecode[value][timecodeKey.Overtimeshiftcode].toString())
+                              ctx.fillStyle ="#000" ;
+                              ctx.font = '13px sans-serif ';
+                              ctx.fillText($scope.summary.timeArray[j - 1].timecode[value][timecodeKey.Overtimeshiftcode].toString(), xTimeField1 - 50 * a,yTimeFieldValue);
+                              a--;
+
+                          }
+                          else {
+                              //  console.log("testsajhhhhhhhhhhhhhhhd")
+
+                          }
+
+                      })
+
+                  })
+              }
+              // doc1.text(xTimeField + 235, yTimeFieldName, 'Standard')
+              // doc1.text(xTimeField + 235, yTimeFieldValue, $scope.summary.timeArray[j-1].Shift_Code)
+              // doc1.text(xTimeField + 275, yTimeFieldName, 'OT1')
+              // doc1.text(xTimeField + 275, yTimeFieldValue, $scope.summary.timeArray[j-1].Time_Code)
+              // doc1.text(xTimeField + 315, yTimeFieldName, 'OT2')
+              // doc1.text(xTimeField + 315, yTimeFieldValue, $scope.summary.timeArray[j-1].Time_Code)
+              // doc1.text(xTimeField + 355, yTimeFieldName, 'OT3')
+              // doc1.text(xTimeField + 355, yTimeFieldValue, $scope.summary.timeArray[j-1].Time_Code)
+
+              // doc1.setFontSize(22)
+              // doc1.setFontType('normal')
+              // if ($scope.summary.timeArray[j - 1].Duration)
+              // doc1.text(xTimeField + 415, yTimeFieldValue, $scope.summary.timeArray[j - 1].Duration.toString())
+              ctx.fillStyle ="#000" ;
+              ctx.font = '13px sans-serif ';
+              ctx.fillText($scope.summary.timeArray[j - 1].Duration.toString(), 700,yTimeFieldValue);
+
+              // doc1.setFontSize(22)
+              // doc1.setFontType('normal')
+              // if ($scope.summary.timeArray[j - 1].Item)
+              // doc1.text(xTimeField + 475, yTimeFieldValue, $scope.summary.timeArray[j - 1].Item)
+              ctx.fillStyle ="#000" ;
+              ctx.font = '13px sans-serif ';
+              ctx.fillText( $scope.summary.timeArray[j - 1].Item, 780,yTimeFieldValue);
+
+              // doc1.setFontSize(22)
+              // doc1.setFontType('normal')
+              // if ($scope.summary.timeArray[j - 1].Comments)
+              // doc1.text(xTimeField + 539, yTimeFieldValue, $scope.summary.timeArray[j - 1].Comments)
+              ctx.fillStyle ="#000" ;
+              ctx.font = '13px sans-serif ';
+              ctx.fillText( $scope.summary.timeArray[j - 1].Description, 965,yTimeFieldValue);
+          }
+
+                  //Expenses heading
+
+
+
+                  var k = 0, xExpenseField = 25, yExpenseField = yTimeField + rectTimeHeight + 20, rectExpenseWidth = 650,
+          rectExpenseHeight = 22 * $scope.summary.expenseArray.length, yExpenseFieldName = yExpenseField + 20,
+          yExpenseFieldValue;
+          // doc1.setFontSize(22)
+          // doc1.setFontType('bold')
+          // doc1.text(xExpenseField, yExpenseField + 5, 'Expenses')
+          ctx.fillStyle ="#000" ;
+          ctx.font = '15px sans-serif ';
+          ctx.fillText('费用', 10,yExpenseField + 5);
+          // doc1.rect(20, yExpenseField + 10, rectExpenseWidth, rectExpenseHeight)
+          // doc1.setFontSize(22)
+          // doc1.setFontType('bold')
+          // doc1.text(xExpenseField, yExpenseFieldName, 'Date')
+          ctx.fillStyle ="#000" ;
+          ctx.font = 'bold 12px sans-serif ';
+          ctx.fillText('日期', 20,yExpenseFieldName);
+          // doc1.setFontSize(22)
+          // doc1.setFontType('bold')
+          // doc1.text(xExpenseField + 150, yExpenseFieldName, 'Expense type')
+          ctx.fillStyle ="#000" ;
+          ctx.font = 'bold 12px sans-serif ';
+          ctx.fillText('费用种类', 200,yExpenseFieldName);
+          // doc1.setFontSize(22)
+          // doc1.setFontType('bold')
+          // doc1.text(xExpenseField + 300, yExpenseFieldName, 'Charge Method')
+          ctx.fillStyle ="#000" ;
+          ctx.font = 'bold 12px sans-serif ';
+          ctx.fillText('结算方式', 350,yExpenseFieldName);
+          // doc1.setFontSize(22)
+          // doc1.setFontType('bold')
+          // doc1.text(xExpenseField + 450, yExpenseFieldName, 'Justification')
+          ctx.fillStyle ="#000" ;
+          ctx.font = 'bold 12px sans-serif ';
+          ctx.fillText('阐述', 500,yExpenseFieldName);
+          // yExpenseFieldValue = yExpenseFieldName + 10;
+          while (k < $scope.summary.expenseArray.length) {
+              // yExpenseFieldName =  ;
+              yExpenseFieldValue = yExpenseFieldName + 10 * ++k;
+
+
+              // doc1.setFontSize(22)
+              // doc1.setFontType('normal')
+              // if ($scope.summary.expenseArray[k - 1].Date)
+              // doc1.text(xExpenseField, yExpenseFieldValue, $scope.summary.expenseArray[k - 1].Date)
+              ctx.fillStyle ="#000" ;
+              ctx.font = '13px sans-serif ';
+              if ($scope.summary.expenseArray[k - 1].Date)
+              ctx.fillText($scope.summary.expenseArray[k - 1].Date, 20,yExpenseFieldValue);
+
+              // doc1.setFontSize(22)
+              // doc1.setFontType('normal')
+              // if ($scope.summary.expenseArray[k - 1].Expense_Type)
+              // doc1.text(xExpenseField + 150, yExpenseFieldValue, $scope.summary.expenseArray[k - 1].Expense_Type)
+              ctx.fillStyle ="#000" ;
+              ctx.font = '13px sans-serif ';
+                if ($scope.summary.expenseArray[k - 1].Expense_Type)
+              ctx.fillText($scope.summary.expenseArray[k - 1].Expense_Type, 200,yExpenseFieldValue);
+
+              // doc1.setFontSize(22)
+              // doc1.setFontType('normal')
+              // if ($scope.summary.expenseArray[k - 1].Charge_Method)
+              // doc1.text(xExpenseField + 300, yExpenseFieldValue, $scope.summary.expenseArray[k - 1].Charge_Method)
+              ctx.fillStyle ="#000" ;
+              ctx.font = '13px sans-serif ';
+                if ($scope.summary.expenseArray[k - 1].Charge_Method)
+              ctx.fillText($scope.summary.expenseArray[k - 1].Charge_Method, 350,yExpenseFieldValue);
+
+              // doc1.setFontSize(22)
+              // doc1.setFontType('normal')
+              // if ($scope.summary.expenseArray[k - 1].Justification)
+              // doc1.text(xExpenseField + 450, yExpenseFieldValue, $scope.summary.expenseArray[k - 1].Justification)
+              ctx.fillStyle ="#000" ;
+              ctx.font = '13px sans-serif ';
+              if ($scope.summary.expenseArray[k - 1].Justification)
+              ctx.fillText($scope.summary.expenseArray[k - 1].Justification, 500,yExpenseFieldValue);
+          }
+          rectExpenseHeight=yExpenseFieldValue-yExpenseFieldName+15;
+          // doc1.rect(20, yExpenseField + 10, rectExpenseWidth, rectExpenseHeight)
+          ctx.fillStyle= "#000" ;
+          ctx.strokeRect(10,yExpenseField + 10,1010,rectExpenseHeight);
+
+
+
+
+                  var l = 0, xMaterialField = 25, yMaterialField = yExpenseField + rectExpenseHeight + 20,
+            rectMaterialWidth = 650, rectMaterialHeight = 25 * $scope.summary.materialArray.length,
+            yMaterialFieldName = yMaterialField + 20, yMaterialFieldValue;
+            // doc1.setFontSize(22)
+            // doc1.setFontType('bold')
+            // doc1.text(xMaterialField, yMaterialField + 5, 'Materials')
+            ctx.fillStyle ="#000" ;
+            ctx.font = '15px sans-serif ';
+            ctx.fillText('物料', 10,yMaterialField + 5);
+            // doc1.rect(20, yMaterialField + 10, rectMaterialWidth, rectMaterialHeight)
+            // doc1.setFontSize(22)
+            // doc1.setFontType('bold')
+            // doc1.text(25, yMaterialFieldName, 'Charge type')
+            ctx.fillStyle ="#000" ;
+            ctx.font = 'bold 13px sans-serif ';
+            ctx.fillText('结算类型', 20,yMaterialFieldName);
+
+            // doc1.setFontSize(22)
+            // doc1.setFontType('bold')
+            // doc1.text(80, yMaterialFieldName, 'Quantity')
+            ctx.fillStyle ="#000" ;
+            ctx.font = 'bold 13px sans-serif ';
+            ctx.fillText('产品数量', 150,yMaterialFieldName);
+            // doc1.setFontSize(22)
+            // doc1.setFontType('bold')
+            // doc1.text(140, yMaterialFieldName, 'Serial#')
+            ctx.fillStyle ="#000" ;
+            ctx.font = 'bold 13px sans-serif ';
+            ctx.fillText('序列号#', 280,yMaterialFieldName);
+
+            // doc1.setFontSize(22)
+            // doc1.setFontType('bold')
+            // doc1.text(200, yMaterialFieldName, 'Serial In#')
+            ctx.fillStyle ="#000" ;
+            ctx.font = 'bold 13px sans-serif ';
+            ctx.fillText('已更换产品序列号#', 510,yMaterialFieldName);
+            // doc1.setFontSize(22)
+            // doc1.setFontType('bold')
+            // doc1.text(260, yMaterialFieldName, 'Serial Out#')原产品序列号
+            ctx.fillStyle ="#000" ;
+            ctx.font = 'bold 13px sans-serif ';
+            ctx.fillText('原产品序列号#', 700,yMaterialFieldName);
+            // doc1.setFontSize(22)
+            // doc1.setFontType('bold')
+            // doc1.setFontSize(22)
+            // doc1.setFontType('bold')
+            // doc1.text(320, yMaterialFieldName, 'Item Name')
+            ctx.fillStyle ="#000" ;
+            ctx.font = 'bold 13px sans-serif ';
+            ctx.fillText('具体描述', 870,yMaterialFieldName);
+            // doc1.text(380, yMaterialFieldName, 'Description')
+            yMaterialFieldValue = yMaterialFieldName + 10;
+            var m=0,n=0,o=0;
+            while (l < $scope.summary.materialArray.length) {
+                // yMaterialFieldName =  ;
+                // yMaterialFieldValue = yMaterialFieldValue + 10 *
+                ++l;
+
+
+                // doc1.setFontSize(22)
+                // doc1.setFontType('normal')
+                // if ($scope.summary.materialArray[l - 1].Charge_Type)
+                // doc1.text(25, yMaterialFieldValue, $scope.summary.materialArray[l - 1].Charge_Type)
+                ctx.fillStyle ="#000" ;
+                ctx.font = '13px sans-serif ';
+                if ($scope.summary.materialArray[l - 1].Charge_Type)
+                ctx.fillText($scope.summary.materialArray[l - 1].Charge_Type, 20,yMaterialFieldValue);
+
+                // doc1.setFontSize(22)
+                // doc1.setFontType('normal')
+                // if ($scope.summary.materialArray[l - 1].Product_Quantity)
+                // doc1.text(80, yMaterialFieldValue, $scope.summary.materialArray[l - 1].Product_Quantity.toString())
+                ctx.fillStyle ="#000" ;
+                ctx.font = ' 13px sans-serif ';
+                    if ($scope.summary.materialArray[l - 1].Product_Quantity)
+                ctx.fillText($scope.summary.materialArray[l - 1].Product_Quantity.toString(), 150,yMaterialFieldValue);
+
+                // doc1.setFontSize(22)
+                // doc1.setFontType('normal')
+                // if ($scope.summary.materialArray[l - 1].serialNumber)
+                // doc1.text(140, yMaterialFieldValue, $scope.summary.materialArray[l - 1].serialNumber)
+                ctx.fillStyle ="#000" ;
+                ctx.font = ' 13px sans-serif ';
+                if ($scope.summary.materialArray[l - 1].serialNumber)
+                ctx.fillText($scope.summary.materialArray[l - 1].serialNumber, 280,yMaterialFieldValue);
+
+                // doc1.setFontSize(22)
+                // doc1.setFontType('normal')
+                // if ($scope.summary.materialArray[l - 1].serialIn)
+                // doc1.text(200, yMaterialFieldValue, $scope.summary.materialArray[l - 1].serialIn)
+                ctx.fillStyle ="#000" ;
+                ctx.font = ' 13px sans-serif ';
+                if ($scope.summary.materialArray[l - 1].serialIn)
+                ctx.fillText($scope.summary.materialArray[l - 1].serialIn, 510,yMaterialFieldValue);
+
+                // doc1.setFontSize(22)
+                // doc1.setFontType('normal')
+                // if ($scope.summary.materialArray[l - 1].serialOut)
+                // doc1.text(260, yMaterialFieldValue, $scope.summary.materialArray[l - 1].serialOut)
+                ctx.fillStyle ="#000" ;
+                ctx.font = ' 13px sans-serif ';
+                  if ($scope.summary.materialArray[l - 1].serialOut)
+                ctx.fillText($scope.summary.materialArray[l - 1].serialOut, 700,yMaterialFieldValue);
+                // doc1.text(320, yMaterialFieldName, 'Serial Activity')
+                // doc1.text(320, yMaterialFieldValue, $scope.summary.materialArray[l-1].Charge_Type)
+                // doc1.setFontSize(22)
+                // doc1.setFontType('normal')
+                // if ($scope.summary.materialArray[l - 1].ItemName)
+                // doc1.text(320, yMaterialFieldValue, $scope.summary.materialArray[l - 1].ItemName)
+                ctx.fillStyle ="#000" ;
+                ctx.font = ' 13px sans-serif ';
+                if ($scope.summary.materialArray[l - 1].ItemName)
+                ctx.fillText($scope.summary.materialArray[l - 1].ItemName, 870,yMaterialFieldValue);
+
+
+                // doc1.text(460, yMaterialFieldName, 'Comments')
+                // doc1.text(460, yMaterialFieldValue, $scope.summary.materialArray[l-1].Charge_Type)
+                yMaterialFieldValue=yMaterialFieldValue + 10 * $scope.summary.materialArray[l-1].Product_Quantity;
+            }
+            rectMaterialHeight= yMaterialFieldValue-yMaterialFieldName+10;
+            // doc1.rect(20, yMaterialField + 10, rectMaterialWidth, rectMaterialHeight)
+            ctx.fillStyle= "#000" ;
+            ctx.strokeRect(10,yMaterialField + 10,1010,rectMaterialHeight);
+
+
+
+                  var xSignField = 25, ySignField = yMaterialFieldValue + 20, rectSignWidth = 650,
+                      rectSignHeight = 80;
+
+                      // doc1.setFontSize(22)
+                      // doc1.setFontType('bold')
+                      // doc1.text(xSignField, ySignField + 5, 'Signature')
+                      ctx.fillStyle ="#000" ;
+                      ctx.font = '15px sans-serif ';
+                      ctx.fillText('签字', 10,ySignField + 5);
+                      // doc1.rect(20, ySignField + 10, rectSignWidth, rectSignHeight)
+                      ctx.fillStyle= "#000" ;
+                      ctx.strokeRect(10,ySignField + 10,1010,rectSignHeight);
+                      // doc1.text(50, ySignField + 20, 'ENGINEER NAME')
+                      ctx.fillStyle ="#000" ;
+                      ctx.font = 'bold 13px sans-serif ';
+                      ctx.fillText('工程师名字', 20,ySignField + 20);
+                      // doc1.text(250, ySignField + 20, 'CUSTOMER NAME')
+                      ctx.fillStyle ="#000" ;
+                      ctx.font = 'bold 13px sans-serif ';
+                      ctx.fillText('客户名', 350,ySignField + 20);
+                      // doc1.text(50, ySignField + 35, 'Alex')
+                      ctx.fillStyle ="#000" ;
+                      ctx.font = '13px sans-serif ';
+                      ctx.fillText($scope.engineerName, 20,ySignField + 35);
+                      // if ($scope.summary.engineer!=null && $scope.summary.engineer.signature)
+                      // doc1.addImage($scope.summary.engineer.signature, 'JPEG', 50, ySignField + 45, 75, 40)
+                      // doc1.text(250, ySignField + 35, $scope.summary.taskObject.Customer_Name)
+                      ctx.fillStyle ="#000" ;
+                      ctx.font = '13px sans-serif ';
+                      ctx.fillText($scope.summary.taskObject.Customer_Name, 350,ySignField + 35);
+
+                      var engineerSignature = document.createElement("img");
+engineerSignature.onload = function() {
+    ctx.drawImage(engineerSignature, 20, ySignField + 45,75,40);
+};
+engineerSignature.src = $scope.summary.engineer.signature;
+engineerSignature.width="75";
+engineerSignature.height="40";
+
+
+                  ctx.fillStyle= "#000" ;
+                  ctx.strokeRect(10,80,1010,ibyvalue-60);
+
+                  ctx.fillStyle= "#000" ;
+                  ctx.strokeRect(10,yNotesField+5,1010,rectNotesHeight);//doc1.rect(20, yNotesField+5, rectNotesWidth, rectNotesHeight)
+                  var imgSign = document.getElementById('logo');
+                          var callback = function(image) {
+                   if(!image) image = this;
+                   ctx.drawImage(image, 10, 5,140,40);
+                }
+                if(imgSign.complete) {
+                   callback(imgSign);
+                }else {
+                   imgSign.onload = callback;
+                }
+                ctx.fillStyle ="#000" ;
+                ctx.font = 'bold 18px sans-serif ';
+                ctx.fillText('Field Service Summary Report', 270,25);
+
+                ctx.fillStyle ="#000" ;
+                ctx.font = '11px sans-serif ';
+                ctx.fillText('Emerson Process Management', 670,12);
+                ctx.fillText('(CHINA)', 670,24);
+
+                ctx.fillStyle= "#000" ;
+                ctx.strokeRect(10,0,1010,50);
+                // ctx.fillText('', 240,10);
+                // ctx.fillText('Emerson Process Management', 240,10);
+                // ctx.fillText('Emerson Process Management', 240,10);
+                // ctx.fillText('Emerson Process Management', 240,10);
+
+
+                var imgData = canvas.toDataURL("image/png", 1.0);
+                    // var pdf = new jsPDF('p', 'mm', [297, 210]);
+                    doc1.addImage(imgData, 'JPEG', 5, 5,650,850);
+                    // var namefile = prompt("insert name of file");
+                    doc1.save("report.pdf");
+                }
+        }
 
         if ($rootScope.local) {
             var filePath = cordova.file.dataDirectory;
