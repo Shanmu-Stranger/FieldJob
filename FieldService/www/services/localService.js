@@ -173,11 +173,11 @@
 
                 var insertValues = [];
 
-                var sqlUpdate = "UPDATE Task SET Job_Description = ?, Duration = ?, Customer_Name =?, Street_Address = ?, City = ?, State = ?, Country = ?, Zip_Code = ?, Expense_Method = ?, Labor_Method = ?, Travel_Method = ?, Material_Method = ?, Service_Request = ?, Assigned = ?, Start_Date = ?, End_Date = ?  WHERE Task_Number = ?";
+                var sqlUpdate = "UPDATE Task SET Job_Description = ?, Duration = ?, Task_Status = ?, Customer_Name =?, Street_Address = ?, City = ?, State = ?, Country = ?, Zip_Code = ?, Expense_Method = ?, Labor_Method = ?, Travel_Method = ?, Material_Method = ?, Service_Request = ?, Assigned = ?, Start_Date = ?, End_Date = ?  WHERE Task_Number = ?";
 
                 insertValues.push(responseList.Job_Description);
                 insertValues.push(responseList.Duration);
-                // insertValues.push(responseList.Task_Status);
+                insertValues.push(responseList.Task_Status);
                 insertValues.push(responseList.Customer_Name);
                 insertValues.push(responseList.Street_Address);
                 insertValues.push(responseList.City);
@@ -3035,7 +3035,7 @@
 
             return db.transaction(function (transaction) {
 
-                transaction.executeSql("SELECT * FROM Task WHERE Task_Status = ? AND Submit_Status = ?", ["Accepted", "A"], function (tx, res) {
+                transaction.executeSql("SELECT * FROM Task WHERE Submit_Status = ?", ["A"], function (tx, res) {
 
                     var rowLength = res.rows.length;
 
