@@ -49,7 +49,7 @@
 </style>
 
 <div id="export1">
-    <div class="padding10 debLabelHeader" translate="Customer Call Details"></div>
+    <div class="padding10 debLabelHeader">CUSTOMER CALL DETAILS</div>
     <div class="container" style="padding:0">
         <div class="debreifContainerouter margintop30" style="margin-top:30px !important">
             <md-card style="border-radius:10px 10px 10px 10px">
@@ -115,9 +115,9 @@
                         <thead md-head>
                             <tr md-row>
                                 <th   translate="Product Line"></th>
-                                <th  translate="System ID / Serial"><span>#</span></th>
-                                <th  translate="TAG"><span>#</span></th>
-                                <th translate="ORGINAL PO"><span>#</span></th>
+                                <th  translate="System ID / Serial #"></th>
+                                <th  translate="TAG #"></th>
+                                <th translate="ORGINAL PO #"></th>
                             </tr>
                         </thead>
                         <tbody md-body>
@@ -162,8 +162,8 @@
                     <table md-table>
                         <thead md-head>
                             <tr md-row>
-                                <th md-column class="col-sm-4" style="text-align:left"><span translate="Note Type"></span></th>
-                                <th md-column class="col-sm-6" style="text-align:left"><span translate="Note Description"></span>
+                                <th md-column class="col-sm-4" style="text-align:left"><span translate="Note Type">NOTE TYPE</span></th>
+                                <th md-column class="col-sm-6" style="text-align:left"><span>NOTE DESCRIPTION</span>
                                 </th>
                             </tr>
                         </thead>
@@ -191,10 +191,10 @@
                     <img data-ng-src="data:{{file1.contentType}};base64,{{file1.base64}}"
                          ng-if="file1.contentType.indexOf('image') > -1" class="img-responsive">
                     <img src="images/pdf.png" ng-if="file1.filetype.indexOf('pdf') > -1" class="img-responsive">
-                    <img src="images/Word_1x.png" ng-if="file1.filetype.indexOf('doc') > -1 || file1.filetype.indexOf('docx') > -1" class="img-responsive">
-                    <img src="images/Excel_1x.png" ng-if="file1.filetype.indexOf('xlsx') > -1 || file1.filetype.indexOf('xls') > -1" class="img-responsive">
-                    <img src="images/PowerPoint_1x.png" ng-if="file1.filetype.indexOf('pptx') > -1 || file1.filetype.indexOf('ppt') > -1" class="img-responsive">
-                    <img src="images/Notepad_1x.png" ng-if="file1.filetype.indexOf('txt') > -1 " class="img-responsive">
+                    <img src="images/Word_2x.png" ng-if="file1.filetype.indexOf('doc') > -1 || file1.filetype.indexOf('docx') > -1" class="img-responsive">
+                    <img src="images/excel.png" ng-if="file1.filetype.indexOf('xlsx') > -1 || file1.filetype.indexOf('xls') > -1" class="img-responsive">
+                    <img src="images/PowerPoint_2x.png" ng-if="file1.filetype.indexOf('pptx') > -1 || file1.filetype.indexOf('ppt') > -1" class="img-responsive">
+                    <img src="images/Notepad_2x.png" ng-if="file1.filetype.indexOf('txt') > -1 > -1" class="img-responsive">
                     <!-- <div>{{file1.name}}</div> -->
                     <div style="margin-bottom:20px">{{file1.filename}}
                     </div>
@@ -300,11 +300,11 @@
                                 <thead md-head>
                                     <tr md-row>
                                         <th md-column><span translate="Charge Type"></span></th>
-                                        <th md-column><span translate="Quantity"></span></th>
-                                        <th md-column><span translate="Serial"> #</span></th>
+                                        <th md-column><span>QUANTITY</span></th>
+                                        <th md-column><span translate="Serial #"></span></th>
                                         <th md-column><span translate="Serial In"></span></th>
                                         <th md-column><span translate="Serial Out"></span></th>
-                                        <th md-column><span translate="item name"></span></th>
+                                        <th md-column><span translate="Item Name"></span></th>
                                         <th md-column><span translate="Item Description"></span></th>
                                     </tr>
                                 </thead>
@@ -326,7 +326,7 @@
             </div>
         </div>
 
-        <div class="padding10 debLabelHeader" translate="Signature"></div>
+        <div class="padding10 debLabelHeader">SIGNATURE</div>
         <div class="container" style="padding:0">
             <div class="debreifContainerouter margintop30">
                 <md-card style="border-radius:10px 10px 10px 10px">
@@ -335,7 +335,7 @@
                             <div class="col-sm-5">
                                 <!-- <label>EMERSON PROCESS MANAGEMENT</label> -->
 
-                                <div><label><span translate="Engineer Name"></span> : {{engineerName}}</label></div>
+                                <div><label translate="Engineer Name"> : {{engineerName}}</label></div>
                                 <!--  <span></span> -->
                                 <!-- <div class="result" ng-show="$rootScope.signature"> -->
                                     <img ng-src="{{summary.engineer.signature}}" style="width:50%">
@@ -343,7 +343,7 @@
                                 </div>
                                 <div class="col-sm-5">
 
-                                    <div><label><span translate="Customer Name"></span> :{{summary.taskObject.Customer_Name}}</label></div>
+                                    <div><label >Customer Name :{{summary.taskObject.Customer_Name}}</label></div>
                                     <span></span>
                                 </div>
                             </div>

@@ -1,4 +1,4 @@
-﻿app.controller('taskOverFlowController', function ($scope, $http, $state, $rootScope, cloudService, valueService, constantService, localService) {
+﻿app.controller('taskOverFlowController', function ($scope, $http, $state, $rootScope, cloudService, valueService, constantService) {
 
     $scope.myVar = false;
 
@@ -14,12 +14,6 @@
         $scope.myVar = !$scope.myVar;
     };
 
-    if ($scope.selectedTask.Task_Status == 'Assigned') {
-        $rootScope.accepted = false;
-    } else {
-        $rootScope.accepted = true;
-    }
-
     $scope.taskId = $rootScope.selectedTask.Task_Number;
 
     $scope.taskDetails = $rootScope.selectedTask;
@@ -33,22 +27,22 @@
         console.log(valueService.getTask());
 
         if (valueService.getTask().Country == "People's Republic of China") {
-            if (valueService.getNetworkStatus()) {
-                var map = new BMap.Map("allmap");
 
-                map.centerAndZoom(new BMap.Point(116.404, 39.915), 11);
+            var map = new BMap.Map("allmap");
 
-                map.addControl(new BMap.MapTypeControl({
-                    mapTypes: [
-                        BMAP_NORMAL_MAP,
-                        BMAP_HYBRID_MAP
-                    ]
-                }));
+            map.centerAndZoom(new BMap.Point(116.404, 39.915), 11);
 
-                map.setCurrentCity("??");
+            map.addControl(new BMap.MapTypeControl({
+                mapTypes: [
+                    BMAP_NORMAL_MAP,
+                    BMAP_HYBRID_MAP
+                ]
+            }));
 
-                map.enableScrollWheelZoom(true);
-            }
+            map.setCurrentCity("??");
+
+            map.enableScrollWheelZoom(true);
+
             $scope.chinaUser = true;
 
         } else {
@@ -68,28 +62,26 @@
         $('#mapToggle').click(function () {
 
             if (firstload) {
-                if (valueService.getNetworkStatus()) {
-                    map = new google.maps.Map(document.getElementById('map'), {
-                        center: { lat: -34.397, lng: 150.644 },
-                        zoom: 8
-                    });
 
-                    firstload = false;
+                map = new google.maps.Map(document.getElementById('map'), {
+                    center: {lat: -34.397, lng: 150.644},
+                    zoom: 8
+                });
 
-                    codeAddress($scope.taskDetails.Zip_Code);
-                }
+                firstload = false;
+
+                codeAddress($scope.taskDetails.Zip_Code);
             }
 
             if (mapClose) {
 
                 if ($scope.chinaUser == false) {
-                    if (valueService.getNetworkStatus()) {
-                        document.getElementById('map').style.display = "block";
 
-                        google.maps.event.trigger(document.getElementById('map'), 'resize');
+                    document.getElementById('map').style.display = "block";
 
-                        mapClose = false;
-                    }
+                    google.maps.event.trigger(document.getElementById('map'), 'resize');
+
+                    mapClose = false;
 
                 } else {
 
@@ -152,25 +144,22 @@
 
     constantService.setUserEmailId(contactArray);
 
-    $scope.taskDetails.InstallBase = [];
+    $scope.taskDetails.InstallBase=[];
 
     angular.forEach(valueService.getInstallBase(), function (key, value) {
 
-        if (key.Task_Number == $scope.taskId) {
-
-            var install = {};
-
-            install.Product_Line = key.Product_Line;
-            install.Serial_Number = key.Serial_Number;
-            install.tagNo = key.TagNumber;
-            install.orginalNo = key.Original_PO_Number;
-
-            $scope.taskDetails.InstallBase.push(install);
-
-            $rootScope.selectedTask = $scope.taskDetails;
-
-            valueService.setTask($scope.taskDetails);
+        if(key.Task_Number==$scope.taskId){
+          var install={};
+          install.Product_Line = key.Product_Line;
+          install.Serial_Number = key.Serial_Number;
+          install.tagNo = key.TagNumber;
+          install.orginalNo = key.Original_PO_Number;
+          $scope.taskDetails.InstallBase.push(install);
+          $rootScope.selectedTask = $scope.taskDetails;
+          valueService.setTask($scope.taskDetails);
         }
+
+
     });
 
     $scope.contacts = [
@@ -187,10 +176,6 @@
         $rootScope.selectedItem = 1;
         $rootScope.showTaskDetail = false;
     };
-
-    $scope.goToOnsiteReq = function () {
-        $state.go('todo');
-    }
 
     $scope.add = function () {
 
@@ -216,41 +201,12 @@
     };
 
     $scope.deleteItem = function () {
-
         $scope.items.splice(this.$index, 1);
+
     };
 
     $scope.accept = function () {
 
-        console.log("STATUS " + $scope.selectedTask.Task_Status);
-
-        if ($scope.selectedTask.Task_Status == 'Assigned') {
-
-            if (valueService.getNetworkStatus()) {
-
-                valueService.acceptTask(valueService.getTask().Task_Number);
-
-                $scope.selectedTask.Task_Status = "Accepted";
-
-                $rootScope.showAccept = false;
-
-            } else {
-
-                var taskObject = {
-                    Task_Status: "Accepted",
-                    Task_Number: valueService.getTask().Task_Number,
-                    Submit_Status: "A",
-                    Date: new Date()
-                };
-
-                localService.updateTaskSubmitStatus(taskObject);
-
-                localService.getTaskList(function (response) {
-
-                    constantService.setTaskList(response);
-                });
-            }
-        }
     };
 
     $scope.mapClicked = function () {

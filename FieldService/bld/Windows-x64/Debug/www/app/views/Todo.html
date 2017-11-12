@@ -1,142 +1,111 @@
-﻿
+﻿<style>
+    div.resources {
+        margin: 30px;
+        float: left;
+        width: 100px;
+    }
 
+    div.resources:hover {
+
+    }
+
+    div.resources img {
+        width: 75px;
+        height: 100px;
+
+    }
+
+    .imgPad {
+        border: 1px solid #ccc;
+        padding: 10px;
+    }
+
+    div.desc {
+        padding: 15px;
+        text-align: center;
+    }
+
+    .toolsField {
+        height: 400px;
+    }
+
+    /*.customContainer{
+      margin-top : 20px;
+      background: #fff;
+      box-shadow: 0px 0px 5px #ccc;
+      padding-top:20px;
+      padding-left: 75px;
+      padding-right: 50px;
+      padding-bottom: 20px;
+      border-radius: 10px;
+    }*/
+
+</style>
+       
 
         <nav class="navbar navbar-default navbar-fixed-top nav-noLeft sub-navbar"  ng-class="{'nav-left' : hideNavLeft}">
-
+            
                 <div class="navbar-header">
 
-                    <md-button class="subheader-btns" aria-label="Learn More"  ui-sref="taskOverFlow" translate="Field Job Details">
+                    <md-button class="subheader-btns" aria-label="Learn More"  ui-sref="taskOverFlow">
+                        FIELD JOB DETAILS
                     </md-button>
                      <md-button class="subheader-btns selectedTabColor" aria-label="Learn More"  ui-sref="todo" translate="Onsite Requirement" style="margin-left: 34px !important;">
                     </md-button>
                 </div>
 
                 <div class="collapse navbar-collapse"  style="text-align: center;">
-
+                    
                     <div class="nav navbar-nav navbar-right">
-
+                         
                          <!-- <a class="startwork-btn md-button md-ink-ripple" ng-click="$root.showTaskOrDebrief(4)" ng-disabled="isFutureDate"><span translate="Debrief"></span></a> -->
 
-                         <button type="button" class="btn btn-default startwork-btn" ng-click="$root.showTaskOrDebrief(4)" ng-disabled="isFutureDateInTodo" translate="Debrief"></button>
+                         <button type="button" class="btn btn-default startwork-btn" ng-click="$root.showTaskOrDebrief(4)" ng-disabled="isFutureDate" translate="Debrief"></button>
                     </div>
 
-
+                      
                 </div>
-
+           
 </nav>
+<!-- <md-toolbar class="category-title" layout="row">
+    <div class="md-toolbar-tools toolbar">
 
-<div class="card-parentContainer martop-106">
+        <md-button class="subheader-btns " aria-label="Learn More" ui-sref="taskOverFlow">
+            FIELD JOB DETAILS
+        </md-button>
+        <md-button class="subheader-btns " aria-label="Learn More" ui-sref="todo">
+            ONSITE REQUIREMENT
+        </md-button>
+       
+        <span flex></span>
+        <md-button class="md-primary startwork-btn"  ng-click="$root.showTaskOrDebrief(4)" ng-disabled="isFutureDate">DEBRIEF
+        </md-button>
 
-<!-- Notes -->
-<label class="header-labeles" translate="Notes"></label>
-<div class="card-childContainer marginbottom30" ng-if="noteArray == undefined || noteArray.length==0">
-    <label class="note-type-label">NO DATA</label>
-</div>
-<div class="card-childContainer marginbottom30"  ng-repeat="note in noteArray">
-
-    <div class="">
-      
-        <div class="created-by">{{note.Created_By}}</div>
-        <div class="created-date">{{note.Start_Date| timezonefilter}}</div>
-        <div class="margintop10">
-            <label class="note-type-label" translate="Note Type"></label>
-            <span class="note-type-value">-{{note.Notes_type}}</span>
-        </div>
-        <div>
-            <label class="note-type-label" translate="Note Description"></label>
-            <span class="note-type-value">-{{note.Notes}}</span>
-        </div>
-
-
+    </div>
+</md-toolbar> -->
+<div class="uiViewContent">
+<h4 class="header-labeles">NOTES</h4>
+<div class="container " style="padding:0">
+    <div class=" TodoContainer" ng-if="noteArray == undefined || noteArray.length==0">
+        NO DATA
     </div>
 </div>
-<!-- End of Notes -->
+<div class="container" style="padding:0" ng-repeat="note in noteArray">
 
-<!-- References -->
-    <label class="header-labeles" translate="References"></label>
-    <div class="card-childContainer marginbottom30" ng-if="attachmentArray == undefined || attachmentArray.length==0">
-        <label class="note-type-label">NO DATA</label>
-    </div>
-
-    <div class="card-childContainer marginbottom30"  ng-if="attachmentArray != undefined && attachmentArray.length>0">
-
-        <div class="row">
-          
-                <!--<div ng-repeat="res in Attachments " class="col-sm-4 text-center">
-                       
-                            <a ng-href="data:{{res.Content_type}};base64,{{res.base64Code}}" target="_blank" download>
-                               
-                                    <img class="imgPad" src="images/pdf.png" alt=""
-                                         ng-if="res.User_File_Name.indexOf('.pdf')>-1"/>
-
-                                    <img class="imgPad" src="images/Word_1x.png" alt=""
-                                         ng-if="res.User_File_Name.indexOf('.docx')>-1 || res.User_File_Name.indexOf('.doc')>-1"/>
-
-                                    <img class="imgPad" src="images/Excel_1x.png" alt=""
-                                         ng-if="res.User_File_Name.indexOf('.xls')>-1 || res.User_File_Name.indexOf('.xlsx')>-1"/>
-
-                                    <img class="imgPad" style="width:100px;height:100px"
-                                         data-ng-src="data:{{res.Content_type}};base64,{{res.base64Code}}" alt=""
-                                         ng-if="res.Content_type.indexOf('image')>-1 "/>
-
-                                    <div class="margintop10">{{res.User_File_Name}}</div>
-
-                                     <div class="margintop10">
-                                        <label class="note-type-label display-block">Created by</label>
-                                        <span class="note-type-value">{{$root.uName}}</span>
-                                    </div>
-                                    <div class="margintop10">
-                                        <label class="note-type-label display-block">Date</label>
-                                        <span class="note-type-value">{{res.Date_Created.substr(1,19)| timezonefilter }}</span>
-                                    </div>
-                                    
-                            </a>
-
-                        
-                    </div>-->
-
-                    <div ng-repeat="item in attachmentArray " class="col-sm-4 text-center">
-                        
-                            <a ng-click="openResource(item)" target="_blank" download>
-
-                                
-                                    <img class="imgPad" src="images/pdf.png" alt=""
-                                         ng-if="item.File_Name.indexOf('.pdf')>-1"/>
-                                    <img class="imgPad" src="images/Word_1x.png" alt=""
-                                         ng-if="item.File_Name.indexOf('.docx')>-1 || item.File_Name.indexOf('.doc')>-1"/>
-                                    <img class="imgPad" src="images/Excel_1x.png" alt=""
-                                         ng-if="item.File_Name.indexOf('.xls')>-1 || item.File_Name.indexOf('.xlsx')>-1"/>
-                                    <img class="imgPad" src="images/Notepad_1x.png" alt=""
-                                     ng-if="item.File_Name.indexOf('.txt')>-1" />
-                                      <img class="imgPad" src="images/PowerPoint_1x.png" alt=""
-                                   ng-if="item.File_Name.indexOf('.ppt')>-1 || item.File_Name.indexOf('.pptx')>-1" />
-                                    <img class="imgPad" style="width:100px;height:100px"
-                                         data-ng-src="data:{{item.contentType}};base64,{{item.base64}}" alt=""
-                                         ng-if="item.contentType.indexOf('image')>-1"/>
-
-                                    <div class="margintop10">{{item.File_Name}}</div>
-
-
-                                     <!--<div class="margintop10">
-                                        <label class="note-type-label display-block" translate="Created By"></label>
-                                        <span class="note-type-value">{{$root.uName}}</span>
-                                    </div>-->
-                                    <div class="margintop10">
-                                        <label class="note-type-label display-block" translate="Date"></label>
-                                        <span class="note-type-value">{{item.Date_Created.substr(1,19)| timezonefilter }}</span>
-                                    </div>
-
-                            </a>
-                        
-                    </div>
-                    
-
-
+    <div class="TodoContainer">
+        <div class="ng-scope layout-column">
+            <div class="labels">{{note.Created_By}}</div>
+            <div class="mysmallValue">{{note.Start_Date| timezonefilter}}</div>
+            <div class="margintop30"><span style="color:#2d383f;font-weight:600;font-size:12px;font-family:Arial;word-wrap:break-word;">NOTE TYPE-</span><span>{{note.Notes_type}}</span>
+            </div>
+        </div>
+        <div class="myvalue margintop10"><span style="color:#2d383f;font-weight:600;font-size:12px;font-family:Arial;word-wrap: break-word;">NOTE DESCRIPTION-</span><span>{{note.Notes}}</span>
         </div>
     </div>
-<!-- End of References -->
+</div>
 
-<!-- <h4 class="header-labeles">REFERENCES</h4>
+
+<h4 class="header-labeles">REFERENCES</h4>
 <div class="container" style="padding:0">
     <div class="TodoContainer">
 
@@ -187,8 +156,7 @@
                                          ng-if="item.File_Name.indexOf('.xls')>-1 || item.File_Name.indexOf('.xlsx')>-1"/>
 
                                     <img style="width:100px;height:100px"
-                                         data-ng-src="data:{{item.contentType}};base64,{{item.base64}}" alt=""
-                                         ng-if="item.contentType.indexOf('image')>-1"/>
+                                         ng-src="{{item.File_Path + item.File_Name}}"/>
 
                                     <div style="padding:15px 0">{{item.File_Name}}</div>
 
@@ -198,51 +166,28 @@
 
                                     <div class="label-my margintop10" style="margin-bottom:0 !important;">Date</div>
 
-                                    <div>{{item.Date_Created.substr(1,19)| timezonefilter }}</div>
+                                    <div>{{res.Date_Created.substr(1,19)| timezonefilter }}</div>
 
                                 </div>
                             </a>
 
                         </div>
                     </div>
-                    <div  ng-if="attachmentArray == undefined || attachmentArray.length==0">
+                    <div  ng-if="Attachments == undefined || Attachments.length==0">
                             NO DATA
-                    </div>
+                        </div>
                 </div>
 
             </div>
-
+          
         </div>
 
     </div>
-
-</div> -->
-
-<!-- Tools and Equipments -->
-<label class="header-labeles" translate="Tools and Equipments"></label>
-   
-    <div class="marginbottom30">
-          
-                <div ng-repeat="t in defaultTasks track by $index" class="tool-items">
-                   <label>
-                       {{t}}
-                   </label> 
-                </div>
-
-                <div ng-repeat="t in tasks track by $index" class="tool-items">
-                   <label>
-                       {{t}}</label> 
-                       <img src="images/cancel.png" class="cancelInEquip" ng-click="delete()"/>
-                   
-                </div>
-                    
+  
+</div>
 
 
-       
-    </div>
-<!-- End of Tools and Equipments -->
-
-<!-- <h4 class="header-labeles" translate="Tools and Equipments"></h4>
+<h4 class="header-labeles">TOOLS AND EQUIPMENTS</h4>
 <div class="container  toolsField" style="padding:0">
     <div class="TodoContainer">
 
@@ -252,10 +197,14 @@
                     <div class="list-item">
 
                         {{t}}
-                        
+                        <!-- <span><img src="images/cancel.png" style="width:12px;float:right;padding-top:3px;outline:none;" ng-click="delete()"></img></span> -->
                     </div>
 
-                    
+                    <!--  <md-button ng-click="delete()" class="md-raised md-primary" style="background-color:red;width:10px;height:10px">
+                      x resources style border: 1px solid #ccc;resources hover border: 1px solid #777;
+                    </md-button>-->
+
+                    <!--<span style="background-color:red;height:33px" ng-click="delete()">X</span>-->
                     <br>
 
                 </div>
@@ -273,48 +222,37 @@
                                        ng-click="delete()"/></span>
                         </div>
 
-                       
+                        <!--  <md-button ng-click="delete()" class="md-raised md-primary" style="background-color:red;width:10px;height:10px">
+                          x resources style border: 1px solid #ccc;resources hover border: 1px solid #777;
+                        </md-button>-->
+
+                        <!--<span style="background-color:red;height:33px" ng-click="delete()">X</span>-->
                         <br>
 
                     </div>
                 </div>
             </div>
         </div>
-    </div> -->
+    </div>
 
-
-    <!-- Add Equipmets/Tools -->
-
-             <div class="marginbottom30">
-            <div class="patternImg" style="height: 147px;">
-                <form name="TodoForm" class="addEquip">
-                    <label class="note-type-label" translate="Add Equipments/Tools"></label>
-                    <div>
-                    <div class="input-group">
-
-                            <input  class="form-control" style="border-radius: 0px;" id="fieldTool"
-                                   ng-model="title" name="title" type="text" required  />
-                            <span class="input-group-addon addlist-btn"   ng-click="add()"
-                                  ng-disabled="TodoForm.$invalid">Add List</span>
-                        </div>
-                    </div>
-                </form>
-            </div>
-    
-            </div>
-
-            
-    <!-- End of Add Equipmets/Tools -->
-
-
-   <!--  <div class="container" style="margin-bottom:20px;padding:0 !important">
+    <div class="container" style="margin-bottom:20px;padding:0 !important">
         <div class="TodoContainer patternImg">
 
             <div class="box-add">
                 <div class="inner-content">
                     <form name="TodoForm">
+                        <!-- <label id="equip-header">ADD EQUIPMENTS/TOOLS</label><br>
+
+                        <input id="fieldTool" ng-model="title"  name="title" type="text" ng-required="true" placeholder="enter the tools/equipment" ></input>
+
+                        <!-- <span style="color:red" ng-show="TodoForm.title.$dirty && TodoForm.title.$invalid && TodoForm.title.$error.required">
+                          task is required
+                        </span> -->
+                        <!-- <button id="addBtn" type="sumbit" ng-click="add()"  ng-disabled="TodoForm.$invalid " >Add</button> -->
+
+
                         <div class="input-group">
-                            <label class="label-my" id="equip-header" translate="Add Equipments/Tools"></label>
+                            <label class="label-my" id="equip-header">ADD EQUIPMENTS/TOOLS</label>
                         </div>
 
                         <div class="input-group">
@@ -323,12 +261,12 @@
                                    ng-model="title" name="title" type="text" required/>
                             <span class="input-group-addon" id="btnGroupAddon" ng-click="add()"
                                   ng-disabled="TodoForm.$invalid "
-                                  style="background-color: #00aa7e;border: none; border-radius: 0 !important;color: #fff;font-weight: bold;" translate="Add"></span>
+                                  style="background-color: #00aa7e;border: none; border-radius: 0 !important;color: #fff;font-weight: bold;">ADD</span>
                         </div>
 
                     </form>
                 </div>
             </div>
         </div>
-    </div> -->
+    </div>
 </div>

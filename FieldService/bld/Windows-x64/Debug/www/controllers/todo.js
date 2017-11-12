@@ -7,7 +7,7 @@
     $rootScope.closed = false;
 
     $scope.ProductQuantity = 1;
-    $scope.isFutureDateInTodo = valueService.getIfFutureDateTask();
+
     $scope.toggle = function () {
 
         $scope.myVar = !$scope.myVar;
@@ -18,45 +18,6 @@
     console.log("NOTE ARRAY " + $scope.noteArray);
 
     $scope.attachmentArray = valueService.getTaskAttachment();
-    $scope.attachments=[];
-    angular.forEach($scope.attachmentArray,function (attachment) {
-        var attachmentObject={};
-        window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fs) {
-
-            fs.root.getFile(attachment.File_Name, {create: true, exclusive: false}, function (fileEntry) {
-
-                fileEntry.file(function (file) {
-
-                    var reader = new FileReader();
-
-                    reader.onloadend = function () {
-
-                        console.log("Successful file read: " + this.result);
-
-                        attachment.base64 = this.result.split(",")[1];
-
-                        attachment.contentType = attachment.File_Type;
-
-                        attachment.filename = attachment.File_Name.split(".")[0];
-                        attachment.Date_Created = attachment.Created_Date;
-                        
-                        attachment.filetype = attachment.File_Name.split(".")[1];
-                        $scope.$apply()
-                        // if (attachment.AttachmentType == "D") {
-
-                         //   $scope.attachments.push(attachmentObject);
-
-                        // } else if (attachment.AttachmentType == "M") {
-                        //
-                        //     $scope.image.push(attachmentObject)
-                        // }
-                    };
-
-                    reader.readAsDataURL(file);
-                });
-            });
-        });
-    })
 
     $scope.openResource = function (item) {
 

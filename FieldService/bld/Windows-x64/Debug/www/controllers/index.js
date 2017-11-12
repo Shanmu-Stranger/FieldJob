@@ -11,6 +11,27 @@
         $scope.onlineStatus = false;
     }
 
+    if (valueService.getNetworkStatus()) {
+
+        localService.getAcceptTaskList(function (response) {
+
+            angular.forEach(response, function (item) {
+
+                valueService.acceptTask(item.Task_Number);
+
+            });
+        });
+
+        localService.getPendingTaskList(function (response) {
+
+            angular.forEach(response, function (item) {
+
+                valueService.submitDebrief(item.Task_Number);
+
+            });
+        });
+    }
+
     $scope.spinnerLoading = true;
 
     $rootScope.closed = false;
@@ -63,7 +84,7 @@
 
                 break;
 
-            case "ch":
+            case "ch" :
 
                 $scope.usFlag = true;
                 $scope.franceFlag = true;
@@ -79,14 +100,15 @@
         }
     }
 
-    $scope.sideNavItems = [{
-        id: 1,
-        displayName: "My Calendar",
-        name: "MyCalendar",
-        controller: "myTask",
-        image: "images/calendar/Rectangle8.png",
-        imageSelected: "images/calendar/Rectangle8copy.png"
-    },
+    $scope.sideNavItems = [
+        {
+            id: 1,
+            displayName: "My Calendar",
+            name: "MyCalendar",
+            controller: "myTask",
+            image: "images/calendar/Rectangle8.png",
+            imageSelected: "images/calendar/Rectangle8copy.png"
+        },
         {
             id: 2,
             displayName: "My Field Job",
@@ -163,7 +185,7 @@
 
                 break;
 
-            case "Debrief":
+            case "Debrief" :
 
                 $scope.taskOverview = true;
 
@@ -200,21 +222,11 @@
 
     $scope.signout = function () {
 
-        if (valueService.getNetworkStatus()) {
+        // localService.deleteUser();
 
-            // var db = sqlitePlugin.deleteDatabase({
-            //     name: 'emerson.sqlite',
-            //     location: 'default'
-            // });
+        // var db = sqlitePlugin.deleteDatabase({name: 'emerson.sqlite', location: 'default'});
 
-            constantService.onDeviceReady();
-
-            $state.go('login');
-        }
-        else {
-            $state.go('login');
-
-        }
+        $state.go('login');
     }
 
     $scope.export2PDF = function () {
@@ -245,8 +257,6 @@
 
     $scope.syncFunctionality = function () {
 
-        console.log("NETWORK " + valueService.getNetworkStatus());
-
         if (valueService.getNetworkStatus()) {
 
             localService.getAcceptTaskList(function (response) {
@@ -254,18 +264,29 @@
                 angular.forEach(response, function (item) {
 
                     valueService.acceptTask(item.Task_Number);
+
                 });
             });
+
+            // valueService.syncData();
 
             localService.getPendingTaskList(function (response) {
 
                 angular.forEach(response, function (item) {
 
-                    valueService.submitDebrief(item, item.Task_Number);
+                    valueService.submitDebrief(item.Task_Number);
+
                 });
             });
 
             cloudService.getTaskList(function (response) {
+
+                localService.deleteInstallBase();
+                localService.deleteNote();
+                localService.deleteContact();
+                localService.deleteShiftCode();
+                localService.deleteOverTime();
+                localService.deleteFieldJobName();
 
                 cloudService.getInstallBaseList();
                 cloudService.getContactList();
@@ -282,10 +303,7 @@
                 cloudService.getItem();
                 cloudService.getCurrency();
 
-                cloudService.getExpenseType();
-                cloudService.getNoteType();
-
-                getAttachments();
+                $state.go('myTask');
             });
         }
     }
@@ -317,6 +335,8 @@
         cloudService.login(data, function (response) {
 
             if (response && response.message == null) {
+
+                $rootScope.Islogin = true;
 
                 valueService.setResourceId(response['ID']);
 
@@ -358,11 +378,7 @@
                         };
 
                         ofscService.activate_resource(data, function (response) {
-
-                            if (response != undefined && response != null) {
-
-                                console.log("ACTIVATE RESOURCE " + JSON.stringify(response));
-                            }
+                            console.log("ACTIVATE RESOURCE " + JSON.stringify(response));
                         });
 
                         offlineGetCall();
@@ -379,21 +395,35 @@
 
             cloudService.getTaskList(function (response) {
 
+                // localService.deleteInstallBase();
+                // localService.deleteContact();
+                // localService.deleteNote();
+                //
+                // localService.deleteOverTime();
+                // localService.deleteShiftCode();
+                //
+                // localService.deleteChargeType();
+                // localService.deleteChargeMethod();
+                // localService.deleteFieldJobName();
+                //
+                // localService.deleteWorkType();
+                // localService.deleteItem();
+                // localService.deleteCurrency();
+                //
+                // localService.deleteExpenseType();
+                // localService.deleteNoteType();
+
                 if (constantService.getUser().Default_View == "My Task") {
 
                     $rootScope.selectedItem = 2;
 
                     $state.go('myFieldJob');
 
-                    $rootScope.Islogin = true;
-
                 } else {
 
                     $rootScope.selectedItem = 1;
 
                     $state.go('myTask');
-
-                    $rootScope.Islogin = true;
                 }
 
                 $rootScope.apicall = false;
@@ -435,7 +465,7 @@
 
                         download(attachmentValue, taskArray.Task_Id, function (response) {
 
-                            // $rootScope.apicall = false;
+                            $rootScope.apicall = false;
 
                             $scope.attachmentArray = [];
 
@@ -454,9 +484,9 @@
                                     File_Type: attachmentValue.Content_type,
                                     Type: "O",
                                     AttachmentType: "O",
-                                    Created_Date: attachmentValue.Date_Created,
                                     Task_Number: taskArray.Task_Id
                                 };
+
                                 $scope.attachmentArray.push(attachmentObject);
 
                                 localService.insertAttachmentList($scope.attachmentArray);

@@ -54,7 +54,6 @@
         service.insertNotesList = insertNotesList;
         service.insertEngineerList = insertEngineerList;
 
-        service.deleteTaskList = deleteTaskList;
         service.deleteInstallBase = deleteInstallBase;
         service.deleteContact = deleteContact;
         service.deleteNote = deleteNote;
@@ -73,13 +72,6 @@
 
         service.deleteExpenseType = deleteExpenseType;
         service.deleteNoteType = deleteNoteType;
-
-        service.deleteTimeList = deleteTimeList;
-        service.deleteExpenseList = deleteExpenseList;
-        service.deleteMaterialList = deleteMaterialList;
-        service.deleteNotesList = deleteNotesList;
-        service.deleteAttachmentList = deleteAttachmentList;
-        service.deleteEngineerList = deleteEngineerList;
 
         service.deleteTime = deleteTime;
         service.deleteExpense = deleteExpense;
@@ -115,7 +107,6 @@
         service.getEngineer = getEngineer;
 
         service.updateTaskSubmitStatus = updateTaskSubmitStatus;
-        service.updateTaskEmail = updateTaskEmail;
 
         service.getPendingTaskList = getPendingTaskList;
         service.getAcceptTaskList = getAcceptTaskList;
@@ -130,36 +121,18 @@
 
                 (function (i) {
 
-                    db.transaction(function (transaction) {
+                    if (i < responseList.length - 1) {
 
-                        var sqlSelect = "SELECT * FROM Task WHERE Task_Number = " + responseList[i].Task_Number;
+                        updateTask(responseList[i]);
 
-                        console.log("TASK  ====> " + sqlSelect);
+                        insertTask(responseList[i]);
 
-                        transaction.executeSql(sqlSelect, [], function (tx, res) {
+                    } else {
 
-                            var rowLength = res.rows.length;
+                        updateTask(responseList[i]);
 
-                            console.log("TASK LENGTH ====> " + rowLength);
-
-                            if (rowLength > 0) {
-
-                                updateTask(responseList[i]);
-
-                            } else {
-
-                                insertTask(responseList[i]);
-                            }
-
-                        }, function (tx, error) {
-
-                            console.log("TASK SELECT ERROR: " + error.message);
-                        });
-
-                    }, function (error) {
-
-                        console.log("TASK SELECT TRANSACTION ERROR: " + error.message);
-                    });
+                        insertTask(responseList[i]);
+                    }
 
                     console.log("TASK OBJECT =====> " + JSON.stringify(responseList[i]));
 
@@ -173,7 +146,7 @@
 
                 var insertValues = [];
 
-                var sqlUpdate = "UPDATE Task SET Job_Description = ?, Duration = ?, Task_Status = ?, Customer_Name =?, Street_Address = ?, City = ?, State = ?, Country = ?, Zip_Code = ?, Expense_Method = ?, Labor_Method = ?, Travel_Method = ?, Material_Method = ?, Service_Request = ?, Assigned = ?, Start_Date = ?, End_Date = ?  WHERE Task_Number = ?";
+                var sqlUpdate = "UPDATE Task SET Job_Description = ?, Duration = ?, Task_Status = ?, Customer_Name =?, Street_Address = ?, City = ?, State = ?, Zip_Code = ?, Expense_Method = ?, Labor_Method = ?, Travel_Method = ?, Material_Method = ?, Service_Request = ?, Assigned = ?, Start_Date = ?, End_Date = ?  WHERE Task_Number = ?";
 
                 insertValues.push(responseList.Job_Description);
                 insertValues.push(responseList.Duration);
@@ -182,7 +155,6 @@
                 insertValues.push(responseList.Street_Address);
                 insertValues.push(responseList.City);
                 insertValues.push(responseList.State);
-                insertValues.push(responseList.Country);
                 insertValues.push(responseList.Zip_Code);
                 insertValues.push(responseList.Expense_Method);
                 insertValues.push(responseList.Labor_Method);
@@ -194,7 +166,7 @@
                 insertValues.push(responseList.End_Date);
                 insertValues.push(responseList.Task_Number);
 
-                console.log("TASK UPDATE VALUES =====> " + insertValues);
+                // console.log("TASK UPDATE VALUES =====> " + insertValues);
 
                 transaction.executeSql(sqlUpdate, insertValues, function (tx, res) {
 
@@ -217,7 +189,7 @@
 
                 var insertValues = [];
 
-                var sqlInsert = "INSERT INTO Task VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                var sqlInsert = "INSERT INTO Task VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
                 insertValues.push(responseList.Task_Number);
                 insertValues.push(responseList.Job_Description);
@@ -227,7 +199,6 @@
                 insertValues.push(responseList.Street_Address);
                 insertValues.push(responseList.City);
                 insertValues.push(responseList.State);
-                insertValues.push(responseList.Country);
                 insertValues.push(responseList.Zip_Code);
                 insertValues.push(responseList.Expense_Method);
                 insertValues.push(responseList.Labor_Method);
@@ -237,12 +208,17 @@
                 insertValues.push(responseList.Assigned);
                 insertValues.push(responseList.Start_Date);
                 insertValues.push(responseList.End_Date);
-                insertValues.push("I");
-                insertValues.push(responseList.Email);
-                insertValues.push(responseList.Date);
-                insertValues.push(responseList.Type);
 
-                console.log("TASK INSERT VALUES =====> " + insertValues);
+                if (responseList.Task_Status == "Field Job Completed") {
+
+                    insertValues.push("I");
+
+                } else {
+
+                    insertValues.push("A");
+                }
+
+                // console.log("TASK INSERT VALUES =====> " + insertValues);
 
                 transaction.executeSql(sqlInsert, insertValues, function (tx, res) {
 
@@ -265,42 +241,13 @@
 
                 var insertValues = [];
 
-                var sqlUpdate = "UPDATE Task SET Task_Status = ?, Submit_Status = ?, Date = ?  WHERE Task_Number = ?";
+                var sqlUpdate = "UPDATE Task SET Task_Status = ?, Submit_Status = ?  WHERE Task_Number = ?";
 
                 insertValues.push(responseList.Task_Status);
                 insertValues.push(responseList.Submit_Status);
-                insertValues.push(responseList.Date);
                 insertValues.push(responseList.Task_Number);
 
-                console.log("TASK UPDATE VALUES =====> " + insertValues);
-
-                transaction.executeSql(sqlUpdate, insertValues, function (tx, res) {
-
-                    console.log("TASK ROW AFFECTED: " + res.rowsAffected);
-
-                }, function (tx, error) {
-
-                    console.log("TASK UPDATE ERROR: " + error.message);
-                });
-
-            }, function (error) {
-
-                console.log("TASK UPDATE TRANSACTION ERROR: " + error.message);
-            });
-        };
-
-        function updateTaskEmail(responseList) {
-
-            db.transaction(function (transaction) {
-
-                var insertValues = [];
-
-                var sqlUpdate = "UPDATE Task SET Email = ?  WHERE Task_Number = ?";
-
-                insertValues.push(responseList.Email);
-                insertValues.push(responseList.Task_Number);
-
-                console.log("TASK UPDATE VALUES =====> " + insertValues);
+                // console.log("TASK UPDATE VALUES =====> " + insertValues);
 
                 transaction.executeSql(sqlUpdate, insertValues, function (tx, res) {
 
@@ -325,36 +272,18 @@
 
                 (function (i) {
 
-                    db.transaction(function (transaction) {
+                    if (i < responseList.length - 1) {
 
-                        var sqlSelect = "SELECT * FROM InstallBase WHERE Installed_Base_ID = " + responseList[i].Installed_Base_ID + " AND Task_Number = " + responseList[i].Task_Number;
+                        updateInstallBase(responseList[i]);
 
-                        console.log("INSTALLBASE  ====> " + sqlSelect);
+                        insertInstallBase(responseList[i]);
 
-                        transaction.executeSql(sqlSelect, [], function (tx, res) {
+                    } else {
 
-                            var rowLength = res.rows.length;
+                        updateInstallBase(responseList[i]);
 
-                            console.log("INSTALLBASE LENGTH ====> " + rowLength);
-
-                            if (rowLength > 0) {
-
-                                updateInstallBase(responseList[i]);
-
-                            } else {
-
-                                insertInstallBase(responseList[i]);
-                            }
-
-                        }, function (tx, error) {
-
-                            console.log("INSTALLBASE SELECT ERROR: " + error.message);
-                        });
-
-                    }, function (error) {
-
-                        console.log("INSTALLBASE SELECT TRANSACTION ERROR: " + error.message);
-                    });
+                        insertInstallBase(responseList[i]);
+                    }
 
                     console.log("INSTALLBASE OBJECT =====> " + JSON.stringify(responseList));
 
@@ -381,7 +310,7 @@
                 insertValues.push(responseList.Installed_Base_ID);
                 insertValues.push(responseList.Task_Number);
 
-                console.log("INSTALLBASE UPDATE VALUES =====> " + insertValues);
+                // console.log("INSTALLBASE UPDATE VALUES =====> " + insertValues);
 
                 transaction.executeSql(sqlUpdate, insertValues, function (tx, res) {
 
@@ -417,7 +346,7 @@
                 insertValues.push(responseList.Start_Date);
                 insertValues.push(responseList.End_Date);
 
-                console.log("INSTALLBASE INSERT VALUES =====> " + insertValues);
+                // console.log("INSTALLBASE INSERT VALUES =====> " + insertValues);
 
                 transaction.executeSql(sqlInsert, insertValues, function (tx, res) {
 
@@ -442,36 +371,18 @@
 
                 (function (i) {
 
-                    db.transaction(function (transaction) {
+                    if (i < responseList.length - 1) {
 
-                        var sqlSelect = "SELECT * FROM Contact WHERE Contact_ID = " + responseList[i].Contact_ID + " AND Task_Number = " + responseList[i].Task_Number;
+                        updateContact(responseList[i]);
 
-                        console.log("CONTACT  ====> " + sqlSelect);
+                        insertContact(responseList[i]);
 
-                        transaction.executeSql(sqlSelect, [], function (tx, res) {
+                    } else {
 
-                            var rowLength = res.rows.length;
+                        updateContact(responseList[i]);
 
-                            console.log("CONTACT LENGTH ====> " + rowLength);
-
-                            if (rowLength > 0) {
-
-                                updateContact(responseList[i]);
-
-                            } else {
-
-                                insertContact(responseList[i]);
-                            }
-
-                        }, function (tx, error) {
-
-                            console.log("CONTACT SELECT ERROR: " + error.message);
-                        });
-
-                    }, function (error) {
-
-                        console.log("CONTACT SELECT TRANSACTION ERROR: " + error.message);
-                    });
+                        insertContact(responseList[i]);
+                    }
 
                     console.log("CONTACT OBJECT =====> " + JSON.stringify(responseList));
 
@@ -502,7 +413,7 @@
                 insertValues.push(responseList.Contact_ID);
                 insertValues.push(responseList.Task_Number);
 
-                console.log("CONTACT UPDATE VALUES =====> " + insertValues);
+                // console.log("CONTACT UPDATE VALUES =====> " + insertValues);
 
                 transaction.executeSql(sqlUpdate, insertValues, function (tx, res) {
 
@@ -542,7 +453,7 @@
                 insertValues.push(responseList.Start_Date);
                 insertValues.push(responseList.End_Date);
 
-                console.log("CONTACT INSERT VALUES =====> " + insertValues);
+                // console.log("CONTACT INSERT VALUES =====> " + insertValues);
 
                 transaction.executeSql(sqlInsert, insertValues, function (tx, res) {
 
@@ -567,36 +478,18 @@
 
                 (function (i) {
 
-                    db.transaction(function (transaction) {
+                    if (i < responseList.length - 1) {
 
-                        var sqlSelect = "SELECT * FROM Note WHERE ID = " + responseList[i].ID + " AND Task_Number = " + responseList[i].Task_Number;
+                        updateNote(responseList[i]);
 
-                        console.log("NOTE  ====> " + sqlSelect);
+                        insertNote(responseList[i]);
 
-                        transaction.executeSql(sqlSelect, [], function (tx, res) {
+                    } else {
 
-                            var rowLength = res.rows.length;
+                        updateNote(responseList[i]);
 
-                            console.log("NOTE LENGTH ====> " + rowLength);
-
-                            if (rowLength > 0) {
-
-                                updateNote(responseList[i]);
-
-                            } else {
-
-                                insertNote(responseList[i]);
-                            }
-
-                        }, function (tx, error) {
-
-                            console.log("NOTE SELECT ERROR: " + error.message);
-                        });
-
-                    }, function (error) {
-
-                        console.log("NOTE SELECT TRANSACTION ERROR: " + error.message);
-                    });
+                        insertNote(responseList[i]);
+                    }
 
                     console.log("NOTE OBJECT =====> " + JSON.stringify(responseList));
 
@@ -622,7 +515,7 @@
                 insertValues.push(responseList.ID);
                 insertValues.push(responseList.Task_Number);
 
-                console.log("NOTE UPDATE VALUES =====> " + insertValues);
+                // console.log("NOTE UPDATE VALUES =====> " + insertValues);
 
                 transaction.executeSql(sqlUpdate, insertValues, function (tx, res) {
 
@@ -657,7 +550,7 @@
                 insertValues.push(responseList.Start_Date);
                 insertValues.push(responseList.End_Date);
 
-                console.log("NOTE INSERT VALUES =====> " + insertValues);
+                // console.log("NOTE INSERT VALUES =====> " + insertValues);
 
                 transaction.executeSql(sqlInsert, insertValues, function (tx, res) {
 
@@ -682,36 +575,18 @@
 
                 (function (i) {
 
-                    db.transaction(function (transaction) {
+                    if (i < responseList.length - 1) {
 
-                        var sqlSelect = "SELECT * FROM Attachment WHERE Attachment_Id = " + responseList[i].Attachment_Id + " AND Task_Number = " + responseList[i].Task_Number;
+                        updateAttachment(responseList[i]);
 
-                        console.log("ATTACHMENT  ====> " + sqlSelect);
+                        insertAttachment(responseList[i]);
 
-                        transaction.executeSql(sqlSelect, [], function (tx, res) {
+                    } else {
 
-                            var rowLength = res.rows.length;
+                        updateAttachment(responseList[i]);
 
-                            console.log("ATTACHMENT LENGTH ====> " + rowLength);
-
-                            if (rowLength > 0) {
-
-                                updateAttachment(responseList[i]);
-
-                            } else {
-
-                                insertAttachment(responseList[i]);
-                            }
-
-                        }, function (tx, error) {
-
-                            console.log("ATTACHMENT SELECT ERROR: " + error.message);
-                        });
-
-                    }, function (error) {
-
-                        console.log("ATTACHMENT SELECT TRANSACTION ERROR: " + error.message);
-                    });
+                        insertAttachment(responseList[i]);
+                    }
 
                     console.log("ATTACHMENT OBJECT =====> " + JSON.stringify(responseList[i]));
 
@@ -725,14 +600,13 @@
 
                 var insertValues = [];
 
-                var sqlUpdate = "UPDATE Attachment SET File_Name = ?, File_Type = ?, File_Path = ?, Type = ?, AttachmentType = ?,Created_Date=? WHERE Attachment_Id = ? AND Task_Number = ?";
+                var sqlUpdate = "UPDATE Attachment SET File_Name = ?, File_Type = ?, File_Path = ?, Type = ?, AttachmentType = ? WHERE Attachment_Id = ? AND Task_Number = ?";
 
                 insertValues.push(responseList.File_Name);
                 insertValues.push(responseList.File_Type);
                 insertValues.push(responseList.File_Path);
                 insertValues.push(responseList.Type);
                 insertValues.push(responseList.AttachmentType);
-                insertValues.push(responseList.Created_Date);
                 insertValues.push(responseList.Attachment_Id);
                 insertValues.push(responseList.Task_Number);
 
@@ -757,7 +631,7 @@
 
                 var insertValues = [];
 
-                var sqlInsert = "INSERT INTO Attachment VALUES (?, ?, ?, ?, ?, ?, ?,?)";
+                var sqlInsert = "INSERT INTO Attachment VALUES (?, ?, ?, ?, ?, ?, ?)";
 
                 insertValues.push(responseList.Attachment_Id);
                 insertValues.push(responseList.File_Name);
@@ -765,9 +639,7 @@
                 insertValues.push(responseList.File_Path);
                 insertValues.push(responseList.Type);
                 insertValues.push(responseList.AttachmentType);
-                insertValues.push(responseList.Created_Date);
                 insertValues.push(responseList.Task_Number);
-
 
                 transaction.executeSql(sqlInsert, insertValues, function (tx, res) {
 
@@ -826,7 +698,7 @@
                 insertValues.push(responseList.Requested);
                 insertValues.push(responseList.ID);
 
-                console.log("PROJECT UPDATE VALUES =====> " + insertValues);
+                // console.log("PROJECT UPDATE VALUES =====> " + insertValues);
 
                 transaction.executeSql(sqlUpdate, insertValues, function (tx, res) {
 
@@ -858,7 +730,7 @@
                 insertValues.push(responseList.P_ProjectNumber);
                 insertValues.push(responseList.Requested);
 
-                console.log("PROJECT INSERT VALUES =====> " + insertValues);
+                // console.log("PROJECT INSERT VALUES =====> " + insertValues);
 
                 transaction.executeSql(sqlInsert, insertValues, function (tx, res) {
 
@@ -883,38 +755,18 @@
 
                 (function (i) {
 
-                    db.transaction(function (transaction) {
+                    if (i < responseList.length - 1) {
 
-                        var insertValues = [];
+                        updateOverTime(responseList[i]);
 
-                        var sqlSelect = "SELECT * FROM OverTime WHERE OverTime_Shift_Code_ID = " + responseList[i].OverTime_Shift_Code_ID + " AND Task = " + responseList[i].Task;
+                        insertOverTime(responseList[i]);
 
-                        console.log("OVERTIME  ====> " + sqlSelect);
+                    } else {
 
-                        transaction.executeSql(sqlSelect, [], function (tx, res) {
+                        updateOverTime(responseList[i]);
 
-                            var rowLength = res.rows.length;
-
-                            console.log("OVERTIME LENGTH ====> " + rowLength);
-
-                            if (rowLength > 0) {
-
-                                updateOverTime(responseList[i]);
-
-                            } else {
-
-                                insertOverTime(responseList[i]);
-                            }
-
-                        }, function (tx, error) {
-
-                            console.log("OVERTIME SELECT ERROR: " + error.message);
-                        });
-
-                    }, function (error) {
-
-                        console.log("OVERTIME SELECT TRANSACTION ERROR: " + error.message);
-                    });
+                        insertOverTime(responseList[i]);
+                    }
 
                     console.log("OVERTIME OBJECT =====> " + JSON.stringify(responseList[i]));
 
@@ -994,36 +846,18 @@
 
                 (function (i) {
 
-                    db.transaction(function (transaction) {
+                    if (i < responseList.length - 1) {
 
-                        var sqlSelect = "SELECT * FROM ShiftCode WHERE Shift_Code_ID = " + responseList[i].Shift_Code_ID + " AND TaskNumber = " + responseList[i].TaskNumber;
+                        updateShiftCode(responseList[i]);
 
-                        console.log("SHIFTCODE  ====> " + sqlSelect);
+                        insertShiftCode(responseList[i]);
 
-                        transaction.executeSql(sqlSelect, [], function (tx, res) {
+                    } else {
 
-                            var rowLength = res.rows.length;
+                        updateShiftCode(responseList[i]);
 
-                            console.log("SHIFTCODE LENGTH ====> " + rowLength);
-
-                            if (rowLength > 0) {
-
-                                updateShiftCode(responseList[i]);
-
-                            } else {
-
-                                insertShiftCode(responseList[i]);
-                            }
-
-                        }, function (tx, error) {
-
-                            console.log("SHIFTCODE SELECT ERROR: " + error.message);
-                        });
-
-                    }, function (error) {
-
-                        console.log("SHIFTCODE SELECT TRANSACTION ERROR: " + error.message);
-                    });
+                        insertShiftCode(responseList[i]);
+                    }
 
                     console.log("SHIFTCODE OBJECT =====> " + JSON.stringify(responseList[i]));
 
@@ -1103,36 +937,18 @@
 
                 (function (i) {
 
-                    db.transaction(function (transaction) {
+                    if (i < responseList.length - 1) {
 
-                        var sqlSelect = "SELECT * FROM ChargeType WHERE ID = " + responseList[i].ID;
+                        updateChargeType(responseList[i]);
 
-                        console.log("CHARGETYPE  ====> " + sqlSelect);
+                        insertChargeType(responseList[i]);
 
-                        transaction.executeSql(sqlSelect, [], function (tx, res) {
+                    } else {
 
-                            var rowLength = res.rows.length;
+                        updateChargeType(responseList[i]);
 
-                            console.log("CHARGETYPE LENGTH ====> " + rowLength);
-
-                            if (rowLength > 0) {
-
-                                updateChargeType(responseList[i]);
-
-                            } else {
-
-                                insertChargeType(responseList[i]);
-                            }
-
-                        }, function (tx, error) {
-
-                            console.log("CHARGETYPE SELECT ERROR: " + error.message);
-                        });
-
-                    }, function (error) {
-
-                        console.log("CHARGETYPE SELECT TRANSACTION ERROR: " + error.message);
-                    });
+                        insertChargeType(responseList[i]);
+                    }
 
                     console.log("CHARGETYPE OBJECT =====> " + JSON.stringify(responseList[i]));
 
@@ -1200,36 +1016,18 @@
 
                 (function (i) {
 
-                    db.transaction(function (transaction) {
+                    if (i < responseList.length - 1) {
 
-                        var sqlSelect = "SELECT * FROM ChargeMethod WHERE ID = " + responseList[i].ID;
+                        updateChargeMethod(responseList[i]);
 
-                        console.log("CHARGEMETHOD  ====> " + sqlSelect);
+                        insertChargeMethod(responseList[i]);
 
-                        transaction.executeSql(sqlSelect, [], function (tx, res) {
+                    } else {
 
-                            var rowLength = res.rows.length;
+                        updateChargeMethod(responseList[i]);
 
-                            console.log("CHARGEMETHOD LENGTH ====> " + rowLength);
-
-                            if (rowLength > 0) {
-
-                                updateChargeMethod(responseList[i]);
-
-                            } else {
-
-                                insertChargeMethod(responseList[i]);
-                            }
-
-                        }, function (tx, error) {
-
-                            console.log("CHARGEMETHOD SELECT ERROR: " + error.message);
-                        });
-
-                    }, function (error) {
-
-                        console.log("CHARGEMETHOD SELECT TRANSACTION ERROR: " + error.message);
-                    });
+                        insertChargeMethod(responseList[i]);
+                    }
 
                     console.log("CHARGEMETHOD OBJECT =====> " + JSON.stringify(responseList[i]));
 
@@ -1297,36 +1095,18 @@
 
                 (function (i) {
 
-                    db.transaction(function (transaction) {
+                    if (i < responseList.length - 1) {
 
-                        var sqlSelect = "SELECT * FROM FieldJobName WHERE TaskCode = " + responseList[i].TaskCode + " AND Task = " + responseList[i].Task;
+                        updateFieldJobName(responseList[i]);
 
-                        console.log("FIELDJOBNAME  ====> " + sqlSelect);
+                        insertFieldJobName(responseList[i]);
 
-                        transaction.executeSql(sqlSelect, [], function (tx, res) {
+                    } else {
 
-                            var rowLength = res.rows.length;
+                        updateFieldJobName(responseList[i]);
 
-                            console.log("FIELDJOBNAME LENGTH ====> " + rowLength);
-
-                            if (rowLength > 0) {
-
-                                updateFieldJobName(responseList[i]);
-
-                            } else {
-
-                                insertFieldJobName(responseList[i]);
-                            }
-
-                        }, function (tx, error) {
-
-                            console.log("FIELDJOBNAME SELECT ERROR: " + error.message);
-                        });
-
-                    }, function (error) {
-
-                        console.log("FIELDJOBNAME SELECT TRANSACTION ERROR: " + error.message);
-                    });
+                        insertFieldJobName(responseList[i]);
+                    }
 
                     console.log("FIELDJOBNAME OBJECT =====> " + JSON.stringify(responseList[i]));
 
@@ -1404,36 +1184,18 @@
 
                 (function (i) {
 
-                    db.transaction(function (transaction) {
+                    if (i < responseList.length - 1) {
 
-                        var sqlSelect = "SELECT * FROM WorkType WHERE ID = " + responseList[i].ID;
+                        updateWorkType(responseList[i]);
 
-                        console.log("WORKTYPE  ====> " + sqlSelect);
+                        insertWorkType(responseList[i]);
 
-                        transaction.executeSql(sqlSelect, [], function (tx, res) {
+                    } else {
 
-                            var rowLength = res.rows.length;
+                        updateWorkType(responseList[i]);
 
-                            console.log("WORKTYPE LENGTH ====> " + rowLength);
-
-                            if (rowLength > 0) {
-
-                                updateWorkType(responseList[i]);
-
-                            } else {
-
-                                insertWorkType(responseList[i]);
-                            }
-
-                        }, function (tx, error) {
-
-                            console.log("WORKTYPE SELECT ERROR: " + error.message);
-                        });
-
-                    }, function (error) {
-
-                        console.log("WORKTYPE SELECT TRANSACTION ERROR: " + error.message);
-                    });
+                        insertWorkType(responseList[i]);
+                    }
 
                     console.log("WORKTYPE OBJECT =====> " + JSON.stringify(responseList[i]));
 
@@ -1501,36 +1263,18 @@
 
                 (function (i) {
 
-                    db.transaction(function (transaction) {
+                    if (i < responseList.length - 1) {
 
-                        var sqlSelect = "SELECT * FROM Item WHERE ID = " + responseList[i].ID;
+                        updateItem(responseList[i]);
 
-                        console.log("ITEM  ====> " + sqlSelect);
+                        insertItem(responseList[i]);
 
-                        transaction.executeSql(sqlSelect, [], function (tx, res) {
+                    } else {
 
-                            var rowLength = res.rows.length;
+                        updateItem(responseList[i]);
 
-                            console.log("ITEM LENGTH ====> " + rowLength);
-
-                            if (rowLength > 0) {
-
-                                updateItem(responseList[i]);
-
-                            } else {
-
-                                insertItem(responseList[i]);
-                            }
-
-                        }, function (tx, error) {
-
-                            console.log("ITEM SELECT ERROR: " + error.message);
-                        });
-
-                    }, function (error) {
-
-                        console.log("ITEM SELECT TRANSACTION ERROR: " + error.message);
-                    });
+                        insertItem(responseList[i]);
+                    }
 
                     console.log("ITEM OBJECT =====> " + JSON.stringify(responseList[i]));
 
@@ -1598,36 +1342,18 @@
 
                 (function (i) {
 
-                    db.transaction(function (transaction) {
+                    if (i < responseList.length - 1) {
 
-                        var sqlSelect = "SELECT * FROM Currency WHERE ID = " + responseList[i].ID;
+                        updateCurrency(responseList[i]);
 
-                        console.log("CURRENCY  ====> " + sqlSelect);
+                        insertCurrency(responseList[i]);
 
-                        transaction.executeSql(sqlSelect, [], function (tx, res) {
+                    } else {
 
-                            var rowLength = res.rows.length;
+                        updateCurrency(responseList[i]);
 
-                            console.log("CURRENCY LENGTH ====> " + rowLength);
-
-                            if (rowLength > 0) {
-
-                                updateCurrency(responseList[i]);
-
-                            } else {
-
-                                insertCurrency(responseList[i]);
-                            }
-
-                        }, function (tx, error) {
-
-                            console.log("CURRENCY SELECT ERROR: " + error.message);
-                        });
-
-                    }, function (error) {
-
-                        console.log("CURRENCY SELECT TRANSACTION ERROR: " + error.message);
-                    });
+                        insertCurrency(responseList[i]);
+                    }
 
                     console.log("CURRENCY OBJECT =====> " + JSON.stringify(responseList[i]));
 
@@ -1695,36 +1421,18 @@
 
                 (function (i) {
 
-                    db.transaction(function (transaction) {
+                    if (i < responseList.length - 1) {
 
-                        var sqlSelect = "SELECT * FROM ExpenseType WHERE ID = " + responseList[i].ID;
+                        updateExpenseType(responseList[i]);
 
-                        console.log("EXPENSETYPE  ====> " + sqlSelect);
+                        insertExpenseType(responseList[i]);
 
-                        transaction.executeSql(sqlSelect, [], function (tx, res) {
+                    } else {
 
-                            var rowLength = res.rows.length;
+                        updateExpenseType(responseList[i]);
 
-                            console.log("EXPENSETYPE LENGTH ====> " + rowLength);
-
-                            if (rowLength > 0) {
-
-                                updateExpenseType(responseList[i]);
-
-                            } else {
-
-                                insertExpenseType(responseList[i]);
-                            }
-
-                        }, function (tx, error) {
-
-                            console.log("EXPENSETYPE SELECT ERROR: " + error.message);
-                        });
-
-                    }, function (error) {
-
-                        console.log("EXPENSETYPE SELECT TRANSACTION ERROR: " + error.message);
-                    });
+                        insertExpenseType(responseList[i]);
+                    }
 
                     console.log("EXPENSETYPE OBJECT =====> " + JSON.stringify(responseList[i]));
 
@@ -1792,36 +1500,18 @@
 
                 (function (i) {
 
-                    db.transaction(function (transaction) {
+                    if (i < responseList.length - 1) {
 
-                        var sqlSelect = "SELECT * FROM NoteType WHERE ID = " + responseList[i].ID;
+                        updateNoteType(responseList[i]);
 
-                        console.log("NOTETYPE  ====> " + sqlSelect);
+                        insertNoteType(responseList[i]);
 
-                        transaction.executeSql(sqlSelect, [], function (tx, res) {
+                    } else {
 
-                            var rowLength = res.rows.length;
+                        updateNoteType(responseList[i]);
 
-                            console.log("NOTETYPE LENGTH ====> " + rowLength);
-
-                            if (rowLength > 0) {
-
-                                updateNoteType(responseList[i]);
-
-                            } else {
-
-                                insertNoteType(responseList[i]);
-                            }
-
-                        }, function (tx, error) {
-
-                            console.log("NOTETYPE SELECT ERROR: " + error.message);
-                        });
-
-                    }, function (error) {
-
-                        console.log("NOTETYPE SELECT TRANSACTION ERROR: " + error.message);
-                    });
+                        insertNoteType(responseList[i]);
+                    }
 
                     console.log("NOTETYPE OBJECT =====> " + JSON.stringify(responseList[i]));
 
@@ -1889,36 +1579,18 @@
 
                 (function (i) {
 
-                    db.transaction(function (transaction) {
+                    if (i < responseList.length - 1) {
 
-                        var sqlSelect = "SELECT * FROM Time WHERE Time_Id = " + responseList[i].Time_Id;
+                        updateTime(responseList[i]);
 
-                        console.log("TIME  ====> " + sqlSelect);
+                        insertTime(responseList[i]);
 
-                        transaction.executeSql(sqlSelect, [], function (tx, res) {
+                    } else {
 
-                            var rowLength = res.rows.length;
+                        updateTime(responseList[i]);
 
-                            console.log("TIME LENGTH ====> " + rowLength);
-
-                            if (rowLength > 0) {
-
-                                updateTime(responseList[i]);
-
-                            } else {
-
-                                insertTime(responseList[i]);
-                            }
-
-                        }, function (tx, error) {
-
-                            console.log("TIME SELECT ERROR: " + error.message);
-                        });
-
-                    }, function (error) {
-
-                        console.log("TIME SELECT TRANSACTION ERROR: " + error.message);
-                    });
+                        insertTime(responseList[i]);
+                    }
 
                     console.log("TIME OBJECT =====> " + JSON.stringify(responseList[i]));
 
@@ -2024,36 +1696,18 @@
 
                 (function (i) {
 
-                    db.transaction(function (transaction) {
+                    if (i < responseList.length - 1) {
 
-                        var sqlSelect = "SELECT * FROM Expense WHERE Expense_Id = " + responseList[i].Expense_Id;
+                        updateExpense(responseList[i]);
 
-                        console.log("EXPENSE  ====> " + sqlSelect);
+                        insertExpense(responseList[i]);
 
-                        transaction.executeSql(sqlSelect, [], function (tx, res) {
+                    } else {
 
-                            var rowLength = res.rows.length;
+                        updateExpense(responseList[i]);
 
-                            console.log("EXPENSE LENGTH ====> " + rowLength);
-
-                            if (rowLength > 0) {
-
-                                updateExpense(responseList[i]);
-
-                            } else {
-
-                                insertExpense(responseList[i]);
-                            }
-
-                        }, function (tx, error) {
-
-                            console.log("EXPENSE SELECT ERROR: " + error.message);
-                        });
-
-                    }, function (error) {
-
-                        console.log("EXPENSE SELECT TRANSACTION ERROR: " + error.message);
-                    });
+                        insertExpense(responseList[i]);
+                    }
 
                     console.log("EXPENSE OBJECT =====> " + JSON.stringify(responseList[i]));
 
@@ -2141,36 +1795,18 @@
 
                 (function (i) {
 
-                    db.transaction(function (transaction) {
+                    if (i < responseList.length - 1) {
 
-                        var sqlSelect = "SELECT * FROM Material WHERE Material_Id = " + responseList[i].Material_Id;
+                        updateMaterial(responseList[i]);
 
-                        console.log("MATERIAL  ====> " + sqlSelect);
+                        insertMaterial(responseList[i]);
 
-                        transaction.executeSql(sqlSelect, [], function (tx, res) {
+                    } else {
 
-                            var rowLength = res.rows.length;
+                        updateMaterial(responseList[i]);
 
-                            console.log("MATERIAL LENGTH ====> " + rowLength);
-
-                            if (rowLength > 0) {
-
-                                updateMaterial(responseList[i]);
-
-                            } else {
-
-                                insertMaterial(responseList[i]);
-                            }
-
-                        }, function (tx, error) {
-
-                            console.log("MATERIAL SELECT ERROR: " + error.message);
-                        });
-
-                    }, function (error) {
-
-                        console.log("MATERIAL SELECT TRANSACTION ERROR: " + error.message);
-                    });
+                        insertMaterial(responseList[i]);
+                    }
 
                     console.log("MATERIAL OBJECT =====> " + JSON.stringify(responseList[i]));
 
@@ -2256,36 +1892,18 @@
 
                 (function (i) {
 
-                    db.transaction(function (transaction) {
+                    if (i < responseList.length - 1) {
 
-                        var sqlSelect = "SELECT * FROM Notes WHERE Notes_Id = " + responseList[i].Notes_Id;
+                        updateNotes(responseList[i]);
 
-                        console.log("NOTES  ====> " + sqlSelect);
+                        insertNotes(responseList[i]);
 
-                        transaction.executeSql(sqlSelect, [], function (tx, res) {
+                    } else {
 
-                            var rowLength = res.rows.length;
+                        updateNotes(responseList[i]);
 
-                            console.log("NOTES LENGTH ====> " + rowLength);
-
-                            if (rowLength > 0) {
-
-                                updateNotes(responseList[i]);
-
-                            } else {
-
-                                insertNotes(responseList[i]);
-                            }
-
-                        }, function (tx, error) {
-
-                            console.log("NOTES SELECT ERROR: " + error.message);
-                        });
-
-                    }, function (error) {
-
-                        console.log("NOTES SELECT TRANSACTION ERROR: " + error.message);
-                    });
+                        insertNotes(responseList[i]);
+                    }
 
                     console.log("NOTES OBJECT =====> " + JSON.stringify(responseList[i]));
 
@@ -2357,40 +1975,11 @@
             });
         };
 
-        function insertEngineerList(response) {
+        function insertEngineerList(responseList) {
 
-            var responseList = response;
+            updateEngineer(responseList);
 
-            db.transaction(function (transaction) {
-
-                var sqlSelect = "SELECT * FROM Engineer WHERE Engineer_Id = " + responseList.Engineer_Id;
-
-                console.log("ENGINEER  ====> " + sqlSelect);
-
-                transaction.executeSql(sqlSelect, [], function (tx, res) {
-
-                    var rowLength = res.rows.length;
-
-                    console.log("ENGINEER LENGTH ====> " + rowLength);
-
-                    if (rowLength > 0) {
-
-                        updateEngineer(responseList);
-
-                    } else {
-
-                        insertEngineer(responseList);
-                    }
-
-                }, function (tx, error) {
-
-                    console.log("ENGINEER SELECT ERROR: " + error.message);
-                });
-
-            }, function (error) {
-
-                console.log("ENGINEER SELECT TRANSACTION ERROR: " + error.message);
-            });
+            insertEngineer(responseList);
 
             console.log("ENGINEER OBJECT =====> " + JSON.stringify(responseList));
 
@@ -2434,13 +2023,9 @@
 
                 var insertValues = [];
 
-                var sqlInsert = "INSERT INTO Engineer VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                var sqlInsert = "INSERT INTO Engineer VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
                 insertValues.push(responseList.Engineer_Id);
-                insertValues.push(responseList.followUp);
-                insertValues.push(responseList.salesQuote);
-                insertValues.push(responseList.salesVisit);
-                insertValues.push(responseList.salesLead);
                 insertValues.push(responseList.Follow_Up);
                 insertValues.push(responseList.Spare_Quote);
                 insertValues.push(responseList.Sales_Visit);
@@ -2464,20 +2049,6 @@
             });
         };
 
-        function deleteTaskList() {
-
-            db.transaction(function (transaction) {
-
-                var sqlDelete = "DELETE FROM Task";
-
-                transaction.executeSql(sqlDelete);
-
-            }, function (error) {
-
-                console.log("TASK DELETE TRANSACTION ERROR: " + error.message);
-            });
-        };
-
         function deleteInstallBase() {
 
             db.transaction(function (transaction) {
@@ -2489,6 +2060,20 @@
             }, function (error) {
 
                 console.log("INSTALLBASE DELETE TRANSACTION ERROR: " + error.message);
+            });
+        };
+
+        function deleteNote() {
+
+            db.transaction(function (transaction) {
+
+                var sqlDelete = "DELETE FROM Note";
+
+                transaction.executeSql(sqlDelete);
+
+            }, function (error) {
+
+                console.log("NOTE DELETE TRANSACTION ERROR: " + error.message);
             });
         };
 
@@ -2506,17 +2091,19 @@
             });
         };
 
-        function deleteNote() {
+        function deleteAttachment(taskId) {
 
             db.transaction(function (transaction) {
 
-                var sqlDelete = "DELETE FROM Note";
+                var insertValues = [];
+
+                var sqlDelete = "DELETE FROM Attachment WHERE Task_Number = " + taskId;
 
                 transaction.executeSql(sqlDelete);
 
             }, function (error) {
 
-                console.log("NOTE DELETE TRANSACTION ERROR: " + error.message);
+                console.log("ATTACHMENT DELETE TRANSACTION ERROR: " + error.message);
             });
         };
 
@@ -2660,90 +2247,6 @@
             });
         };
 
-        function deleteTimeList() {
-
-            db.transaction(function (transaction) {
-
-                var sqlDelete = "DELETE FROM Time";
-
-                transaction.executeSql(sqlDelete);
-
-            }, function (error) {
-
-                console.log("TIME DELETE TRANSACTION ERROR: " + error.message);
-            });
-        };
-
-        function deleteExpenseList() {
-
-            db.transaction(function (transaction) {
-
-                var sqlDelete = "DELETE FROM Expense";
-
-                transaction.executeSql(sqlDelete);
-
-            }, function (error) {
-
-                console.log("EXPENSE DELETE TRANSACTION ERROR: " + error.message);
-            });
-        };
-
-        function deleteMaterialList() {
-
-            db.transaction(function (transaction) {
-
-                var sqlDelete = "DELETE FROM Material";
-
-                transaction.executeSql(sqlDelete);
-
-            }, function (error) {
-
-                console.log("MATERIAL DELETE TRANSACTION ERROR: " + error.message);
-            });
-        };
-
-        function deleteNotesList() {
-
-            db.transaction(function (transaction) {
-
-                var sqlDelete = "DELETE FROM Notes";
-
-                transaction.executeSql(sqlDelete);
-
-            }, function (error) {
-
-                console.log("NOTES DELETE TRANSACTION ERROR: " + error.message);
-            });
-        };
-
-        function deleteAttachmentList() {
-
-            db.transaction(function (transaction) {
-
-                var sqlDelete = "DELETE FROM Attachment";
-
-                transaction.executeSql(sqlDelete);
-
-            }, function (error) {
-
-                console.log("ATTACHMENT DELETE TRANSACTION ERROR: " + error.message);
-            });
-        };
-
-        function deleteEngineerList() {
-
-            db.transaction(function (transaction) {
-
-                var sqlDelete = "DELETE FROM Engineer";
-
-                transaction.executeSql(sqlDelete);
-
-            }, function (error) {
-
-                console.log("ENGINEER DELETE TRANSACTION ERROR: " + error.message);
-            });
-        };
-
         function deleteTime(taskId) {
 
             db.transaction(function (transaction) {
@@ -2805,22 +2308,6 @@
             }, function (error) {
 
                 console.log("NOTES DELETE TRANSACTION ERROR: " + error.message);
-            });
-        };
-
-        function deleteAttachment(taskId) {
-
-            db.transaction(function (transaction) {
-
-                var insertValues = [];
-
-                var sqlDelete = "DELETE FROM Attachment WHERE Task_Number = " + taskId;
-
-                transaction.executeSql(sqlDelete);
-
-            }, function (error) {
-
-                console.log("ATTACHMENT DELETE TRANSACTION ERROR: " + error.message);
             });
         };
 
@@ -2935,9 +2422,9 @@
 
                 transaction.executeSql("SELECT * FROM User", [], function (tx, res) {
 
-                    var rowLength = res.rows.length;
+                    var leng = res.rows.length;
 
-                    for (var i = 0; i < rowLength; i++) {
+                    for (var i = 0; i < leng; i++) {
 
                         value.push(res.rows.item(i));
                     }
@@ -2969,9 +2456,9 @@
 
                 transaction.executeSql("SELECT * FROM Task", [], function (tx, res) {
 
-                    var rowLength = res.rows.length;
+                    var leng = res.rows.length;
 
-                    for (var i = 0; i < rowLength; i++) {
+                    for (var i = 0; i < leng; i++) {
 
                         value.push(res.rows.item(i));
                     }
@@ -3003,9 +2490,9 @@
 
                 transaction.executeSql("SELECT * FROM Task WHERE Submit_Status = ?", ["P"], function (tx, res) {
 
-                    var rowLength = res.rows.length;
+                    var leng = res.rows.length;
 
-                    for (var i = 0; i < rowLength; i++) {
+                    for (var i = 0; i < leng; i++) {
 
                         value.push(res.rows.item(i));
                     }
@@ -3037,9 +2524,9 @@
 
                 transaction.executeSql("SELECT * FROM Task WHERE Submit_Status = ?", ["A"], function (tx, res) {
 
-                    var rowLength = res.rows.length;
+                    var leng = res.rows.length;
 
-                    for (var i = 0; i < rowLength; i++) {
+                    for (var i = 0; i < leng; i++) {
 
                         value.push(res.rows.item(i));
                     }
@@ -3071,9 +2558,9 @@
 
                 transaction.executeSql("SELECT * FROM InstallBase WHERE Task_Number = ? ", [taskId], function (tx, res) {
 
-                    var rowLength = res.rows.length;
+                    var leng = res.rows.length;
 
-                    for (var i = 0; i < rowLength; i++) {
+                    for (var i = 0; i < leng; i++) {
 
                         value.push(res.rows.item(i));
                     }
@@ -3105,9 +2592,9 @@
 
                 transaction.executeSql("SELECT * FROM Contact WHERE Task_Number = ? ", [taskId], function (tx, res) {
 
-                    var rowLength = res.rows.length;
+                    var leng = res.rows.length;
 
-                    for (var i = 0; i < rowLength; i++) {
+                    for (var i = 0; i < leng; i++) {
 
                         value.push(res.rows.item(i));
                     }
@@ -3139,9 +2626,9 @@
 
                 transaction.executeSql("SELECT * FROM Note WHERE Task_Number = ? ", [taskId], function (tx, res) {
 
-                    var rowLength = res.rows.length;
+                    var leng = res.rows.length;
 
-                    for (var i = 0; i < rowLength; i++) {
+                    for (var i = 0; i < leng; i++) {
 
                         value.push(res.rows.item(i));
                     }
@@ -3173,9 +2660,9 @@
 
                 transaction.executeSql("SELECT * FROM Project", [], function (tx, res) {
 
-                    var rowLength = res.rows.length;
+                    var leng = res.rows.length;
 
-                    for (var i = 0; i < rowLength; i++) {
+                    for (var i = 0; i < leng; i++) {
 
                         value.push(res.rows.item(i));
                     }
@@ -3207,9 +2694,9 @@
 
                 transaction.executeSql("SELECT * FROM OverTime WHERE Task = ?", [taskId], function (tx, res) {
 
-                    var rowLength = res.rows.length;
+                    var leng = res.rows.length;
 
-                    for (var i = 0; i < rowLength; i++) {
+                    for (var i = 0; i < leng; i++) {
 
                         value.push(res.rows.item(i));
                     }
@@ -3241,9 +2728,9 @@
 
                 transaction.executeSql("SELECT * FROM ShiftCode  WHERE TaskNumber = ?", [taskId], function (tx, res) {
 
-                    var rowLength = res.rows.length;
+                    var leng = res.rows.length;
 
-                    for (var i = 0; i < rowLength; i++) {
+                    for (var i = 0; i < leng; i++) {
 
                         value.push(res.rows.item(i));
                     }
@@ -3275,9 +2762,9 @@
 
                 transaction.executeSql("SELECT * FROM ChargeType", [], function (tx, res) {
 
-                    var rowLength = res.rows.length;
+                    var leng = res.rows.length;
 
-                    for (var i = 0; i < rowLength; i++) {
+                    for (var i = 0; i < leng; i++) {
 
                         value.push(res.rows.item(i));
                     }
@@ -3309,9 +2796,9 @@
 
                 transaction.executeSql("SELECT * FROM ChargeMethod", [], function (tx, res) {
 
-                    var rowLength = res.rows.length;
+                    var leng = res.rows.length;
 
-                    for (var i = 0; i < rowLength; i++) {
+                    for (var i = 0; i < leng; i++) {
 
                         value.push(res.rows.item(i));
                     }
@@ -3335,17 +2822,17 @@
             });
         };
 
-        function getFieldJobNameList(taskNumber,callback) {
+        function getFieldJobNameList(callback) {
 
             var value = [];
 
             return db.transaction(function (transaction) {
 
-                transaction.executeSql("SELECT * FROM FieldJobName WHERE Task = ?", [taskNumber], function (tx, res) {
+                transaction.executeSql("SELECT * FROM FieldJobName", [], function (tx, res) {
 
-                    var rowLength = res.rows.length;
+                    var leng = res.rows.length;
 
-                    for (var i = 0; i < rowLength; i++) {
+                    for (var i = 0; i < leng; i++) {
 
                         value.push(res.rows.item(i));
                     }
@@ -3377,9 +2864,9 @@
 
                 transaction.executeSql("SELECT * FROM WorkType", [], function (tx, res) {
 
-                    var rowLength = res.rows.length;
+                    var leng = res.rows.length;
 
-                    for (var i = 0; i < rowLength; i++) {
+                    for (var i = 0; i < leng; i++) {
 
                         value.push(res.rows.item(i));
                     }
@@ -3411,9 +2898,9 @@
 
                 transaction.executeSql("SELECT * FROM Item", [], function (tx, res) {
 
-                    var rowLength = res.rows.length;
+                    var leng = res.rows.length;
 
-                    for (var i = 0; i < rowLength; i++) {
+                    for (var i = 0; i < leng; i++) {
 
                         value.push(res.rows.item(i));
                     }
@@ -3445,9 +2932,9 @@
 
                 transaction.executeSql("SELECT * FROM Currency", [], function (tx, res) {
 
-                    var rowLength = res.rows.length;
+                    var leng = res.rows.length;
 
-                    for (var i = 0; i < rowLength; i++) {
+                    for (var i = 0; i < leng; i++) {
 
                         value.push(res.rows.item(i));
                     }
@@ -3479,9 +2966,9 @@
 
                 transaction.executeSql("SELECT * FROM ExpenseType", [], function (tx, res) {
 
-                    var rowLength = res.rows.length;
+                    var leng = res.rows.length;
 
-                    for (var i = 0; i < rowLength; i++) {
+                    for (var i = 0; i < leng; i++) {
 
                         value.push(res.rows.item(i));
                     }
@@ -3513,9 +3000,9 @@
 
                 transaction.executeSql("SELECT * FROM NoteType", [], function (tx, res) {
 
-                    var rowLength = res.rows.length;
+                    var leng = res.rows.length;
 
-                    for (var i = 0; i < rowLength; i++) {
+                    for (var i = 0; i < leng; i++) {
 
                         value.push(res.rows.item(i));
                     }
@@ -3547,9 +3034,9 @@
 
                 transaction.executeSql("SELECT * FROM Time WHERE Task_Number = ? ", [taskId], function (tx, res) {
 
-                    var rowLength = res.rows.length;
+                    var leng = res.rows.length;
 
-                    for (var i = 0; i < rowLength; i++) {
+                    for (var i = 0; i < leng; i++) {
 
                         value.push(res.rows.item(i));
                     }
@@ -3581,9 +3068,9 @@
 
                 transaction.executeSql("SELECT * FROM Expense WHERE Task_Number = ? ", [taskId], function (tx, res) {
 
-                    var rowLength = res.rows.length;
+                    var leng = res.rows.length;
 
-                    for (var i = 0; i < rowLength; i++) {
+                    for (var i = 0; i < leng; i++) {
 
                         value.push(res.rows.item(i));
                     }
@@ -3615,9 +3102,9 @@
 
                 transaction.executeSql("SELECT * FROM Material WHERE Task_Number = ? ", [taskId], function (tx, res) {
 
-                    var rowLength = res.rows.length;
+                    var leng = res.rows.length;
 
-                    for (var i = 0; i < rowLength; i++) {
+                    for (var i = 0; i < leng; i++) {
 
                         value.push(res.rows.item(i));
                     }
@@ -3649,9 +3136,9 @@
 
                 transaction.executeSql("SELECT * FROM Notes WHERE Task_Number = ? ", [taskId], function (tx, res) {
 
-                    var rowLength = res.rows.length;
+                    var leng = res.rows.length;
 
-                    for (var i = 0; i < rowLength; i++) {
+                    for (var i = 0; i < leng; i++) {
 
                         value.push(res.rows.item(i));
                     }
@@ -3683,9 +3170,9 @@
 
                 transaction.executeSql("SELECT * FROM Attachment WHERE Task_Number = ? AND Type = ?", [taskId, type], function (tx, res) {
 
-                    var rowLength = res.rows.length;
+                    var leng = res.rows.length;
 
-                    for (var i = 0; i < rowLength; i++) {
+                    for (var i = 0; i < leng; i++) {
 
                         value.push(res.rows.item(i));
                     }
@@ -3717,7 +3204,7 @@
 
                 transaction.executeSql("SELECT * FROM Engineer WHERE Task_Number = ? ", [taskId], function (tx, res) {
 
-                    var rowLength = res.rows.length;
+                    var leng = res.rows.length;
 
                     var value = res.rows.item(0);
 
