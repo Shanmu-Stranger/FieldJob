@@ -358,11 +358,7 @@ app.controller('indexController', function ($scope, $state, $timeout, $mdSidenav
                         };
 
                         ofscService.activate_resource(data, function (response) {
-
-                            if (response != undefined && response != null) {
-
-                                console.log("ACTIVATE RESOURCE " + JSON.stringify(response));
-                            }
+                            console.log("ACTIVATE RESOURCE " + JSON.stringify(response));
                         });
 
                         offlineGetCall();
@@ -383,40 +379,40 @@ app.controller('indexController', function ($scope, $state, $timeout, $mdSidenav
 
                     $rootScope.selectedItem = 2;
 
-                    $state.go('myFieldJob');
-
                     $rootScope.Islogin = true;
+
+                    $state.go('myFieldJob');
 
                 } else {
 
                     $rootScope.selectedItem = 1;
 
-                    $state.go('myTask');
-
                     $rootScope.Islogin = true;
+
+                    $state.go('myTask');
                 }
 
-                $rootScope.apicall = false;
+                // $rootScope.apicall = false;
 
-                cloudService.getInstallBaseList();
-                cloudService.getContactList();
-                cloudService.getNoteList();
-
-                cloudService.getOverTimeList();
-                cloudService.getShiftCodeList();
-
-                cloudService.getChargeType();
-                cloudService.getChargeMethod();
-                cloudService.getFieldJobName();
-
-                cloudService.getWorkType();
-                cloudService.getItem();
-                cloudService.getCurrency();
-
-                cloudService.getExpenseType();
-                cloudService.getNoteType();
-
-                getAttachments();
+                // cloudService.getInstallBaseList();
+                // cloudService.getContactList();
+                // cloudService.getNoteList();
+                //
+                // cloudService.getOverTimeList();
+                // cloudService.getShiftCodeList();
+                //
+                // cloudService.getChargeType();
+                // cloudService.getChargeMethod();
+                // cloudService.getFieldJobName();
+                //
+                // cloudService.getWorkType();
+                // cloudService.getItem();
+                // cloudService.getCurrency();
+                //
+                // cloudService.getExpenseType();
+                // cloudService.getNoteType();
+                //
+                // getAttachments();
             });
         }
 

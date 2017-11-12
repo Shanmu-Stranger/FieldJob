@@ -32,15 +32,13 @@
 
             }).success(function (response) {
 
-                if (response != undefined) {
-                    console.log('Activate Resource Response', JSON.stringify(response));
-                }
+                console.log('activate_resource Response', JSON.stringify(response));
 
                 callback(response);
 
             }).error(function (error) {
 
-                console.log('Activate Resource Error', JSON.stringify(error));
+                console.log('activate_resource Error', JSON.stringify(error));
 
                 callback(error);
             });

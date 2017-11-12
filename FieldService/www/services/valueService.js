@@ -723,6 +723,10 @@
                 };
 
                 localService.updateTaskSubmitStatus(taskObject);
+
+                cloudService.getTaskList(function (response) {
+
+                });
             });
         };
 

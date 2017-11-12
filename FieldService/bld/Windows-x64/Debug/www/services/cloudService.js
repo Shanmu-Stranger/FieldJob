@@ -41,9 +41,9 @@
         service.startTask = startTask;
 
         service.uploadTime = uploadTime;
-        service.uploadExpense = uploadExpense;
-        service.uploadMaterial = uploadMaterial;
-        service.uploadNote = uploadNote;
+        service.updateExpenses = updateExpenses;
+        service.updateMaterial = updateMaterial;
+        service.updateNotes = updateNotes;
 
         service.createAttachment = createAttachment;
         service.downloadAttachment = downloadAttachment;
@@ -122,33 +122,90 @@
 
         function getTaskList(callback) {
 
-            var ofscResponse = [];
+          //var ofscResponse = [];
+          var responseOfTaskDetails=[];
 
-            var responseOfTaskDetails = [];
+          //var startDate = moment(constantService.getStartDate()).format("YYYY-MM-DD");
+          //var endDate = moment(constantService.getEndDate()).format("YYYY-MM-DD");
+          //var type="CUSTOMER";
+          //return $http({
 
+          //    method: 'GET',
+          //    url: url + 'OFSCActions/tasktype?resourceId='+constantService.getResourceId()+'&fromDate='+startDate+'&toDate='+endDate+'&type='+type,
+          //    headers: {
+          //        "Content-Type": constantService.getContentType(),
+          //        "Authorization": constantService.getAuthor(),
+          //        "oracle-mobile-backend-id": constantService.getOfscBackId()
+          //    }
+          //}).success(function (response) {
+
+          //    ofscResponse = response.finalResult;
+          //  console.log(ofscResponse);
+            $http({
+
+                method: 'GET',
+                url: url + 'TaskDetails/Resource_ID_taskdetails?resourceId=' + constantService.getResourceId()
+                + '&fromDate=' + constantService.getStartDate()
+                + '&toDate=' + constantService.getEndDate(),
+                headers: {
+                    "Content-Type": constantService.getContentType(),
+                    "Authorization": constantService.getAuthor(),
+                    "oracle-mobile-backend-id": constantService.getTaskBackId()
+                }
+
+            }).success(function (response) {
+
+                console.log("Task Response " + JSON.stringify(response));
+
+                response.TaskDetails.forEach(function (item) {
+
+                      //   ofscResponse.forEach(function(itemForOFSC){
+                      //
+                      //     if(itemForOFSC.ActivityID==item.Activity_Id){
+                      //
+                      //         console.log("true" + item.Activity_Id)
+                      //
+                      //        item.Start_Date= itemForOFSC.Start_Date;
+                      //
+                      //        item.End_Date= itemForOFSC.End_Date;
+                      //
+                      //     }
+                      // });
+
+                      responseOfTaskDetails.push(item);
+                  });
+
+                console.log("**************************************************");
+                console.log(responseOfTaskDetails);
+                localService.insertTaskList(responseOfTaskDetails);
+
+                callback(responseOfTaskDetails);
+
+            }).error(function (error) {
+
+                console.log("Task Error " + JSON.stringify(error));
+
+                callback(error);
+            });
+
+          //}).error(function (error) {
+
+          //    console.log('Login Error', JSON.stringify(error));
+
+          //    callback(error);
+          //});
+
+        }
+
+        function getOFSCDate(callback){
+            console.log('getOFSCDate ::', JSON.stringify(formData));
             var startDate = moment(constantService.getStartDate()).format("YYYY-MM-DD");
-
             var endDate = moment(constantService.getEndDate()).format("YYYY-MM-DD");
-
-            var type = "CUSTOMER";
-
-            var typei = "INTERNAL";
-
-            var internalOFSCResponse = [];
-
-            var internalOFSCJSONObject = {
-                "Start_Date": "",
-                "End_Date": "",
-                "Type": "",
-                "Text": ""
-            };
-
-            console.log("Internal URL " + 'OFSCActions/tasktype?resourceId=' + constantService.getResourceId() + '&fromDate=' + startDate + '&toDate=' + endDate + '&type=' + typei);
-
+            var type="CUSTOMER";
             return $http({
 
                 method: 'GET',
-                url: url + 'OFSCActions/tasktype?resourceId=' + constantService.getResourceId() + '&fromDate=' + startDate + '&toDate=' + endDate + '&type=' + typei,
+                url: url + 'OFSCActions/tasktype?resourceId='+constantService.getResourceId()+'&fromDate='+startDate+'&toDate='+endDate+'&type='+type,
                 headers: {
                     "Content-Type": constantService.getContentType(),
                     "Authorization": constantService.getAuthor(),
@@ -156,112 +213,18 @@
                 }
             }).success(function (response) {
 
-                if (response != undefined && response.finalResult != undefined) {
+                console.log('OFSC Date Call Response', JSON.stringify(response));
 
-                    console.log("Internal Response " + JSON.stringify(response));
+                callback(response);
 
-                    response.finalResult.forEach(function (item) {
+            }).error(function (error) {
 
-                        var internalOFSCJSONObject = {};
+                console.log('Login Error', JSON.stringify(error));
 
-                        internalOFSCJSONObject.Start_Date = item.Start_Date;
-                        internalOFSCJSONObject.End_Date = item.End_Date;
-                        internalOFSCJSONObject.Type = item.Type;
-                        internalOFSCJSONObject.Customer_Name = item.Activity_Type;
-                        internalOFSCJSONObject.Task_Number = item.ActivityID;
+                callback(error);
+            });
 
-                        internalOFSCResponse.push(internalOFSCJSONObject);
-
-                    });
-                }
-
-                console.log("Internal OFSCResponse " + JSON.stringify(internalOFSCResponse));
-
-                console.log("Customer URL " + 'OFSCActions/tasktype?resourceId=' + constantService.getResourceId() + '&fromDate=' + startDate + '&toDate=' + endDate + '&type=' + type);
-
-                return $http({
-
-                    method: 'GET',
-                    url: url + 'OFSCActions/tasktype?resourceId=' + constantService.getResourceId() + '&fromDate=' + startDate + '&toDate=' + endDate + '&type=' + type,
-                    headers: {
-                        "Content-Type": constantService.getContentType(),
-                        "Authorization": constantService.getAuthor(),
-                        "oracle-mobile-backend-id": constantService.getOfscBackId()
-                    }
-                }).success(function (response) {
-
-                    if (response != undefined && response.finalResult != undefined) {
-
-                        ofscResponse = response.finalResult;
-
-                        console.log("Customer OFSC Response " + JSON.stringify(ofscResponse));
-                    }
-
-                    $http({
-
-                        method: 'GET',
-                        url: url + 'TaskDetails/Resource_ID_taskdetails?resourceId=' + constantService.getResourceId()
-                        + '&fromDate=' + constantService.getStartDate()
-                        + '&toDate=' + constantService.getEndDate(),
-                        headers: {
-                            "Content-Type": constantService.getContentType(),
-                            "Authorization": constantService.getAuthor(),
-                            "oracle-mobile-backend-id": constantService.getTaskBackId()
-                        }
-
-                    }).success(function (response) {
-
-                        console.log("Task Response " + JSON.stringify(response));
-
-                        response.TaskDetails.forEach(function (item) {
-
-                            ofscResponse.forEach(function (itemForOFSC) {
-
-                                if (itemForOFSC.ActivityID == item.Activity_Id) {
-
-                                    item.Start_Date = itemForOFSC.Start_Date;
-
-                                    item.End_Date = itemForOFSC.End_Date;
-
-                                    item.Type = itemForOFSC.Type;
-
-                                } else {
-
-                                    item.Type = "CUSTOMER";
-                                }
-
-                                item.Email = "";
-
-                                item.Date = new Date();
-
-                            });
-
-                            responseOfTaskDetails.push(item);
-                        });
-
-                        console.log("Task Response Final" + JSON.stringify(responseOfTaskDetails));
-
-                        constantService.setTaskList(responseOfTaskDetails);
-
-                        localService.insertTaskList(responseOfTaskDetails);
-
-                        callback(responseOfTaskDetails);
-
-                    }).error(function (error) {
-
-                        console.log("Task Error " + JSON.stringify(error));
-
-                        callback(error);
-                    });
-
-                }).error(function (error) {
-
-                    console.log('OFSC Error', JSON.stringify(error));
-
-                    callback(error);
-                });
-            })
-        }
+          }
 
         function getInstallBaseList() {
 
@@ -640,7 +603,7 @@
             return $http({
 
                 method: 'POST',
-                url: url + '/UpdateTaskDetails/update',
+                url: url + 'Status_Api/to_change_status',
                 headers: {
                     "Content-Type": constantService.getContentType(),
                     "Authorization": constantService.getAuthor(),
@@ -702,13 +665,13 @@
 
             }).success(function (response) {
 
-                console.log("Create Attachment Response " + JSON.stringify(response));
+                // console.log("downloadAttachment Cloud Response " + JSON.stringify(response));
 
                 callback(response);
 
             }).error(function (error) {
 
-                console.log("Create Attachment Error " + JSON.stringify(error));
+                console.log("CreateAttachment Cloud Error " + JSON.stringify(error));
 
                 callback(error);
             });
@@ -729,7 +692,7 @@
 
             }).success(function (response) {
 
-                // console.log("DownloadAttachment Response " + JSON.stringify(response));
+                // console.log("downloadAttachment Cloud Response " + JSON.stringify(response));
 
                 callback(response);
 
@@ -743,7 +706,7 @@
 
         function uploadTime(timedata, callback) {
 
-            console.log("Time Data " + JSON.stringify(timedata));
+            console.log("UploadTime Data " + JSON.stringify(timedata));
 
             return $http({
 
@@ -758,21 +721,21 @@
 
             }).success(function (response) {
 
-                console.log("Upload Time Response " + JSON.stringify(response));
+                console.log("UploadTime Response " + JSON.stringify(response));
 
                 callback(response);
 
             }).error(function (error) {
 
-                console.log("Upload Time Error " + JSON.stringify(error));
+                console.log("UploadTime Error " + JSON.stringify(error));
 
                 callback(error);
             });
         }
 
-        function uploadExpense(expenseData, callback) {
+        function updateExpenses(expenseData, callback) {
 
-            console.log("Expense Data " + JSON.stringify(expenseData));
+            console.log("UpdateExpenses Data " + JSON.stringify(expenseData));
 
             return $http({
 
@@ -787,23 +750,23 @@
 
             }).success(function (response) {
 
-                console.log("Upload Expense Response " + JSON.stringify(response));
+                console.log("UpdateExpenses Response " + JSON.stringify(response));
 
                 callback(response);
 
             }).error(function (error) {
 
-                console.log("Upload Expense Error " + JSON.stringify(error));
+                console.log("UpdateExpenses Error " + JSON.stringify(error));
 
                 callback(error);
             });
         }
 
-        function uploadMaterial(materialData, callback) {
+        function updateMaterial(materialData, callback) {
 
             var urlWarranty = "Material_API/material_update";
 
-            console.log("Material Data" + JSON.stringify(materialData));
+            console.log("UpdateMaterial  Data" + JSON.stringify(materialData));
 
             $http({
 
@@ -818,21 +781,21 @@
 
             }).success(function (response) {
 
-                console.log("Upload Material Response " + JSON.stringify(response));
+                console.log("updateMaterial Response " + JSON.stringify(response));
 
                 callback(response);
 
             }).error(function (error) {
 
-                console.log("Upload Material Error " + JSON.stringify(error));
+                console.log("updateMaterial Error " + JSON.stringify(error));
 
                 callback(error);
             });
         }
 
-        function uploadNote(noteData, callback) {
+        function updateNotes(noteData, callback) {
 
-            console.log("Note Data", JSON.stringify(noteData));
+            console.log("UpdateNotes Data", JSON.stringify(noteData));
 
             return $http({
 
@@ -847,13 +810,13 @@
 
             }).success(function (response) {
 
-                console.log("Upload Note Response " + JSON.stringify(response));
+                console.log("UpdateNotes Response " + JSON.stringify(response));
 
                 callback(response);
 
             }).error(function (error) {
 
-                console.log("Upload Note Error " + JSON.stringify(error));
+                console.log("UpdateNotes Error " + JSON.stringify(error));
 
                 callback(error);
             });

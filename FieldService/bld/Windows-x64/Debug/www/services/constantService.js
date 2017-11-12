@@ -1,271 +1,219 @@
-﻿(function () {
+﻿(function() {
 
-    'use strict';
+  'use strict';
 
-    app.service('constantService', constantService);
+  app.service('constantService', constantService);
 
-    constantService.$inject = ['$http', '$rootScope', '$window', '$location', 'localService'];
+  constantService.$inject = ['$http', '$rootScope', '$window', '$location', 'localService'];
 
-    function constantService($http, $rootScope, $window, $location, localService) {
+  function constantService($http, $rootScope, $window, $location, localService) {
 
-        var service = {};
+    var service = {};
 
-        var userObject = {};
+    var userObject = {};
 
-        var resourceId = null;
+    var resourceId = null;
 
-        var timeZone = null;
+    var timeZone = null;
 
-        var contactsEmail = [];
+    var contactsEmail = [];
 
-        var taskList = [];
+    var taskList = [];
 
-        var contactsCCEmail = null;
+    var contactsCCEmail = null;
 
-        var contentType = 'application/json';
+    var contentType = 'application/json';
 
-        // var authKey = "Basic QTQ3MjE0NF9FTUVSU09OTU9CSUxFQ0xPVURfTU9CSUxFX0FOT05ZTU9VU19BUFBJRDpZLm81amxkaHVtYzF2ZQ==";
-        //
-        // var taskBackEndId = "cc9a9b83-02ff-4be1-8b70-bccb3ac6c592";
-        //
-        // var chargeBackEndId = "7172e7e3-d292-4bb3-be0b-1e475c6f66a7";
-        //
-        // var shiftBackEndId = "4b2f8c2d-f6d1-4957-8add-b0d471cdaea4";
-        //
-        // var fieldBackEndId = "b861a04a-de53-4c76-9430-3f485c21c5f4";
-        //
-        // var materialBackEndId = "0686fd58-8150-4264-ac09-348f79436fb9";
-        //
-        // var ofscBackEndId = "557f06cf-1dda-42f1-a8a8-afc52f823904";
-        //
-        // var acceptBackEndId = "3fec5f35-296c-49a6-92b7-cbac8e071522";
-        // var acceptBackEndId = "9baa9146-6abd-4375-a454-827de596f83a";
+    var authKey = "Basic QTQ3MjE0NF9FTUVSU09OTU9CSUxFQ0xPVURfTU9CSUxFX0FOT05ZTU9VU19BUFBJRDpZLm81amxkaHVtYzF2ZQ==";
 
-        var authKey = "Basic QTQ3MjE0NF9FTUVSU09OTU9CSUxFVEVTVEVOVl9NT0JJTEVfQU5PTllNT1VTX0FQUElEOm9ma3U1ZG4xUHZscS5t";
+    var taskBackEndId = "cc9a9b83-02ff-4be1-8b70-bccb3ac6c592";
 
-        var taskBackEndId = "eddb82d4-5f21-45e0-a029-c5947d2c9c48";
+    var chargeBackEndId = "7172e7e3-d292-4bb3-be0b-1e475c6f66a7";
 
-        var chargeBackEndId = "eddb82d4-5f21-45e0-a029-c5947d2c9c48";
+    var shiftBackEndId = "4b2f8c2d-f6d1-4957-8add-b0d471cdaea4";
 
-        var shiftBackEndId = "eddb82d4-5f21-45e0-a029-c5947d2c9c48";
+    var fieldBackEndId = "b861a04a-de53-4c76-9430-3f485c21c5f4";
 
-        var fieldBackEndId = "eddb82d4-5f21-45e0-a029-c5947d2c9c48";
+    var materialBackEndId = "0686fd58-8150-4264-ac09-348f79436fb9";
 
-        var materialBackEndId = "eddb82d4-5f21-45e0-a029-c5947d2c9c48";
+    var ofscBackEndId = "557f06cf-1dda-42f1-a8a8-afc52f823904";
 
-        var ofscBackEndId = "b043c17e-7dcd-41a5-abc6-39fa2f8ab0a6";
+    var acceptBackEndId = "3fec5f35-296c-49a6-92b7-cbac8e071522";
 
-        var acceptBackEndId = "eddb82d4-5f21-45e0-a029-c5947d2c9c48";
+    var stagesArray = {};
+    
+    var startDate = new Date();
 
-        var stagesArray = {};
+    startDate.setDate(startDate.getDate() - 15);
 
-        var startDate = new Date();
+    var startDateISOFormat = startDate.toISOString();
 
-        startDate.setDate(startDate.getDate() - 15);
+    var endDate = new Date();
 
-        var startDateISOFormat = startDate.toISOString();
+    endDate.setDate(endDate.getDate() + 15);
 
-        var endDate = new Date();
+    var endDateISOFormat = endDate.toISOString();
 
-        endDate.setDate(endDate.getDate() + 15);
+    service.setResourceId = setResourceId;
+    service.getResourceId = getResourceId;
 
-        var endDateISOFormat = endDate.toISOString();
+    service.setUser = setUser;
+    service.getUser = getUser;
 
-        service.setResourceId = setResourceId;
-        service.getResourceId = getResourceId;
+    service.getStartDate = getStartDate;
+    service.getEndDate = getEndDate;
 
-        service.setUser = setUser;
-        service.getUser = getUser;
+    service.setTaskList = setTaskList;
+    service.getTaskList = getTaskList;
 
-        service.getStartDate = getStartDate;
-        service.getEndDate = getEndDate;
+    service.getContentType = getContentType;
+    service.getAuthor = getAuthor;
 
-        service.setTaskList = setTaskList;
-        service.getTaskList = getTaskList;
+    service.getTaskBackId = getTaskBackId;
+    service.getChargeBackId = getChargeBackId;
+    service.getFieldBackId = getFieldBackId;
+    service.getShiftBackId = getShiftBackId;
+    service.getMaterialBackId = getMaterialBackId;
+    service.getOfscBackId = getOfscBackId;
+    service.getAcceptBackId = getAcceptBackId;
 
-        service.getContentType = getContentType;
-        service.getAuthor = getAuthor;
+    service.setUserEmailId = setUserEmailId;
+    service.getUserEmailId = getUserEmailId;
 
-        service.getTaskBackId = getTaskBackId;
-        service.getChargeBackId = getChargeBackId;
-        service.getFieldBackId = getFieldBackId;
-        service.getShiftBackId = getShiftBackId;
-        service.getMaterialBackId = getMaterialBackId;
-        service.getOfscBackId = getOfscBackId;
-        service.getAcceptBackId = getAcceptBackId;
+    service.setCCEmailID = setCCEmailID;
+    service.getCCEmailID = getCCEmailID;
 
-        service.setUserEmailId = setUserEmailId;
-        service.getUserEmailId = getUserEmailId;
+    service.setTimeZone = setTimeZone;
+    service.getTimeZone = getTimeZone;
+    service.setStagesArray = setStagesArray;
+    service.getStagesArray = getStagesArray;
 
-        service.setCCEmailID = setCCEmailID;
-        service.getCCEmailID = getCCEmailID;
+    return service;
 
-        service.setTimeZone = setTimeZone;
-        service.getTimeZone = getTimeZone;
+    function setResourceId(id) {
+      resourceId = id;
+    };
 
-        service.setStagesArray = setStagesArray;
-        service.getStagesArray = getStagesArray;
+    function getResourceId() {
+      return resourceId;
+    };
 
-        service.onDeviceReady = onDeviceReady;
+    function setUser(user) {
 
-        return service;
+      userObject = user;
 
-        function setResourceId(id) {
-            resourceId = id;
-        };
+      setTimeZone(userObject.Time_Zone);
 
-        function getResourceId() {
-            return resourceId;
-        };
+      $rootScope.uName = userObject.Name;
+    };
 
-        function setUser(user) {
+    function getUser() {
+      return userObject;
+    };
 
-            userObject = user;
+    function setTimeZone(zone) {
+      timeZone = zone;
+    };
 
-            setTimeZone(userObject.Time_Zone);
+    function getTimeZone() {
 
-            $rootScope.uName = userObject.Name;
-        };
+      return timeZone;
+    };
 
-        function getUser() {
-            return userObject;
-        };
+    function setUserEmailId(id) {
 
-        function setTimeZone(zone) {
-            timeZone = zone;
-        };
+      for (var i = 0; i < id.length; i++) {
 
-        function getTimeZone() {
+        contactsEmail.push(id[i].Email);
+      }
+    };
 
-            return timeZone;
-        };
+    function getUserEmailId() {
 
-        function setUserEmailId(id) {
+      return contactsEmail;
+    };
 
-            for (var i = 0; i < id.length; i++) {
+    function setCCEmailID(email) {
 
-                contactsEmail.push(id[i].Email);
-            }
-        };
+      contactsCCEmail = email;
+    };
 
-        function getUserEmailId() {
+    function getCCEmailID() {
 
-            return contactsEmail;
-        };
+      return contactsCCEmail;
+    };
 
-        function setCCEmailID(email) {
+    function getStartDate() {
 
-            contactsCCEmail = email;
-        };
+      return startDateISOFormat;
+    };
 
-        function getCCEmailID() {
+    function getEndDate() {
 
-            return contactsCCEmail;
-        };
+      return endDateISOFormat;
+    };
 
-        function getStartDate() {
+    function setTaskList(response) {
 
-            return startDateISOFormat;
-        };
+      taskList = response;
+    };
 
-        function getEndDate() {
+    function getTaskList() {
 
-            return endDateISOFormat;
-        };
+      return taskList;
+    };
 
-        function setTaskList(response) {
+    function getAuthor() {
 
-            taskList = response;
-        };
+      return authKey;
+    };
 
-        function getTaskList() {
+    function getTaskBackId() {
 
-            return taskList;
-        };
+      return taskBackEndId;
+    };
 
-        function getAuthor() {
+    function getChargeBackId() {
 
-            return authKey;
-        };
+      return chargeBackEndId;
+    };
 
-        function getTaskBackId() {
+    function getFieldBackId() {
 
-            return taskBackEndId;
-        };
+      return fieldBackEndId;
+    };
 
-        function getChargeBackId() {
+    function getShiftBackId() {
 
-            return chargeBackEndId;
-        };
+      return shiftBackEndId;
+    };
 
-        function getFieldBackId() {
+    function getMaterialBackId() {
 
-            return fieldBackEndId;
-        };
+      return materialBackEndId;
+    };
 
-        function getShiftBackId() {
+    function getOfscBackId() {
 
-            return shiftBackEndId;
-        };
+      return ofscBackEndId;
+    };
 
-        function getMaterialBackId() {
+    function getAcceptBackId() {
 
-            return materialBackEndId;
-        };
+      return acceptBackEndId;
+    };
 
-        function getOfscBackId() {
+    function getContentType() {
 
-            return ofscBackEndId;
-        };
+      return contentType;
+    };
 
-        function getAcceptBackId() {
-
-            return acceptBackEndId;
-        };
-
-        function getContentType() {
-
-            return contentType;
-        };
-
-        function setStagesArray(stages) {
-            stagesArray = stages;
-        };
-
-        function getStagesArray() {
-            return stagesArray;
-        };
-
-        function onDeviceReady() {
-
-            localService.deleteTaskList();
-            localService.deleteInstallBase();
-            localService.deleteContact();
-            localService.deleteNote();
-
-            localService.deleteOverTime();
-            localService.deleteShiftCode();
-
-            localService.deleteChargeType();
-            localService.deleteChargeMethod();
-            localService.deleteFieldJobName();
-
-            localService.deleteWorkType();
-            localService.deleteItem();
-            localService.deleteCurrency();
-
-            localService.deleteExpenseType();
-            localService.deleteNoteType();
-
-            localService.deleteTimeList();
-            localService.deleteExpenseList();
-            localService.deleteNotesList();
-            localService.deleteMaterialList();
-            localService.deleteAttachmentList();
-            localService.deleteEngineerList();
-
-            localService.deleteUser();
-
-        };
+    function setStagesArray(stages) {
+      stagesArray = stages;
     }
+
+    function getStagesArray() {
+      return stagesArray;
+    };
+  }
 })();
