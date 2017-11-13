@@ -1,188 +1,148 @@
-<style>
-    .padding10 {
-        padding: 10px;
-        margin-left: 50px;
-        margin-top: 30px;
-        margin-right: 50px;
-    }
 
-    .padding15 {
-        padding-left: 15px;
-        padding-bottom: 10px;
-        padding-top: 10px;
-    }
-
-    .paddiin-bottom-10 {
-        padding-bottom: 10px
-    }
-
-    table.work, th.work, td.work {
-        border: 1px solid #c0c0c0;
-
-    }
-
-    table, tr {
-        border: 1px solid #ebebeb !important;
-
-    }
-
-    td, th {
-        padding: 10px;
-    }
-
-    @media (min-width: 1200px) {
-        .container.custumContainer {
-            width: 1090px !important;
-        }
-
-    }
-    .instalbase tr, .instalbase th,.instalbase td
-    {
-        border:0px !important;
-        text-align:left  !important;;
-    }
-    table.instalbase
-    {
-        border:0px !important;
-        margin-left: 10px;
-    }
-</style>
-
+<div class="card-parentContainer martop-40"> 
 <div id="export1">
-    <div class="padding10 debLabelHeader" translate="Customer Call Details"></div>
-    <div class="container" style="padding:0">
-        <div class="debreifContainerouter margintop30" style="margin-top:30px !important">
-            <md-card style="border-radius:10px 10px 10px 10px">
-                <div class="debreifContainerinner">
-                    <div class="row padding15" style="margin:0 !important">
-                        <label translate="Customer Name">:</label>
-                        <div>{{summary.taskObject.Customer_Name}}</div>
-                    </div>
-                    <div class="row margintop30 ">
-                        <hr/>
-                    </div>
-                    <div class="row margintop30 " style="padding: 0px;margin:0 !important">
-                        <div class="col-sm-4 paddiin-bottom-10">
-                            <label translate="Service Request">:</label>
-                            <div>{{summary.taskObject.Service_Request}}</div>
+
+    <label class="header-labeles" translate="Customer Call Details"></label>
+    <div class="card-childContainer marginbottom30">
+
+    <div class="">
+      
+        <div class="note-type-label marginbottom12" translate="Customer Name"></div>
+        <div class="note-type-value">{{summary.taskObject.Customer_Name}}</div>
+
+        <div class="margin20">
+            <div class="stroke"></div>
+        </div>
+             <div layout="row">
+                        <div flex="30">
+                            <label class="mylabel" translate="Service Request"></label>
+                            <div class="myvalue">{{summary.taskObject.Service_Request}}</div>
                         </div>
 
-                        <div class="col-sm-4 paddiin-bottom-10">
-                            <label translate="Field Job Number">:</label>
-                            <div>{{summary.taskObject.Task_Number}}</div>
+                        <div flex="30">
+                            <label class="mylabel" translate="Field Job Number"></label>
+                            <div class="myvalue">{{summary.taskObject.Task_Number}}</div>
                         </div>
-                        <div class="col-sm-4 paddiin-bottom-10">
-                            <div class="row">
-                                <label translate="Job Description"></label>
+                        <div flex="60">
+                           
+                                <label class="mylabel" translate="Job Description"></label>
                                 <div>{{summary.taskObject.Job_Description}}</div>
-                            </div>
-                            <div class="row margintop25">
-                                <md-table-container>
-                                    <table md-table class="work">
-                                        <thead md-head>
-                                            <tr md-row>
-                                                <th md-column style="border : 1px solid #c0c0c0;"><span translate="Start Date"></span>
-                                                </th>
-                                                <th md-column style="border : 1px solid #c0c0c0;"><span translate="End Date">END DATE</span></th>
-                                                <th md-column style="border : 1px solid #c0c0c0;"><span translate="Duration"></span></th>
-                                            </tr>
-                                        </thead>
-                                        <tbody md-body>
-                                            <tr md-row ng-repeat="time in  summary.taskObject.times"
-                                            style="background-color:#f0f0f0">
-                                            <td md-cell style="border : 1px solid #c0c0c0;background-color:#f0f0f0">
-                                                {{time.Start_Date| timezonefilter}}
-                                            </td>
-                                            <td md-cell style="border : 1px solid #c0c0c0;background-color:#f0f0f0">
-                                                {{time.End_Date| timezonefilter}}
-                                            </td>
-                                            <td md-cell style="border : 1px solid #c0c0c0;background-color:#f0f0f0">{{time.Duration}}
-                                            </td>
-                                        </tr>
+                                <table class="table no-marbottom" style="margin-top: 12px;">
+                                    <thead>
+                                    <tr style="border-top: solid 1px #c0c0c0;">
+                                        <th class="taskoverflow-tableTh"  translate="Start Date"></th>
+                                        <th class="taskoverflow-tableTh"  translate="End Date"></th>
+                                        <th class="taskoverflow-tableTh"  translate="Duration"></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr ng-repeat="time in  summary.taskObject.times">
+                                        <td class="taskoverflow-tableTd">{{time.Start_Date| timezonefilter}}</td>
+                                        <td class="taskoverflow-tableTd">{{time.End_Date| timezonefilter}}</td>
+                                        <td class="taskoverflow-tableTd">{{time.Duration}}</td>
+                                    </tr>
                                     </tbody>
+
                                 </table>
-                            </md-table-container>
+                            
                         </div>
-                    </div>
                 </div>
 
-                <div class="row margintop30 ">
-                    <hr/>
+                <div class="margin20">
+                    <div class="stroke"></div>
                 </div>
 
-                <div class="row margintop30 " style="margin:0 !important">
-                    <table class="instalbase"  md-table >
-                        <thead md-head>
-                            <tr md-row>
-                                <th   translate="Product Line"></th>
-                                <th  translate="System ID / Serial"><span>#</span></th>
-                                <th  translate="TAG"><span>#</span></th>
-                                <th translate="ORGINAL PO"><span>#</span></th>
+                 <div layout="row">
+                    <table class="table no-marbottom noborder">
+                        <thead>
+                            <tr class="noborder">
+                                <th class="taskoverflow-tableTh noborder"  translate="Product Line"></th>
+                                <th class="taskoverflow-tableTh noborder" translate="System ID / Serial"><span>#</span></th>
+                                <th class="taskoverflow-tableTh noborder" translate="TAG"><span>#</span></th>
+                                <th class="taskoverflow-tableTh noborder" translate="ORGINAL PO"><span>#</span></th>
                             </tr>
                         </thead>
-                        <tbody md-body>
-                            <tr md-row ng-repeat="install in summary.taskObject.InstallBase" >
-                                <td md-cell>{{install.Product_Line|| "NO VALUE"}}</td>
-                                <td md-cell> {{install.Serial_Number|| "NO VALUE"}}</td>
-                                <td md-cell>{{install.TagNumber|| "NO VALUE"}}</td>
-                                <td md-cell>{{install.Original_PO_Number|| "NO VALUE"}}</td>
+                        <tbody >
+                            <tr class="noborder" ng-repeat="install in summary.taskObject.InstallBase" >
+                                <td class="taskoverflow-tableTd noborder bg-white">{{install.Product_Line|| "NO VALUE"}}</td>
+                                <td class="taskoverflow-tableTd noborder bg-white"> {{install.Serial_Number|| "NO VALUE"}}</td>
+                                <td class="taskoverflow-tableTd noborder bg-white">{{install.TagNumber|| "NO VALUE"}}</td>
+                                <td class="taskoverflow-tableTd noborder bg-white">{{install.Original_PO_Number|| "NO VALUE"}}</td>
                             </tr>
                         </tbody>
 
                     </table>
-                    <!-- <div class="col-sm-3 paddiin-bottom-10">
-                        <label translate="Product Line">:</label>
-                        <div>{{summary.taskObject.Product_Line}}</div>
+                  
+                </div>
+
+
+    </div>
+</div>
+
+<!-- Notes -->
+<label class="header-labeles" translate="Notes"></label>
+
+<div class="card-childContainer marginbottom30">
+
+    <table class="table no-marbottom noborder">
+                        <thead>
+                            <tr class="noborder">
+                                <th class="taskoverflow-tableTh noborder"  translate="Note Type"></th>
+                                <th class="taskoverflow-tableTh noborder" translate="Note Description"> #</th>
+                            </tr>
+                        </thead>
+                        <tbody >
+                            <tr class="noborder" ng-repeat="note in summary.notesArray" >
+                                <td class="taskoverflow-tableTd noborder bg-white">{{note.Note_Type}}</td>
+                                <td class="taskoverflow-tableTd noborder bg-white"> {{note.Notes}}</td>
+                            </tr>
+                        </tbody>
+
+    </table>
+   
+</div>
+
+
+</div>
+
+<label class="header-labeles" translate="Attachments"></label>
+<div class="card-childContainer marginbottom30">
+    <div class="row" style="margin:0px;">
+    <div ng-repeat="file1 in files" class="col-sm-2 width110 attachment-spacing" >
+
+                    <div class="attachmentDiv" ng-if="file1.contentType.indexOf('image') > -1">
+                    <img data-ng-src="data:{{file1.contentType}};base64,{{file1.base64}}"
+                          class="img-responsive"/>
                     </div>
-                    <div class="col-sm-3 paddiin-bottom-10">
-                        <label translate="System ID / Serial #">:</label>
-                        <div>{{summary.taskObject.Serial_Number}}</div>
+
+                    <div class="attachmentDiv" ng-if="file1.filetype.indexOf('pdf') > -1">
+                    <img src="images/pdf.png"  class="img-responsive"/>
                     </div>
-                    <div class="col-sm-3 paddiin-bottom-10">
-                        <label>TAG #:</label>
-                        <div>{{summary.taskObject.TagNumber|| "NO VALUE"}}</div>
+
+                     <div class="attachmentDiv" ng-if="file1.filetype.indexOf('doc') > -1 || file1.filetype.indexOf('docx') > -1">
+                    <img src="images/Word_1x.png"  class="img-responsive"/>
                     </div>
-                    <div class="col-sm-3 paddiin-bottom-10">
-                        <label>ORIGINAL PO #:</label>
-                        <div>{{summary.taskObject.Original_PO_Number|| "NO VALUE"}}</div>
+
+                    <div class="attachmentDiv" ng-if="file1.filetype.indexOf('xlsx') > -1 || file1.filetype.indexOf('xls') > -1">
+                    <img src="images/Excel_1x.png"  class="img-responsive"/>
+                    </div>
+
+                    <div class="attachmentDiv" ng-if="file1.filetype.indexOf('pptx') > -1 || file1.filetype.indexOf('ppt') > -1">
+                    <img src="images/PowerPoint_1x.png"  class="img-responsive"/>
+                    </div>
+
+                     <div class="attachmentDiv" ng-if="file1.filetype.indexOf('txt') > -1 ">
+                    <img src="images/Notepad_1x.png"  class="img-responsive"/>
+                    </div>
+                    <!-- <div>{{file1.name}}</div> -->
+                    <!-- <div style="margin-bottom:20px">{{file1.filename}}
                     </div> -->
-                </div>
-            </div>
-        </md-card>
+                    <label class="summary-values">{{file1.filename}}</label>
+    </div>
     </div>
 </div>
 
-<div class="padding10 debLabelHeader" translate="Notes"></div>
-
-<div class="container" style="padding:0">
-    <div class="debreifContainerouter margintop30">
-        <md-card style="border-radius:10px 10px 10px 10px">
-            <div class="debreifContainerinner">
-                <md-table-container>
-                    <table md-table>
-                        <thead md-head>
-                            <tr md-row>
-                                <th md-column class="col-sm-4" style="text-align:left"><span translate="Note Type"></span></th>
-                                <th md-column class="col-sm-6" style="text-align:left"><span translate="Note Description"></span>
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody md-body>
-                            <tr md-row ng-repeat="note in summary.notesArray">
-                                <td md-cell class="col-sm-4" style="text-align:left">{{note.Note_Type}}</td>
-                                <td md-cell class="col-sm-6" style="text-align:left">{{note.Notes}}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </md-table-container>
-            </div>
-        </md-card>
-    </div>
-</div>
-</div>
-
-
-<div class="padding10 debLabelHeader" translate="Attachments"></div>
+<!-- <div class="padding10 debLabelHeader" translate="Attachments"></div>
 <div class="container" style="padding:0">
     <div class="debreifContainerouter margintop30">
         <md-card style="border-radius:10px 10px 10px 10px">
@@ -194,100 +154,87 @@
                     <img src="images/Word_1x.png" ng-if="file1.filetype.indexOf('doc') > -1 || file1.filetype.indexOf('docx') > -1" class="img-responsive">
                     <img src="images/Excel_1x.png" ng-if="file1.filetype.indexOf('xlsx') > -1 || file1.filetype.indexOf('xls') > -1" class="img-responsive">
                     <img src="images/PowerPoint_1x.png" ng-if="file1.filetype.indexOf('pptx') > -1 || file1.filetype.indexOf('ppt') > -1" class="img-responsive">
-                    <img src="images/Notepad_1x.png" ng-if="file1.filetype.indexOf('txt') > -1 " class="img-responsive">
+                    <img src="images/Notepad_1x.png" ng-if="file1.filetype.indexOf('txt') > -1 " class="img-responsive"> -->
                     <!-- <div>{{file1.name}}</div> -->
-                    <div style="margin-bottom:20px">{{file1.filename}}
+                    <!-- <div style="margin-bottom:20px">{{file1.filename}}
                     </div>
                 </div>
             </div>
         </md-card>
     </div>
-</div>
+</div> -->
 
+<label class="header-labeles" translate="Time"></label>
 
-<div class="padding10 debLabelHeader" translate="Time"></div>
-<div class="container" style="padding:0">
-    <div class="debreifContainerouter margintop30">
-        <md-card style="border-radius:10px 10px 10px 10px">
-            <div class="debreifContainerinner">
-                <md-table-container>
-                    <table md-table>
-                        <thead md-head>
-                            <tr md-row>
-                                <th md-column><span translate="Date"></span></th>
-                                <th md-column ng-if="userType=='C'"><span translate="Charge Type"></span></th>
-                                <th md-column ng-if="userType=='C'"><span translate="Charge Method"></span></th>
-                                <th md-column><span translate="Work Type"></span></th>
-                                <th md-column ng-if="userType=='C'" ng-repeat="time in timeArray[0].timeDefault.timeCode.values"><span>{{time.Overtimeshiftcode}}</span></th>
+<div class="card-childContainer marginbottom30" style="    overflow-x: auto;">
+
+                    <table class="table no-marbottom noborder">
+                        <thead>
+                            <tr class="summary-tr">
+                                <th class="noborder padding-right"><span translate="Date"></span></th>
+                                <th class=" noborder padding-right" ng-if="userType=='C'"><span translate="Charge Type"></span></th>
+                                <th class=" noborder padding-right" ng-if="userType=='C'"><span translate="Charge Method"></span></th>
+                                <th class=" noborder padding-right"><span translate="Work Type"></span></th>
+                                <th class=" noborder padding-right"  ng-if="userType=='C'" ng-repeat="time in timeArray[0].timeDefault.timeCode.values"><span>{{time.Overtimeshiftcode}}</span></th>
                                 <!-- <th md-column><span>OT1</span></th>
                                     <th md-column><span>OT2</span></th>
                                     <th md-column><span>OT3</span></th>
                                     <th md-column><span>OS1</span></th>
                                     <th md-column><span>OS2</span></th> -->
-                                    <th md-column><span translate="Duration"></span></th>
-                                    <th md-column><span translate="Item"></span></th>
-                                    <th md-column><span translate="Description"></span></th>
+                                    <th class="noborder padding-right"><span translate="Duration"></span></th>
+                                    <th class="noborder padding-right"><span translate="Item"></span></th>
+                                    <th class="noborder padding-right"><span translate="Description"></span></th>
                                 </tr>
                             </thead>
-                            <tbody md-body>
-                                <tr md-row ng-repeat="time in  summary.timeArray">
-                                    <td md-cell>{{time.Date }}</td>
-                                    <td md-cell ng-if="userType=='C'">{{time.Charge_Type}}</td>
-                                    <td md-cell ng-if="userType=='C'">{{time.Charge_Method}}</td>
-                                    <td md-cell>{{time.Work_Type}}</td>
+                            <tbody >
+                                <tr class="summary-tr" ng-repeat="time in  summary.timeArray">
+                                    <td class="noborder bg-white padding-right">{{time.Date }}</td>
+                                    <td class="noborder bg-white padding-right" ng-if="userType=='C'">{{time.Charge_Type}}</td>
+                                    <td class="noborder bg-white padding-right" ng-if="userType=='C'">{{time.Charge_Method}}</td>
+                                    <td class="noborder bg-white padding-right">{{time.Work_Type}}</td>
                                     <!-- <td md-cell>{{time.standard}}</td> -->
-                                    <td md-cell ng-if="userType=='C'" ng-repeat="timec in timeArray[0].timeDefault.timeCode.values">{{time.timecode[$index][timec.Overtimeshiftcode]}} </td>
+                                    <td class="noborder bg-white padding-right" ng-if="userType=='C'" ng-repeat="timec in timeArray[0].timeDefault.timeCode.values">{{time.timecode[$index][timec.Overtimeshiftcode]}} </td>
                                     <!-- <td md-cell>{{time.ot2}}</td>
                                         <td md-cell>{{time.ot3}}</td>
                                         <td md-cell>{{time.os1}}</td>
                                         <td md-cell>{{time.os2}}</td> -->
-                                        <td md-cell>{{time.Duration}}</td>
-                                        <td md-cell>{{time.Item}}</td>
-                                        <td md-cell>{{time.Description}}</td>
+                                        <td class="noborder bg-white padding-right">{{time.Duration}}</td>
+                                        <td class="noborder bg-white padding-right">{{time.Item}}</td>
+                                        <td class="noborder bg-white padding-right"><div class="summary-description">{{time.Description}}</div></td>
                                     </tr>
                                 </tbody>
                             </table>
-                        </md-table-container>
-                    </div>
-                </md-card>
-            </div>
-        </div>
+
+</div>
 
 
-        <div class="padding10 debLabelHeader" translate="Expenses"></div>
-        <div class="container" style="padding:0">
-            <div class="debreifContainerouter margintop30">
-                <md-card style="border-radius:10px 10px 10px 10px">
-                    <div class="debreifContainerinner">
-                        <md-table-container>
-                            <table md-table>
-                                <thead md-head>
-                                    <tr md-row>
-                                        <th md-column><span translate="Date"></span></th>
-                                        <th md-column><span translate="Expense Type"></span></th>
-                                        <!-- <th md-column><span>AMOUNT</span></th> -->
-                                        <!--  <th md-column><span>CURRENCY</span></th> -->
-                                        <th md-column><span translate="Charge Method"></span></th>
-                                        <!--  <th md-column><span>BILLABLE</span></th> -->
-                                        <th md-column><span translate="Justification"></span></th>
-                                    </tr>
-                                </thead>
-                                <tbody md-body>
-                                    <tr md-row ng-repeat="expense in summary.expenseArray">
-                                        <td md-cell>{{expense.Date}}</td>
-                                        <td md-cell>{{expense.Expense_Type}}</td>
-                                        <!-- <td md-cell>{{expense.amount}}</td> -->
-                                        <!--  <td md-cell>{{expense.currency}}</td> -->
-                                        <td md-cell>{{expense.Charge_Method}}</td>
-                                        <!-- <td md-cell>{{expense.isbillable}}</td> -->
-                                        <td md-cell>{{expense.Justification}}</td>
+
+
+        <label class="header-labeles" translate="Expenses"></label>
+        <div class="card-childContainer marginbottom30" >
+                        
+
+                        <table class="table no-marbottom noborder">
+                        <thead>
+                            <tr class="summary-tr">
+                               <th class="noborder width25"><span translate="Date"></span></th>
+                               <th class="noborder width25"><span translate="Expense Type"></span></th>
+                               <th class="noborder width25"><span translate="Charge Method"></span></th>
+                               <th class="noborder width25"><span translate="Justification"></span></th>
+                            </tr>
+                            </thead>
+                            <tbody >
+                                <tr class="summary-tr" ng-repeat="expense in summary.expenseArray">
+                                       <td class="noborder bg-white width25">{{expense.Date}}</td>
+                                       <td class="noborder bg-white width25">{{expense.Expense_Type}}</td>
+                                       <td class="noborder bg-white width25">{{expense.Charge_Method}}</td>
+                                       <td class="noborder bg-white width25"><div class="summary-description" style="width: 160px;">{{expense.Justification}}</div></td>
                                     </tr>
                                 </tbody>
                             </table>
-                        </md-table-container>
-                    </div>
-                </md-card>
-            </div>
+
+
+                   
         </div>
 
         <div class="padding10 debLabelHeader" translate="Material"></div>
@@ -312,9 +259,10 @@
                                     <tr md-row ng-repeat="material in summary.materialArray">
                                         <td md-cell>{{material.Charge_Type}}</td>
                                         <td md-cell>{{material.Product_Quantity}}</td>
-                                        <td md-cell ><span ng-repeat="serailno in material.serialNumber">{{serailno}}</br></span></td>
-                                        <td md-cell ><span ng-repeat="serailin in material.serialIn">{{serailin}}</br></span></td>
-                                        <td md-cell ><span ng-repeat="serailout in material.serialOut">{{serailout}}</br></span></td>
+                                        <td md-cell ><span ng-repeat="serailno in material.serialNumber">{{serailno}}<br/>
+                                        </span></td>
+                                        <td md-cell ><span ng-repeat="serailin in material.serialIn">{{serailin}}<br/></span></td>
+                                        <td md-cell ><span ng-repeat="serailout in material.serialOut">{{serailout}}<br/></span></td>
                                         <td md-cell>{{material.ItemName}}</td>
                                         <td md-cell>{{material.Description}}</td>
                                     </tr>
@@ -326,37 +274,29 @@
             </div>
         </div>
 
-        <div class="padding10 debLabelHeader" translate="Signature"></div>
-        <div class="container" style="padding:0">
-            <div class="debreifContainerouter margintop30">
-                <md-card style="border-radius:10px 10px 10px 10px">
-                    <div class="debreifContainerinner">
-                        <div class="row">
-                            <div class="col-sm-5">
-                                <!-- <label>EMERSON PROCESS MANAGEMENT</label> -->
+             <label class="header-labeles" translate="Signature"></label>
+             <div class="card-childContainer marginbottom30" >
+                            
+                <div class="row">
+                            <div class="col-sm-6 col-md-6 col-lg-6">
 
                                 <div><label><span translate="Engineer Name"></span> : {{engineerName}}</label></div>
                                 <!--  <span></span> -->
                                 <!-- <div class="result" ng-show="$rootScope.signature"> -->
                                     <img ng-src="{{summary.engineer.signature}}" style="width:50%">
-                                    <!-- </div> -->
+                                    
                                 </div>
-                                <div class="col-sm-5">
+                                <div class="col-sm-6 col-md-6 col-lg-6">
 
                                     <div><label><span translate="Customer Name"></span> :{{summary.taskObject.Customer_Name}}</label></div>
                                     <span></span>
                                 </div>
-                            </div>
-                        </div>
-                    </md-card>
                 </div>
+                
+                       
             </div>
 
-            <div class="row" style="text-align:center;">
-
-                <div class="col-sm-12 margintop10 marginbottom5">
-                    <md-button style="border-radius:0;margin-bottom:20px;" class="time-font time-add" ng-click="reviewSummary()" translate="Reviewed">
-                    </md-button>
+            <div class="row text-center">
+                    <button class="summary-reviewBtn" ng-click="reviewSummary()" translate="Reviewed"></button>
                 </div>
-
-            </div>
+</div>
