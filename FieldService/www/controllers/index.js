@@ -38,7 +38,7 @@ app.controller('indexController', function ($scope, $state, $timeout, $mdSidenav
     };
 
     $scope.changeLanguage = function (lang) {
-
+        valueService.setLanguage(lang);
         switch (lang) {
 
             case "en":

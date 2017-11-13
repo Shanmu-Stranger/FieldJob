@@ -23,7 +23,7 @@
         var header = null;
 
         var networkStatus = false;
-
+        var language="";
         var debrief = {
             task: {},
             taskList: [],
@@ -139,10 +139,20 @@
         service.setIfFutureDateTask = setIfFutureDateTask;
         service.getIfFutureDateTask = getIfFutureDateTask;
 
+        service.setLanguage=setLanguage;
+        service.getLanguage=getLanguage;
+
         service.syncData = syncData;
 
         return service;
-
+        function setLanguage(lang)
+        {
+            language=lang;
+        }
+        function getLanguage()
+        {
+            return language;
+        }
         function setResourceId(id) {
             resourceId = id;
         };
