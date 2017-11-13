@@ -77,11 +77,14 @@ app.controller('todoController', function ($scope, $http, $state, $rootScope, cl
     }
 
     $scope.add = function () {
+        if($scope.title!="")
+        {
         $scope.tasks.push($scope.title);
         //$scope.title='';
         $scope.TodoForm.title.$setPristine();
         $scope.TodoForm.title.$setPristine(true);
         $scope.title = '';
+        }
     };
 
     $scope.delete = function () {
