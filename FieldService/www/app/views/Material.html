@@ -73,95 +73,98 @@
     </div>
 </div>-->
 
-<div class="container" style="padding:0">
-    <div class="debreifContainerouter">
-        <md-card style="border-radius:10px 10px 10px 10px;margin:0 !important" class="margin-top15"
-                 ng-repeat="item in materialArray track by $index">
-            <div class="debreifContainerinner">
+<div class="card-parentContainer margintop10">
+    <div class="margintop30" ng-repeat="item in materialArray track by $index">
+        
+            <div class="card-childContainer  noBorder-radius">
 
                 <form class="form-horizontal" name="userForm">
-
-                    <div class="col-sm-12 col-md-12">
-                        <div class="col-sm-4 col-md-4">
-                            <div class="form-group">
-                                <label class="control-label col-sm-12 marginbottom5" translate="{{item.materialDefault.chargeType.title}}"></label>
-                                <!--<div class="col-sm-12">
-
-                                    <input class="inputFieldsMaterial"
-                                    ng-model="item.Charge_Type" disabled></input>
-                                </div>-->
-                                <div class="col-sm-12">
-                                    <select class="form-control select-debrief" ng-model="item.Charge_Type"
-                                            ng-options="x as x.Value | translate for x in item.materialDefault.chargeType.values track by x.ID" ng-change="setChargeTypeMaterial(item)">
-                                        <option value="" disabled selected>Select Charge Method</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-4 col-md-4">
-                            <div class="col-sm-12 col-md-12">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12">
+                            <div class="col-sm-4 col-md-4">
                                 <div class="form-group">
-                                    <label class="control-label  marginbottom5" translate="{{item.materialDefault.description.title}}"></label>
-                                    <input type="text" name="description" class="form-control" ng-model="item.Description"/>
-                                       <!-- <div>{{item.Description}}</div> -->
+                                    <label class="control-label col-sm-12 marginbottom5" translate="{{item.materialDefault.chargeType.title}}"></label>
+                                    <!--<div class="col-sm-12">
+
+                        <input class="inputFieldsMaterial"
+                        ng-model="item.Charge_Type" disabled></input>
+                    </div>-->
+                                    <div class="col-sm-12">
+                                        <select class="form-control select-debrief" ng-model="item.Charge_Type"
+                                                ng-options="x as x.Value | translate for x in item.materialDefault.chargeType.values track by x.ID" ng-change="setChargeTypeMaterial(item)">
+                                            <option value="" disabled selected>Select Charge Method</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-4 col-md-4">
+                                <div class="col-sm-12 col-md-12">
+                                    <div class="form-group">
+                                        <label class="control-label  marginbottom5" translate="{{item.materialDefault.description.title}}"></label>
+                                        <input type="text" name="description" class="form-control" ng-model="item.Description" />
+                                       
+                                          <!-- <div>{{item.Description}}</div> -->
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-4 col-md-4">
+                                <div class="col-sm-6 col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label  marginbottom5" translate="item name"></label>
+                                        <input type="text" ng-model="item.ItemName" />
+                                    </div>
                                 </div>
                             </div>
                         </div>
 
-                         <div class="col-sm-4 col-md-4">
-                            <div class="col-sm-6 col-md-6">
+                        <div class="col-sm-12 col-md-12">
+                            <div class="col-sm-4 col-md-4">
                                 <div class="form-group">
-                                    <label class="control-label  marginbottom5" translate="item name"></label>
-                                    <input type ="text" ng-model="item.ItemName"/>
+                                    <label class="control-label col-sm-12 marginbottom5" translate="{{item.materialDefault.productQuantity.title}}"></label>
+                                    <div class="col-sm-12">
+                                        <button class="plusminusBtn calculateBut" ng-click="deleteSerialItem($index)"
+                                                ng-disabled="item.Product_Quantity<=1">
+                                            -
+                                        </button>
+                                        <label class="control-label  calculateInput"
+                                               ng-model="itemContent.productQuantity.value">{{item.Product_Quantity}}</label>
+                                        <button class="plusminusBtn calculateBut" ng-click="addSerialItem($index) ">
+                                            +
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
 
-                    <div class="col-sm-12 col-md-12">
-                        <div class="col-sm-4 col-md-4">
-                            <div class="form-group">
-                                <label class="control-label col-sm-12 marginbottom5" translate="{{item.materialDefault.productQuantity.title}}"></label>
-                                <div class="col-sm-12">
-                                    <button class="plusminusBtn calculateBut" ng-click="deleteSerialItem($index)"
-                                            ng-disabled="item.Product_Quantity<=1">-
-                                    </button>
-                                    <label class="control-label  calculateInput"
-                                           ng-model="itemContent.productQuantity.value">{{item.Product_Quantity}}</label>
-                                    <button class="plusminusBtn calculateBut" ng-click="addSerialItem($index) ">+
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
+                            <div class="col-sm-8 col-md-8">
+                                <div ng-repeat="serial in item.Serial_Type track by $index" style="clear:both">
+                                    <div ng-show="item.Charge_Type.Value == 'Warranty'">
 
-                        <div class="col-sm-8 col-md-8">
-                            <div ng-repeat="serial in item.Serial_Type track by $index" style="clear:both">
-                                <div ng-show="item.Charge_Type.Value == 'Warranty'">
+                                        <div class="col-sm-6 col-md-6">
+                                            <div class="form-group">
+                                                <label class="control-label" translate="{{item.materialDefault.serialIn.title}}"></label>
+                                                <input class="inputFieldsMaterial" id="SerialIn"
+                                                       ng-model="serial.in" name="ChargeType"></input>
+                                            </div>
+                                        </div>
 
-                                    <div class="col-sm-6 col-md-6">
-                                        <div class="form-group">
-                                            <label class="control-label" translate="{{item.materialDefault.serialIn.title}}"></label>
-                                            <input class="inputFieldsMaterial" id="SerialIn"
-                                                   ng-model="serial.in" name="ChargeType"></input>
+                                        <div class="col-sm-6 col-md-6">
+                                            <div class="form-group">
+                                                <label class="control-label" translate="{{item.materialDefault.serialOut.title}}"></label>
+                                                <input class="inputFieldsMaterial" id="SerialOut"
+                                                       ng-model="serial.out" name="SerialNumber"></input>
+                                            </div>
                                         </div>
                                     </div>
 
-                                    <div class="col-sm-6 col-md-6">
-                                        <div class="form-group">
-                                            <label class="control-label" translate="{{item.materialDefault.serialOut.title}}"></label>
-                                            <input class="inputFieldsMaterial" id="SerialOut"
-                                                   ng-model="serial.out" name="SerialNumber"></input>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-8">
-                                    <div ng-show="item.Charge_Type.Value == 'Billable' || item.Charge_Type.Value == 'Goodwill' || item.Charge_Type.Value == 'Concession' ">
-                                        <div class="form-group ">
-                                            <label class="control-label" translate="{{item.materialDefault.serialNo.title}}"></label>
-                                            <input style="width:240px;" class="inputFieldsMaterial" id="SerialNo"
-                                                   ng-model="serial.number" name="SerialNo"></input>
+                                    <div class="col-md-8">
+                                        <div ng-show="item.Charge_Type.Value == 'Billable' || item.Charge_Type.Value == 'Goodwill' || item.Charge_Type.Value == 'Concession' ">
+                                            <div class="form-group ">
+                                                <label class="control-label" translate="{{item.materialDefault.serialNo.title}}"></label>
+                                                <input style="width:240px;" class="inputFieldsMaterial" id="SerialNo"
+                                                       ng-model="serial.number" name="SerialNo"></input>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -180,7 +183,7 @@
                 <md-button class="time-font time-copy" ng-click="copyObject(item,'Material')" ng-disabled="$root.completedTask" translate="copy"></md-button>
             </section>
 
-        </md-card>
+        
 
     </div>
 </div>

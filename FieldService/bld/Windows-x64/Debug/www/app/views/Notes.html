@@ -1,8 +1,8 @@
-﻿<div class="container">
-    <div class="debreifContainerouter">
-        <md-card ng-repeat="item in notesArray track by $index">
-            <div class="debreifContainerinner">
-                <form class="form-horizontal" action="/action_page.php">
+﻿<div class="card-parentContainer margintop10">
+    <div class="margintop30" ng-repeat="item in notesArray track by $index">
+        
+            <div class="card-childContainer  noBorder-radius">
+                <form class="form-horizontal row" action="/action_page.php">
 
 
                     <div class="row" style="padding-left:15px;padding-right:15px;">
@@ -50,7 +50,7 @@
                     </div>
 
 
-                    <div class="col-sm-12">
+                    <div class="col-sm-12 marginbottom30">
 
                         <label class="control-label label-my" for="justification"
                                translate="{{item.noteDefault.notes.title}}"></label>
@@ -69,6 +69,6 @@
                 <md-button class="time-font time-copy" ng-click="copyObject(item,'Notes')" translate="copy"></md-button>
             </section>
 
-        </md-card>
+       
     </div>
 </div>

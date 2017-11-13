@@ -1363,8 +1363,9 @@ color:#004b8d;
 }
 
 .text-area {
-  background-color: #f0f0f0 !important;
-  border:none !important;
+    background-color: #f0f0f0 !important;
+    border: none !important;
+    height: 70px !important;
 }
 
 .marginbottom5{
