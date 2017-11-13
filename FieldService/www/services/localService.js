@@ -177,7 +177,7 @@
 
                 insertValues.push(responseList.Job_Description);
                 insertValues.push(responseList.Duration);
-                // insertValues.push(responseList.Task_Status);
+                insertValues.push(responseList.Task_Status);
                 insertValues.push(responseList.Customer_Name);
                 insertValues.push(responseList.Street_Address);
                 insertValues.push(responseList.City);
@@ -3035,7 +3035,7 @@
 
             return db.transaction(function (transaction) {
 
-                transaction.executeSql("SELECT * FROM Task WHERE Task_Status = ? AND Submit_Status = ?", ["Accepted", "A"], function (tx, res) {
+                transaction.executeSql("SELECT * FROM Task WHERE Submit_Status = ?", ["A"], function (tx, res) {
 
                     var rowLength = res.rows.length;
 
