@@ -23,22 +23,25 @@
             return $http({
 
                 method: 'POST',
-                url: url + 'OFSCActions/activate_resource?resourceId=' + data.resourceId + '& date=' + data.date,
+                url: url + 'OFSCActions/activate_resource?resourceId=' + data.resourceId + '&date=' + data.date,
                 headers: {
                     "Content-Type": constantService.getContentType(),
                     "Authorization": constantService.getAuthor(),
-                    "oracle-mobile-backend-id": constantService.getOfscBackId()
+                    "oracle-mobile-backend-id": "9baa9146-6abd-4375-a454-827de596f83a"
                 }
 
             }).success(function (response) {
 
-                console.log('activate_resource Response', JSON.stringify(response));
+                if (response != undefined) {
+
+                    console.log('Activate Resource Response', JSON.stringify(response));
+                }
 
                 callback(response);
 
             }).error(function (error) {
 
-                console.log('activate_resource Error', JSON.stringify(error));
+                console.log('Activate Resource Error', JSON.stringify(error));
 
                 callback(error);
             });

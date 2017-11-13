@@ -238,10 +238,7 @@ app.controller('indexController', function ($scope, $state, $timeout, $mdSidenav
         });
     }
 
-    $scope.saveValues = function () {
-
-        valueService.saveValues();
-    }
+    
 
     $scope.syncFunctionality = function () {
 

@@ -226,7 +226,7 @@
                                     item.Type = itemForOFSC.Type;
 
                                 } else {
-
+                                    console.log(item.Start_Date + "----" + item.End_Date+"----"+item.Task_Number)
                                     item.Type = "CUSTOMER";
                                 }
 
@@ -594,7 +594,7 @@
                 headers: {
                     "Content-Type": constantService.getContentType(),
                     "Authorization": constantService.getAuthor(),
-                    "oracle-mobile-backend-id": constantService.getChargeBackId()
+                    "oracle-mobile-backend-id": constantService.getExpenseTypeBackendId()
                 }
 
             }).success(function (response) {

@@ -4,7 +4,7 @@ var conf = {
 
 
   apiUrl: 'https://emersonmobilecloud-a472144.mobileenv.us2.oraclecloud.com:443/mobile/custom/'
-  //apiUrl: 'https://emersonmobiletestenv-a472144.mobileenv.us2.oraclecloud.com/mobile/custom/'
+  //apiUrl: 'https://emersonmobiletestenv-a472144.mobileenv.us2.oraclecloud.com:443/mobile/custom/'
 
  
 

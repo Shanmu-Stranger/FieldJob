@@ -23,11 +23,11 @@
             return $http({
 
                 method: 'POST',
-                url: url + 'OFSCActions/activate_resource?resourceId=' + data.resourceId + '& date=' + data.date,
+                url: url + 'OFSCActions/activate_resource?resourceId=' + data.resourceId + '&date=' + data.date,
                 headers: {
                     "Content-Type": constantService.getContentType(),
                     "Authorization": constantService.getAuthor(),
-                    "oracle-mobile-backend-id": constantService.getOfscBackId()
+                    "oracle-mobile-backend-id": "9baa9146-6abd-4375-a454-827de596f83a"
                 }
 
             }).success(function (response) {

@@ -866,7 +866,131 @@ app.controller("debriefController", function ($scope, $state, $rootScope, $windo
     $scope.setNoteType = function (noteobj) {
         noteobj.Note_Type_Id = noteobj.Note_Type.ID;
     }
+    $rootScope.saveValues = function () {
+        $scope.saveValues();
+        valueService.saveValues();
+    }
+    $scope.saveValues = function ()
+    {
+        if ($scope.timeArray.length > 0) {
 
+            valueService.setTime($scope.timeArray);
+
+        }
+        if ($scope.expenseArray.length > 0) {
+
+            valueService.setExpense($scope.expenseArray);
+
+        }
+        if ($scope.materialArray.length > 0) {
+
+            $scope.serialNumber = function (serialArray) {
+
+                var serialNumberArray = [];
+
+                angular.forEach(serialArray, function (key, value) {
+
+                    serialNumberArray.push(key.number);
+                });
+
+                return serialNumberArray;
+            }
+
+            $scope.serialIn = function (serialArray) {
+
+                var serialNumberArray = [];
+
+                angular.forEach(serialArray, function (key, value) {
+
+                    serialNumberArray.push(key.in);
+                });
+
+                return serialNumberArray;
+            }
+
+            $scope.serialOut = function (serialArray) {
+
+                var serialNumberArray = [];
+
+                angular.forEach(serialArray, function (key, value) {
+
+                    serialNumberArray.push(key.out);
+                });
+
+                return serialNumberArray;
+            }
+
+            angular.forEach($scope.materialArray, function (key, value) {
+                key.Serial_In = $scope.serialIn(key.Serial_Type);
+                key.Serial_Out = $scope.serialOut(key.Serial_Type);
+                key.Serial_Number = $scope.serialNumber(key.Serial_Type);
+            });
+
+            valueService.setMaterial($scope.materialArray);
+        }
+        if ($scope.notesArray.length > 0) {
+
+            valueService.setNote($scope.notesArray);
+        }
+        if ($scope.files.length > 0 || $scope.image.length > 0) {
+
+            $scope.attachmentArraydb = [];
+
+            i = 0;
+
+            angular.forEach($scope.files, function (attachment) {
+
+                var filePath = cordova.file.dataDirectory;
+
+                var base64Code = attachment.base64;
+
+                valueService.saveBase64File(filePath, attachment.filename, base64Code, attachment.contentType);
+
+                var attachmentObject = {
+                    Attachment_Id: $scope.taskId + "" + (i + 1),
+                    File_Path: filePath,
+                    File_Name: attachment.filename,
+                    File_Type: attachment.contentType,
+                    Type: "D",
+                    Task_Number: $scope.taskId,
+                    AttachmentType: "D"
+                };
+
+                $scope.attachmentArraydb.push(attachmentObject);
+
+                i++;
+            });
+
+            angular.forEach($scope.image, function (attachment) {
+
+                var filePath = cordova.file.dataDirectory;
+
+                var base64Code = attachment.base64;
+
+                valueService.saveBase64File(filePath, attachment.filename, base64Code, attachment.data.split(",")[0].split(";")[0].split(":")[1]);
+
+                var attachmentObject = {
+                    Attachment_Id: $scope.taskId + "" + (i + 1),
+                    File_Path: filePath,
+                    File_Name: attachment.filename,
+                    File_Type: attachment.contentType,
+                    Type: "D",
+                    Task_Number: $scope.taskId,
+                    AttachmentType: "M"
+                };
+
+                $scope.attachmentArraydb.push(attachmentObject);
+
+                i++;
+            });
+
+            valueService.setAttachment($scope.attachmentArraydb);
+        }
+        if ($scope.engineerObject != null) {
+
+            valueService.setEngineer($scope.engineerObject);
+        }
+    }
     $scope.tabChange = function (stage) {
 
         constantService.setStagesArray(stage);
@@ -875,139 +999,27 @@ app.controller("debriefController", function ($scope, $state, $rootScope, $windo
 
         if ($scope.currentTab == "time") {
 
-            if ($scope.timeArray.length > 0) {
-
-                valueService.setTime($scope.timeArray);
-
-            }
+          
 
         } else if ($scope.currentTab == "expenses") {
 
-            if ($scope.expenseArray.length > 0) {
-
-                valueService.setExpense($scope.expenseArray);
-
-            }
+            
 
         } else if ($scope.currentTab == "material") {
 
-            if ($scope.materialArray.length > 0) {
-
-                $scope.serialNumber = function (serialArray) {
-
-                    var serialNumberArray = [];
-
-                    angular.forEach(serialArray, function (key, value) {
-
-                        serialNumberArray.push(key.number);
-                    });
-
-                    return serialNumberArray;
-                }
-
-                $scope.serialIn = function (serialArray) {
-
-                    var serialNumberArray = [];
-
-                    angular.forEach(serialArray, function (key, value) {
-
-                        serialNumberArray.push(key.in);
-                    });
-
-                    return serialNumberArray;
-                }
-
-                $scope.serialOut = function (serialArray) {
-
-                    var serialNumberArray = [];
-
-                    angular.forEach(serialArray, function (key, value) {
-
-                        serialNumberArray.push(key.out);
-                    });
-
-                    return serialNumberArray;
-                }
-
-                angular.forEach($scope.materialArray, function (key, value) {
-                    key.Serial_In = $scope.serialIn(key.Serial_Type);
-                    key.Serial_Out = $scope.serialOut(key.Serial_Type);
-                    key.Serial_Number = $scope.serialNumber(key.Serial_Type);
-                });
-
-                valueService.setMaterial($scope.materialArray);
-            }
+           
 
         } else if ($scope.currentTab == "notes") {
 
-            if ($scope.notesArray.length > 0) {
-
-                valueService.setNote($scope.notesArray);
-            }
+            
 
         } else if ($scope.currentTab == "attachments") {
 
-            if ($scope.files.length > 0 || $scope.image.length > 0) {
-
-                $scope.attachmentArraydb = [];
-
-                i = 0;
-
-                angular.forEach($scope.files, function (attachment) {
-
-                    var filePath = cordova.file.dataDirectory;
-
-                    var base64Code = attachment.base64;
-
-                    valueService.saveBase64File(filePath, attachment.filename, base64Code, attachment.contentType);
-
-                    var attachmentObject = {
-                        Attachment_Id: $scope.taskId + "" + (i + 1),
-                        File_Path: filePath,
-                        File_Name: attachment.filename,
-                        File_Type: attachment.contentType,
-                        Type: "D",
-                        Task_Number: $scope.taskId,
-                        AttachmentType: "D"
-                    };
-
-                    $scope.attachmentArraydb.push(attachmentObject);
-
-                    i++;
-                });
-
-                angular.forEach($scope.image, function (attachment) {
-
-                    var filePath = cordova.file.dataDirectory;
-
-                    var base64Code = attachment.base64;
-
-                    valueService.saveBase64File(filePath, attachment.filename, base64Code, attachment.data.split(",")[0].split(";")[0].split(":")[1]);
-
-                    var attachmentObject = {
-                        Attachment_Id: $scope.taskId + "" + (i + 1),
-                        File_Path: filePath,
-                        File_Name: attachment.filename,
-                        File_Type: attachment.contentType,
-                        Type: "D",
-                        Task_Number: $scope.taskId,
-                        AttachmentType: "M"
-                    };
-
-                    $scope.attachmentArraydb.push(attachmentObject);
-
-                    i++;
-                });
-
-                valueService.setAttachment($scope.attachmentArraydb);
-            }
+         
 
         } else if ($scope.currentTab == "engineer signature") {
 
-            if ($scope.engineerObject != null) {
-
-                valueService.setEngineer($scope.engineerObject);
-            }
+           
         }
 
         if (stage.title.toLowerCase() == "time") {
@@ -1587,7 +1599,7 @@ app.controller("debriefController", function ($scope, $state, $rootScope, $windo
                             constantService.setCCEmailID(customerMail.value);
                             var email = {"Email": customerMail.value, "Task_Number": $scope.taskId}
                             localService.updateTaskEmail(email);
-
+                            $scope.saveValues();
                             valueService.saveValues();
 
                             if (valueService.getNetworkStatus()) {

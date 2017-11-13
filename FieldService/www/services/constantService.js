@@ -36,13 +36,14 @@
 
         var materialBackEndId = "0686fd58-8150-4264-ac09-348f79436fb9";
 
-        var ofscBackEndId = "557f06cf-1dda-42f1-a8a8-afc52f823904";
-
+        //var ofscBackEndId = "557f06cf-1dda-42f1-a8a8-afc52f823904";
+        var ofscBackEndId = "9baa9146-6abd-4375-a454-827de596f83a";
 
         var acceptBackEndId = "3fec5f35-296c-49a6-92b7-cbac8e071522";
+        var expenseBackEndId = "1900984d-1b99-4ede-988e-06e0ba319276";
 
         // var ofscBackEndId = "eddb82d4-5f21-45e0-a029-c5947d2c9c48";
-      //  var ofscBackEndId = "b043c17e-7dcd-41a5-abc6-39fa2f8ab0a6";
+      // var ofscBackEndId = "b043c17e-7dcd-41a5-abc6-39fa2f8ab0a6";
 
 
         // var authKey = "Basic QTQ3MjE0NF9FTUVSU09OTU9CSUxFVEVTVEVOVl9NT0JJTEVfQU5PTllNT1VTX0FQUElEOm9ma3U1ZG4xUHZscS5t";
@@ -59,7 +60,8 @@
         //
         // var ofscBackEndId = "eddb82d4-5f21-45e0-a029-c5947d2c9c48";
         //
-        // var acceptBackEndId = "eddb82d4-5f21-45e0-a029-c5947d2c9c48";
+         //var acceptBackEndId = "eddb82d4-5f21-45e0-a029-c5947d2c9c48";
+      // var expenseBackEndId = "eddb82d4-5f21-45e0-a029-c5947d2c9c48";
 
         // var acceptBackEndId = "9baa9146-6abd-4375-a454-827de596f83a";
 
@@ -113,9 +115,12 @@
         service.getStagesArray = getStagesArray;
 
         service.onDeviceReady = onDeviceReady;
-
+        service.getExpenseTypeBackendId = getExpenseTypeBackendId;
         return service;
-
+        function getExpenseTypeBackendId()
+        {
+            return expenseBackEndId;
+        }
         function setResourceId(id) {
             resourceId = id;
         };
