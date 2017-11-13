@@ -908,6 +908,9 @@ width  : 42px;
 
 md-tabs-wrapper{
   background-color: #2d383f !important;
+       padding: 15px 50px;
+    height: 66px;
+    z-index: 1030;
 }
 .md-tab{
   color: #5f6467 !important;
