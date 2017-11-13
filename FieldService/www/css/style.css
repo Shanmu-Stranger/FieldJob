@@ -2211,7 +2211,6 @@ md-select.md-default-theme ._md-select-value, md-select ._md-select-value{
 }
 .summary-description{
   width: 110px;
-  text-align: center;
   overflow:hidden;
   text-overflow:ellipsis;
   white-space:nowrap;
@@ -2249,4 +2248,7 @@ md-select.md-default-theme ._md-select-value, md-select ._md-select-value{
     border: none;
     outline: none;
     text-transform: uppercase;
+}
+.width14{
+    width:14%;
 }

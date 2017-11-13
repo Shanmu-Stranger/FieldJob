@@ -112,27 +112,27 @@
 
                     <div class="attachmentDiv" ng-if="file1.contentType.indexOf('image') > -1">
                     <img data-ng-src="data:{{file1.contentType}};base64,{{file1.base64}}"
-                          class="img-responsive"/>
+                        id="{{file1.filename}}"  class="img-responsive"/>
                     </div>
 
                     <div class="attachmentDiv" ng-if="file1.filetype.indexOf('pdf') > -1">
-                    <img src="images/pdf.png"  class="img-responsive"/>
+                    <img src="images/pdf.png" id="{{file1.filename}}" class="img-responsive"/>
                     </div>
 
                      <div class="attachmentDiv" ng-if="file1.filetype.indexOf('doc') > -1 || file1.filetype.indexOf('docx') > -1">
-                    <img src="images/Word_1x.png"  class="img-responsive"/>
+                    <img src="images/Word_1x.png" id="{{file1.filename}}" class="img-responsive"/>
                     </div>
 
                     <div class="attachmentDiv" ng-if="file1.filetype.indexOf('xlsx') > -1 || file1.filetype.indexOf('xls') > -1">
-                    <img src="images/Excel_1x.png"  class="img-responsive"/>
+                    <img src="images/Excel_1x.png" id="{{file1.filename}}" class="img-responsive"/>
                     </div>
 
                     <div class="attachmentDiv" ng-if="file1.filetype.indexOf('pptx') > -1 || file1.filetype.indexOf('ppt') > -1">
-                    <img src="images/PowerPoint_1x.png"  class="img-responsive"/>
+                    <img src="images/PowerPoint_1x.png" id="{{file1.filename}}" class="img-responsive"/>
                     </div>
 
                      <div class="attachmentDiv" ng-if="file1.filetype.indexOf('txt') > -1 ">
-                    <img src="images/Notepad_1x.png"  class="img-responsive"/>
+                    <img src="images/Notepad_1x.png" id="{{file1.filename}}" class="img-responsive"/>
                     </div>
                     <!-- <div>{{file1.name}}</div> -->
                     <!-- <div style="margin-bottom:20px">{{file1.filename}}
@@ -236,43 +236,44 @@
 
                    
         </div>
+        
+        <label class="header-labeles" translate="Material"></label>
+        <div class="card-childContainer marginbottom30">
 
-        <div class="padding10 debLabelHeader" translate="Material"></div>
-        <div class="container" style="padding:0">
-            <div class="debreifContainerouter margintop30">
-                <md-card style="border-radius:10px 10px 10px 10px">
-                    <div class="debreifContainerinner">
-                        <md-table-container>
-                            <table md-table>
-                                <thead md-head>
-                                    <tr md-row>
-                                        <th md-column><span translate="Charge Type"></span></th>
-                                        <th md-column><span translate="Quantity"></span></th>
-                                        <th md-column><span translate="Serial"> #</span></th>
-                                        <th md-column><span translate="Serial In"></span></th>
-                                        <th md-column><span translate="Serial Out"></span></th>
-                                        <th md-column><span translate="item name"></span></th>
-                                        <th md-column><span translate="Item Description"></span></th>
-                                    </tr>
-                                </thead>
-                                <tbody md-body>
-                                    <tr md-row ng-repeat="material in summary.materialArray">
-                                        <td md-cell>{{material.Charge_Type}}</td>
-                                        <td md-cell>{{material.Product_Quantity}}</td>
-                                        <td md-cell ><span ng-repeat="serailno in material.serialNumber">{{serailno}}<br/>
-                                        </span></td>
-                                        <td md-cell ><span ng-repeat="serailin in material.serialIn">{{serailin}}<br/></span></td>
-                                        <td md-cell ><span ng-repeat="serailout in material.serialOut">{{serailout}}<br/></span></td>
-                                        <td md-cell>{{material.ItemName}}</td>
-                                        <td md-cell>{{material.Description}}</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </md-table-container>
-                    </div>
-                </md-card>
-            </div>
+
+            <table class="table no-marbottom noborder">
+                <thead>
+                    <tr class="summary-tr">
+                        <th class="noborder width14"><span translate="Charge Type"></span></th>
+                        <th class="noborder width14"><span translate="Quantity"></span></th>
+                        <th class="noborder width14"><span translate="Serial"></span><span>#</span></th>
+                        <th class="noborder width14"><span translate="Serial In"></span></th>
+                        <th class="noborder width14"><span translate="Serial Out"></span></th>
+                        <th class="noborder width14"><span translate="item name"></span></th>
+                        <th class="noborder width14"><span translate="Item Description"></span></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="summary-tr" ng-repeat="material in summary.materialArray">
+                        <td class="noborder bg-white width14">{{material.Charge_Type}}</td>
+                        <td class="noborder bg-white width14">{{material.Product_Quantity}}</td>
+                        <td class="noborder bg-white width14">
+                            <span ng-repeat="serailno in material.serialNumber">
+                                {{serailno}}<br />
+                            </span>
+                        </td>
+                        <td class="noborder bg-white width14"><span ng-repeat="serailin in material.serialIn">{{serailin}}<br /></span></td>
+                        <td class="noborder bg-white width14"><span ng-repeat="serailout in material.serialOut">{{serailout}}<br /></span></td>
+                        <td class="noborder bg-white width14">{{material.ItemName}}</td>
+                        <td class="noborder bg-white width14">{{material.Description}}</td>
+                    </tr>
+                </tbody>
+            </table>
+
+
+
         </div>
+       
 
              <label class="header-labeles" translate="Signature"></label>
              <div class="card-childContainer marginbottom30" >
@@ -283,7 +284,7 @@
                                 <div><label><span translate="Engineer Name"></span> : {{engineerName}}</label></div>
                                 <!--  <span></span> -->
                                 <!-- <div class="result" ng-show="$rootScope.signature"> -->
-                                    <img ng-src="{{summary.engineer.signature}}" style="width:50%">
+                                    <img id="engineerSignature" ng-src="{{summary.engineer.signature}}" style="width:50%">
                                     
                                 </div>
                                 <div class="col-sm-6 col-md-6 col-lg-6">
@@ -298,5 +299,8 @@
 
             <div class="row text-center">
                     <button class="summary-reviewBtn" ng-click="reviewSummary()" translate="Reviewed"></button>
-                </div>
+            </div>
+            <canvas id="canvas" width="1050px" height="1204px" style="background-color:#FFF;display:none"></canvas>
+            <img src="./images/emerson.png" id="logo" style="display:none"></img>
+            <img src="./images/pdf.png" id="pdf" class="img-responsive" style="display:none"></img>
 </div>
