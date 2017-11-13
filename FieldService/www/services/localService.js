@@ -54,6 +54,7 @@
         service.insertNotesList = insertNotesList;
         service.insertEngineerList = insertEngineerList;
 
+        service.deleteTaskList = deleteTaskList;
         service.deleteInstallBase = deleteInstallBase;
         service.deleteContact = deleteContact;
         service.deleteNote = deleteNote;
@@ -72,6 +73,13 @@
 
         service.deleteExpenseType = deleteExpenseType;
         service.deleteNoteType = deleteNoteType;
+
+        service.deleteTimeList = deleteTimeList;
+        service.deleteExpenseList = deleteExpenseList;
+        service.deleteMaterialList = deleteMaterialList;
+        service.deleteNotesList = deleteNotesList;
+        service.deleteAttachmentList = deleteAttachmentList;
+        service.deleteEngineerList = deleteEngineerList;
 
         service.deleteTime = deleteTime;
         service.deleteExpense = deleteExpense;
@@ -169,7 +177,7 @@
 
                 insertValues.push(responseList.Job_Description);
                 insertValues.push(responseList.Duration);
-                // insertValues.push(responseList.Task_Status);
+                insertValues.push(responseList.Task_Status);
                 insertValues.push(responseList.Customer_Name);
                 insertValues.push(responseList.Street_Address);
                 insertValues.push(responseList.City);
@@ -2456,6 +2464,20 @@
             });
         };
 
+        function deleteTaskList() {
+
+            db.transaction(function (transaction) {
+
+                var sqlDelete = "DELETE FROM Task";
+
+                transaction.executeSql(sqlDelete);
+
+            }, function (error) {
+
+                console.log("TASK DELETE TRANSACTION ERROR: " + error.message);
+            });
+        };
+
         function deleteInstallBase() {
 
             db.transaction(function (transaction) {
@@ -2635,6 +2657,90 @@
             }, function (error) {
 
                 console.log("NOTETYPE DELETE TRANSACTION ERROR: " + error.message);
+            });
+        };
+
+        function deleteTimeList() {
+
+            db.transaction(function (transaction) {
+
+                var sqlDelete = "DELETE FROM Time";
+
+                transaction.executeSql(sqlDelete);
+
+            }, function (error) {
+
+                console.log("TIME DELETE TRANSACTION ERROR: " + error.message);
+            });
+        };
+
+        function deleteExpenseList() {
+
+            db.transaction(function (transaction) {
+
+                var sqlDelete = "DELETE FROM Expense";
+
+                transaction.executeSql(sqlDelete);
+
+            }, function (error) {
+
+                console.log("EXPENSE DELETE TRANSACTION ERROR: " + error.message);
+            });
+        };
+
+        function deleteMaterialList() {
+
+            db.transaction(function (transaction) {
+
+                var sqlDelete = "DELETE FROM Material";
+
+                transaction.executeSql(sqlDelete);
+
+            }, function (error) {
+
+                console.log("MATERIAL DELETE TRANSACTION ERROR: " + error.message);
+            });
+        };
+
+        function deleteNotesList() {
+
+            db.transaction(function (transaction) {
+
+                var sqlDelete = "DELETE FROM Notes";
+
+                transaction.executeSql(sqlDelete);
+
+            }, function (error) {
+
+                console.log("NOTES DELETE TRANSACTION ERROR: " + error.message);
+            });
+        };
+
+        function deleteAttachmentList() {
+
+            db.transaction(function (transaction) {
+
+                var sqlDelete = "DELETE FROM Attachment";
+
+                transaction.executeSql(sqlDelete);
+
+            }, function (error) {
+
+                console.log("ATTACHMENT DELETE TRANSACTION ERROR: " + error.message);
+            });
+        };
+
+        function deleteEngineerList() {
+
+            db.transaction(function (transaction) {
+
+                var sqlDelete = "DELETE FROM Engineer";
+
+                transaction.executeSql(sqlDelete);
+
+            }, function (error) {
+
+                console.log("ENGINEER DELETE TRANSACTION ERROR: " + error.message);
             });
         };
 
@@ -2929,7 +3035,7 @@
 
             return db.transaction(function (transaction) {
 
-                transaction.executeSql("SELECT * FROM Task WHERE Task_Status = ? AND Submit_Status = ?", ["Accepted", "A"], function (tx, res) {
+                transaction.executeSql("SELECT * FROM Task WHERE Submit_Status = ?", ["A"], function (tx, res) {
 
                     var rowLength = res.rows.length;
 

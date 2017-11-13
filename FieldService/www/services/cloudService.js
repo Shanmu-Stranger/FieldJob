@@ -143,6 +143,8 @@
                 "Text": ""
             };
 
+            console.log("Internal URL " + 'OFSCActions/tasktype?resourceId=' + constantService.getResourceId() + '&fromDate=' + startDate + '&toDate=' + endDate + '&type=' + typei);
+
             return $http({
 
                 method: 'GET',
@@ -154,18 +156,29 @@
                 }
             }).success(function (response) {
 
-                console.log(JSON.stringify(response));
-                response.finalResult.forEach(function (item) {
-                    var internalOFSCJSONObject = {};
-                    internalOFSCJSONObject.Start_Date = item.Start_Date;
-                    internalOFSCJSONObject.End_Date = item.End_Date;
-                    internalOFSCJSONObject.Type = item.Type;
-                    internalOFSCJSONObject.Customer_Name = item.Activity_Type;
-                    internalOFSCJSONObject.Task_Number = item.ActivityID;
-                    internalOFSCResponse.push(internalOFSCJSONObject);
+                if (response != undefined && response.finalResult != undefined) {
 
-                });
-                console.log("internalOFSCResponse********"+JSON.stringify(internalOFSCResponse));
+                    console.log("Internal Response " + JSON.stringify(response));
+
+                    response.finalResult.forEach(function (item) {
+
+                        var internalOFSCJSONObject = {};
+
+                        internalOFSCJSONObject.Start_Date = item.Start_Date;
+                        internalOFSCJSONObject.End_Date = item.End_Date;
+                        internalOFSCJSONObject.Type = item.Type;
+                        internalOFSCJSONObject.Customer_Name = item.Activity_Type;
+                        internalOFSCJSONObject.Task_Number = item.ActivityID;
+
+                        internalOFSCResponse.push(internalOFSCJSONObject);
+
+                    });
+                }
+
+                console.log("Internal OFSCResponse " + JSON.stringify(internalOFSCResponse));
+
+                console.log("Customer URL " + 'OFSCActions/tasktype?resourceId=' + constantService.getResourceId() + '&fromDate=' + startDate + '&toDate=' + endDate + '&type=' + type);
+
                 return $http({
 
                     method: 'GET',
@@ -177,9 +190,12 @@
                     }
                 }).success(function (response) {
 
-                    ofscResponse = response.finalResult;
+                    if (response != undefined && response.finalResult != undefined) {
 
-                    console.log("OFSC Response " + JSON.stringify(ofscResponse));
+                        ofscResponse = response.finalResult;
+
+                        console.log("Customer OFSC Response " + JSON.stringify(ofscResponse));
+                    }
 
                     $http({
 
@@ -208,8 +224,9 @@
                                     item.End_Date = itemForOFSC.End_Date;
 
                                     item.Type = itemForOFSC.Type;
-                                }
-                                else {
+
+                                } else {
+
                                     item.Type = "CUSTOMER";
                                 }
 
@@ -221,12 +238,6 @@
 
                             responseOfTaskDetails.push(item);
                         });
-                        // angular.forEach(internalOFSCResponse, function (intenal)
-                        // {
-                        //
-                        //     responseOfTaskDetails.push(intenal);
-                        // })
-
 
                         console.log("Task Response Final" + JSON.stringify(responseOfTaskDetails));
 
