@@ -694,7 +694,7 @@ app.controller("debriefController", function ($scope, $state, $rootScope, $windo
 
             case "Time":
 
-                itemToBeCopied.comments = "";
+                itemToBeCopied.Comments = "";
                 itemToBeCopied.Time_Id = $scope.taskId + "" + ($scope.timeArray.length + 1)
                 $scope.timeArray.push(itemToBeCopied);
 
@@ -785,19 +785,19 @@ app.controller("debriefController", function ($scope, $state, $rootScope, $windo
 
     $scope.setWorkType = function (workType, timeObject) {
 
-        if (workType.Value == "Deputation") {
+        if (workType.Value == "Deputation" || workType.ID==1) {
 
             timeObject.timeDefault.item.values = timeObject.timeDefault.item.valuesDeputation;
 
-        } else if (workType.Value == "Travel") {
+        } else if (workType.Value == "Travel" || workType.ID == 2) {
 
             timeObject.timeDefault.item.values = timeObject.timeDefault.item.valuesTravel;
 
-        } else if (workType.Value == "Normal") {
+        } else if (workType.Value == "Normal" || workType.ID == 3) {
 
             timeObject.timeDefault.item.values = timeObject.timeDefault.item.valuesNormal;
 
-        } else if (workType.Value == "Night Shift") {
+        } else if (workType.Value == "Night Shift" || workType.Value == "Nightshift" || workType.ID == 4) {
 
             timeObject.timeDefault.item.values = timeObject.timeDefault.item.valuesNightShift;
         }
