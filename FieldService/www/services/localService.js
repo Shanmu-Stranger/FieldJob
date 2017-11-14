@@ -4,9 +4,9 @@
 
     app.factory("localService", localService);
 
-    localService.$inject = ["$http", "$rootScope", "$window", "$location"];
+    localService.$inject = ["$http", "$rootScope", "$window", "$location","$q"];
 
-    function localService($http, $rootScope, $window, $location) {
+    function localService($http, $rootScope, $window, $location,$q) {
 
         var service = {};
 

@@ -283,6 +283,8 @@ app.controller('indexController', function ($scope, $state, $timeout, $mdSidenav
                 cloudService.getNoteType();
 
                 getAttachments();
+
+                $state.reload();
             });
         }
     }
