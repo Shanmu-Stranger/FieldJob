@@ -122,13 +122,17 @@
 
         return service;
 
-        function insertTaskList(response) {
+        function insertTaskList(response, callback) {
 
             var responseList = response;
+
+            var promises = [];
 
             for (var i = 0; i < responseList.length; i++) {
 
                 (function (i) {
+
+                    var deferred = $q.defer();
 
                     db.transaction(function (transaction) {
 
@@ -144,11 +148,11 @@
 
                             if (rowLength > 0) {
 
-                                updateTask(responseList[i]);
+                                updateTask(responseList[i], deferred);
 
                             } else {
 
-                                insertTask(responseList[i]);
+                                insertTask(responseList[i], deferred);
                             }
 
                         }, function (tx, error) {
@@ -163,11 +167,24 @@
 
                     console.log("TASK OBJECT =====> " + JSON.stringify(responseList[i]));
 
+                    promises.push(deferred.promise);
+
                 })(i);
             }
+
+            $q.all(promises).then(
+
+                function (response) {
+                    callback("SUCCESS");
+                },
+
+                function (error) {
+                    callback("ERROR");
+                }
+            );
         };
 
-        function updateTask(responseList) {
+        function updateTask(responseList, defer) {
 
             db.transaction(function (transaction) {
 
@@ -200,6 +217,8 @@
 
                     console.log("TASK ROW AFFECTED: " + res.rowsAffected);
 
+                    defer.resolve(res);
+
                 }, function (tx, error) {
 
                     console.log("TASK UPDATE ERROR: " + error.message);
@@ -211,7 +230,7 @@
             });
         };
 
-        function insertTask(responseList) {
+        function insertTask(responseList, defer) {
 
             db.transaction(function (transaction) {
 
@@ -247,6 +266,8 @@
                 transaction.executeSql(sqlInsert, insertValues, function (tx, res) {
 
                     console.log("TASK INSERT ID: " + res.insertId);
+
+                    defer.resolve(res);
 
                 }, function (tx, error) {
 
