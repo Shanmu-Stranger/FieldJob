@@ -4589,7 +4589,8 @@ AcroForm.internal.setBitPosition = function (variable, position, value) {
 				if (this.supportsArrayBuffer()) {
 					// no need to convert if imageData is already uint8array
 					if (!(imageData instanceof Uint8Array)) {
-						dataAsBinaryString = imageData;
+                        dataAsBinaryString = imageData;
+                        if (imageData != null && imageData != undefined)
 						imageData = this.binaryStringToUint8Array(imageData);
 					}
 				}

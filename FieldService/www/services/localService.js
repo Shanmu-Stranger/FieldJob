@@ -173,7 +173,7 @@
 
                 var insertValues = [];
 
-                var sqlUpdate = "UPDATE Task SET Job_Description = ?, Duration = ?, Customer_Name =?, Street_Address = ?, City = ?, State = ?, Country = ?, Zip_Code = ?, Expense_Method = ?, Labor_Method = ?, Travel_Method = ?, Material_Method = ?, Service_Request = ?, Assigned = ?, Start_Date = ?, End_Date = ?  WHERE Task_Number = ?";
+                var sqlUpdate = "UPDATE Task SET Job_Description = ?, Duration = ?, Task_Status = ?, Customer_Name =?, Street_Address = ?, City = ?, State = ?, Country = ?, Zip_Code = ?, Expense_Method = ?, Labor_Method = ?, Travel_Method = ?, Material_Method = ?, Service_Request = ?, Assigned = ?, Start_Date = ?, End_Date = ?, Activity_Id=?  WHERE Task_Number = ?";
 
                 insertValues.push(responseList.Job_Description);
                 insertValues.push(responseList.Duration);
@@ -192,6 +192,7 @@
                 insertValues.push(responseList.Assigned);
                 insertValues.push(responseList.Start_Date);
                 insertValues.push(responseList.End_Date);
+                insertValues.push(responseList.Activity_Id);
                 insertValues.push(responseList.Task_Number);
 
                 console.log("TASK UPDATE VALUES =====> " + insertValues);
@@ -217,7 +218,7 @@
 
                 var insertValues = [];
 
-                var sqlInsert = "INSERT INTO Task VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                var sqlInsert = "INSERT INTO Task VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)";
 
                 insertValues.push(responseList.Task_Number);
                 insertValues.push(responseList.Job_Description);
@@ -241,6 +242,7 @@
                 insertValues.push(responseList.Email);
                 insertValues.push(responseList.Date);
                 insertValues.push(responseList.Type);
+                insertValues.push(responseList.Activity_Id);
 
                 console.log("TASK INSERT VALUES =====> " + insertValues);
 

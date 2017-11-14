@@ -68,7 +68,7 @@ app.controller('myTaskController', function ($scope, $compile, $timeout, uiCalen
                     var endDateTime = moment(item.End_Date).format("YYYY-MM-DDTHH:mm:ss");
                     // var endDateTime = endDate[0] + "T" + endDate[1];
 
-                    var customerInfo = item.Customer_Name + "\n" + item.Street_Address + "\n" + item.City + "\n" + item.State + "\n" + item.Zip_Code;
+                    var customerInfo = item.Job_Description + "\n" + item.Customer_Name + "\n" + item.Street_Address + "\n" + item.State + "\n" + item.Zip_Code;
 
 
                     //  if (item.Task_Status == 'Accepted' || item.Task_Status == 'Assigned'||) {
@@ -97,7 +97,8 @@ app.controller('myTaskController', function ($scope, $compile, $timeout, uiCalen
                         Expense_Method: item.Expense_Method,
                         Labor_Method: item.Labor_Method,
                         Travel_Method: item.Travel_Method,
-                        Material_Method: item.Material_Method
+                        Material_Method: item.Material_Method,
+                        Activity_Id: item.Activity_Id
                     });
                 } else {
                     var startDateTime = moment(item.Start_Date).format("YYYY-MM-DDTHH:mm:ss");

@@ -13,7 +13,7 @@
 
         var sqlUser = "CREATE TABLE IF NOT EXISTS User ('ID' INTEGER PRIMARY KEY  NOT NULL, 'ClarityID' TEXT, 'Currency' TEXT, 'Default_View' TEXT, 'Email' TEXT, 'Language' TEXT, 'Name' TEXT, 'OFSCId' TEXT, 'Password' TEXT, 'Time_Zone' TEXT, 'Type' TEXT, 'User_Name' TEXT, 'Work_Day' TEXT, 'Work_Hour' TEXT, 'Last_Updated' TEXT)";
 
-        var sqlTask = "CREATE TABLE IF NOT EXISTS Task ('Task_Number' INTEGER PRIMARY KEY  NOT NULL, 'Job_Description' TEXT, 'Duration' TEXT, 'Task_Status' TEXT, 'Customer_Name' TEXT, 'Street_Address' TEXT, 'City' TEXT, 'State' TEXT, 'Country' TEXT, 'Zip_Code' TEXT, 'Expense_Method' TEXT, 'Labor_Method' TEXT, 'Travel_Method' TEXT, 'Material_Method' TEXT, 'Service_Request' TEXT, 'Assigned' TEXT, 'Start_Date' TEXT, 'End_Date' TEXT, 'Submit_Status' TEXT, 'Email' TEXT, 'Date' TEXT, 'Type' TEXT)";
+        var sqlTask = "CREATE TABLE IF NOT EXISTS Task ('Task_Number' INTEGER PRIMARY KEY  NOT NULL, 'Job_Description' TEXT, 'Duration' TEXT, 'Task_Status' TEXT, 'Customer_Name' TEXT, 'Street_Address' TEXT, 'City' TEXT, 'State' TEXT, 'Country' TEXT, 'Zip_Code' TEXT, 'Expense_Method' TEXT, 'Labor_Method' TEXT, 'Travel_Method' TEXT, 'Material_Method' TEXT, 'Service_Request' TEXT, 'Assigned' TEXT, 'Start_Date' TEXT, 'End_Date' TEXT, 'Submit_Status' TEXT, 'Email' TEXT, 'Date' TEXT, 'Type' TEXT,'Activity_Id' TEXT)";
 
         var sqlInstallBase = "CREATE TABLE IF NOT EXISTS InstallBase ('Installed_Base_ID' INTEGER, 'Product_Line' TEXT, 'Serial_Number' TEXT, 'TagNumber' TEXT, 'Original_PO_Number' TEXT, 'Task_Number' TEXT, 'Service_Request' TEXT, 'Assigned' TEXT, 'Start_Date' TEXT, 'End_Date' TEXT)";
 

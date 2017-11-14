@@ -351,9 +351,9 @@ app.controller('indexController', function ($scope, $state, $timeout, $mdSidenav
 
                         var data = {
                             "resourceId": constantService.getUser().OFSCId,
-                            "date": moment(new Date()).format('YYYY-MM-DD')
+                            "date": moment(new Date()).utcOffset(constantService.getTimeZone()).format('YYYY-MM-DD')
                         };
-
+                        console.log(JSON.stringify(data));
                         ofscService.activate_resource(data, function (response) {
 
                             if (response != undefined && response != null) {
