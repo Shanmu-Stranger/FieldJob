@@ -2269,7 +2269,7 @@
                                 ctx.font = '15px sans-serif ';
                                 ctx.fillText(file.filename, xAttachField1, yAttachField + 125);
                             }
-                            xAttachField1 += 100;
+                            xAttachField1 += 120;
                         };
 
                         if (attachfile.complete) {
@@ -2675,7 +2675,17 @@
                     } else {
                         engineerSignature.onload = callback1;
                     }
+                    var customerSignature = document.getElementById('customerSignature');
 
+                    var callback1 = function (image) {
+                        if (!image) image = this;
+                        ctx.drawImage(image, 350, ySignField + 45, 75, 40);
+                    }
+                    if (customerSignature.complete) {
+                        callback1(customerSignature);
+                    } else {
+                        customerSignature.onload = callback1;
+                    }
 
                     ctx.fillStyle = "#000";
                     ctx.strokeRect(10, 80, 1010, ibyvalue - 60);

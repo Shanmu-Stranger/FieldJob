@@ -93,8 +93,8 @@
                         </thead>
                         <tbody >
                             <tr class="noborder" ng-repeat="note in summary.notesArray" >
-                                <td class="taskoverflow-tableTd noborder bg-white">{{note.Note_Type}}</td>
-                                <td class="taskoverflow-tableTd noborder bg-white"> {{note.Notes}}</td>
+                                <td class="taskoverflow-tableTd noborder bg-white">{{note.Note_Type| translate}}</td>
+                                <td class="taskoverflow-tableTd noborder bg-white"> {{note.Notes| translate}}</td>
                             </tr>
                         </tbody>
 
@@ -189,9 +189,9 @@
                             <tbody >
                                 <tr class="summary-tr" ng-repeat="time in  summary.timeArray">
                                     <td class="noborder bg-white padding-right">{{time.Date }}</td>
-                                    <td class="noborder bg-white padding-right" ng-if="userType=='C'">{{time.Charge_Type}}</td>
-                                    <td class="noborder bg-white padding-right" ng-if="userType=='C'">{{time.Charge_Method}}</td>
-                                    <td class="noborder bg-white padding-right">{{time.Work_Type}}</td>
+                                    <td class="noborder bg-white padding-right" ng-if="userType=='C'">{{time.Charge_Type| translate}}</td>
+                                    <td class="noborder bg-white padding-right" ng-if="userType=='C'">{{time.Charge_Method| translate}}</td>
+                                    <td class="noborder bg-white padding-right">{{time.Work_Type| translate}}</td>
                                     <!-- <td md-cell>{{time.standard}}</td> -->
                                     <td class="noborder bg-white padding-right" ng-if="userType=='C'" ng-repeat="timec in timeArray[0].timeDefault.timeCode.values">{{time.timecode[$index][timec.Overtimeshiftcode]}} </td>
                                     <!-- <td md-cell>{{time.ot2}}</td>
@@ -199,7 +199,7 @@
                                         <td md-cell>{{time.os1}}</td>
                                         <td md-cell>{{time.os2}}</td> -->
                                         <td class="noborder bg-white padding-right">{{time.Duration}}</td>
-                                        <td class="noborder bg-white padding-right">{{time.Item}}</td>
+                                        <td class="noborder bg-white padding-right">{{time.Item| translate}}</td>
                                         <td class="noborder bg-white padding-right"><div class="summary-description">{{time.Description}}</div></td>
                                     </tr>
                                 </tbody>
@@ -226,8 +226,8 @@
                             <tbody >
                                 <tr class="summary-tr" ng-repeat="expense in summary.expenseArray">
                                        <td class="noborder bg-white width25">{{expense.Date}}</td>
-                                       <td class="noborder bg-white width25">{{expense.Expense_Type}}</td>
-                                       <td class="noborder bg-white width25">{{expense.Charge_Method}}</td>
+                                       <td class="noborder bg-white width25">{{expense.Expense_Type | translate}}</td>
+                                       <td class="noborder bg-white width25">{{expense.Charge_Method |translate}}</td>
                                        <td class="noborder bg-white width25"><div class="summary-description" style="width: 160px;">{{expense.Justification}}</div></td>
                                     </tr>
                                 </tbody>
@@ -255,7 +255,7 @@
                 </thead>
                 <tbody>
                     <tr class="summary-tr" ng-repeat="material in summary.materialArray">
-                        <td class="noborder bg-white width14">{{material.Charge_Type}}</td>
+                        <td class="noborder bg-white width14">{{material.Charge_Type| translate}}</td>
                         <td class="noborder bg-white width14">{{material.Product_Quantity}}</td>
                         <td class="noborder bg-white width14">
                             <span ng-repeat="serailno in material.serialNumber">
