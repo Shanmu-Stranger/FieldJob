@@ -4,9 +4,9 @@
 
     app.factory("localService", localService);
 
-    localService.$inject = ["$http", "$rootScope", "$window", "$location","$q"];
+    localService.$inject = ["$http", "$rootScope", "$window", "$location", "$q"];
 
-    function localService($http, $rootScope, $window, $location,$q) {
+    function localService($http, $rootScope, $window, $location, $q) {
 
         var service = {};
 
@@ -173,7 +173,6 @@
             }
 
             $q.all(promises).then(
-
                 function (response) {
                     callback("SUCCESS");
                 },
@@ -237,7 +236,7 @@
 
                 var insertValues = [];
 
-                var sqlInsert = "INSERT INTO Task VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)";
+                var sqlInsert = "INSERT INTO Task VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
                 insertValues.push(responseList.Task_Number);
                 insertValues.push(responseList.Job_Description);
@@ -3358,7 +3357,7 @@
             });
         };
 
-        function getFieldJobNameList(taskNumber,callback) {
+        function getFieldJobNameList(taskNumber, callback) {
 
             var value = [];
 

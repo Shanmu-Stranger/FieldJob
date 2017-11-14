@@ -285,6 +285,10 @@ app.controller('indexController', function ($scope, $state, $timeout, $mdSidenav
                 getAttachments();
 
                 $state.reload();
+
+                $state.go($state.current.name);
+
+                window.location.reload(true);
             });
         }
     }
