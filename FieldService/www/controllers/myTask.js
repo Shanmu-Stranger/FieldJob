@@ -68,7 +68,7 @@ app.controller('myTaskController', function ($scope, $compile, $timeout, uiCalen
                     var endDateTime = moment(item.End_Date).format("YYYY-MM-DDTHH:mm:ss");
                     // var endDateTime = endDate[0] + "T" + endDate[1];
 
-                    var customerInfo = item.Job_Description + "\n" + item.Customer_Name + "\n" + item.Street_Address + "\n" + item.State + "\n" + item.Zip_Code;
+                    var customerInfo = item.Job_Description + "\n" + item.Customer_Name + "\n" + item.Street_Address + "\n" + item.State + "\n" + item.Zip_Code+"\n" + item.Work_Phone_Number+"\n" + item.Mobile_Phone_Number;
 
 
                     //  if (item.Task_Status == 'Accepted' || item.Task_Status == 'Assigned'||) {
