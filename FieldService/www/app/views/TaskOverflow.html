@@ -48,23 +48,23 @@
         <div class="taskOverFlow-div">
             <div layout="row">
 
-                <div flex="30">
+                <div flex="25">
                     <div class="mylabel" translate="Service Request"></div>
                     <div class="myvalue">{{taskDetails.Service_Request}}</div>
                 </div>
 
-                <div flex="30">
+                <div flex="25">
                     <div class="mylabel" translate="Field Job Number"></div>
                     <div class="myvalue">{{taskDetails.Task_Number}}</div>
                 </div>
 
-                <div flex="60">
+                <div flex="50">
 
-                    <!-- <div class="mylabel">JOB DESCRIPTION</div>
+                     <div class="mylabel" translate="Job Description"></div>
                         <div class="myvalue">{{taskDetails.Job_Description}}
-                        </div> -->
+                    </div> 
 
-                    <table class="table no-marbottom">
+                    <table class="table no-marbottom" style="margin-top: 12px;">
                         <thead>
                         <tr style="border-top: solid 1px #c0c0c0;">
                             <th class="taskoverflow-tableTh"  translate="Start Date"></th>
@@ -89,14 +89,23 @@
             </div>
 
 
-            <div class="table margintop30 no-marbottom">
+            <!-- <div class="table margintop30 no-marbottom">
                 <table class="instalbase">
                     <thead >
                     <tr >
                         <th class="mylabel" translate="Product Line"></th>
-                        <th class="mylabel" translate="System ID / Serial"><span> #</span></th>
-                        <th class="mylabel" translate="TAG"> <span> #</span></th>
-                        <th class="mylabel" translate="ORGINAL PO"><span>#</span></th>
+                        <th class="mylabel">
+                            <span translate="System ID / Serial"></span>
+                            <span> #</span>
+                        </th>
+                        <th class="mylabel" >
+                         <span translate="TAG"></span>
+                         <span> #</span>
+                         </th>
+                        <th class="mylabel" >
+                            <span translate="ORGINAL PO"></span>
+                            <span>#</span>
+                        </th>
                     </tr>
                     </thead>
                     <tbody>
@@ -109,8 +118,44 @@
                     </tbody>
 
                 </table>
-            </div>
+            </div> -->
+            <div class="margintop30 no-marbottom">
 
+                <div layout="row">
+                    <div flex="25" class="mylabel">
+                        <span translate="Product Line"></span>
+                            <span> #</span>
+                    </div>
+                    <div flex="25" class="mylabel">
+                        <span translate="System ID / Serial"></span>
+                            <span> #</span>
+                    </div>
+                    <div flex="25" class="mylabel">
+                        <span translate="TAG"></span>
+                             <span> #</span>
+                    </div>
+                    <div flex="25" class="mylabel">
+                         <span translate="ORGINAL PO"></span>
+                              <span>#</span>
+                    </div>
+                </div>
+
+                <div layout="row" ng-repeat="install in taskDetails.InstallBase">
+                    <div flex="25" class="myvalue">
+                        <div>{{install.Product_Line|| "NO VALUE"}}</div>
+                    </div>
+                    <div flex="25" class="myvalue">
+                        <div>{{install.Serial_Number|| "NO VALUE"}}</div>
+                    </div>
+                    <div flex="25" class="myvalue">
+                        <div>{{install.tagNo|| "NO VALUE"}}</div>
+                    </div>
+                    <div flex="25" class="myvalue">
+                        <div>{{install.orginalNo|| "NO VALUE"}}</div>
+                    </div>
+                </div>
+
+            </div>
 
             <div class="margintop30">
                 <hr style="margin:0;">
@@ -121,7 +166,7 @@
                 <label class="customer-site" translate="Customer Site"></label>
             </div>
 
-            <div layout="row" class="margintop40">
+            <div layout="row" class="margintop30">
 
                 <div flex="100">
                     <div class="mylabel" translate="Customer Name"></div>
@@ -153,7 +198,7 @@
                 </table>
             </div>
 
-            <div class="ng-scope layout-row margintop60 ">
+            <div class="ng-scope layout-row margintop40">
                 <div class="flex-33">
                     <div class="mylabel" translate="Street Address"></div>
                     <div class="myvalue">{{taskDetails.Street_Address}}</div>
