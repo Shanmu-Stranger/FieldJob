@@ -226,7 +226,7 @@
                                     item.Type = itemForOFSC.Type;
 
                                 } else {
-                                    console.log(item.Start_Date + "----" + item.End_Date+"----"+item.Task_Number)
+
                                     item.Type = "CUSTOMER";
                                 }
 
@@ -243,9 +243,13 @@
 
                         constantService.setTaskList(responseOfTaskDetails);
 
-                        localService.insertTaskList(responseOfTaskDetails);
+                        localService.insertTaskList(responseOfTaskDetails, function (response) {
 
-                        callback(responseOfTaskDetails);
+                            console.log("FINAL =======> " + response);
+
+                            callback(responseOfTaskDetails);
+
+                        });
 
                     }).error(function (error) {
 

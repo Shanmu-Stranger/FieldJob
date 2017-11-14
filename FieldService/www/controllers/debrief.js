@@ -2252,9 +2252,10 @@
 
                     ctx.fillStyle = "#000";
                     ctx.strokeRect(10, yAttachField + 10, 1010, rectAttachHeight);
+                    var index=0;
                     angular.forEach($scope.files, function (file, value) {
 
-                        var attachfile = document.getElementById(file.filename);
+                        var attachfile = document.getElementById(index++);
                         var callback = function (image) {
                             if (!image) image = this;
                             ctx.drawImage(attachfile, xAttachField1, yAttachField + 15);
