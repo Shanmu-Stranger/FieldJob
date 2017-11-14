@@ -122,149 +122,53 @@
 
         function getTaskList(callback) {
 
-            var ofscResponse = [];
+            var taskArray = [];
 
-            var responseOfTaskDetails = [];
-
-            var startDate = moment(constantService.getStartDate()).format("YYYY-MM-DD");
-
-            var endDate = moment(constantService.getEndDate()).format("YYYY-MM-DD");
-
-            var type = "CUSTOMER";
-
-            var typei = "INTERNAL";
-
-            var internalOFSCResponse = [];
-
-            var internalOFSCJSONObject = {
-                "Start_Date": "",
-                "End_Date": "",
-                "Type": "",
-                "Text": ""
-            };
-
-            console.log("Internal URL " + 'OFSCActions/tasktype?resourceId=' + constantService.getResourceId() + '&fromDate=' + startDate + '&toDate=' + endDate + '&type=' + typei);
-
-            return $http({
+            $http({
 
                 method: 'GET',
-                url: url + 'OFSCActions/tasktype?resourceId=' + constantService.getResourceId() + '&fromDate=' + startDate + '&toDate=' + endDate + '&type=' + typei,
+                url: url + 'TaskDetails_Combined/Task_Details?resourceId=' + constantService.getResourceId()
+                + '&fromDate=' + constantService.getStartDate()
+                + '&toDate=' + constantService.getEndDate(),
                 headers: {
                     "Content-Type": constantService.getContentType(),
                     "Authorization": constantService.getAuthor(),
-                    "oracle-mobile-backend-id": constantService.getOfscBackId()
+                    "oracle-mobile-backend-id": constantService.getTaskBackId()
                 }
+
             }).success(function (response) {
 
-                if (response != undefined && response.finalResult != undefined) {
+                console.log("Task Response " + JSON.stringify(response.TaskDetails));
 
-                    console.log("Internal Response " + JSON.stringify(response));
+                constantService.setTaskList(response.TaskDetails);
 
-                    response.finalResult.forEach(function (item) {
+                angular.forEach(response.TaskDetails, function (item) {
 
-                        var internalOFSCJSONObject = {};
+                    item.Type = "CUSTOMER";
 
-                        internalOFSCJSONObject.Start_Date = item.Start_Date;
-                        internalOFSCJSONObject.End_Date = item.End_Date;
-                        internalOFSCJSONObject.Type = item.Type;
-                        internalOFSCJSONObject.Customer_Name = item.Activity_Type;
-                        internalOFSCJSONObject.Task_Number = item.ActivityID;
+                    item.email = "";
 
-                        internalOFSCResponse.push(internalOFSCJSONObject);
+                    item.Date = new Date();
 
-                    });
-                }
-
-                console.log("Internal OFSCResponse " + JSON.stringify(internalOFSCResponse));
-
-                console.log("Customer URL " + 'OFSCActions/tasktype?resourceId=' + constantService.getResourceId() + '&fromDate=' + startDate + '&toDate=' + endDate + '&type=' + type);
-
-                return $http({
-
-                    method: 'GET',
-                    url: url + 'OFSCActions/tasktype?resourceId=' + constantService.getResourceId() + '&fromDate=' + startDate + '&toDate=' + endDate + '&type=' + type,
-                    headers: {
-                        "Content-Type": constantService.getContentType(),
-                        "Authorization": constantService.getAuthor(),
-                        "oracle-mobile-backend-id": constantService.getOfscBackId()
-                    }
-                }).success(function (response) {
-
-                    if (response != undefined && response.finalResult != undefined) {
-
-                        ofscResponse = response.finalResult;
-
-                        console.log("Customer OFSC Response " + JSON.stringify(ofscResponse));
-                    }
-
-                    $http({
-
-                        method: 'GET',
-                        url: url + 'TaskDetails/Resource_ID_taskdetails?resourceId=' + constantService.getResourceId()
-                        + '&fromDate=' + constantService.getStartDate()
-                        + '&toDate=' + constantService.getEndDate(),
-                        headers: {
-                            "Content-Type": constantService.getContentType(),
-                            "Authorization": constantService.getAuthor(),
-                            "oracle-mobile-backend-id": constantService.getTaskBackId()
-                        }
-
-                    }).success(function (response) {
-
-                        console.log("Task Response " + JSON.stringify(response));
-
-                        response.TaskDetails.forEach(function (item) {
-
-                            ofscResponse.forEach(function (itemForOFSC) {
-
-                                if (itemForOFSC.ActivityID == item.Activity_Id) {
-
-                                    item.Start_Date = itemForOFSC.Start_Date;
-
-                                    item.End_Date = itemForOFSC.End_Date;
-
-                                    item.Type = itemForOFSC.Type;
-
-                                } else {
-
-                                    item.Type = "CUSTOMER";
-                                }
-
-                                item.Email = "";
-
-                                item.Date = new Date();
-
-                            });
-
-                            responseOfTaskDetails.push(item);
-                        });
-
-                        console.log("Task Response Final" + JSON.stringify(responseOfTaskDetails));
-
-                        constantService.setTaskList(responseOfTaskDetails);
-
-                        localService.insertTaskList(responseOfTaskDetails, function (response) {
-
-                            console.log("FINAL =======> " + response);
-
-                            callback(responseOfTaskDetails);
-
-                        });
-
-                    }).error(function (error) {
-
-                        console.log("Task Error " + JSON.stringify(error));
-
-                        callback(error);
-                    });
-
-                }).error(function (error) {
-
-                    console.log('OFSC Error', JSON.stringify(error));
-
-                    callback(error);
+                    taskArray.push(item);
                 });
-            })
+
+                constantService.setTaskList(taskArray);
+
+                localService.insertTaskList(taskArray, function (result) {
+
+                    console.log("FINAL =======> " + response);
+
+                    callback(taskArray);
+
+                });
+
+            }).error(function (error) {
+
+                console.log("Task Error " + JSON.stringify(error));
+
+                callback(error);
+            });
         }
 
         function getInstallBaseList() {

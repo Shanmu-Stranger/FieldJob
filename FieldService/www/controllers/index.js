@@ -264,6 +264,8 @@ app.controller('indexController', function ($scope, $state, $timeout, $mdSidenav
 
             cloudService.getTaskList(function (response) {
 
+                $state.go($state.current, {}, {reload: true});
+
                 cloudService.getInstallBaseList();
                 cloudService.getContactList();
                 cloudService.getNoteList();
@@ -284,11 +286,6 @@ app.controller('indexController', function ($scope, $state, $timeout, $mdSidenav
 
                 getAttachments();
 
-                $state.reload();
-
-                $state.go($state.current.name);
-
-                window.location.reload(true);
             });
         }
     }
