@@ -2264,3 +2264,11 @@ md-select.md-default-theme ._md-select-value, md-select ._md-select-value{
 .newItemBorderSection{
   border: solid 1px #00aa7e;
 }
+.copyItem{
+   border-top: solid 1px #283d3f;
+  border-left:solid 1px #283d3f;
+  border-right:solid 1px #283d3f;
+}
+.copyItemSection{
+ border: solid 1px #283d3f;
+}
