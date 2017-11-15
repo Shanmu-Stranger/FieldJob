@@ -20,7 +20,7 @@
         return service;
 
         function activate_resource(data, callback) {
-            console.log(url + 'OFSCActions/activate_resource')
+            
             return $http({
 
                 method: 'POST',

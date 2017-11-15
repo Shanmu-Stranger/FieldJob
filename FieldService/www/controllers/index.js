@@ -358,7 +358,9 @@ app.controller('indexController', function ($scope, $state, $timeout, $mdSidenav
                             "resourceId": constantService.getUser().OFSCId,
                             "date": moment(new Date()).utcOffset(constantService.getTimeZone()).format('YYYY-MM-DD')
                         };
+
                         console.log(JSON.stringify(data));
+
                         ofscService.activate_resource(data, function (response) {
 
                             if (response != undefined && response != null) {
@@ -378,10 +380,6 @@ app.controller('indexController', function ($scope, $state, $timeout, $mdSidenav
         });
 
         function offlineGetCall() {
-
-            // cloudService.getInternalList(function (response) {
-            //
-            // });
 
             cloudService.getTaskList(function (response) {
 
@@ -406,6 +404,11 @@ app.controller('indexController', function ($scope, $state, $timeout, $mdSidenav
 
                 // cloudService.getInternalList(function (response) {
                 //
+                //     localService.getInternalList(function (response) {
+                //
+                //         console.log("INTERNAL DB " +response)
+                //
+                //     });
                 // });
 
                 cloudService.getContactList();

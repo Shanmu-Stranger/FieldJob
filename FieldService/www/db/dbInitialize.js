@@ -15,7 +15,7 @@
 
         var sqlTask = "CREATE TABLE IF NOT EXISTS Task ('Task_Number' INTEGER PRIMARY KEY  NOT NULL, 'Job_Description' TEXT, 'Duration' TEXT, 'Task_Status' TEXT, 'Customer_Name' TEXT, 'Street_Address' TEXT, 'City' TEXT, 'State' TEXT, 'Country' TEXT, 'Zip_Code' TEXT, 'Expense_Method' TEXT, 'Labor_Method' TEXT, 'Travel_Method' TEXT, 'Material_Method' TEXT, 'Service_Request' TEXT, 'Assigned' TEXT, 'Start_Date' TEXT, 'End_Date' TEXT, 'Submit_Status' TEXT, 'Email' TEXT, 'Date' TEXT, 'Type' TEXT, 'Activity_Id' TEXT, 'Work_Phone_Number' TEXT, 'Mobile_Phone_Number' TEXT)";
 
-        var sqlInternal = "CREATE TABLE IF NOT EXISTS Internal ('Task_Number' INTEGER PRIMARY KEY  NOT NULL, 'Job_Description' TEXT, 'Duration' TEXT)";
+        var sqlInternal = "CREATE TABLE IF NOT EXISTS Internal ('Activity_Id' INTEGER PRIMARY KEY  NOT NULL, 'Start_time' TEXT, 'End_time' TEXT, 'Activity_type' TEXT)";
 
         var sqlInstallBase = "CREATE TABLE IF NOT EXISTS InstallBase ('Installed_Base_ID' INTEGER, 'Product_Line' TEXT, 'Serial_Number' TEXT, 'TagNumber' TEXT, 'Original_PO_Number' TEXT, 'Task_Number' TEXT, 'Service_Request' TEXT, 'Assigned' TEXT, 'Start_Date' TEXT, 'End_Date' TEXT)";
 

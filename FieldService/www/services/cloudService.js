@@ -4,7 +4,7 @@
 
     app.factory('cloudService', cloudService);
 
-    cloudService.$inject = ['$http', '$rootScope', '$window', '$location', 'localService', 'constantService','ofscService'];
+    cloudService.$inject = ['$http', '$rootScope', '$window', '$location', 'localService', 'constantService', 'ofscService'];
 
     function cloudService($http, $rootScope, $window, $location, localService, constantService, ofscService) {
 
@@ -125,6 +125,8 @@
 
             var taskArray = [];
 
+            var internalOFSCResponse = [];
+
             $http({
 
                 method: 'GET',
@@ -141,25 +143,49 @@
 
                 console.log("Task Response " + JSON.stringify(response.TaskDetails));
 
-                angular.forEach(response.TaskDetails, function (item) {
+                getInternalList(function (internalresponse) {
 
-                    item.Type = "CUSTOMER";
+                    console.log("Internal Response " + JSON.stringify(internalresponse));
 
-                    item.email = "";
+                    angular.forEach(internalresponse, function (item) {
 
-                    item.Date = new Date();
+                        var internalOFSCJSONObject = {};
 
-                    taskArray.push(item);
-                });
+                       
+                        internalOFSCJSONObject.Start_Date = item.Start_time;
+                        internalOFSCJSONObject.End_Date = item.End_time;
+                        internalOFSCJSONObject.Type = "INTERNAL";
+                        internalOFSCJSONObject.Customer_Name = item.Activity_type;
+                        internalOFSCJSONObject.Task_Number = item.Activity_Id;
 
-                constantService.setTaskList(taskArray);
+                        internalOFSCResponse.push(internalOFSCJSONObject);
+                    });
 
-                localService.insertTaskList(taskArray, function (result) {
+                    angular.forEach(response.TaskDetails, function (item) {
 
-                    console.log("FINAL =======> " + result);
+                        item.Type = "CUSTOMER";
 
-                    callback(taskArray);
+                        item.email = "";
 
+                        item.Date = new Date();
+
+                        taskArray.push(item);
+                    });
+                    
+                    localService.insertTaskList(taskArray, function (result) {
+
+                        console.log("FINAL =======> " + result);
+
+                        angular.forEach(internalOFSCResponse, function (item) {
+
+                            taskArray.push(item);
+                        });
+
+                        constantService.setTaskList(taskArray);
+
+                        callback(taskArray);
+
+                    });
                 });
 
             }).error(function (error) {
@@ -176,28 +202,31 @@
 
                 method: 'POST',
                 url: url + 'Internal_OFSC/get_ids',
-                data: {
-                    resourceId: constantService.getResourceId(),
-                    fromDate: constantService.getStartDate(),
-                    toDate: constantService.getEndDate()
-                },
                 headers: {
                     "Content-Type": constantService.getContentType(),
                     "Authorization": constantService.getAuthor(),
                     "oracle-mobile-backend-id": constantService.getTaskBackId()
+                },
+                data: {
+                    "resourceId": constantService.getResourceId(),
+                    "fromDate": moment(constantService.getStartDate()).format('YYYY-MM-DD'),
+                    "toDate": moment(constantService.getEndDate()).format('YYYY-MM-DD')
                 }
 
             }).success(function (response) {
 
-                console.log("Internal Response " + JSON.stringify(response));
+                console.log("Internal Response " + JSON.stringify(response.activities));
 
-                // localService.insertInternalList(response, function (result) {
-                //
-                //     console.log("FINAL =======> " + result);
-                //
-                //     callback(taskArray);
-                //
-                // });
+                localService.insertInternalList(response.activities, function (result) {
+
+                    console.log("FINAL =======> " + result);
+
+                    localService.getInternalList(function (res) {
+                        callback(res);
+                    })
+
+
+                });
 
             }).error(function (error) {
 
@@ -1171,8 +1200,8 @@
 
             // $cookieStore.remove('advGlobalObj');
         }
-        function OfscActions(activateId,isAccept,callback)
-        {
+
+        function OfscActions(activateId, isAccept, callback) {
             var data = {
                 "resourceId": constantService.getUser().OFSCId,
                 "date": moment(new Date()).utcOffset(constantService.getTimeZone()).format('YYYY-MM-DD')
@@ -1215,23 +1244,20 @@
                                         console.log("startActivityData*****" + startActivityData.activityId)
                                         ofscService.start_activity(startActivityData, function (response) {
 
-                                            if (!isAccept)
-                                            {
-                                                var complete = { "activityId": startActivityData.activityId }
+                                            if (!isAccept) {
+                                                var complete = {"activityId": startActivityData.activityId}
                                                 console.log("complete_activity*****" + complete.activityId)
                                                 ofscService.complete_activity(complete, function (response) {
                                                     callback();
                                                 })
                                             }
-                                            else
-                                            {
+                                            else {
                                                 callback();
                                             }
                                         })
                                     }
                                 })
-                                if (!startActivity)
-                                {
+                                if (!startActivity) {
 
                                     callback();
 
