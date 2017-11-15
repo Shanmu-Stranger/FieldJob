@@ -705,7 +705,16 @@
                 itemToBeCopied.Comments = "";
                 itemToBeCopied.Time_Id = $scope.taskId + "" + ($scope.timeArray.length + 1)
                 $scope.timeArray.push(itemToBeCopied);
-
+                
+                /*Scroll to newly copied element*/
+                $scope.copyObjIndex = $scope.timeArray.length - 1;
+                var newHash = $scope.copyObjIndex;
+                  if ($location.hash() !== newHash) {
+                    $location.hash($scope.copyObjIndex);
+                  } else {
+                    $anchorScroll();
+                  }
+                setTimeout(function(){ $location.hash(null); }, 100);
                 break;
 
             case "Expenses":
