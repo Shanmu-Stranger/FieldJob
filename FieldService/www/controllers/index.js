@@ -49,7 +49,8 @@ app.controller('indexController', function ($scope, $state, $timeout, $mdSidenav
                 $translate.use('en').then(function () {
                     console.log('English Used');
                 });
-
+                $('#calendar').fullCalendar('destroy');
+                $rootScope.eventInit("en");
                 break;
 
             case "fr":
@@ -71,7 +72,8 @@ app.controller('indexController', function ($scope, $state, $timeout, $mdSidenav
                 $translate.use('jp').then(function () {
                     console.log('Chinese Used');
                 });
-
+                $('#calendar').fullCalendar('destroy');
+                $rootScope.eventInit("ch");
                 break;
 
             default:

@@ -130,7 +130,19 @@ app.controller('myTaskController', function ($scope, $compile, $timeout, uiCalen
         var maxTimeVal = "24:00:00";
 
         $("fc-left").addClass("col-md-4");
-
+        var mycal,myFieldJob,localeused;
+        if(lang =='ch')
+        {
+            mycal= "我的日历"
+            localeused="zh-cn";
+            myFieldJob="我的田野工作";
+        }
+        else if(lang=='en')
+        {
+            mycal="My Calendar";
+            localeused="en";
+            myFieldJob="My Field Job";
+        }
         $('#calendar').fullCalendar({
             customButtons: {
                 monthButton: {
@@ -140,13 +152,13 @@ app.controller('myTaskController', function ($scope, $compile, $timeout, uiCalen
                     }
                 },
                 myCalendar: {
-                    text: 'My Calendar',
+                    text: mycal,
                     click: function (item) {
                         $state.go('myTask');
                     }
                 },
                 myTask: {
-                    text: 'My Field Job',
+                    text: myFieldJob,
                     click: function () {
 
                         $rootScope.apicall = true;
@@ -166,6 +178,7 @@ app.controller('myTaskController', function ($scope, $compile, $timeout, uiCalen
                 right: 'prev,title,next today',
                 center: 'agendaWeek,agendaDay,month'
             },
+            locale: localeused,
             //defaultDate: '2017-09-12',
             defaultView: 'agendaWeek',
             navLinks: true,
