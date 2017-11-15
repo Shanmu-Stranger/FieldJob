@@ -619,10 +619,10 @@
                     ItemName: ""
                 });
 
-                $scope.addMaterialObj = $scope.materialArray.length - 1;
+                $scope.addMaterialObj = $scope.materialArray[$scope.materialArray.length - 1].Material_Id;
                 var newHash = $scope.addMaterialObj;
                 if ($location.hash() !== newHash) {
-                    $location.hash('material'+ $scope.addMaterialObj);
+                    $location.hash($scope.addMaterialObj);
                 } else {
                     $anchorScroll();
                 }
@@ -778,10 +778,11 @@
                 itemToBeCopied.Material_Id = $scope.taskId + "" + ($scope.materialArray.length + 1)
                 $scope.materialArray.push(itemToBeCopied);
 
-                $scope.copyMaterialObj = $scope.materialArray.length - 1;
+                $scope.copyMaterialObj = $scope.materialArray[$scope.materialArray.length - 1].Material_Id;
+                //$scope.copyMaterialObj = $scope.materialArray.length - 1;
                 var newHash = $scope.copyMaterialObj;
                 if ($location.hash() !== newHash) {
-                    $location.hash('material'+ $scope.copyMaterialObj);
+                    $location.hash($scope.copyMaterialObj);
                 } else {
                     $anchorScroll();
                 }
