@@ -1,7 +1,7 @@
 <div class="card-parentContainer margintop10">
-    <div class="margintop30" ng-repeat="item in notesArray track by $index">
+    <div class="margintop30" ng-repeat="item in notesArray track by $index" id="note{{$index}}">
         
-            <div class="card-childContainer  noBorder-radius">
+            <div class="card-childContainer  noBorder-radius" ng-class="{'newItemBorder': $index == addNoteObj && $index != 0,'copyItem': $index == copyNoteObj && $index != 0}">
                 <form class="form-horizontal row" action="/action_page.php">
 
 
@@ -63,7 +63,7 @@
 
                 </form>
             </div>
-            <section layout="row" layout-sm="column" layout-align="center center" layout-wrap class="time-btns">
+            <section style="border-radius:0 0 10px 10px" layout="row" layout-sm="column" layout-align="center center" layout-wrap class="time-btns" ng-class="{'newItemBorderSection': $index == addNoteObj && $index != 0,'copyItemSection': $index == copyNoteObj && $index != 0}">
                 <md-button class="time-font time-add" ng-click="addObject('Notes')" translate="Add"></md-button>
                 <md-button class="time-font time-delete" ng-click="deleteObject($index,item,'Notes')" translate="delete"></md-button>
                 <md-button class="time-font time-copy" ng-click="copyObject(item,'Notes')" translate="copy"></md-button>
