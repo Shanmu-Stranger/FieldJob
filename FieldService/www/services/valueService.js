@@ -713,7 +713,7 @@
             });
         };
 
-        function acceptTask(taskId) {
+        function acceptTask(taskId,callback) {
 
             var formData = {
                 "taskid": taskId,
@@ -733,7 +733,8 @@
                 };
 
                 localService.updateTaskSubmitStatus(taskObject);
-                
+                if (callback != null)
+                callback();
             });
         };
 

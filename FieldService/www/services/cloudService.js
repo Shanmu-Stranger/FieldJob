@@ -4,9 +4,9 @@
 
     app.factory('cloudService', cloudService);
 
-    cloudService.$inject = ['$http', '$rootScope', '$window', '$location', 'localService', 'constantService'];
+    cloudService.$inject = ['$http', '$rootScope', '$window', '$location', 'localService', 'constantService','ofscService'];
 
-    function cloudService($http, $rootScope, $window, $location, localService, constantService) {
+    function cloudService($http, $rootScope, $window, $location, localService, constantService, ofscService) {
 
         var url = conf.apiUrl;
 
@@ -68,7 +68,7 @@
 
         service.setCredentials = setCredentials;
         service.clearCredentials = clearCredentials;
-
+        service.OfscActions = OfscActions;
         return service;
 
         function login(formData, callback) {
@@ -1170,6 +1170,84 @@
             $rootScope.globals = {};
 
             // $cookieStore.remove('advGlobalObj');
+        }
+        function OfscActions(activateId,isAccept,callback)
+        {
+            var data = {
+                "resourceId": constantService.getUser().OFSCId,
+                "date": moment(new Date()).utcOffset(constantService.getTimeZone()).format('YYYY-MM-DD')
+            };
+            ofscService.activate_resource(data, function (response) {
+
+                if (response != undefined && response != null) {
+
+                    console.log("ACTIVATE RESOURCE " + JSON.stringify(response));
+
+                    var updateStatus =
+                        {
+                            "activityId": activateId,
+                            "XA_TASK_STATUS": "8"
+                        }
+
+                    ofscService.updateStatus(updateStatus, function (response) {
+
+                        var activityDetails =
+                            {
+                                "activityId": activateId,
+
+                            }
+
+                        ofscService.activityDetails(activateId, function (response) {
+
+                            if (response != undefined && response.items != undefined && response.items.length > 0) {
+                                var startActivity = false
+                                angular.forEach(response.items, function (item) {
+
+                                    var date = new Date(item.date);
+
+                                    if (date.setHours(0, 0, 0, 0) == new Date().setHours(0, 0, 0, 0)) {
+                                        startActivity = true
+                                        var startActivityData =
+                                            {
+                                                "activityId": response.items[0].activityId,
+
+                                            }
+                                        console.log("startActivityData*****" + startActivityData.activityId)
+                                        ofscService.start_activity(startActivityData, function (response) {
+
+                                            if (!isAccept)
+                                            {
+                                                var complete = { "activityId": startActivityData.activityId }
+                                                console.log("complete_activity*****" + complete.activityId)
+                                                ofscService.complete_activity(complete, function (response) {
+                                                    callback();
+                                                })
+                                            }
+                                            else
+                                            {
+                                                callback();
+                                            }
+                                        })
+                                    }
+                                })
+                                if (!startActivity)
+                                {
+
+                                    callback();
+
+                                }
+                                //else if (!startActivity)
+                                //{
+                                //    ofscService.complete_activity(data, function (response) {
+                                //        callback();
+                                //    })
+                                //}
+                            }
+
+                        })
+                    })
+                }
+            });
         }
     }
 
