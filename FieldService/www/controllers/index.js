@@ -380,6 +380,10 @@ app.controller('indexController', function ($scope, $state, $timeout, $mdSidenav
 
         function offlineGetCall() {
 
+            // cloudService.getInternalList(function (response) {
+            //
+            // });
+
             cloudService.getTaskList(function (response) {
 
                 if (constantService.getUser().Default_View == "My Task") {
@@ -399,9 +403,12 @@ app.controller('indexController', function ($scope, $state, $timeout, $mdSidenav
                     $rootScope.Islogin = true;
                 }
 
-                $rootScope.apicall = false;
-
                 cloudService.getInstallBaseList();
+
+                // cloudService.getInternalList(function (response) {
+                //
+                // });
+
                 cloudService.getContactList();
                 cloudService.getNoteList();
 
