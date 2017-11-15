@@ -1,5 +1,136 @@
 app.controller('myTaskController', function ($scope, $compile, $timeout, uiCalendarConfig, $rootScope, $state, $http, cloudService, localService, valueService, $filter, constantService) {
 
+    $rootScope.eventInit = function (lang) {
+
+        var minTimeVal = "07:00:00";
+
+        var maxTimeVal = "24:00:00";
+
+        $("fc-left").addClass("col-md-4");
+        var mycal, myFieldJob, localeused;
+        if (lang == 'ch') {
+            mycal = "我的日历"
+            localeused = "zh-cn";
+            myFieldJob = "我的田野工作";
+        }
+        else if (lang == 'en') {
+            mycal = "My Calendar";
+            localeused = "en";
+            myFieldJob = "My Field Job";
+        }
+        $('#calendar').fullCalendar({
+            customButtons: {
+                monthButton: {
+                    text: 'month',
+                    click: function () {
+                        $scope.showMonth = true;
+                    }
+                },
+                myCalendar: {
+                    text: mycal,
+                    click: function (item) {
+                        $state.go('myTask');
+                    }
+                },
+                myTask: {
+                    text: myFieldJob,
+                    click: function () {
+
+                        $rootScope.apicall = true;
+
+                        $rootScope.apicall = false;
+
+                        $state.go("myFieldJob");
+
+                        $rootScope.tabClicked = true;
+
+                        $rootScope.selectedItem = 2;
+                    }
+                }
+            },
+            header: {
+                left: 'myCalendar,myTask',
+                right: 'prev,title,next today',
+                center: 'agendaWeek,agendaDay,month'
+            },
+            locale: localeused,
+            //defaultDate: '2017-09-12',
+            defaultView: 'agendaWeek',
+            navLinks: true,
+            editable: false,
+            eventLimit: true,
+            views: {
+                month: {
+                    eventLimit: 2
+                }
+            },
+            allDaySlot: false,
+            minTime: minTimeVal,
+            maxTime: maxTimeVal,
+            events: eventsArray,
+            eventClick: function (event, jsEvent, view) {
+
+                //console.log("EVENT " + JSON.stringify(event));
+
+                $rootScope.selectedTask = event;
+
+                valueService.setTask(event);
+
+                $rootScope.selectedItem = 3;
+
+                $rootScope.showTaskDetail = true;
+
+                if (event.Task_Status == 'Field Job Completed' || event.Task_Status == 'Completed') {
+
+                    $scope.showStartWork = false;
+                    $scope.showDebriefBtn = true;
+                    $rootScope.showAccept = false;
+                    $rootScope.completedTask = true;
+
+                    $state.go('debrief');
+
+                }
+                else if (event.Task_Status == 'Assigned') {
+                    $scope.showStartWork = true;
+                    $rootScope.showAccept = true;
+                    $scope.showDebriefBtn = false;
+                    $state.go('taskOverFlow');
+                }
+                else if (event.Task_Status == 'Accepted') {
+                    $scope.showStartWork = true;
+                    $scope.showDebriefBtn = true;
+                    $rootScope.showAccept = false;
+                    $state.go('taskOverFlow');
+                }
+                else if (event.Type == 'INTERNAL') {
+
+                }
+                else {
+
+                    $state.go('taskOverFlow');
+                }
+
+            },
+            eventRender: function (event, element) {
+
+                if (event.Task_Status == 'Completed') {
+
+                    element.addClass("completedEvent");
+
+                } else if (event.Task_Status == 'Accepted') {
+
+                    element.addClass("acceptedEvent");
+
+                } else {
+
+                    element.addClass("assignedEvent");
+                }
+            }
+        });
+    }
+
+
+
     $scope.showSearchTaskDiv = false;
 
     $rootScope.Islogin = true;
@@ -28,8 +159,10 @@ app.controller('myTaskController', function ($scope, $compile, $timeout, uiCalen
             $scope.myTaskDetails = constantService.getTaskList();
 
             setEventArray(constantService.getTaskList());
-
-            eventInit();
+            var lang = valueService.getLanguage(lang);
+            if (lang == undefined)
+                lang = "en";
+            $rootScope.eventInit(lang);
 
         } else {
 
@@ -44,8 +177,10 @@ app.controller('myTaskController', function ($scope, $compile, $timeout, uiCalen
                     console.log("GET TASK IN DB" + $rootScope.myTaskDetails);
 
                     setEventArray(response);
-
-                    eventInit();
+                   var lang = valueService.getLanguage(lang);
+                    if (lang == undefined)
+                        lang = "en";
+                    $rootScope.eventInit(lang);
                 }
             });
         }
@@ -123,139 +258,7 @@ app.controller('myTaskController', function ($scope, $compile, $timeout, uiCalen
         }
     }
 
-    function eventInit() {
-
-        var minTimeVal = "07:00:00";
-
-        var maxTimeVal = "24:00:00";
-
-        $("fc-left").addClass("col-md-4");
-        var mycal,myFieldJob,localeused;
-        if(lang =='ch')
-        {
-            mycal= "我的日历"
-            localeused="zh-cn";
-            myFieldJob="我的田野工作";
-        }
-        else if(lang=='en')
-        {
-            mycal="My Calendar";
-            localeused="en";
-            myFieldJob="My Field Job";
-        }
-        $('#calendar').fullCalendar({
-            customButtons: {
-                monthButton: {
-                    text: 'month',
-                    click: function () {
-                        $scope.showMonth = true;
-                    }
-                },
-                myCalendar: {
-                    text: mycal,
-                    click: function (item) {
-                        $state.go('myTask');
-                    }
-                },
-                myTask: {
-                    text: myFieldJob,
-                    click: function () {
-
-                        $rootScope.apicall = true;
-
-                        $rootScope.apicall = false;
-
-                        $state.go("myFieldJob");
-
-                        $rootScope.tabClicked = true;
-
-                        $rootScope.selectedItem = 2;
-                    }
-                }
-            },
-            header: {
-                left: 'myCalendar,myTask',
-                right: 'prev,title,next today',
-                center: 'agendaWeek,agendaDay,month'
-            },
-            locale: localeused,
-            //defaultDate: '2017-09-12',
-            defaultView: 'agendaWeek',
-            navLinks: true,
-            editable: false,
-            eventLimit: true,
-            views: {
-                month: {
-                    eventLimit: 2
-                }
-            },
-            allDaySlot: false,
-            minTime: minTimeVal,
-            maxTime: maxTimeVal,
-            events: eventsArray,
-            eventClick: function (event, jsEvent, view) {
-
-                //console.log("EVENT " + JSON.stringify(event));
-
-                $rootScope.selectedTask = event;
-
-                valueService.setTask(event);
-
-                $rootScope.selectedItem = 3;
-
-                $rootScope.showTaskDetail = true;
-
-                if (event.Task_Status == 'Field Job Completed' || event.Task_Status == 'Completed') {
-
-                    $scope.showStartWork = false;
-                    $scope.showDebriefBtn = true;
-                    $rootScope.showAccept = false;
-                    $rootScope.completedTask = true;
-
-                    $state.go('debrief');
-
-                }
-                else if (event.Task_Status == 'Assigned')
-                {
-                    $scope.showStartWork = true;
-                    $rootScope.showAccept = true;
-                    $scope.showDebriefBtn = false;
-                    $state.go('taskOverFlow');
-                }
-                else if (event.Task_Status == 'Accepted')
-                {
-                    $scope.showStartWork = true;
-                    $scope.showDebriefBtn = true;
-                    $rootScope.showAccept = false;
-                    $state.go('taskOverFlow');
-                }
-                else if (event.Type == 'INTERNAL')
-                {
-
-                }
-                else {
-
-                    $state.go('taskOverFlow');
-                }
-            
-            },
-            eventRender: function (event, element) {
-
-                if (event.Task_Status == 'Completed') {
-
-                    element.addClass("completedEvent");
-
-                } else if (event.Task_Status == 'Accepted') {
-
-                    element.addClass("acceptedEvent");
-
-                } else {
-
-                    element.addClass("assignedEvent");
-                }
-            }
-        });
-    }
+   
 
     $scope.goToDate = function () {
 
