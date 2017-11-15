@@ -219,6 +219,19 @@ a.article, a.article:hover {
     /*left: 25%;*/
 
 }
+.user-avatar-online {
+    height: 43px;
+    width: 46px;
+    background-position: center !important;
+    background-image: url('../images/user_avator/username_grey.png');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    /*background-color: #ffffff;*/
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    /*left: 25%;*/
+}
 .save{
     height: 38px;
     width: 34px;

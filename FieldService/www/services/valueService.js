@@ -952,10 +952,166 @@
                                                         promises.push(deferred.promise);
 
                                                     });
+                                                    //report
+                                                    var deferred = $q.defer();
+                                                    var reportObj;
+                                                    window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fs) {
 
+                                                        fs.root.getFile("Report_" + taskId + ".pdf", {
+                                                            create: true,
+                                                            exclusive: false
+                                                        }, function (fileEntry) {
+
+                                                            fileEntry.file(function (file) {
+
+                                                                var reader = new FileReader();
+
+                                                                reader.onloadend = function () {
+
+                                                                     reportObj = {
+                                                                         "Data": this.result.split(",")[1],
+                                                                         "FileName": "Report_" + taskId + ".pdf",
+                                                                         "Description": "Report_" + taskId + ".pdf",
+                                                                         "Name": "Report_" + taskId + ".pdf",
+                                                                         "taskId": taskId,
+                                                                        "contentType": "application/pdf"
+                                                                    }
+
+                                                                    //attachmentJSONData.push(attachmentObject);
+
+                                                                     deferred.resolve(reportObj);
+                                                                };
+
+                                                                reader.readAsDataURL(file);
+                                                            });
+                                                        });
+                                                    });
+                                                    promises.push(deferred.promise);
                                                     $q.all(promises).then(
                                                         function (response) {
-                                                            console(attachmentJSONData);
+                                                            console.log(attachmentJSONData);
+                                                            var reportattachmentUploadJSON
+                                                            if (reportObj != undefined)
+                                                            {
+                                                                reportattachmentUploadJSON  = {
+                                                                    "attachment": reportObj
+                                                                };
+                                                            }
+                                                            localService.getEngineer(taskId, function (response) {
+
+                                                                if (response != undefined) {
+
+                                                                    var formData = {
+                                                                        "taskid": taskId,
+                                                                        "taskstatus": "Completed",
+                                                                        "email": taskObject.Email,
+                                                                        "requestDate": moment.utc(new Date()).format("YYYY-MM-DDTHH:mm:ss.000Z"),
+                                                                        "completeDate": moment.utc(new Date()).format("YYYY-MM-DDTHH:mm:ss.000Z"),
+                                                                        "followUp": response.followUp + "",
+                                                                        "salesQuote": response.salesQuote + "",
+                                                                        "salesVisit": response.salesVisit + "",
+                                                                        "salesLead": response.salesLead + "",
+                                                                        "followuptext": response.Follow_Up,
+                                                                        "sparequotetext": response.Spare_Quote,
+                                                                        "salesText": response.Sales_Visit,
+                                                                        "salesleadText": response.Sales_Head
+                                                                    };
+
+                                                                    var timeUploadJSON = {
+                                                                        "Time": timeJSONData
+                                                                    };
+
+                                                                    var expenseUploadJSON = {
+                                                                        "expense": expenseJSONData
+                                                                    };
+
+                                                                    var notesUploadJSON = {
+                                                                        "Notes": noteJSONData
+                                                                    };
+
+                                                                    var materialUploadJSON = {
+                                                                        "Material": materialJSONData
+                                                                    };
+
+                                                                    var attachmentUploadJSON = {
+                                                                        "attachment": attachmentJSONData
+                                                                    };
+
+                                                                    cloudService.uploadTime(timeUploadJSON, function (response) {
+
+                                                                        console.log("Uploaded Time " + JSON.stringify(response));
+
+                                                                        cloudService.uploadExpense(expenseUploadJSON, function (response) {
+
+                                                                            console.log("Uploaded Expense " + JSON.stringify(response));
+
+                                                                            cloudService.uploadNote(notesUploadJSON, function (response) {
+
+                                                                                console.log("Uploaded Notes " + JSON.stringify(response));
+
+                                                                                cloudService.uploadMaterial(materialUploadJSON, function (response) {
+
+                                                                                    console.log("Uploaded Material " + JSON.stringify(response));
+                                                                                    if (attachmentUploadJSON.attachment.length > 0)
+                                                                                    {
+                                                                                        cloudService.createAttachment(attachmentUploadJSON, function (response) {
+                                                                                            if (reportattachmentUploadJSON != undefined && reportattachmentUploadJSON.attachment != undefined)
+                                                                                            {
+                                                                                                cloudService.createAttachment(reportattachmentUploadJSON, function (response) {
+
+                                                                                                })
+                                                                                            }
+                                                                                            console.log("Uploaded Attachment " + JSON.stringify(response));
+
+                                                                                            cloudService.updateAcceptTask(formData, function (response) {
+
+                                                                                                console.log("Task Completed " + JSON.stringify(response));
+
+                                                                                                var taskObject = {
+                                                                                                    Task_Status: "Completed",
+                                                                                                    Task_Number: taskId,
+                                                                                                    Submit_Status: "I"
+                                                                                                };
+
+                                                                                                localService.updateTaskSubmitStatus(taskObject);
+
+                                                                                                cloudService.getTaskList(function (response) {
+
+                                                                                                });
+                                                                                            });
+                                                                                        });
+                                                                                    }
+                                                                                    else
+                                                                                    {
+                                                                                        if (reportattachmentUploadJSON != undefined && reportattachmentUploadJSON.attachment != undefined) {
+                                                                                            cloudService.createAttachment(reportattachmentUploadJSON, function (response) {
+
+                                                                                            })
+                                                                                        }
+                                                                                        cloudService.updateAcceptTask(formData, function (response) {
+
+                                                                                            console.log("Task Completed " + JSON.stringify(response));
+
+                                                                                            var taskObject = {
+                                                                                                Task_Status: "Completed",
+                                                                                                Task_Number: taskId,
+                                                                                                Submit_Status: "I"
+                                                                                            };
+
+                                                                                            localService.updateTaskSubmitStatus(taskObject);
+
+                                                                                            cloudService.getTaskList(function (response) {
+
+                                                                                            });
+                                                                                        });
+                                                                                    }
+                                                                                   
+                                                                                });
+                                                                            });
+                                                                        });
+                                                                    });
+                                                                }
+                                                            });
                                                         },
 
                                                         function (error) {
@@ -996,89 +1152,7 @@
                                                     //   });
                                                     // });
 
-                                                    localService.getEngineer(taskId, function (response) {
-
-                                                        if (response != undefined) {
-
-                                                            var formData = {
-                                                                "taskid": taskId,
-                                                                "taskstatus": "Completed",
-                                                                "email": taskObject.Email,
-                                                                "requestDate": moment.utc(new Date()).format("YYYY-MM-DDTHH:mm:ss.000Z"),
-                                                                "completeDate": moment.utc(new Date()).format("YYYY-MM-DDTHH:mm:ss.000Z"),
-                                                                "followUp": response.followUp + "",
-                                                                "salesQuote": response.salesQuote + "",
-                                                                "salesVisit": response.salesVisit + "",
-                                                                "salesLead": response.salesLead + "",
-                                                                "followuptext": response.Follow_Up,
-                                                                "sparequotetext": response.Spare_Quote,
-                                                                "salesText": response.Sales_Visit,
-                                                                "salesleadText": response.Sales_Head
-                                                            };
-
-                                                            var timeUploadJSON = {
-                                                                "Time": timeJSONData
-                                                            };
-
-                                                            var expenseUploadJSON = {
-                                                                "expense": expenseJSONData
-                                                            };
-
-                                                            var notesUploadJSON = {
-                                                                "Notes": noteJSONData
-                                                            };
-
-                                                            var materialUploadJSON = {
-                                                                "Material": materialJSONData
-                                                            };
-
-                                                            var attachmentUploadJSON = {
-                                                                "attachment": attachmentJSONData
-                                                            };
-
-                                                            cloudService.uploadTime(timeUploadJSON, function (response) {
-
-                                                                console.log("Uploaded Time " + JSON.stringify(response));
-
-                                                                cloudService.uploadExpense(expenseUploadJSON, function (response) {
-
-                                                                    console.log("Uploaded Expense " + JSON.stringify(response));
-
-                                                                    cloudService.uploadNote(notesUploadJSON, function (response) {
-
-                                                                        console.log("Uploaded Notes " + JSON.stringify(response));
-
-                                                                        cloudService.uploadMaterial(materialUploadJSON, function (response) {
-
-                                                                            console.log("Uploaded Material " + JSON.stringify(response));
-
-                                                                            cloudService.createAttachment(attachmentUploadJSON, function (response) {
-
-                                                                                console.log("Uploaded Attachment " + JSON.stringify(response));
-
-                                                                                cloudService.updateAcceptTask(formData, function (response) {
-
-                                                                                    console.log("Task Completed " + JSON.stringify(response));
-
-                                                                                    var taskObject = {
-                                                                                        Task_Status: "Completed",
-                                                                                        Task_Number: taskId,
-                                                                                        Submit_Status: "I"
-                                                                                    };
-
-                                                                                    localService.updateTaskSubmitStatus(taskObject);
-
-                                                                                    cloudService.getTaskList(function (response) {
-
-                                                                                    });
-                                                                                });
-                                                                            });
-                                                                        });
-                                                                    });
-                                                                });
-                                                            });
-                                                        }
-                                                    });
+                                                   
                                                 }
                                             });
                                         }

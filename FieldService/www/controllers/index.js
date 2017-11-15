@@ -265,31 +265,31 @@ app.controller('indexController', function ($scope, $state, $timeout, $mdSidenav
                 });
             });
 
-            cloudService.getTaskList(function (response) {
+            //cloudService.getTaskList(function (response) {
 
-                $state.go($state.current, {}, {reload: true});
+            //    $state.go($state.current, {}, {reload: true});
 
-                cloudService.getInstallBaseList();
-                cloudService.getContactList();
-                cloudService.getNoteList();
+            //    cloudService.getInstallBaseList();
+            //    cloudService.getContactList();
+            //    cloudService.getNoteList();
 
-                cloudService.getOverTimeList();
-                cloudService.getShiftCodeList();
+            //    cloudService.getOverTimeList();
+            //    cloudService.getShiftCodeList();
 
-                cloudService.getChargeType();
-                cloudService.getChargeMethod();
-                cloudService.getFieldJobName();
+            //    cloudService.getChargeType();
+            //    cloudService.getChargeMethod();
+            //    cloudService.getFieldJobName();
 
-                cloudService.getWorkType();
-                cloudService.getItem();
-                cloudService.getCurrency();
+            //    cloudService.getWorkType();
+            //    cloudService.getItem();
+            //    cloudService.getCurrency();
 
-                cloudService.getExpenseType();
-                cloudService.getNoteType();
+            //    cloudService.getExpenseType();
+            //    cloudService.getNoteType();
 
-                getAttachments();
+            //    getAttachments();
 
-            });
+            //});
         }
     }
 
