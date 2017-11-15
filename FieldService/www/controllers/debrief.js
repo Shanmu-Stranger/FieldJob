@@ -1766,16 +1766,7 @@
                                     attachmentJSONData.push(attachmentObject);
                                 }
 
-                                var reportObj = {
-                                    "Data": $scope.reportBase64,
-                                    "FileName": "Report_" + $scope.summary.taskObject.Task_Number + ".pdf",
-                                    "Description": "Report_" + $scope.summary.taskObject.Task_Number + ".pdf",
-                                    "Name": "Report_" + $scope.summary.taskObject.Task_Number + ".pdf",
-                                    "taskId": $rootScope.selectedTask.Task_Number,
-                                    "contentType": "application/pdf"
-                                }
-
-                                attachmentJSONData.push(reportObj);
+                                
 
                                 var timeUploadJSON = {
                                     "Time": timeJSONData
@@ -1818,44 +1809,60 @@
                                                     cloudService.createAttachment(attachmentUploadJSON, function (response) {
 
                                                         console.log("Uploaded Attachment " + JSON.stringify(response));
-                                                        setTimeout(function () {
+                                                        var reportObj = {
+                                                            "Data": $scope.reportBase64,
+                                                            "FileName": "Report_" + $scope.summary.taskObject.Task_Number + ".pdf",
+                                                            "Description": "Report_" + $scope.summary.taskObject.Task_Number + ".pdf",
+                                                            "Name": "Report_" + $scope.summary.taskObject.Task_Number + ".pdf",
+                                                            "taskId": $rootScope.selectedTask.Task_Number,
+                                                            "contentType": "application/pdf"
+                                                        }
+                                                        attachmentJSONData = [];
+                                                        attachmentJSONData.push(reportObj);
+                                                        var reportattachmentUploadJSON = {
+                                                            "attachment": attachmentJSONData
+                                                        };
+                                                        cloudService.createAttachment(reportattachmentUploadJSON, function (response) {
+                                                            setTimeout(function () {
 
-                                                            var formData = {
-                                                                "taskid": $scope.taskId,
-                                                                "taskstatus": "Completed",
-                                                                "email": constantService.getCCEmailID(),
-                                                                "requestDate": moment.utc(new Date()).format("YYYY-MM-DDTHH:mm:ss.000+00:00"),
-                                                                "completeDate": moment.utc(new Date()).format("YYYY-MM-DDTHH:mm:ss.000+00:00"),
-                                                                "followUp": $scope.engineerObject.followUp.toString(),
-                                                                "salesQuote": $scope.engineerObject.salesQuote.toString(),
-                                                                "salesVisit": $scope.engineerObject.salesVisit.toString(),
-                                                                "salesLead": $scope.engineerObject.salesLead.toString(),
-                                                                "followuptext": $scope.engineerObject.Follow_Up,
-                                                                "sparequotetext": $scope.engineerObject.Spare_Quote,
-                                                                "salesText": $scope.engineerObject.Sales_Visit,
-                                                                "salesleadText": $scope.engineerObject.Sales_Head
-                                                            };
-
-                                                            cloudService.updateAcceptTask(formData, function (response) {
-
-                                                                console.log("Task Completed " + JSON.stringify(response));
-
-                                                                var taskObject = {
-                                                                    Task_Status: "Completed",
-                                                                    Task_Number: $scope.taskId,
-                                                                    Submit_Status: "I"
+                                                                var formData = {
+                                                                    "taskid": $scope.taskId,
+                                                                    "taskstatus": "Completed",
+                                                                    "email": constantService.getCCEmailID(),
+                                                                    "requestDate": moment.utc(new Date()).format("YYYY-MM-DDTHH:mm:ss.000+00:00"),
+                                                                    "completeDate": moment.utc(new Date()).format("YYYY-MM-DDTHH:mm:ss.000+00:00"),
+                                                                    "followUp": $scope.engineerObject.followUp.toString(),
+                                                                    "salesQuote": $scope.engineerObject.salesQuote.toString(),
+                                                                    "salesVisit": $scope.engineerObject.salesVisit.toString(),
+                                                                    "salesLead": $scope.engineerObject.salesLead.toString(),
+                                                                    "followuptext": $scope.engineerObject.Follow_Up,
+                                                                    "sparequotetext": $scope.engineerObject.Spare_Quote,
+                                                                    "salesText": $scope.engineerObject.Sales_Visit,
+                                                                    "salesleadText": $scope.engineerObject.Sales_Head
                                                                 };
 
-                                                                localService.updateTaskSubmitStatus(taskObject);
-                                                                cloudService.OfscActions($rootScope.selectedTask.Activity_Id, false, function (response) {
-                                                                    cloudService.getTaskList(function (response) {
+                                                                cloudService.updateAcceptTask(formData, function (response) {
 
-                                                                    });
-                                                                })
-                                                               
-                                                            });
+                                                                    console.log("Task Completed " + JSON.stringify(response));
 
-                                                        }, 3000);
+                                                                    var taskObject = {
+                                                                        Task_Status: "Completed",
+                                                                        Task_Number: $scope.taskId,
+                                                                        Submit_Status: "I"
+                                                                    };
+
+                                                                    localService.updateTaskSubmitStatus(taskObject);
+                                                                    cloudService.OfscActions($rootScope.selectedTask.Activity_Id, false, function (response) {
+                                                                        cloudService.getTaskList(function (response) {
+
+                                                                        });
+                                                                    })
+
+                                                                });
+
+                                                            }, 3000);
+                                                        })
+                                                        
                                                     });
                                                 }
                                             });
