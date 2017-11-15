@@ -2256,3 +2256,11 @@ md-select.md-default-theme ._md-select-value, md-select ._md-select-value{
 .width14{
     width:14%;
 }
+.newItemBorder{
+  border-top: solid 1px #00aa7e;
+  border-left:solid 1px #00aa7e;
+  border-right:solid 1px #00aa7e;
+}
+.newItemBorderSection{
+  border: solid 1px #00aa7e;
+}

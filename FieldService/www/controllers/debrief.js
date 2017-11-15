@@ -1,4 +1,4 @@
-﻿app.controller("debriefController", function ($scope, $state, $rootScope, $window, $timeout, $filter, $http, $q, cloudService, $mdDialog, valueService, localService, Upload, constantService) {
+﻿app.controller("debriefController", function ($scope, $state, $rootScope, $window, $timeout, $filter, $http, $q, cloudService, $mdDialog, valueService, localService, Upload, constantService,$anchorScroll,$location) {
 
     $scope.currentTab = "time";
 
@@ -546,6 +546,15 @@
                     Task_Number: $scope.taskId
                 });
 
+                 $scope.indexOFElement = $scope.timeArray.length - 1;
+                 var newHash = $scope.indexOFElement;
+                  if ($location.hash() !== newHash) {
+                    $location.hash($scope.indexOFElement);
+                  } else {
+                    $anchorScroll();
+                  }
+                  setTimeout(function(){ $location.hash(null); }, 100); 
+                  
                 break;
 
             case "Expenses":

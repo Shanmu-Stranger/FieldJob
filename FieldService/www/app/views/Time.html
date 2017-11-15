@@ -1,8 +1,8 @@
 
 <div class="card-parentContainer margintop10">
    
-            <div class="margintop30" ng-repeat="item in timeArray track by $index">
-            <div class="card-childContainer  noBorder-radius" >
+            <div class="margintop30" ng-repeat="item in timeArray track by $index" id="{{$index}}" >
+            <div class="card-childContainer  noBorder-radius" ng-class="{'newItemBorder': $index == indexOFElement && $index != 0}">
                 <form class="form-horizontal" action="/action_page.php" ng-disabled="$root.completedTask">
                 <div layout="row" layout-wrap>
                     <div ng-if="userType=='C'" flex="30" class="debrief-items" style="max-width: 20%;">
@@ -132,7 +132,7 @@
 
        </div>
                 <section style="border-radius:0 0 10px 10px" layout="row" layout-sm="column" layout-align="center center"
-                     layout-wrap class="time-btns">
+                     layout-wrap class="time-btns" ng-class="{'newItemBorderSection': $index == indexOFElement && $index != 0}">
                 <md-button class="time-font time-add" ng-click="addObject('Time')" ng-disabled="$root.completedTask" translate="Add"></md-button>
                 <md-button class="time-font time-delete" ng-click="deleteObject($index,item,'Time')" ng-disabled="$root.completedTask" translate="delete"></md-button>
                 <md-button class="time-font time-copy" ng-click="copyObject(item,'Time')" ng-disabled="$root.completedTask" translate="copy"></md-button>
