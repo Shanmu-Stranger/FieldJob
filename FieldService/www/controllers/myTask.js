@@ -9,9 +9,9 @@ app.controller('myTaskController', function ($scope, $compile, $timeout, uiCalen
         $("fc-left").addClass("col-md-4");
         var mycal, myFieldJob, localeused;
         if (lang == 'ch') {
-            mycal = "我的日历"
+            mycal = $filter('translate')("My Calendar");// "我的日历"
             localeused = "zh-cn";
-            myFieldJob = "我的田野工作";
+            myFieldJob = $filter('translate')("My Field Job");// "我的田野工作";
         }
         else if (lang == 'en') {
             mycal = "My Calendar";

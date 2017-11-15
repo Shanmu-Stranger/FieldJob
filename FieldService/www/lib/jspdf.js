@@ -4597,10 +4597,10 @@ AcroForm.internal.setBitPosition = function (variable, position, value) {
 
 				info = this['process' + format.toUpperCase()](imageData, getImageIndex(images), alias, checkCompressValue(compression), dataAsBinaryString);
 
-				if (!info) throw new Error('An unkwown error occurred whilst processing the image');
+				//if (!info) throw new Error('An unkwown error occurred whilst processing the image');
 			}
-		}
-
+        }
+        if (info != null)
 		writeImageToPDF.call(this, x, y, w, h, info, info.i, images);
 
 		return this;

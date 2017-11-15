@@ -71,9 +71,10 @@ app.controller('indexController', function ($scope, $state, $timeout, $mdSidenav
                 $scope.chinaFlag = false;
                 $translate.use('jp').then(function () {
                     console.log('Chinese Used');
+                    $('#calendar').fullCalendar('destroy');
+                    $rootScope.eventInit("ch");
                 });
-                $('#calendar').fullCalendar('destroy');
-                $rootScope.eventInit("ch");
+               
                 break;
 
             default:
