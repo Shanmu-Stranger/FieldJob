@@ -40,34 +40,31 @@
         var ofscBackEndId = "1900984d-1b99-4ede-988e-06e0ba319276";
 
         var acceptBackEndId = "1900984d-1b99-4ede-988e-06e0ba319276";
+
         var expenseBackEndId = "1900984d-1b99-4ede-988e-06e0ba319276";
 
 
-        // var ofscBackEndId = "eddb82d4-5f21-45e0-a029-c5947d2c9c48";
-     //  var ofscBackEndId = "b043c17e-7dcd-41a5-abc6-39fa2f8ab0a6";
-
-        //SIT
-
-         //var authKey = "Basic QTQ3MjE0NF9FTUVSU09OTU9CSUxFVEVTVEVOVl9NT0JJTEVfQU5PTllNT1VTX0FQUElEOm9ma3U1ZG4xUHZscS5t";
-
-         //var taskBackEndId = "e4ecc164-2b7a-49ab-a00c-8ea1209d7886";
-
-         //var chargeBackEndId = "e4ecc164-2b7a-49ab-a00c-8ea1209d7886";
-
-         //var shiftBackEndId = "e4ecc164-2b7a-49ab-a00c-8ea1209d7886";
-
-         //var fieldBackEndId = "e4ecc164-2b7a-49ab-a00c-8ea1209d7886";
-
-         //var materialBackEndId = "e4ecc164-2b7a-49ab-a00c-8ea1209d7886";
-
-         //var ofscBackEndId = "b043c17e-7dcd-41a5-abc6-39fa2f8ab0a6";
-
-         //var acceptBackEndId = "e4ecc164-2b7a-49ab-a00c-8ea1209d7886";
-         //var expenseBackEndId = "e4ecc164-2b7a-49ab-a00c-8ea1209d7886";
-
+        // //SIT
+        //
+        // var authKey = "Basic QTQ3MjE0NF9FTUVSU09OTU9CSUxFVEVTVEVOVl9NT0JJTEVfQU5PTllNT1VTX0FQUElEOm9ma3U1ZG4xUHZscS5t";
+        //
+        // var taskBackEndId = "e4ecc164-2b7a-49ab-a00c-8ea1209d7886";
+        //
+        // var chargeBackEndId = "e4ecc164-2b7a-49ab-a00c-8ea1209d7886";
+        //
+        // var shiftBackEndId = "e4ecc164-2b7a-49ab-a00c-8ea1209d7886";
+        //
+        // var fieldBackEndId = "e4ecc164-2b7a-49ab-a00c-8ea1209d7886";
+        //
+        // var materialBackEndId = "e4ecc164-2b7a-49ab-a00c-8ea1209d7886";
+        //
+        // var ofscBackEndId = "b043c17e-7dcd-41a5-abc6-39fa2f8ab0a6";
+        //
+        // var acceptBackEndId = "e4ecc164-2b7a-49ab-a00c-8ea1209d7886";
+        //
+        // var expenseBackEndId = "e4ecc164-2b7a-49ab-a00c-8ea1209d7886";
+        //
         // var acceptBackEndId = "9baa9146-6abd-4375-a454-827de596f83a";
-
-       
 
         var stagesArray = {};
 

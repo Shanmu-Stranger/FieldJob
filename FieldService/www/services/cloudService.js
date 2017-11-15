@@ -17,6 +17,7 @@
         service.getTechnicianProfile = getTechnicianProfile;
 
         service.getTaskList = getTaskList;
+        service.getInternalList = getInternalList;
         service.getInstallBaseList = getInstallBaseList;
         service.getContactList = getContactList;
         service.getNoteList = getNoteList;
@@ -140,8 +141,6 @@
 
                 console.log("Task Response " + JSON.stringify(response.TaskDetails));
 
-                constantService.setTaskList(response.TaskDetails);
-
                 angular.forEach(response.TaskDetails, function (item) {
 
                     item.Type = "CUSTOMER";
@@ -157,7 +156,7 @@
 
                 localService.insertTaskList(taskArray, function (result) {
 
-                    console.log("FINAL =======> " + response);
+                    console.log("FINAL =======> " + result);
 
                     callback(taskArray);
 
@@ -168,6 +167,41 @@
                 console.log("Task Error " + JSON.stringify(error));
 
                 callback(error);
+            });
+        }
+
+        function getInternalList(callback) {
+
+            $http({
+
+                method: 'POST',
+                url: url + 'Internal_OFSC/get_ids',
+                data: {
+                    resourceId: constantService.getResourceId(),
+                    fromDate: constantService.getStartDate(),
+                    toDate: constantService.getEndDate()
+                },
+                headers: {
+                    "Content-Type": constantService.getContentType(),
+                    "Authorization": constantService.getAuthor(),
+                    "oracle-mobile-backend-id": constantService.getTaskBackId()
+                }
+
+            }).success(function (response) {
+
+                console.log("Internal Response " + JSON.stringify(response));
+
+                // localService.insertInternalList(response, function (result) {
+                //
+                //     console.log("FINAL =======> " + result);
+                //
+                //     callback(taskArray);
+                //
+                // });
+
+            }).error(function (error) {
+
+                console.log("Internal Error " + JSON.stringify(error));
             });
         }
 
