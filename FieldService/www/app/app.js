@@ -90,9 +90,28 @@ app.run(function ($rootScope, $location, $http, $state, localService, valueServi
 
                             console.log("TASK MY FIELD JOB =====> " + JSON.stringify(response));
 
-                            constantService.setTaskList(response);
+                            localService.getInternalList(function (internalresponse) {
 
-                            $state.go('myFieldJob');
+                                angular.forEach(internalresponse, function (item) {
+
+                                    var internalOFSCJSONObject = {};
+
+
+                                    internalOFSCJSONObject.Start_Date = item.Start_time;
+                                    internalOFSCJSONObject.End_Date = item.End_time;
+                                    internalOFSCJSONObject.Type = "INTERNAL";
+                                    internalOFSCJSONObject.Customer_Name = item.Activity_type;
+                                    internalOFSCJSONObject.Task_Number = item.Activity_Id;
+
+                                    response.push(internalOFSCJSONObject);
+                                });
+                                constantService.setTaskList(response);
+
+                                $state.go('myFieldJob');
+
+                            });
+
+                           
                         });
 
                     } else {
@@ -101,9 +120,27 @@ app.run(function ($rootScope, $location, $http, $state, localService, valueServi
 
                             console.log("TASK MY TASK =====> " + JSON.stringify(response));
 
-                            constantService.setTaskList(response);
+                            localService.getInternalList(function (internalresponse) {
+                                angular.forEach(internalresponse, function (item) {
 
-                            $state.go('myTask');
+                                    var internalOFSCJSONObject = {};
+
+
+                                    internalOFSCJSONObject.Start_Date = item.Start_time;
+                                    internalOFSCJSONObject.End_Date = item.End_time;
+                                    internalOFSCJSONObject.Type = "INTERNAL";
+                                    internalOFSCJSONObject.Customer_Name = item.Activity_type;
+                                    internalOFSCJSONObject.Task_Number = item.Activity_Id;
+
+                                    response.push(internalOFSCJSONObject);
+                                });
+                                constantService.setTaskList(response);
+
+                                $state.go('myTask');
+
+                            });
+
+                            
                         });
                     }
 

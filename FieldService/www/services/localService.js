@@ -89,6 +89,7 @@
         service.deleteEngineer = deleteEngineer;
 
         service.getTaskList = getTaskList;
+        service.getInternalList = getInternalList;
         service.getInstallBaseList = getInstallBaseList;
         service.getContactList = getContactList;
         service.getNoteList = getNoteList;
@@ -300,36 +301,36 @@
 
                     db.transaction(function (transaction) {
 
-                        var sqlSelect = "SELECT * FROM Task WHERE Task_Number = " + responseList[i].Task_Number;
+                        var sqlSelect = "SELECT * FROM Internal WHERE Activity_Id = " + responseList[i].Activity_Id;
 
-                        console.log("TASK  ====> " + sqlSelect);
+                        console.log("INTERNAL  ====> " + sqlSelect);
 
                         transaction.executeSql(sqlSelect, [], function (tx, res) {
 
                             var rowLength = res.rows.length;
 
-                            console.log("TASK LENGTH ====> " + rowLength);
+                            console.log("INTERNAL LENGTH ====> " + rowLength);
 
                             if (rowLength > 0) {
 
-                                updateTask(responseList[i], deferred);
+                                updateInternal(responseList[i], deferred);
 
                             } else {
 
-                                insertTask(responseList[i], deferred);
+                                insertInternal(responseList[i], deferred);
                             }
 
                         }, function (tx, error) {
 
-                            console.log("TASK SELECT ERROR: " + error.message);
+                            console.log("INTERNAL SELECT ERROR: " + error.message);
                         });
 
                     }, function (error) {
 
-                        console.log("TASK SELECT TRANSACTION ERROR: " + error.message);
+                        console.log("INTERNAL SELECT TRANSACTION ERROR: " + error.message);
                     });
 
-                    console.log("TASK OBJECT =====> " + JSON.stringify(responseList[i]));
+                    console.log("INTERNAL OBJECT =====> " + JSON.stringify(responseList[i]));
 
                     promises.push(deferred.promise);
 
@@ -338,114 +339,76 @@
 
             $q.all(promises).then(
                 function (response) {
-                    callback("SUCCESS TASK");
+                    callback("SUCCESS INTERNAL");
                 },
 
                 function (error) {
-                    callback("ERROR TASK");
+                    callback("ERROR INTERNAL");
                 }
             );
         };
 
-        function updateTask(responseList, defer) {
+        function updateInternal(responseList, defer) {
 
             db.transaction(function (transaction) {
 
                 var insertValues = [];
 
-                var sqlUpdate = "UPDATE Task SET Job_Description = ?, Duration = ?, Task_Status = ?, Customer_Name =?, Street_Address = ?, City = ?, State = ?, Country = ?, Zip_Code = ?, Expense_Method = ?, Labor_Method = ?, Travel_Method = ?, Material_Method = ?, Service_Request = ?, Assigned = ?, Start_Date = ?, End_Date = ?, Activity_Id = ?, Work_Phone_Number = ?, Mobile_Phone_Number = ?  WHERE Task_Number = ?";
+                var sqlUpdate = "UPDATE Internal SET Start_time = ?, End_time = ?, Activity_type = ? WHERE Activity_Id = ?";
 
-                insertValues.push(responseList.Job_Description);
-                insertValues.push(responseList.Duration);
-                insertValues.push(responseList.Task_Status);
-                insertValues.push(responseList.Customer_Name);
-                insertValues.push(responseList.Street_Address);
-                insertValues.push(responseList.City);
-                insertValues.push(responseList.State);
-                insertValues.push(responseList.Country);
-                insertValues.push(responseList.Zip_Code);
-                insertValues.push(responseList.Expense_Method);
-                insertValues.push(responseList.Labor_Method);
-                insertValues.push(responseList.Travel_Method);
-                insertValues.push(responseList.Material_Method);
-                insertValues.push(responseList.Service_Request);
-                insertValues.push(responseList.Assigned);
-                insertValues.push(responseList.Start_Date);
-                insertValues.push(responseList.End_Date);
+                insertValues.push(responseList.Start_time);
+                insertValues.push(responseList.End_time);
+                insertValues.push(responseList.Activity_type);
                 insertValues.push(responseList.Activity_Id);
-                insertValues.push(responseList.Work_Phone_Number);
-                insertValues.push(responseList.Mobile_Phone_Number);
-                insertValues.push(responseList.Task_Number);
 
-                console.log("TASK UPDATE VALUES =====> " + insertValues);
+                console.log("INTERNAL UPDATE VALUES =====> " + insertValues);
 
                 transaction.executeSql(sqlUpdate, insertValues, function (tx, res) {
 
-                    console.log("TASK ROW AFFECTED: " + res.rowsAffected);
+                    console.log("INTERNAL ROW AFFECTED: " + res.rowsAffected);
 
                     defer.resolve(res);
 
                 }, function (tx, error) {
 
-                    console.log("TASK UPDATE ERROR: " + error.message);
+                    console.log("INTERNAL UPDATE ERROR: " + error.message);
                 });
 
             }, function (error) {
 
-                console.log("TASK UPDATE TRANSACTION ERROR: " + error.message);
+                console.log("INTERNAL UPDATE TRANSACTION ERROR: " + error.message);
             });
         };
 
-        function insertTask(responseList, defer) {
+        function insertInternal(responseList, defer) {
 
             db.transaction(function (transaction) {
 
                 var insertValues = [];
 
-                var sqlInsert = "INSERT INTO Task VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                var sqlInsert = "INSERT INTO Internal VALUES (?, ?, ?, ?)";
 
-                insertValues.push(responseList.Task_Number);
-                insertValues.push(responseList.Job_Description);
-                insertValues.push(responseList.Duration);
-                insertValues.push(responseList.Task_Status);
-                insertValues.push(responseList.Customer_Name);
-                insertValues.push(responseList.Street_Address);
-                insertValues.push(responseList.City);
-                insertValues.push(responseList.State);
-                insertValues.push(responseList.Country);
-                insertValues.push(responseList.Zip_Code);
-                insertValues.push(responseList.Expense_Method);
-                insertValues.push(responseList.Labor_Method);
-                insertValues.push(responseList.Travel_Method);
-                insertValues.push(responseList.Material_Method);
-                insertValues.push(responseList.Service_Request);
-                insertValues.push(responseList.Assigned);
-                insertValues.push(responseList.Start_Date);
-                insertValues.push(responseList.End_Date);
-                insertValues.push("I");
-                insertValues.push(responseList.Email);
-                insertValues.push(responseList.Date);
-                insertValues.push(responseList.Type);
                 insertValues.push(responseList.Activity_Id);
-                insertValues.push(responseList.Work_Phone_Number);
-                insertValues.push(responseList.Mobile_Phone_Number);
+                insertValues.push(responseList.Start_time);
+                insertValues.push(responseList.End_time);
+                insertValues.push(responseList.Activity_type);
 
-                console.log("TASK INSERT VALUES =====> " + insertValues);
+                console.log("INTERNAL INSERT VALUES =====> " + insertValues);
 
                 transaction.executeSql(sqlInsert, insertValues, function (tx, res) {
 
-                    console.log("TASK INSERT ID: " + res.insertId);
+                    console.log("INTERNAL INSERT ID: " + res.insertId);
 
                     defer.resolve(res);
 
                 }, function (tx, error) {
 
-                    console.log("TASK INSERT ERROR: " + error.message);
+                    console.log("INTERNAL INSERT ERROR: " + error.message);
                 });
 
             }, function (error) {
 
-                console.log("TASK INSERT TRANSACTION ERROR: " + error.message);
+                console.log("INTERNAL INSERT TRANSACTION ERROR: " + error.message);
             });
         };
 
@@ -3180,6 +3143,40 @@
             }, function (error) {
 
                 console.log("GET TASK TRANSACTION ERROR: " + error.message);
+
+                callback(value);
+            });
+        };
+
+        function getInternalList(callback) {
+
+            var value = [];
+
+            return db.transaction(function (transaction) {
+
+                transaction.executeSql("SELECT * FROM Internal", [], function (tx, res) {
+
+                    var rowLength = res.rows.length;
+
+                    for (var i = 0; i < rowLength; i++) {
+
+                        value.push(res.rows.item(i));
+                    }
+
+                    console.log("GET INTERNAL DB ==========> " + JSON.stringify(value));
+
+                    callback(value);
+
+                }, function (tx, error) {
+
+                    console.log("GET INTERNAL SELECT ERROR: " + error.message);
+
+                    callback(value);
+                });
+
+            }, function (error) {
+
+                console.log("GET INTERNAL TRANSACTION ERROR: " + error.message);
 
                 callback(value);
             });
