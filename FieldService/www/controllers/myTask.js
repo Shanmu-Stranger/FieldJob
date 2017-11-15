@@ -18,6 +18,13 @@ app.controller('myTaskController', function ($scope, $compile, $timeout, uiCalen
             localeused = "en";
             myFieldJob = "My Field Job";
         }
+        else
+        {
+            console.log(lang);
+            mycal = "My Calendar";
+            localeused = "en";
+            myFieldJob = "My Field Job";
+        }
         $('#calendar').fullCalendar({
             customButtons: {
                 monthButton: {

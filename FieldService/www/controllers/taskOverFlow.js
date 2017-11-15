@@ -228,57 +228,17 @@ app.controller('taskOverFlowController', function ($scope, $http, $state, $rootS
 
             if (valueService.getNetworkStatus()) {
 
-                valueService.acceptTask(valueService.getTask().Task_Number);
+                valueService.acceptTask(valueService.getTask().Task_Number, function () {
 
-                $scope.selectedTask.Task_Status = "Accepted";
-                var data = {
-                    "resourceId": constantService.getUser().OFSCId,
-                    "date": moment(new Date()).utcOffset(constantService.getTimeZone()).format('YYYY-MM-DD')
-                };
-                ofscService.activate_resource(data, function (response) {
-
-                    if (response != undefined && response != null) {
-
-                        console.log("ACTIVATE RESOURCE " + JSON.stringify(response));
-
-                        var updateStatus =
-                            {
-                                "activityId": $scope.selectedTask.Activity_Id,
-                                "XA_TASK_STATUS": "8"
-                            }
-
-                        ofscService.updateStatus(updateStatus, function (response) {
-
-                            var activityDetails =
-                                {
-                                    "activityId": $scope.selectedTask.Activity_Id,
-                                   
-                                }
-
-                            ofscService.activityDetails($scope.selectedTask.Activity_Id, function (response) {
-                                if (response != undefined && response.items != undefined && response.items.length > 0) {
-                                    angular.forEach(response.items, function (item) {
-                                        var date = new Date(item.date);
-                                        if (new Date(item.date).setHours(0, 0, 0, 0) == new Date().setHours(0, 0, 0, 0))
-                                        {
-                                            var startActivityData =
-                                                {
-                                                    "activityId": response.items[0].activityId,
-
-                                                }
-                                            ofscService.start_activity(startActivityData, function (response) {
-
-                                            })
-                                        }
-                                    })
-                                   
-                                }
-
-                            })
-                        })
-                    }
+                    $scope.selectedTask.Task_Status = "Accepted";
+                    
+                    cloudService.OfscActions($scope.selectedTask.Activity_Id,true, function (response) {
+                        $rootScope.showAccept = false;
+                    })
                 });
-                $rootScope.showAccept = false;
+
+               
+               
 
             } else {
 
