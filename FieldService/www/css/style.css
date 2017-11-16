@@ -923,7 +923,7 @@ md-tabs-wrapper{
   background-color: #2d383f !important;
        padding: 15px 50px;
     height: 66px;
-    z-index: 1030;
+    z-index: 10 !important;
 }
 .md-tab{
   color: #5f6467 !important;
@@ -2140,6 +2140,13 @@ md-select.md-default-theme ._md-select-value, md-select ._md-select-value{
      margin-bottom: 30px;
   max-width: 16% !important;
 }
+
+
+.debrief-items-NC {
+    padding-right: 20px;
+    margin-bottom: 30px;
+}
+
 .debrief-textarea{
   background-color: #f0f0f0 !important;
   border:none !important;
@@ -2147,8 +2154,16 @@ md-select.md-default-theme ._md-select-value, md-select ._md-select-value{
     margin-bottom: 20px;
     padding: 10px !important;
 }
-.noBorder-radius{
-      padding-bottom: 0px !important;
+
+.debrief-textarea-NC {
+    background-color: #f0f0f0 !important;
+    border: none !important;
+    height: 70px !important;
+    margin-bottom: 20px;
+    padding: 10px !important;
+}
+.noBorder-radius {
+    padding-bottom: 0px !important;
     border-bottom-left-radius: 0px !important;
     border-bottom-right-radius: 0px !important;
 }
@@ -2284,4 +2299,7 @@ md-select.md-default-theme ._md-select-value, md-select ._md-select-value{
 }
 .copyItemSection{
  border: solid 1px #283d3f;
+}
+md-tabs:not(.md-dynamic-height)[md-border-bottom] md-tabs-content-wrapper{
+    top:66px !important;
 }
