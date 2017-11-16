@@ -169,18 +169,18 @@
                 values: [{"ID": 1, "Value": " Standard"},
                     {"ID": 2, "Value": " Overtime"},
                     {"ID": 3, "Value": " DoubleTime"}],
-                valuesDeputation: [{"ID": 1, "Value": "Deputation- Standard"},
-                    {"ID": 2, "Value": "Deputation- Overtime"},
-                    {"ID": 3, "Value": "Deputation- DoubleTime"}],
+                valuesDeputation: [{"ID": 139, "Value": "Deputation- Standard"},
+                    {"ID": 140, "Value": "Deputation- Overtime"},
+                    {"ID": 141, "Value": "Deputation- DoubleTime"}],
                 valuesTravel: [{"ID": 4, "Value": "Travel- Standard"},
                     {"ID": 5, "Value": "Travel- Overtime"},
                     {"ID": 6, "Value": "Travel- DoubleTime"}],
-                valuesNormal: [{"ID": 1, "Value": "Normal- Standard"},
-                    {"ID": 2, "Value": "Normal- Overtime"},
-                    {"ID": 3, "Value": "Normal- DoubleTime"}],
-                valuesNightShift: [{"ID": 1, "Value": "Night Shift- Standard"},
-                    {"ID": 2, "Value": "Night Shift- Overtime"},
-                    {"ID": 3, "Value": "Night Shift- DoubleTime"}]
+                valuesNormal: [{"ID": 142, "Value": "Normal- Standard"},
+                    {"ID": 143, "Value": "Normal- Overtime"},
+                    {"ID": 144, "Value": "Normal- DoubleTime"}],
+                valuesNightShift: [{"ID": 145, "Value": "Night Shift- Standard"},
+                    {"ID": 146, "Value": "Night Shift- Overtime"},
+                    {"ID": 147, "Value": "Night Shift- DoubleTime"}]
             },
             description: {
                 title: "Description"
@@ -1872,6 +1872,7 @@
                                                                     var taskObject = {
                                                                         Task_Status: "Completed",
                                                                         Task_Number: $scope.taskId,
+                                                                        Date: new Date(),
                                                                         Submit_Status: "I"
                                                                     };
 
@@ -1930,6 +1931,7 @@
                                                                 var taskObject = {
                                                                     Task_Status: "Completed",
                                                                     Task_Number: $scope.taskId,
+                                                                    Date: new Date(),
                                                                     Submit_Status: "I"
                                                                 };
 
@@ -1956,18 +1958,20 @@
                                 var taskObject = {
                                     Task_Status: "Completed",
                                     Task_Number: valueService.getTask().Task_Number,
+                                    Date: new Date(),
                                     Submit_Status: "P"
                                 };
 
-                                localService.updateTaskSubmitStatus(taskObject);
+                                localService.updateTaskSubmitStatus(taskObject, function (result) {
 
-                                localService.getTaskList(function (response) {
+                                    localService.getTaskList(function (response) {
 
-                                    constantService.setTaskList(response);
-                                    $rootScope.apicall = false;
+                                        constantService.setTaskList(response);
+
+                                        $rootScope.apicall = false;
+                                    });
                                 });
                             }
-
                         };
 
                         reader.readAsDataURL(file);
@@ -1978,7 +1982,6 @@
         }, function (reason) {
 
         });
-
     }
 
     $scope.SaveSign = function () {

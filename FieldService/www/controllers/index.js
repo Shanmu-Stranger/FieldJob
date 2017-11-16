@@ -1,4 +1,4 @@
-app.controller('indexController', function ($scope, $state, $timeout, $mdSidenav, $mdDialog, $translate, $rootScope, usSpinnerService, cloudService, localService, valueService, constantService, ofscService) {
+app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSidenav, $mdDialog, $translate, $rootScope, usSpinnerService, cloudService, localService, valueService, constantService, ofscService) {
 
     $scope.onlineStatus = false;
 
@@ -205,11 +205,6 @@ app.controller('indexController', function ($scope, $state, $timeout, $mdSidenav
 
         if (valueService.getNetworkStatus()) {
 
-            // var db = sqlitePlugin.deleteDatabase({
-            //     name: 'emerson.sqlite',
-            //     location: 'default'
-            // });
-
             constantService.onDeviceReady();
 
             $state.go('login');
@@ -241,19 +236,26 @@ app.controller('indexController', function ($scope, $state, $timeout, $mdSidenav
         });
     }
 
-    
-
     $scope.syncFunctionality = function () {
 
         console.log("NETWORK " + valueService.getNetworkStatus());
 
+        var promises = [];
+        
         if (valueService.getNetworkStatus()) {
-
+            $rootScope.apicall = true;
             localService.getAcceptTaskList(function (response) {
 
                 angular.forEach(response, function (item) {
 
-                    valueService.acceptTask(item.Task_Number);
+                    var deferred = $q.defer();
+
+                    valueService.acceptTask(item.Task_Number, function (result) {
+
+                        deferred.resolve("Update Success");
+                    });
+
+                    promises.push(deferred.promise);
                 });
             });
 
@@ -261,35 +263,57 @@ app.controller('indexController', function ($scope, $state, $timeout, $mdSidenav
 
                 angular.forEach(response, function (item) {
 
-                    valueService.submitDebrief(item, item.Task_Number);
+                    var deferred = $q.defer();
+
+                    valueService.submitDebrief(item, item.Task_Number, function (result) {
+
+                        deferred.resolve("Update Success");
+
+                        console.log("DEBRIEF SUCCESS");
+                    });
+
+                    promises.push(deferred.promise);
                 });
             });
 
-            //cloudService.getTaskList(function (response) {
+            $q.all(promises).then(
 
-            //    $state.go($state.current, {}, {reload: true});
+                function (response) {
 
-            //    cloudService.getInstallBaseList();
-            //    cloudService.getContactList();
-            //    cloudService.getNoteList();
+                    console.log("SYNC DATA");
 
-            //    cloudService.getOverTimeList();
-            //    cloudService.getShiftCodeList();
+                    cloudService.getTaskList(function (response) {
 
-            //    cloudService.getChargeType();
-            //    cloudService.getChargeMethod();
-            //    cloudService.getFieldJobName();
+                        $state.go($state.current, {}, {reload: true});
 
-            //    cloudService.getWorkType();
-            //    cloudService.getItem();
-            //    cloudService.getCurrency();
+                        cloudService.getInstallBaseList();
+                        cloudService.getContactList();
+                        cloudService.getNoteList();
 
-            //    cloudService.getExpenseType();
-            //    cloudService.getNoteType();
+                        cloudService.getOverTimeList();
+                        cloudService.getShiftCodeList();
 
-            //    getAttachments();
+                        cloudService.getChargeType();
+                        cloudService.getChargeMethod();
+                        cloudService.getFieldJobName();
 
-            //});
+                        cloudService.getWorkType();
+                        cloudService.getItem();
+                        cloudService.getCurrency();
+
+                        cloudService.getExpenseType();
+                        cloudService.getNoteType();
+
+                        getAttachments();
+
+                       // $rootScope.apicall = false;
+                    });
+                },
+
+                function (error) {
+
+                }
+            );
         }
     }
 
@@ -402,16 +426,6 @@ app.controller('indexController', function ($scope, $state, $timeout, $mdSidenav
                 }
 
                 cloudService.getInstallBaseList();
-
-                // cloudService.getInternalList(function (response) {
-                //
-                //     localService.getInternalList(function (response) {
-                //
-                //         console.log("INTERNAL DB " +response)
-                //
-                //     });
-                // });
-
                 cloudService.getContactList();
                 cloudService.getNoteList();
 
@@ -495,25 +509,3 @@ app.controller('indexController', function ($scope, $state, $timeout, $mdSidenav
     }
 
 });
-
-//$scope.changeLanguage();
-
-/*$(function (){
-   $("[data-toggle = 'popover']").popover({
-         'placement': 'bottom',
-         'animation': true,
-         'html': true,
-         'title' : getPopoverCustomTitle(),
-         'content': getPopoverCustomContent()
-     });
-});
-
-function getPopoverCustomTitle() {
-// return '<div class="popover ' + className + '" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>';
-return '<div class="popover-custom-title"><label>Alex</label><label>Field Engineer</label><label>Sign Out</label></div>';
-}
-
-function getPopoverCustomContent() {
-// return '<div class="popover ' + className + '" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>';
-return '<div class="popover-custom-content"><label>Select your Language</label><br><hr><img src="images/Layer 10.png" ng-click="changeLanguage()"><img src="images/Layer 12.png" ng-click="changeLanguage()"></div>';
-}*/

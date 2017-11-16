@@ -117,11 +117,13 @@
 
         service.onDeviceReady = onDeviceReady;
         service.getExpenseTypeBackendId = getExpenseTypeBackendId;
+
         return service;
-        function getExpenseTypeBackendId()
-        {
+
+        function getExpenseTypeBackendId() {
             return expenseBackEndId;
         }
+
         function setResourceId(id) {
             resourceId = id;
         };
@@ -249,10 +251,10 @@
         };
 
 
-
         function onDeviceReady() {
 
             localService.deleteTaskList();
+            localService.deleteInternalList();
             localService.deleteInstallBase();
             localService.deleteContact();
             localService.deleteNote();

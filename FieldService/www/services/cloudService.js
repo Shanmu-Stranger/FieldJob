@@ -151,7 +151,6 @@
 
                         var internalOFSCJSONObject = {};
 
-                       
                         internalOFSCJSONObject.Start_Date = item.Start_time;
                         internalOFSCJSONObject.End_Date = item.End_time;
                         internalOFSCJSONObject.Type = "INTERNAL";
@@ -171,7 +170,7 @@
 
                         taskArray.push(item);
                     });
-                    
+
                     localService.insertTaskList(taskArray, function (result) {
 
                         console.log("FINAL =======> " + result);
@@ -223,9 +222,7 @@
 
                     localService.getInternalList(function (res) {
                         callback(res);
-                    })
-
-
+                    });
                 });
 
             }).error(function (error) {

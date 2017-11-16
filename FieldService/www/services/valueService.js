@@ -713,7 +713,7 @@
             });
         };
 
-        function acceptTask(taskId,callback) {
+        function acceptTask(taskId, callback) {
 
             var formData = {
                 "taskid": taskId,
@@ -732,13 +732,14 @@
                     Date: new Date()
                 };
 
-                localService.updateTaskSubmitStatus(taskObject);
-                if (callback != null)
-                callback();
+                localService.updateTaskSubmitStatus(taskObject, function (result) {
+
+                    callback(result);
+                });
             });
         };
 
-        function submitDebrief(taskObject, taskId) {
+        function submitDebrief(taskObject, taskId, callback) {
 
             var timeArray = [];
             var expenseArray = [];
@@ -752,209 +753,215 @@
             var noteJSONData = [];
             var attachmentJSONData = [];
 
-            acceptTask(taskId);
+            var deferred = $q.defer();
 
-            localService.getTimeList(taskId, function (response) {
+            var promise = deferred.promise;
 
-                timeArray = response;
+            acceptTask(taskId, function (result) {
 
-                if (timeArray.length > 0) {
+                deferred.resolve("Accept Success")
+            });
 
-                    for (var i = 0; i < timeArray.length; i++) {
+            promise.then(function (value) {
 
-                        var timeData = {
-                            "task_id": timeArray[i].Task_Number,
-                            "shift_code": timeArray[i].Shift_Code_Id,
-                            "overtime_shiftcode": timeArray[i].Time_Code_Id,
-                            "charge_type": timeArray[i].Charge_Type_Id,
-                            "duration": timeArray[i].Duration,
-                            "comments": timeArray[i].Comments,
-                            "labor_item": timeArray[i].Item_Id,
-                            "labor_description": timeArray[i].Description,
-                            "work_type": timeArray[i].Work_Type_Id,
-                            "start_date": moment.utc(new Date(timeArray[i].Date)).format("YYYY-MM-DDTHH:mm:ss.000Z"),
-                            "end_date": moment.utc(new Date(timeArray[i].Date)).format("YYYY-MM-DDTHH:mm:ss.000Z"),
-                            "charge_method": timeArray[i].Charge_Method_Id,
-                            "JobName": timeArray[i].Field_Job_Name_Id
-                        }
+                localService.getTimeList(taskId, function (response) {
 
-                        timeJSONData.push(timeData);
-                    }
+                    timeArray = response;
 
-                    localService.getExpenseList(taskId, function (response) {
+                    if (timeArray.length > 0) {
 
-                        expenseArray = response;
+                        for (var i = 0; i < timeArray.length; i++) {
 
-                        if (expenseArray.length > 0) {
-
-                            for (var i = 0; i < expenseArray.length; i++) {
-
-                                var expenseData = {
-                                    "taskId": expenseArray[i].Task_Number,
-                                    "comments": expenseArray[i].Justification,
-                                    "currency": expenseArray[i].Currency_Id.toString(),
-                                    "chargeMethod": expenseArray[i].Charge_Method_Id.toString(),
-                                    "ammount": expenseArray[i].Amount,
-                                    "date": moment.utc(new Date(expenseArray[i].Date)).format("YYYY-MM-DD"),
-                                    "expenseItem": expenseArray[i].Expense_Type_Id.toString()
-                                    // "chargeType": "2",
-                                    // "billable": "true"
-                                }
-
-                                expenseJSONData.push(expenseData);
+                            var timeData = {
+                                "task_id": timeArray[i].Task_Number,
+                                "shift_code": timeArray[i].Shift_Code_Id,
+                                "overtime_shiftcode": timeArray[i].Time_Code_Id,
+                                "charge_type": timeArray[i].Charge_Type_Id,
+                                "duration": timeArray[i].Duration,
+                                "comments": timeArray[i].Comments,
+                                "labor_item": timeArray[i].Item_Id,
+                                "labor_description": timeArray[i].Description,
+                                "work_type": timeArray[i].Work_Type_Id,
+                                "start_date": moment.utc(new Date(timeArray[i].Date)).format("YYYY-MM-DDTHH:mm:ss.000Z"),
+                                "end_date": moment.utc(new Date(timeArray[i].Date)).format("YYYY-MM-DDTHH:mm:ss.000Z"),
+                                "charge_method": timeArray[i].Charge_Method_Id,
+                                "JobName": timeArray[i].Field_Job_Name_Id
                             }
 
-                            localService.getMaterialList(taskId, function (response) {
+                            timeJSONData.push(timeData);
+                        }
 
-                                materialArray = response;
+                        localService.getExpenseList(taskId, function (response) {
 
-                                if (materialArray.length > 0) {
+                            expenseArray = response;
 
-                                    angular.forEach(materialArray, function (item) {
+                            if (expenseArray.length > 0) {
 
-                                        var serialIn, serialOut, serialNo;
+                                for (var i = 0; i < expenseArray.length; i++) {
 
-                                        if (item.Serial_In != undefined) {
+                                    var expenseData = {
+                                        "taskId": expenseArray[i].Task_Number,
+                                        "comments": expenseArray[i].Justification,
+                                        "currency": expenseArray[i].Currency_Id.toString(),
+                                        "chargeMethod": expenseArray[i].Charge_Method_Id.toString(),
+                                        "ammount": expenseArray[i].Amount,
+                                        "date": moment.utc(new Date(expenseArray[i].Date)).format("YYYY-MM-DD"),
+                                        "expenseItem": expenseArray[i].Expense_Type_Id.toString()
+                                    }
 
-                                            serialIn = item.Serial_In.split(",");
-                                        }
+                                    expenseJSONData.push(expenseData);
+                                }
 
-                                        if (item.Serial_Out != undefined) {
+                                localService.getMaterialList(taskId, function (response) {
 
-                                            serialOut = item.Serial_Out.split(",");
-                                        }
+                                    materialArray = response;
 
-                                        if (item.Serial_Number != undefined) {
+                                    if (materialArray.length > 0) {
 
-                                            serialNo = item.Serial_Number.split(",")
-                                        }
+                                        angular.forEach(materialArray, function (item) {
 
-                                        item.Serial_Type = [];
+                                            var serialIn, serialOut, serialNo;
 
-                                        if (serialNo != undefined && serialNo.length > 0) {
+                                            if (item.Serial_In != undefined) {
 
-                                            angular.forEach(serialNo, function (serail) {
-
-                                                var serialTypeObject = {};
-
-                                                serialTypeObject.in = "";
-                                                serialTypeObject.out = "";
-                                                serialTypeObject.number = serail;
-
-                                                if (serialTypeObject.number != "")
-                                                    item.Serial_Type.push(serialTypeObject);
-                                            });
-                                        }
-
-                                        if (serialIn != undefined && serialIn.length > 0 && serialOut != undefined && serialOut.length > 0) {
-
-                                            var index = 0;
-
-                                            angular.forEach(serialIn, function (serial) {
-
-                                                var serialTypeObject = {};
-
-                                                serialTypeObject.in = serial;
-                                                serialTypeObject.out = serialOut[index];
-                                                serialTypeObject.number = "";
-
-                                                if (serialTypeObject.in != "")
-                                                    item.Serial_Type.push(serialTypeObject);
-
-                                                index++;
-                                            });
-                                        }
-                                        angular.forEach(item.Serial_Type, function (key) {
-
-                                            var materialData = {
-                                                "charge_method": item.Charge_Type_Id.toString(),
-                                                "task_id": item.Task_Number,
-                                                "item_description": item.Description,
-                                                "product_quantity": "1",
-                                                "comments": "",
-                                                "item": item.ItemName,
-                                                "serialin": key.in,
-                                                "serialout": key.out,
-                                                "serial_number": key.number
-                                                // "service_activity": "serveact",
-                                                // "charge_type": "2"
+                                                serialIn = item.Serial_In.split(",");
                                             }
 
-                                            materialJSONData.push(materialData);
+                                            if (item.Serial_Out != undefined) {
+
+                                                serialOut = item.Serial_Out.split(",");
+                                            }
+
+                                            if (item.Serial_Number != undefined) {
+
+                                                serialNo = item.Serial_Number.split(",")
+                                            }
+
+                                            item.Serial_Type = [];
+
+                                            if (serialNo != undefined && serialNo.length > 0) {
+
+                                                angular.forEach(serialNo, function (serail) {
+
+                                                    var serialTypeObject = {};
+
+                                                    serialTypeObject.in = "";
+                                                    serialTypeObject.out = "";
+                                                    serialTypeObject.number = serail;
+
+                                                    if (serialTypeObject.number != "")
+                                                        item.Serial_Type.push(serialTypeObject);
+                                                });
+                                            }
+
+                                            if (serialIn != undefined && serialIn.length > 0 && serialOut != undefined && serialOut.length > 0) {
+
+                                                var index = 0;
+
+                                                angular.forEach(serialIn, function (serial) {
+
+                                                    var serialTypeObject = {};
+
+                                                    serialTypeObject.in = serial;
+                                                    serialTypeObject.out = serialOut[index];
+                                                    serialTypeObject.number = "";
+
+                                                    if (serialTypeObject.in != "")
+                                                        item.Serial_Type.push(serialTypeObject);
+
+                                                    index++;
+                                                });
+                                            }
+                                            angular.forEach(item.Serial_Type, function (key) {
+
+                                                var materialData = {
+                                                    "charge_method": item.Charge_Type_Id.toString(),
+                                                    "task_id": item.Task_Number,
+                                                    "item_description": item.Description,
+                                                    "product_quantity": "1",
+                                                    "comments": "",
+                                                    "item": item.ItemName,
+                                                    "serialin": key.in,
+                                                    "serialout": key.out,
+                                                    "serial_number": key.number
+                                                }
+
+                                                materialJSONData.push(materialData);
+                                            });
                                         });
-                                    });
 
-                                    localService.getNotesList(taskId, function (response) {
+                                        localService.getNotesList(taskId, function (response) {
 
-                                        notesArray = response;
+                                            notesArray = response;
 
-                                        if (notesArray.length > 0) {
+                                            if (notesArray.length > 0) {
 
-                                            for (var i = 0; i < notesArray.length; i++) {
+                                                for (var i = 0; i < notesArray.length; i++) {
 
-                                                var noteData = {
-                                                    "Notes_type": notesArray[i].Note_Type_Id,
-                                                    "notes_description": notesArray[i].Notes,
-                                                    "task_id": notesArray[i].Task_Number,
-                                                    "mobilecreatedDate": moment.utc(new Date(notesArray[i].Date)).format("YYYY-MM-DDTHH:mm:ss.000Z")
-                                                };
+                                                    var noteData = {
+                                                        "Notes_type": notesArray[i].Note_Type_Id,
+                                                        "notes_description": notesArray[i].Notes,
+                                                        "task_id": notesArray[i].Task_Number,
+                                                        "mobilecreatedDate": moment.utc(new Date(notesArray[i].Date)).format("YYYY-MM-DDTHH:mm:ss.000Z")
+                                                    };
 
-                                                noteJSONData.push(noteData);
-                                            }
+                                                    noteJSONData.push(noteData);
+                                                }
 
-                                            localService.getAttachmentList(taskId, "D", function (response) {
+                                                localService.getAttachmentList(taskId, "D", function (response) {
 
-                                                attachmentArray = response;
-
-                                                if (attachmentArray.length > 0) {
+                                                    attachmentArray = response;
 
                                                     var promises = [];
 
-                                                    angular.forEach(attachmentArray, function (attachment) {
+                                                    if (attachmentArray.length > 0) {
 
-                                                        var deferred = $q.defer();
+                                                        angular.forEach(attachmentArray, function (attachment) {
 
-                                                        console.log(attachment);
+                                                            var deferred = $q.defer();
 
-                                                        var attachmentObject = {};
+                                                            var attachmentObject = {};
 
-                                                        attachmentObject.taskId = attachment.Task_Number;
-                                                        attachmentObject.contentType = attachment.File_Type;
-                                                        attachmentObject.FileName = attachment.File_Name.split(".")[0];
-                                                        attachmentObject.Description = attachment.File_Name.split(".")[0];
-                                                        attachmentObject.Name = attachment.File_Name.split(".")[0];
+                                                            attachmentObject.taskId = attachment.Task_Number;
+                                                            attachmentObject.contentType = attachment.File_Type;
+                                                            attachmentObject.FileName = attachment.File_Name.split(".")[0];
+                                                            attachmentObject.Description = attachment.File_Name.split(".")[0];
+                                                            attachmentObject.Name = attachment.File_Name.split(".")[0];
 
-                                                        window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fs) {
+                                                            window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fs) {
 
-                                                            fs.root.getFile(attachment.File_Name, {
-                                                                create: true,
-                                                                exclusive: false
-                                                            }, function (fileEntry) {
+                                                                fs.root.getFile(attachment.File_Name, {
+                                                                    create: true,
+                                                                    exclusive: false
+                                                                }, function (fileEntry) {
 
-                                                                fileEntry.file(function (file) {
+                                                                    fileEntry.file(function (file) {
 
-                                                                    var reader = new FileReader();
+                                                                        var reader = new FileReader();
 
-                                                                    reader.onloadend = function () {
+                                                                        reader.onloadend = function () {
 
-                                                                        attachmentObject.Data = this.result.split(",")[1];
+                                                                            attachmentObject.Data = this.result.split(",")[1];
 
-                                                                        attachmentJSONData.push(attachmentObject);
+                                                                            attachmentJSONData.push(attachmentObject);
 
-                                                                        deferred.resolve(attachmentObject);
-                                                                    };
+                                                                            deferred.resolve(attachmentObject);
+                                                                        };
 
-                                                                    reader.readAsDataURL(file);
+                                                                        reader.readAsDataURL(file);
+                                                                    });
                                                                 });
                                                             });
+
+                                                            promises.push(deferred.promise);
+
                                                         });
+                                                    }
 
-                                                        promises.push(deferred.promise);
-
-                                                    });
-                                                    //report
                                                     var deferred = $q.defer();
-                                                    var reportObj;
+
+                                                    var reportObject;
+
                                                     window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fs) {
 
                                                         fs.root.getFile("Report_" + taskId + ".pdf", {
@@ -968,35 +975,36 @@
 
                                                                 reader.onloadend = function () {
 
-                                                                     reportObj = {
-                                                                         "Data": this.result.split(",")[1],
-                                                                         "FileName": "Report_" + taskId + ".pdf",
-                                                                         "Description": "Report_" + taskId + ".pdf",
-                                                                         "Name": "Report_" + taskId + ".pdf",
-                                                                         "taskId": taskId,
+                                                                    reportObject = {
+                                                                        "Data": this.result.split(",")[1],
+                                                                        "FileName": "Report_" + taskId + ".pdf",
+                                                                        "Description": "Report_" + taskId + ".pdf",
+                                                                        "Name": "Report_" + taskId + ".pdf",
+                                                                        "taskId": taskId,
                                                                         "contentType": "application/pdf"
                                                                     }
 
-                                                                    //attachmentJSONData.push(attachmentObject);
-
-                                                                     deferred.resolve(reportObj);
+                                                                    deferred.resolve(reportObject);
                                                                 };
 
                                                                 reader.readAsDataURL(file);
                                                             });
                                                         });
                                                     });
+
                                                     promises.push(deferred.promise);
-                                                    $q.all(promises).then(
-                                                        function (response) {
-                                                            console.log(attachmentJSONData);
-                                                            var reportattachmentUploadJSON
-                                                            if (reportObj != undefined)
-                                                            {
-                                                                reportattachmentUploadJSON  = {
-                                                                    "attachment": reportObj
+
+                                                    $q.all(promises).then(function (response) {
+
+                                                            var reportAttachmentUploadJSON;
+
+                                                            if (reportObject != undefined) {
+
+                                                                reportAttachmentUploadJSON = {
+                                                                    "attachment": reportObject
                                                                 };
                                                             }
+
                                                             localService.getEngineer(taskId, function (response) {
 
                                                                 if (response != undefined) {
@@ -1052,16 +1060,19 @@
                                                                                 cloudService.uploadMaterial(materialUploadJSON, function (response) {
 
                                                                                     console.log("Uploaded Material " + JSON.stringify(response));
-                                                                                    if (attachmentUploadJSON.attachment.length > 0)
-                                                                                    {
-                                                                                        cloudService.createAttachment(attachmentUploadJSON, function (response) {
-                                                                                            if (reportattachmentUploadJSON != undefined && reportattachmentUploadJSON.attachment != undefined)
-                                                                                            {
-                                                                                                cloudService.createAttachment(reportattachmentUploadJSON, function (response) {
 
-                                                                                                })
-                                                                                            }
+                                                                                    if (attachmentUploadJSON.attachment != undefined && attachmentUploadJSON.attachment.length > 0) {
+
+                                                                                        cloudService.createAttachment(attachmentUploadJSON, function (response) {
+
                                                                                             console.log("Uploaded Attachment " + JSON.stringify(response));
+
+                                                                                            if (reportAttachmentUploadJSON != undefined && reportAttachmentUploadJSON.attachment != undefined) {
+
+                                                                                                cloudService.createAttachment(reportAttachmentUploadJSON, function (response) {
+
+                                                                                                });
+                                                                                            }
 
                                                                                             cloudService.updateAcceptTask(formData, function (response) {
 
@@ -1073,21 +1084,23 @@
                                                                                                     Submit_Status: "I"
                                                                                                 };
 
-                                                                                                localService.updateTaskSubmitStatus(taskObject);
+                                                                                                localService.updateTaskSubmitStatus(taskObject, function (result) {
 
-                                                                                                cloudService.getTaskList(function (response) {
-
+                                                                                                    callback("Success Submit");
                                                                                                 });
+
                                                                                             });
                                                                                         });
-                                                                                    }
-                                                                                    else
-                                                                                    {
-                                                                                        if (reportattachmentUploadJSON != undefined && reportattachmentUploadJSON.attachment != undefined) {
-                                                                                            cloudService.createAttachment(reportattachmentUploadJSON, function (response) {
 
-                                                                                            })
+                                                                                    } else {
+
+                                                                                        if (reportAttachmentUploadJSON != undefined && reportAttachmentUploadJSON.attachment != undefined) {
+
+                                                                                            cloudService.createAttachment(reportAttachmentUploadJSON, function (response) {
+
+                                                                                            });
                                                                                         }
+
                                                                                         cloudService.updateAcceptTask(formData, function (response) {
 
                                                                                             console.log("Task Completed " + JSON.stringify(response));
@@ -1098,14 +1111,12 @@
                                                                                                 Submit_Status: "I"
                                                                                             };
 
-                                                                                            localService.updateTaskSubmitStatus(taskObject);
+                                                                                            localService.updateTaskSubmitStatus(taskObject, function (result) {
 
-                                                                                            cloudService.getTaskList(function (response) {
-
+                                                                                                callback("Success Submit");
                                                                                             });
                                                                                         });
                                                                                     }
-                                                                                   
                                                                                 });
                                                                             });
                                                                         });
@@ -1113,56 +1124,20 @@
                                                                 }
                                                             });
                                                         },
-
                                                         function (error) {
-                                                        }
-                                                    );
 
-                                                    // angular.forEach(attachmentArray, function(attachment) {
-                                                    //
-                                                    //   var attachmentObject = {};
-                                                    //
-                                                    //   attachmentObject.taskId = attachment.Task_Number;
-                                                    //   attachmentObject.contentType = attachment.File_Type;
-                                                    //   attachmentObject.FileName = attachment.File_Name.split(".")[0];
-                                                    //   attachmentObject.Description = attachment.File_Name.split(".")[0];
-                                                    //   attachmentObject.Name = attachment.File_Name.split(".")[0];
-                                                    //
-                                                    //   window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fs) {
-                                                    //
-                                                    //     fs.root.getFile(attachment.File_Name, {
-                                                    //       create: true,
-                                                    //       exclusive: false
-                                                    //     }, function(fileEntry) {
-                                                    //
-                                                    //       fileEntry.file(function(file) {
-                                                    //
-                                                    //         var reader = new FileReader();
-                                                    //
-                                                    //         reader.onloadend = function() {
-                                                    //
-                                                    //           attachmentObject.Data = this.result.split(",")[1];
-                                                    //
-                                                    //           attachmentJSONData.push(attachmentObject);
-                                                    //         };
-                                                    //
-                                                    //         reader.readAsDataURL(file);
-                                                    //       });
-                                                    //     });
-                                                    //   });
-                                                    // });
-
-                                                   
-                                                }
-                                            });
-                                        }
-                                    });
-                                }
-                            });
-                        }
-                    });
-                }
+                                                        });
+                                                });
+                                            }
+                                        });
+                                    }
+                                });
+                            }
+                        });
+                    }
+                });
             });
+
         };
 
         function checkIfFutureDayTask(selTask) {

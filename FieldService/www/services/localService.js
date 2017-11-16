@@ -56,6 +56,7 @@
         service.insertEngineerList = insertEngineerList;
 
         service.deleteTaskList = deleteTaskList;
+        service.deleteInternalList = deleteInternalList;
         service.deleteInstallBase = deleteInstallBase;
         service.deleteContact = deleteContact;
         service.deleteNote = deleteNote;
@@ -412,7 +413,7 @@
             });
         };
 
-        function updateTaskSubmitStatus(responseList) {
+        function updateTaskSubmitStatus(responseList, callback) {
 
             db.transaction(function (transaction) {
 
@@ -430,6 +431,8 @@
                 transaction.executeSql(sqlUpdate, insertValues, function (tx, res) {
 
                     console.log("TASK ROW AFFECTED: " + res.rowsAffected);
+
+                    callback(res);
 
                 }, function (tx, error) {
 
@@ -2628,6 +2631,20 @@
             }, function (error) {
 
                 console.log("TASK DELETE TRANSACTION ERROR: " + error.message);
+            });
+        };
+
+        function deleteInternalList() {
+
+            db.transaction(function (transaction) {
+
+                var sqlDelete = "DELETE FROM Internal";
+
+                transaction.executeSql(sqlDelete);
+
+            }, function (error) {
+
+                console.log("INTERNAL DELETE TRANSACTION ERROR: " + error.message);
             });
         };
 
