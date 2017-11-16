@@ -2,7 +2,7 @@
     <div class="margintop30" ng-repeat="item in expenseArray track by $index" id="expense{{$index}}">
         
             <div class="card-childContainer  noBorder-radius" ng-class="{'newItemBorder': $index == addExpenseObj && $index != 0,'copyItem': $index == copyExpenseObj && $index != 0}">
-                <form class="form-horizontal" action="/action_page.php">
+                <form class="form-horizontal input-items" action="/action_page.php">
                     <div class="row">
                         <div class="layout-row">
 
@@ -16,7 +16,7 @@
                                                datepicker-options="dateOptions" ng-required="true" close-text="Close"
                                                alt-input-formats="altInputFormats" ng-change="setDuration($index)" />
                                         <span class="input-group-btn">
-                                            <button type="button" class="btn btn-default" style="border-color:#ccc !important"
+                                            <button type="button" class="btn btn-default custom-debrief-item" style="border-color:#ccc !important"
                                                     ng-click="openCalendar(item,'Expenses')">
                                                 <i class="glyphicon glyphicon-calendar"></i>
                                             </button>
@@ -64,7 +64,7 @@
                                        translate="{{item.expenseDefault.chargeMethod.title}}"></label>
                                 <div class="col-sm-12">
                                     <select class="form-control select-debrief" ng-model="item.Charge_Method"
-                                            ng-options="x as x.Value for x in item.expenseDefault.chargeMethod.values  track by x.ID" ng-change="setChargeMethodForExpense(item)">
+                                            ng-options="x as x.Value | translate for x in item.expenseDefault.chargeMethod.values  track by x.ID" ng-change="setChargeMethodForExpense(item)">
                                         <option value="" disabled selected>Select Charge Method</option>
                                     </select>
                                 </div>
@@ -81,7 +81,7 @@
 </form>
 
             </div>
-            <section style="border-radius:0 0 10px 10px" layout="row" layout-sm="column" layout-align="center center"
+            <section  layout="row" layout-sm="column" layout-align="center center"
                          layout-wrap class="time-btns" ng-class="{'newItemBorderSection': $index == addExpenseObj && $index != 0,'copyItemSection': $index == copyExpenseObj && $index != 0}">
                 <md-button class="time-font  time-add" ng-click="addObject('Expenses')" translate="Add"></md-button>
                 <md-button class="time-font  time-delete" ng-click="deleteObject($index,item,'Expenses')" translate="delete">

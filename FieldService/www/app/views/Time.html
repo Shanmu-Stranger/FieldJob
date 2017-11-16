@@ -3,13 +3,13 @@
    
             <div class="margintop30" ng-repeat="item in timeArray track by $index" id="time{{$index}}" >
             <div class="card-childContainer  noBorder-radius" ng-class="{'newItemBorder': $index == addTimeObj && $index != 0,'copyItem': $index == copyTimeObj && $index != 0}">
-                <form class="form-horizontal" action="/action_page.php" ng-disabled="$root.completedTask">
+                <form class="form-horizontal input-items" action="/action_page.php" ng-disabled="$root.completedTask">
                 <div layout="row" layout-wrap>
                     <div ng-if="userType=='C'" flex="30" class="debrief-items" style="max-width: 20%;">
                          <label  flex="100" class="label-my" 
                                translate="Clarity Task Name"></label>
                         <div flex="100">
-                            <select style="width:100% !important" class="form-control select-debrief select-debrief-time-first-select"
+                            <select style="width:100% !important" class="form-control  select-debrief-time-first-select"
                                     ng-model="item.Field_Job_Name"
                                     ng-options="x as x.JobName for x in item.timeDefault.fieldJobName.values track by x.TaskCode" ng-change="setFieldName(item)">
                                 <option value="" disabled selected>Select Field Job Name</option>
@@ -20,7 +20,7 @@
                     <div ng-if="userType=='C'" flex="20" class="debrief-items">
                         <label flex="100" class="label-my" translate="{{item.timeDefault.chargeType.title}}"></label>
                         <div flex="100">
-                            <select class="form-control select-debrief" ng-model="item.Charge_Type"
+                            <select class="form-control " ng-model="item.Charge_Type"
                                     ng-options="x as x.Value | translate for x in item.timeDefault.chargeType.values track by x.ID" ng-change="setChargeType(item)">
                                 <option value="" disabled selected>Select Charge Type</option>
                             </select>
@@ -30,7 +30,7 @@
                     <div flex="20" class="debrief-items">
                         <label flex="100" class=" label-my" translate="{{item.timeDefault.workType.title}}"></label>
                         <div flex="100">
-                            <select class="form-control select-debrief " ng-model="item.Work_Type"
+                            <select class="form-control" ng-model="item.Work_Type"
                                     ng-options="x as x.Value | translate for x in item.timeDefault.workType.values track by x.ID"
                                     ng-change="setWorkType(item.Work_Type, item)">
                                 <option value="" disabled selected>Select Work Type</option>
@@ -41,7 +41,7 @@
                     <div ng-if="userType=='C'" flex="20" class="debrief-items">
                         <label flex="100" class="  label-my" translate="{{item.timeDefault.chargeMethod.title}}"></label>
                         <div flex="100">
-                            <select class="form-control select-debrief" ng-model="item.Charge_Method"
+                            <select class="form-control" ng-model="item.Charge_Method"
                                     ng-options="x as x.Value | translate for x in item.timeDefault.chargeMethod.values track by x.ID" ng-change="setChargeMethod(item)">
                                 <option value="" disabled selected>Select Charge Method</option>
                             </select>
@@ -51,7 +51,7 @@
                     <div flex="20" class="debrief-items">
                         <label flex="100" class="  label-my" translate="{{item.timeDefault.item.title}}"></label>
                         <div cflex="100">
-                            <select class="form-control select-debrief" ng-model="item.Item"
+                            <select class="form-control" ng-model="item.Item"
                                     ng-options="x as x.Value | translate for x in item.timeDefault.item.values track by x.ID" ng-change="setItem(item)">
                                 <option value="" disabled selected>Select Item</option>
                             </select>
@@ -68,7 +68,7 @@
                     <div ng-if="userType=='C'" flex="20" class="debrief-items">
                         <label flex="100" class="  label-my" translate="{{item.timeDefault.timeCode.title}}"></label>
                         <div flex="100">
-                            <select class="form-control select-debrief" ng-model="item.Time_Code"
+                            <select class="form-control" ng-model="item.Time_Code"
                                     ng-options="x as x.Overtimeshiftcode | translate for x in item.timeDefault.timeCode.values track by x.OverTime_Shift_Code_ID" ng-change="setTimeCode(item)">
                                 <option value="" disabled selected>Select Time Code</option>
                             </select>
@@ -78,7 +78,7 @@
                     <div ng-if="userType=='C'" flex="20" class="debrief-items">
                         <label flex="100" class="  label-my" translate="{{item.timeDefault.shiftCode.title}}"></label>
                         <div flex="100">
-                            <select class="form-control select-debrief" ng-change="setShiftCode(item)"
+                            <select class="form-control" ng-change="setShiftCode(item)"
                                     ng-options="x as x.ShiftCodeName | translate for x in item.timeDefault.shiftCode.values track by x.Shift_Code_ID"
                                     ng-model="item.Shift_Code">
                                 <option value="" disabled selected>Select Shift Code</option>
@@ -97,7 +97,7 @@
                                        alt-input-formats="altInputFormats" ng-change="setDuration($index)" />
 
                                 <span class="input-group-btn">
-                                <button type="button" class="btn btn-default" style="border-color:#ccc !important"
+                                <button type="button" class="btn btn-default custom-debrief-item" style="border-color:#ccc !important"
                                         ng-click="openCalendar(item,'Time')"><i
                                         class="glyphicon glyphicon-calendar"></i></button>
                               </span>
@@ -131,7 +131,7 @@
            
 
        </div>
-                <section style="border-radius:0 0 10px 10px" layout="row" layout-sm="column" layout-align="center center"
+                <section  layout="row" layout-sm="column" layout-align="center center"
                      layout-wrap class="time-btns" ng-class="{'newItemBorderSection': $index == addTimeObj && $index != 0,'copyItemSection': $index == copyTimeObj && $index != 0}">
                 <md-button class="time-font time-add" ng-click="addObject('Time')" ng-disabled="$root.completedTask" translate="Add"></md-button>
                 <md-button class="time-font time-delete" ng-click="deleteObject($index,item,'Time')" ng-disabled="$root.completedTask" translate="delete"></md-button>
