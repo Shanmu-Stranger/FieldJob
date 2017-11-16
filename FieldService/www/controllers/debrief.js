@@ -546,14 +546,17 @@
                     Task_Number: $scope.taskId
                 });
 
-                 $scope.addTimeObj = $scope.timeArray.length - 1;
-                 var newHash = $scope.addTimeObj;
-                  if ($location.hash() !== newHash) {
-                    $location.hash('time' +$scope.addTimeObj);
-                  } else {
-                    $anchorScroll();
-                  }
-                  setTimeout(function(){ $location.hash(null); }, 100);
+                if ($scope.timeArray.length > 1){
+                    $scope.addTimeObj = $scope.timeArray.length - 1;
+                    var newHash = $scope.addTimeObj;
+                    if ($location.hash() !== newHash) {
+                        $location.hash('time' + $scope.addTimeObj);
+                    } else {
+                        $anchorScroll();
+                    }
+                    setTimeout(function () { $location.hash(null); }, 100);
+                }
+                 
                   
                 break;
 
@@ -573,14 +576,18 @@
                     Justification: "",
                     Task_Number: $scope.taskId
                 });
-                $scope.addExpenseObj = $scope.expenseArray.length - 1;
-                var newHash = $scope.addExpenseObj;
-                if ($location.hash() !== newHash) {
-                    $location.hash('expense'+ $scope.addExpenseObj);
-                } else {
-                    $anchorScroll();
+
+                if ($scope.expenseArray.length > 1){
+                    $scope.addExpenseObj = $scope.expenseArray.length - 1;
+                    var newHash = $scope.addExpenseObj;
+                    if ($location.hash() !== newHash) {
+                        $location.hash('expense' + $scope.addExpenseObj);
+                    } else {
+                        $anchorScroll();
+                    }
+                    setTimeout(function () { $location.hash(null); }, 100);
                 }
-                setTimeout(function(){ $location.hash(null); }, 100);
+                
                 break;
 
             case "Notes":
@@ -596,14 +603,17 @@
                     Task_Number: $scope.taskId
                 });
 
-                $scope.addNoteObj = $scope.notesArray.length - 1;
-                var newHash = $scope.addNoteObj;
-                if ($location.hash() !== newHash) {
-                    $location.hash('note'+$scope.addNoteObj);
-                } else {
-                    $anchorScroll();
+                if ($scope.notesArray.length > 1){
+                    $scope.addNoteObj = $scope.notesArray.length - 1;
+                    var newHash = $scope.addNoteObj;
+                    if ($location.hash() !== newHash) {
+                        $location.hash('note' + $scope.addNoteObj);
+                    } else {
+                        $anchorScroll();
+                    }
+                    setTimeout(function () { $location.hash(null); }, 100);
                 }
-                setTimeout(function(){ $location.hash(null); }, 100);
+                
 
                 break;
             case "Material":
@@ -619,14 +629,17 @@
                     ItemName: ""
                 });
 
-                $scope.addMaterialObj = $scope.materialArray[$scope.materialArray.length - 1].Material_Id;
-                var newHash = $scope.addMaterialObj;
-                if ($location.hash() !== newHash) {
-                    $location.hash($scope.addMaterialObj);
-                } else {
-                    $anchorScroll();
+                if ($scope.materialArray.length > 1){
+                    $scope.addMaterialObj = $scope.materialArray[$scope.materialArray.length - 1].Material_Id;
+                    var newHash = $scope.addMaterialObj;
+                    if ($location.hash() !== newHash) {
+                        $location.hash($scope.addMaterialObj);
+                    } else {
+                        $anchorScroll();
+                    }
+                    setTimeout(function () { $location.hash(null); }, 100);
                 }
-                setTimeout(function(){ $location.hash(null); }, 100);
+                
 
                 break;
             default:
@@ -734,14 +747,17 @@
                 $scope.timeArray.push(itemToBeCopied);
                 
                 /*Scroll to newly copied element*/
-                $scope.copyTimeObj = $scope.timeArray.length - 1;
-                var newHash = $scope.copyTimeObj;
-                  if ($location.hash() !== newHash) {
-                    $location.hash('time'+$scope.copyTimeObj);
-                  } else {
-                    $anchorScroll();
-                  }
-                setTimeout(function(){ $location.hash(null); }, 100);
+                if ($scope.timeArray.length > 1){
+                    $scope.copyTimeObj = $scope.timeArray.length - 1;
+                    var newHash = $scope.copyTimeObj;
+                    if ($location.hash() !== newHash) {
+                        $location.hash('time' + $scope.copyTimeObj);
+                    } else {
+                        $anchorScroll();
+                    }
+                    setTimeout(function () { $location.hash(null); }, 100);
+                }
+                
                 break;
 
             case "Expenses":
@@ -750,43 +766,51 @@
                 itemToBeCopied.Expense_Id = $scope.taskId + "" + ($scope.expenseArray.length + 1)
                 $scope.expenseArray.push(itemToBeCopied);
 
-                $scope.copyExpenseObj = $scope.expenseArray.length - 1;
-                var newHash = $scope.copyExpenseObj;
-                if ($location.hash() !== newHash) {
-                    $location.hash('expense'+ $scope.copyExpenseObj);
-                } else {
-                    $anchorScroll();
+                if ($scope.expenseArray.length > 1){
+                    $scope.copyExpenseObj = $scope.expenseArray.length - 1;
+                    var newHash = $scope.copyExpenseObj;
+                    if ($location.hash() !== newHash) {
+                        $location.hash('expense' + $scope.copyExpenseObj);
+                    } else {
+                        $anchorScroll();
+                    }
+                    setTimeout(function () { $location.hash(null); }, 100);
                 }
-                setTimeout(function(){ $location.hash(null); }, 100);
+                
                 break;
 
             case "Notes":
                 itemToBeCopied.Notes_Id = $scope.taskId + "" + ($scope.notesArray.length + 1)
                 $scope.notesArray.push(itemToBeCopied);
 
-                $scope.copyNoteObj = $scope.notesArray.length - 1;
-                var newHash = $scope.copyNoteObj;
-                if ($location.hash() !== newHash) {
-                    $location.hash('note'+ $scope.copyNoteObj);
-                } else {
-                    $anchorScroll();
+                if ($scope.notesArray.length > 1){
+                    $scope.copyNoteObj = $scope.notesArray.length - 1;
+                    var newHash = $scope.copyNoteObj;
+                    if ($location.hash() !== newHash) {
+                        $location.hash('note' + $scope.copyNoteObj);
+                    } else {
+                        $anchorScroll();
+                    }
+                    setTimeout(function () { $location.hash(null); }, 100);
                 }
-                setTimeout(function(){ $location.hash(null); }, 100);
+                
 
                 break;
             case "Material":
                 itemToBeCopied.Material_Id = $scope.taskId + "" + ($scope.materialArray.length + 1)
                 $scope.materialArray.push(itemToBeCopied);
-
-                $scope.copyMaterialObj = $scope.materialArray[$scope.materialArray.length - 1].Material_Id;
-                //$scope.copyMaterialObj = $scope.materialArray.length - 1;
-                var newHash = $scope.copyMaterialObj;
-                if ($location.hash() !== newHash) {
-                    $location.hash($scope.copyMaterialObj);
-                } else {
-                    $anchorScroll();
+                if ($scope.materialArray.length > 1){
+                    $scope.copyMaterialObj = $scope.materialArray[$scope.materialArray.length - 1].Material_Id;
+                    //$scope.copyMaterialObj = $scope.materialArray.length - 1;
+                    var newHash = $scope.copyMaterialObj;
+                    if ($location.hash() !== newHash) {
+                        $location.hash($scope.copyMaterialObj);
+                    } else {
+                        $anchorScroll();
+                    }
+                    setTimeout(function () { $location.hash(null); }, 100);
                 }
-                setTimeout(function(){ $location.hash(null); }, 100);
+                
                 break;
 
             default:
