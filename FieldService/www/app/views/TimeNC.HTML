@@ -67,7 +67,7 @@
                     <div flex="20" class="debrief-items-NC">
                         <label flex="100" class="  label-my" translate="{{item.timeDefault.duration.title}}"></label>
                         <div flex="100">
-                            <input type="text" class="form-control" date-format ng-model="item.Duration" ng-change="setDurationHours(item)" />
+                            <input type="text" class="form-control" date-format ng-model="item.Duration" ng-change="setDurationHours(item)" ng-blur="checkDuration(item)" />
 
                         </div>
                     </div>

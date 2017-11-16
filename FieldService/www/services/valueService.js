@@ -23,7 +23,7 @@
         var header = null;
 
         var networkStatus = false;
-        var language="";
+        var language = "";
         var debrief = {
             task: {},
             taskList: [],
@@ -139,20 +139,21 @@
         service.setIfFutureDateTask = setIfFutureDateTask;
         service.getIfFutureDateTask = getIfFutureDateTask;
 
-        service.setLanguage=setLanguage;
-        service.getLanguage=getLanguage;
+        service.setLanguage = setLanguage;
+        service.getLanguage = getLanguage;
 
         service.syncData = syncData;
 
         return service;
-        function setLanguage(lang)
-        {
-            language=lang;
+
+        function setLanguage(lang) {
+            language = lang;
         }
-        function getLanguage()
-        {
+
+        function getLanguage() {
             return language;
         }
+
         function setResourceId(id) {
             resourceId = id;
         };
@@ -508,37 +509,49 @@
             if (debrief.time.length > 0) {
 
                 localService.deleteTime(debrief.task.Task_Number);
-                localService.insertTimeList(debrief.time);
+                localService.insertTimeList(debrief.time, function (result) {
+                    console.log("success")
+                });
             }
 
             if (debrief.expense.length > 0) {
 
                 localService.deleteExpense(debrief.task.Task_Number);
-                localService.insertExpenseList(debrief.expense);
+                localService.insertExpenseList(debrief.expense, function (result) {
+                    console.log("success")
+                });
             }
 
             if (debrief.material.length > 0) {
 
                 localService.deleteMaterial(debrief.task.Task_Number);
-                localService.insertMaterialList(debrief.material);
+                localService.insertMaterialList(debrief.material, function (result) {
+                    console.log("success")
+                });
             }
 
             if (debrief.notes.length > 0) {
 
                 localService.deleteNotes(debrief.task.Task_Number);
-                localService.insertNotesList(debrief.notes);
+                localService.insertNotesList(debrief.notes, function (result) {
+                    console.log("success")
+                });
             }
 
             if (debrief.attachment.length > 0) {
 
                 localService.deleteAttachment(debrief.task.Task_Number);
-                localService.insertAttachmentList(debrief.attachment);
+                localService.insertAttachmentList(debrief.attachment, function (result) {
+                    console.log("success")
+                });
             }
 
             if (debrief.engineer != undefined && debrief.engineer.Task_Number != null) {
 
                 localService.deleteEngineer(debrief.task.Task_Number);
-                localService.insertEngineerList(debrief.engineer);
+                localService.insertEngineerList(debrief.engineer, function (result) {
+                    console.log("success")
+                });
             }
         };
 

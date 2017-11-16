@@ -17,10 +17,11 @@
         service.complete_activity = complete_activity;
         service.updateStatus = updateStatus;
         service.activityDetails = activityDetails;
+
         return service;
 
         function activate_resource(data, callback) {
-            
+
             return $http({
 
                 method: 'POST',
@@ -103,6 +104,7 @@
                 callback(error);
             });
         }
+
         function updateStatus(data, callback) {
             console.log(url + 'OFSCActions/update_status' + JSON.stringify(data));
             return $http({
@@ -129,12 +131,13 @@
                 callback(error);
             });
         }
-        function activityDetails(activityId , callback) {
+
+        function activityDetails(activityId, callback) {
 
             return $http({
 
                 method: 'GET',
-                url: url + 'OFSCActions/activity_details?activityId='+activityId,
+                url: url + 'OFSCActions/activity_details?activityId=' + activityId,
                 headers: {
                     "Content-Type": constantService.getContentType(),
                     "Authorization": constantService.getAuthor(),

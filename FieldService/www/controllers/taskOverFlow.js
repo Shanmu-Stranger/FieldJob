@@ -248,13 +248,16 @@ app.controller('taskOverFlowController', function ($scope, $http, $state, $rootS
                     Submit_Status: "A",
                     Date: new Date()
                 };
+                localService.updateTaskSubmitStatus(taskObject, function (result) {
 
-                localService.updateTaskSubmitStatus(taskObject);
+                    localService.getTaskList(function (response) {
 
-                localService.getTaskList(function (response) {
+                        constantService.setTaskList(response);
 
-                    constantService.setTaskList(response);
+                        
+                    });
                 });
+               
             }
         }
     };

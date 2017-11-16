@@ -2,8 +2,8 @@
 
 var conf = {
 
-  apiUrl: 'https://emersonmobilecloud-a472144.mobileenv.us2.oraclecloud.com:443/mobile/custom/'
-  //apiUrl: 'https://emersonmobiletestenv-a472144.mobileenv.us2.oraclecloud.com:443/mobile/custom/'
+    //apiUrl: 'https://emersonmobilecloud-a472144.mobileenv.us2.oraclecloud.com:443/mobile/custom/'
+    apiUrl: 'https://emersonmobiletestenv-a472144.mobileenv.us2.oraclecloud.com:443/mobile/custom/'
 };
 
 var app = angular.module('emerson', ['ngMaterial', 'ngLoadingSpinner', 'md.data.table', 'ui.router', 'ui.bootstrap', 'ui.calendar', 'pascalprecht.translate', 'ngFileUpload']);
@@ -96,7 +96,6 @@ app.run(function ($rootScope, $location, $http, $state, localService, valueServi
 
                                     var internalOFSCJSONObject = {};
 
-
                                     internalOFSCJSONObject.Start_Date = item.Start_time;
                                     internalOFSCJSONObject.End_Date = item.End_time;
                                     internalOFSCJSONObject.Type = "INTERNAL";
@@ -105,13 +104,12 @@ app.run(function ($rootScope, $location, $http, $state, localService, valueServi
 
                                     response.push(internalOFSCJSONObject);
                                 });
+
                                 constantService.setTaskList(response);
 
                                 $state.go('myFieldJob');
 
                             });
-
-                           
                         });
 
                     } else {
@@ -121,10 +119,10 @@ app.run(function ($rootScope, $location, $http, $state, localService, valueServi
                             console.log("TASK MY TASK =====> " + JSON.stringify(response));
 
                             localService.getInternalList(function (internalresponse) {
+
                                 angular.forEach(internalresponse, function (item) {
 
                                     var internalOFSCJSONObject = {};
-
 
                                     internalOFSCJSONObject.Start_Date = item.Start_time;
                                     internalOFSCJSONObject.End_Date = item.End_time;
@@ -134,13 +132,12 @@ app.run(function ($rootScope, $location, $http, $state, localService, valueServi
 
                                     response.push(internalOFSCJSONObject);
                                 });
+
                                 constantService.setTaskList(response);
 
                                 $state.go('myTask');
 
                             });
-
-                            
                         });
                     }
 
@@ -259,23 +256,32 @@ app.directive('dateFormat', function ($filter) {
                 //elem.val($filter(attrs.format)(plainNumber));
                 //return plainNumber;
                 if (viewValue !== undefined && viewValue !== "") {
-                    if (viewValue.split(":")[0] != undefined && viewValue.split(":")[0].length == 1) {
-                        var hours = "0" + viewValue.split(":")[0]
-                        viewValue = hours + ":" + viewValue.split(":")[1]
+                    if (viewValue.length == 2) {
+                        viewValue = viewValue + ":";
+                        elem.val(viewValue);
                     }
-                    if (viewValue.split(":")[1] != undefined && viewValue.split(":")[1].length == 1) {
-                        var mins = "0" + viewValue.split(":")[1]
-                        viewValue = viewValue.split(":")[0] + ":" + mins
+                    if (viewValue.length > 5) {
+                        viewValue = viewValue.substring(0, 5);
+                        elem.val(viewValue)
                     }
-                    if (viewValue.split(":")[1] != undefined && viewValue.split(":")[1] != "undefined" && viewValue.split(":")[1].length > 2) {
-                        var mins = viewValue.split(":")[1].substring(0, 2);
-                        viewValue = viewValue.split(":")[0] + ":" + mins
-                    }
-                    if (viewValue.split(":")[1] == undefined || viewValue.split(":")[1] == "undefined") {
-                        viewValue = viewValue.split(":")[0] + ":00";
-                    }
+                    //if (viewValue.split(":")[0] != undefined && viewValue.split(":")[0].length == 1) {
+                    //    var hours = "0" + viewValue.split(":")[0]
+                    //    viewValue = hours + ":" + viewValue.split(":")[1]
+                    //}
+                    //if (viewValue.split(":")[1] != undefined && viewValue.split(":")[1].length == 1) {
+                    //    var mins = "0" + viewValue.split(":")[1]
+                    //    viewValue = viewValue.split(":")[0] + ":" + mins
+                    //}
+                    //if (viewValue.split(":")[1] != undefined && viewValue.split(":")[1] != "undefined" && viewValue.split(":")[1].length > 2) {
+                    //    var mins = viewValue.split(":")[1].substring(0, 2);
+                    //    viewValue = viewValue.split(":")[0] + ":" + mins
+                    //}
+                    //if (viewValue.split(":")[1] == undefined || viewValue.split(":")[1] == "undefined") {
+                    //    viewValue = viewValue.split(":")[0] + ":00";
+                    //}
                 }
-                elem.val(viewValue);
+
+
                 return viewValue;
             });
         }

@@ -340,11 +340,11 @@
 
             $q.all(promises).then(
                 function (response) {
-                    callback("SUCCESS INTERNAL");
+                    callback("SUCCESS");
                 },
 
                 function (error) {
-                    callback("ERROR INTERNAL");
+                    callback("ERROR");
                 }
             );
         };
@@ -473,13 +473,17 @@
             });
         };
 
-        function insertInstallBaseList(response) {
+        function insertInstallBaseList(response, callback) {
 
             var responseList = response.InstallBase;
+
+            var promises = [];
 
             for (var i = 0; i < responseList.length; i++) {
 
                 (function (i) {
+
+                    var deferred = $q.defer();
 
                     db.transaction(function (transaction) {
 
@@ -495,11 +499,11 @@
 
                             if (rowLength > 0) {
 
-                                updateInstallBase(responseList[i]);
+                                updateInstallBase(responseList[i], deferred);
 
                             } else {
 
-                                insertInstallBase(responseList[i]);
+                                insertInstallBase(responseList[i], deferred);
                             }
 
                         }, function (tx, error) {
@@ -514,11 +518,23 @@
 
                     console.log("INSTALLBASE OBJECT =====> " + JSON.stringify(responseList));
 
+                    promises.push(deferred.promise);
+
                 })(i);
             }
+
+            $q.all(promises).then(
+                function (response) {
+                    callback("SUCCESS");
+                },
+
+                function (error) {
+                    callback("ERROR");
+                }
+            );
         };
 
-        function updateInstallBase(responseList) {
+        function updateInstallBase(responseList, defer) {
 
             db.transaction(function (transaction) {
 
@@ -541,6 +557,8 @@
 
                 transaction.executeSql(sqlUpdate, insertValues, function (tx, res) {
 
+                    defer.resolve(res);
+
                     console.log("INSTALLBASE ROW AFFECTED: " + res.rowsAffected);
 
                 }, function (tx, error) {
@@ -554,7 +572,7 @@
             });
         };
 
-        function insertInstallBase(responseList) {
+        function insertInstallBase(responseList, defer) {
 
             db.transaction(function (transaction) {
 
@@ -577,6 +595,8 @@
 
                 transaction.executeSql(sqlInsert, insertValues, function (tx, res) {
 
+                    defer.resolve(res);
+
                     console.log("INSTALLBASE INSERT ID: " + res.insertId);
 
                 }, function (tx, error) {
@@ -590,13 +610,17 @@
             });
         };
 
-        function insertContactList(response) {
+        function insertContactList(response, callback) {
 
             var responseList = response.Contacts;
+
+            var promises = [];
 
             for (var i = 0; i < responseList.length; i++) {
 
                 (function (i) {
+
+                    var deferred = $q.defer();
 
                     db.transaction(function (transaction) {
 
@@ -612,11 +636,11 @@
 
                             if (rowLength > 0) {
 
-                                updateContact(responseList[i]);
+                                updateContact(responseList[i], deferred);
 
                             } else {
 
-                                insertContact(responseList[i]);
+                                insertContact(responseList[i], deferred);
                             }
 
                         }, function (tx, error) {
@@ -631,11 +655,23 @@
 
                     console.log("CONTACT OBJECT =====> " + JSON.stringify(responseList));
 
+                    promises.push(deferred.promise);
+
                 })(i);
             }
+
+            $q.all(promises).then(
+                function (response) {
+                    callback("SUCCESS");
+                },
+
+                function (error) {
+                    callback("ERROR");
+                }
+            );
         };
 
-        function updateContact(responseList) {
+        function updateContact(responseList, defer) {
 
             db.transaction(function (transaction) {
 
@@ -662,6 +698,8 @@
 
                 transaction.executeSql(sqlUpdate, insertValues, function (tx, res) {
 
+                    defer.resolve(res);
+
                     console.log("CONTACT ROW AFFECTED: " + res.rowsAffected);
 
                 }, function (tx, error) {
@@ -675,7 +713,7 @@
             });
         };
 
-        function insertContact(responseList) {
+        function insertContact(responseList, defer) {
 
             db.transaction(function (transaction) {
 
@@ -702,6 +740,8 @@
 
                 transaction.executeSql(sqlInsert, insertValues, function (tx, res) {
 
+                    defer.resolve(res);
+
                     console.log("CONTACT INSERT ID: " + res.insertId);
 
                 }, function (tx, error) {
@@ -715,13 +755,17 @@
             });
         };
 
-        function insertNoteList(response) {
+        function insertNoteList(response, callback) {
 
             var responseList = response.Notes;
+
+            var promises = [];
 
             for (var i = 0; i < responseList.length; i++) {
 
                 (function (i) {
+
+                    var deferred = $q.defer();
 
                     db.transaction(function (transaction) {
 
@@ -737,11 +781,11 @@
 
                             if (rowLength > 0) {
 
-                                updateNote(responseList[i]);
+                                updateNote(responseList[i], deferred);
 
                             } else {
 
-                                insertNote(responseList[i]);
+                                insertNote(responseList[i], deferred);
                             }
 
                         }, function (tx, error) {
@@ -756,11 +800,23 @@
 
                     console.log("NOTE OBJECT =====> " + JSON.stringify(responseList));
 
+                    promises.push(deferred.promise);
+
                 })(i);
             }
+
+            $q.all(promises).then(
+                function (response) {
+                    callback("SUCCESS");
+                },
+
+                function (error) {
+                    callback("ERROR");
+                }
+            );
         };
 
-        function updateNote(responseList) {
+        function updateNote(responseList, defer) {
 
             db.transaction(function (transaction) {
 
@@ -782,6 +838,8 @@
 
                 transaction.executeSql(sqlUpdate, insertValues, function (tx, res) {
 
+                    defer.resolve(res);
+
                     console.log("NOTE ROW AFFECTED: " + res.rowsAffected);
 
                 }, function (tx, error) {
@@ -795,7 +853,7 @@
             });
         };
 
-        function insertNote(responseList) {
+        function insertNote(responseList, defer) {
 
             db.transaction(function (transaction) {
 
@@ -817,6 +875,8 @@
 
                 transaction.executeSql(sqlInsert, insertValues, function (tx, res) {
 
+                    defer.resolve(res);
+
                     console.log("Note INSERT ID: " + res.insertId);
 
                 }, function (tx, error) {
@@ -830,13 +890,17 @@
             });
         };
 
-        function insertAttachmentList(response) {
+        function insertAttachmentList(response, callback) {
 
             var responseList = response;
+
+            var promises = [];
 
             for (var i = 0; i < responseList.length; i++) {
 
                 (function (i) {
+
+                    var deferred = $q.defer();
 
                     db.transaction(function (transaction) {
 
@@ -852,11 +916,11 @@
 
                             if (rowLength > 0) {
 
-                                updateAttachment(responseList[i]);
+                                updateAttachment(responseList[i], deferred);
 
                             } else {
 
-                                insertAttachment(responseList[i]);
+                                insertAttachment(responseList[i], deferred);
                             }
 
                         }, function (tx, error) {
@@ -871,11 +935,23 @@
 
                     console.log("ATTACHMENT OBJECT =====> " + JSON.stringify(responseList[i]));
 
+                    promises.push(deferred.promise);
+
                 })(i);
             }
+
+            $q.all(promises).then(
+                function (response) {
+                    callback("SUCCESS");
+                },
+
+                function (error) {
+                    callback("ERROR");
+                }
+            );
         };
 
-        function updateAttachment(responseList) {
+        function updateAttachment(responseList, defer) {
 
             db.transaction(function (transaction) {
 
@@ -894,6 +970,8 @@
 
                 transaction.executeSql(sqlUpdate, insertValues, function (tx, res) {
 
+                    defer.resolve(res);
+
                     console.log("ATTACHMENT ROW AFFECTED: " + res.rowsAffected);
 
                 }, function (tx, error) {
@@ -907,7 +985,7 @@
             });
         };
 
-        function insertAttachment(responseList) {
+        function insertAttachment(responseList, defer) {
 
             db.transaction(function (transaction) {
 
@@ -926,6 +1004,8 @@
 
 
                 transaction.executeSql(sqlInsert, insertValues, function (tx, res) {
+
+                    defer.resolve(res);
 
                     console.log("ATTACHMENT INSERT ID: " + res.insertId);
 
@@ -948,6 +1028,8 @@
 
                 (function (i) {
 
+                    var deferred = $q.defer();
+
                     if (i < responseList.length - 1) {
 
                         insertProject(responseList[i]);
@@ -962,6 +1044,8 @@
                     }
 
                     console.log("PROJECT OBJECT =====> " + JSON.stringify(responseList[i]));
+
+                    promises.push(deferred.promise);
 
                 })(i);
             }
@@ -1031,13 +1115,17 @@
             });
         };
 
-        function insertOverTimeList(response) {
+        function insertOverTimeList(response, callback) {
 
             var responseList = response;
+
+            var promises = [];
 
             for (var i = 0; i < responseList.length; i++) {
 
                 (function (i) {
+
+                    var deferred = $q.defer();
 
                     db.transaction(function (transaction) {
 
@@ -1055,11 +1143,11 @@
 
                             if (rowLength > 0) {
 
-                                updateOverTime(responseList[i]);
+                                updateOverTime(responseList[i], deferred);
 
                             } else {
 
-                                insertOverTime(responseList[i]);
+                                insertOverTime(responseList[i], deferred);
                             }
 
                         }, function (tx, error) {
@@ -1074,11 +1162,23 @@
 
                     console.log("OVERTIME OBJECT =====> " + JSON.stringify(responseList[i]));
 
+                    promises.push(deferred.promise);
+
                 })(i);
             }
+
+            $q.all(promises).then(
+                function (response) {
+                    callback("SUCCESS");
+                },
+
+                function (error) {
+                    callback("ERROR");
+                }
+            );
         };
 
-        function updateOverTime(responseList) {
+        function updateOverTime(responseList, defer) {
 
             db.transaction(function (transaction) {
 
@@ -1097,6 +1197,8 @@
 
                 transaction.executeSql(sqlUpdate, insertValues, function (tx, res) {
 
+                    defer.resolve(res);
+
                     console.log("OVERTIME ROW AFFECTED: " + res.rowsAffected);
 
                 }, function (tx, error) {
@@ -1110,7 +1212,7 @@
             });
         };
 
-        function insertOverTime(responseList) {
+        function insertOverTime(responseList, defer) {
 
             db.transaction(function (transaction) {
 
@@ -1129,6 +1231,8 @@
 
                 transaction.executeSql(sqlInsert, insertValues, function (tx, res) {
 
+                    defer.resolve(res);
+
                     console.log("OVERTIME INSERT ID: " + res.insertId);
 
                 }, function (tx, error) {
@@ -1142,13 +1246,17 @@
             });
         };
 
-        function insertShiftCodeList(response) {
+        function insertShiftCodeList(response, callback) {
 
             var responseList = response;
+
+            var promises = [];
 
             for (var i = 0; i < responseList.length; i++) {
 
                 (function (i) {
+
+                    var deferred = $q.defer();
 
                     db.transaction(function (transaction) {
 
@@ -1164,11 +1272,11 @@
 
                             if (rowLength > 0) {
 
-                                updateShiftCode(responseList[i]);
+                                updateShiftCode(responseList[i], deferred);
 
                             } else {
 
-                                insertShiftCode(responseList[i]);
+                                insertShiftCode(responseList[i], deferred);
                             }
 
                         }, function (tx, error) {
@@ -1183,11 +1291,23 @@
 
                     console.log("SHIFTCODE OBJECT =====> " + JSON.stringify(responseList[i]));
 
+                    promises.push(deferred.promise);
+
                 })(i);
             }
+
+            $q.all(promises).then(
+                function (response) {
+                    callback("SUCCESS");
+                },
+
+                function (error) {
+                    callback("ERROR");
+                }
+            );
         };
 
-        function updateShiftCode(responseList) {
+        function updateShiftCode(responseList, defer) {
 
             db.transaction(function (transaction) {
 
@@ -1206,6 +1326,8 @@
 
                 transaction.executeSql(sqlUpdate, insertValues, function (tx, res) {
 
+                    defer.resolve(res);
+
                     console.log("SHIFTCODE ROW AFFECTED: " + res.rowsAffected);
 
                 }, function (tx, error) {
@@ -1219,7 +1341,7 @@
             });
         };
 
-        function insertShiftCode(responseList) {
+        function insertShiftCode(responseList, defer) {
 
             db.transaction(function (transaction) {
 
@@ -1238,6 +1360,8 @@
 
                 transaction.executeSql(sqlInsert, insertValues, function (tx, res) {
 
+                    defer.resolve(res);
+
                     console.log("SHIFTCODE INSERT ID: " + res.insertId);
 
                 }, function (tx, error) {
@@ -1251,13 +1375,17 @@
             });
         };
 
-        function insertChargeTypeList(response) {
+        function insertChargeTypeList(response, callback) {
 
             var responseList = response;
+
+            var promises = [];
 
             for (var i = 0; i < responseList.length; i++) {
 
                 (function (i) {
+
+                    var deferred = $q.defer();
 
                     db.transaction(function (transaction) {
 
@@ -1273,11 +1401,11 @@
 
                             if (rowLength > 0) {
 
-                                updateChargeType(responseList[i]);
+                                updateChargeType(responseList[i], deferred);
 
                             } else {
 
-                                insertChargeType(responseList[i]);
+                                insertChargeType(responseList[i], deferred);
                             }
 
                         }, function (tx, error) {
@@ -1292,11 +1420,23 @@
 
                     console.log("CHARGETYPE OBJECT =====> " + JSON.stringify(responseList[i]));
 
+                    promises.push(deferred.promise);
+
                 })(i);
             }
+
+            $q.all(promises).then(
+                function (response) {
+                    callback("SUCCESS");
+                },
+
+                function (error) {
+                    callback("ERROR");
+                }
+            );
         };
 
-        function updateChargeType(responseList) {
+        function updateChargeType(responseList, defer) {
 
             db.transaction(function (transaction) {
 
@@ -1308,6 +1448,8 @@
                 insertValues.push(responseList.ID);
 
                 transaction.executeSql(sqlUpdate, insertValues, function (tx, res) {
+
+                    defer.resolve(res);
 
                     console.log("CHARGETYPE ROW AFFECTED: " + res.rowsAffected);
 
@@ -1322,7 +1464,7 @@
             });
         };
 
-        function insertChargeType(responseList) {
+        function insertChargeType(responseList, defer) {
 
             db.transaction(function (transaction) {
 
@@ -1334,6 +1476,8 @@
                 insertValues.push(responseList.Value);
 
                 transaction.executeSql(sqlInsert, insertValues, function (tx, res) {
+
+                    defer.resolve(res);
 
                     console.log("CHARGETYPE INSERT ID: " + res.insertId);
 
@@ -1348,13 +1492,17 @@
             });
         };
 
-        function insertChargeMethodList(response) {
+        function insertChargeMethodList(response, callback) {
 
             var responseList = response;
+
+            var promises = [];
 
             for (var i = 0; i < responseList.length; i++) {
 
                 (function (i) {
+
+                    var deferred = $q.defer();
 
                     db.transaction(function (transaction) {
 
@@ -1370,11 +1518,11 @@
 
                             if (rowLength > 0) {
 
-                                updateChargeMethod(responseList[i]);
+                                updateChargeMethod(responseList[i], deferred);
 
                             } else {
 
-                                insertChargeMethod(responseList[i]);
+                                insertChargeMethod(responseList[i], deferred);
                             }
 
                         }, function (tx, error) {
@@ -1389,11 +1537,23 @@
 
                     console.log("CHARGEMETHOD OBJECT =====> " + JSON.stringify(responseList[i]));
 
+                    promises.push(deferred.promise);
+
                 })(i);
             }
+
+            $q.all(promises).then(
+                function (response) {
+                    callback("SUCCESS");
+                },
+
+                function (error) {
+                    callback("ERROR");
+                }
+            );
         };
 
-        function updateChargeMethod(responseList) {
+        function updateChargeMethod(responseList, defer) {
 
             db.transaction(function (transaction) {
 
@@ -1405,6 +1565,8 @@
                 insertValues.push(responseList.ID);
 
                 transaction.executeSql(sqlUpdate, insertValues, function (tx, res) {
+
+                    defer.resolve(res);
 
                     console.log("CHARGEMETHOD ROW AFFECTED: " + res.rowsAffected);
 
@@ -1419,7 +1581,7 @@
             });
         };
 
-        function insertChargeMethod(responseList) {
+        function insertChargeMethod(responseList, defer) {
 
             db.transaction(function (transaction) {
 
@@ -1431,6 +1593,8 @@
                 insertValues.push(responseList.Value);
 
                 transaction.executeSql(sqlInsert, insertValues, function (tx, res) {
+
+                    defer.resolve(res);
 
                     console.log("CHARGEMETHOD INSERT ID: " + res.insertId);
 
@@ -1445,13 +1609,17 @@
             });
         };
 
-        function insertFieldJobNameList(response) {
+        function insertFieldJobNameList(response, callback) {
 
             var responseList = response;
+
+            var promises = [];
 
             for (var i = 0; i < responseList.length; i++) {
 
                 (function (i) {
+
+                    var deferred = $q.defer();
 
                     db.transaction(function (transaction) {
 
@@ -1467,11 +1635,11 @@
 
                             if (rowLength > 0) {
 
-                                updateFieldJobName(responseList[i]);
+                                updateFieldJobName(responseList[i], deferred);
 
                             } else {
 
-                                insertFieldJobName(responseList[i]);
+                                insertFieldJobName(responseList[i], deferred);
                             }
 
                         }, function (tx, error) {
@@ -1486,11 +1654,23 @@
 
                     console.log("FIELDJOBNAME OBJECT =====> " + JSON.stringify(responseList[i]));
 
+                    promises.push(deferred.promise);
+
                 })(i);
             }
+
+            $q.all(promises).then(
+                function (response) {
+                    callback("SUCCESS");
+                },
+
+                function (error) {
+                    callback("ERROR");
+                }
+            );
         };
 
-        function updateFieldJobName(responseList) {
+        function updateFieldJobName(responseList, defer) {
 
             db.transaction(function (transaction) {
 
@@ -1508,6 +1688,8 @@
 
                 transaction.executeSql(sqlUpdate, insertValues, function (tx, res) {
 
+                    defer.resolve(res);
+
                     console.log("FIELDJOBNAME ROW AFFECTED: " + res.rowsAffected);
 
                 }, function (tx, error) {
@@ -1521,7 +1703,7 @@
             });
         };
 
-        function insertFieldJobName(responseList) {
+        function insertFieldJobName(responseList, defer) {
 
             db.transaction(function (transaction) {
 
@@ -1539,6 +1721,8 @@
 
                 transaction.executeSql(sqlInsert, insertValues, function (tx, res) {
 
+                    defer.resolve(res);
+
                     console.log("FIELDJOBNAME INSERT ID: " + res.insertId);
 
                 }, function (tx, error) {
@@ -1552,13 +1736,17 @@
             });
         };
 
-        function insertWorkTypeList(response) {
+        function insertWorkTypeList(response, callback) {
 
             var responseList = response;
+
+            var promises = [];
 
             for (var i = 0; i < responseList.length; i++) {
 
                 (function (i) {
+
+                    var deferred = $q.defer();
 
                     db.transaction(function (transaction) {
 
@@ -1574,11 +1762,11 @@
 
                             if (rowLength > 0) {
 
-                                updateWorkType(responseList[i]);
+                                updateWorkType(responseList[i], deferred);
 
                             } else {
 
-                                insertWorkType(responseList[i]);
+                                insertWorkType(responseList[i], deferred);
                             }
 
                         }, function (tx, error) {
@@ -1593,11 +1781,23 @@
 
                     console.log("WORKTYPE OBJECT =====> " + JSON.stringify(responseList[i]));
 
+                    promises.push(deferred.promise);
+
                 })(i);
             }
+
+            $q.all(promises).then(
+                function (response) {
+                    callback("SUCCESS");
+                },
+
+                function (error) {
+                    callback("ERROR");
+                }
+            );
         };
 
-        function updateWorkType(responseList) {
+        function updateWorkType(responseList, defer) {
 
             db.transaction(function (transaction) {
 
@@ -1609,6 +1809,8 @@
                 insertValues.push(responseList.ID);
 
                 transaction.executeSql(sqlUpdate, insertValues, function (tx, res) {
+
+                    defer.resolve(res);
 
                     console.log("WORKTYPE ROW AFFECTED: " + res.rowsAffected);
 
@@ -1623,7 +1825,7 @@
             });
         };
 
-        function insertWorkType(responseList) {
+        function insertWorkType(responseList, defer) {
 
             db.transaction(function (transaction) {
 
@@ -1635,6 +1837,8 @@
                 insertValues.push(responseList.Value);
 
                 transaction.executeSql(sqlInsert, insertValues, function (tx, res) {
+
+                    defer.resolve(res);
 
                     console.log("WORKTYPE INSERT ID: " + res.insertId);
 
@@ -1649,13 +1853,17 @@
             });
         };
 
-        function insertItemList(response) {
+        function insertItemList(response, callback) {
 
             var responseList = response;
+
+            var promises = [];
 
             for (var i = 0; i < responseList.length; i++) {
 
                 (function (i) {
+
+                    var deferred = $q.defer();
 
                     db.transaction(function (transaction) {
 
@@ -1671,11 +1879,11 @@
 
                             if (rowLength > 0) {
 
-                                updateItem(responseList[i]);
+                                updateItem(responseList[i], deferred);
 
                             } else {
 
-                                insertItem(responseList[i]);
+                                insertItem(responseList[i], deferred);
                             }
 
                         }, function (tx, error) {
@@ -1690,11 +1898,23 @@
 
                     console.log("ITEM OBJECT =====> " + JSON.stringify(responseList[i]));
 
+                    promises.push(deferred.promise);
+
                 })(i);
             }
+
+            $q.all(promises).then(
+                function (response) {
+                    callback("SUCCESS");
+                },
+
+                function (error) {
+                    callback("ERROR");
+                }
+            );
         };
 
-        function updateItem(responseList) {
+        function updateItem(responseList, defer) {
 
             db.transaction(function (transaction) {
 
@@ -1706,6 +1926,8 @@
                 insertValues.push(responseList.ID);
 
                 transaction.executeSql(sqlUpdate, insertValues, function (tx, res) {
+
+                    defer.resolve(res);
 
                     console.log("ITEM ROW AFFECTED: " + res.rowsAffected);
 
@@ -1720,7 +1942,7 @@
             });
         };
 
-        function insertItem(responseList) {
+        function insertItem(responseList, defer) {
 
             db.transaction(function (transaction) {
 
@@ -1732,6 +1954,8 @@
                 insertValues.push(responseList.Value);
 
                 transaction.executeSql(sqlInsert, insertValues, function (tx, res) {
+
+                    defer.resolve(res);
 
                     console.log("ITEM INSERT ID: " + res.insertId);
 
@@ -1746,13 +1970,17 @@
             });
         };
 
-        function insertCurrencyList(response) {
+        function insertCurrencyList(response, callback) {
 
             var responseList = response;
+
+            var promises = [];
 
             for (var i = 0; i < responseList.length; i++) {
 
                 (function (i) {
+
+                    var deferred = $q.defer();
 
                     db.transaction(function (transaction) {
 
@@ -1768,11 +1996,11 @@
 
                             if (rowLength > 0) {
 
-                                updateCurrency(responseList[i]);
+                                updateCurrency(responseList[i], deferred);
 
                             } else {
 
-                                insertCurrency(responseList[i]);
+                                insertCurrency(responseList[i], deferred);
                             }
 
                         }, function (tx, error) {
@@ -1787,11 +2015,23 @@
 
                     console.log("CURRENCY OBJECT =====> " + JSON.stringify(responseList[i]));
 
+                    promises.push(deferred.promise);
+
                 })(i);
             }
+
+            $q.all(promises).then(
+                function (response) {
+                    callback("SUCCESS");
+                },
+
+                function (error) {
+                    callback("ERROR");
+                }
+            );
         };
 
-        function updateCurrency(responseList) {
+        function updateCurrency(responseList, defer) {
 
             db.transaction(function (transaction) {
 
@@ -1803,6 +2043,8 @@
                 insertValues.push(responseList.ID);
 
                 transaction.executeSql(sqlUpdate, insertValues, function (tx, res) {
+
+                    defer.resolve(res);
 
                     console.log("CURRENCY ROW AFFECTED: " + res.rowsAffected);
 
@@ -1817,7 +2059,7 @@
             });
         };
 
-        function insertCurrency(responseList) {
+        function insertCurrency(responseList, defer) {
 
             db.transaction(function (transaction) {
 
@@ -1829,6 +2071,8 @@
                 insertValues.push(responseList.Value);
 
                 transaction.executeSql(sqlInsert, insertValues, function (tx, res) {
+
+                    defer.resolve(res);
 
                     console.log("CURRENCY INSERT ID: " + res.insertId);
 
@@ -1843,13 +2087,17 @@
             });
         };
 
-        function insertExpenseTypeList(response) {
+        function insertExpenseTypeList(response, callback) {
 
             var responseList = response;
+
+            var promises = [];
 
             for (var i = 0; i < responseList.length; i++) {
 
                 (function (i) {
+
+                    var deferred = $q.defer();
 
                     db.transaction(function (transaction) {
 
@@ -1865,11 +2113,11 @@
 
                             if (rowLength > 0) {
 
-                                updateExpenseType(responseList[i]);
+                                updateExpenseType(responseList[i], deferred);
 
                             } else {
 
-                                insertExpenseType(responseList[i]);
+                                insertExpenseType(responseList[i], deferred);
                             }
 
                         }, function (tx, error) {
@@ -1884,11 +2132,23 @@
 
                     console.log("EXPENSETYPE OBJECT =====> " + JSON.stringify(responseList[i]));
 
+                    promises.push(deferred.promise);
+
                 })(i);
             }
+
+            $q.all(promises).then(
+                function (response) {
+                    callback("SUCCESS");
+                },
+
+                function (error) {
+                    callback("ERROR");
+                }
+            );
         };
 
-        function updateExpenseType(responseList) {
+        function updateExpenseType(responseList, defer) {
 
             db.transaction(function (transaction) {
 
@@ -1900,6 +2160,8 @@
                 insertValues.push(responseList.ID);
 
                 transaction.executeSql(sqlUpdate, insertValues, function (tx, res) {
+
+                    defer.resolve(res);
 
                     console.log("EXPENSETYPE ROW AFFECTED: " + res.rowsAffected);
 
@@ -1914,7 +2176,7 @@
             });
         };
 
-        function insertExpenseType(responseList) {
+        function insertExpenseType(responseList, defer) {
 
             db.transaction(function (transaction) {
 
@@ -1926,6 +2188,8 @@
                 insertValues.push(responseList.Value);
 
                 transaction.executeSql(sqlInsert, insertValues, function (tx, res) {
+
+                    defer.resolve(res);
 
                     console.log("EXPENSETYPE INSERT ID: " + res.insertId);
 
@@ -1940,13 +2204,17 @@
             });
         };
 
-        function insertNoteTypeList(response) {
+        function insertNoteTypeList(response, callback) {
 
             var responseList = response;
+
+            var promises = [];
 
             for (var i = 0; i < responseList.length; i++) {
 
                 (function (i) {
+
+                    var deferred = $q.defer();
 
                     db.transaction(function (transaction) {
 
@@ -1962,11 +2230,11 @@
 
                             if (rowLength > 0) {
 
-                                updateNoteType(responseList[i]);
+                                updateNoteType(responseList[i], deferred);
 
                             } else {
 
-                                insertNoteType(responseList[i]);
+                                insertNoteType(responseList[i], deferred);
                             }
 
                         }, function (tx, error) {
@@ -1981,11 +2249,23 @@
 
                     console.log("NOTETYPE OBJECT =====> " + JSON.stringify(responseList[i]));
 
+                    promises.push(deferred.promise);
+
                 })(i);
             }
+
+            $q.all(promises).then(
+                function (response) {
+                    callback("SUCCESS");
+                },
+
+                function (error) {
+                    callback("ERROR");
+                }
+            );
         };
 
-        function updateNoteType(responseList) {
+        function updateNoteType(responseList, defer) {
 
             db.transaction(function (transaction) {
 
@@ -1997,6 +2277,8 @@
                 insertValues.push(responseList.ID);
 
                 transaction.executeSql(sqlUpdate, insertValues, function (tx, res) {
+
+                    defer.resolve(res);
 
                     console.log("NOTETYPE ROW AFFECTED: " + res.rowsAffected);
 
@@ -2011,7 +2293,7 @@
             });
         };
 
-        function insertNoteType(responseList) {
+        function insertNoteType(responseList, defer) {
 
             db.transaction(function (transaction) {
 
@@ -2023,6 +2305,8 @@
                 insertValues.push(responseList.Value);
 
                 transaction.executeSql(sqlInsert, insertValues, function (tx, res) {
+
+                    defer.resolve(res);
 
                     console.log("NOTETYPE INSERT ID: " + res.insertId);
 
@@ -2037,13 +2321,17 @@
             });
         };
 
-        function insertTimeList(response) {
+        function insertTimeList(response, callback) {
 
             var responseList = response;
+
+            var promises = [];
 
             for (var i = 0; i < responseList.length; i++) {
 
                 (function (i) {
+
+                    var deferred = $q.defer();
 
                     db.transaction(function (transaction) {
 
@@ -2059,11 +2347,11 @@
 
                             if (rowLength > 0) {
 
-                                updateTime(responseList[i]);
+                                updateTime(responseList[i], deferred);
 
                             } else {
 
-                                insertTime(responseList[i]);
+                                insertTime(responseList[i], deferred);
                             }
 
                         }, function (tx, error) {
@@ -2078,11 +2366,23 @@
 
                     console.log("TIME OBJECT =====> " + JSON.stringify(responseList[i]));
 
+                    promises.push(deferred.promise);
+
                 })(i);
             }
+
+            $q.all(promises).then(
+                function (response) {
+                    callback("SUCCESS");
+                },
+
+                function (error) {
+                    callback("ERROR");
+                }
+            );
         };
 
-        function updateTime(responseList) {
+        function updateTime(responseList, defer) {
 
             db.transaction(function (transaction) {
 
@@ -2114,6 +2414,8 @@
 
                 transaction.executeSql(sqlUpdate, insertValues, function (tx, res) {
 
+                    defer.resolve(res);
+
                     console.log("TIME ROW AFFECTED: " + res.rowsAffected);
 
                 }, function (tx, error) {
@@ -2127,7 +2429,7 @@
             });
         };
 
-        function insertTime(responseList) {
+        function insertTime(responseList, defer) {
 
             db.transaction(function (transaction) {
 
@@ -2159,6 +2461,8 @@
 
                 transaction.executeSql(sqlInsert, insertValues, function (tx, res) {
 
+                    defer.resolve(res);
+
                     console.log("TIME INSERT ID: " + res.insertId);
 
                 }, function (tx, error) {
@@ -2172,13 +2476,17 @@
             });
         };
 
-        function insertExpenseList(response) {
+        function insertExpenseList(response, callback) {
 
             var responseList = response;
+
+            var promises = [];
 
             for (var i = 0; i < responseList.length; i++) {
 
                 (function (i) {
+
+                    var deferred = $q.defer();
 
                     db.transaction(function (transaction) {
 
@@ -2194,11 +2502,11 @@
 
                             if (rowLength > 0) {
 
-                                updateExpense(responseList[i]);
+                                updateExpense(responseList[i], deferred);
 
                             } else {
 
-                                insertExpense(responseList[i]);
+                                insertExpense(responseList[i], deferred);
                             }
 
                         }, function (tx, error) {
@@ -2213,11 +2521,23 @@
 
                     console.log("EXPENSE OBJECT =====> " + JSON.stringify(responseList[i]));
 
+                    promises.push(deferred.promise);
+
                 })(i);
             }
+
+            $q.all(promises).then(
+                function (response) {
+                    callback("SUCCESS");
+                },
+
+                function (error) {
+                    callback("ERROR");
+                }
+            );
         };
 
-        function updateExpense(responseList) {
+        function updateExpense(responseList, defer) {
 
             db.transaction(function (transaction) {
 
@@ -2240,6 +2560,8 @@
 
                 transaction.executeSql(sqlUpdate, insertValues, function (tx, res) {
 
+                    defer.resolve(res);
+
                     console.log("EXPENSE ROW AFFECTED: " + res.rowsAffected);
 
                 }, function (tx, error) {
@@ -2253,7 +2575,7 @@
             });
         };
 
-        function insertExpense(responseList) {
+        function insertExpense(responseList, defer) {
 
             db.transaction(function (transaction) {
 
@@ -2276,6 +2598,8 @@
 
                 transaction.executeSql(sqlInsert, insertValues, function (tx, res) {
 
+                    defer.resolve(res);
+
                     console.log("EXPENSE INSERT ID: " + res.insertId);
 
                 }, function (tx, error) {
@@ -2289,13 +2613,17 @@
             });
         };
 
-        function insertMaterialList(response) {
+        function insertMaterialList(response, callback) {
 
             var responseList = response;
+
+            var promises = [];
 
             for (var i = 0; i < responseList.length; i++) {
 
                 (function (i) {
+
+                    var deferred = $q.defer();
 
                     db.transaction(function (transaction) {
 
@@ -2311,11 +2639,11 @@
 
                             if (rowLength > 0) {
 
-                                updateMaterial(responseList[i]);
+                                updateMaterial(responseList[i], deferred);
 
                             } else {
 
-                                insertMaterial(responseList[i]);
+                                insertMaterial(responseList[i], deferred);
                             }
 
                         }, function (tx, error) {
@@ -2330,11 +2658,23 @@
 
                     console.log("MATERIAL OBJECT =====> " + JSON.stringify(responseList[i]));
 
+                    promises.push(deferred.promise);
+
                 })(i);
             }
+
+            $q.all(promises).then(
+                function (response) {
+                    callback("SUCCESS");
+                },
+
+                function (error) {
+                    callback("ERROR");
+                }
+            );
         };
 
-        function updateMaterial(responseList) {
+        function updateMaterial(responseList, defer) {
 
             db.transaction(function (transaction) {
 
@@ -2356,6 +2696,8 @@
 
                 transaction.executeSql(sqlUpdate, insertValues, function (tx, res) {
 
+                    defer.resolve(res);
+
                     console.log("MATERIAL ROW AFFECTED: " + res.rowsAffected);
 
                 }, function (tx, error) {
@@ -2369,7 +2711,7 @@
             });
         };
 
-        function insertMaterial(responseList) {
+        function insertMaterial(responseList, defer) {
 
             db.transaction(function (transaction) {
 
@@ -2391,6 +2733,8 @@
 
                 transaction.executeSql(sqlInsert, insertValues, function (tx, res) {
 
+                    defer.resolve(res);
+
                     console.log("MATERIAL INSERT ID: " + res.insertId);
 
                 }, function (tx, error) {
@@ -2404,13 +2748,17 @@
             });
         };
 
-        function insertNotesList(response) {
+        function insertNotesList(response, callback) {
 
             var responseList = response;
+
+            var promises = [];
 
             for (var i = 0; i < responseList.length; i++) {
 
                 (function (i) {
+
+                    var deferred = $q.defer();
 
                     db.transaction(function (transaction) {
 
@@ -2426,11 +2774,11 @@
 
                             if (rowLength > 0) {
 
-                                updateNotes(responseList[i]);
+                                updateNotes(responseList[i], deferred);
 
                             } else {
 
-                                insertNotes(responseList[i]);
+                                insertNotes(responseList[i], deferred);
                             }
 
                         }, function (tx, error) {
@@ -2445,11 +2793,23 @@
 
                     console.log("NOTES OBJECT =====> " + JSON.stringify(responseList[i]));
 
+                    promises.push(deferred.promise);
+
                 })(i);
             }
+
+            $q.all(promises).then(
+                function (response) {
+                    callback("SUCCESS");
+                },
+
+                function (error) {
+                    callback("ERROR");
+                }
+            );
         };
 
-        function updateNotes(responseList) {
+        function updateNotes(responseList, defer) {
 
             db.transaction(function (transaction) {
 
@@ -2468,6 +2828,8 @@
 
                 transaction.executeSql(sqlUpdate, insertValues, function (tx, res) {
 
+                    defer.resolve(res);
+
                     console.log("NOTES ROW AFFECTED: " + res.rowsAffected);
 
                 }, function (tx, error) {
@@ -2481,7 +2843,7 @@
             });
         };
 
-        function insertNotes(responseList) {
+        function insertNotes(responseList, defer) {
 
             db.transaction(function (transaction) {
 
@@ -2500,6 +2862,8 @@
 
                 transaction.executeSql(sqlInsert, insertValues, function (tx, res) {
 
+                    defer.resolve(res);
+
                     console.log("NOTES INSERT ID: " + res.insertId);
 
                 }, function (tx, error) {
@@ -2513,9 +2877,13 @@
             });
         };
 
-        function insertEngineerList(response) {
+        function insertEngineerList(response, callback) {
 
             var responseList = response;
+
+            var promises = [];
+
+            var deferred = $q.defer();
 
             db.transaction(function (transaction) {
 
@@ -2531,11 +2899,11 @@
 
                     if (rowLength > 0) {
 
-                        updateEngineer(responseList);
+                        updateEngineer(responseList, deferred);
 
                     } else {
 
-                        insertEngineer(responseList);
+                        insertEngineer(responseList, deferred);
                     }
 
                 }, function (tx, error) {
@@ -2548,11 +2916,23 @@
                 console.log("ENGINEER SELECT TRANSACTION ERROR: " + error.message);
             });
 
+            promises.push(deferred.promise);
+
             console.log("ENGINEER OBJECT =====> " + JSON.stringify(responseList));
+
+            $q.all(promises).then(
+                function (response) {
+                    callback("SUCCESS");
+                },
+
+                function (error) {
+                    callback("ERROR");
+                }
+            );
 
         };
 
-        function updateEngineer(responseList) {
+        function updateEngineer(responseList, defer) {
 
             db.transaction(function (transaction) {
 
@@ -2571,6 +2951,8 @@
 
                 transaction.executeSql(sqlUpdate, insertValues, function (tx, res) {
 
+                    defer.resolve(res);
+
                     console.log("ENGINEER ROW AFFECTED: " + res.rowsAffected);
 
                 }, function (tx, error) {
@@ -2584,7 +2966,7 @@
             });
         };
 
-        function insertEngineer(responseList) {
+        function insertEngineer(responseList, defer) {
 
             db.transaction(function (transaction) {
 
@@ -2606,6 +2988,8 @@
                 insertValues.push(responseList.Task_Number);
 
                 transaction.executeSql(sqlInsert, insertValues, function (tx, res) {
+
+                    defer.resolve(res);
 
                     console.log("ENGINEER INSERT ID: " + res.insertId);
 

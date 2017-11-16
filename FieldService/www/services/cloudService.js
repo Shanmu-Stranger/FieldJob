@@ -145,8 +145,6 @@
 
                 getInternalList(function (internalresponse) {
 
-                    console.log("Internal Response " + JSON.stringify(internalresponse));
-
                     angular.forEach(internalresponse, function (item) {
 
                         var internalOFSCJSONObject = {};
@@ -231,7 +229,7 @@
             });
         }
 
-        function getInstallBaseList() {
+        function getInstallBaseList(callback) {
 
             $http({
 
@@ -249,7 +247,12 @@
 
                 console.log("Install Base Response " + JSON.stringify(response));
 
-                localService.insertInstallBaseList(response);
+                $rootScope.apicall = true;
+
+                localService.insertInstallBaseList(response, function (result) {
+
+                    callback("success");
+                });
 
             }).error(function (error) {
 
@@ -257,7 +260,7 @@
             });
         }
 
-        function getContactList() {
+        function getContactList(callback) {
 
             $http({
 
@@ -275,7 +278,12 @@
 
                 console.log("Contact Response " + JSON.stringify(response));
 
-                localService.insertContactList(response);
+                $rootScope.apicall = true;
+
+                localService.insertContactList(response, function (result) {
+
+                    callback("success");
+                });
 
             }).error(function (error) {
 
@@ -283,7 +291,7 @@
             });
         }
 
-        function getNoteList() {
+        function getNoteList(callback) {
 
             $http({
 
@@ -301,7 +309,12 @@
 
                 console.log("Note Response " + JSON.stringify(response));
 
-                localService.insertNoteList(response);
+                $rootScope.apicall = true;
+
+                localService.insertNoteList(response, function (result) {
+
+                    callback("success");
+                });
 
             }).error(function (error) {
 
@@ -361,7 +374,7 @@
             });
         }
 
-        function getOverTimeList() {
+        function getOverTimeList(callback) {
 
             $http({
 
@@ -377,7 +390,12 @@
 
                 console.log("OverTime Response " + JSON.stringify(response));
 
-                localService.insertOverTimeList(response.OverTImeShiftCode);
+                $rootScope.apicall = true;
+
+                localService.insertOverTimeList(response.OverTImeShiftCode, function (result) {
+
+                    callback("success");
+                });
 
             }).error(function (error) {
 
@@ -385,7 +403,7 @@
             });
         }
 
-        function getShiftCodeList() {
+        function getShiftCodeList(callback) {
 
             $http({
 
@@ -401,7 +419,12 @@
 
                 console.log("ShiftCode Response " + JSON.stringify(response));
 
-                localService.insertShiftCodeList(response.ShiftCode);
+                $rootScope.apicall = true;
+
+                localService.insertShiftCodeList(response.ShiftCode, function (result) {
+
+                    callback("success");
+                });
 
             }).error(function (error) {
 
@@ -409,7 +432,7 @@
             });
         }
 
-        function getChargeType() {
+        function getChargeType(callback) {
 
             $http({
 
@@ -425,7 +448,12 @@
 
                 console.log("ChargeType Response " + JSON.stringify(response));
 
-                localService.insertChargeTypeList(response.Charge_Type);
+                $rootScope.apicall = true;
+
+                localService.insertChargeTypeList(response.Charge_Type, function (result) {
+
+                    callback("success");
+                });
 
             }).error(function (error) {
 
@@ -433,7 +461,7 @@
             });
         }
 
-        function getChargeMethod() {
+        function getChargeMethod(callback) {
 
             $http({
 
@@ -449,7 +477,12 @@
 
                 console.log("ChargeMethod Response " + JSON.stringify(response));
 
-                localService.insertChargeMethodList(response.Charge_Method);
+                $rootScope.apicall = true;
+
+                localService.insertChargeMethodList(response.Charge_Method, function (result) {
+
+                    callback("success");
+                });
 
             }).error(function (error) {
 
@@ -457,7 +490,7 @@
             });
         }
 
-        function getFieldJobName() {
+        function getFieldJobName(callback) {
 
             $http({
 
@@ -473,7 +506,12 @@
 
                 console.log("FieldJob Response " + JSON.stringify(response));
 
-                localService.insertFieldJobNameList(response.TaskName);
+                $rootScope.apicall = true;
+
+                localService.insertFieldJobNameList(response.TaskName, function (result) {
+
+                    callback("success");
+                });
 
             }).error(function (error) {
 
@@ -481,7 +519,7 @@
             });
         }
 
-        function getWorkType() {
+        function getWorkType(callback) {
 
             $http({
 
@@ -497,7 +535,12 @@
 
                 console.log("WorkType Response " + JSON.stringify(response));
 
-                localService.insertWorkTypeList(response.Charge_Method);
+                $rootScope.apicall = true;
+
+                localService.insertWorkTypeList(response.Charge_Method, function (result) {
+
+                    callback("success");
+                });
 
             }).error(function (error) {
 
@@ -505,7 +548,7 @@
             });
         }
 
-        function getItem() {
+        function getItem(callback) {
 
             $http({
 
@@ -521,7 +564,12 @@
 
                 console.log("Item Response " + JSON.stringify(response));
 
-                localService.insertItemList(response.Charge_Method);
+                $rootScope.apicall = true;
+
+                localService.insertItemList(response.Charge_Method, function (result) {
+
+                    callback("success");
+                });
 
             }).error(function (error) {
 
@@ -529,7 +577,7 @@
             });
         }
 
-        function getCurrency() {
+        function getCurrency(callback) {
 
             $http({
 
@@ -545,7 +593,12 @@
 
                 console.log("Currency Response " + JSON.stringify(response));
 
-                localService.insertCurrencyList(response.Charge_Method);
+                $rootScope.apicall = true;
+
+                localService.insertCurrencyList(response.Charge_Method, function (result) {
+
+                    callback("success");
+                });
 
             }).error(function (error) {
 
@@ -553,7 +606,7 @@
             });
         }
 
-        function getExpenseType() {
+        function getExpenseType(callback) {
 
             $http({
 
@@ -569,7 +622,12 @@
 
                 console.log("ExpenseType Response " + JSON.stringify(response));
 
-                localService.insertExpenseTypeList(response.ExpenseType);
+                $rootScope.apicall = true;
+
+                localService.insertExpenseTypeList(response.ExpenseType, function (result) {
+
+                    callback("success");
+                });
 
             }).error(function (error) {
 
@@ -577,7 +635,7 @@
             });
         }
 
-        function getNoteType() {
+        function getNoteType(callback) {
 
             $http({
 
@@ -593,7 +651,12 @@
 
                 console.log("NoteType Response " + JSON.stringify(response));
 
-                localService.insertNoteTypeList(response.Notes_Type);
+                $rootScope.apicall = true;
+
+                localService.insertNoteTypeList(response.Notes_Type, function (result) {
+
+                    callback("success");
+                });
 
             }).error(function (error) {
 

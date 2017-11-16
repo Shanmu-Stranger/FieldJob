@@ -94,7 +94,7 @@
                                 <input type="text" class="form-control" uib-datepicker-popup="{{format}}"
                                        ng-model="item.Date" is-open="item.calendarOpened"
                                        datepicker-options="dateOptions" ng-required="true" close-text="Close"
-                                       alt-input-formats="altInputFormats" ng-change="setDuration($index)"/>
+                                       alt-input-formats="altInputFormats" ng-change="setDuration($index)" />
 
                                 <span class="input-group-btn">
                                 <button type="button" class="btn btn-default" style="border-color:#ccc !important"
@@ -109,7 +109,7 @@
                     <div flex="20" class="debrief-items">
                         <label flex="100" class="  label-my" translate="{{item.timeDefault.duration.title}}"></label>
                         <div flex="100">
-                            <input type="text" class="form-control" date-format ng-model="item.Duration" ng-change="setDurationHours(item)"
+                            <input type="text" class="form-control" date-format ng-model="item.Duration" ng-change="setDurationHours(item)" ng-blur="checkDuration(item)"
                                    />
 
                         </div>
