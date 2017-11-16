@@ -515,8 +515,8 @@
                     DurationMinutes = moment.duration(durationFromResponse).minutes();
                 } else {
                     durationFromResponse = "08:00";
-                    DurationHours = "08"
-                    DurationMinutes = "00"
+                    DurationHours = 8
+                    DurationMinutes = 0
                 }
 
                 $scope.timeArray.push({
