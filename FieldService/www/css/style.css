@@ -510,10 +510,10 @@ a.article, a.article:hover {
 }
 
 #fieldTool {
-    background-color: #dee6ea;
+    background-color: #f0f0f0;
     height: 40px;
     outline: none;
-    border:none !important;
+    border:solid 1px #c0c0c0 !important;
     /* padding-left: 10px; */
     display: inline-block;
     padding: 0px 22px 0px 22px;
@@ -957,9 +957,11 @@ md-tabs-wrapper{
 .col-sm-20,.col-sm-12 label{
   text-align: left !important;
 }
-.time-btns{
-      padding: 10px;
+.time-btns {
+    padding: 10px;
     background-color: #c0c0c0;
+    border-radius: 0 0 10px 10px !important;
+    /*box-shadow: 0px 0px 20px rgba(0,0,0,0.2);*/
 }
 
 .time-font {
@@ -1847,7 +1849,7 @@ md-tab-content{
   font-weight: bold;
   font-size: 14px;
   color: #00aa7e !important;
-  text-decoration: underline;
+  /*text-decoration: underline;*/
   text-align: left;
 }
 .task-details{
@@ -1867,11 +1869,11 @@ md-tab-content{
   margin-right: 40px;
   margin-bottom: 40px;
 }
-.card-childContainer{
+.card-childContainer {
     padding: 30px 22px 30px 22px;
     background-color: #fff;
     border-radius: 10px;
-    box-shadow: 0px 0px 3px #ccc;
+    box-shadow: 0px 0px 20px rgba(0,0,0,0.2);
 }
 .martop-106{
   margin-top: 106px;
@@ -2124,7 +2126,7 @@ md-select.md-default-theme ._md-select-value, md-select ._md-select-value{
     float: right;
 }
 .marginbottom12{
-  margin-bottom: 12px;
+  margin-bottom: 12px !important;
 }
 .stroke{
   border: solid 1px #f0f0f0;
@@ -2310,4 +2312,65 @@ md-tabs:not(.md-dynamic-height)[md-border-bottom] md-tabs-content-wrapper{
 }
 .fieldjob-search-center{
     display:inline-block;
+}
+.input-items  select, input {
+    height: 40px !important;
+    background-color: #f0f0f0 !important;
+    border-radius:0px !important;
+    border-color: none !important;
+}
+.input-items  select:focus, input:focus {
+    height: 40px;
+    background-color: #f0f0f0;
+    border-color:#00aa7e !important;
+    outline:none;
+    box-shadow:none !important;
+    border-radius:0px !important;
+}
+.custom-debrief-item {
+    height: 40px !important;
+    background-color: #c0c0c0 !important;
+}
+
+textarea:focus {
+    border-color: #00aa7e !important;
+}
+.noMarginPadding {
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+    margin-left: 0px !important;
+    margin-right: 0px !important;
+    margin-bottom: 0px !important;
+}
+.minus-button {
+    border: 1px solid rgb(192, 192, 192);
+    width: 40px;
+    height: 40px;
+    margin-right: 16px;
+    background-color: #ffffff;
+    font-size:20px;
+    color:#283d3f;
+}
+.quantity-button {
+    border: none !important;
+    width: 50px;
+    height: 40px;
+    margin-right: 16px;
+    background-color: #f0f0f0;
+    position:relative;
+    top:-2px;
+}
+.plus-button {
+    border: 1px solid rgb(192, 192, 192);
+    width: 40px;
+    height: 40px;
+    background-color: #00aa7e;
+    color:#ffffff;
+    font-size:20px;
+}
+.material-label {
+    font-family: Arial !important;
+    font-weight: bold !important;
+    font-size: 12px !important;
+    color: #283d3f !important;
 }
