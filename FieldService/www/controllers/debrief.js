@@ -556,8 +556,8 @@
                     }
                     setTimeout(function () { $location.hash(null); }, 100);
                 }
-                 
-                  
+
+
                 break;
 
             case "Expenses":
@@ -587,7 +587,7 @@
                     }
                     setTimeout(function () { $location.hash(null); }, 100);
                 }
-                
+
                 break;
 
             case "Notes":
@@ -613,7 +613,7 @@
                     }
                     setTimeout(function () { $location.hash(null); }, 100);
                 }
-                
+
 
                 break;
             case "Material":
@@ -639,7 +639,7 @@
                     }
                     setTimeout(function () { $location.hash(null); }, 100);
                 }
-                
+
 
                 break;
             default:
@@ -745,7 +745,7 @@
                 itemToBeCopied.Comments = "";
                 itemToBeCopied.Time_Id = $scope.taskId + "" + ($scope.timeArray.length + 1)
                 $scope.timeArray.push(itemToBeCopied);
-                
+
                 /*Scroll to newly copied element*/
                 if ($scope.timeArray.length > 1){
                     $scope.copyTimeObj = $scope.timeArray.length - 1;
@@ -757,7 +757,7 @@
                     }
                     setTimeout(function () { $location.hash(null); }, 100);
                 }
-                
+
                 break;
 
             case "Expenses":
@@ -776,7 +776,7 @@
                     }
                     setTimeout(function () { $location.hash(null); }, 100);
                 }
-                
+
                 break;
 
             case "Notes":
@@ -793,7 +793,7 @@
                     }
                     setTimeout(function () { $location.hash(null); }, 100);
                 }
-                
+
 
                 break;
             case "Material":
@@ -810,7 +810,7 @@
                     }
                     setTimeout(function () { $location.hash(null); }, 100);
                 }
-                
+
                 break;
 
             default:
@@ -1094,27 +1094,27 @@
 
         if ($scope.currentTab == "time") {
 
-          
+
 
         } else if ($scope.currentTab == "expenses") {
 
-            
+
 
         } else if ($scope.currentTab == "material") {
 
-           
+
 
         } else if ($scope.currentTab == "notes") {
 
-            
+
 
         } else if ($scope.currentTab == "attachments") {
 
-         
+
 
         } else if ($scope.currentTab == "engineer signature") {
 
-           
+
         }
 
         if (stage.title.toLowerCase() == "time") {
@@ -1560,7 +1560,7 @@
 
                         timecode[value] = hours + ":" + timecode[value].split(":")[1]
 
-                     
+
                     }
 
                     if (timecode[value].split(":")[1].length == 1) {
@@ -1569,7 +1569,7 @@
 
                         timecode[value] = timecode[value].split(":")[0] + ":" + mins
 
-                       
+
                     }
                 }
             });
@@ -1790,7 +1790,7 @@
                                     attachmentJSONData.push(attachmentObject);
                                 }
 
-                                
+
 
                                 var timeUploadJSON = {
                                     "Time": timeJSONData
@@ -1887,7 +1887,7 @@
 
                                                             }, 3000);
                                                         })
-                                                        
+
                                                     });
                                                 }
                                                 else
@@ -2226,7 +2226,7 @@
     function generatePDF() {
 
         var defer = $q.defer();
-        
+
         setTimeout(function () {
             if (valueService.getLanguage() == 'ch') {
                 var canvas = document.getElementById('canvas');

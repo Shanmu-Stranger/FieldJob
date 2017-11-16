@@ -64,7 +64,7 @@
                                        translate="{{item.expenseDefault.chargeMethod.title}}"></label>
                                 <div class="col-sm-12">
                                     <select class="form-control select-debrief" ng-model="item.Charge_Method"
-                                            ng-options="x as x.Value for x in item.expenseDefault.chargeMethod.values  track by x.ID" ng-change="setChargeMethodForExpense(item)">
+                                            ng-options="x as x.Value | translate for x in item.expenseDefault.chargeMethod.values  track by x.ID" ng-change="setChargeMethodForExpense(item)">
                                         <option value="" disabled selected>Select Charge Method</option>
                                     </select>
                                 </div>
