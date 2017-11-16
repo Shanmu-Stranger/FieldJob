@@ -241,10 +241,20 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
         console.log("NETWORK " + valueService.getNetworkStatus());
 
         var promises = [];
+
+        var deferred;
         
         if (valueService.getNetworkStatus()) {
+
             $rootScope.apicall = true;
+
+            var deferAccept = $q.defer();
+           
             localService.getAcceptTaskList(function (response) {
+
+                console.log("SYNC ACCEPT");
+
+                deferAccept.resolve("Accept");
 
                 angular.forEach(response, function (item) {
 
@@ -259,7 +269,15 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
                 });
             });
 
+            promises.push(deferAccept.promise);
+
+            var deferSubmit = $q.defer();
+                 
             localService.getPendingTaskList(function (response) {
+
+                console.log("SYNC SUBMIT");
+
+                deferSubmit.resolve("Submit");
 
                 angular.forEach(response, function (item) {
 
@@ -275,6 +293,10 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
                     promises.push(deferred.promise);
                 });
             });
+
+            promises.push(deferSubmit.promise);
+
+            console.log("LENGTH " + promises.length);
 
             $q.all(promises).then(
 
