@@ -24,7 +24,7 @@
 
         var contentType = 'application/json';
 
-        DEV
+        //DEV
         var authKey = "Basic QTQ3MjE0NF9FTUVSU09OTU9CSUxFQ0xPVURfTU9CSUxFX0FOT05ZTU9VU19BUFBJRDpZLm81amxkaHVtYzF2ZQ==";
 
         var taskBackEndId = "1900984d-1b99-4ede-988e-06e0ba319276";
