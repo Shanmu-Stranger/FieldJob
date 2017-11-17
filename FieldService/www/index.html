@@ -169,7 +169,7 @@
 
         <nav class="navbar navbar-default navbar-fixed-top nav-noLeft" ng-show="$root.Islogin"
              ng-class="{'nav-left' : hideNavLeft}">
-            <div class="container-fluid">
+            <div>
 
                 <div class="navbar-header">
 
@@ -178,7 +178,7 @@
 
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" style="text-align: center;">
                     <label class="title" translate="{{$root.selectedCategory}}"></label><span class="title" ng-if="$root.selectedTask.Task_Number">#{{$root.selectedTask.Task_Number}}</span>
-                    <ul class="nav navbar-nav navbar-right">
+                    <ul class="nav navbar-nav pull-right">
 
                         <li class="popover__wrapper">
                             <div class="user-avatar"></div>
@@ -197,6 +197,11 @@
                                          ng-disabled="franceFlag" ng-class="!franceFlag ? 'selected':'unselected'"/>
                                     <img src="images/Layer 12.png" ng-click="changeLanguage('ch')"
                                          ng-disabled="chinaFlag" ng-class="!chinaFlag ? 'selected':'unselected'"/>
+                                </div>
+                                <div class="language-labels">
+                                    <label>English</label>
+                                    <label>Chinese</label>
+                                    <label>French</label>
                                 </div>
                             </div>
                         </li>

@@ -1,4 +1,4 @@
-﻿app.controller("debriefController", function ($scope, $state, $rootScope, $window, $timeout, $filter, $http, $q, cloudService, $mdDialog, valueService, localService, Upload, constantService,$anchorScroll,$location) {
+﻿app.controller("debriefController", function ($scope, $state, $rootScope, $window, $timeout, $filter, $http, $q, cloudService, $mdDialog, valueService, localService, Upload, constantService, $anchorScroll, $location) {
 
     $scope.currentTab = "time";
 
@@ -43,9 +43,12 @@
     $scope.datePicker = {startDate: null, endDate: null};
 
     $scope.summary = {};
+
     $scope.taskId = "";
+
     $scope.taskObject = {};
-    $scope.installBaseObject = {};
+
+    $scope.installBaseArray = [];
 
     $scope.timeArray = [];
     $scope.expenseArray = [];
@@ -57,13 +60,24 @@
     $scope.overTimeArray = [];
     $scope.shiftCodeArray = [];
 
+    $scope.chargeTypeArray = [];
+    $scope.chargeMethodArray = [];
+    $scope.fieldJobArray = [];
+
+    $scope.workTypeArray = [];
+    $scope.itemArray = [];
+    $scope.currencyArray = [];
+
+    $scope.expenseTypeArray = [];
+    $scope.noteTypeArray = [];
+
     $scope.initializeDebrief = function () {
 
         $scope.taskObject = valueService.getTask();
 
         $scope.taskId = $scope.taskObject.Task_Number;
 
-        $scope.installBaseObject = valueService.getInstallBase();
+        $scope.installBaseArray = valueService.getInstallBase();
 
         $scope.timeArray = valueService.getTime();
         $scope.expenseArray = valueService.getExpense();
@@ -126,16 +140,42 @@
         $scope.chargeMethodArray = valueService.getChargeMethod();
         $scope.fieldJobArray = valueService.getFieldJob();
 
-        $scope.chargeTypeArray = valueService.getChargeType();
-        $scope.chargeMethodArray = valueService.getChargeMethod();
-        $scope.fieldJobArray = valueService.getFieldJob();
-
         $scope.workTypeArray = valueService.getWorkType();
-        $scope.Item = valueService.getItem();
+        $scope.itemArray = valueService.getItem();
         $scope.currencyArray = valueService.getCurrency();
 
         $scope.expenseTypeArray = valueService.getExpenseType();
         $scope.noteTypeArray = valueService.getNoteType();
+
+        $scope.itemValue = [];
+        $scope.itemTravel = [];
+        $scope.itemDeputation = [];
+        $scope.itemNormal = [];
+        $scope.itemNightShift = [];
+
+        angular.forEach($scope.itemArray, function (item) {
+
+            if (item.Type == "Value") {
+
+                $scope.itemValue.push(item);
+
+            } else if (item.Type == "Travel") {
+
+                $scope.itemTravel.push(item);
+
+            } else if (item.Type == "Deputation") {
+
+                $scope.itemDeputation.push(item);
+
+            } else if (item.Type == "Normal") {
+
+                $scope.itemNormal.push(item);
+
+            } else if (item.Type == "Nightshift") {
+
+                $scope.itemNightShift.push(item);
+            }
+        });
 
         $scope.setDropDownValues();
 
@@ -166,21 +206,7 @@
             },
             item: {
                 title: "Item",
-                values: [{"ID": 1, "Value": " Standard"},
-                    {"ID": 2, "Value": " Overtime"},
-                    {"ID": 3, "Value": " DoubleTime"}],
-                valuesDeputation: [{"ID": 139, "Value": "Deputation- Standard"},
-                    {"ID": 140, "Value": "Deputation- Overtime"},
-                    {"ID": 141, "Value": "Deputation- DoubleTime"}],
-                valuesTravel: [{"ID": 4, "Value": "Travel- Standard"},
-                    {"ID": 5, "Value": "Travel- Overtime"},
-                    {"ID": 6, "Value": "Travel- DoubleTime"}],
-                valuesNormal: [{"ID": 142, "Value": "Normal- Standard"},
-                    {"ID": 143, "Value": "Normal- Overtime"},
-                    {"ID": 144, "Value": "Normal- DoubleTime"}],
-                valuesNightShift: [{"ID": 145, "Value": "Night Shift- Standard"},
-                    {"ID": 146, "Value": "Night Shift- Overtime"},
-                    {"ID": 147, "Value": "Night Shift- DoubleTime"}]
+                values: $scope.itemValue
             },
             description: {
                 title: "Description"
@@ -332,13 +358,13 @@
                         item.Work_Type = type;
 
                         if (type.Value == "Deputation") {
-                            item.timeDefault.item.values = item.timeDefault.item.valuesDeputation;
+                            item.timeDefault.item.values = $scope.itemDeputation;
                         } else if (type.Value == "Travel") {
-                            item.timeDefault.item.values = item.timeDefault.item.valuesTravel;
+                            item.timeDefault.item.values = $scope.itemTravel;
                         } else if (type.Value == "Normal") {
-                            item.timeDefault.item.values = item.timeDefault.item.valuesNormal;
+                            item.timeDefault.item.values = $scope.itemNormal;
                         } else if (type.Value == "Night Shift") {
-                            item.timeDefault.item.values = item.timeDefault.item.valuesNightShift;
+                            item.timeDefault.item.values = $scope.itemNightShift;
                         }
                     }
                 });
@@ -385,25 +411,27 @@
             angular.forEach($scope.materialArray, function (item) {
 
                 item.materialDefault = $scope.materialDefault;
+
                 angular.forEach(item.materialDefault.chargeType.values, function (type) {
                     if (type.ID == item.Charge_Type_Id) {
                         item.Charge_Type = type;
                     }
                 });
-                var serialin, serialout, serialNo;
+
+                var serialIn, serialOut, serialNo;
 
                 if (item.Serial_In != undefined) {
 
-                    var serialin = item.Serial_In.split(",");
+                    var serialIn = item.Serial_In.split(",");
 
-                    serialin = item.Serial_In.split(",");
+                    serialIn = item.Serial_In.split(",");
                 }
 
                 if (item.Serial_In != undefined) {
 
-                    var serialout = item.Serial_Out.split(",");
+                    var serialOut = item.Serial_Out.split(",");
 
-                    serialout = item.Serial_Out.split(",");
+                    serialOut = item.Serial_Out.split(",");
                 }
 
                 if (item.Serial_In != undefined) {
@@ -419,31 +447,31 @@
 
                     angular.forEach(serialNo, function (serail) {
 
-                        var serialTypeobj = {};
+                        var serialTypeObject = {};
 
-                        serialTypeobj.in = "";
-                        serialTypeobj.out = "";
-                        serialTypeobj.number = serail;
+                        serialTypeObject.in = "";
+                        serialTypeObject.out = "";
+                        serialTypeObject.number = serail;
 
-                        if (serialTypeobj.number != "")
-                            item.Serial_Type.push(serialTypeobj);
+                        if (serialTypeObject.number != "")
+                            item.Serial_Type.push(serialTypeObject);
                     });
                 }
 
-                if (serialin != undefined && serialin.length > 0 && serialout != undefined && serialout.length > 0) {
+                if (serialIn != undefined && serialIn.length > 0 && serialOut != undefined && serialOut.length > 0) {
 
                     var index = 0;
 
-                    angular.forEach(serialin, function (serail) {
+                    angular.forEach(serialIn, function (serail) {
 
-                        var serialTypeobj = {};
+                        var serialTypeObject = {};
 
-                        serialTypeobj.in = serail;
-                        serialTypeobj.out = serialout[index];
-                        serialTypeobj.number = "";
+                        serialTypeObject.in = serail;
+                        serialTypeObject.out = serialOut[index];
+                        serialTypeObject.number = "";
 
                         if (serialTypeobj.in != "")
-                            item.Serial_Type.push(serialTypeobj);
+                            item.Serial_Type.push(serialTypeObject);
 
                         index++;
                     });
@@ -492,8 +520,9 @@
                 File_Name: "",
                 Task_Number: $scope.taskId
             };
-        }
-        else {
+
+        } else {
+
             $scope.engineerObject.followUp = ($scope.engineerObject.followUp == 'true');
             $scope.engineerObject.salesQuote = ($scope.engineerObject.salesQuote == 'true');
             $scope.engineerObject.salesVisit = ($scope.engineerObject.salesVisit == 'true');
@@ -510,13 +539,16 @@
             case "Time":
 
                 if (valueService.getUserType().duration) {
+
                     durationFromResponse = moment(valueService.getUserType().duration, 'HH').format('HH:mm');
                     DurationHours = moment.duration(durationFromResponse).hours();
                     DurationMinutes = moment.duration(durationFromResponse).minutes();
+
                 } else {
+
                     durationFromResponse = "08:00";
-                    DurationHours = 8
-                    DurationMinutes = 0
+                    DurationHours = 8;
+                    DurationMinutes = 0;
                 }
 
                 $scope.timeArray.push({
@@ -546,15 +578,25 @@
                     Task_Number: $scope.taskId
                 });
 
-                if ($scope.timeArray.length > 1){
+                if ($scope.timeArray.length > 1) {
+
                     $scope.addTimeObj = $scope.timeArray.length - 1;
+
                     var newHash = $scope.addTimeObj;
+
                     if ($location.hash() !== newHash) {
+
                         $location.hash('time' + $scope.addTimeObj);
+
                     } else {
+
                         $anchorScroll();
                     }
-                    setTimeout(function () { $location.hash(null); }, 100);
+
+                    setTimeout(function () {
+
+                        $location.hash(null);
+                    }, 100);
                 }
 
 
@@ -577,15 +619,25 @@
                     Task_Number: $scope.taskId
                 });
 
-                if ($scope.expenseArray.length > 1){
+                if ($scope.expenseArray.length > 1) {
+
                     $scope.addExpenseObj = $scope.expenseArray.length - 1;
+
                     var newHash = $scope.addExpenseObj;
+
                     if ($location.hash() !== newHash) {
+
                         $location.hash('expense' + $scope.addExpenseObj);
+
                     } else {
+
                         $anchorScroll();
                     }
-                    setTimeout(function () { $location.hash(null); }, 100);
+
+                    setTimeout(function () {
+
+                        $location.hash(null);
+                    }, 100);
                 }
 
                 break;
@@ -603,20 +655,31 @@
                     Task_Number: $scope.taskId
                 });
 
-                if ($scope.notesArray.length > 1){
+                if ($scope.notesArray.length > 1) {
+
                     $scope.addNoteObj = $scope.notesArray.length - 1;
+
                     var newHash = $scope.addNoteObj;
+
                     if ($location.hash() !== newHash) {
+
                         $location.hash('note' + $scope.addNoteObj);
+
                     } else {
+
                         $anchorScroll();
                     }
-                    setTimeout(function () { $location.hash(null); }, 100);
+
+                    setTimeout(function () {
+
+                        $location.hash(null);
+                    }, 100);
                 }
 
 
                 break;
             case "Material":
+
                 $scope.materialArray.push({
                     materialDefault: $scope.materialDefault,
                     Material_Id: $scope.taskId + "" + ($scope.materialArray.length + 1),
@@ -629,17 +692,26 @@
                     ItemName: ""
                 });
 
-                if ($scope.materialArray.length > 1){
+                if ($scope.materialArray.length > 1) {
+
                     $scope.addMaterialObj = $scope.materialArray[$scope.materialArray.length - 1].Material_Id;
+
                     var newHash = $scope.addMaterialObj;
+
                     if ($location.hash() !== newHash) {
+
                         $location.hash($scope.addMaterialObj);
+
                     } else {
+
                         $anchorScroll();
                     }
-                    setTimeout(function () { $location.hash(null); }, 100);
-                }
 
+                    setTimeout(function () {
+
+                        $location.hash(null);
+                    }, 100);
+                }
 
                 break;
             default:
@@ -743,19 +815,31 @@
             case "Time":
 
                 itemToBeCopied.Comments = "";
-                itemToBeCopied.Time_Id = $scope.taskId + "" + ($scope.timeArray.length + 1)
+
+                itemToBeCopied.Time_Id = $scope.taskId + "" + ($scope.timeArray.length + 1);
+
                 $scope.timeArray.push(itemToBeCopied);
 
-                /*Scroll to newly copied element*/
-                if ($scope.timeArray.length > 1){
+                if ($scope.timeArray.length > 1) {
+
                     $scope.copyTimeObj = $scope.timeArray.length - 1;
+
                     var newHash = $scope.copyTimeObj;
+
                     if ($location.hash() !== newHash) {
+
                         $location.hash('time' + $scope.copyTimeObj);
+
                     } else {
+
                         $anchorScroll();
                     }
-                    setTimeout(function () { $location.hash(null); }, 100);
+
+                    setTimeout(function () {
+
+                        $location.hash(null);
+
+                    }, 100);
                 }
 
                 break;
@@ -763,52 +847,88 @@
             case "Expenses":
 
                 itemToBeCopied.justification = "";
-                itemToBeCopied.Expense_Id = $scope.taskId + "" + ($scope.expenseArray.length + 1)
+
+                itemToBeCopied.Expense_Id = $scope.taskId + "" + ($scope.expenseArray.length + 1);
+
                 $scope.expenseArray.push(itemToBeCopied);
 
-                if ($scope.expenseArray.length > 1){
+                if ($scope.expenseArray.length > 1) {
+
                     $scope.copyExpenseObj = $scope.expenseArray.length - 1;
+
                     var newHash = $scope.copyExpenseObj;
+
                     if ($location.hash() !== newHash) {
+
                         $location.hash('expense' + $scope.copyExpenseObj);
+
                     } else {
+
                         $anchorScroll();
                     }
-                    setTimeout(function () { $location.hash(null); }, 100);
+
+                    setTimeout(function () {
+
+                        $location.hash(null);
+                    }, 100);
                 }
 
                 break;
 
             case "Notes":
-                itemToBeCopied.Notes_Id = $scope.taskId + "" + ($scope.notesArray.length + 1)
+
+                itemToBeCopied.Notes_Id = $scope.taskId + "" + ($scope.notesArray.length + 1);
+
                 $scope.notesArray.push(itemToBeCopied);
 
-                if ($scope.notesArray.length > 1){
+                if ($scope.notesArray.length > 1) {
+
                     $scope.copyNoteObj = $scope.notesArray.length - 1;
+
                     var newHash = $scope.copyNoteObj;
+
                     if ($location.hash() !== newHash) {
+
                         $location.hash('note' + $scope.copyNoteObj);
+
                     } else {
+
                         $anchorScroll();
                     }
-                    setTimeout(function () { $location.hash(null); }, 100);
+
+                    setTimeout(function () {
+
+                        $location.hash(null);
+                    }, 100);
                 }
 
 
                 break;
             case "Material":
-                itemToBeCopied.Material_Id = $scope.taskId + "" + ($scope.materialArray.length + 1)
+
+                itemToBeCopied.Material_Id = $scope.taskId + "" + ($scope.materialArray.length + 1);
+
                 $scope.materialArray.push(itemToBeCopied);
-                if ($scope.materialArray.length > 1){
+
+                if ($scope.materialArray.length > 1) {
+
                     $scope.copyMaterialObj = $scope.materialArray[$scope.materialArray.length - 1].Material_Id;
-                    //$scope.copyMaterialObj = $scope.materialArray.length - 1;
+
                     var newHash = $scope.copyMaterialObj;
+
                     if ($location.hash() !== newHash) {
+
                         $location.hash($scope.copyMaterialObj);
+
                     } else {
+
                         $anchorScroll();
                     }
-                    setTimeout(function () { $location.hash(null); }, 100);
+
+                    setTimeout(function () {
+
+                        $location.hash(null);
+                    }, 100);
                 }
 
                 break;
@@ -879,24 +999,25 @@
 
     $scope.setWorkType = function (workType, timeObject) {
 
-        if (workType.Value == "Deputation" || workType.ID==1) {
+        if (workType.Value == "Deputation" || workType.ID == 1) {
 
-            timeObject.timeDefault.item.values = timeObject.timeDefault.item.valuesDeputation;
+            timeObject.timeDefault.item.values = $scope.itemDeputation;
 
         } else if (workType.Value == "Travel" || workType.ID == 2) {
 
-            timeObject.timeDefault.item.values = timeObject.timeDefault.item.valuesTravel;
+            timeObject.timeDefault.item.values = $scope.itemTravel;
 
         } else if (workType.Value == "Normal" || workType.ID == 3) {
 
-            timeObject.timeDefault.item.values = timeObject.timeDefault.item.valuesNormal;
+            timeObject.timeDefault.item.values = $scope.itemNormal;
 
         } else if (workType.Value == "Night Shift" || workType.Value == "Nightshift" || workType.ID == 4) {
 
-            timeObject.timeDefault.item.values = timeObject.timeDefault.item.valuesNightShift;
+            timeObject.timeDefault.item.values = $scope.itemNightShift;
         }
 
         timeObject.Work_Type_Id = timeObject.Work_Type.ID;
+
         timeObject.Item = "";
     };
 
@@ -961,22 +1082,26 @@
     $scope.setNoteType = function (noteobj) {
         noteobj.Note_Type_Id = noteobj.Note_Type.ID;
     }
+
     $rootScope.saveValues = function () {
+
         $scope.saveValues();
+
         valueService.saveValues();
     }
-    $scope.saveValues = function ()
-    {
+
+    $scope.saveValues = function () {
+
         if ($scope.timeArray.length > 0) {
 
             valueService.setTime($scope.timeArray);
-
         }
+
         if ($scope.expenseArray.length > 0) {
 
             valueService.setExpense($scope.expenseArray);
-
         }
+
         if ($scope.materialArray.length > 0) {
 
             $scope.serialNumber = function (serialArray) {
@@ -1023,10 +1148,12 @@
 
             valueService.setMaterial($scope.materialArray);
         }
+
         if ($scope.notesArray.length > 0) {
 
             valueService.setNote($scope.notesArray);
         }
+
         if ($scope.files.length > 0 || $scope.image.length > 0) {
 
             $scope.attachmentArraydb = [];
@@ -1081,11 +1208,13 @@
 
             valueService.setAttachment($scope.attachmentArraydb);
         }
+
         if ($scope.engineerObject != null) {
 
             valueService.setEngineer($scope.engineerObject);
         }
     }
+
     $scope.tabChange = function (stage) {
 
         constantService.setStagesArray(stage);
@@ -1095,25 +1224,19 @@
         if ($scope.currentTab == "time") {
 
 
-
         } else if ($scope.currentTab == "expenses") {
-
 
 
         } else if ($scope.currentTab == "material") {
 
 
-
         } else if ($scope.currentTab == "notes") {
-
 
 
         } else if ($scope.currentTab == "attachments") {
 
 
-
         } else if ($scope.currentTab == "engineer signature") {
-
 
         }
 
@@ -1162,6 +1285,7 @@
         }
 
         if (stage.title.toLowerCase() == "material") {
+
             if ($scope.materialArray.length == 0) {
 
                 $scope.addObject(stage.title);
@@ -1303,11 +1427,11 @@
                 $scope.summary.taskObject.Task_Number = $scope.taskObject.Task_Number;
                 $scope.summary.taskObject.Job_Description = $scope.taskObject.Job_Description;
 
-                if ($scope.installBaseObject != undefined && $scope.installBaseObject.length > 0) {
+                if ($scope.installBaseArray != undefined && $scope.installBaseArray.length > 0) {
 
                     $scope.summary.taskObject.InstallBase = [];
 
-                    angular.forEach($scope.installBaseObject, function (key) {
+                    angular.forEach($scope.installBaseArray, function (key) {
 
                         var install = {};
 
@@ -1558,18 +1682,14 @@
 
                         var hours = "0" + timecode[value].split(":")[0];
 
-                        timecode[value] = hours + ":" + timecode[value].split(":")[1]
-
-
+                        timecode[value] = hours + ":" + timecode[value].split(":")[1];
                     }
 
                     if (timecode[value].split(":")[1].length == 1) {
 
                         var mins = "0" + timecode[value].split(":")[1];
 
-                        timecode[value] = timecode[value].split(":")[0] + ":" + mins
-
-
+                        timecode[value] = timecode[value].split(":")[0] + ":" + mins;
                     }
                 }
             });
@@ -1667,10 +1787,13 @@
         $scope.customersubmit = true;
 
         $scope.isSubmitted = true;
+
         $rootScope.apicall = true;
+
         var promise = generatePDF();
 
         promise.then(function () {
+
             window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fs) {
 
                 fs.root.getFile("Report_" + $scope.summary.taskObject.Task_Number + ".pdf", {
@@ -1687,10 +1810,15 @@
                             console.log("Successful file read: " + this.result);
 
                             $scope.reportBase64 = this.result.split(",")[1];
+
                             constantService.setCCEmailID(customerMail.value);
-                            var email = {"Email": customerMail.value, "Task_Number": $scope.taskId}
+
+                            var email = {"Email": customerMail.value, "Task_Number": $scope.taskId};
+
                             localService.updateTaskEmail(email);
+
                             $scope.saveValues();
+
                             valueService.saveValues();
 
                             if (valueService.getNetworkStatus()) {
@@ -1790,8 +1918,6 @@
                                     attachmentJSONData.push(attachmentObject);
                                 }
 
-
-
                                 var timeUploadJSON = {
                                     "Time": timeJSONData
                                 };
@@ -1833,7 +1959,8 @@
                                                     cloudService.createAttachment(attachmentUploadJSON, function (response) {
 
                                                         console.log("Uploaded Attachment " + JSON.stringify(response));
-                                                        var reportObj = {
+
+                                                        var reportObject = {
                                                             "Data": $scope.reportBase64,
                                                             "FileName": "Report_" + $scope.summary.taskObject.Task_Number + ".pdf",
                                                             "Description": "Report_" + $scope.summary.taskObject.Task_Number + ".pdf",
@@ -1841,12 +1968,16 @@
                                                             "taskId": $rootScope.selectedTask.Task_Number,
                                                             "contentType": "application/pdf"
                                                         }
+
                                                         attachmentJSONData = [];
-                                                        attachmentJSONData.push(reportObj);
-                                                        var reportattachmentUploadJSON = {
+
+                                                        attachmentJSONData.push(reportObject);
+
+                                                        var reportAttachmentUploadJSON = {
                                                             "attachment": attachmentJSONData
                                                         };
-                                                        cloudService.createAttachment(reportattachmentUploadJSON, function (response) {
+
+                                                        cloudService.createAttachment(reportAttachmentUploadJSON, function (response) {
                                                             setTimeout(function () {
 
                                                                 var formData = {
@@ -1876,25 +2007,24 @@
                                                                         Submit_Status: "I"
                                                                     };
 
-                                                                    localService.updateTaskSubmitStatus(taskObject, function (result){
-
+                                                                    localService.updateTaskSubmitStatus(taskObject, function (result) {
                                                                     });
+
                                                                     cloudService.OfscActions($rootScope.selectedTask.Activity_Id, false, function (response) {
                                                                         cloudService.getTaskList(function (response) {
 
                                                                         });
-                                                                    })
-
+                                                                    });
                                                                 });
 
                                                             }, 3000);
                                                         })
 
                                                     });
-                                                }
-                                                else
-                                                {
-                                                    var reportObj = {
+
+                                                } else {
+
+                                                    var reportObject = {
                                                         "Data": $scope.reportBase64,
                                                         "FileName": "Report_" + $scope.summary.taskObject.Task_Number + ".pdf",
                                                         "Description": "Report_" + $scope.summary.taskObject.Task_Number + ".pdf",
@@ -1902,12 +2032,17 @@
                                                         "taskId": $rootScope.selectedTask.Task_Number,
                                                         "contentType": "application/pdf"
                                                     }
+
                                                     attachmentJSONData = [];
-                                                    attachmentJSONData.push(reportObj);
-                                                    var reportattachmentUploadJSON = {
+
+                                                    attachmentJSONData.push(reportObject);
+
+                                                    var reportAttachmentUploadJSON = {
                                                         "attachment": attachmentJSONData
                                                     };
-                                                    cloudService.createAttachment(reportattachmentUploadJSON, function (response) {
+
+                                                    cloudService.createAttachment(reportAttachmentUploadJSON, function (response) {
+
                                                         setTimeout(function () {
 
                                                             var formData = {
@@ -1937,7 +2072,7 @@
                                                                     Submit_Status: "I"
                                                                 };
 
-                                                                localService.updateTaskSubmitStatus(taskObject, function (result){
+                                                                localService.updateTaskSubmitStatus(taskObject, function (result) {
 
                                                                 });
 
@@ -1945,8 +2080,7 @@
                                                                     cloudService.getTaskList(function (response) {
 
                                                                     });
-                                                                })
-
+                                                                });
                                                             });
 
                                                         }, 3000)
@@ -1956,7 +2090,6 @@
                                         });
                                     });
                                 });
-
 
                             } else {
 
@@ -1974,6 +2107,8 @@
                                         constantService.setTaskList(response);
 
                                         $rootScope.apicall = false;
+
+                                        $state.go($state.current, {}, {reload: true});
                                     });
                                 });
                             }
@@ -2132,10 +2267,8 @@
             item.DurationMinutes = parseInt(item.Duration.split(":")[1]);
         }
     };
-    $scope.checkDuration = function (item)
-    {
-        if (item.Duration == "")
-        {
+    $scope.checkDuration = function (item) {
+        if (item.Duration == "") {
             item.Duration = "00:00";
             item.DurationHours = 0;
             item.DurationMinutes = 0;
@@ -2243,13 +2376,18 @@
         var defer = $q.defer();
 
         setTimeout(function () {
-            if (valueService.getLanguage() == 'ch') {
-                var canvas = document.getElementById('canvas');
-                if (canvas.getContext) {
-                    var ctx = canvas.getContext('2d');
-                    var pdfimg = 'data:image/png;base64,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'
-                    var excelimg = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAQAAAAAYLlVAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QAAKqNIzIAAAAJcEhZcwAADdcAAA3XAUIom3gAAAAHdElNRQfhCwEGLDTCqNdaAAADfklEQVRo3u2ZTUhUURTHf8+vUsuK7MNKKCenCT/HohKkoo2gtQyiqCiCqDZFCxcVfRBRrqJFUARZUAS1aBGhrSQNIiiDEMrACKkIE1TKonJeC193zvsanZk7MxvP29zzce/5v3PvPee++wySI4MAdYSpYwXBRAbISchtDqsttzUUWbKRxN4gHgD5VBMmTB1VzEgianECmEPYchsiW5fbyQEsskIcpky/U38Ay5XbktS6lQCyWWWFuJZ56XIrAYxSoHG8AzRM2daki7tganqGAWiLs9e1rPQH3UY7Mg2gKNMAmAaQWDHypzd0CK6QBqCX7y67tdG0rncb2imEickGD83w/34Zn4JpAM5F+JGHgltHvUP/lB7VDrDVNV4VSwW3DICNLHbZ5Uab9qX0m5AwCzFu0/6wlelODbXAdO+CdhvSBzbdBaHZpaUYmV7bcJtws0bIh5ij5EV8SR2A9+QJCB1KflxIL2sqx6aB6bE0W2hV7U10AjBAkF+WrJpXrgPqCHNxHkgW0AQ8ZtDlYWd0GXrhGrWt22eYmOxTvEH3FDPhhskzoV8qbhPGWzHpFW+8d8qpOAkAEdaJN+7noOLm8lUnAL9MaHAFQ03STe4rzXkWopH8y/F69nDLal/kj9Wq41DM8ZqpElwpALvZ7LITn3b+W+Qzs11xee5rPTEFcW/DWMWohBMOyX7W+1qbJESxq6Fzrw/FsDVIkPzD0+/xzfRI9xQYMULXyBOrVcCY1VpBL/me1hOZ0LkIDwNXGXBZn2bmZBG4Lcwvi/bJmBGwUxKJaJBiZRxgXNz/5PEuHYnoGN9U+xxZnFXcb46glbzeRp7ta4lgEqFWyO7pi4DXIhyjkg+Ka6cRgMc0K9kS3rqSlMZyLA8eW4RcDn1U1zZ0A3hpSz8vhKZLyLN5nRoAfwkLN9sd2iahqyeSCgCtwkUOfQ5tjy3h3tABwF6OTeCM4soodyydWq7zSXE/PVb3FduHTZBLQAt9Lrs70TQfb8j8nmEPOEkkorTRNADdVzSnRL6EWQDc8LiimZUqAAGPQ1tFrA4Zn4JpAJkGMJppAPdy+CMvjJKm7jhsTbq4a5BHhfWfqIbCJFxPnIjiJllesyhXf4+K4x5JAwBJpepvYWlmAERpvgUlTDDmnkkZgCgVUmNBqbTdo6UNQJRyqbCg1KjjeVoByP4rrT2U4O/7f0/9ov/AQQ2NAAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDE3LTExLTAxVDA2OjQ0OjUyKzAxOjAwfVk/DQAAACV0RVh0ZGF0ZTptb2RpZnkAMjAxNy0xMS0wMVQwNjo0NDo1MiswMTowMAwEh7EAAAAZdEVYdFNvZnR3YXJlAHd3dy5pbmtzY2FwZS5vcmeb7jwaAAAAAElFTkSuQmCC'
 
+            if (valueService.getLanguage() == 'ch') {
+
+                var canvas = document.getElementById('canvas');
+
+                if (canvas.getContext) {
+
+                    var ctx = canvas.getContext('2d');
+
+                    var pdfimg = 'data:image/png;base64,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';
+
+                    var excelimg = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAQAAAAAYLlVAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QAAKqNIzIAAAAJcEhZcwAADdcAAA3XAUIom3gAAAAHdElNRQfhCwEGLDTCqNdaAAADfklEQVRo3u2ZTUhUURTHf8+vUsuK7MNKKCenCT/HohKkoo2gtQyiqCiCqDZFCxcVfRBRrqJFUARZUAS1aBGhrSQNIiiDEMrACKkIE1TKonJeC193zvsanZk7MxvP29zzce/5v3PvPee++wySI4MAdYSpYwXBRAbISchtDqsttzUUWbKRxN4gHgD5VBMmTB1VzEgianECmEPYchsiW5fbyQEsskIcpky/U38Ay5XbktS6lQCyWWWFuJZ56XIrAYxSoHG8AzRM2daki7tganqGAWiLs9e1rPQH3UY7Mg2gKNMAmAaQWDHypzd0CK6QBqCX7y67tdG0rncb2imEickGD83w/34Zn4JpAM5F+JGHgltHvUP/lB7VDrDVNV4VSwW3DICNLHbZ5Uab9qX0m5AwCzFu0/6wlelODbXAdO+CdhvSBzbdBaHZpaUYmV7bcJtws0bIh5ij5EV8SR2A9+QJCB1KflxIL2sqx6aB6bE0W2hV7U10AjBAkF+WrJpXrgPqCHNxHkgW0AQ8ZtDlYWd0GXrhGrWt22eYmOxTvEH3FDPhhskzoV8qbhPGWzHpFW+8d8qpOAkAEdaJN+7noOLm8lUnAL9MaHAFQ03STe4rzXkWopH8y/F69nDLal/kj9Wq41DM8ZqpElwpALvZ7LITn3b+W+Qzs11xee5rPTEFcW/DWMWohBMOyX7W+1qbJESxq6Fzrw/FsDVIkPzD0+/xzfRI9xQYMULXyBOrVcCY1VpBL/me1hOZ0LkIDwNXGXBZn2bmZBG4Lcwvi/bJmBGwUxKJaJBiZRxgXNz/5PEuHYnoGN9U+xxZnFXcb46glbzeRp7ta4lgEqFWyO7pi4DXIhyjkg+Ka6cRgMc0K9kS3rqSlMZyLA8eW4RcDn1U1zZ0A3hpSz8vhKZLyLN5nRoAfwkLN9sd2iahqyeSCgCtwkUOfQ5tjy3h3tABwF6OTeCM4soodyydWq7zSXE/PVb3FduHTZBLQAt9Lrs70TQfb8j8nmEPOEkkorTRNADdVzSnRL6EWQDc8LiimZUqAAGPQ1tFrA4Zn4JpAJkGMJppAPdy+CMvjJKm7jhsTbq4a5BHhfWfqIbCJFxPnIjiJllesyhXf4+K4x5JAwBJpepvYWlmAERpvgUlTDDmnkkZgCgVUmNBqbTdo6UNQJRyqbCg1KjjeVoByP4rrT2U4O/7f0/9ov/AQQ2NAAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDE3LTExLTAxVDA2OjQ0OjUyKzAxOjAwfVk/DQAAACV0RVh0ZGF0ZTptb2RpZnkAMjAxNy0xMS0wMVQwNjo0NDo1MiswMTowMAwEh7EAAAAZdEVYdFNvZnR3YXJlAHd3dy5pbmtzY2FwZS5vcmeb7jwaAAAAAElFTkSuQmCC'
 
                     //Customer Call heading
                     ctx.fillStyle = "#000";
@@ -2281,7 +2419,9 @@
 
                     ctx.fillStyle = "#000";
                     ctx.font = '13px sans-serif ';
+
                     var enddate = " ";
+
                     if ($scope.summary.taskObject.times[0].End_Date != "" && $scope.summary.taskObject.times[0].End_Date != undefined) {
                         enddate = moment.utc($scope.summary.taskObject.times[0].End_Date).utcOffset(constantService.getTimeZone()).format("DD/MM/YYYY");
                     }
@@ -2293,6 +2433,7 @@
 
                     ctx.fillStyle = "#000";
                     ctx.font = '13px sans-serif ';
+
                     if ($scope.summary.taskObject.times[0].Duration)
                         ctx.fillText($scope.summary.taskObject.times[0].Duration, 500, 112);
 
@@ -2302,6 +2443,7 @@
 
                     ctx.fillStyle = "#000";
                     ctx.font = '13px sans-serif ';
+
                     if ($scope.summary.taskObject.Service_Request)
                         ctx.fillText($scope.summary.taskObject.Service_Request, 20, 152);
 
@@ -2311,6 +2453,7 @@
 
                     ctx.fillStyle = "#000";
                     ctx.font = '13px sans-serif ';
+
                     if ($scope.summary.taskObject.Task_Number)
                         ctx.fillText($scope.summary.taskObject.Task_Number, 200, 152);
 
@@ -2326,55 +2469,56 @@
                     ctx.font = 'bold 13px sans-serif ';
                     ctx.fillText('产品系列', 20, 182);
 
-
-
                     ctx.fillStyle = "#000";
                     ctx.font = 'bold 13px sans-serif ';
                     ctx.fillText('系统序列号/产品序列号', 200, 182);
-
 
                     ctx.fillStyle = "#000";
                     ctx.font = 'bold 13px sans-serif ';
                     ctx.fillText('标签#', 350, 182);
 
-
                     ctx.fillStyle = "#000";
                     ctx.font = 'bold 13px sans-serif ';
                     ctx.fillText('原始订单号#', 500, 182);
 
-
-
                     var ibyvalue = 196;
+
                     if ($scope.summary.taskObject.InstallBase) {
+
                         angular.forEach($scope.summary.taskObject.InstallBase, function (key) {
+
                             ctx.fillStyle = "#000";
                             ctx.font = '13px sans-serif ';
+
                             if (key.Product_Line)
-                                ctx.fillText(key.Product_Line, 20, ibyvalue)
+                                ctx.fillText(key.Product_Line, 20, ibyvalue);
                             else
-                                ctx.fillText('NO VALUE', 20, ibyvalue)
-
+                                ctx.fillText('NO VALUE', 20, ibyvalue);
 
                             ctx.fillStyle = "#000";
                             ctx.font = '13px sans-serif ';
+
                             if (key.Serial_Number)
-                                ctx.fillText(key.Serial_Number, 200, ibyvalue)
+                                ctx.fillText(key.Serial_Number, 200, ibyvalue);
                             else
-                                ctx.fillText('NO VALUE', 200, ibyvalue)
+                                ctx.fillText('NO VALUE', 200, ibyvalue);
 
                             ctx.fillStyle = "#000";
                             ctx.font = '13px sans-serif ';
+
                             if (key.TagNumber)
-                                ctx.fillText(key.TagNumber, 350, ibyvalue)
+                                ctx.fillText(key.TagNumber, 350, ibyvalue);
                             else
-                                ctx.fillText('NO VALUE', 350, ibyvalue)
+                                ctx.fillText('NO VALUE', 350, ibyvalue);
 
                             ctx.fillStyle = "#000";
                             ctx.font = '13px sans-serif ';
+
                             if (key.Original_PO_Number)
-                                ctx.fillText(key.Original_PO_Number, 450, ibyvalue)
+                                ctx.fillText(key.Original_PO_Number, 450, ibyvalue);
                             else
-                                ctx.fillText('NO VALUE', 450, ibyvalue)
+                                ctx.fillText('NO VALUE', 450, ibyvalue);
+
                             ibyvalue = ibyvalue + 14;
                         });
                     }
@@ -2383,12 +2527,9 @@
                     var i = 0, xNotesField = 20, yNotesField = ibyvalue + 35, rectNotesWidth = 660,
                         rectNotesHeight = 22 * $scope.summary.notesArray.length,
                         rectNotesX = 20, rectNotesY = 170;
+
                     var xNotesField1 = xNotesField, xNotesField2 = xNotesField1 + 150, yNotesField1 = yNotesField + 22,
                         yNotesField2, yNotesField1_val, yNotesField2_val;
-
-
-
-
 
                     ctx.fillStyle = "#000";
                     ctx.font = 'bold 13px sans-serif ';
@@ -2403,23 +2544,22 @@
                     ctx.fillText('备注', 10, yNotesField);
 
                     while (i < $scope.summary.notesArray.length) {
+
                         xNotesField1 = xNotesField;
 
                         yNotesField1_val = yNotesField1 + 14 * ++i;
                         xNotesField2 = xNotesField1 + 150;
 
-
                         ctx.fillStyle = "#000";
                         ctx.font = '13px sans-serif ';
                         ctx.fillText($filter('translate')($scope.summary.notesArray[i - 1].Note_Type), 20, yNotesField1_val);
-
 
                         ctx.fillStyle = "#000";
                         ctx.font = '13px sans-serif ';
                         ctx.fillText($filter('translate')($scope.summary.notesArray[i - 1].Notes), 200, yNotesField1_val);
                     }
-                    rectNotesHeight = yNotesField1_val - yNotesField + 10;
 
+                    rectNotesHeight = yNotesField1_val - yNotesField + 10;
 
                     var xAttachField = 25, yAttachField = yNotesField1_val + 30, rectAttachWidth = 660,
                         rectAttachHeight = 135, xAttachField1 = 25;
@@ -2430,24 +2570,31 @@
 
                     ctx.fillStyle = "#000";
                     ctx.strokeRect(10, yAttachField + 10, 1010, rectAttachHeight);
-                    var index=0;
+
+                    var index = 0;
+
                     angular.forEach($scope.files, function (file, value) {
 
                         var attachfile = document.getElementById(index++);
+
                         var callback = function (image) {
+
                             if (!image) image = this;
+
                             ctx.drawImage(attachfile, xAttachField1, yAttachField + 15);
+
                             if (file.filename.length >= 20) {
+
                                 ctx.fillStyle = "#000";
                                 ctx.font = '15px sans-serif ';
                                 ctx.fillText($filter('translate')(file.filename.substr(0, 18)) + '..', xAttachField1, yAttachField + 125);
-                            }
+                            } else {
 
-                            else {
                                 ctx.fillStyle = "#000";
                                 ctx.font = '15px sans-serif ';
                                 ctx.fillText($filter('translate')(file.filename), xAttachField1, yAttachField + 125);
                             }
+
                             xAttachField1 += 120;
                         };
 
@@ -2532,7 +2679,7 @@
                         //     attachfileexcel.height="40";
                         //   }
 
-                    })
+                    });
 
                     var j = 0, xTimeField = 25, yTimeField = yAttachField + rectAttachHeight + 25, rectTimeWidth = 660,
                         rectTimeHeight = 22 * $scope.summary.timeArray.length, yTimeFieldName = yTimeField + 20,
@@ -2546,7 +2693,6 @@
                     ctx.font = 'bold 13px sans-serif ';
                     ctx.fillText('日期', 20, yTimeFieldName);
 
-
                     if ($scope.userType == 'C') {
 
                         ctx.fillStyle = "#000";
@@ -2556,7 +2702,6 @@
                         ctx.fillStyle = "#000";
                         ctx.font = 'bold 13px sans-serif ';
                         ctx.fillText('结算方式', 180, yTimeFieldName);
-
                     }
 
                     ctx.fillStyle = "#000";
@@ -2564,8 +2709,11 @@
                     ctx.fillText('收费与否', 250, yTimeFieldName);
 
                     var xTimeField1 = 290;
+
                     if ($scope.userType == 'C') {
+
                         angular.forEach($scope.timeArray[0].timeDefault.timeCode.values, function (timecodeKey, value) {
+
                             xTimeField1 = xTimeField1 + 50;
 
                             ctx.fillStyle = "#000";
@@ -2589,6 +2737,7 @@
 
                     ctx.fillStyle = "#000";
                     ctx.strokeRect(10, yTimeField + 5, 1010, rectTimeHeight);
+
                     while (j < $scope.summary.timeArray.length) {
 
                         yTimeFieldName = yTimeField + 20 * ++j;
@@ -2596,50 +2745,55 @@
 
                         ctx.fillStyle = "#000";
                         ctx.font = '13px sans-serif ';
+
                         if ($scope.summary.timeArray[j - 1].Date)
                             ctx.fillText($scope.summary.timeArray[j - 1].Date, 20, yTimeFieldValue);
 
                         doc1.setFontSize(22)
                         doc1.setFontType('normal')
+
                         if ($scope.userType == 'C') {
 
                             ctx.fillStyle = "#000";
                             ctx.font = '13px sans-serif ';
+
                             if ($scope.summary.timeArray[j - 1].Charge_Type)
                                 ctx.fillText($filter('translate')($scope.summary.timeArray[j - 1].Charge_Type), 100, yTimeFieldValue);
 
                             ctx.fillStyle = "#000";
                             ctx.font = '13px sans-serif ';
+
                             if ($scope.summary.timeArray[j - 1].Charge_Method)
                                 ctx.fillText($filter('translate')($scope.summary.timeArray[j - 1].Charge_Method), 180, yTimeFieldValue);
                         }
 
                         ctx.fillStyle = "#000";
                         ctx.font = '13px sans-serif ';
+
                         if ($scope.summary.timeArray[j - 1].Work_Type)
                             ctx.fillText($filter('translate')($scope.summary.timeArray[j - 1].Work_Type), 250, yTimeFieldValue);
+
                         var a = 2;
+
                         if ($scope.userType == 'C') {
+
                             angular.forEach($scope.timeArray[0].timeDefault.timeCode.values, function (timecodeKey, value) {
 
                                 angular.forEach($scope.summary.timeArray[j - 1].timecode, function (key, value) {
-                                    console.log($scope.summary.timeArray[j - 1].timecode[value][timecodeKey.Overtimeshiftcode])
+
+                                    console.log($scope.summary.timeArray[j - 1].timecode[value][timecodeKey.Overtimeshiftcode]);
+
                                     if ($scope.summary.timeArray[j - 1].timecode[value][timecodeKey.Overtimeshiftcode] != undefined) {
-
-
                                         ctx.fillStyle = "#000";
                                         ctx.font = '13px sans-serif ';
                                         ctx.fillText($filter('translate')($scope.summary.timeArray[j - 1].timecode[value][timecodeKey.Overtimeshiftcode].toString()), xTimeField1 - 50 * a, yTimeFieldValue);
                                         a--;
 
-                                    }
-                                    else {
+                                    } else {
 
                                     }
-
-                                })
-
-                            })
+                                });
+                            });
                         }
 
                         ctx.fillStyle = "#000";
@@ -2716,8 +2870,6 @@
 
                     ctx.fillStyle = "#000";
                     ctx.strokeRect(10, yExpenseField + 10, 1010, rectExpenseHeight);
-
-
 
 
                     var l = 0, xMaterialField = 25, yMaterialField = yExpenseField + rectExpenseHeight + 25,
@@ -2806,13 +2958,13 @@
                             ctx.fillText($filter('translate')($scope.summary.materialArray[l - 1].ItemName), 870, yMaterialFieldValue);
 
 
-
                         yMaterialFieldValue = yMaterialFieldValue + 10 * $scope.summary.materialArray[l - 1].Product_Quantity;
                     }
                     rectMaterialHeight = yMaterialFieldValue - yMaterialFieldName + 10;
 
                     ctx.fillStyle = "#000";
                     ctx.strokeRect(10, yMaterialField + 10, 1010, rectMaterialHeight);
+
 
 
 
@@ -2895,12 +3047,11 @@
                     ctx.strokeRect(10, 0, 1010, 50);
 
 
-
                     var imgData = canvas.toDataURL("image/png", 1.0);
 
                     doc1.addImage(imgData, 'JPEG', 5, 5, 660, 850);
 
-                  //  doc1.save("Report_" + $scope.summary.taskObject.Task_Number + ".pdf");
+                    //  doc1.save("Report_" + $scope.summary.taskObject.Task_Number + ".pdf");
                 }
             }
             else {

@@ -1866,46 +1866,30 @@
                     var deferred = $q.defer();
 
                     db.transaction(function (transaction) {
-                        var type=0;
-                        if (responseList[i].Values != undefined)
-                            type = 0;
-                        if (responseList[i].valuesTravel != undefined)
-                            type = 1;
-                        if (responseList[i].valuesDeputation != undefined)
-                            type = 2;
-                        if (responseList[i].valuesNormal != undefined)
-                            type = 3;
-                        if (responseList[i].valuesNightshift != undefined)
-                            type = 4;
-                        if (type == 0)
-                        {
-                            angular.forEach(responseList[i].Values, function (item)
-                            {
-                                WorktypeItem(item, deferred, type, transaction)
-                            })
-                        }
-                        if (type == 1) {
-                            angular.forEach(responseList[i].valuesTravel, function (item) {
-                                WorktypeItem(item, deferred, type, transaction)
-                            })
-                        }
-                        if (type == 2) {
-                            angular.forEach(responseList[i].valuesDeputation, function (item) {
-                                WorktypeItem(item, deferred, type, transaction)
-                            })
-                        }
-                        if (type == 3) {
-                            angular.forEach(item.valuesNormal, function (item) {
-                                WorktypeItem(item, deferred, type, transaction)
-                            })
-                        }
-                        if (type == 4) {
-                            angular.forEach(responseList[i].valuesNightshift, function (item) {
-                                WorktypeItem(item, deferred, type, transaction)
-                            })
-                        }
 
+                        var sqlSelect = "SELECT * FROM Item WHERE ID = " + responseList[i].ID;
 
+                        // console.log("ITEM  ====> " + sqlSelect);
+
+                        transaction.executeSql(sqlSelect, [], function (tx, res) {
+
+                            var rowLength = res.rows.length;
+
+                            // console.log("ITEM LENGTH ====> " + rowLength);
+
+                            if (rowLength > 0) {
+
+                                updateItem(responseList[i], deferred);
+
+                            } else {
+
+                                insertItem(responseList[i], deferred);
+                            }
+
+                        }, function (tx, error) {
+
+                            // console.log("ITEM SELECT ERROR: " + error.message);
+                        });
 
                     }, function (error) {
 
@@ -1929,53 +1913,17 @@
                 }
             );
         };
-        function WorktypeItem(item, deferred, type, transaction)
-        {
-            var sqlSelect = "SELECT * FROM Item WHERE ID = " + item.ID;
 
-            // console.log("ITEM  ====> " + sqlSelect);
-
-            transaction.executeSql(sqlSelect, [], function (tx, res) {
-
-                var rowLength = res.rows.length;
-
-                // console.log("ITEM LENGTH ====> " + rowLength);
-
-                if (rowLength > 0) {
-
-                    updateItem(item, deferred,type);
-
-                } else {
-
-                    insertItem(item, deferred,type);
-                }
-
-            }, function (tx, error) {
-
-                // console.log("ITEM SELECT ERROR: " + error.message);
-            });
-        }
-
-        {"Charge_Method":[
-            {"Values":[{"ID":49,"Value":" Standard"},{"ID":50,"Value":" Overtime"},{"ID":51,"Value":" DoubleTime"}]},
-            {"valuesTravel":[{"ID":4,"Value":"Travel- Standard"},{"ID":5,"Value":"Travel- Overtime"},
-                {"ID":6,"Value":"Travel- Double time"}]},
-            {"valuesDeputation":[{"ID":139,"Value":"Deputation- Standard"},{"ID":140,"Value":"Deputation- Overtime"},
-                {"ID":141,"Value":"Deputation- Double time"}]},
-            {"valuesNormal":[{"ID":142,"Value":"Normal- Standard"},
-                {"ID":143,"Value":"Normal- Overtime"},{"ID":144,"Value":"Normal- Double time"}]},
-            {"valuesNightshift":[{"ID":145,"Value":"Nightshift- Standard"},{"ID":146,"Value":"Nightshift- Overtime"},
-                {"ID":147,"Value":"Nightshift- Double time"}]}]};
-
-        function updateItem(responseList, defer,type) {
+        function updateItem(responseList, defer) {
 
             db.transaction(function (transaction) {
 
                 var insertValues = [];
 
-                var sqlUpdate = "UPDATE Item SET Value = ?  WHERE ID = ?";
+                var sqlUpdate = "UPDATE Item SET Value = ?, Type = ?  WHERE ID = ?";
 
                 insertValues.push(responseList.Value);
+                insertValues.push(responseList.Type);
                 insertValues.push(responseList.ID);
 
                 transaction.executeSql(sqlUpdate, insertValues, function (tx, res) {
@@ -1995,16 +1943,17 @@
             });
         };
 
-        function insertItem(responseList, defer,type) {
+        function insertItem(responseList, defer) {
 
             db.transaction(function (transaction) {
 
                 var insertValues = [];
 
-                var sqlInsert = "INSERT INTO Item VALUES (?, ?)";
+                var sqlInsert = "INSERT INTO Item VALUES (?, ?, ?)";
 
                 insertValues.push(responseList.ID);
                 insertValues.push(responseList.Value);
+                insertValues.push(responseList.Type);
 
                 transaction.executeSql(sqlInsert, insertValues, function (tx, res) {
 

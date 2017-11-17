@@ -74,7 +74,7 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
                     $('#calendar').fullCalendar('destroy');
                     $rootScope.eventInit("ch");
                 });
-               
+
                 break;
 
             default:
@@ -247,7 +247,7 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
             $rootScope.apicall = true;
 
             var deferAccept = $q.defer();
-           
+
             localService.getAcceptTaskList(function (response) {
 
                 console.log("SYNC ACCEPT");
@@ -260,11 +260,12 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
 
                     valueService.acceptTask(item.Task_Number, function (result) {
 
-                       
                         cloudService.OfscActions(item.Activity_Id, true, function (response) {
+
                             $rootScope.showAccept = false;
+
                             deferred.resolve("success");
-                        })
+                        });
                     });
 
                     promises.push(deferred.promise);
@@ -274,7 +275,7 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
             promises.push(deferAccept.promise);
 
             var deferSubmit = $q.defer();
-                 
+
             localService.getPendingTaskList(function (response) {
 
                 console.log("SYNC SUBMIT");
@@ -286,9 +287,11 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
                     var deferred = $q.defer();
 
                     valueService.submitDebrief(item, item.Task_Number, function (result) {
-                        cloudService.OfscActions(item.Activity_Id, false, function (response) {
-                            
-                        })
+
+                        cloudService.OfscActions(item.Activity_Id, false, function (res) {
+
+                        });
+
                         deferred.resolve("success");
 
                         console.log("DEBRIEF SUCCESS");
@@ -303,7 +306,6 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
             console.log("PENDING UPDATE LENGTH " + promises.length);
 
             $q.all(promises).then(
-
                 function (response) {
 
                     console.log("SYNC DATA");
@@ -532,7 +534,6 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
                         );
 
                         getAttachments();
-
                     });
                 },
 
@@ -771,20 +772,20 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
 
                 promiseArray.push(deferWorkType.promise);
 
-                 // var deferItem = $q.defer();
-                 //
-                 // $rootScope.apicall = true;
-                 //
-                 // cloudService.getItem(function (result) {
-                 //
-                 //    console.log("ITEM");
-                 //
-                 //    $rootScope.apicall = true;
-                 //
-                 //    deferItem.resolve("success");
-                 // });
-                 //
-                 // promiseArray.push(deferItem.promise);
+                var deferItem = $q.defer();
+
+                $rootScope.apicall = true;
+
+                cloudService.getItem(function (result) {
+
+                    console.log("ITEM");
+
+                    $rootScope.apicall = true;
+
+                    deferItem.resolve("success");
+                });
+
+                promiseArray.push(deferItem.promise);
 
                 var deferCurrency = $q.defer();
 
@@ -929,7 +930,7 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
                                 };
                                 $scope.attachmentArray.push(attachmentObject);
 
-                                localService.insertAttachmentList($scope.attachmentArray, function(result){
+                                localService.insertAttachmentList($scope.attachmentArray, function (result) {
                                     // console.log("success")
                                 });
 
