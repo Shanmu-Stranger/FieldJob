@@ -296,8 +296,8 @@
                                 {{serailno}}<br />
                             </span>
                         </td>
-                        <td class="noborder bg-white width14"><span ng-repeat="serailin in material.serialIn">{{serailin}}<br /></span></td>
-                        <td class="noborder bg-white width14"><span ng-repeat="serailout in material.serialOut">{{serailout}}<br /></span></td>
+                        <td class="noborder bg-white width14"><span ng-repeat="serailin in material.serialIn track by $index">{{serailin}}<br /></span></td>
+                        <td class="noborder bg-white width14"><span ng-repeat="serailout in material.serialOut track by $index">{{serailout}}<br /></span></td>
                         <td class="noborder bg-white width14">{{material.ItemName}}</td>
                         <td class="noborder bg-white width14">{{material.Description}}</td>
                     </tr>

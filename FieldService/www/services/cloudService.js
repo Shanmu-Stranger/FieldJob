@@ -171,7 +171,7 @@
 
                     localService.insertTaskList(taskArray, function (result) {
 
-                        console.log("FINAL =======> " + result);
+                        console.log("TASK");
 
                         angular.forEach(internalOFSCResponse, function (item) {
 
@@ -216,9 +216,10 @@
 
                 localService.insertInternalList(response.activities, function (result) {
 
-                    console.log("FINAL =======> " + result);
+                    console.log("INTERNAL");
 
                     localService.getInternalList(function (res) {
+
                         callback(res);
                     });
                 });
@@ -569,6 +570,7 @@
                 localService.insertItemList(response.Charge_Method, function (result) {
 
                     callback("success");
+
                 });
 
             }).error(function (error) {

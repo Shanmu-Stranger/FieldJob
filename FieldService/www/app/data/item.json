@@ -1,0 +1,79 @@
+{
+  "Charge_Method": [
+    {
+      "ID": 49,
+      "Value": " Standard",
+      "Type": "value"
+    },
+    {
+      "ID": 50,
+      "Value": " Overtime",
+      "Type": "value"
+    },
+    {
+      "ID": 51,
+      "Value": " DoubleTime",
+      "Type": "value"
+    },
+    {
+      "ID": 4,
+      "Value": "Travel- Standard",
+      "Type": "travel"
+    },
+    {
+      "ID": 5,
+      "Value": "Travel- Overtime",
+      "Type": "travel"
+    },
+    {
+      "ID": 6,
+      "Value": "Travel- Double time",
+      "Type": "travel"
+    },
+    {
+      "ID": 139,
+      "Value": "Deputation- Standard",
+      "Type": "Deputation"
+    },
+    {
+      "ID": 140,
+      "Value": "Deputation- Overtime",
+      "Type": "Deputation"
+    },
+    {
+      "ID": 141,
+      "Value": "Deputation- Double time",
+      "Type": "Deputation"
+    },
+    {
+      "ID": 142,
+      "Value": "Normal- Standard",
+      "Type": "Normal"
+    },
+    {
+      "ID": 143,
+      "Value": "Normal- Overtime",
+      "Type": "Normal"
+    },
+    {
+      "ID": 144,
+      "Value": "Normal- Double time",
+      "Type": "Normal"
+    },
+    {
+      "ID": 145,
+      "Value": "NightShift- Standard",
+      "Type": "NightShift"
+    },
+    {
+      "ID": 146,
+      "Value": "NightShift- Overtime",
+      "Type": "NightShift"
+    },
+    {
+      "ID": 147,
+      "Value": "NightShift- Double time",
+      "Type": "NightShift"
+    }
+  ]
+}

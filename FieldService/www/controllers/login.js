@@ -87,24 +87,6 @@ app.controller('loginController', function ($location, $state, $rootScope, $scop
 
             cloudService.getTaskList(function (response) {
 
-                // localService.deleteInstallBase();
-                // localService.deleteContact();
-                // localService.deleteNote();
-                //
-                // localService.deleteOverTime();
-                // localService.deleteShiftCode();
-                //
-                // localService.deleteChargeType();
-                // localService.deleteChargeMethod();
-                // localService.deleteFieldJobName();
-                //
-                // localService.deleteWorkType();
-                // localService.deleteItem();
-                // localService.deleteCurrency();
-                //
-                // localService.deleteExpenseType();
-                // localService.deleteNoteType();
-
                 if (constantService.getUser().Default_View == "My Task") {
 
                     $rootScope.selectedItem = 2;

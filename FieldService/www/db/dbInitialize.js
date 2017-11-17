@@ -37,7 +37,7 @@
 
         var sqlWorkType = "CREATE TABLE IF NOT EXISTS WorkType ('ID' INTEGER PRIMARY KEY  NOT NULL, 'Value' TEXT)";
 
-        var sqlItem = "CREATE TABLE IF NOT EXISTS Item ('ID' INTEGER PRIMARY KEY  NOT NULL, 'Value' TEXT)";
+        var sqlItem = "CREATE TABLE IF NOT EXISTS Item ('ID' INTEGER PRIMARY KEY  NOT NULL, 'Value' TEXT,'Type' INTEGER)";
 
         var sqlCurrency = "CREATE TABLE IF NOT EXISTS Currency ('ID' INTEGER PRIMARY KEY  NOT NULL, 'Value' TEXT)";
 

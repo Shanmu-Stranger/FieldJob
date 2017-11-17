@@ -602,21 +602,21 @@
 
             var DataBlob = b64toBlob(content, contentType);
 
-            console.log("START WRITING");
+            // console.log("START WRITING");
 
             window.resolveLocalFileSystemURL(folderpath, function (dir) {
 
-                console.log("ACCESS GRANTED");
+                // console.log("ACCESS GRANTED");
 
                 dir.getFile(filename, {
                     create: true
                 }, function (file) {
 
-                    console.log("FILE CREATED SUCCESSFULLY");
+                    // console.log("FILE CREATED SUCCESSFULLY");
 
                     file.createWriter(function (fileWriter) {
 
-                        console.log("WRITING CONTENT TO FILE");
+                        // console.log("WRITING CONTENT TO FILE");
 
                         fileWriter.write(DataBlob);
                         if (defer != null)

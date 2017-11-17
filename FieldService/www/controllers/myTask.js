@@ -7,24 +7,28 @@ app.controller('myTaskController', function ($scope, $compile, $timeout, uiCalen
         var maxTimeVal = "24:00:00";
 
         $("fc-left").addClass("col-md-4");
+
         var mycal, myFieldJob, localeused;
+
         if (lang == 'ch') {
+
             mycal = $filter('translate')("My Calendar");// "我的日历"
             localeused = "zh-cn";
             myFieldJob = $filter('translate')("My Field Job");// "我的田野工作";
-        }
-        else if (lang == 'en') {
+
+        } else if (lang == 'en') {
+
+            mycal = "My Calendar";
+            localeused = "en";
+            myFieldJob = "My Field Job";
+
+        } else {
+
             mycal = "My Calendar";
             localeused = "en";
             myFieldJob = "My Field Job";
         }
-        else
-        {
-            console.log(lang);
-            mycal = "My Calendar";
-            localeused = "en";
-            myFieldJob = "My Field Job";
-        }
+
         $('#calendar').fullCalendar({
             customButtons: {
                 monthButton: {
@@ -77,8 +81,6 @@ app.controller('myTaskController', function ($scope, $compile, $timeout, uiCalen
             events: eventsArray,
             eventClick: function (event, jsEvent, view) {
 
-                //console.log("EVENT " + JSON.stringify(event));
-
                 $rootScope.selectedTask = event;
 
                 valueService.setTask(event);
@@ -96,27 +98,28 @@ app.controller('myTaskController', function ($scope, $compile, $timeout, uiCalen
 
                     $state.go('debrief');
 
-                }
-                else if (event.Task_Status == 'Assigned') {
+                } else if (event.Task_Status == 'Assigned') {
+
                     $scope.showStartWork = true;
                     $rootScope.showAccept = true;
                     $scope.showDebriefBtn = false;
+
                     $state.go('taskOverFlow');
-                }
-                else if (event.Task_Status == 'Accepted') {
+
+                } else if (event.Task_Status == 'Accepted') {
+
                     $scope.showStartWork = true;
                     $scope.showDebriefBtn = true;
                     $rootScope.showAccept = false;
-                    $state.go('taskOverFlow');
-                }
-                else if (event.Type == 'INTERNAL') {
-
-                }
-                else {
 
                     $state.go('taskOverFlow');
-                }
 
+                } else if (event.Type == 'INTERNAL') {
+
+                } else {
+
+                    $state.go('taskOverFlow');
+                }
             },
             eventRender: function (event, element) {
 
@@ -136,8 +139,6 @@ app.controller('myTaskController', function ($scope, $compile, $timeout, uiCalen
         });
     }
 
-
-
     $scope.showSearchTaskDiv = false;
 
     $rootScope.Islogin = true;
@@ -148,27 +149,23 @@ app.controller('myTaskController', function ($scope, $compile, $timeout, uiCalen
 
     var eventsArray = [];
 
-    // localService.getTaskList(function (response) {
-    //
-    //     constantService.setTaskList(response);
-    //
-    //     $scope.myTaskDetails = response;
-    // });
-
     getTask();
 
     function getTask() {
 
-        console.log("GET TASK IN " + JSON.stringify(constantService.getTaskList()));
+        console.log("MY TASK " + JSON.stringify(constantService.getTaskList()));
 
         if (constantService.getTaskList()) {
 
             $scope.myTaskDetails = constantService.getTaskList();
 
             setEventArray(constantService.getTaskList());
+
             var lang = valueService.getLanguage(lang);
+
             if (lang == undefined)
                 lang = "en";
+
             $rootScope.eventInit(lang);
 
         } else {
@@ -181,12 +178,15 @@ app.controller('myTaskController', function ($scope, $compile, $timeout, uiCalen
 
                     constantService.setTaskList(response)
 
-                    console.log("GET TASK IN DB" + $rootScope.myTaskDetails);
+                    console.log("MY TASK IN DB" + $rootScope.myTaskDetails);
 
                     setEventArray(response);
-                   var lang = valueService.getLanguage(lang);
+
+                    var lang = valueService.getLanguage(lang);
+
                     if (lang == undefined)
                         lang = "en";
+
                     $rootScope.eventInit(lang);
                 }
             });
@@ -201,7 +201,6 @@ app.controller('myTaskController', function ($scope, $compile, $timeout, uiCalen
 
                 if (item.Type == "CUSTOMER") {
 
-
                     // var startDate = item.Start_Date.split(' ');
                     var startDateTime = moment(item.Start_Date).format("YYYY-MM-DDTHH:mm:ss");
                     // var startDateTime = startDate[0] + "T" + startDate[1];
@@ -210,8 +209,7 @@ app.controller('myTaskController', function ($scope, $compile, $timeout, uiCalen
                     var endDateTime = moment(item.End_Date).format("YYYY-MM-DDTHH:mm:ss");
                     // var endDateTime = endDate[0] + "T" + endDate[1];
 
-                    var customerInfo = item.Job_Description + "\n" + item.Customer_Name + "\n" + item.Street_Address + "\n" + item.State + "\n" + item.Zip_Code+"\n" + item.Work_Phone_Number+"\n" + item.Mobile_Phone_Number;
-
+                    var customerInfo = item.Job_Description + "\n" + item.Customer_Name + "\n" + item.Street_Address + "\n" + item.State + "\n" + item.Zip_Code + "\n" + item.Work_Phone_Number + "\n" + item.Mobile_Phone_Number;
 
                     //  if (item.Task_Status == 'Accepted' || item.Task_Status == 'Assigned'||) {
                     eventsArray.push({
@@ -242,7 +240,9 @@ app.controller('myTaskController', function ($scope, $compile, $timeout, uiCalen
                         Material_Method: item.Material_Method,
                         Activity_Id: item.Activity_Id
                     });
+
                 } else {
+
                     var startDateTime = moment(item.Start_Date).format("YYYY-MM-DDTHH:mm:ss");
                     // var startDateTime = startDate[0] + "T" + startDate[1];
 
@@ -260,12 +260,10 @@ app.controller('myTaskController', function ($scope, $compile, $timeout, uiCalen
                         Type: item.Type
                     });
                 }
-                //  }
             });
         }
     }
 
-   
 
     $scope.goToDate = function () {
 
@@ -366,7 +364,7 @@ app.controller('myTaskController', function ($scope, $compile, $timeout, uiCalen
 
     $scope.changeTaskStatus = function (taskStatus) {
 
-        console.log(taskStatus);
+        console.log("STATUS " + taskStatus);
 
         if (taskStatus == "All") {
 
