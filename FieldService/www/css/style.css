@@ -2429,3 +2429,6 @@ textarea:focus {
 }
 
 }
+.nopad-left{
+  padding-left: 0px !important;
+}
