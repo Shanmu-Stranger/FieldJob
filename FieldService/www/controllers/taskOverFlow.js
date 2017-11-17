@@ -231,14 +231,19 @@ app.controller('taskOverFlowController', function ($scope, $http, $state, $rootS
                 valueService.acceptTask(valueService.getTask().Task_Number, function () {
 
                     $scope.selectedTask.Task_Status = "Accepted";
-                    
-                    cloudService.OfscActions($scope.selectedTask.Activity_Id,true, function (response) {
-                        $rootScope.showAccept = false;
-                    })
-                });
 
-               
-               
+                    cloudService.OfscActions($scope.selectedTask.Activity_Id, true, function (response) {
+
+                        $rootScope.showAccept = false;
+                    });
+
+                    localService.getTaskList(function (response) {
+
+                        constantService.setTaskList(response);
+
+                        $state.go($state.current, {}, {reload: true});
+                    });
+                });
 
             } else {
 
@@ -248,16 +253,16 @@ app.controller('taskOverFlowController', function ($scope, $http, $state, $rootS
                     Submit_Status: "A",
                     Date: new Date()
                 };
+
                 localService.updateTaskSubmitStatus(taskObject, function (result) {
 
                     localService.getTaskList(function (response) {
 
                         constantService.setTaskList(response);
 
-                        
+                        $state.go($state.current, {}, {reload: true});
                     });
                 });
-               
             }
         }
     };

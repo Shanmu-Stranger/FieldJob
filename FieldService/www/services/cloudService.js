@@ -567,7 +567,7 @@
 
                 $rootScope.apicall = true;
 
-                localService.insertItemList(response.Charge_Method, function (result) {
+                localService.insertItemList(response.Items, function (result) {
 
                     callback("success");
 
