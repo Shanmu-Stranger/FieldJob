@@ -470,7 +470,7 @@
                         serialTypeObject.out = serialOut[index];
                         serialTypeObject.number = "";
 
-                        if (serialTypeobj.in != "")
+                        if (serialTypeObject.in != "")
                             item.Serial_Type.push(serialTypeObject);
 
                         index++;
@@ -1722,8 +1722,8 @@
         $("#datetimepickerEndDate").datetimepicker();
     });
 
-    var doc1 = jsPDF('p', 'mm', [700, 850]);
-
+    //var doc1 = new jsPDF('p', 'pt', 'a4', true);
+    var doc1 = jsPDF('p', 'mm', [700, 850], true);
     $(function () {
 
         setTimeout(function () {
@@ -2365,7 +2365,7 @@
     }
 
     $scope.reviewSummary = function () {
-       // var promise = generatePDF();
+        //var promise = generatePDF();
         $scope.selectedIndex = $scope.stages.findIndex(x => x.title == "Customer Signature"
     )
 
@@ -3064,7 +3064,7 @@
 
 
                 doc1.rect(20, 8, 660, 55)
-                doc1.addImage(imgData, 'JPEG', 75, 15, 100, 40)
+                doc1.addImage(imgData, 'JPEG', 75, 15, 100, 40, 'emelogo', 'FAST')
                 doc1.setFontSize(40)
                 doc1.setFontType('bold')
                 doc1.text(250, 35, 'Field Service Summary Report')
@@ -3230,17 +3230,17 @@
                 angular.forEach($scope.files, function (file, value) {
                     // setTimeout(function () {
                     if (file.filetype == "pdf")
-                        doc1.addImage(pdfimg, 'JPEG', xAttachField1, yAttachField + 15, 50, 40)
+                        doc1.addImage(pdfimg, 'JPEG', xAttachField1, yAttachField + 15, 50, 40, file.fileDisc, 'FAST')
                     else if (file.filetype == "xlsx")
-                        doc1.addImage(excelimg, 'JPEG', xAttachField1, yAttachField + 15, 50, 40)
+                        doc1.addImage(excelimg, 'JPEG', xAttachField1, yAttachField + 15, 50, 40, file.fileDisc, 'FAST')
                     else if (file.filetype == "txt")
-                        doc1.addImage(noteimg, 'JPEG', xAttachField1, yAttachField + 15, 50, 40)
+                        doc1.addImage(noteimg, 'JPEG', xAttachField1, yAttachField + 15, 50, 40, file.fileDisc, 'FAST')
                     else if (file.filetype == "ppt" || file.filetype == "pptx")
-                        doc1.addImage(pptimg, 'JPEG', xAttachField1, yAttachField + 15, 50, 40)
+                        doc1.addImage(pptimg, 'JPEG', xAttachField1, yAttachField + 15, 50, 40, file.fileDisc, 'FAST')
                     else if (file.filetype == "doc" || file.filetype == "docx")
-                        doc1.addImage(wordimg, 'JPEG', xAttachField1, yAttachField + 15, 50, 40)
+                        doc1.addImage(wordimg, 'JPEG', xAttachField1, yAttachField + 15, 50, 40, file.fileDisc, 'FAST')
                     else
-                        doc1.addImage("data:"+file.contentType +";base64, "+file.base64, 'JPEG', xAttachField1, yAttachField + 15, 50, 40)
+                        doc1.addImage("data:" + file.contentType + ";base64, " + file.base64, 'JPEG', xAttachField1, yAttachField + 15, 50, 40, '', 'FAST')
                     doc1.setFontSize(16)
                     doc1.setFontType('normal')
                     if (file.fileDisc.length >= 20)
@@ -3508,11 +3508,11 @@
                 doc1.text(50, ySignField + 35, $scope.engineerName);
 
                 if ($scope.summary.engineer != undefined && $scope.summary.engineer.signature)
-                    doc1.addImage($scope.summary.engineer.signature, 'JPEG', 50, ySignField + 45, 75, 40);
+                    doc1.addImage($scope.summary.engineer.signature, 'JPEG', 50, ySignField + 45, 75, 40, 'engsign', 'FAST');
                 doc1.text(250, ySignField + 35, $scope.summary.taskObject.Customer_Name);
 
                 if ($rootScope.signature)
-                    doc1.addImage($rootScope.signature, 'JPEG', 250, ySignField + 45, 75, 40);
+                    doc1.addImage($rootScope.signature, 'JPEG', 250, ySignField + 45, 75, 40, 'custsign', 'FAST');
                 //                 doc1.save("Report_" + $scope.summary.taskObject.Task_Number + ".pdf");
             }
             if ($rootScope.local) {
