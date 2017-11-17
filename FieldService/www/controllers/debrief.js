@@ -1876,7 +1876,9 @@
                                                                         Submit_Status: "I"
                                                                     };
 
-                                                                    localService.updateTaskSubmitStatus(taskObject);
+                                                                    localService.updateTaskSubmitStatus(taskObject, function (result){
+
+                                                                    });
                                                                     cloudService.OfscActions($rootScope.selectedTask.Activity_Id, false, function (response) {
                                                                         cloudService.getTaskList(function (response) {
 
@@ -1935,7 +1937,10 @@
                                                                     Submit_Status: "I"
                                                                 };
 
-                                                                localService.updateTaskSubmitStatus(taskObject);
+                                                                localService.updateTaskSubmitStatus(taskObject, function (result){
+
+                                                                });
+
                                                                 cloudService.OfscActions($rootScope.selectedTask.Activity_Id, false, function (response) {
                                                                     cloudService.getTaskList(function (response) {
 

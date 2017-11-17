@@ -525,7 +525,7 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
                             }
                         );
 
-                        // getAttachments();
+                        getAttachments();
 
                     });
                 },
@@ -555,7 +555,7 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
             header: {
                 'Content-Type': 'application/json',
                 'Authorization': 'Basic ' + authorizationValue,
-                'oracle-mobile-backend-id': constantService.getTaskBackId
+                'oracle-mobile-backend-id': constantService.getChargeBackId()
             }
         };
 
@@ -880,7 +880,7 @@ app.controller('indexController', function ($q, $scope, $state, $timeout, $mdSid
                     }
                 );
 
-                // getAttachments();
+                getAttachments();
             });
         }
 
