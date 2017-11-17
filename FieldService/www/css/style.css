@@ -387,7 +387,12 @@ a.article, a.article:hover {
 /*.fc-myCalendar-button:active {
   color : #19a97f !important;
 }*/
-
+.fc-myTask-button {
+        margin-left: 34px !important;
+        font-family: OpenSans-Bold !important;
+        font-size: 14px !important;
+        color: #888888 !important;
+    }
 .fc-myTask-button:active {
   color : #19a97f !important;
 }
@@ -397,17 +402,27 @@ a.article, a.article:hover {
 }*/
 
 .fc-left{
-  width: 55%;
+  width: 33%;
 }
 
-.fc-center {
-  width: 36%;
-}
+
 
 .fc-right{
-  width: 60%;
+  width: 50%;
 }
 
+#calendar > div.fc-toolbar.fc-header-toolbar > div.fc-right > div{
+  width: 50%;
+  text-align: center;
+}
+.fc-prev-button {
+  display: inline-block;
+}
+
+
+.fc-next-button {
+   display: inline-block;
+}
 .fc-center>fc-button-group {
   float:right;
 }
@@ -460,29 +475,28 @@ a.article, a.article:hover {
 }
 /*Calendar Styles*/
 .fc-toolbar.fc-header-toolbar {
-    margin-bottom: 0;
-    font-size: 20px;
+   margin-bottom: 0; */
+    /* font-size: 20px; */
     letter-spacing: .005em;
     box-sizing: border-box;
-    font-weight: 400;
+    /* font-weight: 400; */
     display: -webkit-box;
     display: -webkit-flex;
-    display: flex;
-    -webkit-box-align: center;
+    /* display: flex; */
+    /* -webkit-box-align: center; */
     -webkit-align-items: center;
-    align-items: center;
-    -webkit-box-orient: horizontal;
-    -webkit-box-direction: normal;
-    -webkit-flex-direction: row;
-    flex-direction: row;
-    width: 100%;
-    height: 64px;
+    /* align-items: center; */
+    /* -webkit-box-orient: horizontal; */
+    /* -webkit-box-direction: normal; */
+    /* -webkit-flex-direction: row; */
+    /* flex-direction: row; */
+    width: 91%;
+    height: 66px;
     max-height: 64px;
     padding: 0 16px;
-    margin: 0;
+    /* margin: 0; */
     background-color: #2d383f;
 }
-
 
 /* Todo.html */
 
@@ -913,7 +927,8 @@ td em{
 }
 
 #calendar > div.fc-toolbar.fc-header-toolbar > div.fc-center > div {
-  left : 0px !important;
+  position: relative;
+  left: 20px;
 }
 
 
@@ -2373,4 +2388,35 @@ textarea:focus {
     font-weight: bold !important;
     font-size: 12px !important;
     color: #283d3f !important;
+}
+/*Media Queries For Calendar*/
+@media (min-width: 768px) and (max-width: 1024px)  {
+   .fc-toolbar.fc-header-toolbar{
+    width: 88%;
+   }
+
+   .fc-left {
+    width: 32%;
+  }
+
+  .fc-myTask-button {
+    margin-left: 20px !important;
+   
+}
+.fc-right {
+    width: 44% !important;
+}
+#calendar > div.fc-toolbar.fc-header-toolbar > div.fc-right > div {
+    width: 65% ;
+   
+}  
+}
+
+@media (min-width: 800px) and (max-width: 1280px)  {
+  
+
+.fc-right {
+    width: 48%;
+}
+
 }
