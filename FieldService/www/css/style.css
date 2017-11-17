@@ -524,7 +524,7 @@ a.article, a.article:hover {
 }
 
 #fieldTool {
-    background-color: #f0f0f0;
+    background-color: #ffffff !important;
     height: 40px;
     outline: none;
     border:solid 1px #c0c0c0 !important;
@@ -1890,7 +1890,7 @@ md-tab-content{
 }
 .card-parentContainer{
   margin-left: 50px;
-  margin-right: 40px;
+  margin-right: 50px;
   margin-bottom: 40px;
 }
 .card-childContainer {
@@ -2431,4 +2431,7 @@ textarea:focus {
 }
 .nopad-left{
   padding-left: 0px !important;
+}
+.paddingleft10{
+    padding-left:10px !important;
 }
