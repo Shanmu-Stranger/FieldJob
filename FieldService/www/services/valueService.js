@@ -23,7 +23,9 @@
         var header = null;
 
         var networkStatus = false;
+
         var language = "";
+
         var debrief = {
             task: {},
             taskList: [],
