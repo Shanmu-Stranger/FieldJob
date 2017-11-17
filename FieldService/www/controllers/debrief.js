@@ -470,7 +470,7 @@
                         serialTypeObject.out = serialOut[index];
                         serialTypeObject.number = "";
 
-                        if (serialTypeobj.in != "")
+                        if (serialTypeObject.in != "")
                             item.Serial_Type.push(serialTypeObject);
 
                         index++;
@@ -2082,7 +2082,6 @@
                                                                     });
                                                                 });
                                                             });
-
                                                         }, 3000)
                                                     });
                                                 }
