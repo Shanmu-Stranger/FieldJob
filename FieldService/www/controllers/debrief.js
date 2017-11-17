@@ -2232,7 +2232,7 @@
     }
 
     $scope.reviewSummary = function () {
-
+       // var promise = generatePDF();
         $scope.selectedIndex = $scope.stages.findIndex(x => x.title == "Customer Signature"
     )
 
@@ -2380,7 +2380,7 @@
                     }
 
 
-                    var i = 0, xNotesField = 20, yNotesField = ibyvalue + 35, rectNotesWidth = 650,
+                    var i = 0, xNotesField = 20, yNotesField = ibyvalue + 35, rectNotesWidth = 660,
                         rectNotesHeight = 22 * $scope.summary.notesArray.length,
                         rectNotesX = 20, rectNotesY = 170;
                     var xNotesField1 = xNotesField, xNotesField2 = xNotesField1 + 150, yNotesField1 = yNotesField + 22,
@@ -2421,7 +2421,7 @@
                     rectNotesHeight = yNotesField1_val - yNotesField + 10;
 
 
-                    var xAttachField = 25, yAttachField = yNotesField1_val + 30, rectAttachWidth = 650,
+                    var xAttachField = 25, yAttachField = yNotesField1_val + 30, rectAttachWidth = 660,
                         rectAttachHeight = 135, xAttachField1 = 25;
 
                     ctx.fillStyle = "#000";
@@ -2534,7 +2534,7 @@
 
                     })
 
-                    var j = 0, xTimeField = 25, yTimeField = yAttachField + rectAttachHeight + 25, rectTimeWidth = 650,
+                    var j = 0, xTimeField = 25, yTimeField = yAttachField + rectAttachHeight + 25, rectTimeWidth = 660,
                         rectTimeHeight = 22 * $scope.summary.timeArray.length, yTimeFieldName = yTimeField + 20,
                         yTimeFieldValue = yTimeField;
 
@@ -2661,7 +2661,7 @@
 
 
 
-                    var k = 0, xExpenseField = 25, yExpenseField = yTimeField + rectTimeHeight + 25, rectExpenseWidth = 650,
+                    var k = 0, xExpenseField = 25, yExpenseField = yTimeField + rectTimeHeight + 25, rectExpenseWidth = 660,
                         rectExpenseHeight = 22 * $scope.summary.expenseArray.length, yExpenseFieldName = yExpenseField + 20,
                         yExpenseFieldValue;
 
@@ -2721,7 +2721,7 @@
 
 
                     var l = 0, xMaterialField = 25, yMaterialField = yExpenseField + rectExpenseHeight + 25,
-                        rectMaterialWidth = 650, rectMaterialHeight = 25 * $scope.summary.materialArray.length,
+                        rectMaterialWidth = 660, rectMaterialHeight = 25 * $scope.summary.materialArray.length,
                         yMaterialFieldName = yMaterialField + 20, yMaterialFieldValue;
 
                     ctx.fillStyle = "#000";
@@ -2816,7 +2816,7 @@
 
 
 
-                    var xSignField = 25, ySignField = yMaterialFieldValue + 20, rectSignWidth = 650,
+                    var xSignField = 25, ySignField = yMaterialFieldValue + 20, rectSignWidth = 660,
                         rectSignHeight = 80;
 
 
@@ -2898,7 +2898,7 @@
 
                     var imgData = canvas.toDataURL("image/png", 1.0);
 
-                    doc1.addImage(imgData, 'JPEG', 5, 5, 650, 850);
+                    doc1.addImage(imgData, 'JPEG', 5, 5, 660, 850);
 
                   //  doc1.save("Report_" + $scope.summary.taskObject.Task_Number + ".pdf");
                 }
@@ -2912,13 +2912,13 @@
                 var wordimg = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAADICAYAAACtWK6eAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyhpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTExIDc5LjE1ODMyNSwgMjAxNS8wOS8xMC0wMToxMDoyMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTUgKE1hY2ludG9zaCkiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OURFODcyMzZCQjRBMTFFN0I0QzBCNTY5N0VGRjkzOUIiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OURFODcyMzdCQjRBMTFFN0I0QzBCNTY5N0VGRjkzOUIiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo3RDMyNzQ4N0JCNEExMUU3QjRDMEI1Njk3RUZGOTM5QiIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo3RDMyNzQ4OEJCNEExMUU3QjRDMEI1Njk3RUZGOTM5QiIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PuyH9lMAABqVSURBVHja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'
 
 
-                doc1.rect(20, 8, 650, 55)
+                doc1.rect(20, 8, 660, 55)
                 doc1.addImage(imgData, 'JPEG', 75, 15, 100, 40)
                 doc1.setFontSize(40)
                 doc1.setFontType('bold')
                 doc1.text(250, 35, 'Field Service Summary Report')
                 if ($scope.summary.taskObject.Task_Number.toString())
-                    doc1.text(250, 50, 'Field Job#' + $scope.summary.taskObject.Task_Number)
+                    doc1.text(300, 50, 'Field Job# ' + $scope.summary.taskObject.Task_Number)
                 doc1.setFontSize(20)
                 doc1.setFontType('normal')
                 doc1.text(500, 20, 'Emerson Process Management')
@@ -2929,77 +2929,77 @@
                 doc1.text(500, 60, 'Fax: +44(0)122 2892896')
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
-                doc1.text(25, 70, 'Customer Call Details')
+                doc1.text(25, 80, 'Customer Call Details')
 
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
-                doc1.text(25, 85, 'Customer Name')
+                doc1.text(25, 100, 'Customer Name')
                 doc1.setFontSize(22)
                 doc1.setFontType('normal')
                 if ($scope.summary.taskObject.Customer_Name)
-                    doc1.text(25, 95, $scope.summary.taskObject.Customer_Name)
+                    doc1.text(25, 110, $scope.summary.taskObject.Customer_Name)
                 // console.log($scope.summary.taskObject.times[0].Start_Date.split(" ")[0]  | date : 'dd/MM/yyyy')
                 //
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
-                doc1.text(200, 85, 'Start Date')
+                doc1.text(180, 100, 'Start Date')
                 doc1.setFontSize(22)
                 doc1.setFontType('normal')
                 var start = moment.utc($scope.summary.taskObject.times[0].Start_Date).utcOffset(constantService.getTimeZone()).format("DD/MM/YYYY")
                 if (start)
-                    doc1.text(200, 95, start)
+                    doc1.text(180, 110, start)
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
-                doc1.text(350, 85, 'End Date')
+                doc1.text(345, 100, 'End Date')
                 doc1.setFontSize(22)
                 doc1.setFontType('normal')
                 var enddate = " ";
                 if ($scope.summary.taskObject.times[0].End_Date != "" && $scope.summary.taskObject.times[0].End_Date != undefined) {
                     enddate = moment.utc($scope.summary.taskObject.times[0].End_Date).utcOffset(constantService.getTimeZone()).format("DD/MM/YYYY");
                 }
-                doc1.text(350, 95, enddate);
+                doc1.text(345, 110, enddate);
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
-                doc1.text(475, 85, 'Duration')
+                doc1.text(510, 100, 'Duration')
                 doc1.setFontSize(22)
                 doc1.setFontType('normal')
                 console.log($scope.summary.taskObject.times[0].Duration)
                 if ($scope.summary.taskObject.times[0].Duration)
-                    doc1.text(475, 95, $scope.summary.taskObject.times[0].Duration)
+                    doc1.text(510, 110, $scope.summary.taskObject.times[0].Duration)
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
-                doc1.text(25, 110, 'Service Request')
+                doc1.text(25, 125, 'Service Request')
                 doc1.setFontSize(22)
                 doc1.setFontType('normal')
                 if ($scope.summary.taskObject.Service_Request)
-                    doc1.text(25, 120, $scope.summary.taskObject.Service_Request)
+                    doc1.text(25, 135, $scope.summary.taskObject.Service_Request)
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
-                doc1.text(200, 110, 'Field Job Request')
+                doc1.text(180, 125, 'Field Job Request')
                 doc1.setFontSize(22)
                 doc1.setFontType('normal')
                 if ($scope.summary.taskObject.Task_Number.toString())
-                    doc1.text(200, 120, $scope.summary.taskObject.Task_Number.toString())
+                    doc1.text(180, 135, $scope.summary.taskObject.Task_Number.toString())
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
-                doc1.text(350, 110, 'Job Description')
+                doc1.text(345, 125, 'Job Description')
                 doc1.setFontSize(22)
                 doc1.setFontType('normal')
                 if ($scope.summary.taskObject.Job_Description)
-                    doc1.text(350, 120, $scope.summary.taskObject.Job_Description)
+                    doc1.text(345, 135, $scope.summary.taskObject.Job_Description)
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
-                doc1.text(25, 135, 'Product Line')
+                doc1.text(25, 150, 'Product Line')
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
-                doc1.text(200, 135, 'System ID/Serial #')
+                doc1.text(180, 150, 'System ID/Serial #')
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
-                doc1.text(350, 135, 'Tag #')
+                doc1.text(345, 150, 'Tag #')
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
-                doc1.text(450, 135, 'Original PO#')
-                var ibyvalue = 145;
+                doc1.text(510, 150, 'Original PO#')
+                var ibyvalue = 160;
                 angular.forEach($scope.summary.taskObject.InstallBase, function (key) {
                     doc1.setFontSize(22)
                     doc1.setFontType('normal')
@@ -3012,33 +3012,33 @@
                     doc1.setFontSize(22)
                     doc1.setFontType('normal')
                     if (key.Serial_Number)
-                        doc1.text(200, ibyvalue, key.Serial_Number)
+                        doc1.text(180, ibyvalue, key.Serial_Number)
                     else
-                        doc1.text(200, ibyvalue, 'NO VALUE')
+                        doc1.text(180, ibyvalue, 'NO VALUE')
 
                     doc1.setFontSize(22)
                     doc1.setFontType('normal')
                     if (key.TagNumber)
-                        doc1.text(350, ibyvalue, key.TagNumber)
+                        doc1.text(345, ibyvalue, key.TagNumber)
                     else
-                        doc1.text(350, ibyvalue, 'NO VALUE')
+                        doc1.text(345, ibyvalue, 'NO VALUE')
 
                     doc1.setFontSize(22)
                     doc1.setFontType('normal')
                     if (key.Original_PO_Number)
-                        doc1.text(450, ibyvalue, key.Original_PO_Number)
+                        doc1.text(510, ibyvalue, key.Original_PO_Number)
                     else
-                        doc1.text(450, ibyvalue, 'NO VALUE')
+                        doc1.text(510, ibyvalue, 'NO VALUE')
                     ibyvalue = ibyvalue + 10;
                 })
-                var customerRectHeight = ibyvalue - 70;
-                doc1.rect(20, 75, 650, customerRectHeight)
+                var customerRectHeight = ibyvalue - 85;
+                doc1.rect(20, 85, 660, customerRectHeight)
 
 
-                var i = 0, xNotesField = 25, yNotesField = ibyvalue + 20, rectNotesWidth = 650,
+                var i = 0, xNotesField = 25, yNotesField = ibyvalue + 15, rectNotesWidth = 660,
                     rectNotesHeight = 22 * $scope.summary.notesArray.length,
                     rectNotesX = 20, rectNotesY = 170;
-                var xNotesField1 = xNotesField, xNotesField2 = xNotesField1 + 150, yNotesField1 = yNotesField + 22,
+                var xNotesField1 = xNotesField, xNotesField2 = xNotesField1 + 325, yNotesField1 = yNotesField + 20,
                     yNotesField2, yNotesField1_val, yNotesField2_val;
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
@@ -3054,7 +3054,7 @@
                     xNotesField1 = xNotesField;
                     //yNotesField1 = yNotesField + 22;
                     yNotesField1_val = yNotesField1 + 10 * ++i;
-                    xNotesField2 = xNotesField1 + 150;
+                    xNotesField2 = xNotesField1 + 325;
 
                     doc1.setFontSize(22)
                     doc1.setFontType('normal')
@@ -3066,16 +3066,16 @@
                     if ($scope.summary.notesArray[i - 1].Notes)
                         doc1.text(xNotesField2, yNotesField1_val, $scope.summary.notesArray[i - 1].Notes)
                 }
-                rectNotesHeight = yNotesField1_val - yNotesField + 10;
-                doc1.rect(20, yNotesField + 5, rectNotesWidth, rectNotesHeight)
+                rectNotesHeight = yNotesField1_val - yNotesField ;
+                doc1.rect(20, yNotesField + 5, rectNotesWidth, rectNotesHeight+5)
 
 
-                var xAttachField = 25, yAttachField = yNotesField1_val + 25, rectAttachWidth = 650,
-                    rectAttachHeight = 60, xAttachField1 = 25;
+                var xAttachField = 25, yAttachField = yNotesField1_val + 25, rectAttachWidth = 660,
+                    rectAttachHeight = 70, xAttachField1 = 25;
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
                 doc1.text(xAttachField, yAttachField, 'Attachments')
-                doc1.rect(20, yAttachField + 10, rectAttachWidth, rectAttachHeight)
+                doc1.rect(20, yAttachField + 5, rectAttachWidth, rectAttachHeight)
                 angular.forEach($scope.files, function (file, value) {
                     // setTimeout(function () {
                     if (file.filetype == "pdf")
@@ -3089,7 +3089,7 @@
                     else if (file.filetype == "doc" || file.filetype == "docx")
                         doc1.addImage(wordimg, 'JPEG', xAttachField1, yAttachField + 15, 50, 40)
                     else
-                        doc1.addImage(file.data, 'JPEG', xAttachField1, yAttachField + 15, 50, 40)
+                        doc1.addImage("data:"+file.contentType +";base64, "+file.base64, 'JPEG', xAttachField1, yAttachField + 15, 50, 40)
                     doc1.setFontSize(16)
                     doc1.setFontType('normal')
                     if (file.fileDisc.length >= 20)
@@ -3099,9 +3099,11 @@
                     }
                     xAttachField1 += 60;
                 })
-                var j = 0, xTimeField = 25, yTimeField = yAttachField + rectAttachHeight + 20, rectTimeWidth = 650,
-                    rectTimeHeight = 22 * $scope.summary.timeArray.length, yTimeFieldName = yTimeField + 20,
+                var j = 0, xTimeField = 25, yTimeField = yAttachField + rectAttachHeight + 20, rectTimeWidth = 660,
+                    rectTimeHeight = 23 * $scope.summary.timeArray.length, yTimeFieldName = yTimeField + 20,
                     yTimeFieldValue = yTimeField;
+                var timeWidth = (660 / ($scope.timeArray[0].timeDefault.timeCode.values.length + 7)) ;
+
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
                 doc1.text(xTimeField, yTimeField, 'Time')
@@ -3110,32 +3112,34 @@
                 doc1.text(xTimeField, yTimeFieldName, 'Date')
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
-                doc1.text(xTimeField + 55, yTimeFieldName, 'Charge Type')
+                doc1.text(xTimeField+timeWidth, yTimeFieldName, 'Charge'+'\n'+'Type')
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
-                doc1.text(xTimeField + 110, yTimeFieldName, 'Charge method')
+                doc1.text(xTimeField+(timeWidth * 2), yTimeFieldName, 'Charge\nMethod')
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
-                doc1.text(xTimeField + 175, yTimeFieldName, 'Work Type')
+                doc1.text(xTimeField+(timeWidth * 3), yTimeFieldName, 'Work\nType')
                 //  doc1.text(xTimeField + 235, yTimeFieldName, 'Standard')
                 var xTimeField1 = xTimeField + 195;
+                var i = 4
                 angular.forEach($scope.timeArray[0].timeDefault.timeCode.values, function (timecodeKey, value) {
                     xTimeField1 = xTimeField1 + 40;
                     doc1.setFontSize(22)
                     doc1.setFontType('bold')
-                    doc1.text(xTimeField1, yTimeFieldName, timecodeKey.Overtimeshiftcode)
+                    doc1.text(xTimeField+(timeWidth * i), yTimeFieldName, timecodeKey.Overtimeshiftcode)
+                    i++;
                     // doc1.text(xTimeField + 275, yTimeFieldName, 'OT1')
                     // doc1.text(xTimeField + 315, yTimeFieldName, 'OT2')
                     // doc1.text(xTimeField + 355, yTimeFieldName, 'OT3')
                 });
-                doc1.text(xTimeField + 415, yTimeFieldName, 'Duration')
-                doc1.text(xTimeField + 475, yTimeFieldName, 'Item')
-                doc1.text(xTimeField + 539, yTimeFieldName, 'Description')
-                doc1.rect(20, yTimeField + 5, rectTimeWidth, rectTimeHeight)
+                doc1.text(xTimeField+(timeWidth*i), yTimeFieldName, 'Duration')
+                doc1.text(xTimeField+(timeWidth * (++i)), yTimeFieldName, 'Item')
+                doc1.text(xTimeField+(timeWidth * (++i)), yTimeFieldName, 'Description')
+                doc1.rect(20, yTimeField + 5, rectTimeWidth, rectTimeHeight+10)
                 while (j < $scope.summary.timeArray.length) {
 
                     yTimeFieldName = yTimeField + 20 * ++j;
-                    yTimeFieldValue = yTimeFieldName + 10;
+                    yTimeFieldValue = yTimeFieldName +20;
                     // doc1.text(xTimeField, yTimeFieldName, 'Date')
 
                     doc1.setFontSize(22)
@@ -3146,21 +3150,21 @@
                     doc1.setFontSize(22)
                     doc1.setFontType('normal')
                     if ($scope.summary.timeArray[j - 1].Charge_Type)
-                        doc1.text(xTimeField + 55, yTimeFieldValue, $scope.summary.timeArray[j - 1].Charge_Type)
+                        doc1.text(xTimeField + timeWidth, yTimeFieldValue, $scope.summary.timeArray[j - 1].Charge_Type)
 
                     doc1.setFontSize(22)
                     doc1.setFontType('normal')
                     if ($scope.summary.timeArray[j - 1].Charge_Method)
-                        doc1.text(xTimeField + 110, yTimeFieldValue, $scope.summary.timeArray[j - 1].Charge_Method)
+                        doc1.text(xTimeField + (timeWidth * 2), yTimeFieldValue, $scope.summary.timeArray[j - 1].Charge_Method)
 
                     doc1.setFontSize(22)
 
                     doc1.setFontType('normal');
 
                     if ($scope.summary.timeArray[j - 1].Work_Type)
-                        doc1.text(xTimeField + 175, yTimeFieldValue, $scope.summary.timeArray[j - 1].Work_Type)
+                        doc1.text(xTimeField + (timeWidth * 3), yTimeFieldValue, $scope.summary.timeArray[j - 1].Work_Type)
                     var a = 2;
-
+                    i = 4;
                     angular.forEach($scope.timeArray[0].timeDefault.timeCode.values, function (timecodeKey, value) {
 
                         angular.forEach($scope.summary.timeArray[j - 1].timecode, function (key, value) {
@@ -3175,8 +3179,9 @@
                                 // xTimeField1=xTimeField1-40*a;
                                 doc1.setFontSize(22)
                                 doc1.setFontType('normal')
-                                doc1.text(xTimeField1 - 40 * a, yTimeFieldValue, $scope.summary.timeArray[j - 1].timecode[value][timecodeKey.Overtimeshiftcode].toString());
+                                doc1.text(xTimeField + (timeWidth * i), yTimeFieldValue, $scope.summary.timeArray[j - 1].timecode[value][timecodeKey.Overtimeshiftcode].toString());
                                 a--;
+                                i++;
 
                             } else {
 
@@ -3196,20 +3201,23 @@
                     doc1.setFontSize(22)
                     doc1.setFontType('normal')
                     if ($scope.summary.timeArray[j - 1].Duration)
-                        doc1.text(xTimeField + 415, yTimeFieldValue, $scope.summary.timeArray[j - 1].Duration.toString())
+                        doc1.text(xTimeField + (timeWidth * i), yTimeFieldValue, $scope.summary.timeArray[j - 1].Duration.toString())
 
                     doc1.setFontSize(22)
                     doc1.setFontType('normal')
-                    if ($scope.summary.timeArray[j - 1].Item)
-                        doc1.text(xTimeField + 475, yTimeFieldValue, $scope.summary.timeArray[j - 1].Item)
-
+                    if ($scope.summary.timeArray[j - 1].Item && $scope.summary.timeArray[j - 1].Item != "")
+                        doc1.text(xTimeField + (timeWidth * (++i)), yTimeFieldValue, $scope.summary.timeArray[j - 1].Item.split('-')[0] + '\n-' + $scope.summary.timeArray[j - 1].Item.split('-')[1])
+                    else
+                        i++;
                     doc1.setFontSize(22)
                     doc1.setFontType('normal')
                     if ($scope.summary.timeArray[j - 1].Comments)
-                        doc1.text(xTimeField + 539, yTimeFieldValue, $scope.summary.timeArray[j - 1].Comments)
+                        doc1.text(xTimeField + (timeWidth * (++i)), yTimeFieldValue, $scope.summary.timeArray[j - 1].Comments)
+                    else
+                        i++;
                 }
-                var k = 0, xExpenseField = 25, yExpenseField = yTimeField + rectTimeHeight + 20, rectExpenseWidth = 650,
-                    rectExpenseHeight = 22 * $scope.summary.expenseArray.length, yExpenseFieldName = yExpenseField + 20,
+                var k = 0, xExpenseField = 25, yExpenseField = yTimeField + rectTimeHeight + 25, rectExpenseWidth = 660,
+                    rectExpenseHeight = 22 * $scope.summary.expenseArray.length, yExpenseFieldName = yExpenseField + 25,
                     yExpenseFieldValue;
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
@@ -3220,13 +3228,13 @@
                 doc1.text(xExpenseField, yExpenseFieldName, 'Date')
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
-                doc1.text(xExpenseField + 150, yExpenseFieldName, 'Expense type')
+                doc1.text(xExpenseField + 140, yExpenseFieldName, 'Expense type')
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
-                doc1.text(xExpenseField + 300, yExpenseFieldName, 'Charge Method')
+                doc1.text(xExpenseField + 305, yExpenseFieldName, 'Charge Method')
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
-                doc1.text(xExpenseField + 450, yExpenseFieldName, 'Justification')
+                doc1.text(xExpenseField + 470, yExpenseFieldName, 'Justification')
                 // yExpenseFieldValue = yExpenseFieldName + 10;
                 while (k < $scope.summary.expenseArray.length) {
                     // yExpenseFieldName =  ;
@@ -3241,24 +3249,24 @@
                     doc1.setFontSize(22)
                     doc1.setFontType('normal')
                     if ($scope.summary.expenseArray[k - 1].Expense_Type)
-                        doc1.text(xExpenseField + 150, yExpenseFieldValue, $scope.summary.expenseArray[k - 1].Expense_Type)
+                        doc1.text(xExpenseField + 140, yExpenseFieldValue, $scope.summary.expenseArray[k - 1].Expense_Type)
 
                     doc1.setFontSize(22)
                     doc1.setFontType('normal')
                     if ($scope.summary.expenseArray[k - 1].Charge_Method)
-                        doc1.text(xExpenseField + 300, yExpenseFieldValue, $scope.summary.expenseArray[k - 1].Charge_Method)
+                        doc1.text(xExpenseField + 305, yExpenseFieldValue, $scope.summary.expenseArray[k - 1].Charge_Method)
 
                     doc1.setFontSize(22)
                     doc1.setFontType('normal')
                     if ($scope.summary.expenseArray[k - 1].Justification)
-                        doc1.text(xExpenseField + 450, yExpenseFieldValue, $scope.summary.expenseArray[k - 1].Justification)
+                        doc1.text(xExpenseField + 470, yExpenseFieldValue, $scope.summary.expenseArray[k - 1].Justification)
                 }
-                rectExpenseHeight = yExpenseFieldValue - yExpenseFieldName + 15;
+                rectExpenseHeight = yExpenseFieldValue - yExpenseFieldName + 25;
                 doc1.rect(20, yExpenseField + 10, rectExpenseWidth, rectExpenseHeight);
 
                 var l = 0, xMaterialField = 25, yMaterialField = yExpenseField + rectExpenseHeight + 20,
-                    rectMaterialWidth = 650, rectMaterialHeight = 25 * $scope.summary.materialArray.length,
-                    yMaterialFieldName = yMaterialField + 20, yMaterialFieldValue;
+                    rectMaterialWidth = 660, rectMaterialHeight = 25 * $scope.summary.materialArray.length,
+                    yMaterialFieldName = yMaterialField + 25, yMaterialFieldValue;
 
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
@@ -3269,22 +3277,22 @@
                 doc1.text(25, yMaterialFieldName, 'Charge type')
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
-                doc1.text(80, yMaterialFieldName, 'Quantity')
+                doc1.text(106, yMaterialFieldName, 'Quantity')
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
-                doc1.text(140, yMaterialFieldName, 'Serial#')
+                doc1.text(202, yMaterialFieldName, 'Serial#')
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
-                doc1.text(200, yMaterialFieldName, 'Serial In#')
+                doc1.text(298, yMaterialFieldName, 'Serial In#')
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
-                doc1.text(260, yMaterialFieldName, 'Serial Out#')
+                doc1.text(394, yMaterialFieldName, 'Serial Out#')
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
-                doc1.text(320, yMaterialFieldName, 'Item Name')
-                doc1.text(380, yMaterialFieldName, 'Description')
+                doc1.text(490, yMaterialFieldName, 'Item Name')
+                doc1.text(586, yMaterialFieldName, 'Description')
                 yMaterialFieldValue = yMaterialFieldName + 10;
 
                 while (l < $scope.summary.materialArray.length) {
@@ -3302,50 +3310,50 @@
                     doc1.setFontSize(22)
                     doc1.setFontType('normal')
                     if ($scope.summary.materialArray[l - 1].Product_Quantity)
-                        doc1.text(80, yMaterialFieldValue, $scope.summary.materialArray[l - 1].Product_Quantity.toString())
+                        doc1.text(106, yMaterialFieldValue, $scope.summary.materialArray[l - 1].Product_Quantity.toString())
 
                     doc1.setFontSize(22)
                     doc1.setFontType('normal')
                     if ($scope.summary.materialArray[l - 1].serialNumber)
-                        doc1.text(140, yMaterialFieldValue, $scope.summary.materialArray[l - 1].serialNumber)
+                        doc1.text(202, yMaterialFieldValue, $scope.summary.materialArray[l - 1].serialNumber)
 
                     doc1.setFontSize(22)
                     doc1.setFontType('normal')
                     if ($scope.summary.materialArray[l - 1].serialIn)
-                        doc1.text(200, yMaterialFieldValue, $scope.summary.materialArray[l - 1].serialIn)
+                        doc1.text(298, yMaterialFieldValue, $scope.summary.materialArray[l - 1].serialIn)
 
                     doc1.setFontSize(22)
                     doc1.setFontType('normal')
                     if ($scope.summary.materialArray[l - 1].serialOut)
-                        doc1.text(260, yMaterialFieldValue, $scope.summary.materialArray[l - 1].serialOut)
+                        doc1.text(394, yMaterialFieldValue, $scope.summary.materialArray[l - 1].serialOut)
                     // doc1.text(320, yMaterialFieldName, 'Serial Activity')
                     // doc1.text(320, yMaterialFieldValue, $scope.summary.materialArray[l-1].Charge_Type)
                     doc1.setFontSize(22)
                     doc1.setFontType('normal')
                     if ($scope.summary.materialArray[l - 1].ItemName)
-                        doc1.text(320, yMaterialFieldValue, $scope.summary.materialArray[l - 1].ItemName)
+                        doc1.text(490, yMaterialFieldValue, $scope.summary.materialArray[l - 1].ItemName)
 
                     doc1.setFontSize(22)
                     doc1.setFontType('normal')
                     if ($scope.summary.materialArray[l - 1].Description)
-                        doc1.text(380, yMaterialFieldValue, $scope.summary.materialArray[l - 1].Description)
+                        doc1.text(586, yMaterialFieldValue, $scope.summary.materialArray[l - 1].Description)
                     // doc1.text(460, yMaterialFieldName, 'Comments')
                     // doc1.text(460, yMaterialFieldValue, $scope.summary.materialArray[l-1].Charge_Type)
                     yMaterialFieldValue = yMaterialFieldValue + 10 * $scope.summary.materialArray[l - 1].Product_Quantity;
                 }
 
-                rectMaterialHeight = yMaterialFieldValue - yMaterialFieldName + 10;
+                rectMaterialHeight = yMaterialFieldValue - yMaterialFieldName + 15;
                 doc1.rect(20, yMaterialField + 10, rectMaterialWidth, rectMaterialHeight)
 
-                var xSignField = 25, ySignField = yMaterialField + rectMaterialHeight + 20, rectSignWidth = 650,
+                var xSignField = 25, ySignField = yMaterialField + rectMaterialHeight + 20, rectSignWidth = 660,
                     rectSignHeight = 80;
 
                 doc1.setFontSize(22)
                 doc1.setFontType('bold')
                 doc1.text(xSignField, ySignField + 5, 'Signature')
                 doc1.rect(20, ySignField + 10, rectSignWidth, rectSignHeight)
-                doc1.text(50, ySignField + 20, 'ENGINEER NAME')
-                doc1.text(250, ySignField + 20, 'CUSTOMER NAME')
+                doc1.text(50, ySignField + 25, 'ENGINEER NAME')
+                doc1.text(250, ySignField + 25, 'CUSTOMER NAME')
                 doc1.text(50, ySignField + 35, $scope.engineerName);
 
                 if ($scope.summary.engineer != undefined && $scope.summary.engineer.signature)

@@ -202,7 +202,7 @@
                 headers: {
                     "Content-Type": constantService.getContentType(),
                     "Authorization": constantService.getAuthor(),
-                    "oracle-mobile-backend-id": constantService.getInternalBackId()
+                    "oracle-mobile-backend-id": constantService.getTaskBackId()
                 },
                 data: {
                     "resourceId": constantService.getResourceId(),
@@ -241,7 +241,7 @@
                 headers: {
                     "Content-Type": constantService.getContentType(),
                     "Authorization": constantService.getAuthor(),
-                    "oracle-mobile-backend-id": constantService.getInternalBackId()
+                    "oracle-mobile-backend-id": constantService.getTaskBackId()
                 }
 
             }).success(function (response) {
@@ -558,7 +558,7 @@
                 headers: {
                     "Content-Type": constantService.getContentType(),
                     "Authorization": constantService.getAuthor(),
-                    "oracle-mobile-backend-id": constantService.getInternalBackId()
+                    "oracle-mobile-backend-id": constantService.getTaskBackId()
                 }
 
             }).success(function (response) {
@@ -617,7 +617,7 @@
                 headers: {
                     "Content-Type": constantService.getContentType(),
                     "Authorization": constantService.getAuthor(),
-                    "oracle-mobile-backend-id": constantService.getInternalBackId()
+                    "oracle-mobile-backend-id": constantService.getTaskBackId()
                 }
 
             }).success(function (response) {
@@ -677,7 +677,7 @@
                 headers: {
                     "Content-Type": constantService.getContentType(),
                     "Authorization": constantService.getAuthor(),
-                    "oracle-mobile-backend-id": constantService.getInternalBackId()
+                    "oracle-mobile-backend-id": constantService.getTaskBackId()
                 },
                 data: formData
 
@@ -785,7 +785,7 @@
                 headers: {
                     "Content-Type": constantService.getContentType(),
                     "Authorization": constantService.getAuthor(),
-                    "oracle-mobile-backend-id": constantService.getInternalBackId()
+                    "oracle-mobile-backend-id": constantService.getTaskBackId()
                 },
                 data: timedata
 

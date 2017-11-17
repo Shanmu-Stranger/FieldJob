@@ -15,7 +15,7 @@ body {
 }
 
 input {
-  background-color: #f9f9f9;
+  background-color: #f0f0f0;
   border:none;
   font-size:10px;
   display: block;
@@ -33,7 +33,7 @@ input::placeholder {
 }
 
 #user{
-  background: #f9f9f9 url('../images/user.png') 7px 7px;
+  background: #f0f0f0 url('../images/user.png') 7px 7px;
   background-repeat: no-repeat;
   background-size: 12px;
   background-position: 8px 20px;
@@ -50,13 +50,12 @@ input::placeholder {
 
 #pass{
   height:50px;
-  background: #f9f9f9 url('../images/padlock.png') 7px 7px;
+  background: #f0f0f0 url('../images/padlock.png') 7px 7px;
   background-repeat: no-repeat;
   margin-top: 10px;
   background-size: 12px;
   background-position: 8px 20px;
-  font-family: OpenSans-Bold;
-  font-weight:bold;
+  font-family: OpenSans-Regular;
   color:c0c0c0;
   font-size: 15px;
 }
