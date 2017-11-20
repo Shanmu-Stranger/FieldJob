@@ -25,6 +25,9 @@
         right: 0;
         bottom: 0;
     }
+    button[disabled].summary-report-donebtn {
+        opacity: 0.5 !important;
+    }
 </style>
 
 
@@ -101,7 +104,7 @@
         </div>
         <div class="card-childContainer margintop30">
             <div class="mylabel font-size" translate="Customer Signature"></div>
-            <div style="height: 220px;">
+            <div style="height: 220px;width:100%">
                 <signature-pad accept="accept" clear="clear" height="220" width="1050" dataurl="dataurl" disabled="isSubmitted || $root.completedTask"></signature-pad>
                  <label ng-bind="$root.customerSignTime"></label>
             </div>
@@ -119,7 +122,7 @@
                     <label translate="I confirm that I have read, understand and agreed to all terms"></label>
                 </div>
                 <div class="flex-20">
-                    <button class="summary-report-donebtn" ng-click="custsignature = accept();customerSubmit()" style="float:right;" ng-disabled="isSubmitted || $root.completedTask" translate="Submit"></button>
+                    <button class="summary-report-donebtn" ng-click="custsignature = accept();customerSubmit()" style="float:right;" ng-disabled="isSubmitted || $root.completedTask || $root.Engsignature=='' || $root.Engsignature==undefined " translate="Submit"></button>
                 </div>
             </div>
         </div>

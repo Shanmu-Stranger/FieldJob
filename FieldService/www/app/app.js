@@ -312,7 +312,17 @@ app.directive('signaturePad', ['$interval', '$timeout', '$window', '$rootScope',
             $scope.accept = function () {
 
                 $rootScope.signature = $scope.dataurl;
-
+                var stagesSign = constantService.getStagesArray();
+                switch (stagesSign.title) {
+                    case 'Engineer Signature':
+                        $rootScope.Engsignature = $scope.dataurl;
+                        break;
+                    case 'Customer Signature':
+                        $rootScope.customersignature = $scope.dataurl;
+                        break;
+                    default:
+                        break;
+                }
                 return {
                     isEmpty: $scope.dataurl === EMPTY_IMAGE,
                     dataUrl: $scope.dataurl
@@ -345,6 +355,17 @@ app.directive('signaturePad', ['$interval', '$timeout', '$window', '$rootScope',
                 $timeout().then(function () {
 
                     $scope.dataurl = $scope.signaturePad.isEmpty() ? EMPTY_IMAGE : $scope.signaturePad.toDataURL();
+                    var stagesSign = constantService.getStagesArray();
+                    switch (stagesSign.title) {
+                        case 'Engineer Signature':
+                            $rootScope.Engsignature = $scope.dataurl;
+                            break;
+                        case 'Customer Signature':
+                            $rootScope.customersignature = $scope.dataurl;
+                            break;
+                        default:
+                            break;
+                    }
                 });
             };
 
@@ -355,9 +376,11 @@ app.directive('signaturePad', ['$interval', '$timeout', '$window', '$rootScope',
                 switch (stagesTime.title) {
                     case 'Engineer Signature':
                         $rootScope.engineerSignTime = '';
+                        $rootScope.Engsignature = '';
                         break;
                     case 'Customer Signature':
                         $rootScope.customerSignTime = '';
+                        $rootScope.customersignature = '';
                         break;
                     default:
                         break;

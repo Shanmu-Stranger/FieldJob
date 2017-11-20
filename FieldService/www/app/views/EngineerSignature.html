@@ -1,3 +1,9 @@
+<style>
+    button[disabled].engSign-Next
+    {
+        opacity:0.5 !important;
+    }
+</style>
 <div class="card-parentContainer martop-40"> 
     <div class="card-childContainer marginbottom30">
       
@@ -73,7 +79,8 @@
            
             <div>
                  <button class="serbtn" ng-click="clear()" translate="Clear"></button>
-                 <button  class="engSign-Next" ng-click="signature = accept(); SaveSign()" translate="Next">
+                <!--<div>Please add signature</div>-->
+                 <button  class="engSign-Next" ng-click="signature = accept(); SaveSign()" ng-disabled="$root.Engsignature=='' || $root.Engsignature==undefined "  translate="Next">
                  </button>
             </div>
    

@@ -3510,8 +3510,8 @@
                     doc1.addImage($scope.summary.engineer.signature, 'JPEG', 50, ySignField + 45, 75, 40, 'engsign', 'FAST');
                 doc1.text(250, ySignField + 35, $scope.summary.taskObject.Customer_Name);
 
-                if ($rootScope.signature)
-                    doc1.addImage($rootScope.signature, 'JPEG', 250, ySignField + 45, 75, 40, 'custsign', 'FAST');
+                if ($rootScope.customersignature)
+                    doc1.addImage($rootScope.customersignature, 'JPEG', 250, ySignField + 45, 75, 40, 'custsign', 'FAST');
                 //                 doc1.save("Report_" + $scope.summary.taskObject.Task_Number + ".pdf");
             }
             if ($rootScope.local) {
